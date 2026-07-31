@@ -1,0 +1,7 @@
+requests>=2.31,<3
+beautifulsoup4>=4.12,<5
+PyYAML>=6.0,<7
+matplotlib>=3.7
+
+# Testes (opcional em producao):
+pytest>=8.0

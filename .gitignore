@@ -1,0 +1,43 @@
+# Ambientes virtuais
+venv/
+.venv/
+env/
+ENV/
+.python-version
+
+# Bytecode / build
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Testes e ferramentas
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Saidas da coleta (dados gerados, nao versionar)
+output/
+*.csv
+*.xlsx
+relatorio_*.md
+!requirements.txt
+
+# Editores / SO
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Segredos
+.env
+.env.*

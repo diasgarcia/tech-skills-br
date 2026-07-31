@@ -1,0 +1,372 @@
+# Regras de classificacao por area de tecnologia.
+#
+# Como funciona:
+#   - Para cada area, cada keyword vale um "peso".
+#   - Keywords encontradas no TITULO valem `title_boost` vezes mais que no corpo
+#     da descricao (o titulo e um sinal muito mais confiavel).
+#   - A area com maior pontuacao vence; se ninguem passar de `min_score`,
+#     a vaga cai em "Outros/TI Geral".
+#
+# Para ajustar: edite as listas abaixo. O texto e comparado sem acentos, em
+# minusculas, com pontuacao virando espaco -- entao escreva as keywords assim
+# ("ci cd" casa com "CI/CD", "banco de dados" casa com "Banco de Dados").
+# Keywords com espaco sao casadas como frase; keywords de uma palavra sao
+# casadas com limite de palavra (nao ha match parcial dentro de outra palavra).
+
+settings:
+  title_boost: 3.0
+  # min_score 3.0 = uma keyword `peso_medio` no titulo. Abaixo disso a vaga cai
+  # em "Outros". Nao baixe para 1.0: um unico "dados" solto no meio de uma
+  # descricao longa passaria a definir a area da vaga.
+  min_score: 3.0
+  fallback_area: "Outros/TI Geral"
+
+# Portao de relevancia: a busca dos portais e "solta" e devolve muita vaga que
+# nao e de tecnologia ("Analista Contábil Jr", "Analista Fiscal Jr"...).
+#
+# O TITULO e o sinal confiavel; a descricao nem sempre e. O Vagas.com, por
+# exemplo, so devolve um trecho de marketing da vaga, cheio de palavra generica
+# ("sistemas", "aplicacao") que apareceria ate em vaga administrativa. Por isso
+# ha duas listas com rigor diferente.
+#
+# Uma vaga passa no portao se:
+#   1. o TITULO casar `tech_gate.titulo`, ou
+#   2. o TITULO casar uma keyword `peso_alto` de qualquer area, ou
+#   3. a DESCRICAO casar `tech_gate.descricao` ou uma keyword `peso_alto`.
+# As demais sao descartadas e contadas como "nao-tech" no relatorio.
+tech_gate:
+  titulo: # sinais amplos -- confiaveis porque vem do titulo da vaga
+    - ti
+    - t i
+    - tecnologia
+    - tecnologia da informacao
+    - sistemas
+    - sistema
+    - software
+    - desenvolvimento
+    - desenvolvedor
+    - desenvolvedora
+    - programador
+    - programadora
+    - programacao
+    - developer
+    - dev
+    - computacao
+    - informatica
+    - engenharia de software
+    - suporte tecnico
+    - help desk
+    - helpdesk
+    - service desk
+    - infraestrutura de ti
+    - redes
+    - servidores
+    - banco de dados
+    - tech
+
+  # Contextos onde as palavras acima NAO significam tecnologia. Se o titulo casar
+  # qualquer item daqui, a vaga e descartada mesmo que case `titulo` acima.
+  # ("Pesquisa e Desenvolvimento" = P&D de industria; "Odontologia Digital" idem.)
+  excluir:
+    - pesquisa e desenvolvimento
+    - desenvolvimento humano
+    - desenvolvimento pessoal
+    - desenvolvimento organizacional
+    - desenvolvimento de negocios
+    - desenvolvimento sustentavel
+    - desenvolvimento infantil
+    - desenvolvimento de produtos
+    - desenvolvimento de novos produtos
+    - desenvolvimento de materiais
+    - desenvolvimento de embalagens
+    - desenvolvimento de pessoas
+    - treinamento e desenvolvimento
+    - treinamento desenvolvimento
+    - recursos humanos
+    - programacao de gas
+    - programacao de producao
+    - programacao de manutencao
+    - desenvolvimento de mercado
+    - desenvolvimento comercial
+    - tecnologia educacional
+    - tecnologia de alimentos
+    - tecnologia agricola
+    - tecnologia textil
+    - odontologia digital
+    - marketing digital
+    - seguranca do trabalho
+    - tecnico em enfermagem
+    - pedagogia
+    - arquivologia
+    - biomedicina
+    - nutricao
+    - fisioterapia
+    - odontologia
+
+  descricao: # sinais estritos -- precisam sobreviver ao boilerplate das descricoes
+    - desenvolvimento de software
+    - desenvolvedor
+    - desenvolvedora
+    - programador
+    - linguagem de programacao
+    - engenharia de software
+    - banco de dados
+    - codigo fonte
+    - tecnologia da informacao
+    - suporte tecnico
+    - help desk
+
+areas:
+  Data:
+    peso_alto: # sinais fortes e pouco ambiguos
+      - engenheiro de dados
+      - engenharia de dados
+      - data engineer
+      - cientista de dados
+      - data scientist
+      - analista de dados
+      - data analyst
+      - business intelligence
+      - analista de bi
+      - etl
+      - data warehouse
+      - databricks
+      - big data
+      - pipeline de dados
+    peso_medio:
+      # "data" sozinho NAO entra: em portugues casa com "data de admissao".
+      - dados
+      - bi
+      - sql
+      - power bi
+      - tableau
+      - looker
+      - airflow
+      - spark
+      - pyspark
+      - hadoop
+      - snowflake
+      - redshift
+      - bigquery
+      - dbt
+      - kafka
+      - machine learning
+      - aprendizado de maquina
+      - estatistica
+      - pandas
+      - analytics
+      - modelagem de dados
+      - dataviz
+
+  Frontend:
+    peso_alto:
+      - front end
+      - frontend
+      - desenvolvedor front
+      - front-end
+      - desenvolvimento web front
+    peso_medio:
+      - react
+      - reactjs
+      - angular
+      - vue
+      - vuejs
+      - svelte
+      - next js
+      - nextjs
+      - html
+      - css
+      - sass
+      - scss
+      - tailwind
+      - bootstrap
+      - javascript
+      - typescript
+      - jquery
+      - ui
+      - interface do usuario
+      - responsivo
+      - figma
+      - webpack
+      - redux
+
+  Backend:
+    peso_alto:
+      - back end
+      - backend
+      - back-end
+      - desenvolvedor back
+      - desenvolvimento de apis
+    peso_medio:
+      - api rest
+      - apis
+      - rest
+      - microservicos
+      - microsservicos
+      - java
+      - spring
+      - spring boot
+      - net
+      - dotnet
+      - c#
+      - csharp
+      - python
+      - django
+      - flask
+      - fastapi
+      - node
+      - nodejs
+      - php
+      - laravel
+      - ruby
+      - rails
+      - golang
+      - go lang
+      - kotlin
+      - scala
+      - servidor
+      - banco de dados
+      - postgresql
+      - mysql
+      - mongodb
+      - oracle
+      - abap
+      - sap
+
+  Mobile:
+    peso_alto:
+      - mobile
+      - android
+      - ios
+      - desenvolvedor android
+      - desenvolvedor ios
+      - aplicativos moveis
+      - app mobile
+    peso_medio:
+      - flutter
+      - react native
+      - swift
+      - swiftui
+      - objective c
+      - xamarin
+      - kotlin multiplatform
+      - play store
+      - app store
+      - aplicativo
+
+  DevOps:
+    peso_alto:
+      - devops
+      - sre
+      - site reliability
+      - infraestrutura cloud
+      - cloud engineer
+      - plataforma cloud
+    peso_medio:
+      - aws
+      - azure
+      - gcp
+      - google cloud
+      - kubernetes
+      - k8s
+      - docker
+      - container
+      - terraform
+      - ansible
+      - jenkins
+      - ci cd
+      - pipeline
+      - linux
+      - infraestrutura
+      - observabilidade
+      - monitoramento
+      - prometheus
+      - grafana
+      - cloudformation
+      - openshift
+      - helm
+      - nginx
+
+  QA:
+    peso_alto:
+      - qa
+      - quality assurance
+      - analista de testes
+      - engenheiro de qualidade
+      - testes automatizados
+      - automacao de testes
+      - qualidade de software
+    peso_medio:
+      - teste
+      - testes
+      - tester
+      - selenium
+      - cypress
+      - playwright
+      - junit
+      - pytest
+      - jest
+      - postman
+      - casos de teste
+      - regressao
+      - bug
+      - homologacao
+
+  Fullstack:
+    peso_alto:
+      - fullstack
+      - full stack
+      - full-stack
+      - desenvolvedor full
+    peso_medio: []
+
+  Suporte/Infra:
+    peso_alto:
+      - suporte tecnico
+      - help desk
+      - helpdesk
+      - service desk
+      - analista de suporte
+      - tecnico de suporte
+      - suporte de ti
+      - infraestrutura de ti
+      - analista de redes
+    peso_medio:
+      - suporte
+      - chamados
+      - ticket
+      - atendimento ao usuario
+      - manutencao de computadores
+      - hardware
+      - windows server
+      - active directory
+      - redes
+      - switch
+      - roteador
+      - telefonia
+      - impressora
+
+  Segurança:
+    peso_alto:
+      - seguranca da informacao
+      - cybersecurity
+      - ciberseguranca
+      - seguranca cibernetica
+      - pentest
+      - soc analyst
+      - analista de seguranca
+      - seguranca de redes
+    peso_medio:
+      # NAO colocar "seguranca" sozinho aqui: casa com "seguranca do trabalho" e
+      # com boilerplate de "normas de seguranca" em vaga de suporte tecnico.
+      - vulnerabilidade
+      - firewall
+      - siem
+      - lgpd
+      - iso 27001
+      - criptografia
+
+# Peso numerico de cada faixa.
+weights:
+  peso_alto: 4.0
+  peso_medio: 1.0

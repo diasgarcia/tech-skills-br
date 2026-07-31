@@ -1,0 +1,133 @@
+# Tecnologias e habilidades procuradas nas vagas.
+#
+# Formato:  Nome Canônico: [alias, alias, ...]
+# O nome canonico e o que aparece no grafico e no CSV; os aliases sao as formas
+# como a tecnologia aparece escrita nas vagas.
+#
+# O texto e comparado em minusculas e sem acento, mas "#" e "+" sao preservados
+# (para "C#" e "C++" nao virarem "c"). Pontos viram espaco: escreva "node js",
+# nao "node.js". O casamento e por palavra/frase inteira -- "go" nao casa dentro
+# de "Goiania", "java" nao casa dentro de "javascript".
+
+linguagens:
+  Python: [python]
+  Java: [java]
+  JavaScript: [javascript, java script]
+  TypeScript: [typescript, type script]
+  "C#": ["c#", csharp, c sharp]
+  "C++": ["c++"]
+  C: [linguagem c]
+  PHP: [php]
+  Go: [golang, go lang]
+  Ruby: [ruby]
+  Kotlin: [kotlin]
+  Swift: [swift]
+  Scala: [scala]
+  R: [linguagem r]
+  SQL: [sql]
+  PL/SQL: [pl sql, plsql]
+  ABAP: [abap]
+  Shell/Bash: [shell script, bash, powershell]
+  HTML: [html, html5]
+  CSS: [css, css3]
+
+frameworks:
+  React: [react, reactjs, react js]
+  React Native: [react native]
+  Angular: [angular, angularjs]
+  Vue: [vue, vuejs, vue js]
+  Node.js: [node js, nodejs, node]
+  .NET: [net, dotnet, asp net]
+  Spring: [spring, spring boot]
+  Django: [django]
+  Flask: [flask]
+  FastAPI: [fastapi, fast api]
+  Laravel: [laravel]
+  Flutter: [flutter]
+  jQuery: [jquery]
+  Bootstrap: [bootstrap]
+  Tailwind: [tailwind, tailwindcss]
+
+dados:
+  Power BI: [power bi, powerbi]
+  Excel: [excel, planilhas]
+  Pandas: [pandas]
+  NumPy: [numpy]
+  Spark: [spark, pyspark, apache spark]
+  Airflow: [airflow, apache airflow]
+  ETL: [etl, elt]
+  Tableau: [tableau]
+  Looker: [looker, looker studio]
+  BigQuery: [bigquery, big query]
+  Databricks: [databricks]
+  Snowflake: [snowflake]
+  Redshift: [redshift]
+  dbt: [dbt]
+  Kafka: [kafka, apache kafka]
+  Hadoop: [hadoop]
+  Machine Learning: [machine learning, aprendizado de maquina, ml]
+  Data Warehouse: [data warehouse, datawarehouse, dw]
+  Estatística: [estatistica]
+
+bancos:
+  PostgreSQL: [postgresql, postgres]
+  MySQL: [mysql]
+  SQL Server: [sql server, sqlserver, t sql]
+  Oracle: [oracle]
+  MongoDB: [mongodb, mongo]
+  Redis: [redis]
+  Firebase: [firebase]
+
+cloud_devops:
+  AWS: [aws, amazon web services]
+  Azure: [azure, microsoft azure]
+  GCP: [gcp, google cloud]
+  Docker: [docker]
+  Kubernetes: [kubernetes, k8s]
+  Terraform: [terraform]
+  Ansible: [ansible]
+  Jenkins: [jenkins]
+  CI/CD: [ci cd, integracao continua]
+  Git: [git, github, gitlab, versionamento]
+  Linux: [linux, ubuntu, centos]
+  Nginx: [nginx]
+  Grafana: [grafana]
+  Prometheus: [prometheus]
+
+qa:
+  Selenium: [selenium]
+  Cypress: [cypress]
+  Playwright: [playwright]
+  Postman: [postman]
+  JUnit: [junit]
+  Pytest: [pytest]
+  Jest: [jest]
+  Testes Automatizados: [testes automatizados, automacao de testes]
+  Testes Manuais: [testes manuais, teste manual]
+
+suporte_infra:
+  Windows Server: [windows server]
+  Active Directory: [active directory, ad]
+  Windows: [windows]
+  Redes/TCP-IP: [tcp ip, redes de computadores, redes]
+  VPN: [vpn]
+  Firewall: [firewall]
+  ITIL: [itil]
+  Service Desk: [service desk, help desk, helpdesk]
+  Zendesk: [zendesk]
+  Office 365: [office 365, o365, microsoft 365]
+  Hardware: [hardware, manutencao de computadores]
+  VMware: [vmware, virtualizacao]
+
+praticas:
+  API REST: [api rest, rest, restful, apis rest]
+  Scrum: [scrum]
+  Metodologias Ágeis: [metodologias ageis, agile, metodologia agil, kanban]
+  Microserviços: [microservicos, microsservicos]
+  POO: [poo, orientacao a objetos, programacao orientada a objetos]
+  Inglês: [ingles, english]
+  Figma: [figma]
+  UX/UI: [ux, ui, ux ui]
+  LGPD: [lgpd]
+  SAP: [sap]
+  Salesforce: [salesforce]
