@@ -11,6 +11,105 @@ Markdown com o ranking.
 
 ---
 
+# Resultados
+
+> **Coleta de 31/07/2026** — 940 vagas brutas da Gupy e do Vagas.com.br, das
+> quais **182** sobraram após filtrar nível de entrada, remover duplicatas e
+> descartar vagas fora de tecnologia. Os números abaixo são um retrato dessa
+> data; rodar `python main.py` gera um novo.
+
+## Qual área mais contrata júnior
+
+![Vagas júnior de tecnologia por área](docs/grafico-areas.png)
+
+| # | Área | Vagas | % |
+|---|------|-------|---|
+| 1 | Suporte/Infra | 54 | 29,7% |
+| 2 | Outros/TI Geral | 43 | 23,6% |
+| 3 | Backend | 29 | 15,9% |
+| 4 | Data | 15 | 8,2% |
+| 5 | Frontend | 9 | 4,9% |
+| 6 | DevOps | 9 | 4,9% |
+| 7 | Fullstack | 8 | 4,4% |
+| 8 | Mobile | 6 | 3,3% |
+| 9 | Segurança | 5 | 2,7% |
+| 10 | QA | 4 | 2,2% |
+
+**Suporte/Infra é quase um terço das vagas de entrada** — bem à frente de
+qualquer área de desenvolvimento. É a porta mais larga para quem está começando,
+e não costuma ser a primeira escolha de quem entra na área.
+
+"Outros/TI Geral" com 23,6% não é falha de classificação: são títulos como
+"Estágio em TI" ou "Desenvolvedor de Software Jr", dos quais realmente não dá
+para inferir a área. Preferi deixá-los explícitos a distribuí-los por chute e
+inflar alguma área artificialmente.
+
+## Remoto, híbrido ou presencial
+
+![Vagas júnior por modalidade de trabalho](docs/grafico-modalidade.png)
+
+| Modalidade | Vagas | % |
+|---|---|---|
+| Presencial | 103 | 56,6% |
+| Não informado | 31 | 17,0% |
+| Híbrido | 30 | 16,5% |
+| Remoto | 18 | 9,9% |
+
+**Só 1 em cada 10 vagas júnior é remota.** Somando remoto e híbrido chega-se a
+26,4% — a maioria exige presença física.
+
+A distribuição por área é mais reveladora que o total: **Backend concentra 8 das
+18 vagas remotas**, enquanto **Data não tem nenhuma** (7 híbridas, 5 presenciais,
+3 sem informação). Quem busca trabalho remoto júnior está, na prática, olhando
+para Backend.
+
+A fatia "Não informado" é quase toda do Vagas.com, cujo card de listagem não
+distingue híbrido de presencial — está detalhado em
+[Modalidade de trabalho](#modalidade-de-trabalho).
+
+## Tecnologias mais pedidas
+
+![Tecnologias mais pedidas por área](docs/grafico-skills.png)
+
+| Tecnologia | Vagas | | Tecnologia | Vagas |
+|---|---|---|---|---|
+| Inglês | 59 | | Metodologias Ágeis | 27 |
+| SQL | 40 | | Java | 23 |
+| Git | 38 | | Redes/TCP-IP | 23 |
+| Windows | 37 | | Excel | 23 |
+| Python | 32 | | JavaScript | 21 |
+| ITIL | 32 | | API REST | 21 |
+
+**SQL aparece no topo de Data, Backend e Suporte/Infra** — é a habilidade mais
+transferível entre as três áreas com mais vagas. **Inglês** lidera o geral e
+aparece em praticamente toda área.
+
+Para quem mira Data, o dado desconfortável: o topo da área é **Excel e Power BI**
+(9 vagas cada, de 15), seguidos de SQL e Python. Airflow, Spark e dbt não
+aparecem no top 8. O que o mercado brasileiro chama de "Data júnior" hoje é
+majoritariamente perfil de BI/analista, não de engenharia de dados.
+
+## Como esses números foram apurados
+
+Três decisões afetaram o resultado mais que qualquer ajuste de código, e todas
+vieram de rodar contra dados reais:
+
+- **48% das vagas coletadas não eram de tecnologia** ("Analista Contábil Jr",
+  "Analista Fiscal Jr"). Sem um portão de relevância, o ranking mediria a
+  população errada.
+- **A área Segurança apareceu com 45 vagas, todas falso positivo**: a palavra
+  `segurança` casava com "normas de segurança" no boilerplate de vagas de
+  suporte. Depois da correção, são 5 — o número real.
+- **`data` não pode ser keyword de Data em português**: casa com "**data** de
+  admissão".
+
+As regras estão em três YAMLs comentados, e o CSV traz uma coluna `area_matches`
+com as keywords que dispararam cada classificação, para auditoria.
+
+Limitações conhecidas estão em [Limitações honestas](#limitações-honestas).
+
+---
+
 ## Fontes de dados
 
 | Portal | Como é acessado | Status |
