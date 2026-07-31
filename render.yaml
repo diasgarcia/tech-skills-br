@@ -1,0 +1,38 @@
+# Deploy da API no Render (https://render.com).
+#
+# O disco do plano free e efemero: some a cada deploy e a cada vez que o
+# servico acorda depois de hibernar. Por isso o banco NAO e versionado nem
+# persistido -- ele e reconstruido do CSV em `seed/` toda vez que o servico
+# sobe. Sao 182 linhas, leva ~1s.
+#
+# O scraper nao roda aqui de proposito: portais de vaga costumam bloquear IP
+# de nuvem. O deploy serve um snapshot datado; para atualizar, rode o scraper
+# na sua maquina e faca commit de um novo `seed/vagas.csv`.
+
+services:
+  - type: web
+    name: vagas-tech-junior-api
+    runtime: python
+    plan: free
+    region: oregon
+
+    buildCommand: pip install -r requirements-api.txt
+
+    # Reconstroi o banco a partir do snapshot e sobe a API.
+    #
+    # --recriar    estado limpo mesmo se sobrar disco de um boot anterior.
+    # --referencia data real da coleta. Sem ela, as 8 vagas cujo portal
+    #              informou data relativa ("Ontem", "Ha 3 dias") seriam
+    #              calculadas contra a data do deploy e mudariam a cada
+    #              redeploy. Atualize junto com o seed/vagas.csv.
+    # 0.0.0.0      e nao 127.0.0.1, senao o Render nao alcanca o processo.
+    startCommand: >-
+      python scripts/import_csv.py --csv seed/vagas.csv --recriar
+      --referencia 2026-07-31 &&
+      uvicorn api.app:app --host 0.0.0.0 --port $PORT
+
+    healthCheckPath: /health
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11"

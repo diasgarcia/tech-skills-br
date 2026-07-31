@@ -1,0 +1,18 @@
+# Dependencias so da API, usadas no deploy.
+#
+# Deliberadamente sem matplotlib: a API nunca importa `scraper/charts.py`
+# (verificado -- o grafo de import de `api.app` puxa requests, bs4 e yaml,
+# nao matplotlib). Tirar reduz bastante o tamanho e o tempo de build.
+#
+# Para desenvolver localmente use `requirements.txt`, que tem tudo.
+
+fastapi>=0.115
+uvicorn>=0.30
+SQLAlchemy>=2.0,<3
+pydantic>=2.0,<3
+
+# `api.vocabulary` le os YAMLs do scraper, e `scraper.sources` e importado
+# junto para descobrir as fontes validas -- por isso requests e bs4 entram.
+PyYAML>=6.0,<7
+requests>=2.31,<3
+beautifulsoup4>=4.12,<5
