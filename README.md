@@ -259,7 +259,8 @@ python scripts/import_csv.py
 uvicorn api.app:app --reload
 ```
 
-Documentação interativa em **http://127.0.0.1:8000/docs**.
+Documentação interativa em **http://127.0.0.1:8000/docs** (`127.0.0.1` é a sua
+própria máquina).
 
 ### Endpoints
 
@@ -318,6 +319,32 @@ As expressões relativas são resolvidas contra a **data de geração do CSV**
 (extraída do timestamp no nome do arquivo), não contra a data de hoje — assim
 importar um CSV de duas semanas atrás produz as mesmas datas que produziria no
 dia da coleta.
+
+Fora da máquina que coletou, o nome do arquivo pode não ter o timestamp e o
+`mtime` deixa de ser confiável (num deploy, o clone do git carimba a data do
+deploy). Por isso o snapshot é importado com a data fixa:
+
+```bash
+python scripts/import_csv.py --csv seed/vagas.csv --referencia 2026-07-31
+```
+
+### Deploy
+
+`render.yaml` sobe a API no [Render](https://render.com) — basta apontar o
+serviço para o repositório.
+
+O disco do plano free é efêmero, então **o banco não é persistido**: ele é
+reconstruído do snapshot em `seed/vagas.csv` toda vez que o serviço sobe (182
+linhas, ~1s). O build usa `requirements-api.txt`, sem matplotlib, que a API
+nunca importa.
+
+O scraper **não roda no servidor**, de propósito: portais de vaga costumam
+bloquear IP de nuvem. O deploy serve um snapshot datado. Para atualizar, rode
+a coleta na sua máquina e faça commit de um novo `seed/vagas.csv`, ajustando
+`--referencia` no `render.yaml`.
+
+No plano free o serviço hiberna após 15 minutos parado, e o primeiro acesso
+depois disso leva ~50s para responder.
 
 ## Como funciona
 

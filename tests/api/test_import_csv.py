@@ -164,6 +164,25 @@ def test_campos_vazios_viram_null(tmp_path):
         assert vaga.tecnologias == []
 
 
+def test_referencia_explicita_vence_o_nome_do_arquivo(tmp_path):
+    """O snapshot versionado depende disso: no deploy o mtime é a data do clone."""
+    csv_path = _escrever_csv(tmp_path, [_linha(published_date="Ontem")])
+    importar(csv_path, tmp_path / "t.db", referencia=date(2020, 1, 10))
+
+    with Session(make_engine(tmp_path / "t.db")) as db:
+        assert db.scalar(select(Vaga)).published_date == date(2020, 1, 9)
+
+
+def test_referencia_explicita_funciona_sem_timestamp_no_nome(tmp_path):
+    csv_path = _escrever_csv(
+        tmp_path, [_linha(published_date="Há 3 dias")], nome="vagas.csv"
+    )
+    importar(csv_path, tmp_path / "t.db", referencia=date(2026, 7, 31))
+
+    with Session(make_engine(tmp_path / "t.db")) as db:
+        assert db.scalar(select(Vaga)).published_date == date(2026, 7, 28)
+
+
 def test_recriar_limpa_o_banco(tmp_path):
     db_path = tmp_path / "t.db"
     importar(_escrever_csv(tmp_path, [_linha(), _linha(external_id="2")]), db_path)

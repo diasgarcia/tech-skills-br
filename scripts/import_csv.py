@@ -19,6 +19,7 @@ import csv
 import glob
 import logging
 import sys
+from datetime import date, datetime
 from pathlib import Path
 
 from sqlalchemy import func, select
@@ -40,6 +41,16 @@ CAMPOS_TEXTO = [
     "company", "seniority", "location", "workplace_type",
     "url", "description", "area_matches", "search_term",
 ]
+
+
+def _data_iso(valor: str) -> date:
+    """Valida --referencia no formato AAAA-MM-DD."""
+    try:
+        return datetime.strptime(valor, "%Y-%m-%d").date()
+    except ValueError:
+        raise argparse.ArgumentTypeError(
+            f"Data inválida: {valor!r}. Use o formato AAAA-MM-DD."
+        ) from None
 
 
 def csv_mais_recente(output_dir: Path) -> Path:
@@ -73,7 +84,12 @@ def _float_ou_none(valor: str | None) -> float | None:
         return None
 
 
-def importar(csv_path: Path, db_path: Path, recriar: bool = False) -> dict:
+def importar(
+    csv_path: Path,
+    db_path: Path,
+    recriar: bool = False,
+    referencia: date | None = None,
+) -> dict:
     engine = make_engine(db_path)
     if recriar:
         Base.metadata.drop_all(engine)
@@ -81,7 +97,14 @@ def importar(csv_path: Path, db_path: Path, recriar: bool = False) -> dict:
 
     # Datas relativas ("Ontem", "Há 3 dias") so fazem sentido contra a data em
     # que o CSV foi gerado -- nao contra hoje.
-    referencia = reference_date_from_csv(csv_path)
+    #
+    # Sem `referencia` explicita, a data sai do timestamp no nome do arquivo e,
+    # como ultimo recurso, do mtime. O mtime e fragil fora da maquina que
+    # coletou: num deploy, o clone do git carimba a data do deploy no arquivo,
+    # e as datas relativas passariam a mudar a cada redeploy. Por isso o
+    # snapshot versionado em seed/ e importado com --referencia fixa.
+    if referencia is None:
+        referencia = reference_date_from_csv(csv_path)
     logger.info("Data de referência do CSV: %s", referencia)
 
     criadas = atualizadas = sem_data = 0
@@ -152,6 +175,14 @@ def main(argv: list[str] | None = None) -> int:
                         help=f"Banco de destino (padrão: {DEFAULT_DB_PATH}).")
     parser.add_argument("--recriar", action="store_true",
                         help="Apaga e recria as tabelas antes de importar.")
+    parser.add_argument(
+        "--referencia", type=_data_iso, default=None, metavar="AAAA-MM-DD",
+        help=(
+            "Data da coleta, usada para resolver datas relativas "
+            "('Ontem', 'Há 3 dias'). Padrão: o timestamp no nome do arquivo. "
+            "Fixe este valor ao importar um snapshot versionado."
+        ),
+    )
     args = parser.parse_args(argv)
 
     logging.basicConfig(
@@ -159,7 +190,9 @@ def main(argv: list[str] | None = None) -> int:
     )
 
     csv_path = args.csv or csv_mais_recente(PROJECT_ROOT / "output")
-    resultado = importar(csv_path, args.db, recriar=args.recriar)
+    resultado = importar(
+        csv_path, args.db, recriar=args.recriar, referencia=args.referencia
+    )
 
     print()
     print(f"  CSV .............. {resultado['csv']}")
