@@ -35,6 +35,43 @@ def normalize(text: str | None) -> str:
     return _WS_RE.sub(" ", text).strip()
 
 
+REMOTO = "Remoto"
+HIBRIDO = "Híbrido"
+PRESENCIAL = "Presencial"
+NAO_INFORMADO = "Não informado"
+
+WORKPLACE_ORDER = [REMOTO, HIBRIDO, PRESENCIAL, NAO_INFORMADO]
+
+# Como cada portal nomeia a modalidade de trabalho.
+_WORKPLACE_MAP = {
+    "remote": REMOTO,
+    "remoto": REMOTO,
+    "home office": REMOTO,
+    "hybrid": HIBRIDO,
+    "hibrido": HIBRIDO,
+    "on-site": PRESENCIAL,
+    "on site": PRESENCIAL,
+    "onsite": PRESENCIAL,
+    "presencial": PRESENCIAL,
+}
+
+
+def normalize_workplace(raw: str | None) -> str:
+    """Converte o rotulo de modalidade do portal para o vocabulario do projeto."""
+    key = normalize(raw)
+    if not key:
+        return NAO_INFORMADO
+    if key in _WORKPLACE_MAP:
+        return _WORKPLACE_MAP[key]
+    if "home office" in key or "remoto" in key:
+        return REMOTO
+    if "hibrid" in key:
+        return HIBRIDO
+    if "presencial" in key:
+        return PRESENCIAL
+    return NAO_INFORMADO
+
+
 @dataclass
 class Job:
     """Uma vaga normalizada, independente do portal de origem."""

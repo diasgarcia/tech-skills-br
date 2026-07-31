@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import logging
 
-from ..models import Job
+from ..models import Job, normalize_workplace
 from .base import JobSource
 
 logger = logging.getLogger(__name__)
@@ -86,7 +86,11 @@ class GupySource(JobSource):
             url=raw.get("jobUrl") or raw.get("careerPageUrl") or "",
             description=raw.get("description") or "",
             location=location,
-            workplace_type=raw.get("workplaceType") or "",
+            # A Gupy informa a modalidade explicitamente: remote / hybrid / on-site.
+            workplace_type=normalize_workplace(
+                raw.get("workplaceType")
+                or ("remote" if raw.get("isRemoteWork") else "")
+            ),
             published_date=(raw.get("publishedDate") or "")[:10],
             search_term=term,
         )

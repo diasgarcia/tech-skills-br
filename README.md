@@ -134,6 +134,7 @@ Gravadas em `output/` (ignorado pelo git), com timestamp no nome:
   senioridade e portal, tecnologias mais pedidas, top empresas e amostra de
   vagas por área.
 - `grafico_areas_<timestamp>.png` — distribuição das vagas por área.
+- `grafico_modalidade_<timestamp>.png` — distribuição por remoto / híbrido / presencial.
 - `grafico_skills_<timestamp>.png` — tecnologias mais pedidas por área.
 
 Os gráficos saem em PNG (200 dpi). Use `--no-charts` para pular essa etapa.
@@ -204,6 +205,24 @@ a distribuí-los por chute.
 As keywords são casadas como palavra/frase inteira sobre o texto normalizado
 (minúsculas, sem acento, pontuação virando espaço). Isso evita que "go" case
 dentro de "Goiânia" ou "java" dentro de "javascript".
+
+### Modalidade de trabalho
+
+As vagas são classificadas em **Remoto**, **Híbrido**, **Presencial** e
+**Não informado**, com origens diferentes por portal:
+
+- **Gupy** expõe a modalidade explicitamente no campo `workplaceType`
+  (`remote` / `hybrid` / `on-site`) — é dado afirmado pelo portal.
+- **Vagas.com** classifica as vagas em três modalidades ("Na empresa",
+  "Na empresa e Home Office", "100% Home Office"), mas **o card da listagem só
+  mostra "100% Home Office" ou o nome da cidade** — um card híbrido e um
+  presencial são indistinguíveis ali. Por isso só o remoto é afirmado; o resto
+  fica como "Não informado" em vez de ser adivinhado como presencial.
+
+As três modalidades existem como filtro de busca no Vagas.com, mas os resultados
+filtrados não reconciliam com a paginação da busca normal (para alguns termos o
+filtro "Na empresa" sozinho já devolve a página inteira), então esse caminho foi
+descartado.
 
 ### Extração de tecnologias
 
@@ -293,7 +312,7 @@ vagas-tech-junior/
 │       ├── base.py          # contrato JobSource
 │       ├── gupy.py
 │       └── vagas_com.py
-└── tests/                   # 84 testes, sem rede
+└── tests/                   # 100 testes, sem rede
 ```
 
 ### Adicionando um portal novo
@@ -311,7 +330,7 @@ classificação, dedupe e exportação.
 python -m pytest -q
 ```
 
-São 84 testes e nenhum acessa a rede: os parsers são testados contra respostas
+São 100 testes e nenhum acessa a rede: os parsers são testados contra respostas
 reais capturadas dos portais e fixadas em `tests/test_sources.py`.
 
 ---
@@ -335,6 +354,10 @@ reais capturadas dos portais e fixadas em `tests/test_sources.py`.
   para as áreas com menos de ~15 vagas.
 - **A extração de tecnologias mede menção, não exigência.** Uma vaga que diz
   "diferencial: Python" conta igual a uma que exige Python.
+- **A fatia "Não informado" da modalidade é quase toda do Vagas.com**, pelo
+  motivo explicado acima. Entre as vagas em que o portal afirma a modalidade
+  (as da Gupy), não há indefinição — se quiser só o dado afirmado, filtre o CSV
+  por `source = gupy`.
 - **Os portais mudam.** Se a Gupy alterar o endpoint ou o Vagas.com mudar as
   classes do HTML, o coletor correspondente para de trazer resultados (e avisa
   no log, sem inventar dados).

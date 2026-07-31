@@ -22,7 +22,7 @@ import re
 
 from bs4 import BeautifulSoup
 
-from ..models import Job, normalize
+from ..models import NAO_INFORMADO, REMOTO, Job, normalize
 from .base import JobSource
 
 logger = logging.getLogger(__name__)
@@ -76,6 +76,8 @@ class VagasComSource(JobSource):
             if link is None:
                 continue
 
+            location = self._text(card.select_one(".vaga-local"))
+
             job_id = link.get("data-id-vaga")
             title = link.get("title") or self._text(link)
             if not job_id or not title:
@@ -92,13 +94,29 @@ class VagasComSource(JobSource):
                     company=self._text(card.select_one("span.emprVaga")),
                     url=url,
                     description=self._text(card.select_one("div.detalhes")),
-                    location=self._text(card.select_one("div.vaga-local")),
-                    workplace_type=self._text(card.select_one("span.nivelVaga")),
+                    location=location,
+                    workplace_type=self._workplace(location),
                     published_date=self._text(card.select_one("span.data-publicacao")),
                     search_term=term,
                 )
             )
         return jobs
+
+    @staticmethod
+    def _workplace(location: str) -> str:
+        """Modalidade de trabalho a partir do campo de local do card.
+
+        O Vagas.com classifica as vagas em tres modalidades ("Na empresa",
+        "Na empresa e Home Office", "100% Home Office"), mas o card da listagem
+        so mostra "100% Home Office" ou o nome da cidade -- um card hibrido e
+        um presencial sao indistinguiveis aqui. Por isso so o remoto e afirmado;
+        o resto fica como nao informado em vez de ser adivinhado.
+
+        (As tres modalidades existem como filtro de busca, mas os resultados
+        filtrados nao reconciliam com a paginacao da busca normal: para alguns
+        termos o filtro "Na empresa" sozinho ja devolve a pagina inteira.)
+        """
+        return REMOTO if "home office" in normalize(location) else NAO_INFORMADO
 
     @staticmethod
     def _text(node) -> str:

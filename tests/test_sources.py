@@ -68,7 +68,7 @@ def test_gupy_parse_mapeia_campos():
     assert job.company == "Minsait"
     assert job.url == "https://minsait.gupy.io/job/abc123"
     assert job.location == "São Paulo, São Paulo"
-    assert job.workplace_type == "hybrid"
+    assert job.workplace_type == "Híbrido"
     assert job.published_date == "2026-07-31"
     assert job.search_term == "desenvolvedor junior"
 
@@ -100,6 +100,15 @@ def test_vagas_parse_page():
     assert job.url == "https://www.vagas.com.br/vagas/v2824782/desenvolvedor-de-software-jr"
     assert job.location == "Rio de Janeiro / RJ"
     assert job.published_date == "09/07/2026"
+    # "Júnior/Trainee" (span.nivelVaga) e senioridade, nao modalidade de trabalho.
+    assert job.workplace_type == "Não informado"
+
+
+def test_vagas_parse_page_detecta_home_office():
+    html = VAGAS_HTML.replace("Rio de Janeiro / RJ", "100% Home Office")
+    job = _source(VagasComSource)._parse_page(html, "x")[0]
+    assert job.workplace_type == "Remoto"
+    assert job.location == "100% Home Office"
 
 
 def test_vagas_parse_page_vazia():

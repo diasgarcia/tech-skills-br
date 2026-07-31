@@ -25,7 +25,7 @@ matplotlib.use("Agg")  # sem interface grafica: so grava arquivo
 import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.patches import FancyBboxPatch, Rectangle  # noqa: E402
 
-from .export import build_ranking  # noqa: E402
+from .export import build_ranking, build_workplace_ranking  # noqa: E402
 from .models import Job  # noqa: E402
 from .skills import skills_by_area  # noqa: E402
 
@@ -40,6 +40,7 @@ INK_MUTED = "#898781"
 
 FONT_STACK = ["Segoe UI", "DejaVu Sans", "sans-serif"]
 BAR_THICKNESS = 0.46  # fracao da faixa: marca fina, com ar entre as barras
+MAX_BAR_PX = 46  # teto absoluto da espessura: a barra nunca preenche a faixa
 CORNER_PX = 9  # raio do canto arredondado, em pixels da imagem final
 
 
@@ -74,6 +75,10 @@ def _add_rounded_bars(ax, values: list[float], color: str = SERIES_1,
     y_min, y_max = ax.get_ylim()
     x_per_px = (x_max - x_min) / max(bbox.width, 1)
     y_per_px = (y_max - y_min) / max(bbox.height, 1)
+
+    # Com poucas linhas a faixa fica alta e a barra engrossa demais; o teto em
+    # pixels mantem a marca fina independente de quantas categorias existem.
+    height = min(height, MAX_BAR_PX * y_per_px)
 
     bar_height_px = height / y_per_px
     radius_px = min(CORNER_PX, bar_height_px / 2)
@@ -149,6 +154,50 @@ def chart_areas(jobs: list[Job], output_path: Path, subtitle: str = "") -> Path:
     # espaco certo e nao sobra faixa vazia entre o subtitulo e a primeira barra.
     ax.set_title(
         "Vagas júnior de tecnologia por área",
+        loc="left", fontsize=15, fontweight="600", color=INK_PRIMARY,
+        pad=34 if subtitle else 16,
+    )
+    if subtitle:
+        ax.text(
+            0, 1.012, subtitle, transform=ax.transAxes,
+            ha="left", va="bottom", fontsize=9.5, color=INK_MUTED,
+        )
+
+    fig.tight_layout()
+    _add_rounded_bars(ax, values)
+    fig.savefig(output_path, bbox_inches="tight", pad_inches=0.32)
+    plt.close(fig)
+    return output_path
+
+
+def chart_workplace(jobs: list[Job], output_path: Path, subtitle: str = "") -> Path:
+    """Grafico 3 -- distribuicao por modalidade (remoto / hibrido / presencial)."""
+    _style()
+    ranking = build_workplace_ranking(jobs)
+    if not ranking:
+        raise ValueError("Sem vagas para plotar.")
+
+    rows = list(reversed(ranking))
+    labels = [r["modalidade"] for r in rows]
+    values = [r["vagas"] for r in rows]
+    percents = [r["percentual"] for r in rows]
+
+    fig, ax = plt.subplots(figsize=(9.0, 0.52 * len(rows) + 1.5), dpi=200)
+
+    for i, (value, pct) in enumerate(zip(values, percents)):
+        ax.text(
+            value + max(values) * 0.015, i, f"{value}  ({pct}%)",
+            va="center", ha="left", fontsize=10, color=INK_SECONDARY,
+        )
+
+    ax.set_yticks(range(len(labels)))
+    ax.set_yticklabels(labels, fontsize=11, color=INK_PRIMARY)
+    ax.set_xlim(0, max(values) * 1.22)
+    ax.set_ylim(-0.6, len(rows) - 0.4)
+    _bare_axes(ax)
+
+    ax.set_title(
+        "Vagas júnior de tecnologia por modalidade de trabalho",
         loc="left", fontsize=15, fontweight="600", color=INK_PRIMARY,
         pad=34 if subtitle else 16,
     )
@@ -247,6 +296,9 @@ def export_charts(jobs: list[Job], output_dir: Path, stamp: str,
 
     files["chart_areas"] = chart_areas(
         jobs, output_dir / f"grafico_areas_{stamp}.png", subtitle=subtitle
+    )
+    files["chart_workplace"] = chart_workplace(
+        jobs, output_dir / f"grafico_modalidade_{stamp}.png", subtitle=subtitle
     )
     skills_path = chart_skills(
         jobs, output_dir / f"grafico_skills_{stamp}.png"

@@ -7,7 +7,7 @@ from collections import Counter
 from datetime import datetime
 from pathlib import Path
 
-from .models import Job
+from .models import WORKPLACE_ORDER, Job
 
 JOB_COLUMNS = [
     "area",
@@ -60,6 +60,22 @@ def build_ranking(jobs: list[Job]) -> list[dict]:
             }
         )
     return ranking
+
+
+def build_workplace_ranking(jobs: list[Job]) -> list[dict]:
+    """Distribuicao das vagas por modalidade, na ordem Remoto/Híbrido/Presencial."""
+    counts = Counter(job.workplace_type or WORKPLACE_ORDER[-1] for job in jobs)
+    total = sum(counts.values()) or 1
+    ordered = [m for m in WORKPLACE_ORDER if counts.get(m)]
+    ordered += [m for m in counts if m not in WORKPLACE_ORDER]
+    return [
+        {
+            "modalidade": modality,
+            "vagas": counts[modality],
+            "percentual": round(100 * counts[modality] / total, 1),
+        }
+        for modality in ordered
+    ]
 
 
 def export_ranking_csv(ranking: list[dict], output_dir: Path,
@@ -123,6 +139,27 @@ def export_report_md(
     lines.append("|-------|-------|")
     for label, count in seniority_counts.most_common():
         lines.append(f"| {label} | {count} |")
+    lines.append("")
+
+    lines.append("## Modalidade de trabalho")
+    lines.append("")
+    lines.append("| Modalidade | Vagas | % |")
+    lines.append("|------------|-------|---|")
+    for row in build_workplace_ranking(jobs):
+        lines.append(f"| {row['modalidade']} | {row['vagas']} | {row['percentual']}% |")
+    lines.append("")
+
+    lines.append("### Modalidade por área")
+    lines.append("")
+    modalities = [m for m in WORKPLACE_ORDER
+                  if any(j.workplace_type == m for j in jobs)]
+    lines.append("| Área | " + " | ".join(modalities) + " |")
+    lines.append("|------|" + "|".join(["---"] * len(modalities)) + "|")
+    for row in ranking:
+        area_jobs = [j for j in jobs if j.area == row["area"]]
+        cells = [str(sum(1 for j in area_jobs if j.workplace_type == m))
+                 for m in modalities]
+        lines.append(f"| {row['area']} | " + " | ".join(cells) + " |")
     lines.append("")
 
     lines.append("## Vagas por portal")
