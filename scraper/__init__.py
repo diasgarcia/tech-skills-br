@@ -1,4 +1,4 @@
-"""vagas-tech-junior-2026 -- qual area de tech mais contrata junior no Brasil."""
+"""vagas-tech-junior -- qual area de tech mais contrata junior no Brasil."""
 
 __version__ = "1.0.0"
 

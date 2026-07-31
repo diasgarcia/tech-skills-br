@@ -1,4 +1,4 @@
-"""CLI do vagas-tech-junior-2026.
+"""CLI do vagas-tech-junior.
 
 Exemplos:
     python main.py                          # coleta completa (Gupy + Vagas.com)
@@ -22,7 +22,7 @@ from scraper.sources import AVAILABLE_SOURCES
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="vagas-tech-junior-2026",
+        prog="vagas-tech-junior",
         description="Descobre qual area de tecnologia tem mais vagas junior no Brasil.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,

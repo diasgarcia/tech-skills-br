@@ -1,4 +1,4 @@
-# vagas-tech-junior-2026
+# vagas-tech-junior
 
 Raspagem de vagas de emprego para responder, **com dados reais**, uma pergunta:
 qual área de tecnologia (Backend, Frontend, Data, Mobile, DevOps, QA, Fullstack,
@@ -64,8 +64,8 @@ arquivo só.
 Requer Python 3.10+.
 
 ```bash
-git clone <url-do-seu-repo> vagas-tech-junior-2026
-cd vagas-tech-junior-2026
+git clone <url-do-seu-repo> vagas-tech-junior
+cd vagas-tech-junior
 python -m venv venv
 ```
 
@@ -269,7 +269,7 @@ Duas armadilhas já documentadas lá dentro, aprendidas rodando com dados reais:
 ## Estrutura
 
 ```
-vagas-tech-junior-2026/
+vagas-tech-junior/
 ├── main.py                  # CLI
 ├── requirements.txt
 ├── README.md

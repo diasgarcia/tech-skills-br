@@ -14,7 +14,7 @@ RULES_DIR = Path(__file__).resolve().parent / "rules"
 DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "output"
 
 USER_AGENT = (
-    "vagas-tech-junior-2026/1.0 (estudo de mercado de trabalho) python-requests"
+    "vagas-tech-junior/1.0 (estudo de mercado de trabalho) python-requests"
 )
 
 # Termos usados na busca. Cada termo vira uma consulta separada em cada portal.
