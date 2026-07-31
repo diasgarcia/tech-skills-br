@@ -23,6 +23,11 @@ dist/
 htmlcov/
 .tox/
 
+# Banco gerado a partir dos CSVs (reconstruivel, nao versionar)
+data/
+*.db
+*.sqlite3
+
 # Saidas da coleta (dados gerados, nao versionar)
 output/
 *.csv

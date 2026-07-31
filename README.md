@@ -6,8 +6,8 @@ Suporte/Infra, Segurança) tem mais vagas para desenvolvedores júnior no Brasil
 
 O projeto coleta vagas em portais públicos, filtra apenas nível de entrada
 (júnior/estágio/trainee/aprendiz), classifica cada vaga em uma área de tecnologia
-por palavras-chave, remove duplicatas e gera CSVs + um relatório em Markdown com
-o ranking.
+por palavras-chave, remove duplicatas e gera CSVs, gráficos e um relatório em
+Markdown com o ranking.
 
 ---
 
@@ -142,6 +142,83 @@ Os gráficos saem em PNG (200 dpi). Use `--no-charts` para pular essa etapa.
 Os CSVs saem em `utf-8-sig`, então abrem direto no Excel com acentuação correta.
 
 ---
+
+## API REST (opcional)
+
+Há uma API **somente leitura** sobre os dados coletados. Ela não substitui o
+pipeline: as vagas continuam entrando pelo scraper, e a API só as expõe por HTTP.
+
+```bash
+pip install -r requirements.txt
+```
+
+```bash
+python scripts/import_csv.py
+```
+
+```bash
+uvicorn api.app:app --reload
+```
+
+Documentação interativa em **http://127.0.0.1:8000/docs**.
+
+### Endpoints
+
+| Método | Rota | O que faz |
+|---|---|---|
+| GET | `/vagas` | Lista vagas. Filtros: `area`, `tecnologia`, `modalidade`, `fonte`, `q` (título), `limit`, `offset` |
+| GET | `/vagas/{id}` | Detalhe da vaga, com descrição completa |
+| GET | `/areas` | As 10 áreas com contagem e percentual |
+| GET | `/areas/{nome}` | Uma área |
+| GET | `/tecnologias` | As 107 tecnologias com contagem de menções. Filtros: `grupo`, `com_vagas` |
+| GET | `/tecnologias/{nome}` | Uma tecnologia |
+
+Exemplos:
+
+```bash
+curl "http://127.0.0.1:8000/vagas?area=Backend&modalidade=Remoto&limit=5"
+```
+
+```bash
+curl "http://127.0.0.1:8000/tecnologias?grupo=linguagens&com_vagas=true"
+```
+
+**Não há `POST`, `PUT` nem `DELETE`** — os dados vêm da raspagem, e escrever por
+HTTP criaria um estado que a próxima importação sobrescreveria. Esses verbos
+respondem `405`.
+
+Erros: `404` para vaga/área/tecnologia inexistente, `422` para parâmetro fora do
+vocabulário (`?area=Inexistente`), sempre no formato `{"detail": "..."}`.
+
+### Banco
+
+SQLite em `data/vagas.db` (ignorado pelo git — é reconstruível a partir do CSV).
+`scripts/import_csv.py` pega o CSV mais recente de `output/`, ou um específico
+com `--csv`; `--recriar` zera as tabelas antes.
+
+A importação é **idempotente**: a identidade da vaga é o par
+`(source, external_id)`, então rodar de novo atualiza em vez de duplicar.
+
+Duas decisões de modelagem que valem menção:
+
+- **`skills` vira relação.** A string `"Excel, Python, SQL"` do CSV é
+  normalizada numa tabela `tecnologias` + associação muitos-para-muitos. Sem
+  isso não dá para filtrar nem contar direito.
+- **`/areas` e `/tecnologias` são calculados da tabela de vagas**, nunca lidos
+  de `ranking_areas.csv` ou `skills_por_area.csv`. Esses CSVs são recortes já
+  agregados — o de skills é truncado no top-15 de cada área, então serviria
+  números errados.
+
+### Datas
+
+O CSV traz três formatos: ISO (`2026-06-26`, Gupy), `dd/mm/aaaa` (Vagas.com) e
+relativo (`"Ontem"`, `"Há 3 dias"`, Vagas.com). O importador converte tudo para
+um único campo `DATE`.
+
+As expressões relativas são resolvidas contra a **data de geração do CSV**
+(extraída do timestamp no nome do arquivo), não contra a data de hoje — assim
+importar um CSV de duas semanas atrás produz as mesmas datas que produziria no
+dia da coleta.
 
 ## Como funciona
 
@@ -289,7 +366,7 @@ Duas armadilhas já documentadas lá dentro, aprendidas rodando com dados reais:
 
 ```
 vagas-tech-junior/
-├── main.py                  # CLI
+├── main.py                  # CLI do scraper
 ├── requirements.txt
 ├── README.md
 ├── .gitignore
@@ -312,7 +389,19 @@ vagas-tech-junior/
 │       ├── base.py          # contrato JobSource
 │       ├── gupy.py
 │       └── vagas_com.py
-└── tests/                   # 100 testes, sem rede
+├── api/                     # API REST somente leitura (opcional)
+│   ├── app.py               # FastAPI, /docs, handlers de erro
+│   ├── database.py          # engine e sessão SQLAlchemy
+│   ├── models.py            # tabelas: vagas, tecnologias, associação
+│   ├── schemas.py           # Pydantic (respostas)
+│   ├── crud.py              # consultas e filtros
+│   ├── dates.py             # normalização das datas para DATE
+│   ├── vocabulary.py        # áreas e tecnologias, lidas dos YAMLs
+│   └── routers/
+├── scripts/
+│   └── import_csv.py        # CSV → SQLite, idempotente
+└── tests/                   # 161 testes, sem rede
+    └── api/                 # testes da API (pulados sem FastAPI)
 ```
 
 ### Adicionando um portal novo
@@ -330,7 +419,7 @@ classificação, dedupe e exportação.
 python -m pytest -q
 ```
 
-São 100 testes e nenhum acessa a rede: os parsers são testados contra respostas
+São 161 testes e nenhum acessa a rede: os parsers são testados contra respostas
 reais capturadas dos portais e fixadas em `tests/test_sources.py`.
 
 ---
