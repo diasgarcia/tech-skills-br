@@ -9,6 +9,18 @@ O projeto coleta vagas em portais públicos, filtra apenas nível de entrada
 por palavras-chave, remove duplicatas e gera CSVs, gráficos e um relatório em
 Markdown com o ranking.
 
+### 🔗 API no ar: **[vagas-tech-junior-api.onrender.com/docs](https://vagas-tech-junior-api.onrender.com/docs)**
+
+Documentação interativa — dá para filtrar as vagas pelo navegador, sem instalar
+nada. Alguns exemplos diretos:
+
+- [Vagas de Backend remotas](https://vagas-tech-junior-api.onrender.com/vagas?area=Backend&modalidade=Remoto)
+- [Ranking das áreas](https://vagas-tech-junior-api.onrender.com/areas)
+- [Tecnologias mais pedidas](https://vagas-tech-junior-api.onrender.com/tecnologias?com_vagas=true)
+
+> Hospedada no plano gratuito do Render, que hiberna após 15 minutos sem uso —
+> **o primeiro acesso pode levar cerca de 1 minuto**. Os seguintes são imediatos.
+
 ---
 
 # Resultados
@@ -247,6 +259,11 @@ Os CSVs saem em `utf-8-sig`, então abrem direto no Excel com acentuação corre
 Há uma API **somente leitura** sobre os dados coletados. Ela não substitui o
 pipeline: as vagas continuam entrando pelo scraper, e a API só as expõe por HTTP.
 
+**No ar em [vagas-tech-junior-api.onrender.com/docs](https://vagas-tech-junior-api.onrender.com/docs)**
+(primeiro acesso pode levar ~1 min — o plano gratuito hiberna).
+
+Para rodar na sua máquina:
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -273,14 +290,14 @@ própria máquina).
 | GET | `/tecnologias` | As 107 tecnologias com contagem de menções. Filtros: `grupo`, `com_vagas` |
 | GET | `/tecnologias/{nome}` | Uma tecnologia |
 
-Exemplos:
+Exemplos, contra a instância pública:
 
 ```bash
-curl "http://127.0.0.1:8000/vagas?area=Backend&modalidade=Remoto&limit=5"
+curl "https://vagas-tech-junior-api.onrender.com/vagas?area=Backend&modalidade=Remoto&limit=5"
 ```
 
 ```bash
-curl "http://127.0.0.1:8000/tecnologias?grupo=linguagens&com_vagas=true"
+curl "https://vagas-tech-junior-api.onrender.com/tecnologias?grupo=linguagens&com_vagas=true"
 ```
 
 **Não há `POST`, `PUT` nem `DELETE`** — os dados vêm da raspagem, e escrever por
