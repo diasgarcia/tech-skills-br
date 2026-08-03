@@ -68,7 +68,27 @@ class AreaClassifier:
                 weight = self.tiers.get(tier_name, 1.0)
                 for kw in keywords or []:
                     compiled.append((_compile_keyword(kw), weight, kw))
+            # Da keyword mais longa para a mais curta: `score_all` usa essa
+            # ordem para nao contar duas vezes o mesmo trecho de texto.
+            compiled.sort(key=lambda item: -len(normalize(item[2])))
             self.areas[area] = compiled
+
+    @staticmethod
+    def _primeiro_livre(
+        pattern: re.Pattern, texto: str, usados: list[tuple[int, int]]
+    ) -> tuple[int, int] | None:
+        """Primeira ocorrencia da keyword que nao caia num trecho ja pontuado.
+
+        Devolve o intervalo (inicio, fim) do casamento, ou None se todas as
+        ocorrencias estiverem dentro de trechos ja contados nesta area.
+        """
+        if not texto:
+            return None
+        for match in pattern.finditer(texto):
+            span = match.span()
+            if not any(ini <= span[0] and span[1] <= fim for ini, fim in usados):
+                return span
+        return None
 
     def _strong_patterns(self):
         for keywords in self.areas.values():
@@ -96,14 +116,24 @@ class AreaClassifier:
             total = 0.0
             title_total = 0.0
             matches: list[str] = []
+            # Trechos ja pontuados nesta area, para nao contar o mesmo texto
+            # duas vezes: "suporte tecnico" (peso alto) contem "suporte"
+            # (peso medio), e sem isso a area somaria os dois pelo mesmo trecho.
+            usados_titulo: list[tuple[int, int]] = []
+            usados_corpo: list[tuple[int, int]] = []
+
             for pattern, weight, raw_kw in keywords:
-                in_title = bool(pattern.search(title_text))
-                in_body = bool(pattern.search(body_text))
-                if in_title:
+                no_titulo = self._primeiro_livre(pattern, title_text, usados_titulo)
+                if no_titulo is not None:
+                    usados_titulo.append(no_titulo)
                     total += weight * self.title_boost
                     title_total += weight * self.title_boost
                     matches.append(f"{raw_kw}(t)")
-                elif in_body:
+                    continue
+
+                no_corpo = self._primeiro_livre(pattern, body_text, usados_corpo)
+                if no_corpo is not None:
+                    usados_corpo.append(no_corpo)
                     total += weight
                     matches.append(raw_kw)
             if total > 0:

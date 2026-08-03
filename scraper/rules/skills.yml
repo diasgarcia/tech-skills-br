@@ -43,6 +43,8 @@ frameworks:
   Flask: [flask]
   FastAPI: [fastapi, fast api]
   Laravel: [laravel]
+  CodeIgniter: [codeigniter, code igniter]
+  JavaEE: [javaee, java ee, j2ee, jakarta ee]
   Flutter: [flutter]
   jQuery: [jquery]
   Bootstrap: [bootstrap]
@@ -104,6 +106,8 @@ qa:
   Jest: [jest]
   Testes Automatizados: [testes automatizados, automacao de testes]
   Testes Manuais: [testes manuais, teste manual]
+  Testes Funcionais: [testes funcionais, teste funcional]
+  Testes de Regressão: [testes de regressao, teste de regressao]
 
 suporte_infra:
   Windows Server: [windows server]

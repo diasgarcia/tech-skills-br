@@ -63,6 +63,11 @@ tech_gate:
     - servidores
     - banco de dados
     - tech
+    # Vistos em titulos reais da ProgramaThor que o portao derrubava:
+    # "Web3 Product Tester - Junior" nao casava nenhum sinal.
+    - tester
+    - web3
+    - blockchain
 
   # Contextos onde as palavras acima NAO significam tecnologia. Se o titulo casar
   # qualquer item daqui, a vaga e descartada mesmo que case `titulo` acima.

@@ -128,6 +128,7 @@ Limitações conhecidas estão em [Limitações honestas](#limitações-honestas
 |--------|-----------------|--------|
 | **Gupy** (`portal.gupy.io`) | Endpoint JSON público que o front do portal usa: `GET https://employability-portal.gupy.io/api/v1/jobs?jobName=<termo>&limit=<n>&offset=<n>` | Funcionando, sem autenticação |
 | **Vagas.com.br** | HTML da busca (`/vagas-de-<termo>?pagina=<n>`), renderizado no servidor | Funcionando, sem Selenium |
+| **ProgramaThor** | HTML da listagem (`/jobs?expertise=<nível>&page=<n>`), renderizado no servidor | Funcionando, volume pequeno |
 | **Catho** | — | **Bloqueado** (ver abaixo) |
 
 ### Sobre a Gupy
@@ -154,6 +155,29 @@ ao vivo antes de escrever o parser.
 Ponto de atenção: o Vagas.com devolve apenas um *trecho* da descrição (texto de
 marketing), enquanto a Gupy devolve a descrição completa. O classificador leva
 isso em conta (veja "Portão de relevância" abaixo).
+
+### Sobre a ProgramaThor
+
+Portal 100% de tecnologia, com listagem renderizada no servidor. Duas
+particularidades mudam a forma de integrar:
+
+- **O parâmetro `?search=` é ignorado.** Buscar `?search=python` devolve
+  exatamente o mesmo conjunto de vagas que a listagem sem filtro — conferido
+  comparando os ids retornados. Já `?expertise=` e `?page=` funcionam. Por isso
+  esta fonte não percorre os 13 termos de busca do projeto: usa os filtros
+  nativos de nível de entrada (`expertise=Júnior`, `contract_type=Estágio`) e
+  faz duas consultas em vez de treze inúteis.
+- **Vagas expiradas continuam na listagem**, marcadas com um selo "Vencida". São
+  descartadas, e são a maioria: das 75 vagas "Júnior" nas 5 primeiras páginas,
+  **68 estavam vencidas (91%)**, e as de estágio estavam 100% expiradas. As
+  ativas ficam nas primeiras páginas — da página 6 em diante não há nenhuma.
+
+O volume real é pequeno (**7 vagas júnior abertas** na coleta de 03/08/2026),
+mas o card traz **senioridade e tecnologias declaradas pelo próprio portal**, o
+que serve para conferir a classificação por keywords do projeto contra uma
+categorização nativa. A senioridade declarada é respeitada em vez do regex de
+título: "Programador(a) PHP" não tem marca de nível nenhuma, mas o portal a
+classifica como Júnior.
 
 ### Sobre a Catho — bloqueada
 
@@ -287,7 +311,7 @@ própria máquina).
 | GET | `/vagas/{id}` | Detalhe da vaga, com descrição completa |
 | GET | `/areas` | As 10 áreas com contagem e percentual |
 | GET | `/areas/{nome}` | Uma área |
-| GET | `/tecnologias` | As 107 tecnologias com contagem de menções. Filtros: `grupo`, `com_vagas` |
+| GET | `/tecnologias` | As 111 tecnologias com contagem de menções. Filtros: `grupo`, `com_vagas` |
 | GET | `/tecnologias/{nome}` | Uma tecnologia |
 
 Exemplos, contra a instância pública:
@@ -531,7 +555,8 @@ vagas-tech-junior/
 │   └── sources/
 │       ├── base.py          # contrato JobSource
 │       ├── gupy.py
-│       └── vagas_com.py
+│       ├── vagas_com.py
+│       └── programathor.py
 ├── api/                     # API REST somente leitura (opcional)
 │   ├── app.py               # FastAPI, /docs, handlers de erro
 │   ├── database.py          # engine e sessão SQLAlchemy
@@ -543,7 +568,7 @@ vagas-tech-junior/
 │   └── routers/
 ├── scripts/
 │   └── import_csv.py        # CSV → SQLite, idempotente
-└── tests/                   # 161 testes, sem rede
+└── tests/                   # 178 testes, sem rede
     └── api/                 # testes da API (pulados sem FastAPI)
 ```
 
@@ -562,7 +587,7 @@ classificação, dedupe e exportação.
 python -m pytest -q
 ```
 
-São 161 testes e nenhum acessa a rede: os parsers são testados contra respostas
+São 178 testes e nenhum acessa a rede: os parsers são testados contra respostas
 reais capturadas dos portais e fixadas em `tests/test_sources.py`.
 
 ---

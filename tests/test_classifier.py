@@ -177,6 +177,36 @@ def test_filter_tech_separa_as_duas_listas():
     assert [j.external_id for j in non_tech] == ["2"]
 
 
+def test_keyword_contida_em_outra_nao_pontua_duas_vezes(clf):
+    """'suporte tecnico' contém 'suporte' -- o mesmo trecho não pode somar duas vezes."""
+    scores = {s.area: s.score for s in clf.score_all("Suporte Técnico Júnior")}
+    # peso_alto (4.0) x title_boost (3.0) = 12, e não 15 (12 + 3 do 'suporte' contido).
+    assert scores["Suporte/Infra"] == 12.0
+
+
+def test_frases_que_so_se_sobrepoem_em_parte_ainda_somam(clf):
+    """A regra é contenção, não sobreposição: duas frases fortes distintas contam."""
+    scores = {s.area: s.score for s in clf.score_all("Analista de Suporte Técnico Jr")}
+    # 'analista de suporte' e 'suporte tecnico' compartilham uma palavra, mas
+    # nenhuma está contida na outra -- são dois sinais fortes de verdade.
+    assert scores["Suporte/Infra"] == 24.0
+
+
+def test_titulo_backend_com_suporte_nao_vira_suporte(clf):
+    """Caso real da ProgramaThor: a soma em dobro fazia Suporte vencer Backend."""
+    resultado = clf.classify(
+        "DESENVOLVEDOR BACKEND JÚNIOR - SUSTENTAÇÃO E SUPORTE TÉCNICO",
+        "Tecnologias: API, Node.js, SQL, PostgreSQL.",
+    )
+    assert resultado.area == "Backend"
+
+
+def test_ocorrencias_separadas_ainda_pontuam(clf):
+    """A regra só ignora trecho sobreposto, não repetição em lugares diferentes."""
+    scores = {s.area: s.score for s in clf.score_all("Suporte", "Precisa de SQL e ETL.")}
+    assert scores["Data"] > 0  # sql e etl contam, são trechos distintos
+
+
 def test_score_all_ordena_por_pontuacao(clf):
     ranked = clf.score_all("Desenvolvedor Fullstack React e Node Júnior")
     assert ranked[0].score >= ranked[-1].score
