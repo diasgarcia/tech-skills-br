@@ -1,8 +1,11 @@
 """Testes dos parsers, usando respostas reais capturadas dos portais (offline)."""
 
+import pytest
+
 from scraper.config import Settings
 from scraper.sources.gupy import GupySource
 from scraper.sources.programathor import FILTROS_NIVEL_ENTRADA, ProgramathorSource
+from scraper.sources.trampos import TramposSource
 from scraper.sources.vagas_com import VagasComSource, slugify_term
 
 # Recorte real da resposta de
@@ -220,6 +223,102 @@ def test_programathor_pagina_vazia():
 def test_programathor_ignora_card_sem_id_valido():
     html = '<div class="wrapper-jobs-list"><a href="/jobs/sem-id"><h3>X</h3></a></div>'
     assert _source(ProgramathorSource)._parse_page(html, "x") == []
+
+
+# Recorte real de GET https://trampos.co/api/v2/opportunities?tr=desenvolvedor&page=1
+TRAMPOS_JSON = {
+    "id": 773915,
+    "name": "Desenvolvedor(a) .Net C#",
+    "type_name": "Emprego",
+    "type_slug": "emprego",
+    "category_name": "Tecnologia da Informação",
+    "category_slug": "ti",
+    "home_office": None,
+    "hybrid": True,
+    "salary": "NÃO DIVULGADA",
+    "published_at": "2026-08-02T12:00:07.000-03:00",
+    "custom_company_name": None,
+    "company": {
+        "id": 725735,
+        "name": "Artium Soluções",
+        "slug": "artium-solucoes",
+        "description": "Somos uma empresa de tecnologia da inovação.",
+    },
+    "email_share_url":
+        "https://trampos.co/oportunidades/773915-desenvolvedor-a-net-c/share/email",
+}
+
+
+def test_trampos_parse_mapeia_campos():
+    job = _source(TramposSource)._parse(TRAMPOS_JSON, "desenvolvedor")
+    assert job is not None
+    assert job.source == "trampos"
+    assert job.external_id == "773915"
+    assert job.title == "Desenvolvedor(a) .Net C#"
+    assert job.company == "Artium Soluções"
+    assert job.published_date == "2026-08-02"
+    assert job.search_term == "desenvolvedor"
+
+
+def test_trampos_url_sai_do_link_de_compartilhamento():
+    # A API não devolve a URL da vaga; ela está dentro das de compartilhamento.
+    job = _source(TramposSource)._parse(TRAMPOS_JSON, "x")
+    assert job.url == "https://trampos.co/oportunidades/773915-desenvolvedor-a-net-c"
+
+
+@pytest.mark.parametrize(
+    "flags,esperado",
+    [
+        ({"home_office": True, "hybrid": False}, "Remoto"),
+        ({"home_office": True, "hybrid": True}, "Remoto"),
+        ({"home_office": None, "hybrid": True}, "Híbrido"),
+        ({"home_office": False, "hybrid": False}, "Presencial"),
+        ({}, "Presencial"),
+    ],
+)
+def test_trampos_modalidade(flags, esperado):
+    # `hybrid` vem sempre; `home_office` às vezes vem nulo.
+    assert TramposSource._modalidade(flags) == esperado
+
+
+def test_trampos_estagio_vem_do_tipo_nativo():
+    raw = dict(TRAMPOS_JSON, type_slug="estagio", type_name="Estágio")
+    assert _source(TramposSource)._parse(raw, "x").seniority == "Estágio"
+
+
+def test_trampos_emprego_deixa_senioridade_para_o_regex():
+    assert _source(TramposSource)._parse(TRAMPOS_JSON, "x").seniority == ""
+
+
+def test_trampos_descricao_usa_a_categoria_nativa():
+    job = _source(TramposSource)._parse(TRAMPOS_JSON, "x")
+    assert "Tecnologia da Informação" in job.description
+
+
+def test_trampos_descricao_ignora_o_texto_da_empresa():
+    """company.description fala da EMPRESA -- usá-la classificaria errado."""
+    job = _source(TramposSource)._parse(TRAMPOS_JSON, "x")
+    assert "inovação" not in job.description
+
+
+def test_trampos_salario_nao_divulgado_fica_de_fora():
+    job = _source(TramposSource)._parse(TRAMPOS_JSON, "x")
+    assert "Salário" not in job.description
+    com_salario = _source(TramposSource)._parse(
+        dict(TRAMPOS_JSON, salary="R$ 5.000"), "x"
+    )
+    assert "Salário: R$ 5.000." in com_salario.description
+
+
+def test_trampos_ignora_registro_incompleto():
+    src = _source(TramposSource)
+    assert src._parse({"id": None, "name": "x"}, "t") is None
+    assert src._parse({"id": 1, "name": ""}, "t") is None
+
+
+def test_trampos_usa_custom_company_name_quando_existe():
+    raw = dict(TRAMPOS_JSON, custom_company_name="Empresa Confidencial")
+    assert _source(TramposSource)._parse(raw, "x").company == "Empresa Confidencial"
 
 
 def test_programathor_filtros_de_nivel_de_entrada():
