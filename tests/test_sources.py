@@ -4,6 +4,7 @@ import pytest
 
 from scraper.config import Settings
 from scraper.sources.gupy import GupySource
+from scraper.sources.linkedin import GEO_ID_BRASIL, LinkedInSource
 from scraper.sources.programathor import FILTROS_NIVEL_ENTRADA, ProgramathorSource
 from scraper.sources.trampos import TramposSource
 from scraper.sources.vagas_com import VagasComSource, slugify_term
@@ -319,6 +320,87 @@ def test_trampos_ignora_registro_incompleto():
 def test_trampos_usa_custom_company_name_quando_existe():
     raw = dict(TRAMPOS_JSON, custom_company_name="Empresa Confidencial")
     assert _source(TramposSource)._parse(raw, "x").company == "Empresa Confidencial"
+
+
+# Recorte real de
+# GET .../jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=desenvolvedor+junior&geoId=106057199
+LINKEDIN_HTML = """
+<ul>
+<li>
+  <div class="base-card job-search-card"
+       data-entity-urn="urn:li:jobPosting:4422123289">
+    <a class="base-card__full-link"
+       href="https://www.linkedin.com/jobs/view/desenvolvedor-junior-at-acme-4422123289?position=1&amp;pageNum=0">
+      <span class="sr-only">Desenvolvedor Back-end Júnior</span>
+    </a>
+    <div class="base-search-card__info">
+      <h3 class="base-search-card__title">Desenvolvedor Back-end Júnior</h3>
+      <h4 class="base-search-card__subtitle">ACME Tecnologia</h4>
+      <span class="job-search-card__location">São Paulo, São Paulo, Brazil</span>
+      <time datetime="2026-08-01">1 dia atrás</time>
+    </div>
+  </div>
+</li>
+</ul>
+"""
+
+
+def test_linkedin_parse_mapeia_campos():
+    jobs = _source(LinkedInSource)._parse_page(LINKEDIN_HTML, "desenvolvedor junior")
+    assert len(jobs) == 1
+    job = jobs[0]
+    assert job.source == "linkedin"
+    assert job.external_id == "4422123289"
+    assert job.title == "Desenvolvedor Back-end Júnior"
+    assert job.company == "ACME Tecnologia"
+    assert job.location == "São Paulo, São Paulo, Brazil"
+    assert job.published_date == "2026-08-01"
+    assert job.search_term == "desenvolvedor junior"
+
+
+def test_linkedin_url_perde_os_parametros_de_rastreio():
+    job = _source(LinkedInSource)._parse_page(LINKEDIN_HTML, "x")[0]
+    assert job.url == (
+        "https://www.linkedin.com/jobs/view/desenvolvedor-junior-at-acme-4422123289"
+    )
+    assert "?" not in job.url
+
+
+def test_linkedin_usa_geoid_do_brasil():
+    """`location=Brasil` em português falha em silêncio e traz vagas dos EUA."""
+    assert GEO_ID_BRASIL == "106057199"
+
+
+@pytest.mark.parametrize(
+    "local,esperado",
+    [
+        ("São Paulo, São Paulo, Brazil", "Não informado"),
+        ("Brazil (Remote)", "Remoto"),
+        ("São Paulo (Remoto)", "Remoto"),
+        ("", "Não informado"),
+    ],
+)
+def test_linkedin_modalidade_so_afirma_remoto(local, esperado):
+    # O card não tem campo de modalidade: presencial e híbrido são
+    # indistinguíveis, então não são chutados.
+    assert LinkedInSource._modalidade(local) == esperado
+
+
+def test_linkedin_ignora_card_sem_urn_ou_titulo():
+    src = _source(LinkedInSource)
+    assert src._parse_page('<div class="base-card"><h3>X</h3></div>', "x") == []
+    assert src._parse_page(
+        '<div class="base-card" data-entity-urn="urn:li:jobPosting:1"></div>', "x"
+    ) == []
+
+
+def test_linkedin_pagina_vazia():
+    assert _source(LinkedInSource)._parse_page("<html></html>", "x") == []
+
+
+def test_linkedin_sem_descricao_no_card():
+    """A busca não traz descrição; a classificação se apoia no título."""
+    assert _source(LinkedInSource)._parse_page(LINKEDIN_HTML, "x")[0].description == ""
 
 
 def test_programathor_filtros_de_nivel_de_entrada():
