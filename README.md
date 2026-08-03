@@ -131,6 +131,7 @@ Limitações conhecidas estão em [Limitações honestas](#limitações-honestas
 | **ProgramaThor** | HTML da listagem (`/jobs?expertise=<nível>&page=<n>`), renderizado no servidor | Funcionando, volume pequeno |
 | **Trampos.co** | API JSON pública que a SPA consome: `GET https://trampos.co/api/v2/opportunities?tr=<termo>&page=<n>` | Funcionando, volume pequeno |
 | **Catho** | — | **Bloqueado** (ver abaixo) |
+| **Indeed BR** | — | **Bloqueado** (ver abaixo) |
 
 ### Sobre a Gupy
 
@@ -213,10 +214,18 @@ a home do site, não só a busca. Não é uma questão de renderização de Java
 que Selenium resolveria sozinho.
 
 **Nenhum dado da Catho é simulado neste projeto.** Por isso a fonte ficou de
-fora, e o caminho recomendado é trocar por outra fonte pública: **LinkedIn Jobs**
-(guest API), **Indeed BR**, **Programathor**, **Trampos.co** ou **Remotar** — a
-estrutura de `scraper/sources/` foi feita para receber uma fonte nova em um
-arquivo só.
+fora. A estrutura de `scraper/sources/` foi feita para receber uma fonte nova
+em um arquivo só — **Remotar** e **Gupy Vagas** são candidatos ainda não
+avaliados.
+
+### Sobre o Indeed BR — bloqueado
+
+O Indeed responde **HTTP 403 do Cloudflare** com o cabeçalho
+`Cf-Mitigated: challenge`, tanto com o User-Agent do projeto quanto com um de
+navegador. É um desafio de bot no edge, não uma questão de renderização.
+
+Assim como na Catho, **nenhum dado do Indeed é simulado**: a fonte foi avaliada,
+documentada e deixada de fora.
 
 ---
 
