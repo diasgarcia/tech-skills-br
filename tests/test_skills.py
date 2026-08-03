@@ -4,6 +4,7 @@ from scraper.models import Job
 from scraper.skills import (
     SkillExtractor,
     attach_skills,
+    jobs_with_skills_by_area,
     normalize_tech,
     overall_skill_counts,
     skills_by_area,
@@ -72,6 +73,23 @@ def test_skills_by_area_agrupa_e_ordena():
 def test_skills_by_area_ignora_area_sem_skills():
     jobs = [Job(source="t", external_id="1", title="a", area="QA", skills=[])]
     assert "QA" not in skills_by_area(jobs)
+
+
+def test_jobs_with_skills_by_area():
+    """Base dos percentuais: nem toda vaga informa tecnologia."""
+    jobs = [
+        Job(source="t", external_id="1", title="a", area="Data", skills=["SQL"]),
+        Job(source="t", external_id="2", title="b", area="Data", skills=[]),
+        Job(source="t", external_id="3", title="c", area="Data", skills=["Python"]),
+        Job(source="t", external_id="4", title="d", area="Backend", skills=[]),
+    ]
+    base = jobs_with_skills_by_area(jobs)
+    assert base["Data"] == 2  # e não 3
+    assert "Backend" not in base  # nenhuma vaga informa tecnologia
+
+
+def test_jobs_with_skills_by_area_lista_vazia():
+    assert jobs_with_skills_by_area([]) == {}
 
 
 def test_overall_skill_counts():
