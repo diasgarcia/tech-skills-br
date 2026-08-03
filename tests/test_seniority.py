@@ -44,6 +44,27 @@ def test_nao_casa_junior_dentro_de_outra_palavra():
     assert flt.label("Gerente de Projetos") is None
 
 
+def test_senioridade_declarada_pela_fonte_vence_o_titulo():
+    """Título sem marca de nível não descarta a vaga se a fonte já sabe o nível."""
+    jobs = [
+        Job(source="programathor", external_id="1",
+            title="Programador(a) PHP", seniority="Júnior"),
+        Job(source="programathor", external_id="2",
+            title="Analista de Sistemas", seniority="Estágio"),
+    ]
+    kept = filter_entry_level(jobs)
+    assert [j.external_id for j in kept] == ["1", "2"]
+    assert kept[0].seniority == "Júnior"
+
+
+def test_sem_senioridade_da_fonte_cai_no_regex_do_titulo():
+    jobs = [
+        Job(source="gupy", external_id="1", title="Programador(a) PHP"),
+        Job(source="gupy", external_id="2", title="Programador(a) PHP Júnior"),
+    ]
+    assert [j.external_id for j in filter_entry_level(jobs)] == ["2"]
+
+
 def test_filter_entry_level_preenche_rotulo():
     jobs = [
         Job(source="t", external_id="1", title="Desenvolvedor Júnior"),

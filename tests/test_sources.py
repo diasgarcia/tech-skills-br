@@ -2,6 +2,7 @@
 
 from scraper.config import Settings
 from scraper.sources.gupy import GupySource
+from scraper.sources.programathor import FILTROS_NIVEL_ENTRADA, ProgramathorSource
 from scraper.sources.vagas_com import VagasComSource, slugify_term
 
 # Recorte real da resposta de
@@ -118,3 +119,111 @@ def test_vagas_parse_page_vazia():
 def test_slugify_term():
     assert slugify_term("desenvolvedor júnior") == "desenvolvedor-junior"
     assert slugify_term("Estágio  em TI") == "estagio-em-ti"
+
+
+# Recorte real de https://programathor.com.br/jobs?expertise=Júnior
+# Dois cards: um ativo e um com o selo "Vencida".
+PROGRAMATHOR_HTML = """
+<div class="wrapper-jobs-list">
+<a href="/jobs/33692-desenvolvedor-a-php-junior">
+  <div class="cell-list-content">
+    <h3 class="text-24 line-height-30">Desenvolvedor(a) PHP Júnior</h3>
+    <div class="cell-list-content-icon">
+      <span><i class="fa fa-briefcase"></i>TECHLEGAL SERVICOS - ME</span>
+      <span><i class="fas fa-map-marker-alt"></i>São Paulo  (Híbrido)</span>
+      <span><i class="fa fa-building"></i>Startup</span>
+      <span><i class="far fa-money-bill-alt"></i>Até R$4.000</span>
+      <span><i class="far fa-chart-bar"></i>Júnior</span>
+      <span><i class="far fa-file-alt"></i>PJ</span>
+      <span><i class="fas fa-plane"></i>Não Aceito candidatos de outras cidades</span>
+    </div>
+    <div>
+      <span class="tag-list background-gray">API</span>
+      <span class="tag-list background-gray">CodeIgniter</span>
+      <span class="tag-list background-gray">HTML</span>
+      <span class="tag-list background-gray">JavaScript</span>
+      <span class="tag-list background-gray">MySQL</span>
+      <span class="tag-list background-gray">PHP</span>
+    </div>
+  </div>
+</a>
+<a href="/jobs/13029-programador-a-php">
+  <div class="cell-list-content">
+    <h3 class="color-gray text-24 line-height-30">
+      <span class="text-16 border-red color-red">Vencida</span>
+      Programador(a) PHP
+    </h3>
+    <div class="cell-list-content-icon">
+      <span><i class="fa fa-briefcase"></i>Wase Tecnologia</span>
+      <span><i class="fas fa-map-marker-alt"></i>Remoto</span>
+      <span><i class="far fa-chart-bar"></i>Júnior</span>
+      <span><i class="far fa-file-alt"></i>Estágio</span>
+    </div>
+    <div><span class="tag-list background-gray">PHP</span></div>
+  </div>
+</a>
+</div>
+"""
+
+
+def test_programathor_parse_mapeia_campos_pelo_icone():
+    jobs = _source(ProgramathorSource)._parse_page(PROGRAMATHOR_HTML, "Júnior")
+    assert len(jobs) == 1  # a vaga "Vencida" foi descartada
+    job = jobs[0]
+    assert job.source == "programathor"
+    assert job.external_id == "33692"
+    assert job.title == "Desenvolvedor(a) PHP Júnior"
+    assert job.company == "TECHLEGAL SERVICOS - ME"
+    assert job.url == "https://programathor.com.br/jobs/33692-desenvolvedor-a-php-junior"
+    assert job.search_term == "Júnior"
+
+
+def test_programathor_descarta_vaga_vencida():
+    jobs = _source(ProgramathorSource)._parse_page(PROGRAMATHOR_HTML, "x")
+    assert "13029" not in {j.external_id for j in jobs}
+
+
+def test_programathor_separa_local_e_modalidade():
+    parse = ProgramathorSource._local_e_modalidade
+    assert parse("São Paulo  (Híbrido)") == ("São Paulo", "Híbrido")
+    assert parse("São Luís, Maranhão  (Presencial)") == ("São Luís, Maranhão", "Presencial")
+    assert parse("Remoto") == ("", "Remoto")
+    assert parse("") == ("", "")
+
+
+def test_programathor_usa_a_senioridade_declarada_pelo_portal():
+    """O portal informa o nível num campo próprio; não dependemos do título."""
+    job = _source(ProgramathorSource)._parse_page(PROGRAMATHOR_HTML, "x")[0]
+    assert job.seniority == "Júnior"
+
+
+def test_programathor_contrato_de_estagio_vence_a_senioridade():
+    # O portal marca estágio como expertise=Júnior + contract_type=Estágio.
+    senioridade = ProgramathorSource._senioridade(
+        {"expertise": "Júnior", "contract": "Estágio"}
+    )
+    assert senioridade == "Estágio"
+
+
+def test_programathor_tecnologias_entram_na_descricao():
+    """O card não traz descrição, mas traz as tags -- que alimentam o classificador."""
+    job = _source(ProgramathorSource)._parse_page(PROGRAMATHOR_HTML, "x")[0]
+    assert "CodeIgniter" in job.description
+    assert "PHP" in job.description
+    assert "Faixa salarial" in job.description
+
+
+def test_programathor_pagina_vazia():
+    assert _source(ProgramathorSource)._parse_page("<html></html>", "x") == []
+
+
+def test_programathor_ignora_card_sem_id_valido():
+    html = '<div class="wrapper-jobs-list"><a href="/jobs/sem-id"><h3>X</h3></a></div>'
+    assert _source(ProgramathorSource)._parse_page(html, "x") == []
+
+
+def test_programathor_filtros_de_nivel_de_entrada():
+    # O portal não tem busca textual, então a fonte usa os filtros nativos.
+    assert set(FILTROS_NIVEL_ENTRADA) == {"Júnior", "Estágio"}
+    assert FILTROS_NIVEL_ENTRADA["Júnior"] == {"expertise": "Júnior"}
+    assert FILTROS_NIVEL_ENTRADA["Estágio"] == {"contract_type": "Estágio"}
