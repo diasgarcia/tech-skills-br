@@ -27,7 +27,7 @@ from matplotlib.patches import FancyBboxPatch, Rectangle  # noqa: E402
 
 from .export import build_ranking, build_workplace_ranking  # noqa: E402
 from .models import Job  # noqa: E402
-from .skills import skills_by_area  # noqa: E402
+from .skills import jobs_with_skills_by_area, skills_by_area  # noqa: E402
 
 logger = logging.getLogger(__name__)
 
@@ -217,20 +217,34 @@ def chart_workplace(jobs: list[Job], output_path: Path, subtitle: str = "") -> P
 def chart_skills(
     jobs: list[Job],
     output_path: Path,
-    top_areas: int = 6,
+    top_areas: int = 8,
     top_skills: int = 8,
-    min_jobs: int = 5,
+    min_jobs: int = 6,
     subtitle: str = "",
 ) -> Path | None:
-    """Grafico 2 -- small multiples: principais tecnologias por area."""
+    """Grafico 2 -- small multiples: principais tecnologias por area.
+
+    As barras sao **percentuais**, e nao contagens: as areas tem tamanhos muito
+    diferentes (144 vagas em "Outros/TI Geral" contra 8 em Mobile), entao
+    contagem absoluta nao permite comparar um painel com o outro.
+
+    A base do percentual e o numero de vagas da area que **informam alguma
+    tecnologia**, nao o total da area. Nem toda vaga informa: o card do LinkedIn
+    nao traz descricao, entao em "Outros/TI Geral" so 31 das 144 vagas tem
+    tecnologia. Usar o total daria percentuais artificialmente baixos justamente
+    nas areas mais contaminadas por essa limitacao.
+
+    Por isso `min_jobs` filtra pela base, e nao pelo tamanho da area: com 4
+    vagas informando tecnologia, cada uma valeria 25% e o painel seria ruido.
+    """
     _style()
     per_area = skills_by_area(jobs, top_n=top_skills)
     area_sizes = {r["area"]: r["vagas"] for r in build_ranking(jobs)}
+    bases = jobs_with_skills_by_area(jobs)
 
-    # Areas com volume suficiente para a contagem significar alguma coisa.
     areas = [
-        a for a in sorted(per_area, key=lambda a: -area_sizes.get(a, 0))
-        if area_sizes.get(a, 0) >= min_jobs and per_area[a]
+        a for a in sorted(per_area, key=lambda a: -bases.get(a, 0))
+        if bases.get(a, 0) >= min_jobs and per_area[a]
     ][:top_areas]
 
     if not areas:
@@ -250,25 +264,28 @@ def chart_skills(
             continue
 
         area = areas[idx]
+        base = bases.get(area, 0) or 1
         data = list(reversed(per_area[area]))
         names = [d[0] for d in data]
         counts = [d[1] for d in data]
-        panels.append((ax, counts))
+        pcts = [100 * c / base for c in counts]
+        panels.append((ax, pcts))
 
-        for i, count in enumerate(counts):
+        for i, (pct, count) in enumerate(zip(pcts, counts)):
             ax.text(
-                count + max(counts) * 0.04, i, str(count),
+                pct + max(pcts) * 0.04, i, f"{pct:.0f}%  ({count})",
                 va="center", ha="left", fontsize=9, color=INK_SECONDARY,
             )
 
         ax.set_yticks(range(len(names)))
         ax.set_yticklabels(names, fontsize=9.5, color=INK_PRIMARY)
-        ax.set_xlim(0, max(counts) * 1.26)
+        ax.set_xlim(0, max(pcts) * 1.38)
         ax.set_ylim(-0.6, len(names) - 0.4)
         _bare_axes(ax)
         ax.set_title(
-            f"{area}  ·  {area_sizes.get(area, 0)} vagas",
-            loc="left", fontsize=11.5, fontweight="600",
+            f"{area}  ·  {bases.get(area, 0)} de {area_sizes.get(area, 0)} vagas "
+            "informam tecnologias",
+            loc="left", fontsize=10.5, fontweight="600",
             color=INK_PRIMARY, pad=10,
         )
 
@@ -277,7 +294,10 @@ def chart_skills(
         x=0.02, y=0.985, ha="left", fontsize=15, fontweight="600",
         color=INK_PRIMARY,
     )
-    note = subtitle or "Número de vagas da área que citam cada tecnologia"
+    note = subtitle or (
+        "Percentual das vagas da área que citam cada tecnologia — "
+        "base: só as vagas em que o portal informa tecnologias"
+    )
     fig.text(0.02, 0.952, note, ha="left", fontsize=9.5, color=INK_MUTED)
 
     fig.tight_layout(rect=(0, 0, 1, 0.93), h_pad=2.6, w_pad=4.0)
@@ -301,7 +321,9 @@ def export_charts(jobs: list[Job], output_dir: Path, stamp: str,
         jobs, output_dir / f"grafico_modalidade_{stamp}.png", subtitle=subtitle
     )
     skills_path = chart_skills(
-        jobs, output_dir / f"grafico_skills_{stamp}.png"
+        jobs, output_dir / f"grafico_skills_{stamp}.png",
+        subtitle="Percentual das vagas da área que citam cada tecnologia "
+                 "(base: vagas em que o portal informa tecnologias)",
     )
     if skills_path:
         files["chart_skills"] = skills_path

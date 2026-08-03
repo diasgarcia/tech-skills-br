@@ -105,14 +105,33 @@ A novidade em relação à coleta anterior é **Inteligência Artificial no top 
 com 24 menções — não aparecia antes porque o vocabulário de tecnologias não a
 cobria. Ela só entrou depois de aparecer em dados reais das fontes novas.
 
-Para quem mira Data, o dado desconfortável continua: o topo da área é **Excel e
-Power BI**, seguidos de SQL e Python. Airflow, Spark e dbt não aparecem. O que o
-mercado brasileiro chama de "Data júnior" hoje é majoritariamente perfil de
-BI/analista, não de engenharia de dados.
+### O gráfico por área é percentual, não contagem
+
+As áreas têm tamanhos muito diferentes (144 vagas em "Outros/TI Geral" contra 8
+em Mobile), então contagem absoluta não deixa comparar um painel com o outro. E
+a base do percentual **não é o total da área**: é o número de vagas que
+*informam* alguma tecnologia. Nem toda vaga informa — o card do LinkedIn não traz
+descrição, então em "Outros/TI Geral" só 31 das 144 vagas têm tecnologia. Cada
+painel declara a própria base.
+
+A mudança inverte uma leitura: em números absolutos, **SQL parecia mais forte em
+Backend (17 menções) que em Data (9)**. Em proporção, é o contrário — **60% das
+vagas de Data pedem SQL, contra 37% das de Backend**. Data é a área mais
+concentrada em SQL do dataset; Backend é a que mais distribui entre linguagens.
+
+Para quem mira Data, o dado desconfortável continua: depois de SQL (60%) e
+Python (53%) vêm **Excel e Power BI, ambos em 47%** das vagas. Airflow, Spark e
+dbt não aparecem. O que o mercado brasileiro chama de "Data júnior" hoje é
+majoritariamente perfil de BI/analista, não de engenharia de dados.
+
+Duas áreas onde a proporção é mais reveladora que o total: **Suporte/Infra é
+dominada por Windows (65%), Inglês (62%) e ITIL (56%)** — nada de programação no
+topo; e **Mobile pede Kotlin em 71%** das vagas, o maior percentual de uma
+linguagem específica em qualquer área.
 
 ## Como esses números foram apurados
 
-Quatro decisões afetaram o resultado mais que qualquer ajuste de código, e todas
+Cinco decisões afetaram o resultado mais que qualquer ajuste de código, e todas
 vieram de rodar contra dados reais:
 
 - **48% das vagas coletadas não eram de tecnologia** ("Analista Contábil Jr",
@@ -647,7 +666,7 @@ vagas-tech-junior/
 │   └── routers/
 ├── scripts/
 │   └── import_csv.py        # CSV → SQLite, idempotente
-└── tests/                   # 209 testes, sem rede
+└── tests/                   # 211 testes, sem rede
     └── api/                 # testes da API (pulados sem FastAPI)
 ```
 
@@ -666,7 +685,7 @@ classificação, dedupe e exportação.
 python -m pytest -q
 ```
 
-São 209 testes e nenhum acessa a rede: os parsers são testados contra respostas
+São 211 testes e nenhum acessa a rede: os parsers são testados contra respostas
 reais capturadas dos portais e fixadas em `tests/test_sources.py`.
 
 ---
