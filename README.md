@@ -130,6 +130,7 @@ Limitações conhecidas estão em [Limitações honestas](#limitações-honestas
 | **Vagas.com.br** | HTML da busca (`/vagas-de-<termo>?pagina=<n>`), renderizado no servidor | Funcionando, sem Selenium |
 | **ProgramaThor** | HTML da listagem (`/jobs?expertise=<nível>&page=<n>`), renderizado no servidor | Funcionando, volume pequeno |
 | **Trampos.co** | API JSON pública que a SPA consome: `GET https://trampos.co/api/v2/opportunities?tr=<termo>&page=<n>` | Funcionando, volume pequeno |
+| **LinkedIn Jobs** | API de convidado, sem login: `GET .../jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=<termo>&geoId=106057199` | Funcionando, maior volume |
 | **Catho** | — | **Bloqueado** (ver abaixo) |
 | **Indeed BR** | — | **Bloqueado** (ver abaixo) |
 
@@ -205,6 +206,30 @@ Dois pontos que o código trata:
 A modalidade vem de flags nativas (`home_office`, `hybrid`). Vale registrar que
 a fama de portal remoto **não se confirmou no recorte júnior**: das 12 vagas de
 entrada, 3 remotas, 3 híbridas e 6 presenciais.
+
+### Sobre o LinkedIn Jobs
+
+É o endpoint que o próprio site chama para carregar mais resultados na busca
+pública. Devolve um fragmento HTML com 10 cards por chamada e responde `200` até
+com o User-Agent do projeto — não exige navegador nem sessão. É a fonte de maior
+volume: **292 vagas** numa coleta real.
+
+**A localização precisa ser o `geoId`.** Passar `location=Brasil` em português
+falha em silêncio: a API responde `200` e devolve vagas dos Estados Unidos
+("Brooklyn, NY", "San Francisco Bay Area"). `location=Brazil` em inglês filtra
+quase tudo; `geoId=106057199` acertou 10 de 10 nos testes, e é o que o código
+usa. Numa coleta de 292 vagas, nenhuma veio de fora do Brasil.
+
+Limitação importante: o card da busca **não traz a descrição da vaga**, então a
+classificação desta fonte se apoia só no título. O efeito é visível — **49% das
+vagas do LinkedIn caem em "Outros/TI Geral"**, contra 24% nas fontes com
+descrição, porque títulos como "ANALISTA DE SISTEMAS JR" ou "Analista de
+Desenvolvimento Júnior" realmente não dizem a área. Buscar a descrição exigiria
+uma requisição por vaga, multiplicando a carga no portal.
+
+É também a fonte com maior chance de passar a bloquear. Se isso acontecer, a
+sessão devolve `None`, o coletor entrega o que tiver e as outras fontes seguem
+normalmente.
 
 ### Sobre a Catho — bloqueada
 
@@ -592,7 +617,8 @@ vagas-tech-junior/
 │       ├── gupy.py
 │       ├── vagas_com.py
 │       ├── programathor.py
-│       └── trampos.py
+│       ├── trampos.py
+│       └── linkedin.py
 ├── api/                     # API REST somente leitura (opcional)
 │   ├── app.py               # FastAPI, /docs, handlers de erro
 │   ├── database.py          # engine e sessão SQLAlchemy
@@ -604,7 +630,7 @@ vagas-tech-junior/
 │   └── routers/
 ├── scripts/
 │   └── import_csv.py        # CSV → SQLite, idempotente
-└── tests/                   # 192 testes, sem rede
+└── tests/                   # 203 testes, sem rede
     └── api/                 # testes da API (pulados sem FastAPI)
 ```
 
@@ -623,7 +649,7 @@ classificação, dedupe e exportação.
 python -m pytest -q
 ```
 
-São 192 testes e nenhum acessa a rede: os parsers são testados contra respostas
+São 203 testes e nenhum acessa a rede: os parsers são testados contra respostas
 reais capturadas dos portais e fixadas em `tests/test_sources.py`.
 
 ---

@@ -109,7 +109,15 @@ def test_modalidade_invalida_da_422(client):
 
 
 def test_fonte_invalida_da_422(client):
-    assert client.get("/vagas", params={"fonte": "linkedin"}).status_code == 422
+    assert client.get("/vagas", params={"fonte": "portal-inexistente"}).status_code == 422
+
+
+def test_fontes_validas_saem_do_registry_das_fontes(client):
+    """Registrar um coletor novo já o torna filtrável na API, sem tocar aqui."""
+    from scraper.sources import AVAILABLE_SOURCES
+
+    for fonte in AVAILABLE_SOURCES:
+        assert client.get("/vagas", params={"fonte": fonte}).status_code == 200
 
 
 def test_tecnologia_desconhecida_da_422_com_dica(client):
