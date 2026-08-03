@@ -68,6 +68,14 @@ dados:
   Kafka: [kafka, apache kafka]
   Hadoop: [hadoop]
   Machine Learning: [machine learning, aprendizado de maquina, ml]
+  # Vistos em dados reais: tag "AI Agents" na ProgramaThor e titulo
+  # "Estagiario(a) em Tecnologia e Agentes de IA" na Trampos.co.
+  # "ai" sozinho NAO entra: casa nome de empresa ("Triggo.AI", "AI R
+  # Revolution") em descricoes reais. "ia" solto e seguro -- conferido nas 182
+  # vagas do snapshot, so casou o termo mesmo, nunca o verbo "ia".
+  Inteligência Artificial: [inteligencia artificial, ia, artificial intelligence]
+  Agentes de IA: [agentes de ia, ai agents, agentes autonomos]
+  LLM: [llm, llms, large language model, genai, ia generativa]
   Data Warehouse: [data warehouse, datawarehouse, dw]
   Estatística: [estatistica]
 

@@ -129,6 +129,7 @@ Limitações conhecidas estão em [Limitações honestas](#limitações-honestas
 | **Gupy** (`portal.gupy.io`) | Endpoint JSON público que o front do portal usa: `GET https://employability-portal.gupy.io/api/v1/jobs?jobName=<termo>&limit=<n>&offset=<n>` | Funcionando, sem autenticação |
 | **Vagas.com.br** | HTML da busca (`/vagas-de-<termo>?pagina=<n>`), renderizado no servidor | Funcionando, sem Selenium |
 | **ProgramaThor** | HTML da listagem (`/jobs?expertise=<nível>&page=<n>`), renderizado no servidor | Funcionando, volume pequeno |
+| **Trampos.co** | API JSON pública que a SPA consome: `GET https://trampos.co/api/v2/opportunities?tr=<termo>&page=<n>` | Funcionando, volume pequeno |
 | **Catho** | — | **Bloqueado** (ver abaixo) |
 
 ### Sobre a Gupy
@@ -178,6 +179,31 @@ que serve para conferir a classificação por keywords do projeto contra uma
 categorização nativa. A senioridade declarada é respeitada em vez do regex de
 título: "Programador(a) PHP" não tem marca de nível nenhuma, mas o portal a
 classifica como Júnior.
+
+### Sobre o Trampos.co
+
+O site é uma SPA em Ember: o HTML entregue traz só um `<noscript>` de fallback,
+sem link nem id por vaga. O que serve é a API JSON que o app consome, pública e
+sem autenticação, descoberta na aba Network.
+
+Os nomes dos parâmetros não são óbvios e foram mapeados por tentativa contra a
+API: **`tr` é a busca textual** (cobre título e descrição) e `lc` é localização.
+`q`, `s`, `category` e afins são silenciosamente ignorados.
+
+Dois pontos que o código trata:
+
+- O portal é **misto** — publica vagas de Comunicação e de TI no mesmo lugar. A
+  categoria nativa entra na descrição para o portão de relevância decidir. Numa
+  coleta real, das 12 vagas de nível de entrada encontradas, **11 eram de
+  Administrativo, Comercial, Mídia e Publicidade** e só 1 era de tecnologia.
+- A listagem **não traz a descrição da vaga**. Existe uma `company.description`,
+  mas ela descreve a *empresa* — usá-la para classificar faria qualquer vaga de
+  uma empresa de tecnologia parecer vaga de tecnologia. Só entram fatos da
+  própria vaga.
+
+A modalidade vem de flags nativas (`home_office`, `hybrid`). Vale registrar que
+a fama de portal remoto **não se confirmou no recorte júnior**: das 12 vagas de
+entrada, 3 remotas, 3 híbridas e 6 presenciais.
 
 ### Sobre a Catho — bloqueada
 
@@ -311,7 +337,7 @@ própria máquina).
 | GET | `/vagas/{id}` | Detalhe da vaga, com descrição completa |
 | GET | `/areas` | As 10 áreas com contagem e percentual |
 | GET | `/areas/{nome}` | Uma área |
-| GET | `/tecnologias` | As 111 tecnologias com contagem de menções. Filtros: `grupo`, `com_vagas` |
+| GET | `/tecnologias` | As 114 tecnologias com contagem de menções. Filtros: `grupo`, `com_vagas` |
 | GET | `/tecnologias/{nome}` | Uma tecnologia |
 
 Exemplos, contra a instância pública:
@@ -556,7 +582,8 @@ vagas-tech-junior/
 │       ├── base.py          # contrato JobSource
 │       ├── gupy.py
 │       ├── vagas_com.py
-│       └── programathor.py
+│       ├── programathor.py
+│       └── trampos.py
 ├── api/                     # API REST somente leitura (opcional)
 │   ├── app.py               # FastAPI, /docs, handlers de erro
 │   ├── database.py          # engine e sessão SQLAlchemy
@@ -568,7 +595,7 @@ vagas-tech-junior/
 │   └── routers/
 ├── scripts/
 │   └── import_csv.py        # CSV → SQLite, idempotente
-└── tests/                   # 178 testes, sem rede
+└── tests/                   # 192 testes, sem rede
     └── api/                 # testes da API (pulados sem FastAPI)
 ```
 
@@ -587,7 +614,7 @@ classificação, dedupe e exportação.
 python -m pytest -q
 ```
 
-São 178 testes e nenhum acessa a rede: os parsers são testados contra respostas
+São 192 testes e nenhum acessa a rede: os parsers são testados contra respostas
 reais capturadas dos portais e fixadas em `tests/test_sources.py`.
 
 ---
