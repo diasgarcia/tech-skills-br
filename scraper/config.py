@@ -40,7 +40,10 @@ class Settings:
     """Parametros de execucao. Sobrescritos pela CLI em `main.py`."""
 
     search_terms: list[str] = field(default_factory=lambda: list(SEARCH_TERMS))
-    sources: list[str] = field(default_factory=lambda: ["gupy", "vagas"])
+    # Todos os portais que funcionam hoje. Ver `scraper/sources/__init__.py`.
+    sources: list[str] = field(
+        default_factory=lambda: ["gupy", "vagas", "programathor", "trampos", "linkedin"]
+    )
     output_dir: Path = DEFAULT_OUTPUT_DIR
 
     # Educacao com o servidor

@@ -28,7 +28,7 @@ services:
     # 0.0.0.0      e nao 127.0.0.1, senao o Render nao alcanca o processo.
     startCommand: >-
       python scripts/import_csv.py --csv seed/vagas.csv --recriar
-      --referencia 2026-07-31 &&
+      --referencia 2026-08-03 &&
       uvicorn api.app:app --host 0.0.0.0 --port $PORT
 
     healthCheckPath: /health

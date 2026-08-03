@@ -28,9 +28,9 @@ def build_parser() -> argparse.ArgumentParser:
         epilog=__doc__,
     )
     parser.add_argument(
-        "--sources", nargs="+", default=["gupy", "vagas"],
+        "--sources", nargs="+", default=list(AVAILABLE_SOURCES),
         choices=AVAILABLE_SOURCES,
-        help="Portais a consultar (padrao: gupy vagas).",
+        help=f"Portais a consultar (padrão: todos — {' '.join(AVAILABLE_SOURCES)}).",
     )
     parser.add_argument(
         "--terms", nargs="+", default=None,
