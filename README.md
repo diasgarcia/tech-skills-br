@@ -25,8 +25,8 @@ nada. Alguns exemplos diretos:
 
 # Resultados
 
-> **Coleta de 03/08/2026** — 1.489 vagas brutas de **cinco portais** (Gupy,
-> Vagas.com.br, ProgramaThor, Trampos.co e LinkedIn), das quais **390**
+> **Coleta de 03/08/2026** — 1.397 vagas brutas de **cinco portais** (Gupy,
+> Vagas.com.br, ProgramaThor, Trampos.co e LinkedIn), das quais **374**
 > sobraram após filtrar nível de entrada, remover duplicatas e descartar vagas
 > fora de tecnologia. Os números abaixo são um retrato dessa data; rodar
 > `python main.py` gera um novo.
@@ -37,29 +37,29 @@ nada. Alguns exemplos diretos:
 
 | # | Área | Vagas | % |
 |---|------|-------|---|
-| 1 | Outros/TI Geral | 144 | 36,9% |
-| 2 | Suporte/Infra | 99 | 25,4% |
-| 3 | Backend | 49 | 12,6% |
-| 4 | Fullstack | 25 | 6,4% |
-| 5 | Data | 21 | 5,4% |
-| 6 | QA | 17 | 4,4% |
-| 7 | Frontend | 13 | 3,3% |
+| 1 | Outros/TI Geral | 144 | 38,5% |
+| 2 | Suporte/Infra | 87 | 23,3% |
+| 3 | Backend | 49 | 13,1% |
+| 4 | Fullstack | 23 | 6,1% |
+| 5 | Data | 20 | 5,3% |
+| 6 | QA | 17 | 4,5% |
+| 7 | Frontend | 12 | 3,2% |
 | 8 | Mobile | 8 | 2,1% |
 | 9 | DevOps | 8 | 2,1% |
-| 10 | Segurança | 6 | 1,5% |
+| 10 | Segurança | 6 | 1,6% |
 
-**Entre as áreas identificáveis, Suporte/Infra lidera com folga** — 99 vagas
+**Entre as áreas identificáveis, Suporte/Infra lidera com folga** — 87 vagas
 contra 49 de Backend, a segunda colocada. É a porta mais larga para quem está
 começando, e não costuma ser a primeira escolha de quem entra na área.
 
 Vale registrar que **esse resultado se manteve ao dobrar a base**: na coleta
 anterior, com duas fontes e 182 vagas, Suporte/Infra também liderava (29,7%).
-Somar três portais e 208 vagas não mudou a resposta — o que é um indício de que
+Somar três portais e 192 vagas não mudou a resposta — o que é um indício de que
 ela não era artefato de uma amostra pequena.
 
 O primeiro lugar da tabela, "Outros/TI Geral", **não é uma área** — é o balde
 das vagas cujo título não permite inferir a área ("ANALISTA DE SISTEMAS JR",
-"Analista de Desenvolvimento Júnior"). Ele cresceu de 23,6% para 36,9% por um
+"Analista de Desenvolvimento Júnior"). Ele cresceu de 23,6% para 38,5% por um
 motivo específico: **101 das suas 144 vagas vêm do LinkedIn**, cujo card de
 busca não traz descrição, deixando só o título para classificar. Preferi
 mantê-las explícitas a distribuí-las por chute.
@@ -70,14 +70,14 @@ mantê-las explícitas a distribuí-las por chute.
 
 | Modalidade | Vagas | % do total | % entre as informadas |
 |---|---|---|---|
-| Não informado | 242 | 62,1% | — |
-| Presencial | 96 | 24,6% | 64,9% |
-| Híbrido | 31 | 7,9% | 20,9% |
-| Remoto | 21 | 5,4% | 14,2% |
+| Não informado | 226 | 60,4% | — |
+| Presencial | 96 | 25,7% | 64,9% |
+| Híbrido | 31 | 8,3% | 20,9% |
+| Remoto | 21 | 5,6% | 14,2% |
 
 Aqui as fontes novas **pioraram** a qualidade do dado, e vale ser explícito: nem
 o LinkedIn nem o Vagas.com distinguem presencial de híbrido no card de listagem,
-então 62% das vagas ficaram sem modalidade. A leitura honesta é a última coluna,
+então 60% das vagas ficaram sem modalidade. A leitura honesta é a última coluna,
 restrita às 148 vagas em que o portal informa: **quase dois terços presenciais e
 só 14% remotas**.
 
@@ -127,6 +127,10 @@ vieram de rodar contra dados reais:
   JÚNIOR - SUSTENTAÇÃO E SUPORTE TÉCNICO" pontuava `suporte técnico` (peso alto)
   *e* `suporte` (peso médio) pelo mesmo trecho, e ia parar em Suporte/Infra por
   15 a 14 em vez de Backend.
+- **A mesma vaga aparecia duas vezes quando dois portais a anunciavam**, porque
+  cada um escreve o nome da empresa do seu jeito ("Minsait" e "Minsait an Indra
+  Company", "FEI" e "Centro Universitário FEI"). Suporte/Infra caiu de 99 para
+  87 vagas depois da correção — era a Wyntech contada em dobro.
 
 As regras estão em três YAMLs comentados, e o CSV traz uma coluna `area_matches`
 com as keywords que dispararam cada classificação, para auditoria.
@@ -643,7 +647,7 @@ vagas-tech-junior/
 │   └── routers/
 ├── scripts/
 │   └── import_csv.py        # CSV → SQLite, idempotente
-└── tests/                   # 203 testes, sem rede
+└── tests/                   # 209 testes, sem rede
     └── api/                 # testes da API (pulados sem FastAPI)
 ```
 
@@ -662,7 +666,7 @@ classificação, dedupe e exportação.
 python -m pytest -q
 ```
 
-São 203 testes e nenhum acessa a rede: os parsers são testados contra respostas
+São 209 testes e nenhum acessa a rede: os parsers são testados contra respostas
 reais capturadas dos portais e fixadas em `tests/test_sources.py`.
 
 ---
@@ -677,6 +681,17 @@ reais capturadas dos portais e fixadas em `tests/test_sources.py`.
 - **Vagas replicadas por cidade** (uma mesma posição anunciada em 20 comarcas)
   contam como 20 vagas, porque são de fato 20 posições abertas — mas isso pesa
   no ranking. Olhe a coluna `company` no CSV se um número parecer estranho.
+- **Restam ~5 duplicatas cruzadas (≈1%)** que a deduplicação não pega, e isso é
+  deliberado. Ela exige título idêntico e nomes de empresa compatíveis; sobram
+  os casos em que o título também muda ("Analista de Testes Júnior" na Gupy vira
+  "Analista de Testes Júnior (QA) - JBS") ou em que o portal grafa a cidade sem
+  espaço ("Governador Valadares" → "Governadorvaladares").
+
+  Medi a alternativa antes de descartá-la: casar títulos com 85% de similaridade
+  resolveria 4 duplicatas e criaria **60 fusões falsas** — juntaria "VOLANTE C4 -
+  ABAETÉ" com "VOLANTE C4 - GOVERNADOR VALADARES", que são vagas distintas em
+  cidades distintas. Numa proporção de 15 erros para cada acerto, contar 5 vagas
+  a mais é o problema menor.
 - **Classificação por keyword erra em casos ambíguos.** A coluna `area_matches`
   mostra exatamente o que disparou cada classificação, para você auditar e
   ajustar o YAML.
