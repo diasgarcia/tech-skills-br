@@ -1,0 +1,56 @@
+# API + PostgreSQL.
+#
+#     docker compose up --build
+#     -> http://localhost:8000/docs
+#
+# O banco e populado no boot a partir de seed/vagas.csv, o mesmo snapshot que
+# alimenta o deploy. A importacao e idempotente (a identidade da vaga e o par
+# source+external_id), entao subir de novo atualiza em vez de duplicar.
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: vagas
+      POSTGRES_PASSWORD: vagas
+      POSTGRES_DB: vagas
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      # Exposto para dar para inspecionar o banco de fora (psql, DBeaver).
+      - "5432:5432"
+    healthcheck:
+      # A API so sobe depois que o Postgres aceita conexao de verdade. Sem
+      # isso, `depends_on` liberaria a API assim que o container existisse,
+      # e a importacao falharia no primeiro `docker compose up`.
+      test: ["CMD-SHELL", "pg_isready -U vagas -d vagas"]
+      interval: 3s
+      timeout: 5s
+      retries: 15
+
+  api:
+    build: .
+    environment:
+      # Unica coisa que muda em relacao a rodar local: para onde o banco aponta.
+      DATABASE_URL: postgresql://vagas:vagas@db:5432/vagas
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    # --referencia fixa a data da coleta: as vagas cujo portal informou data
+    # relativa ("Ontem", "Ha 3 dias") seriam calculadas contra a data do
+    # container e mudariam a cada `up`. Atualize junto com o seed/vagas.csv.
+    command: >-
+      sh -c "python scripts/import_csv.py --csv seed/vagas.csv
+      --referencia 2026-08-03 &&
+      uvicorn api.app:app --host 0.0.0.0 --port 8000"
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/health')\""]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  postgres_data:

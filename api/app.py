@@ -10,13 +10,16 @@ from __future__ import annotations
 import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Request
+from fastapi import Depends, FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
+from sqlalchemy import func, select
+from sqlalchemy.orm import Session
 
 from scraper import __version__
 
-from .database import DEFAULT_DB_PATH, engine, init_db
+from .database import database_url, get_db, init_db, url_sem_senha
+from .models import Vaga
 from .routers import areas, tecnologias, vagas
 
 logger = logging.getLogger(__name__)
@@ -36,11 +39,7 @@ atualizar, rode o scraper (`python main.py`) e depois a importação
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     init_db()
-    if not DEFAULT_DB_PATH.exists():
-        logger.warning(
-            "Banco ainda vazio em %s -- rode `python scripts/import_csv.py` "
-            "para carregar os dados do CSV.", DEFAULT_DB_PATH,
-        )
+    logger.info("Banco: %s", url_sem_senha(database_url()))
     yield
 
 
@@ -81,12 +80,12 @@ def raiz() -> dict:
 
 
 @app.get("/health", tags=["meta"], summary="Checagem de saúde")
-def health() -> dict:
-    from sqlalchemy import func, select
-    from sqlalchemy.orm import Session
+def health(db: Session = Depends(get_db)) -> dict:
+    """Usa a mesma sessao das demais rotas, e nao um engine proprio.
 
-    from .models import Vaga
-
-    with Session(engine) as db:
-        total = db.scalar(select(func.count()).select_from(Vaga)) or 0
+    Assim a checagem enxerga exatamente o banco que a API esta atendendo --
+    seja SQLite ou Postgres -- e falha junto com ela se o banco cair, que e o
+    que o healthcheck do compose precisa detectar.
+    """
+    total = db.scalar(select(func.count()).select_from(Vaga)) or 0
     return {"status": "ok", "vagas": total}

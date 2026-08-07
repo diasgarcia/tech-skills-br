@@ -427,7 +427,58 @@ respondem `405`.
 Erros: `404` para vaga/área/tecnologia inexistente, `422` para parâmetro fora do
 vocabulário (`?area=Inexistente`), sempre no formato `{"detail": "..."}`.
 
+### Docker (API + PostgreSQL)
+
+Sobe a API e um PostgreSQL juntos, sem instalar nada além do Docker:
+
+```bash
+docker compose up --build
+```
+
+Pronto — **http://localhost:8000/docs**. O primeiro build leva ~1 min; depois
+sobe em segundos.
+
+O que acontece no `up`: o Postgres sobe, a API espera ele ficar **realmente**
+pronto (healthcheck com `pg_isready`, não apenas o container existir), importa
+`seed/vagas.csv` e só então inicia o uvicorn.
+
+```bash
+docker compose down
+```
+
+Para apagar também os dados do banco, use `docker compose down -v`.
+
+O banco fica num volume, então parar e subir de novo preserva os dados — e como
+a importação é idempotente, subir de novo atualiza em vez de duplicar. Dá para
+inspecionar o Postgres de fora, na porta 5432:
+
+```bash
+docker compose exec db psql -U vagas -d vagas -c "SELECT area, COUNT(*) FROM vagas GROUP BY area ORDER BY 2 DESC;"
+```
+
 ### Banco
+
+O projeto roda em **SQLite ou PostgreSQL** — a escolha é só de configuração,
+nenhuma linha de código muda entre os dois. A precedência é:
+
+1. o destino passado no argumento (usado pelo importador e pelos testes);
+2. `DATABASE_URL` — é o que o `docker-compose` define;
+3. `VAGAS_DB` — caminho de arquivo SQLite;
+4. o padrão: `data/vagas.db`.
+
+**Sem nenhuma variável definida, o comportamento é o de sempre: SQLite.** É o
+que o deploy no Render continua usando, e o que roda ao chamar
+`uvicorn api.app:app` direto.
+
+O importador aceita os dois destinos:
+
+```bash
+python scripts/import_csv.py --db postgresql://vagas:vagas@localhost:5432/vagas
+```
+
+URLs com o prefixo histórico `postgres://` (que Render e Heroku ainda entregam,
+e que o SQLAlchemy recusa) são convertidas automaticamente. A senha nunca
+aparece nos logs.
 
 SQLite em `data/vagas.db` (ignorado pelo git — é reconstruível a partir do CSV).
 `scripts/import_csv.py` pega o CSV mais recente de `output/`, ou um específico
@@ -664,9 +715,11 @@ vagas-tech-junior/
 │   ├── dates.py             # normalização das datas para DATE
 │   ├── vocabulary.py        # áreas e tecnologias, lidas dos YAMLs
 │   └── routers/
+├── Dockerfile               # imagem da API
+├── docker-compose.yml       # API + PostgreSQL
 ├── scripts/
-│   └── import_csv.py        # CSV → SQLite, idempotente
-└── tests/                   # 211 testes, sem rede
+│   └── import_csv.py        # CSV → banco, idempotente
+└── tests/                   # 221 testes, sem rede
     └── api/                 # testes da API (pulados sem FastAPI)
 ```
 
@@ -685,7 +738,7 @@ classificação, dedupe e exportação.
 python -m pytest -q
 ```
 
-São 211 testes e nenhum acessa a rede: os parsers são testados contra respostas
+São 221 testes e nenhum acessa a rede: os parsers são testados contra respostas
 reais capturadas dos portais e fixadas em `tests/test_sources.py`.
 
 ---

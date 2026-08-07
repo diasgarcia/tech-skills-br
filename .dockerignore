@@ -1,0 +1,26 @@
+# Nada aqui e necessario para servir a API, e tudo aumenta o contexto de build.
+.git/
+.gitignore
+.pytest_cache/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+
+# Dados gerados: o container reconstroi o banco a partir de seed/vagas.csv.
+data/
+output/
+*.db
+*.sqlite3
+
+# Ambientes locais
+venv/
+.venv/
+env/
+
+# Nao entram na imagem da API
+tests/
+docs/
+main.py
+render.yaml
+requirements.txt
+README.md
