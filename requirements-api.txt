@@ -11,6 +11,10 @@ uvicorn>=0.30
 SQLAlchemy>=2.0,<3
 pydantic>=2.0,<3
 
+# Driver do PostgreSQL, usado pelo docker-compose. O projeto continua rodando
+# em SQLite sem ele -- so e exigido quando DATABASE_URL aponta para Postgres.
+psycopg[binary]>=3.1
+
 # `api.vocabulary` le os YAMLs do scraper, e `scraper.sources` e importado
 # junto para descobrir as fontes validas -- por isso requests e bs4 entram.
 PyYAML>=6.0,<7

@@ -3,6 +3,7 @@
     python scripts/import_csv.py                  # pega o CSV mais recente
     python scripts/import_csv.py --csv caminho.csv
     python scripts/import_csv.py --db data/outro.db --recriar
+    python scripts/import_csv.py --db postgresql://vagas:vagas@localhost/vagas
 
 O CSV nao e alterado: o pipeline de raspagem continua sendo a fonte dos dados, e
 este script so espelha o ultimo resultado no banco.
@@ -28,7 +29,12 @@ from sqlalchemy.orm import Session
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from api import vocabulary  # noqa: E402
-from api.database import DEFAULT_DB_PATH, Base, make_engine  # noqa: E402
+from api.database import (  # noqa: E402
+    Base,
+    database_url,
+    make_engine,
+    url_sem_senha,
+)
 from api.dates import parse_published_date, reference_date_from_csv  # noqa: E402
 from api.models import Tecnologia, Vaga  # noqa: E402
 from scraper.config import PROJECT_ROOT  # noqa: E402
@@ -86,7 +92,7 @@ def _float_ou_none(valor: str | None) -> float | None:
 
 def importar(
     csv_path: Path,
-    db_path: Path,
+    db_path: Path | str | None = None,
     recriar: bool = False,
     referencia: date | None = None,
 ) -> dict:
@@ -161,7 +167,7 @@ def importar(
         "atualizadas": atualizadas,
         "sem_data": sem_data,
         "total": total_vagas,
-        "db": db_path,
+        "db": url_sem_senha(database_url(db_path)),
     }
 
 
@@ -171,8 +177,11 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--csv", type=Path, default=None,
                         help="CSV a importar (padrão: o mais recente em output/).")
-    parser.add_argument("--db", type=Path, default=DEFAULT_DB_PATH,
-                        help=f"Banco de destino (padrão: {DEFAULT_DB_PATH}).")
+    parser.add_argument(
+        "--db", default=None, metavar="DESTINO",
+        help="Banco de destino: caminho de arquivo SQLite ou URL completa "
+             "(postgresql://...). Padrão: DATABASE_URL, ou data/vagas.db.",
+    )
     parser.add_argument("--recriar", action="store_true",
                         help="Apaga e recria as tabelas antes de importar.")
     parser.add_argument(
