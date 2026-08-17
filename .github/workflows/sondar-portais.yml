@@ -1,0 +1,56 @@
+# Sondagem descartavel: os portais respondem de um runner do GitHub Actions?
+#
+# O runner sai por IP de datacenter (Azure), e portais de vaga costumam bloquear
+# esse tipo de origem. Isso decide se a coleta automatizada e viavel aqui ou se
+# precisa rodar em outro lugar -- entao vale medir antes de construir o resto.
+#
+# Rode manualmente pela aba Actions ("Run workflow"). Apague depois de decidir.
+
+name: Sondar portais (diagnostico)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sondar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: De onde este runner sai
+        run: |
+          echo "IP publico do runner:"
+          curl -s --max-time 20 https://api.ipify.org || echo "  (nao consegui descobrir)"
+          echo
+          echo "Organizacao dona do IP:"
+          curl -s --max-time 20 "https://ipinfo.io/org" || echo "  (nao consegui descobrir)"
+          echo
+
+      - name: Responder de IP de nuvem?
+        run: |
+          UA='vagas-tech-junior/1.0 (estudo de mercado de trabalho) python-requests'
+          probe () {
+            nome="$1"; url="$2"
+            resposta=$(curl -s -o /dev/null -m 30 -w "%{http_code} %{size_download}" \
+                       -A "$UA" "$url" 2>/dev/null || echo "erro -")
+            printf "  %-22s %s\n" "$nome" "$resposta"
+          }
+          echo "portal                 http  bytes"
+          echo "-------------------------------------"
+          probe "Gupy (API)"        "https://employability-portal.gupy.io/api/v1/jobs?jobName=desenvolvedor%20junior&limit=5&offset=0"
+          probe "Vagas.com"         "https://www.vagas.com.br/vagas-de-desenvolvedor-junior"
+          probe "ProgramaThor"      "https://programathor.com.br/jobs?expertise=J%C3%BAnior"
+          probe "Trampos.co (API)"  "https://trampos.co/api/v2/opportunities?tr=desenvolvedor&page=1"
+          probe "LinkedIn (guest)"  "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=desenvolvedor%20junior&geoId=106057199&start=0"
+          probe "Solides"           "https://vagas.solides.com.br/vagas?search=desenvolvedor"
+          probe "GeekHunter"        "https://www.geekhunter.com.br/vagas"
+          probe "99Jobs"            "https://99jobs.com/opportunities"
+          probe "We Work Remotely"  "https://weworkremotely.com/categories/remote-programming-jobs.rss"
+          probe "Indeed BR"         "https://br.indeed.com/jobs?q=desenvolvedor"
+          probe "Catho"             "https://www.catho.com.br/vagas/"
+
+      - name: A Gupy devolve dados de verdade?
+        run: |
+          echo "Contando vagas no JSON da Gupy (0 = bloqueio silencioso):"
+          curl -s -m 30 -A "vagas-tech-junior/1.0 (estudo) python-requests" \
+            "https://employability-portal.gupy.io/api/v1/jobs?jobName=desenvolvedor%20junior&limit=5&offset=0" \
+            | python3 -c "import json,sys; d=json.load(sys.stdin); print('  vagas:', len(d.get('data', [])))" \
+            || echo "  resposta nao era JSON -- provavel bloqueio"
