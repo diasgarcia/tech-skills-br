@@ -780,3 +780,15 @@ reais capturadas dos portais e fixadas em `tests/test_sources.py`.
 - **Os portais mudam.** Se a Gupy alterar o endpoint ou o Vagas.com mudar as
   classes do HTML, o coletor correspondente para de trazer resultados (e avisa
   no log, sem inventar dados).
+
+---
+
+## Licença
+
+[MIT](LICENSE) — use, modifique e redistribua à vontade, mantendo o aviso de
+copyright.
+
+A licença cobre **o código deste repositório**, não os dados coletados. As vagas
+pertencem aos portais e às empresas que as publicaram; raspá-las está sujeito
+aos termos de uso de cada site, que a licença não altera. Nenhum dado raspado é
+versionado aqui além do snapshot em `seed/`, usado para o deploy.
