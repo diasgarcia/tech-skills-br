@@ -1,0 +1,128 @@
+# Catalogo dos principais polos tecnologicos do Brasil por macrorregiao.
+#
+# Cada polo define:
+#   nome: nome canonico da cidade/polo
+#   uf: sigla do estado
+#   aliases: variacoes de escrita para o classificador geografico (cidades/bairros/apelidos)
+#   serpapi_location: string canonica usada pela SerpApi (Google Jobs)
+#   theirstack_id: ID numerico do catalogo de localidades da TheirStack
+
+regioes:
+  Sudeste:
+    - nome: "São Paulo"
+      uf: "SP"
+      aliases: ["sao paulo", "capital paulista", "grande sao paulo", "paulista", "alphaville", "barueri", "santo andre", "sao bernardo", "sao caetano", "osasco", "guarulhos"]
+      serpapi_location: "Sao Paulo, State of Sao Paulo, Brazil"
+      theirstack_id: 3448439
+
+    - nome: "Campinas"
+      uf: "SP"
+      aliases: ["campinas", "regiao metropolitana de campinas", "hortolandia", "indaiatuba", "sumare", "paulinia"]
+      serpapi_location: "Campinas, State of Sao Paulo, Brazil"
+      theirstack_id: 3467865
+
+    - nome: "Rio de Janeiro"
+      uf: "RJ"
+      aliases: ["rio de janeiro", "capital fluminense", "niteroi", "duque de caxias", "barra da tijuca"]
+      serpapi_location: "Rio de Janeiro, State of Rio de Janeiro, Brazil"
+      theirstack_id: 3451190
+
+    - nome: "Belo Horizonte"
+      uf: "MG"
+      aliases: ["belo horizonte", "bh", "san pedro valley", "contagem", "betim", "nova lima"]
+      serpapi_location: "Belo Horizonte, State of Minas Gerais, Brazil"
+      theirstack_id: 3470127
+
+  Sul:
+    - nome: "Curitiba"
+      uf: "PR"
+      aliases: ["curitiba", "regiao metropolitana de curitiba", "sao jose dos pinhais", "araucaria"]
+      serpapi_location: "Curitiba, State of Parana, Brazil"
+      theirstack_id: 3464975
+
+    - nome: "Florianópolis"
+      uf: "SC"
+      aliases: ["florianopolis", "floripa", "ilha do silicio", "sao jose", "palhoca", "joinville", "blumenau"]
+      serpapi_location: "Florianopolis, State of Santa Catarina, Brazil"
+      theirstack_id: 3463237
+
+    - nome: "Porto Alegre"
+      uf: "RS"
+      aliases: ["porto alegre", "poa", "tecnopuc", "canoas", "sao leopoldo", "caxias do sul", "novo hamburgo"]
+      serpapi_location: "Porto Alegre, State of Rio Grande do Sul, Brazil"
+      theirstack_id: 3452925
+
+  Nordeste:
+    - nome: "Recife"
+      uf: "PE"
+      aliases: ["recife", "porto digital", "olinda", "jaboatao", "paulista"]
+      serpapi_location: "Recife, State of Pernambuco, Brazil"
+      theirstack_id: 3451940
+
+    - nome: "Salvador"
+      uf: "BA"
+      aliases: ["salvador", "lauro de freitas", "camacari"]
+      serpapi_location: "Salvador, State of Bahia, Brazil"
+      theirstack_id: 3450554
+
+    - nome: "Fortaleza"
+      uf: "CE"
+      aliases: ["fortaleza", "caucaia", "maracanau", "eusebio"]
+      serpapi_location: "Fortaleza, State of Ceara, Brazil"
+      theirstack_id: 3463930
+
+  Centro-Oeste:
+    - nome: "Brasília"
+      uf: "DF"
+      aliases: ["brasilia", "distrito federal", "taguatinga", "aguas claras", "ceilandia"]
+      serpapi_location: "Brasilia, Federal District, Brazil"
+      theirstack_id: 3469058
+
+    - nome: "Goiânia"
+      uf: "GO"
+      aliases: ["goiania", "aparecida de goiania", "anapolis"]
+      serpapi_location: "Goiania, State of Goias, Brazil"
+      theirstack_id: 3463504
+
+  Norte:
+    - nome: "Manaus"
+      uf: "AM"
+      aliases: ["manaus", "polo industrial de manaus"]
+      serpapi_location: "Manaus, State of Amazonas, Brazil"
+      theirstack_id: 3457193
+
+    - nome: "Belém"
+      uf: "PA"
+      aliases: ["belem", "ananindeua"]
+      serpapi_location: "Belem, State of Para, Brazil"
+      theirstack_id: 3467865
+
+# Mapeamento de UFs para casos onde a vaga informa apenas o estado
+ufs_para_regioes:
+  SP: "Sudeste"
+  RJ: "Sudeste"
+  MG: "Sudeste"
+  ES: "Sudeste"
+  PR: "Sul"
+  SC: "Sul"
+  RS: "Sul"
+  PE: "Nordeste"
+  BA: "Nordeste"
+  CE: "Nordeste"
+  RN: "Nordeste"
+  PB: "Nordeste"
+  MA: "Nordeste"
+  AL: "Nordeste"
+  SE: "Nordeste"
+  PI: "Nordeste"
+  DF: "Centro-Oeste"
+  GO: "Centro-Oeste"
+  MT: "Centro-Oeste"
+  MS: "Centro-Oeste"
+  AM: "Norte"
+  PA: "Norte"
+  RO: "Norte"
+  AC: "Norte"
+  TO: "Norte"
+  RR: "Norte"
+  AP: "Norte"
