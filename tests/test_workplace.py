@@ -58,3 +58,21 @@ def test_ranking_trata_campo_vazio_como_nao_informado():
 
 def test_ranking_lista_vazia():
     assert build_workplace_ranking([]) == []
+
+
+@pytest.mark.parametrize(
+    "explicit,location,title,description,esperado",
+    [
+        ("hybrid", "SP", "", "", "Híbrido"),
+        ("", "São Paulo, SP (Remoto)", "", "", "Remoto"),
+        ("", "São Paulo, SP", "Dev Júnior", "Atuação 100% presencial no escritório", "Presencial"),
+        ("", "Curitiba, PR", "Estágio TI", "Modelo de trabalho híbrido com 2 dias presenciais", "Híbrido"),
+        ("", "Recife, PE", "Dev Jr", "Vaga 100% Home Office", "Remoto"),
+        ("", "", "Dev Jr", "", "Não informado"),
+    ],
+)
+def test_infer_workplace(explicit, location, title, description, esperado):
+    from scraper.models import infer_workplace
+
+    assert infer_workplace(explicit, location, title, description) == esperado
+

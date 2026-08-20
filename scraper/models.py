@@ -56,6 +56,17 @@ _WORKPLACE_MAP = {
 }
 
 
+_HIBRIDO_RE = re.compile(
+    r"\b(hibrid[oa]|regime hibrido|modelo hibrido|trabalho hibrido|formato hibrido|escala hibrida|dias presenciais)\b"
+)
+_REMOTO_RE = re.compile(
+    r"\b(100% remoto|totalmente remoto|remoto|home office|trabalho remoto|modelo remoto|regime remoto|formato remoto|vaga remota|atuacao remota|teletrabalho)\b"
+)
+_PRESENCIAL_RE = re.compile(
+    r"\b(100% presencial|totalmente presencial|presencial|regime presencial|modelo presencial|trabalho presencial|formato presencial|atuacao presencial|in loco)\b"
+)
+
+
 def normalize_workplace(raw: str | None) -> str:
     """Converte o rotulo de modalidade do portal para o vocabulario do projeto."""
     key = normalize(raw)
@@ -70,6 +81,51 @@ def normalize_workplace(raw: str | None) -> str:
     if "presencial" in key:
         return PRESENCIAL
     return NAO_INFORMADO
+
+
+def infer_workplace(
+    explicit: str | None = None,
+    location: str | None = None,
+    title: str | None = None,
+    description: str | None = None,
+    source: str | None = None,
+) -> str:
+    """Infere a modalidade combinando rotulo explicito, localizacao, titulo, descricao e fonte."""
+    # 1. Rotulo explicito normalizado
+    norm = normalize_workplace(explicit)
+    if norm != NAO_INFORMADO:
+        return norm
+
+    # 2. Analise textual no titulo e descricao
+    full_text = normalize(f"{title or ''} {description or ''}")
+    if full_text:
+        # Hibrido tem prioridade se mencionado (pois muitas vagas hibridas tambem citam dias presenciais)
+        if _HIBRIDO_RE.search(full_text):
+            return HIBRIDO
+        if _REMOTO_RE.search(full_text):
+            return REMOTO
+        if _PRESENCIAL_RE.search(full_text):
+            return PRESENCIAL
+
+    # 3. Localizacao informada
+    loc_norm = normalize(location)
+    if loc_norm:
+        if "remoto" in loc_norm or "home office" in loc_norm:
+            return REMOTO
+        if "hibrid" in loc_norm:
+            return HIBRIDO
+        if "cidades proximas" in loc_norm or "apenas candidaturas" in loc_norm:
+            return PRESENCIAL
+        if loc_norm in ("brasil", "brazil", "nacional"):
+            if source == "linkedin":
+                return REMOTO
+            return NAO_INFORMADO
+        # Cidade fisica identificada
+        return PRESENCIAL
+
+    return NAO_INFORMADO
+
+
 
 
 @dataclass
@@ -92,6 +148,9 @@ class Job:
     area_matches: str = ""
     seniority: str = ""
     skills: list[str] = field(default_factory=list)
+    regiao: str = ""
+    polo: str = ""
+
 
     def __post_init__(self) -> None:
         self.title = _WS_RE.sub(" ", (self.title or "")).strip()
