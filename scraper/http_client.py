@@ -50,7 +50,7 @@ class PoliteSession:
             status=max_retries,
             backoff_factor=backoff_factor,
             status_forcelist=(429, 500, 502, 503, 504),
-            allowed_methods=frozenset(["GET"]),
+            allowed_methods=frozenset(["GET", "POST"]),
             raise_on_status=False,
             respect_retry_after_header=True,
         )
@@ -78,16 +78,51 @@ class PoliteSession:
 
         if response.status_code >= 400:
             logger.warning(
-                "HTTP %s em %s (params=%s)",
+                "HTTP %s em %s (params=%s, resp=%s)",
                 response.status_code,
                 url,
                 kwargs.get("params"),
+                response.text[:200],
             )
             return None
         return response
 
     def get_json(self, url: str, **kwargs) -> dict | list | None:
         response = self.get(url, **kwargs)
+        if response is None:
+            return None
+        try:
+            return response.json()
+        except ValueError:
+            logger.warning("Resposta nao-JSON em %s (content-type=%s)", url,
+                           response.headers.get("content-type"))
+            return None
+
+    def post(self, url: str, **kwargs) -> requests.Response | None:
+        """POST com delay + retry. Devolve `None` em caso de falha definitiva."""
+        self._wait_turn()
+        kwargs.setdefault("timeout", self.timeout_seconds)
+        self.request_count += 1
+        try:
+            response = self.session.post(url, **kwargs)
+        except requests.RequestException as exc:
+            logger.warning("Falha de rede em %s: %s", url, exc)
+            return None
+
+        if response.status_code >= 400:
+            logger.warning(
+                "HTTP %s em %s (json=%s, resp=%s)",
+                response.status_code,
+                url,
+                kwargs.get("json"),
+                response.text[:200],
+            )
+            return None
+        return response
+
+
+    def post_json(self, url: str, **kwargs) -> dict | list | None:
+        response = self.post(url, **kwargs)
         if response is None:
             return None
         try:
