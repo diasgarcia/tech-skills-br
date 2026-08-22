@@ -29,8 +29,16 @@ import re
 
 from bs4 import BeautifulSoup
 
-from ..models import NAO_INFORMADO, REMOTO, Job, normalize
+from ..models import (
+    HIBRIDO,
+    NAO_INFORMADO,
+    PRESENCIAL,
+    REMOTO,
+    Job,
+    normalize,
+)
 from .base import JobSource
+
 
 logger = logging.getLogger(__name__)
 
@@ -56,7 +64,10 @@ class LinkedInSource(JobSource):
         jobs: list[Job] = []
         seen: set[str] = set()
 
-        for page in range(self.settings.max_pages_per_term):
+        start_page = max(0, self.settings.start_page - 1)
+        end_page = max(start_page + 1, self.settings.max_pages_per_term)
+
+        for page in range(start_page, end_page):
             response = self.session.get(
                 API_URL,
                 params={
@@ -65,6 +76,7 @@ class LinkedInSource(JobSource):
                     "start": page * RESULTADOS_POR_PAGINA,
                 },
             )
+
             if response is None:
                 break
 
@@ -124,15 +136,26 @@ class LinkedInSource(JobSource):
 
     @staticmethod
     def _modalidade(location: str) -> str:
-        """So afirma remoto quando o proprio texto do local diz isso.
+        """Infere a modalidade com base no padrao do LinkedIn.
 
-        O card nao tem campo de modalidade; presencial e hibrido sao
-        indistinguiveis aqui, entao ficam como nao informado em vez de chute.
+        - 'Brasil' / 'Brazil' / 'Nacional' -> Remoto (vagas de escopo nacional)
+        - 'Brasil (Remoto)' / 'Remoto' -> Remoto
+        - 'São Paulo (Híbrido)' / 'Híbrido' -> Híbrido
+        - Cidade física ('Rio de Janeiro e Região', 'Curitiba, PR') -> Presencial
+        - Vazio -> Não informado
         """
         texto = normalize(location)
+        if not texto:
+            return NAO_INFORMADO
         if "remoto" in texto or "remote" in texto:
             return REMOTO
-        return NAO_INFORMADO
+        if "hibrid" in texto or "hybrid" in texto:
+            return HIBRIDO
+        if texto in ("brasil", "brazil", "nacional"):
+            return REMOTO
+        return PRESENCIAL
+
+
 
     @staticmethod
     def _text(node) -> str:
