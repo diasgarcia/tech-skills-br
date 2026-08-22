@@ -87,8 +87,12 @@ class ProgramathorSource(JobSource):
         seen: set[str] = set()
         anterior: set[str] = set()
 
-        for page in range(1, self.settings.max_pages_per_term + 1):
+        start_page = max(1, self.settings.start_page)
+        end_page = max(start_page, self.settings.max_pages_per_term)
+
+        for page in range(start_page, end_page + 1):
             response = self.session.get(JOBS_URL, params={**params, "page": page})
+
             if response is None:
                 break
 
