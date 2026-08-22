@@ -36,13 +36,17 @@ class GupySource(JobSource):
         jobs: list[Job] = []
         seen_ids: set[str] = set()
         limit = min(self.settings.page_size, MAX_LIMIT)
+        start_page = max(0, self.settings.start_page - 1)
+        end_page = max(start_page + 1, self.settings.max_pages_per_term)
 
-        for page in range(self.settings.max_pages_per_term):
+        for page in range(start_page, end_page):
+
             offset = page * limit
             payload = self.session.get_json(
                 API_URL,
                 params={"jobName": term, "limit": limit, "offset": offset},
             )
+
             if not payload:
                 break
 
