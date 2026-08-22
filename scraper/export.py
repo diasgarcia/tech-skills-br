@@ -15,6 +15,8 @@ JOB_COLUMNS = [
     "title",
     "company",
     "source",
+    "regiao",
+    "polo",
     "location",
     "workplace_type",
     "published_date",
@@ -60,6 +62,41 @@ def build_ranking(jobs: list[Job]) -> list[dict]:
             }
         )
     return ranking
+
+
+def build_region_ranking(jobs: list[Job]) -> list[dict]:
+    """Distribuicao das vagas por macrorregiao e remoto nacional."""
+    counts = Counter(job.regiao or "Não informado" for job in jobs)
+    total = sum(counts.values()) or 1
+    ranking = []
+    for position, (regiao, count) in enumerate(counts.most_common(), start=1):
+        ranking.append(
+            {
+                "posicao": position,
+                "regiao": regiao,
+                "vagas": count,
+                "percentual": round(100 * count / total, 1),
+            }
+        )
+    return ranking
+
+
+def build_polo_ranking(jobs: list[Job], top_n: int = 15) -> list[dict]:
+    """Ranking dos principais polos tecnologicos."""
+    counts = Counter(job.polo for job in jobs if job.polo and job.polo != "Não informado")
+    total = sum(counts.values()) or 1
+    ranking = []
+    for position, (polo, count) in enumerate(counts.most_common(top_n), start=1):
+        ranking.append(
+            {
+                "posicao": position,
+                "polo": polo,
+                "vagas": count,
+                "percentual": round(100 * count / total, 1),
+            }
+        )
+    return ranking
+
 
 
 def build_workplace_ranking(jobs: list[Job]) -> list[dict]:
@@ -141,6 +178,22 @@ def export_report_md(
         lines.append(f"| {label} | {count} |")
     lines.append("")
 
+    lines.append("## Distribuicao por macrorregiao")
+    lines.append("")
+    lines.append("| Regiao | Vagas | % |")
+    lines.append("|--------|-------|---|")
+    for row in build_region_ranking(jobs):
+        lines.append(f"| {row['regiao']} | {row['vagas']} | {row['percentual']}% |")
+    lines.append("")
+
+    lines.append("### Principais polos tecnologicos")
+    lines.append("")
+    lines.append("| Polo | Vagas | % |")
+    lines.append("|------|-------|---|")
+    for row in build_polo_ranking(jobs, top_n=10):
+        lines.append(f"| {row['polo']} | {row['vagas']} | {row['percentual']}% |")
+    lines.append("")
+
     lines.append("## Modalidade de trabalho")
     lines.append("")
     lines.append("| Modalidade | Vagas | % |")
@@ -148,6 +201,7 @@ def export_report_md(
     for row in build_workplace_ranking(jobs):
         lines.append(f"| {row['modalidade']} | {row['vagas']} | {row['percentual']}% |")
     lines.append("")
+
 
     lines.append("### Modalidade por área")
     lines.append("")

@@ -17,7 +17,7 @@ from pathlib import Path
 
 from scraper.config import SEARCH_TERMS, Settings
 from scraper.pipeline import run
-from scraper.sources import AVAILABLE_SOURCES
+from scraper.sources import AVAILABLE_SOURCES, DEFAULT_SOURCES
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -28,13 +28,22 @@ def build_parser() -> argparse.ArgumentParser:
         epilog=__doc__,
     )
     parser.add_argument(
-        "--sources", nargs="+", default=list(AVAILABLE_SOURCES),
+        "--sources", nargs="+", default=list(DEFAULT_SOURCES),
         choices=AVAILABLE_SOURCES,
-        help=f"Portais a consultar (padrão: todos — {' '.join(AVAILABLE_SOURCES)}).",
+        help=f"Portais a consultar (padrão: {' '.join(DEFAULT_SOURCES)}).",
+    )
+
+    parser.add_argument(
+        "--locations", nargs="+", default=["todos"],
+        help="Polos ou regioes a consultar (ex: todos, sudeste, sul, nordeste, 'São Paulo', 'Recife').",
     )
     parser.add_argument(
         "--terms", nargs="+", default=None,
         help=f"Termos de busca (padrao: {len(SEARCH_TERMS)} termos de config.py).",
+    )
+    parser.add_argument(
+        "--start-page", type=int, default=1,
+        help="Pagina inicial da busca por portal (padrao: 1). Util para pular paginas iniciais.",
     )
     parser.add_argument(
         "--max-pages", type=int, default=5,
@@ -44,6 +53,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--page-size", type=int, default=100,
         help="Vagas por pagina; a Gupy aceita no maximo 100 (padrao: 100).",
     )
+
     parser.add_argument(
         "--delay", type=float, default=1.5,
         help="Segundos de espera entre requests (padrao: 1.5).",
@@ -88,11 +98,15 @@ def main(argv: list[str] | None = None) -> int:
     settings = Settings(
         search_terms=args.terms or list(SEARCH_TERMS),
         sources=args.sources,
+        locations=args.locations,
         delay_seconds=args.delay,
         page_size=min(args.page_size, 100),
+        start_page=max(1, args.start_page),
         max_pages_per_term=args.max_pages,
         only_junior=not args.all_levels,
     )
+
+
     if args.output:
         settings.output_dir = args.output
 
