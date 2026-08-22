@@ -48,8 +48,12 @@ class TramposSource(JobSource):
         jobs: list[Job] = []
         seen: set[str] = set()
 
-        for page in range(1, self.settings.max_pages_per_term + 1):
+        start_page = max(1, self.settings.start_page)
+        end_page = max(start_page, self.settings.max_pages_per_term)
+
+        for page in range(start_page, end_page + 1):
             payload = self.session.get_json(API_URL, params={"tr": term, "page": page})
+
             if not payload:
                 break
 
