@@ -10,8 +10,11 @@ from .classifier import classify_jobs, default_classifier, filter_tech
 from .config import Settings
 from .dedupe import deduplicate
 from .export import build_ranking, export_all
+from .geo import attach_geo_info
 from .http_client import PoliteSession
-from .models import Job, SourceStats
+from .models import NAO_INFORMADO, Job, SourceStats, infer_workplace
+
+
 from .seniority import SeniorityFilter, filter_entry_level
 from .skills import attach_skills
 from .sources import SOURCE_REGISTRY
@@ -97,10 +100,19 @@ def run(
                     len(jobs), dropped_non_tech)
 
     jobs = classify_jobs(jobs, classifier)
-    # Antes da exportacao: `to_row` trunca a descricao, e as tecnologias precisam
-    # do texto completo (a Gupy devolve a descricao inteira).
     jobs = attach_skills(jobs)
+    for job in jobs:
+        if not job.workplace_type or job.workplace_type == NAO_INFORMADO:
+            job.workplace_type = infer_workplace(
+                job.workplace_type,
+                location=job.location,
+                title=job.title,
+                description=job.description,
+            )
+    jobs = attach_geo_info(jobs)
     ranking = build_ranking(jobs)
+
+
 
     meta = {
         "sources": [SOURCE_REGISTRY[s].label for s in settings.sources
