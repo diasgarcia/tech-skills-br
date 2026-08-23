@@ -7,8 +7,8 @@
 [![Manual de Uso](https://img.shields.io/badge/Docs-Manual%20de%20Uso-orange.svg)](docs/manual_de_uso.md)
 [![Arquitetura Técnica](https://img.shields.io/badge/Docs-Arquitetura%20T%C3%A9cnica-blueviolet.svg)](docs/arquitetura_tecnica.md)
 
-
 Projeto de dados voltado para a mineração e a organização de dados sobre vagas de entrada em tecnologia no Brasil.
+
 
 ---
 
