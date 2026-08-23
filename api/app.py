@@ -25,15 +25,15 @@ from .routers import areas, tecnologias, vagas
 logger = logging.getLogger(__name__)
 
 DESCRIPTION = """
-API de consulta das vagas júnior de tecnologia coletadas pelo scraper.
+### 🔬 Mapeamento de Skills em Tecnologia no Brasil (PIBIC / Iniciação Científica)
 
-**Somente leitura.** Os dados vêm da raspagem da Gupy e do Vagas.com.br; para
-atualizar, rode o scraper (`python main.py`) e depois a importação
-(`python scripts/import_csv.py`).
+API pública de consulta e análise quantitativa de dados sobre o mercado de trabalho em computação e tecnologia no Brasil, comparando a demanda real das empresas com os referenciais curriculares do **MEC (DCNs)** e da **Sociedade Brasileira de Computação (SBC)**.
 
-- `/vagas` — listagem com filtros por área, tecnologia, modalidade e fonte
-- `/areas` — as 10 áreas com contagem de vagas
-- `/tecnologias` — as tecnologias com contagem de menções
+**Fontes integradas:** Gupy, LinkedIn Jobs, SerpApi (Google Jobs), TheirStack API, Vagas.com.br, ProgramaThor e Trampos.co.
+
+- **`/vagas`** — Listagem de vagas com filtros combinados por área, tecnologia, modalidade de trabalho, portal e busca textual
+- **`/areas`** — Distribuição estatística das vagas por área de especialidade técnica
+- **`/tecnologias`** — Taxonomia de habilidades e tecnologias com ranking de citações
 """
 
 @asynccontextmanager
@@ -44,10 +44,10 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="vagas-tech-junior API",
+    title="Mapeamento de Skills em Tecnologia no Brasil (PIBIC)",
     description=DESCRIPTION,
     version=__version__,
-    contact={"name": "vagas-tech-junior"},
+    contact={"name": "Pesquisa PIBIC - Mercado vs. DCNs/SBC"},
     lifespan=lifespan,
 )
 
@@ -71,12 +71,13 @@ async def _validacao(request: Request, exc: RequestValidationError) -> JSONRespo
 @app.get("/", tags=["meta"], summary="Informações da API")
 def raiz() -> dict:
     return {
-        "nome": "vagas-tech-junior API",
+        "nome": "Mapeamento de Skills em Tecnologia no Brasil - API de Pesquisa (PIBIC)",
         "versao": __version__,
         "somente_leitura": True,
         "docs": "/docs",
         "endpoints": ["/vagas", "/vagas/{id}", "/areas", "/tecnologias"],
     }
+
 
 
 @app.get("/health", tags=["meta"], summary="Checagem de saúde")
