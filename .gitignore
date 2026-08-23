@@ -32,7 +32,6 @@ data/
 output/
 *.csv
 *.xlsx
-relatorio_*.md
 
 # Excecao: o snapshot que alimenta o deploy precisa ser versionado, senao a
 # API sobe vazia no servidor (o disco do Render e efemero).
