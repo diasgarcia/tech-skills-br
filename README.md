@@ -156,15 +156,4 @@ Para validar a integridade dos coletores, classificadores e regras de extração
 pytest
 ```
 
----
-
-## Agradecimentos e Créditos
-
-Este projeto de pesquisa acadêmica foi desenvolvido a partir da concepção e base inicial do repositório de código aberto [**vagas-tech-junior**](https://github.com/EmidioLP/vagas-tech-junior), idealizado e desenvolvido por:
-
-- **Emidio Lopes de Souza Neto**
-  - GitHub: [@EmidioLP](https://github.com/EmidioLP)
-  - LinkedIn: [emidio-lopes](https://www.linkedin.com/in/emidio-lopes/)
-
-Agradecemos pelo trabalho fundacional de raspagem e estruturação inicial que possibilitou a expansão deste ecossistema para mineração científica de dados, taxonomia avançada de *skills* e análise curricular (PIBIC).
 
