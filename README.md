@@ -6,9 +6,11 @@
 [![SQLite / PostgreSQL](https://img.shields.io/badge/Database-SQLAlchemy%202.0-red.svg)](api/database.py)
 [![Manual de Uso](https://img.shields.io/badge/Docs-Manual%20de%20Uso-orange.svg)](docs/manual_de_uso.md)
 [![Arquitetura Técnica](https://img.shields.io/badge/Docs-Arquitetura%20T%C3%A9cnica-blueviolet.svg)](docs/arquitetura_tecnica.md)
-
+[![Pesquisa](https://img.shields.io/badge/Pesquisa-PIBIC%20%2F%20Inicia%C3%A7%C3%A3o%20Cient%C3%ADfica-9cf.svg)](#contexto-e-objetivo-da-pesquisa)
+[![Foco](https://img.shields.io/badge/Foco-Mercado%20vs%20DCNs%2FSBC-success.svg)](#contexto-e-objetivo-da-pesquisa)
 
 Projeto de pesquisa científica (PIBIC / Iniciação Científica) voltado para a **mineração de dados, extração de habilidades técnicas (*skills*) e análise do mercado de trabalho de tecnologia no Brasil**, comparando a demanda real das empresas com os referenciais curriculares do **MEC (Diretrizes Curriculares Nacionais - DCNs)** e da **Sociedade Brasileira de Computação (SBC)**.
+
 
 ---
 
