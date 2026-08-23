@@ -57,25 +57,8 @@ Emprega vocabulário controlado com centenas de sinônimos mapeados em `scraper/
 
 ---
 
-## Principais Descobertas e Resultados
-
-Análise consolidada a partir da base histórica de vagas mineradas no Brasil:
-
-### 1. Top Tecnologias Mais Demandadas no Mercado
-1. **SQL & Bancos de Dados:** A competência técnica mais universal e transferível entre todas as áreas de tecnologia.
-2. **Git & Controle de Versão:** Requisito padrão exigido em praticamente todos os processos seletivos.
-3. **Linguagens de Programação Dominantes:** Python, JavaScript, Java, C# e TypeScript.
-4. **Inteligência Artificial & APIs REST:** Crescimento acelerado como requisito para novos desenvolvedores.
-5. **Fundamentos:** Redes/TCP-IP, Hardware e Sistemas Operacionais como forte base de entrada.
-
-### 2. Distribuição por Modalidade de Trabalho
-- **Presencial:** ~65% das vagas mapeadas (com foco nos polos regionais).
-- **Remoto:** ~18% (com maior concentração em vagas de Backend e Engenharia de Software).
-- **Híbrido:** ~12%.
-
----
-
 ## Trilha de Execução Rápida
+
 
 Consulte o **[Manual de Uso e Guia de Execução](docs/manual_de_uso.md)** para a documentação completa de todos os parâmetros e opções.
 
@@ -156,15 +139,4 @@ Para validar a integridade dos coletores, classificadores e regras de extração
 pytest
 ```
 
----
-
-## Agradecimentos e Créditos
-
-Este projeto de pesquisa acadêmica foi desenvolvido a partir da concepção e base inicial do repositório de código aberto [**vagas-tech-junior**](https://github.com/EmidioLP/vagas-tech-junior), idealizado e desenvolvido por:
-
-- **Emidio Lopes de Souza Neto**
-  - GitHub: [@EmidioLP](https://github.com/EmidioLP)
-  - LinkedIn: [emidio-lopes](https://www.linkedin.com/in/emidio-lopes/)
-
-Agradecemos pelo trabalho fundacional de raspagem e estruturação inicial que possibilitou a expansão deste ecossistema para mineração científica de dados, taxonomia avançada de *skills* e análise curricular (PIBIC).
 
