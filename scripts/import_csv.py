@@ -38,6 +38,9 @@ from api.database import (  # noqa: E402
 from api.dates import parse_published_date, reference_date_from_csv  # noqa: E402
 from api.models import Tecnologia, Vaga  # noqa: E402
 from scraper.config import PROJECT_ROOT  # noqa: E402
+from scraper.geo import default_geo_classifier  # noqa: E402
+from scraper.models import infer_workplace  # noqa: E402
+
 
 logger = logging.getLogger("import_csv")
 
@@ -46,7 +49,9 @@ logger = logging.getLogger("import_csv")
 CAMPOS_TEXTO = [
     "company", "seniority", "location", "workplace_type",
     "url", "description", "area_matches", "search_term",
+    "regiao", "polo",
 ]
+
 
 
 def _data_iso(valor: str) -> date:
@@ -90,6 +95,22 @@ def _float_ou_none(valor: str | None) -> float | None:
         return None
 
 
+def _garantir_colunas(engine) -> None:
+    """Garante que colunas novas (regiao, polo) existam em bancos pre-existentes."""
+    from sqlalchemy import inspect, text
+
+    inspector = inspect(engine)
+    if "vagas" not in inspector.get_table_names():
+        return
+    cols = {col["name"] for col in inspector.get_columns("vagas")}
+    with engine.connect() as conn:
+        if "regiao" not in cols:
+            conn.execute(text("ALTER TABLE vagas ADD COLUMN regiao VARCHAR(40)"))
+        if "polo" not in cols:
+            conn.execute(text("ALTER TABLE vagas ADD COLUMN polo VARCHAR(60)"))
+        conn.commit()
+
+
 def importar(
     csv_path: Path,
     db_path: Path | str | None = None,
@@ -100,6 +121,8 @@ def importar(
     if recriar:
         Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
+    _garantir_colunas(engine)
+
 
     # Datas relativas ("Ontem", "Há 3 dias") so fazem sentido contra a data em
     # que o CSV foi gerado -- nao contra hoje.
@@ -118,6 +141,7 @@ def importar(
     with Session(engine) as db:
         tecnologias = semear_tecnologias(db)
         conhecidas = {n.lower(): t for n, t in tecnologias.items()}
+        geo = default_geo_classifier()
 
         with open(csv_path, encoding="utf-8-sig", newline="") as fh:
             for linha in csv.DictReader(fh):
@@ -150,6 +174,18 @@ def importar(
                 if vaga.published_date is None:
                     sem_data += 1
 
+                # Infere modalidade e polo/regiao caso nao tenham vindo estruturados
+                vaga.workplace_type = infer_workplace(
+                    vaga.workplace_type,
+                    location=vaga.location,
+                    title=vaga.title,
+                    description=vaga.description,
+                )
+                if not vaga.regiao or vaga.regiao == "Não informado":
+                    polo, regiao = geo.classify(vaga.location, vaga.workplace_type)
+                    vaga.polo = polo
+                    vaga.regiao = regiao
+
                 nomes = [
                     n.strip() for n in (linha.get("skills") or "").split(",") if n.strip()
                 ]
@@ -157,7 +193,28 @@ def importar(
                     conhecidas[n.lower()] for n in nomes if n.lower() in conhecidas
                 ]
 
+        # Enriquecimento retroativo de todas as vagas existentes no banco
+        todas_vagas = db.scalars(select(Vaga)).all()
+        for v in todas_vagas:
+            if not v.workplace_type or v.workplace_type == "Não informado":
+                v.workplace_type = infer_workplace(
+                    v.workplace_type,
+                    location=v.location,
+                    title=v.title,
+                    description=v.description,
+                )
+                if (not v.workplace_type or v.workplace_type == "Não informado") and v.source == "theirstack":
+                    if v.location and "remoto" not in v.location.lower() and v.location.lower() != "brasil":
+                        v.workplace_type = "Presencial"
+
+            if not v.regiao or v.regiao == "Não informado":
+                polo, regiao = geo.classify(v.location, v.workplace_type)
+                v.polo = polo
+                v.regiao = regiao
+
+
         db.commit()
+
         total_vagas = db.scalar(select(func.count()).select_from(Vaga)) or 0
 
     return {
