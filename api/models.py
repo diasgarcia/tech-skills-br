@@ -63,6 +63,8 @@ class Vaga(Base):
         Index("ix_vagas_area", "area"),
         Index("ix_vagas_workplace_type", "workplace_type"),
         Index("ix_vagas_source", "source"),
+        Index("ix_vagas_regiao", "regiao"),
+        Index("ix_vagas_polo", "polo"),
     )
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -80,9 +82,13 @@ class Vaga(Base):
     url: Mapped[str | None] = mapped_column(Text)
     description: Mapped[str | None] = mapped_column(Text)
 
+    regiao: Mapped[str | None] = mapped_column(String(40))
+    polo: Mapped[str | None] = mapped_column(String(60))
+
     area_score: Mapped[float | None] = mapped_column(Float)
     area_matches: Mapped[str | None] = mapped_column(Text)
     search_term: Mapped[str | None] = mapped_column(String(100))
+
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime, server_default=func.now(), nullable=False
