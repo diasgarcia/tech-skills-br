@@ -167,7 +167,8 @@ Este projeto é distribuído sob a licença **MIT**, em conformidade com a licen
 ```text
 MIT License
 
-Copyright (c) 2026 Emidio Lopes / Pesquisa PIBIC
+Copyright (c) 2026 Emidio Lopes
+
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

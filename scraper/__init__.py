@@ -1,4 +1,4 @@
-"""vagas-tech-junior -- qual area de tech mais contrata junior no Brasil."""
+"""tech-skills-br -- Mapeamento de Skills em Tecnologia no Brasil (PIBIC)."""
 
 __version__ = "1.0.0"
 

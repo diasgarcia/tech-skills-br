@@ -45,8 +45,10 @@ def _load_dotenv(env_path: Path | None = None) -> None:
 _load_dotenv()
 
 USER_AGENT = (
-    "vagas-tech-junior/1.0 (estudo de mercado de trabalho) python-requests"
+    "tech-skills-br/1.0 (pesquisa academica PIBIC - mapeamento de skills tech) python-requests"
 )
+
+
 
 # Termos usados na busca. Cada termo vira uma consulta separada em cada portal.
 SEARCH_TERMS: list[str] = [

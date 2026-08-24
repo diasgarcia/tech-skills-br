@@ -11,6 +11,9 @@
 
 Projeto de pesquisa científica (PIBIC / Iniciação Científica) voltado para a **mineração de dados, extração de habilidades técnicas (*skills*) e análise do mercado de trabalho de tecnologia no Brasil**, comparando a demanda real das empresas com os referenciais curriculares do **MEC (Diretrizes Curriculares Nacionais - DCNs)** e da **Sociedade Brasileira de Computação (SBC)**.
 
+> *Projeto derivado do [vagas-tech-junior](docs/arquitetura_tecnica.md#agradecimentos-e-créditos).*
+
+
 
 ---
 
@@ -108,7 +111,7 @@ Acesse a documentação interativa no navegador: **[http://localhost:8000/docs](
 ## Estrutura do Repositório
 
 ```text
-vagas-tech-junior/
+tech-skills-br/
 ├── api/                   # API FastAPI (endpoints, modelos ORM, schemas Pydantic)
 │   ├── database.py        # Configuração SQLAlchemy (SQLite / PostgreSQL)
 │   ├── models.py          # Modelos de dados (Vaga, Tecnologia, VagaTecnologia)
