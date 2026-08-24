@@ -120,7 +120,10 @@ tech-skills-br/
 │   └── routes/            # Rotas da API REST
 ├── data/                  # Base de dados local (vagas.db)
 ├── docs/                  # Documentação acadêmica e manuais
-│   └── manual_de_uso.md   # Guia detalhado de todos os comandos e parâmetros
+│   ├── arquitetura_tecnica.md # Especificação técnica da arquitetura e créditos
+│   ├── manual_de_uso.md   # Guia detalhado de todos os comandos e parâmetros
+│   └── relatorios/        # Relatório consolidado e gráficos analíticos PNG
+
 ├── output/                # Relatórios em Markdown, rankings CSV e gráficos PNG
 ├── scraper/               # Mecanismo de mineração e processamento de dados
 │   ├── classifier.py      # Classificador de áreas de tecnologia
