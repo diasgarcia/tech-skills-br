@@ -9,6 +9,9 @@
 
 Projeto de dados voltado para a mineração e a organização de dados sobre vagas de entrada em tecnologia no Brasil.
 
+> *Projeto derivado do [vagas-tech-junior](docs/arquitetura_tecnica.md#agradecimentos-e-créditos).*
+
+
 
 ---
 
@@ -106,7 +109,7 @@ Acesse a documentação interativa no navegador: **[http://localhost:8000/docs](
 ## Estrutura do Repositório
 
 ```text
-vagas-tech-junior/
+tech-skills-br/
 ├── api/                   # API FastAPI (endpoints, modelos ORM, schemas Pydantic)
 │   ├── database.py        # Configuração SQLAlchemy (SQLite / PostgreSQL)
 │   ├── models.py          # Modelos de dados (Vaga, Tecnologia, VagaTecnologia)
