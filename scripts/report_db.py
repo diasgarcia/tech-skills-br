@@ -9,10 +9,12 @@ Exemplos de uso:
 from __future__ import annotations
 
 import argparse
+import shutil
 import sys
 from collections import Counter
 from datetime import datetime
 from pathlib import Path
+
 
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
@@ -23,8 +25,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from api.database import Base, database_url, make_engine, url_sem_senha
 from api.models import Tecnologia, Vaga, vaga_tecnologia
 from scraper.charts import export_charts
-from scraper.config import DEFAULT_OUTPUT_DIR
+from scraper.config import DEFAULT_OUTPUT_DIR, PROJECT_ROOT
 from scraper.models import Job
+
 
 
 def _bar(percent: float, width: int = 20) -> str:
@@ -261,6 +264,13 @@ def generate_db_report(
         print(f"\nArquivos gerados:")
         print(f"  - Relatório Markdown: {report_path}")
 
+        # Atualiza a pasta organizada docs/relatorios/ com a versao mais recente
+        docs_reports_dir = PROJECT_ROOT / "docs" / "relatorios"
+        docs_reports_dir.mkdir(parents=True, exist_ok=True)
+        docs_md_path = docs_reports_dir / "relatorio_banco_consolidado.md"
+        docs_md_path.write_text(md_content, encoding="utf-8")
+        print(f"  - Snapshot Docs: {docs_md_path}")
+
         if with_charts and jobs:
             chart_files = export_charts(
                 jobs,
@@ -271,7 +281,22 @@ def generate_db_report(
             for chart_key, chart_file in chart_files.items():
                 print(f"  - Gráfico {chart_key}: {chart_file}")
 
+                canon_name = f"grafico_{chart_key.replace('chart_', '')}_consolidado.png"
+                if chart_key == "chart_workplace":
+                    canon_name = "grafico_modalidade_consolidado.png"
+                elif chart_key == "chart_regions":
+                    canon_name = "grafico_regioes_consolidado.png"
+                elif chart_key == "chart_areas":
+                    canon_name = "grafico_areas_consolidado.png"
+                elif chart_key == "chart_skills":
+                    canon_name = "grafico_skills_consolidado.png"
+
+                target_chart = docs_reports_dir / canon_name
+                shutil.copyfile(chart_file, target_chart)
+                print(f"  - Snapshot Docs Gráfico: {target_chart}")
+
     return md_content
+
 
 
 def main(argv: list[str] | None = None) -> int:
