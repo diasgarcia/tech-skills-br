@@ -1,9 +1,10 @@
-"""CLI do vagas-tech-junior.
+"""CLI do tech-skills-br - Mapeamento de Skills em Tecnologia no Brasil (PIBIC).
 
 Exemplos:
-    python main.py                          # coleta completa (Gupy + Vagas.com)
-    python main.py --sources gupy           # so a Gupy
-    python main.py --terms "estagio dados" "engenheiro de dados junior"
+    python main.py                          # coleta padrao gratuita (Gupy, LinkedIn, etc.)
+    python main.py --sources serpapi        # coleta isolada Google Jobs
+    python main.py --sources theirstack     # coleta isolada TheirStack
+    python main.py --terms "estagio ti" "engenheiro de dados junior"
     python main.py --max-pages 2 --delay 2  # coleta menor e mais lenta
     python main.py --strict                 # descarta titulos "Junior/Pleno"
 """
@@ -22,11 +23,12 @@ from scraper.sources import AVAILABLE_SOURCES, DEFAULT_SOURCES
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="vagas-tech-junior",
-        description="Descobre qual area de tecnologia tem mais vagas junior no Brasil.",
+        prog="tech-skills-br",
+        description="Mineracao e mapeamento de habilidades tecnicas (skills) demandadas no mercado de tecnologia no Brasil (PIBIC).",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
+
     parser.add_argument(
         "--sources", nargs="+", default=list(DEFAULT_SOURCES),
         choices=AVAILABLE_SOURCES,
