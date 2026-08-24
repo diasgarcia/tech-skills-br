@@ -1,6 +1,7 @@
 # Mapeamento de Skills em Tecnologia no Brasil (PIBIC)
 
-[![Testes Automatizados](https://img.shields.io/badge/Testes-268%20passed-brightgreen.svg)](tests/)
+[![CI](https://github.com/diasgarcia/tech-skills-br/actions/workflows/ci.yml/badge.svg)](https://github.com/diasgarcia/tech-skills-br/actions/workflows/ci.yml)
+
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115%2B-009688.svg)](https://fastapi.tiangolo.com/)
 [![SQLite / PostgreSQL](https://img.shields.io/badge/Database-SQLAlchemy%202.0-red.svg)](api/database.py)
@@ -53,7 +54,8 @@ Para evitar o viés de concentração geográfica exclusiva no Sudeste, a coleta
 - **Remoto Nacional:** Vagas 100% remotas de abrangência nacional.
 
 ### 3. Extração e Normalização de Skills (Taxonomia Curada)
-Emprega vocabulário controlado com centenas de sinônimos mapeados em `scraper/rules/skills.yml`, garantindo precisão terminológica e zero falsos positivos:
+Emprega vocabulário controlado com centenas de sinônimos mapeados em `scraper/rules/skills.yml`, visando alta precisão terminológica e com regras específicas para redução de falsos positivos:
+
 - *Exemplo:* `"React"`, `"React.js"`, `"ReactJS"`, `"react js"` $\rightarrow$ **`React`**.
 
 ### 4. Portão de Relevância e Senioridade
