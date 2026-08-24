@@ -123,15 +123,18 @@ def main(argv: list[str] | None = None) -> int:
         print("\nNenhuma vaga encontrada. Verifique conexao e termos de busca.")
         return 1
 
+    tipo_vagas = "junior/estagio/trainee" if settings.only_junior else "todos os niveis"
     print("\n" + "=" * 62)
-    print(f"  RANKING DE AREAS -- {len(result.jobs)} vagas junior/estagio/trainee")
+    print(f"  RANKING DE AREAS -- {len(result.jobs)} vagas ({tipo_vagas})")
     print("=" * 62)
     for row in result.ranking:
         bar = "#" * round(row["percentual"] / 2)
         print(f"  {row['posicao']:>2}. {row['area']:<18} {row['vagas']:>4} vagas "
               f"({row['percentual']:>5.1f}%) {bar}")
     print("=" * 62)
-    print(f"\n  Area com mais demanda junior: {result.top_area}")
+    demanda_label = "demanda junior" if settings.only_junior else "demanda geral"
+    print(f"\n  Area com mais {demanda_label}: {result.top_area}")
+
 
     print("\n  Arquivos gerados:")
     for label, path in result.files.items():
