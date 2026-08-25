@@ -101,8 +101,6 @@
       border: 1px solid var(--border);
       border-radius: 6px;
       padding: 14px;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
     }
 
     .card-title { font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
@@ -113,7 +111,6 @@
       border-collapse: collapse;
       margin-top: 10px;
       font-size: 12px;
-      min-width: 280px;
     }
 
     th, td {
@@ -180,8 +177,8 @@
       gap: 8px;
     }
 
-    /* RESPONSIVIDADE MOBILE ROOTS */
-    @media (max-width: 650px) {
+    /* RESPONSIVIDADE MOBILE ROOTS (ENCAIXA SEM ROLAGEM) */
+    @media (max-width: 768px) {
       body { padding: 10px; font-size: 12px; }
       h1 { font-size: 14px; }
       .grid-kpi { grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -192,10 +189,12 @@
       table { font-size: 11px; }
       th, td { padding: 5px 6px; }
       .search-input { max-width: 100%; }
-      #table-vagas { min-width: 480px; }
+
+      /* Oculta colunas secundárias para caber 100% na largura do celular */
+      .hide-mobile { display: none !important; }
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 420px) {
       .grid-kpi { grid-template-columns: 1fr; }
       .nav-btn { width: 100%; text-align: left; }
     }
@@ -255,7 +254,7 @@
       <div class="card">
         <div class="card-title" style="font-weight: 700;">Distribuição por Área Técnica</div>
         <table id="table-areas-summary">
-          <thead><tr><th>Área</th><th>Vagas</th><th>%</th><th style="width: 35%;">Distribuição</th></tr></thead>
+          <thead><tr><th>Área</th><th>Vagas</th><th>%</th><th class="hide-mobile" style="width: 35%;">Distribuição</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -264,13 +263,13 @@
       <div class="card">
         <div class="card-title" style="font-weight: 700;">Macrorregiões do Brasil</div>
         <table id="table-regioes-summary">
-          <thead><tr><th>Região</th><th>Vagas</th><th>%</th><th style="width: 35%;">Distribuição</th></tr></thead>
+          <thead><tr><th>Região</th><th>Vagas</th><th>%</th><th class="hide-mobile" style="width: 35%;">Distribuição</th></tr></thead>
           <tbody></tbody>
         </table>
         
         <div class="card-title" style="font-weight: 700; margin-top: 16px;">Modalidade de Trabalho</div>
         <table id="table-modalidades-summary">
-          <thead><tr><th>Modalidade</th><th>Vagas</th><th>%</th><th style="width: 35%;">Distribuição</th></tr></thead>
+          <thead><tr><th>Modalidade</th><th>Vagas</th><th>%</th><th class="hide-mobile" style="width: 35%;">Distribuição</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -289,7 +288,7 @@
       </div>
 
       <table id="table-skills">
-        <thead><tr><th>#</th><th>Tecnologia</th><th>Categoria</th><th>Vagas</th><th>Demanda %</th><th style="width: 35%;">Barra</th></tr></thead>
+        <thead><tr><th>#</th><th>Tecnologia</th><th class="hide-mobile">Categoria</th><th>Vagas</th><th>Demanda %</th><th class="hide-mobile" style="width: 35%;">Barra</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
@@ -307,7 +306,7 @@
       <p style="color: var(--text-muted); font-size: 11px; margin-bottom: 10px;" id="area-detail-subtitle"></p>
       
       <table id="table-area-skills">
-        <thead><tr><th>Tecnologia</th><th>Categoria</th><th>Vagas na Área</th><th>Aderência na Área %</th><th style="width: 40%;">Proporção</th></tr></thead>
+        <thead><tr><th>Tecnologia</th><th class="hide-mobile">Categoria</th><th>Vagas na Área</th><th>Aderência %</th><th class="hide-mobile" style="width: 40%;">Proporção</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
@@ -327,7 +326,7 @@
       <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;" id="vagas-count-info"></p>
 
       <table id="table-vagas">
-        <thead><tr><th>ID</th><th>Título</th><th>Empresa</th><th>Área</th><th>Local / Mod.</th><th style="text-align: center; width: 60px;">Link</th></tr></thead>
+        <thead><tr><th class="hide-mobile" style="width: 45px;">ID</th><th>Título</th><th>Empresa</th><th class="hide-mobile">Área</th><th>Local / Mod.</th><th style="text-align: center; width: 45px;">Link</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
@@ -342,34 +341,35 @@
       </p>
 
       <table style="margin: 14px 0;">
-        <thead><tr><th>Endpoint</th><th>Descrição</th><th>Link Direto</th></tr></thead>
+        <thead><tr><th>Endpoint</th><th class="hide-mobile">Descrição</th><th>Link Direto</th></tr></thead>
         <tbody>
           <tr>
             <td><code>GET /api/resumo.json</code></td>
-            <td>Metadados gerais, KPIs e distribuições de áreas e regiões</td>
+            <td class="hide-mobile">Metadados gerais, KPIs e distribuições de áreas e regiões</td>
             <td><a href="api/resumo.json" target="_blank">[abrir JSON]</a></td>
           </tr>
           <tr>
             <td><code>GET /api/areas.json</code></td>
-            <td>Ranking consolidado de todas as áreas técnicas com contagens e percentuais</td>
+            <td class="hide-mobile">Ranking consolidado de todas as áreas técnicas com contagens e percentuais</td>
             <td><a href="api/areas.json" target="_blank">[abrir JSON]</a></td>
           </tr>
           <tr>
             <td><code>GET /api/tecnologias.json</code></td>
-            <td>Ranking completo de todas as tecnologias e habilidades demandadas</td>
+            <td class="hide-mobile">Ranking completo de todas as tecnologias e habilidades demandadas</td>
             <td><a href="api/tecnologias.json" target="_blank">[abrir JSON]</a></td>
           </tr>
           <tr>
             <td><code>GET /api/vagas.json</code></td>
-            <td>Base completa e estruturada com todas as vagas ativas catalogadas</td>
+            <td class="hide-mobile">Base completa e estruturada com todas as vagas ativas catalogadas</td>
             <td><a href="api/vagas.json" target="_blank">[abrir JSON]</a></td>
           </tr>
         </tbody>
+      </table>
+
       <div class="card-title" style="font-weight: 700; margin-top: 16px;">Terminal:</div>
       <pre><code>curl -s https://diasgarcia.github.io/tech-skills-br/api/tecnologias.json | jq .[0:5]</code></pre>
     </div>
   </div>
-
 
   <!-- FOOTER -->
   <footer>
@@ -452,7 +452,6 @@ function initKPIs() {
   }
 }
 
-
 function renderSummaryTables() {
   // Áreas
   const tbodyAreas = document.querySelector("#table-areas-summary tbody");
@@ -463,7 +462,7 @@ function renderSummaryTables() {
       <td><strong>${a.area}</strong></td>
       <td>${a.vagas}</td>
       <td>${a.percentual}%</td>
-      <td><div class="bar-wrap"><div class="bar-fill" style="width: ${a.percentual * 3.5}%;"></div></div></td>
+      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${a.percentual * 3.5}%;"></div></div></td>
     `;
     tbodyAreas.appendChild(tr);
   });
@@ -477,7 +476,7 @@ function renderSummaryTables() {
       <td>${r.regiao}</td>
       <td>${r.vagas}</td>
       <td>${r.percentual}%</td>
-      <td><div class="bar-wrap"><div class="bar-fill" style="width: ${r.percentual * 1.8}%; background: var(--green);"></div></div></td>
+      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${r.percentual * 1.8}%; background: var(--green);"></div></div></td>
     `;
     tbodyReg.appendChild(tr);
   });
@@ -491,7 +490,7 @@ function renderSummaryTables() {
       <td>${m.modalidade}</td>
       <td>${m.vagas}</td>
       <td>${m.percentual}%</td>
-      <td><div class="bar-wrap"><div class="bar-fill" style="width: ${m.percentual * 1.2}%; background: var(--amber);"></div></div></td>
+      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${m.percentual * 1.2}%; background: var(--amber);"></div></div></td>
     `;
     tbodyMod.appendChild(tr);
   });
@@ -512,10 +511,10 @@ function renderSkillsTable() {
     tr.innerHTML = `
       <td style="color: var(--text-muted);">${t.posicao}</td>
       <td><strong style="color: var(--text-bright);">${t.nome}</strong></td>
-      <td><span class="badge">${t.grupo}</span></td>
+      <td class="hide-mobile"><span class="badge">${t.grupo}</span></td>
       <td>${t.vagas}</td>
       <td><strong>${t.percentual_total}%</strong></td>
-      <td><div class="bar-wrap"><div class="bar-fill" style="width: ${t.percentual_total * 4}%;"></div></div></td>
+      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${t.percentual_total * 4}%;"></div></div></td>
     `;
     tbody.appendChild(tr);
   });
@@ -553,10 +552,10 @@ function renderAreaDetail() {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td><strong style="color: var(--text-bright);">${s.nome}</strong></td>
-      <td><span class="badge">${s.grupo}</span></td>
+      <td class="hide-mobile"><span class="badge">${s.grupo}</span></td>
       <td>${s.vagas}</td>
       <td><strong>${s.percentual}%</strong></td>
-      <td><div class="bar-wrap"><div class="bar-fill" style="width: ${s.percentual}%; background: var(--purple);"></div></div></td>
+      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${s.percentual}%; background: var(--purple);"></div></div></td>
     `;
     tbody.appendChild(tr);
   });
@@ -583,10 +582,10 @@ function renderVagasTable() {
     const linkHtml = v.url ? `<a href="${v.url}" target="_blank" rel="noopener noreferrer" title="Abrir vaga" style="font-size: 14px; text-decoration: none;">↗</a>` : "-";
 
     tr.innerHTML = `
-      <td style="color: var(--text-muted);">${v.id}</td>
+      <td class="hide-mobile" style="color: var(--text-muted);">${v.id}</td>
       <td><strong>${v.titulo}</strong></td>
       <td>${v.empresa}</td>
-      <td><span class="badge">${v.area}</span></td>
+      <td class="hide-mobile"><span class="badge">${v.area}</span></td>
       <td>${v.polo || v.localidade} &middot; <em style="color: var(--text-muted);">${v.modalidade}</em></td>
       <td style="text-align: center;">${linkHtml}</td>
     `;
