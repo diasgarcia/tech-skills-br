@@ -101,6 +101,8 @@
       border: 1px solid var(--border);
       border-radius: 6px;
       padding: 14px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .card-title { font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
@@ -111,6 +113,7 @@
       border-collapse: collapse;
       margin-top: 10px;
       font-size: 12px;
+      min-width: 280px;
     }
 
     th, td {
@@ -175,6 +178,26 @@
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 8px;
+    }
+
+    /* RESPONSIVIDADE MOBILE ROOTS */
+    @media (max-width: 650px) {
+      body { padding: 10px; font-size: 12px; }
+      h1 { font-size: 14px; }
+      .grid-kpi { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .card { padding: 10px; }
+      .card-value { font-size: 17px; }
+      .nav-tabs { gap: 4px; margin: 12px 0; }
+      .nav-btn { font-size: 11px; padding: 5px 8px; }
+      table { font-size: 11px; }
+      th, td { padding: 5px 6px; }
+      .search-input { max-width: 100%; }
+      #table-vagas { min-width: 480px; }
+    }
+
+    @media (max-width: 400px) {
+      .grid-kpi { grid-template-columns: 1fr; }
+      .nav-btn { width: 100%; text-align: left; }
     }
   </style>
 </head>
