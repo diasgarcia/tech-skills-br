@@ -45,8 +45,10 @@ def _load_dotenv(env_path: Path | None = None) -> None:
 _load_dotenv()
 
 USER_AGENT = (
-    "tech-skills-br/1.0 (pesquisa academica PIBIC - mapeamento de skills tech) python-requests"
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 )
+
 
 
 

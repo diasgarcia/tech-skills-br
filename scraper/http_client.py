@@ -38,11 +38,12 @@ class PoliteSession:
         self.session.headers.update(
             {
                 "User-Agent": user_agent,
-                "Accept": "application/json, text/html;q=0.9, */*;q=0.8",
-                "Accept-Language": "pt-BR,pt;q=0.9,en;q=0.8",
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8,application/json;q=0.5",
+                "Accept-Language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
                 "Connection": "keep-alive",
             }
         )
+
         retry = Retry(
             total=max_retries,
             connect=max_retries,
