@@ -48,14 +48,16 @@ jobs:
         # 3. Exporta a base acumulada e regenera os relatorios e graficos:
         python scripts/export_seed.py
         python scripts/report_db.py
-
+        # 4. Exporta os endpoints JSON da API estatica para o GitHub Pages:
+        python scripts/export_pages_data.py
 
     - name: 6. Comitar e enviar dados atualizados para o GitHub
       run: |
         git config --global user.name "diasgarcia"
         git config --global user.email "rafdgar@gmail.com"
-        git add seed/vagas.csv docs/relatorios/
+        git add seed/vagas.csv docs/
         
         DATA_HOJE=$(date +'%d/%m/%Y')
         git diff --quiet && git diff --staged --quiet || (git commit -m "chore(data): coleta automatizada de vagas [${DATA_HOJE}] [skip ci]" && git push)
+
 
