@@ -74,6 +74,8 @@ Emprega vocabulário controlado com centenas de sinônimos mapeados em `scraper/
 Consulte o **[Manual de Uso e Guia de Execução](docs/manual_de_uso.md)** para a documentação completa de todos os parâmetros e opções.
 
 ```powershell
+python scripts/import_csv.py --csv seed/vagas.csv
+
 # 1. Executa a coleta geral gratuita (ilimitada - Gupy, LinkedIn, Vagas.com, ProgramaThor, Trampos):
 python main.py
 
@@ -141,14 +143,4 @@ tech-skills-br/
 │   └── report_db.py       		# Emissão de relatório estatístico do banco
 ├── seed/                  		# Snapshot de dados versionado para reprodutibilidade
 └── tests/                 		# Suíte com +260 testes automatizados (pytest)
-```
-
----
-
-## Executando os Testes
-
-Para validar a integridade dos coletores, classificadores e regras de extração:
-
-```powershell
-pytest
 ```
