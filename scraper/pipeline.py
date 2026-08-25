@@ -99,6 +99,12 @@ def run(
         logger.info("Apos filtro de tecnologia: %d vagas (-%d nao-tech)",
                     len(jobs), dropped_non_tech)
 
+    # Enriquecimento paralelo das descricoes do LinkedIn apenas para vagas unicas filtradas
+    linkedin_to_enrich = [j for j in jobs if j.source == "linkedin" and not j.description]
+    if linkedin_to_enrich:
+        logger.info("Enriquecendo descricoes de %d vagas unicas do LinkedIn em paralelo...", len(linkedin_to_enrich))
+        _enrich_linkedin_parallel(linkedin_to_enrich)
+
     jobs = classify_jobs(jobs, classifier)
     jobs = attach_skills(jobs)
     for job in jobs:
@@ -109,6 +115,7 @@ def run(
                 title=job.title,
                 description=job.description,
             )
+
     jobs = attach_geo_info(jobs)
     ranking = build_ranking(jobs)
 
@@ -129,3 +136,34 @@ def run(
                        with_charts=with_charts)
     return PipelineResult(jobs=jobs, ranking=ranking, files=files,
                           stats=stats, meta=meta)
+
+
+def _enrich_linkedin_parallel(jobs: list[Job], max_workers: int = 6) -> None:
+    """Busca descricoes completas em paralelo apenas para as vagas unicas filtradas."""
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    import requests
+    from bs4 import BeautifulSoup
+
+    detail_url = "https://www.linkedin.com/jobs-guest/jobs/api/jobPosting/{job_id}"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Accept-Language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    }
+
+    def _fetch(job: Job) -> None:
+        try:
+            with requests.Session() as s:
+                r = s.get(detail_url.format(job_id=job.external_id), headers=headers, timeout=12)
+                if r.status_code == 200:
+                    soup = BeautifulSoup(r.text, "html.parser")
+                    el = soup.select_one(".show-more-less-html__markup, .description__text")
+                    if el:
+                        job.description = el.get_text(" ", strip=True)
+        except Exception:
+            pass
+
+    with ThreadPoolExecutor(max_workers=max_workers) as pool:
+        futures = [pool.submit(_fetch, j) for j in jobs]
+        for f in as_completed(futures):
+            pass
+

@@ -93,11 +93,9 @@ class LinkedInSource(JobSource):
                 if job.external_id in seen:
                     continue
                 seen.add(job.external_id)
-                desc = self._fetch_description(job.external_id)
-                if desc:
-                    job.description = desc
                 jobs.append(job)
                 novos += 1
+
 
             if novos == 0:
                 break  # a API comecou a repetir resultados
