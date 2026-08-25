@@ -82,12 +82,20 @@ class GupySource(JobSource):
         if not location:
             location = (raw.get("country") or "").strip()
 
+        url = raw.get("jobUrl") or raw.get("careerPageUrl") or ""
+        if "&inactive" in url.lower():
+            return None
+
+        pub_date = (raw.get("publishedDate") or "")[:10]
+        if pub_date and pub_date < "2026-01-01":
+            return None
+
         return Job(
             source=self.name,
             external_id=str(job_id),
             title=title,
             company=raw.get("careerPageName") or "",
-            url=raw.get("jobUrl") or raw.get("careerPageUrl") or "",
+            url=url,
             description=raw.get("description") or "",
             location=location,
             # A Gupy informa a modalidade explicitamente: remote / hybrid / on-site.
@@ -95,6 +103,7 @@ class GupySource(JobSource):
                 raw.get("workplaceType")
                 or ("remote" if raw.get("isRemoteWork") else "")
             ),
-            published_date=(raw.get("publishedDate") or "")[:10],
+            published_date=pub_date,
             search_term=term,
         )
+
