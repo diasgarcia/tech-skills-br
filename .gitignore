@@ -48,5 +48,9 @@ desktop.ini
 # Segredos
 .env
 .env.*
+
+# Planos e rascunhos locais
+PLANO_*.md
+
 !.env.example
 
