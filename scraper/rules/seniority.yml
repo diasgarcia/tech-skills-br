@@ -19,7 +19,13 @@ include:
     - \bjr\b
     - \bjunior?es\b
     - \bnivel 1\b
+    - \bnivel i\b
+    - \bn1\b
+    - \btier 1\b
     - \bentry level\b
+    - \biniciante\b
+    - \bassistente\b
+    - \bauxiliar\b
     - \bi\b$          # "Desenvolvedor I"
   Estágio:
     - \bestagio\b
@@ -52,3 +58,14 @@ exclude:
   - \barquiteto\b
   - \bprincipal\b
   - \bstaff\b
+  - \bconsultor\b
+  - \bii\b$          # "Desenvolvedor II" (pleno)
+  - \biii\b$         # "Desenvolvedor III" (senior)
+  - \biv\b$
+  - \bnivel [2-5]\b
+  - \bnivel ii\b
+  - \bnivel iii\b
+  - \bnivel iv\b
+  - \bn[2-5]\b
+  - \btier [2-5]\b
+

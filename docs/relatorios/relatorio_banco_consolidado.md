@@ -1,79 +1,79 @@
-# Relatório Consolidado da Base de Vagas (1525 vagas)
+# Relatório Consolidado da Base de Vagas (1498 vagas)
 
-- **Data de geração:** 24/08/2026 17:13
-- **Período coberto:** 10/03/2022 até 24/08/2026
-- **Total de vagas consolidadas:** 1525
+- **Data de geração:** 25/08/2026 01:15
+- **Período coberto:** 05/01/2026 até 24/08/2026
+- **Total de vagas consolidadas:** 1498
 
 ## Ranking de Áreas de Tecnologia
 
 | Posição | Área | Vagas | % | Gráfico |
 |---|---|---|---|---|
-| 1 | Outros/TI Geral | 513 | 33.6% | #######............. |
-| 2 | Suporte/Infra | 391 | 25.6% | #####............... |
-| 3 | Backend | 179 | 11.7% | ##.................. |
-| 4 | Data | 133 | 8.7% | ##.................. |
-| 5 | Fullstack | 79 | 5.2% | #................... |
-| 6 | QA | 64 | 4.2% | #................... |
-| 7 | Frontend | 57 | 3.7% | #................... |
-| 8 | DevOps | 51 | 3.3% | #................... |
-| 9 | Mobile | 41 | 2.7% | #................... |
+| 1 | Outros/TI Geral | 507 | 33.8% | #######............. |
+| 2 | Suporte/Infra | 385 | 25.7% | #####............... |
+| 3 | Backend | 173 | 11.5% | ##.................. |
+| 4 | Data | 133 | 8.9% | ##.................. |
+| 5 | Fullstack | 79 | 5.3% | #................... |
+| 6 | QA | 61 | 4.1% | #................... |
+| 7 | Frontend | 54 | 3.6% | #................... |
+| 8 | DevOps | 50 | 3.3% | #................... |
+| 9 | Mobile | 39 | 2.6% | #................... |
 | 10 | Segurança | 17 | 1.1% | .................... |
 
 ## Distribuição por Macrorregião
 
 | Região | Vagas | % | Gráfico |
 |---|---|---|---|
-| Sudeste | 697 | 45.7% | #########........... |
-| Remoto Nacional | 241 | 15.8% | ###................. |
-| Sul | 210 | 13.8% | ###................. |
-| Nacional | 124 | 8.1% | ##.................. |
-| Nordeste | 97 | 6.4% | #................... |
-| Não informado | 71 | 4.7% | #................... |
-| Centro-Oeste | 57 | 3.7% | #................... |
-| Norte | 28 | 1.8% | .................... |
+| Sudeste | 681 | 45.5% | #########........... |
+| Remoto Nacional | 239 | 16.0% | ###................. |
+| Sul | 206 | 13.8% | ###................. |
+| Nacional | 124 | 8.3% | ##.................. |
+| Nordeste | 95 | 6.3% | #................... |
+| Não informado | 70 | 4.7% | #................... |
+| Centro-Oeste | 57 | 3.8% | #................... |
+| Norte | 26 | 1.7% | .................... |
 
 ## Top 10 Polos Tecnológicos Regionais
 
 | Posição | Polo | Vagas | % | Gráfico |
 |---|---|---|---|---|
-| 1 | São Paulo | 386 | 25.3% | #####............... |
-| 2 | Remoto | 241 | 15.8% | ###................. |
-| 3 | Nacional | 124 | 8.1% | ##.................. |
-| 4 | Estado/SP | 88 | 5.8% | #................... |
-| 5 | Belo Horizonte | 75 | 4.9% | #................... |
-| 6 | Florianópolis | 69 | 4.5% | #................... |
-| 7 | Rio de Janeiro | 51 | 3.3% | #................... |
-| 8 | Porto Alegre | 48 | 3.1% | #................... |
-| 9 | Campinas | 42 | 2.8% | #................... |
-| 10 | Curitiba | 38 | 2.5% | .................... |
+| 1 | São Paulo | 379 | 25.3% | #####............... |
+| 2 | Remoto | 239 | 16.0% | ###................. |
+| 3 | Nacional | 124 | 8.3% | ##.................. |
+| 4 | Estado/SP | 87 | 5.8% | #................... |
+| 5 | Belo Horizonte | 73 | 4.9% | #................... |
+| 6 | Florianópolis | 67 | 4.5% | #................... |
+| 7 | Porto Alegre | 47 | 3.1% | #................... |
+| 8 | Rio de Janeiro | 47 | 3.1% | #................... |
+| 9 | Campinas | 41 | 2.7% | #................... |
+| 10 | Estado/MG | 38 | 2.5% | .................... |
 
 ## Distribuição por Modalidade de Trabalho
 
 | Modalidade | Vagas | % | Gráfico |
 |---|---|---|---|
-| Presencial | 1070 | 70.2% | ##############...... |
-| Remoto | 283 | 18.6% | ####................ |
-| Não informado | 91 | 6.0% | #................... |
-| Híbrido | 81 | 5.3% | #................... |
+| Presencial | 1049 | 70.0% | ##############...... |
+| Remoto | 278 | 18.6% | ####................ |
+| Não informado | 91 | 6.1% | #................... |
+| Híbrido | 80 | 5.3% | #................... |
 
 ## Distribuição por Nível de Entrada
 
 | Senioridade | Vagas | % |
 |---|---|---|
-| Júnior | 963 | 63.1% |
-| Estágio | 519 | 34.0% |
+| Júnior | 946 | 63.2% |
+| Estágio | 509 | 34.0% |
 | Aprendiz | 27 | 1.8% |
-| Trainee | 16 | 1.0% |
+| Trainee | 16 | 1.1% |
 
 ## Distribuição por Portal de Origem
 
 | Portal | Vagas | % |
 |---|---|---|
-| linkedin | 726 | 47.6% |
-| serpapi | 352 | 23.1% |
-| gupy | 229 | 15.0% |
-| theirstack | 140 | 9.2% |
-| vagas | 61 | 4.0% |
+| linkedin | 713 | 47.6% |
+| serpapi | 352 | 23.5% |
+| gupy | 215 | 14.4% |
+| theirstack | 140 | 9.3% |
+| vagas | 61 | 4.1% |
 | programathor | 14 | 0.9% |
 | trampos | 3 | 0.2% |
 
@@ -81,26 +81,26 @@
 
 | Posição | Tecnologia | Vagas Citadas |
 |---|---|---|
-| 1 | Redes/TCP-IP | 132 |
+| 1 | Redes/TCP-IP | 129 |
 | 2 | Inteligência Artificial | 112 |
-| 3 | Hardware | 103 |
-| 4 | SQL | 101 |
-| 5 | JavaScript | 98 |
-| 6 | Python | 86 |
-| 7 | Git | 85 |
-| 8 | Java | 81 |
-| 9 | Inglês | 80 |
-| 10 | React | 61 |
-| 11 | API REST | 59 |
-| 12 | Metodologias Ágeis | 56 |
-| 13 | Windows | 54 |
-| 14 | Service Desk | 52 |
-| 15 | Segurança da Informação | 48 |
-| 16 | Node.js | 45 |
-| 17 | C# | 41 |
-| 18 | Angular | 39 |
-| 19 | Algoritmos | 39 |
-| 20 | ERP | 38 |
+| 3 | SQL | 99 |
+| 4 | Hardware | 99 |
+| 5 | JavaScript | 96 |
+| 6 | Git | 85 |
+| 7 | Python | 83 |
+| 8 | Java | 77 |
+| 9 | Inglês | 76 |
+| 10 | API REST | 59 |
+| 11 | React | 58 |
+| 12 | Metodologias Ágeis | 53 |
+| 13 | Windows | 52 |
+| 14 | Service Desk | 51 |
+| 15 | Segurança da Informação | 46 |
+| 16 | Node.js | 44 |
+| 17 | C# | 40 |
+| 18 | Algoritmos | 39 |
+| 19 | ERP | 38 |
+| 20 | Angular | 38 |
 
 ## Top 10 Empresas com Mais Vagas
 
@@ -108,11 +108,11 @@
 |---|---|
 | Jobbol | 50 |
 | Wyntech | 24 |
-| Quality Digital | 16 |
-| BairesDev | 14 |
+| Quality Digital | 15 |
 | TOTVS | 12 |
 | Confidencial | 11 |
 | SiDi | 9 |
 | Casa Do Dev | 9 |
 | BuscarVagas - Empregos Brasil | 9 |
-| Stefanini Group | 8 |
+| BairesDev | 9 |
+| Sidia Instituto de Ciência e Tecnologia | 8 |

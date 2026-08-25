@@ -125,12 +125,17 @@ areas:
   Data:
     peso_alto: # sinais fortes e pouco ambiguos
       - engenheiro de dados
+      - engenheira de dados
       - engenharia de dados
       - data engineer
       - cientista de dados
       - data scientist
       - analista de dados
       - data analyst
+      - analytics engineer
+      - engenheiro de analytics
+      - engenheiro de ia
+      - engenheiro de inteligencia artificial
       - business intelligence
       - analista de bi
       - etl
@@ -157,11 +162,17 @@ areas:
       - kafka
       - machine learning
       - aprendizado de maquina
+      - inteligencia artificial
+      - ia generativa
+      - llm
+      - visao computacional
+      - nlp
       - estatistica
       - pandas
       - analytics
       - modelagem de dados
       - dataviz
+      - governanca de dados
 
   Frontend:
     peso_alto:
@@ -202,12 +213,21 @@ areas:
       - back-end
       - desenvolvedor back
       - desenvolvimento de apis
+      - desenvolvedor rpa
+      - engenheiro de rpa
+      - software embarcado
+      - sistemas embarcados
     peso_medio:
       - api rest
       - apis
       - rest
       - microservicos
       - microsservicos
+      - rpa
+      - embarcados
+      - iot
+      - c++
+      - c/c++
       - java
       - spring
       - spring boot
@@ -237,6 +257,7 @@ areas:
       - oracle
       - abap
       - sap
+
 
   Mobile:
     peso_alto:
@@ -296,6 +317,11 @@ areas:
     peso_alto:
       - qa
       - quality assurance
+      - qa engineer
+      - analista de qa
+      - analista de qualidade
+      - software tester
+      - testador de software
       - analista de testes
       - engenheiro de qualidade
       - testes automatizados
@@ -333,15 +359,34 @@ areas:
       - service desk
       - analista de suporte
       - tecnico de suporte
+      - tecnico de ti
+      - tecnico de informatica
+      - assistente de ti
+      - auxiliar de ti
+      - analista de ti
+      - analista de infraestrutura
+      - analista de infra
       - suporte de ti
       - infraestrutura de ti
       - analista de redes
+      - field service
+      - analista de implantacao
+      - implantacao de sistemas
+      - operador de noc
+      - suporte n1
+      - suporte n2
+      - suporte nivel 1
+      - suporte nivel 2
     peso_medio:
       - suporte
+      - infra
+      - infraestrutura
       - chamados
       - ticket
       - atendimento ao usuario
       - manutencao de computadores
+      - gestao de ativos
+      - ativos de ti
       - hardware
       - windows server
       - active directory
@@ -350,6 +395,10 @@ areas:
       - roteador
       - telefonia
       - impressora
+      - implantador
+      - suporte a sistemas
+      - atendimento n1
+
 
   Segurança:
     peso_alto:
