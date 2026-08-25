@@ -1,33 +1,33 @@
 [
   {
-    "area": "Outros/TI Geral",
-    "vagas": 390,
-    "percentual": 23.7
+    "area": "Suporte Técnico",
+    "vagas": 374,
+    "percentual": 22.7
   },
   {
-    "area": "Suporte Técnico",
-    "vagas": 352,
-    "percentual": 21.3
+    "area": "Outros/TI Geral",
+    "vagas": 303,
+    "percentual": 18.4
   },
   {
     "area": "Engenharia de Software",
-    "vagas": 205,
-    "percentual": 12.4
+    "vagas": 224,
+    "percentual": 13.6
   },
   {
     "area": "Backend",
-    "vagas": 166,
-    "percentual": 10.1
+    "vagas": 175,
+    "percentual": 10.6
   },
   {
     "area": "Data",
-    "vagas": 138,
-    "percentual": 8.4
+    "vagas": 140,
+    "percentual": 8.5
   },
   {
     "area": "QA",
-    "vagas": 84,
-    "percentual": 5.1
+    "vagas": 85,
+    "percentual": 5.2
   },
   {
     "area": "Fullstack",
@@ -35,19 +35,24 @@
     "percentual": 4.6
   },
   {
+    "area": "Infraestrutura / Redes",
+    "vagas": 57,
+    "percentual": 3.5
+  },
+  {
+    "area": "Frontend",
+    "vagas": 44,
+    "percentual": 2.7
+  },
+  {
     "area": "DevOps",
     "vagas": 42,
     "percentual": 2.5
   },
   {
-    "area": "Frontend",
-    "vagas": 42,
-    "percentual": 2.5
-  },
-  {
-    "area": "Infraestrutura / Redes",
-    "vagas": 40,
-    "percentual": 2.4
+    "area": "Sistemas / ERP",
+    "vagas": 32,
+    "percentual": 1.9
   },
   {
     "area": "Mobile",
@@ -55,24 +60,19 @@
     "percentual": 1.8
   },
   {
-    "area": "Sistemas / ERP",
-    "vagas": 29,
-    "percentual": 1.8
+    "area": "Field Service / Hardware",
+    "vagas": 20,
+    "percentual": 1.2
   },
   {
     "area": "Service Desk / Help Desk",
-    "vagas": 16,
-    "percentual": 1.0
+    "vagas": 20,
+    "percentual": 1.2
   },
   {
     "area": "Segurança",
-    "vagas": 15,
-    "percentual": 0.9
-  },
-  {
-    "area": "Field Service / Hardware",
-    "vagas": 13,
-    "percentual": 0.8
+    "vagas": 16,
+    "percentual": 1.0
   },
   {
     "area": "Hardware / Eletrônica",
