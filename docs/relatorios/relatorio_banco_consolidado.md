@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (1646 vagas)
 
-- **Data de geração:** 25/08/2026 05:30
+- **Data de geração:** 25/08/2026 10:28
 - **Período coberto:** 10/03/2022 até 25/08/2026
 - **Total de vagas consolidadas:** 1646
 
@@ -8,8 +8,8 @@
 
 | Posição | Área | Vagas | % | Gráfico |
 |---|---|---|---|---|
-| 1 | Suporte Técnico | 391 | 23.8% | #####............... |
-| 2 | Outros/TI Geral | 383 | 23.3% | #####............... |
+| 1 | Suporte Técnico | 393 | 23.9% | #####............... |
+| 2 | Outros/TI Geral | 376 | 22.8% | #####............... |
 | 3 | Engenharia de Software | 213 | 12.9% | ###................. |
 | 4 | Backend | 172 | 10.4% | ##.................. |
 | 5 | Data | 134 | 8.1% | ##.................. |
@@ -21,7 +21,9 @@
 | 11 | Mobile | 29 | 1.8% | .................... |
 | 12 | Sistemas / ERP | 20 | 1.2% | .................... |
 | 13 | Segurança | 15 | 0.9% | .................... |
-| 14 | Design / UI / UX | 2 | 0.1% | .................... |
+| 14 | Hardware / Eletrônica | 4 | 0.2% | .................... |
+| 15 | Design / UI / UX | 2 | 0.1% | .................... |
+| 16 | Field Service / Hardware | 1 | 0.1% | .................... |
 
 ## Distribuição por Macrorregião
 

@@ -487,36 +487,84 @@ areas:
       - business analyst
       - implantacao
 
-  Suporte Técnico:
+  Service Desk / Help Desk:
     peso_alto:
-      - suporte tecnico
+      - service desk
       - help desk
       - helpdesk
-      - service desk
-      - analista de suporte
-      - tecnico de suporte
-      - tecnico de informatica
-      - field service
+      - analista de service desk
+      - analista de help desk
+      - analista de helpdesk
+      - tecnico de help desk
+      - tecnico de helpdesk
       - suporte n1
       - suporte n2
       - suporte nivel 1
       - suporte nivel 2
-      - suporte de ti
+      - atendimento n1
+      - atendimento n2
+      - operador de service desk
+      - operador de helpdesk
+      - analista de suporte n1
+      - analista de suporte n2
+      - estagio em service desk
+      - estagio service desk
+      - estagio help desk
     peso_medio:
-      - suporte
       - chamados
       - ticket
       - tickets
+      - abertura de chamados
       - atendimento ao usuario
+      - suporte remoto
+      - atendimento telefonico
+      - sla
+      - incidentes
+
+  Field Service / Hardware:
+    peso_alto:
+      - field service
+      - analista de field service
+      - tecnico de field service
+      - suporte de campo
+      - suporte volante
       - manutencao de computadores
-      - gestao de ativos
-      - ativos de ti
+      - manutencao de micro
+      - manutencao de micros
+      - tecnico de informatica
+      - suporte a hardware
+      - suporte presencial
+      - tecnico de campo
+    peso_medio:
       - hardware
       - impressora
-      - suporte a sistemas
-      - atendimento n1
-      - suporte presencial
-      - suporte remoto
+      - impressoras
+      - cftv
+      - cabeamento
+      - cabeamento estruturado
+      - montagem e manutencao
+      - formatacao
+      - ativos de ti
+      - gestao de ativos
+      - perifericos
+      - inventario de ti
+
+  Suporte Técnico:
+    peso_alto:
+      - suporte tecnico
+      - analista de suporte
+      - tecnico de suporte
+      - suporte de ti
+      - analista de suporte ti
+      - estagio suporte
+      - estagio em suporte
+      - estagiario de suporte
+      - operador de suporte
+    peso_medio:
+      - suporte
+      - atendimento tecnico
+      - suporte computacional
+      - atendimento
 
   Infraestrutura / Redes:
     peso_alto:
@@ -575,6 +623,33 @@ areas:
       - lgpd
       - iso 27001
       - criptografia
+
+  Hardware / Eletrônica:
+    peso_alto:
+      - engenharia de hardware
+      - desenvolvimento de hardware
+      - engenheiro de hardware
+      - tecnico em eletronica
+      - engenharia eletronica
+      - engenharia de telecomunicacoes
+      - desenvolvimento de firmware
+      - firmware
+      - desenvolvedor de hardware
+    peso_medio:
+      - eletronica
+      - circuitos
+      - microcontrolador
+      - microcontroladores
+      - arduino
+      - esp32
+      - pcb
+      - placas
+      - telecom
+      - telecomunicacoes
+      - sensores
+      - automacao industrial
+      - clp
+
 
 
 # Peso numerico de cada faixa.
