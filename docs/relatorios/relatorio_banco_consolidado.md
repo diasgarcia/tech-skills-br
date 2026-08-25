@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (2001 vagas)
 
-- **Data de geração:** 25/08/2026 15:12
+- **Data de geração:** 25/08/2026 15:17
 - **Período coberto:** 05/01/2026 até 25/08/2026
 - **Total de vagas consolidadas:** 2001
 
@@ -89,9 +89,9 @@
 | Posição | Tecnologia | Vagas Citadas |
 |---|---|---|
 | 1 | Inteligência Artificial | 94 |
-| 2 | Hardware | 74 |
-| 3 | Segurança da Informação | 67 |
-| 4 | JavaScript | 64 |
+| 2 | Segurança da Informação | 67 |
+| 3 | JavaScript | 64 |
+| 4 | Hardware | 63 |
 | 5 | SQL | 62 |
 | 6 | Python | 59 |
 | 7 | Java | 51 |
