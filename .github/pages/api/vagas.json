@@ -1,9 +1,231 @@
 [
   {
+    "id": 2057,
+    "titulo": "Pessoa Analista de Suporte Júnior (EY SDC - Recife Porto Digital)",
+    "empresa": "EY",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Recife, PE",
+    "polo": "Recife",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "25/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/pessoa-analista-de-suporte-j%C3%BAnior-ey-sdc-recife-porto-digital-at-ey-4457620137",
+    "tecnologias": []
+  },
+  {
+    "id": 2046,
+    "titulo": "Estagiário(a) em Inovação e Tecnologia",
+    "empresa": "Pif Paf Alimentos",
+    "area": "Outros/TI Geral",
+    "senioridade": "Estágio",
+    "localidade": "Belo Horizonte, MG",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "25/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-em-inova%C3%A7%C3%A3o-e-tecnologia-at-pif-paf-alimentos-4456939892",
+    "tecnologias": []
+  },
+  {
+    "id": 2031,
+    "titulo": "Estágio em Visão Computacional",
+    "empresa": "SiDi",
+    "area": "Inteligência Artificial",
+    "senioridade": "Estágio",
+    "localidade": "Campinas, SP",
+    "polo": "Campinas",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "25/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-vis%C3%A3o-computacional-at-sidi-4456907458",
+    "tecnologias": [
+      "Machine Learning"
+    ]
+  },
+  {
+    "id": 2024,
+    "titulo": "ANALISTA DE REDES NOC N1",
+    "empresa": "Alloha Fibra",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Júnior",
+    "localidade": "Fortaleza, CE",
+    "polo": "Fortaleza",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "25/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-redes-noc-n1-at-alloha-fibra-4456598527",
+    "tecnologias": []
+  },
+  {
+    "id": 2023,
+    "titulo": "Desenvolvedor(a) Full Stack Junior",
+    "empresa": "Neppo",
+    "area": "Fullstack",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "25/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-full-stack-junior-at-neppo-4456959495",
+    "tecnologias": [
+      "Java",
+      "JavaScript",
+      "Kotlin",
+      "SQL",
+      "Angular",
+      "Spring",
+      "Inteligência Artificial",
+      "MySQL",
+      "MariaDB",
+      "Grafana",
+      "API REST",
+      "gRPC",
+      "WebSockets",
+      "Microserviços",
+      "ERP",
+      "CRM"
+    ]
+  },
+  {
+    "id": 2017,
+    "titulo": "Estágio em Desenvolvimento de Software - Frontend",
+    "empresa": "Gabriel",
+    "area": "Engenharia de Software",
+    "senioridade": "Estágio",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "25/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-desenvolvimento-de-software-frontend-at-gabriel-4457614785",
+    "tecnologias": []
+  },
+  {
+    "id": 2016,
+    "titulo": "Estagiário em Desenvolvimento de Sistemas",
+    "empresa": "DFL Indústria e Comércio S/A",
+    "area": "Engenharia de Software",
+    "senioridade": "Estágio",
+    "localidade": "Rio de Janeiro / RJ A empresa aceita candidaturas de Rio de Janeiro e cidades próximas",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "25/08/2026",
+    "fonte": "vagas",
+    "url": "https://www.vagas.com.br/vagas/v2832092/estagiario-em-desenvolvimento-de-sistemas",
+    "tecnologias": [
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ]
+  },
+  {
+    "id": 2014,
+    "titulo": "Desenvolvedor júnior",
+    "empresa": "Grupo Ultra Franquias",
+    "area": "Engenharia de Software",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "25/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-j%C3%BAnior-at-grupo-ultra-franquias-4459019797",
+    "tecnologias": [
+      "JavaScript",
+      "PHP",
+      "SQL",
+      "HTML",
+      "CSS",
+      "Laravel",
+      "SQL Server",
+      "Git",
+      "API REST",
+      "Scrum",
+      "Metodologias Ágeis",
+      "POO",
+      "Clean Code",
+      "ERP"
+    ]
+  },
+  {
+    "id": 2013,
+    "titulo": "0903 | Assistente de Desenvolvimento de Sistemas - Sede Dourados/MS",
+    "empresa": "Sicredi",
+    "area": "Engenharia de Software",
+    "senioridade": "Júnior",
+    "localidade": "Dourados, MS",
+    "polo": "Campo Grande",
+    "regiao": "Centro-Oeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "25/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/0903-assistente-de-desenvolvimento-de-sistemas-sede-dourados-ms-at-sicredi-4458799815",
+    "tecnologias": []
+  },
+  {
+    "id": 2006,
+    "titulo": "Banco de Talentos 2026: Cientista de Dados JR/PL/SR",
+    "empresa": "WeCogno",
+    "area": "Data",
+    "senioridade": "Júnior",
+    "localidade": "Florianópolis, SC",
+    "polo": "Florianópolis",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "25/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/banco-de-talentos-2026-cientista-de-dados-jr-pl-sr-at-wecogno-4457414278",
+    "tecnologias": []
+  },
+  {
+    "id": 2005,
+    "titulo": "Analista de Business Intelligence Júnior - Allergan Aesthetics",
+    "empresa": "AbbVie",
+    "area": "Data",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "25/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-business-intelligence-j%C3%BAnior-allergan-aesthetics-at-abbvie-4459016187",
+    "tecnologias": [
+      "BI"
+    ]
+  },
+  {
+    "id": 2002,
+    "titulo": "Desenvolvedor Backend Python Júnior",
+    "empresa": "byx",
+    "area": "Backend",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "25/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-backend-python-j%C3%BAnior-at-byx-4457495990",
+    "tecnologias": [
+      "Python"
+    ]
+  },
+  {
     "id": 1996,
     "titulo": "TECNICO INFORMATICA JR - AFIRMATIVA PARA PESSOAS COM DEFICIÊNCIA",
     "empresa": "Cogna Educação",
-    "area": "Outros/TI Geral",
+    "area": "Suporte Técnico",
     "senioridade": "Júnior",
     "localidade": "Brasília, Distrito Federal",
     "polo": "Brasília",
@@ -12,7 +234,14 @@
     "data_publicacao": "25/08/2026",
     "fonte": "gupy",
     "url": "https://cogna.gupy.io/job/eyJqb2JJZCI6MTIyNjg0OTAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Redes de Computadores",
+      "Hardware",
+      "VMware",
+      "Metodologias Ágeis",
+      "Inglês",
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 1990,
@@ -119,7 +348,12 @@
     "data_publicacao": "25/08/2026",
     "fonte": "gupy",
     "url": "https://wyntech.gupy.io/job/eyJqb2JJZCI6MTIyNjIyMTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "ITIL",
+      "Algoritmos",
+      "Inglês"
+    ]
   },
   {
     "id": 1916,
@@ -155,7 +389,7 @@
     "id": 1896,
     "titulo": "Assistente de Suporte Técnico de Service Desk L1",
     "empresa": "Unisys",
-    "area": "Service Desk / Help Desk",
+    "area": "Suporte Técnico",
     "senioridade": "Júnior",
     "localidade": "Campo Grande, MS",
     "polo": "Campo Grande",
@@ -165,7 +399,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-t%C3%A9cnico-de-service-desk-l1-at-unisys-4456938931",
     "tecnologias": [
-      "Service Desk"
+      "Excel",
+      "Service Desk",
+      "Hardware",
+      "Inglês"
     ]
   },
   {
@@ -449,7 +686,7 @@
     "id": 1641,
     "titulo": "Assistente de Tecnologia da Informação",
     "empresa": "Tecnomyl Brasil",
-    "area": "Segurança",
+    "area": "Outros/TI Geral",
     "senioridade": "Júnior",
     "localidade": "Foz do Iguaçu, PR",
     "polo": "Cascavel",
@@ -565,7 +802,15 @@
     "data_publicacao": "25/08/2026",
     "fonte": "gupy",
     "url": "https://porto.gupy.io/job/eyJqb2JJZCI6MTIyNzg5MTEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "ETL",
+      "BigQuery",
+      "Databricks",
+      "Inteligência Artificial",
+      "Inglês"
+    ]
   },
   {
     "id": 1628,
@@ -745,7 +990,24 @@
     "data_publicacao": "25/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-full-stack-jr-at-farmarcas-4456594581",
-    "tecnologias": []
+    "tecnologias": [
+      "JavaScript",
+      "Angular",
+      "Node.js",
+      ".NET",
+      "Kafka",
+      "Inteligência Artificial",
+      "PostgreSQL",
+      "MongoDB",
+      "AWS",
+      "Git",
+      "RabbitMQ",
+      "Metodologias Ágeis",
+      "SOLID",
+      "Clean Code",
+      "Estrutura de Dados",
+      "Copilots & Assistentes de IA"
+    ]
   },
   {
     "id": 1615,
@@ -846,7 +1108,7 @@
     "id": 1576,
     "titulo": "Estágio em TI - RS",
     "empresa": "Fundatec (Fundação Universidade Empresa de Tecnologia e Ciências)",
-    "area": "Suporte Técnico",
+    "area": "Outros/TI Geral",
     "senioridade": "Estágio",
     "localidade": "Porto Alegre e Região",
     "polo": "Porto Alegre",
@@ -1073,6 +1335,21 @@
     "tecnologias": []
   },
   {
+    "id": 2033,
+    "titulo": "AUXILIAR DE INFORMATICA- ATIBAIA",
+    "empresa": "Atacadão",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "24/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/auxiliar-de-informatica-atibaia-at-atacad%C3%A3o-4458508023",
+    "tecnologias": []
+  },
+  {
     "id": 1989,
     "titulo": "Estágio em Suporte Técnico Automotivo e Eletroeletrônica",
     "empresa": "OnMotus Engenharia",
@@ -1115,7 +1392,13 @@
     "data_publicacao": "24/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-a-sistemas-n1-supero-outsourcing-at-koopere-4457154427",
-    "tecnologias": []
+    "tecnologias": [
+      "SQL",
+      "ITIL",
+      "Algoritmos",
+      "ERP",
+      "Jira"
+    ]
   },
   {
     "id": 1894,
@@ -1148,6 +1431,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-help-desk-jr-hs-cons%C3%B3rcios-at-grupo-herval-4456540067",
     "tecnologias": [
+      "SQL",
+      "SQL Server",
+      "ERP",
       "Help Desk"
     ]
   },
@@ -1257,7 +1543,10 @@
     "data_publicacao": "24/08/2026",
     "fonte": "gupy",
     "url": "https://harald.gupy.io/job/eyJqb2JJZCI6MTIyNjA4NzcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "ERP",
+      "SAP"
+    ]
   },
   {
     "id": 1642,
@@ -1328,7 +1617,7 @@
     "localidade": "Porto Alegre, RS",
     "polo": "Porto Alegre",
     "regiao": "Sul",
-    "modalidade": "Presencial",
+    "modalidade": "Remoto",
     "data_publicacao": "24/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-python-junior-trabalho-remoto-at-bairesdev-4456895688",
@@ -1386,7 +1675,9 @@
     "data_publicacao": "24/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/caio-botucatu-analista-de-suporte-de-sistemas-jr-at-caio-perfil-oficial-fabricante-de-%C3%B4nibus-4456519631",
-    "tecnologias": []
+    "tecnologias": [
+      "ERP"
+    ]
   },
   {
     "id": 1494,
@@ -1449,7 +1740,12 @@
     "data_publicacao": "24/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-j%C3%BAnior-15-48h-at%C3%A9-01-09h-at-engineering-brasil-4456515238",
-    "tecnologias": []
+    "tecnologias": [
+      "SQL",
+      "SQL Server",
+      "Inglês",
+      "Automação Industrial"
+    ]
   },
   {
     "id": 1465,
@@ -1464,7 +1760,9 @@
     "data_publicacao": "24/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-jr-b-noc-at-mamtech-tecnologia-4456522633",
-    "tecnologias": []
+    "tecnologias": [
+      "ERP"
+    ]
   },
   {
     "id": 1451,
@@ -1497,6 +1795,12 @@
     "fonte": "gupy",
     "url": "https://qualitydigital.gupy.io/job/eyJqb2JJZCI6MTIyNjMzODEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Excel",
+      "VPN",
+      "Service Desk",
+      "Office 365",
+      "Hardware",
+      "Estrutura de Dados",
       "Suporte N1/N2"
     ]
   },
@@ -1592,7 +1896,24 @@
     "data_publicacao": "24/08/2026",
     "fonte": "gupy",
     "url": "https://vemprotimefarmarcas.gupy.io/job/eyJqb2JJZCI6MTIwMzgxMjAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "JavaScript",
+      "Angular",
+      "Node.js",
+      ".NET",
+      "Kafka",
+      "Inteligência Artificial",
+      "PostgreSQL",
+      "MongoDB",
+      "AWS",
+      "Git",
+      "RabbitMQ",
+      "Metodologias Ágeis",
+      "SOLID",
+      "Clean Code",
+      "Estrutura de Dados",
+      "Copilots & Assistentes de IA"
+    ]
   },
   {
     "id": 1396,
@@ -1638,6 +1959,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/programador-junior-at-jobgether-4456860204",
     "tecnologias": [
+      "Python",
+      "SQL",
       "Next.js",
       "RPA",
       "Inteligência Artificial"
@@ -1692,7 +2015,7 @@
     "id": 1378,
     "titulo": "Estagiário em Desenvolvimento de Software Backend",
     "empresa": "Nelogica",
-    "area": "Backend",
+    "area": "Engenharia de Software",
     "senioridade": "Estágio",
     "localidade": "Porto Alegre, RS",
     "polo": "Porto Alegre",
@@ -1701,7 +2024,9 @@
     "data_publicacao": "24/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-em-desenvolvimento-de-software-backend-at-nelogica-4455876543",
-    "tecnologias": []
+    "tecnologias": [
+      "POO"
+    ]
   },
   {
     "id": 1377,
@@ -1782,7 +2107,10 @@
     "data_publicacao": "24/08/2026",
     "fonte": "gupy",
     "url": "https://vemserixcsoft.gupy.io/job/eyJqb2JJZCI6MTIyMjk2NjYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Inteligência Artificial",
+      "Algoritmos"
+    ]
   },
   {
     "id": 317,
@@ -1812,7 +2140,16 @@
     "data_publicacao": "24/08/2026",
     "fonte": "gupy",
     "url": "https://mtpbrasil.gupy.io/job/eyJqb2JJZCI6MTIyNjA3MzUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "Inteligência Artificial",
+      "Azure",
+      "Docker",
+      "Testes Automatizados",
+      "Testes Funcionais",
+      "BDD",
+      "Criptografia"
+    ]
   },
   {
     "id": 282,
@@ -1857,7 +2194,11 @@
     "data_publicacao": "24/08/2026",
     "fonte": "gupy",
     "url": "https://viadeacesso.gupy.io/job/eyJqb2JJZCI6MTIyNjUwNjIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Criptografia",
+      "LGPD",
+      "Inglês"
+    ]
   },
   {
     "id": 255,
@@ -1934,7 +2275,21 @@
     "data_publicacao": "24/08/2026",
     "fonte": "gupy",
     "url": "https://mrm.gupy.io/job/eyJqb2JJZCI6MTIxNDY1NDMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "JavaScript",
+      "TypeScript",
+      "SQL",
+      "HTML",
+      "CSS",
+      "React",
+      "Next.js",
+      "Node.js",
+      "Inteligência Artificial",
+      "Git",
+      "API REST",
+      "Copilots & Assistentes de IA"
+    ]
   },
   {
     "id": 122,
@@ -1949,7 +2304,20 @@
     "data_publicacao": "24/08/2026",
     "fonte": "gupy",
     "url": "https://yduqstech.gupy.io/job/eyJqb2JJZCI6MTIxODEwMDAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "JavaScript",
+      "TypeScript",
+      "HTML",
+      "CSS",
+      "React",
+      "Node.js",
+      "AWS",
+      "Azure",
+      "Git",
+      "CI/CD",
+      "Metodologias Ágeis",
+      "UX/UI"
+    ]
   },
   {
     "id": 74,
@@ -2123,6 +2491,21 @@
     "tecnologias": []
   },
   {
+    "id": 2055,
+    "titulo": "Estágio Em Suporte Técnico | Home Office",
+    "empresa": "Empresa Confidencial",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "22/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-suporte-t%C3%A9cnico-home-office-at-empresa-confidencial-4457819307",
+    "tecnologias": []
+  },
+  {
     "id": 1999,
     "titulo": "TRILHOS I TECNICO (A) SUPORTE SISTEMAS I",
     "empresa": "Grupo CCR",
@@ -2165,13 +2548,19 @@
     "data_publicacao": "22/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-a-sistemas-jr-at-unimed-do-brasil-4455021492",
-    "tecnologias": []
+    "tecnologias": [
+      "Linux",
+      "Windows",
+      "Redes de Computadores",
+      "ITIL",
+      "Algoritmos"
+    ]
   },
   {
     "id": 1824,
     "titulo": "Auxiliar de Informática",
     "empresa": "Eletrodata Engenharia",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "Feira de Santana, BA",
     "polo": "Interior Baiano",
@@ -2196,7 +2585,12 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-redes-j%C3%BAnior-at-proativa-intelig%C3%AAncia-em-ti-4457595814",
     "tecnologias": [
-      "Redes de Computadores"
+      "Linux",
+      "Windows Server",
+      "Windows",
+      "Redes de Computadores",
+      "GLPI",
+      "Zabbix"
     ]
   },
   {
@@ -2325,7 +2719,7 @@
     "id": 1319,
     "titulo": "Técnico de Suporte em Informática Júnior | Helpdesk",
     "empresa": "Grupo Magi",
-    "area": "Suporte Técnico",
+    "area": "Service Desk / Help Desk",
     "senioridade": "Júnior",
     "localidade": "Manaus, AM",
     "polo": "Manaus",
@@ -2335,11 +2729,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-suporte-em-inform%C3%A1tica-j%C3%BAnior-helpdesk-at-grupo-magi-4456650897",
     "tecnologias": [
-      "Windows",
-      "Redes de Computadores",
-      "Firewall",
-      "Service Desk",
-      "Hardware",
       "Help Desk"
     ]
   },
@@ -2651,7 +3040,7 @@
     "id": 817,
     "titulo": "Estágio em TI",
     "empresa": "BorgWarner",
-    "area": "Infraestrutura / Redes",
+    "area": "Outros/TI Geral",
     "senioridade": "Estágio",
     "localidade": "Campinas, SP",
     "polo": "Campinas",
@@ -2660,13 +3049,7 @@
     "data_publicacao": "22/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-ti-at-borgwarner-4447190887",
-    "tecnologias": [
-      "Active Directory",
-      "ITIL",
-      "Office 365",
-      "Inglês",
-      "Copilots & Assistentes de IA"
-    ]
+    "tecnologias": []
   },
   {
     "id": 761,
@@ -2860,7 +3243,9 @@
     "data_publicacao": "21/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/auxiliar-de-suporte-de-ti-at-century-furniture-brazil-4457374619",
-    "tecnologias": []
+    "tecnologias": [
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 1937,
@@ -3018,7 +3403,16 @@
     "data_publicacao": "21/08/2026",
     "fonte": "gupy",
     "url": "https://timeplayers.gupy.io/job/eyJqb2JJZCI6MTIyMTIwMzAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "SQL",
+      "Power BI",
+      "Excel",
+      "Tableau",
+      "Looker",
+      "Databricks",
+      "Estatística",
+      "Azure"
+    ]
   },
   {
     "id": 1606,
@@ -3056,7 +3450,7 @@
     "id": 1561,
     "titulo": "ESTÁGIARIO EM SISTEMAS DE OPERAÇÕES",
     "empresa": "Lojas Renner S.A.",
-    "area": "Suporte Técnico",
+    "area": "Outros/TI Geral",
     "senioridade": "Estágio",
     "localidade": "Porto Alegre, RS",
     "polo": "Porto Alegre",
@@ -3065,12 +3459,7 @@
     "data_publicacao": "21/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1giario-em-sistemas-de-opera%C3%A7%C3%B5es-at-lojas-renner-s-a-4457519926",
-    "tecnologias": [
-      "SQL",
-      "PL/SQL",
-      "Estatística",
-      "ITIL"
-    ]
+    "tecnologias": []
   },
   {
     "id": 1520,
@@ -3093,7 +3482,7 @@
     "id": 1483,
     "titulo": "Assistente de TI",
     "empresa": "Transportes Cordenonsi",
-    "area": "Outros/TI Geral",
+    "area": "Service Desk / Help Desk",
     "senioridade": "Júnior",
     "localidade": "Xaxim, SC",
     "polo": "Estado/SC",
@@ -3102,7 +3491,14 @@
     "data_publicacao": "21/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-ti-at-transportes-cordenonsi-4456281767",
-    "tecnologias": []
+    "tecnologias": [
+      "Linux",
+      "Windows",
+      "Redes de Computadores",
+      "GLPI",
+      "Inglês",
+      "Help Desk"
+    ]
   },
   {
     "id": 1474,
@@ -3914,7 +4310,11 @@
     "data_publicacao": "21/08/2026",
     "fonte": "gupy",
     "url": "https://voke.gupy.io/job/eyJqb2JJZCI6MTE1NzcxMjksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "Redes de Computadores",
+      "Hardware"
+    ]
   },
   {
     "id": 400,
@@ -3929,7 +4329,9 @@
     "data_publicacao": "21/08/2026",
     "fonte": "gupy",
     "url": "https://minsait.gupy.io/job/eyJqb2JJZCI6MTIxNDk3NTAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Metodologias Ágeis"
+    ]
   },
   {
     "id": 389,
@@ -3944,13 +4346,17 @@
     "data_publicacao": "21/08/2026",
     "fonte": "gupy",
     "url": "https://nidecga-br.gupy.io/job/eyJqb2JJZCI6MTIyMTc2NTYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Office 365",
+      "Estrutura de Dados",
+      "Inglês"
+    ]
   },
   {
     "id": 374,
     "titulo": "Desenvolvedor (a) Júnior",
     "empresa": "Construmarket",
-    "area": "Suporte Técnico",
+    "area": "Engenharia de Software",
     "senioridade": "Júnior",
     "localidade": "Brasil",
     "polo": "Remoto",
@@ -3960,7 +4366,13 @@
     "fonte": "gupy",
     "url": "https://construmarket.gupy.io/job/eyJqb2JJZCI6MTIyMTI1OTcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Git"
+      "TypeScript",
+      "C#",
+      "Angular",
+      ".NET",
+      "jQuery",
+      "Git",
+      "Metodologias Ágeis"
     ]
   },
   {
@@ -4021,7 +4433,12 @@
     "data_publicacao": "21/08/2026",
     "fonte": "gupy",
     "url": "https://qualitydigital.gupy.io/job/eyJqb2JJZCI6MTIxNjE3NjUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "VPN",
+      "Service Desk",
+      "Hardware",
+      "Estrutura de Dados"
+    ]
   },
   {
     "id": 342,
@@ -4036,7 +4453,11 @@
     "data_publicacao": "21/08/2026",
     "fonte": "gupy",
     "url": "https://qualitydigital.gupy.io/job/eyJqb2JJZCI6MTIwNzk5MzksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Service Desk",
+      "Hardware",
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 331,
@@ -4083,7 +4504,12 @@
     "data_publicacao": "21/08/2026",
     "fonte": "gupy",
     "url": "https://vemserbenner.gupy.io/job/eyJqb2JJZCI6MTIxNDE0NjgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "RPA",
+      "Inteligência Artificial"
+    ]
   },
   {
     "id": 236,
@@ -4098,7 +4524,9 @@
     "data_publicacao": "21/08/2026",
     "fonte": "gupy",
     "url": "https://sistemaindustria.gupy.io/job/eyJqb2JJZCI6MTIyMjEyOTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Inteligência Artificial"
+    ]
   },
   {
     "id": 212,
@@ -4128,7 +4556,12 @@
     "data_publicacao": "21/08/2026",
     "fonte": "gupy",
     "url": "https://carreirascopaenergia.gupy.io/job/eyJqb2JJZCI6MTIyMDQ0ODQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Power BI",
+      "Excel",
+      "ERP",
+      "SAP"
+    ]
   },
   {
     "id": 154,
@@ -4176,14 +4609,22 @@
     "fonte": "gupy",
     "url": "https://stefanini.gupy.io/job/eyJqb2JJZCI6MTIxODI4MDUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Inteligência Artificial"
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Power BI",
+      "Tableau",
+      "Inteligência Artificial",
+      "Scrum",
+      "Metodologias Ágeis",
+      "UX/UI"
     ]
   },
   {
     "id": 96,
     "titulo": "ANALISTA DESENVOLVEDOR JR",
     "empresa": "Stefanini Group",
-    "area": "Outros/TI Geral",
+    "area": "DevOps",
     "senioridade": "Júnior",
     "localidade": "Brasília, Distrito Federal",
     "polo": "Brasília",
@@ -4193,7 +4634,13 @@
     "fonte": "gupy",
     "url": "https://stefanini.gupy.io/job/eyJqb2JJZCI6MTIxODI4MDEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Inteligência Artificial"
+      "Inteligência Artificial",
+      "Elasticsearch",
+      "Grafana",
+      "Prometheus",
+      "ITIL",
+      "Scrum",
+      "Metodologias Ágeis"
     ]
   },
   {
@@ -4240,8 +4687,10 @@
     "fonte": "gupy",
     "url": "https://confitec.gupy.io/job/eyJqb2JJZCI6MTIyMDQ4MDUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "C#",
       "SQL",
-      "SQL Server"
+      "SQL Server",
+      "Modelagem de Dados"
     ]
   },
   {
@@ -4258,7 +4707,12 @@
     "fonte": "gupy",
     "url": "https://minsait.gupy.io/job/eyJqb2JJZCI6MTIxNDM4NDUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "COBOL"
+      "COBOL",
+      "SQL",
+      "Scrum",
+      "Metodologias Ágeis",
+      "Algoritmos",
+      "Modelagem de Dados"
     ]
   },
   {
@@ -4332,8 +4786,42 @@
     "fonte": "gupy",
     "url": "https://viasoft.gupy.io/job/eyJqb2JJZCI6MTIyMTM3OTcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Delphi"
+      "Delphi",
+      "SQL",
+      "Git",
+      "Metodologias Ágeis",
+      "Estrutura de Dados"
     ]
+  },
+  {
+    "id": 2009,
+    "titulo": "Especialista Cientista de Dados I",
+    "empresa": "PagBank",
+    "area": "Data",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "20/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/especialista-cientista-de-dados-i-at-pagbank-4418200168",
+    "tecnologias": []
+  },
+  {
+    "id": 2003,
+    "titulo": "Estágio em Desenvolvimento Backend",
+    "empresa": "Bemobi Wave",
+    "area": "Backend",
+    "senioridade": "Estágio",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "20/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-desenvolvimento-backend-at-bemobi-wave-4453873943",
+    "tecnologias": []
   },
   {
     "id": 1956,
@@ -4348,7 +4836,14 @@
     "data_publicacao": "20/08/2026",
     "fonte": "gupy",
     "url": "https://arborevagas.gupy.io/job/eyJqb2JJZCI6MTIyMDQ3NzUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Active Directory",
+      "Redes de Computadores",
+      "Firewall",
+      "Hardware",
+      "Algoritmos",
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 1950,
@@ -4363,7 +4858,13 @@
     "data_publicacao": "20/08/2026",
     "fonte": "gupy",
     "url": "https://icarotech.gupy.io/job/eyJqb2JJZCI6MTIxOTcyMjQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Linux",
+      "Windows",
+      "ITIL",
+      "Office 365",
+      "IAM"
+    ]
   },
   {
     "id": 1949,
@@ -4378,7 +4879,13 @@
     "data_publicacao": "20/08/2026",
     "fonte": "gupy",
     "url": "https://icarotech.gupy.io/job/eyJqb2JJZCI6MTIxOTcyNDcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Linux",
+      "Windows",
+      "ITIL",
+      "Office 365",
+      "IAM"
+    ]
   },
   {
     "id": 1918,
@@ -4488,7 +4995,13 @@
     "fonte": "gupy",
     "url": "https://estagiocepel.gupy.io/job/eyJqb2JJZCI6MTIyMDI5NzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Redes de Computadores"
+      "Azure",
+      "GCP",
+      "Linux",
+      "Windows",
+      "Redes de Computadores",
+      "VPN",
+      "Firewall"
     ]
   },
   {
@@ -4585,13 +5098,19 @@
     "data_publicacao": "20/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/lwsa-analista-de-suporte-e-infraestrutura-j%C3%BAnior-presencial-at-lwsa-4456035054",
-    "tecnologias": []
+    "tecnologias": [
+      "Inteligência Artificial",
+      "Active Directory",
+      "Redes de Computadores",
+      "Service Desk",
+      "Hardware"
+    ]
   },
   {
     "id": 1541,
     "titulo": "Assistente de T.I",
     "empresa": "Auster Contábil",
-    "area": "Suporte Técnico",
+    "area": "Outros/TI Geral",
     "senioridade": "Júnior",
     "localidade": "Uberlândia, MG",
     "polo": "Uberlândia",
@@ -4600,9 +5119,7 @@
     "data_publicacao": "20/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-t-i-at-auster-cont%C3%A1bil-4456429751",
-    "tecnologias": [
-      "Inteligência Artificial"
-    ]
+    "tecnologias": []
   },
   {
     "id": 1523,
@@ -4757,6 +5274,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-t%C3%A9cnico-erp-j%C3%BAnior-pleno-at-areco-4455485399",
     "tecnologias": [
+      "SQL",
+      "SQL Server",
       "ERP"
     ]
   },
@@ -5671,7 +6190,10 @@
     "data_publicacao": "20/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-em-t-i-n%C3%ADvel-1-at-abler-vagas-4457016439",
-    "tecnologias": []
+    "tecnologias": [
+      "Linux",
+      "Windows"
+    ]
   },
   {
     "id": 330,
@@ -5715,7 +6237,14 @@
     "fonte": "gupy",
     "url": "https://zenvia.gupy.io/job/eyJqb2JJZCI6MTE5NTEwODIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Testes Manuais"
+      "Ruby",
+      "HTML",
+      "Inteligência Artificial",
+      "Git",
+      "Testes Automatizados",
+      "Testes Manuais",
+      "Scrum",
+      "Metodologias Ágeis"
     ]
   },
   {
@@ -5889,7 +6418,7 @@
     "id": 36,
     "titulo": "Estágio em Tecnologia - Automação, IA & Desenvolvimento",
     "empresa": "B4A",
-    "area": "Outros/TI Geral",
+    "area": "Engenharia de Software",
     "senioridade": "Estágio",
     "localidade": "São Paulo, São Paulo",
     "polo": "São Paulo",
@@ -5915,6 +6444,68 @@
     "data_publicacao": "20/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-backend-junior-pleno-renda-fixa-at-btg-pactual-4456789309",
+    "tecnologias": []
+  },
+  {
+    "id": 2050,
+    "titulo": "Assistente de T.I.",
+    "empresa": "CCBC - Câmara de Comércio Brasil-Canadá",
+    "area": "Sistemas / ERP",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "19/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/assistente-de-t-i-at-ccbc-chamber-of-commerce-brazil-canada-4456101345",
+    "tecnologias": [
+      "Power BI",
+      "Inteligência Artificial",
+      "Oracle",
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "ITIL",
+      "Service Desk",
+      "Office 365",
+      "Hardware",
+      "LGPD",
+      "Inglês",
+      "ERP",
+      "CFTV",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa"
+    ]
+  },
+  {
+    "id": 2045,
+    "titulo": "ESTAGIÁRIO DE TI - CARLIDER - RECREIO VEÍCULOS/RJ",
+    "empresa": "Grupo Lider",
+    "area": "Outros/TI Geral",
+    "senioridade": "Estágio",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "19/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-de-ti-carlider-recreio-ve%C3%ADculos-rj-at-grupo-lider-4455469819",
+    "tecnologias": []
+  },
+  {
+    "id": 2004,
+    "titulo": "Pessoa Estagiária em Banco de Dados",
+    "empresa": "ArcelorMittal",
+    "area": "Backend",
+    "senioridade": "Estágio",
+    "localidade": "Belo Horizonte, MG",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "19/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/pessoa-estagi%C3%A1ria-em-banco-de-dados-at-arcelormittal-4455422362",
     "tecnologias": []
   },
   {
@@ -5960,7 +6551,15 @@
     "data_publicacao": "19/08/2026",
     "fonte": "gupy",
     "url": "https://gruponewchase.gupy.io/job/eyJqb2JJZCI6MTIxNTEwNTgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "Service Desk",
+      "GLPI",
+      "Office 365",
+      "Algoritmos",
+      "Inglês",
+      "Help Desk"
+    ]
   },
   {
     "id": 1910,
@@ -6007,7 +6606,12 @@
     "data_publicacao": "19/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-junior-at-motivus-4455412896",
-    "tecnologias": []
+    "tecnologias": [
+      "Active Directory",
+      "VPN",
+      "Office 365",
+      "IAM"
+    ]
   },
   {
     "id": 1846,
@@ -6078,7 +6682,7 @@
     "id": 1765,
     "titulo": "Assistente de TI - Vaga Afirmativa PcD",
     "empresa": "Centro de Excelência Votorantim",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "São Paulo, São Paulo",
     "polo": "São Paulo",
@@ -6088,7 +6692,14 @@
     "fonte": "gupy",
     "url": "https://votorantimcoe.gupy.io/job/eyJqb2JJZCI6MTE1MTYwMTAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Inteligência Artificial"
+      "Power BI",
+      "Excel",
+      "Inteligência Artificial",
+      "ITIL",
+      "Office 365",
+      "Hardware",
+      "Criptografia",
+      "Estrutura de Dados"
     ]
   },
   {
@@ -6110,7 +6721,7 @@
     "id": 1713,
     "titulo": "TECNICO INFORMATICA JR - LONDRINA/PR - CATUAI",
     "empresa": "Cogna Educação",
-    "area": "Outros/TI Geral",
+    "area": "Field Service / Hardware",
     "senioridade": "Júnior",
     "localidade": "Londrina, Paraná",
     "polo": "Londrina",
@@ -6119,7 +6730,13 @@
     "data_publicacao": "19/08/2026",
     "fonte": "gupy",
     "url": "https://cogna.gupy.io/job/eyJqb2JJZCI6MTIwOTE1OTksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Hardware",
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 1680,
@@ -6189,7 +6806,7 @@
     "id": 1654,
     "titulo": "Analista Estratégia Segurança do Produto - Junior (onboarding)",
     "empresa": "Digio",
-    "area": "Outros/TI Geral",
+    "area": "Data",
     "senioridade": "Júnior",
     "localidade": "Barueri, São Paulo",
     "polo": "São Paulo",
@@ -6198,7 +6815,14 @@
     "data_publicacao": "19/08/2026",
     "fonte": "gupy",
     "url": "https://digio.gupy.io/job/eyJqb2JJZCI6MTIwNjQzODUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "Databricks",
+      "Estatística",
+      "Metodologias Ágeis",
+      "Governança e Riscos (GRC)"
+    ]
   },
   {
     "id": 1653,
@@ -6262,7 +6886,11 @@
     "data_publicacao": "19/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-ti-at-uni%C3%A3o-b-f-toys-4456100326",
-    "tecnologias": []
+    "tecnologias": [
+      "Service Desk",
+      "Hardware",
+      "Algoritmos"
+    ]
   },
   {
     "id": 1578,
@@ -6384,7 +7012,15 @@
     "data_publicacao": "19/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-ti-belo-horizonte-mg-at-gruponewchase-4453475215",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "Service Desk",
+      "GLPI",
+      "Office 365",
+      "Algoritmos",
+      "Inglês",
+      "Help Desk"
+    ]
   },
   {
     "id": 1447,
@@ -6543,6 +7179,12 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/pessoa-analista-de-suporte-n1-j%C3%BAnior-h%C3%ADbrido-em-blumenau-sc-at-amcom-sistemas-de-informa%C3%A7%C3%A3o-4455488170",
     "tecnologias": [
+      "SQL",
+      "SQL Server",
+      "Windows",
+      "ITIL",
+      "Service Desk",
+      "Hardware",
       "Suporte N1/N2"
     ]
   },
@@ -6589,7 +7231,9 @@
     "data_publicacao": "19/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-a-produtos-jr-at-avipam-viagens-turismo-4455996428",
-    "tecnologias": []
+    "tecnologias": [
+      "Algoritmos"
+    ]
   },
   {
     "id": 1285,
@@ -6724,7 +7368,15 @@
     "data_publicacao": "19/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-processos-de-ti-j%C3%BAnior-at-softtek-4453478933",
-    "tecnologias": []
+    "tecnologias": [
+      "Power BI",
+      "Excel",
+      "ITIL",
+      "GLPI",
+      "Criptografia",
+      "LGPD",
+      "Jira"
+    ]
   },
   {
     "id": 1170,
@@ -7285,12 +7937,7 @@
     "data_publicacao": "19/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-an%C3%A1lise-e-desenvolvimento-de-sistemas-ci%C3%AAncia-da-computa%C3%A7%C3%A3o-sistemas-da-informa%C3%A7%C3%A3o-at-iel-sc-4455450987",
-    "tecnologias": [
-      "Python",
-      "Delphi",
-      "HTML",
-      "ERP"
-    ]
+    "tecnologias": []
   },
   {
     "id": 804,
@@ -7416,7 +8063,11 @@
     "data_publicacao": "19/08/2026",
     "fonte": "gupy",
     "url": "https://direcionalengenharia.gupy.io/job/eyJqb2JJZCI6MTIxODU3MTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Linux",
+      "Windows",
+      "Algoritmos"
+    ]
   },
   {
     "id": 347,
@@ -7446,7 +8097,12 @@
     "data_publicacao": "19/08/2026",
     "fonte": "gupy",
     "url": "https://qualitydigital.gupy.io/job/eyJqb2JJZCI6MTIwOTYyOTIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "VPN",
+      "Service Desk",
+      "Hardware",
+      "Estrutura de Dados"
+    ]
   },
   {
     "id": 321,
@@ -7461,7 +8117,14 @@
     "data_publicacao": "19/08/2026",
     "fonte": "gupy",
     "url": "https://softexpert.gupy.io/job/eyJqb2JJZCI6MTIxODc5ODksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "SQL",
+      "Postman",
+      "Testes Automatizados",
+      "Testes Funcionais",
+      "Scrum",
+      "Metodologias Ágeis"
+    ]
   },
   {
     "id": 299,
@@ -7537,7 +8200,16 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-desenvolvimento-de-software-intelig%C3%AAncia-artificial-at-samsung-brasil-4456306264",
     "tecnologias": [
-      "Inteligência Artificial"
+      "Python",
+      "Java",
+      "C++",
+      "Android",
+      "Machine Learning",
+      "Inteligência Artificial",
+      "Git",
+      "Metodologias Ágeis",
+      "Inglês",
+      "Jira"
     ]
   },
   {
@@ -7616,7 +8288,17 @@
     "fonte": "gupy",
     "url": "https://evoluservices.gupy.io/job/eyJqb2JJZCI6MTIxODA5OTEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "iOS"
+      "Java",
+      "Swift",
+      "iOS",
+      "Firebase",
+      "Git",
+      "CI/CD",
+      "TDD",
+      "BDD",
+      "API REST",
+      "POO",
+      "Design Patterns"
     ]
   },
   {
@@ -7633,7 +8315,17 @@
     "fonte": "gupy",
     "url": "https://evoluservices.gupy.io/job/eyJqb2JJZCI6MTIxODEwNDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Android"
+      "Java",
+      "Kotlin",
+      "Android",
+      "Firebase",
+      "Git",
+      "CI/CD",
+      "TDD",
+      "BDD",
+      "API REST",
+      "POO",
+      "Design Patterns"
     ]
   },
   {
@@ -7666,15 +8358,47 @@
     "url": "https://stefanini.gupy.io/job/eyJqb2JJZCI6MTIxODQ1ODAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
       "Python",
+      "Java",
+      "JavaScript",
+      "C#",
       "SQL",
-      "Inteligência Artificial"
+      "HTML",
+      "CSS",
+      "React",
+      "Angular",
+      ".NET",
+      "JavaEE",
+      "React Native",
+      "Power BI",
+      "Pandas",
+      "Databricks",
+      "Inteligência Artificial",
+      "PostgreSQL",
+      "MySQL",
+      "SQL Server",
+      "Oracle",
+      "AWS",
+      "Azure",
+      "Docker",
+      "Kubernetes",
+      "Git",
+      "Testes Funcionais",
+      "ITIL",
+      "API REST",
+      "Metodologias Ágeis",
+      "Microserviços",
+      "Algoritmos",
+      "Modelagem de Dados",
+      "UML",
+      "ERP",
+      "SAP"
     ]
   },
   {
     "id": 116,
     "titulo": "Desenvolvedor Web Junior",
     "empresa": "Hypera Pharma",
-    "area": "Outros/TI Geral",
+    "area": "Engenharia de Software",
     "senioridade": "Júnior",
     "localidade": "São Paulo, São Paulo",
     "polo": "São Paulo",
@@ -7683,7 +8407,14 @@
     "data_publicacao": "19/08/2026",
     "fonte": "gupy",
     "url": "https://hyperapharma.gupy.io/job/eyJqb2JJZCI6MTE5NzY0MDMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Git",
+      "Metodologias Ágeis",
+      "UX/UI"
+    ]
   },
   {
     "id": 101,
@@ -7698,7 +8429,17 @@
     "data_publicacao": "19/08/2026",
     "fonte": "gupy",
     "url": "https://vemserbinario.gupy.io/job/eyJqb2JJZCI6MTIxODczNzYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Docker",
+      "Kubernetes",
+      "Terraform",
+      "Git",
+      "CI/CD",
+      "Linux",
+      "Redes de Computadores",
+      "Criptografia",
+      "Inglês"
+    ]
   },
   {
     "id": 95,
@@ -7713,7 +8454,17 @@
     "data_publicacao": "19/08/2026",
     "fonte": "gupy",
     "url": "https://brasilprev.gupy.io/job/eyJqb2JJZCI6MTIxODEwNDMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Java",
+      "SQL",
+      "RPA",
+      "AWS",
+      "Azure",
+      "Scrum",
+      "Metodologias Ágeis",
+      "Inglês",
+      "Jira"
+    ]
   },
   {
     "id": 42,
@@ -7750,6 +8501,53 @@
     ]
   },
   {
+    "id": 2035,
+    "titulo": "Assistente de TI",
+    "empresa": "Assaí Atacadista - O atacadista com 50 anos de tradição! #VemserAssaí",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "Belo Horizonte, Minas Gerais",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "18/08/2026",
+    "fonte": "gupy",
+    "url": "https://assai.gupy.io/job/eyJqb2JJZCI6MTIxNjc1MjAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": [
+      "Algoritmos"
+    ]
+  },
+  {
+    "id": 2026,
+    "titulo": "Administrador de Sistemas Nível 1 - Trainee",
+    "empresa": "Visual Systems",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Júnior",
+    "localidade": "São José do Rio Preto, SP",
+    "polo": "Interior Paulista Ocidental",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "18/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/administrador-de-sistemas-n%C3%ADvel-1-trainee-at-visual-systems-4455548052",
+    "tecnologias": []
+  },
+  {
+    "id": 2012,
+    "titulo": "ESTAGIÁRIO(A) DE TI - INFRAESTRUTURA",
+    "empresa": "Coritiba SAF",
+    "area": "DevOps",
+    "senioridade": "Estágio",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "18/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-de-ti-infraestrutura-at-coritiba-saf-4455533981",
+    "tecnologias": []
+  },
+  {
     "id": 1995,
     "titulo": "PESSOA ESTAGIÁRIA DE DADOS PARA SUPORTE E ATENDIMENTO AO CLIENTE",
     "empresa": "Quality Digital",
@@ -7762,7 +8560,10 @@
     "data_publicacao": "18/08/2026",
     "fonte": "gupy",
     "url": "https://qualitydigital.gupy.io/job/eyJqb2JJZCI6MTE5MjY4NzcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Estrutura de Dados",
+      "Algoritmos"
+    ]
   },
   {
     "id": 1966,
@@ -7778,7 +8579,15 @@
     "fonte": "gupy",
     "url": "https://centralailos.gupy.io/job/eyJqb2JJZCI6MTIxNDMxOTEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Hardware"
+      "Azure",
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "ITIL",
+      "Office 365",
+      "Hardware",
+      "LGPD",
+      "Algoritmos"
     ]
   },
   {
@@ -7826,7 +8635,16 @@
     "data_publicacao": "18/08/2026",
     "fonte": "gupy",
     "url": "https://gruposc.gupy.io/job/eyJqb2JJZCI6MTIxNjIwNjUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Linux",
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "VPN",
+      "Gestão de Vulnerabilidades",
+      "IAM",
+      "Governança e Riscos (GRC)"
+    ]
   },
   {
     "id": 1859,
@@ -7849,7 +8667,7 @@
     "id": 1761,
     "titulo": "Assistente de TI",
     "empresa": "GF Pneus",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "Ilhota, Santa Catarina",
     "polo": "Não informado",
@@ -7858,7 +8676,11 @@
     "data_publicacao": "18/08/2026",
     "fonte": "gupy",
     "url": "https://gfpneus.gupy.io/job/eyJqb2JJZCI6MTIwNDUyMjMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "Hardware",
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 1754,
@@ -7903,7 +8725,10 @@
     "data_publicacao": "18/08/2026",
     "fonte": "gupy",
     "url": "https://positivotecnologia.gupy.io/job/eyJqb2JJZCI6MTIxNjgxNDAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Hardware",
+      "Eletrônica"
+    ]
   },
   {
     "id": 1715,
@@ -7941,7 +8766,7 @@
     "id": 1697,
     "titulo": "Assistente de Sistemas PL - TI",
     "empresa": "TPC Logística Inteligente",
-    "area": "Outros/TI Geral",
+    "area": "Engenharia de Software",
     "senioridade": "Júnior",
     "localidade": "Salvador, Bahia",
     "polo": "Salvador",
@@ -7951,7 +8776,8 @@
     "fonte": "gupy",
     "url": "https://tpc.gupy.io/job/eyJqb2JJZCI6MTIxNjAyNDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "ERP"
+      "ERP",
+      "Governança e Riscos (GRC)"
     ]
   },
   {
@@ -8803,10 +9629,7 @@
     "data_publicacao": "18/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-suporte-junior-at-braga-it-4455545912",
-    "tecnologias": [
-      "Hardware",
-      "Manutenção Preventiva"
-    ]
+    "tecnologias": []
   },
   {
     "id": 378,
@@ -8836,7 +9659,10 @@
     "data_publicacao": "18/08/2026",
     "fonte": "gupy",
     "url": "https://cnnbrasil.gupy.io/job/eyJqb2JJZCI6MTIxNzA3MzksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Linux",
+      "Inglês"
+    ]
   },
   {
     "id": 346,
@@ -8972,7 +9798,7 @@
     "id": 201,
     "titulo": "Desenvolvedor Júnior",
     "empresa": "Jobbol",
-    "area": "Outros/TI Geral",
+    "area": "Engenharia de Software",
     "senioridade": "Júnior",
     "localidade": "São Paulo, SP",
     "polo": "São Paulo",
@@ -9002,7 +9828,7 @@
     "id": 145,
     "titulo": "ESTÁGIO EM TI",
     "empresa": "Grupo CEV",
-    "area": "Outros/TI Geral",
+    "area": "Field Service / Hardware",
     "senioridade": "Estágio",
     "localidade": "Teresina, Piauí",
     "polo": "Teresina",
@@ -9011,7 +9837,10 @@
     "data_publicacao": "18/08/2026",
     "fonte": "gupy",
     "url": "https://grupocev.gupy.io/job/eyJqb2JJZCI6MTIwOTA1MzYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Android",
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 100,
@@ -9027,8 +9856,16 @@
     "fonte": "gupy",
     "url": "https://xfckvnq.gupy.io/job/eyJqb2JJZCI6MTIwOTg5MzMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Apex",
       "Inteligência Artificial",
-      "Salesforce"
+      "Azure",
+      "Git",
+      "API REST",
+      "Scrum",
+      "Modelagem de Dados",
+      "Inglês",
+      "Salesforce",
+      "Jira"
     ]
   },
   {
@@ -9094,8 +9931,53 @@
     "fonte": "gupy",
     "url": "https://americanas.gupy.io/job/eyJqb2JJZCI6MTIxNTAxMjcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Java"
+      "Java",
+      "SQL",
+      "React",
+      "Spring",
+      "Inteligência Artificial",
+      "MySQL",
+      "Oracle",
+      "Azure",
+      "Git",
+      "RabbitMQ",
+      "Grafana",
+      "Datadog",
+      "API REST",
+      "Scrum",
+      "Metodologias Ágeis",
+      "Design Patterns"
     ]
+  },
+  {
+    "id": 2037,
+    "titulo": "Assistente de Tecnologia da Informação",
+    "empresa": "Jobbol",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "Manaus, AM",
+    "polo": "Manaus",
+    "regiao": "Norte",
+    "modalidade": "Presencial",
+    "data_publicacao": "17/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/assistente-de-tecnologia-da-informa%C3%A7%C3%A3o-at-jobbol-4455363463",
+    "tecnologias": []
+  },
+  {
+    "id": 2022,
+    "titulo": "Desenvolvedor Full Stack Júnior",
+    "empresa": "Jobbol",
+    "area": "Fullstack",
+    "senioridade": "Júnior",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "17/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-full-stack-j%C3%BAnior-at-jobbol-4455211796",
+    "tecnologias": []
   },
   {
     "id": 2001,
@@ -9174,7 +10056,16 @@
     "data_publicacao": "17/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-junior-at-xp-inc-4455385048",
-    "tecnologias": []
+    "tecnologias": [
+      "Power BI",
+      "Excel",
+      "Inteligência Artificial",
+      "LGPD",
+      "ISO 27001",
+      "Gestão de Vulnerabilidades",
+      "Cibersegurança",
+      "Governança e Riscos (GRC)"
+    ]
   },
   {
     "id": 1850,
@@ -9204,7 +10095,9 @@
     "data_publicacao": "17/08/2026",
     "fonte": "gupy",
     "url": "https://santacasabh.gupy.io/job/eyJqb2JJZCI6MTIwMzA0OTIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Algoritmos"
+    ]
   },
   {
     "id": 1814,
@@ -9266,7 +10159,10 @@
     "data_publicacao": "17/08/2026",
     "fonte": "gupy",
     "url": "https://yduqs.gupy.io/job/eyJqb2JJZCI6MTIwNzM1NjcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel",
+      "SAP"
+    ]
   },
   {
     "id": 1755,
@@ -9505,17 +10401,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-de-firmware-junior-at-diel-energia-4455343347",
     "tecnologias": [
-      "C++",
-      "Inteligência Artificial",
-      "Git",
-      "Hardware",
-      "Scrum",
-      "Metodologias Ágeis",
-      "Firmware",
-      "Sistemas Embarcados",
-      "Microcontroladores",
-      "IoT",
-      "Eletrônica"
+      "Firmware"
     ]
   },
   {
@@ -9828,7 +10714,15 @@
     "fonte": "gupy",
     "url": "https://ibsamericas.gupy.io/job/eyJqb2JJZCI6MTIxNDAyNjIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Windows"
+      "Shell/Bash",
+      "Windows",
+      "Redes de Computadores",
+      "VPN",
+      "Office 365",
+      "Hardware",
+      "Inglês",
+      "ERP",
+      "TOTVS"
     ]
   },
   {
@@ -9844,7 +10738,11 @@
     "data_publicacao": "17/08/2026",
     "fonte": "gupy",
     "url": "https://programaestagiargrendene.gupy.io/job/eyJqb2JJZCI6MTIxMTEzNDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Redes de Computadores",
+      "Hardware",
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 353,
@@ -9882,7 +10780,7 @@
     "id": 333,
     "titulo": "Analista Sistemas Funcional Junior",
     "empresa": "Santa Helena Indústria de Alimentos S/A",
-    "area": "Engenharia de Software",
+    "area": "Sistemas / ERP",
     "senioridade": "Júnior",
     "localidade": "Ribeirão Preto, São Paulo",
     "polo": "Ribeirão Preto",
@@ -9892,6 +10790,12 @@
     "fonte": "gupy",
     "url": "https://santahelena.gupy.io/job/eyJqb2JJZCI6MTIxNDA1MDYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "SQL",
+      "Testes Funcionais",
+      "ITIL",
+      "Scrum",
+      "Metodologias Ágeis",
+      "Inglês",
       "ERP",
       "SAP"
     ]
@@ -10014,7 +10918,12 @@
     "data_publicacao": "17/08/2026",
     "fonte": "gupy",
     "url": "https://pabu.gupy.io/job/eyJqb2JJZCI6MTIwODk4MjgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "PHP",
+      "Laravel",
+      "MySQL",
+      "Modelagem de Dados"
+    ]
   },
   {
     "id": 1357,
@@ -10102,6 +11011,21 @@
     "tecnologias": []
   },
   {
+    "id": 2007,
+    "titulo": "CIENTISTA DE DADOS ESPEC I",
+    "empresa": "Porto",
+    "area": "Data",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "15/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/cientista-de-dados-espec-i-at-porto-4428116832",
+    "tecnologias": []
+  },
+  {
     "id": 1572,
     "titulo": "Estágio em TI",
     "empresa": "CARAPRETA",
@@ -10138,7 +11062,7 @@
     "id": 1470,
     "titulo": "Analista de Suporte N1 (Porto Alegre e Região)",
     "empresa": "Seprol - IT by Experts",
-    "area": "Service Desk / Help Desk",
+    "area": "Suporte Técnico",
     "senioridade": "Júnior",
     "localidade": "Porto Alegre e Região",
     "polo": "Porto Alegre",
@@ -10148,6 +11072,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-porto-alegre-e-regi%C3%A3o-at-seprol-computadores-e-sistemas-4454836310",
     "tecnologias": [
+      "Redes de Computadores",
+      "ITIL",
+      "Hardware",
+      "Algoritmos",
       "Suporte N1/N2"
     ]
   },
@@ -10282,7 +11210,70 @@
     "fonte": "gupy",
     "url": "https://sejaglobalweb.gupy.io/job/eyJqb2JJZCI6MTIxMTE3NjcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Java"
+      "Python",
+      "Java",
+      "JavaScript",
+      "TypeScript",
+      "PHP",
+      "SQL",
+      "HTML",
+      "CSS",
+      "Angular",
+      "Node.js",
+      "Spring",
+      "Flutter",
+      "Kafka",
+      "RPA",
+      "Oracle",
+      "Docker",
+      "Git",
+      "CI/CD",
+      "RabbitMQ",
+      "SonarQube",
+      "JUnit",
+      "Testes Automatizados",
+      "TDD",
+      "OAuth/JWT",
+      "API REST",
+      "Microserviços",
+      "SOLID",
+      "Clean Code",
+      "Design Patterns",
+      "Modelagem de Dados",
+      "UX/UI",
+      "Jira"
+    ]
+  },
+  {
+    "id": 2047,
+    "titulo": "Estágio em Auditoria Interna de Tecnologia",
+    "empresa": "BTG Pactual",
+    "area": "Outros/TI Geral",
+    "senioridade": "Estágio",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "14/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-auditoria-interna-de-tecnologia-at-btg-pactual-4454346649",
+    "tecnologias": []
+  },
+  {
+    "id": 2029,
+    "titulo": "Estágio em IA e Automação",
+    "empresa": "STLFLIX",
+    "area": "Inteligência Artificial",
+    "senioridade": "Estágio",
+    "localidade": "Joinville, SC",
+    "polo": "Joinville",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "14/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-ia-e-automa%C3%A7%C3%A3o-at-stlflix-4454355303",
+    "tecnologias": [
+      "Inteligência Artificial"
     ]
   },
   {
@@ -10313,7 +11304,10 @@
     "data_publicacao": "14/08/2026",
     "fonte": "gupy",
     "url": "https://fcamara.gupy.io/job/eyJqb2JJZCI6MTIwOTAxMzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Inglês",
+      "Governança e Riscos (GRC)"
+    ]
   },
   {
     "id": 1942,
@@ -10360,7 +11354,10 @@
     "data_publicacao": "14/08/2026",
     "fonte": "gupy",
     "url": "https://aliare.gupy.io/job/eyJqb2JJZCI6MTIwNzcwMTIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Hardware",
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 1796,
@@ -10420,7 +11417,12 @@
     "data_publicacao": "14/08/2026",
     "fonte": "gupy",
     "url": "https://penso.gupy.io/job/eyJqb2JJZCI6MTIwNDEzMzQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Hardware",
+      "Algoritmos",
+      "Help Desk",
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 1652,
@@ -10518,14 +11520,7 @@
     "data_publicacao": "14/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-dados-e-b-i-at-br-supply-suprimentos-corporativos-4453263888",
-    "tecnologias": [
-      "SQL",
-      "Power BI",
-      "Excel",
-      "ETL",
-      "Estatística",
-      "Modelagem de Dados"
-    ]
+    "tecnologias": []
   },
   {
     "id": 1352,
@@ -10810,7 +11805,7 @@
     "id": 820,
     "titulo": "Estágio em Tecnologia",
     "empresa": "Renault Group",
-    "area": "Service Desk / Help Desk",
+    "area": "Outros/TI Geral",
     "senioridade": "Estágio",
     "localidade": "São José dos Pinhais, PR",
     "polo": "Curitiba",
@@ -10819,14 +11814,7 @@
     "data_publicacao": "14/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-at-renault-group-4453721859",
-    "tecnologias": [
-      "Excel",
-      "Scrum",
-      "Metodologias Ágeis",
-      "Inglês",
-      "SAP",
-      "Jira"
-    ]
+    "tecnologias": []
   },
   {
     "id": 802,
@@ -10841,10 +11829,7 @@
     "data_publicacao": "14/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-tecnologia-da-informa%C3%A7%C3%A3o-at-fips-ferrovia-interna-do-porto-de-santos-4451274287",
-    "tecnologias": [
-      "Power BI",
-      "Inteligência Artificial"
-    ]
+    "tecnologias": []
   },
   {
     "id": 348,
@@ -10984,6 +11969,8 @@
     "fonte": "gupy",
     "url": "https://grupobreitkopf.gupy.io/job/eyJqb2JJZCI6MTE4MzIwMDYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Python",
+      "SQL",
       "RPA"
     ]
   },
@@ -11001,9 +11988,19 @@
     "fonte": "gupy",
     "url": "https://institutoeldorado.gupy.io/job/eyJqb2JJZCI6MTIwMjQ0NTUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Java",
+      "JavaScript",
+      "TypeScript",
+      "HTML",
+      "CSS",
+      "Angular",
+      "Spring",
+      "GCP",
+      "Git",
       "Testes Automatizados",
       "Scrum",
-      "Metodologias Ágeis"
+      "Metodologias Ágeis",
+      "Inglês"
     ]
   },
   {
@@ -11049,7 +12046,9 @@
     "data_publicacao": "13/08/2026",
     "fonte": "gupy",
     "url": "https://estagio-e-trainee-infnet.gupy.io/job/eyJqb2JJZCI6MTIwNzI3NjcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "CRM"
+    ]
   },
   {
     "id": 1943,
@@ -11064,7 +12063,18 @@
     "data_publicacao": "13/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-a-aplica%C3%A7%C3%A3o-n2-junior-pleno-135099-presencial-sp-at-gft-brasil-4450825347",
-    "tecnologias": []
+    "tecnologias": [
+      "SQL",
+      "Shell/Bash",
+      "SQL Server",
+      "Oracle",
+      "Linux",
+      "Grafana",
+      "Windows Server",
+      "Windows",
+      "ITIL",
+      "Inglês"
+    ]
   },
   {
     "id": 1915,
@@ -11079,7 +12089,10 @@
     "data_publicacao": "13/08/2026",
     "fonte": "gupy",
     "url": "https://construmarket.gupy.io/job/eyJqb2JJZCI6MTIwNzg2ODYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel",
+      "Office 365"
+    ]
   },
   {
     "id": 1911,
@@ -11269,7 +12282,7 @@
     "id": 1410,
     "titulo": "Assistente TI",
     "empresa": "Roca Brasil",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "Santa Luzia, MG",
     "polo": "Belo Horizonte",
@@ -11278,7 +12291,9 @@
     "data_publicacao": "13/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-ti-at-roca-sanitarios-brasil-4454097989",
-    "tecnologias": []
+    "tecnologias": [
+      "Hardware"
+    ]
   },
   {
     "id": 1404,
@@ -11746,7 +12761,14 @@
     "data_publicacao": "13/08/2026",
     "fonte": "gupy",
     "url": "https://gruporpn.gupy.io/job/eyJqb2JJZCI6MTIwNzM4ODcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Hardware",
+      "Inglês",
+      "Help Desk"
+    ]
   },
   {
     "id": 379,
@@ -11806,7 +12828,10 @@
     "data_publicacao": "13/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-suporte-jr-tecnologia-da-informa%C3%A7%C3%A3o-morumbi-s%C3%A3o-paulo-at-rede-d-or-4450804633",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 340,
@@ -11821,7 +12846,12 @@
     "data_publicacao": "13/08/2026",
     "fonte": "gupy",
     "url": "https://qualitydigital.gupy.io/job/eyJqb2JJZCI6MTE5NTQ4ODEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "VPN",
+      "Service Desk",
+      "Hardware",
+      "Estrutura de Dados"
+    ]
   },
   {
     "id": 314,
@@ -11898,13 +12928,18 @@
     "data_publicacao": "13/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-em-desenvolvimento-de-software-embarcado-at-lightera-4454065563",
-    "tecnologias": []
+    "tecnologias": [
+      "C++",
+      "Redes de Computadores",
+      "Sistemas Embarcados",
+      "Eletrônica"
+    ]
   },
   {
     "id": 190,
     "titulo": "Analista de Tecnologia da Informação Nível 1",
     "empresa": "Jobbol",
-    "area": "Outros/TI Geral",
+    "area": "Suporte Técnico",
     "senioridade": "Júnior",
     "localidade": "São Paulo, SP",
     "polo": "São Paulo",
@@ -11913,7 +12948,11 @@
     "data_publicacao": "13/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-tecnologia-da-informa%C3%A7%C3%A3o-n%C3%ADvel-1-at-jobbol-4453625401",
-    "tecnologias": []
+    "tecnologias": [
+      "Active Directory",
+      "Office 365",
+      "Hardware"
+    ]
   },
   {
     "id": 187,
@@ -11977,7 +13016,14 @@
       "Java",
       "Kotlin",
       "Android",
-      "Algoritmos"
+      "Git",
+      "CI/CD",
+      "Testes Automatizados",
+      "API REST",
+      "Scrum",
+      "POO",
+      "Algoritmos",
+      "Inglês"
     ]
   },
   {
@@ -12025,7 +13071,23 @@
     "data_publicacao": "13/08/2026",
     "fonte": "gupy",
     "url": "https://cuattro.gupy.io/job/eyJqb2JJZCI6MTIwNjAwMTgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Node.js",
+      "Inteligência Artificial",
+      "Firebase",
+      "GCP",
+      "Git",
+      "CI/CD",
+      "Serverless",
+      "Testes Automatizados",
+      "IAM",
+      "Estrutura de Dados",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa"
+    ]
   },
   {
     "id": 86,
@@ -12040,7 +13102,15 @@
     "data_publicacao": "13/08/2026",
     "fonte": "gupy",
     "url": "https://aliare.gupy.io/job/eyJqb2JJZCI6MTIwNTU1NzMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "SQL",
+      "Spark",
+      "ETL",
+      "Databricks",
+      "Kafka",
+      "Azure",
+      "Docker"
+    ]
   },
   {
     "id": 54,
@@ -12055,7 +13125,13 @@
     "data_publicacao": "13/08/2026",
     "fonte": "gupy",
     "url": "https://piracanjuba.gupy.io/job/eyJqb2JJZCI6MTIwNTUzNjAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "SQL",
+      "Power BI",
+      "Excel",
+      "BI",
+      "Algoritmos"
+    ]
   },
   {
     "id": 32,
@@ -12087,6 +13163,38 @@
       "ERP",
       "Agentes de IA & RAG"
     ]
+  },
+  {
+    "id": 2030,
+    "titulo": "Estágio em Inteligência Artificial",
+    "empresa": "BTG Pactual",
+    "area": "Inteligência Artificial",
+    "senioridade": "Estágio",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "12/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-intelig%C3%AAncia-artificial-at-btg-pactual-4443542393",
+    "tecnologias": [
+      "Inteligência Artificial"
+    ]
+  },
+  {
+    "id": 2019,
+    "titulo": "Software Engineer I",
+    "empresa": "McKinsey & Company",
+    "area": "Engenharia de Software",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "12/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/software-engineer-i-at-mckinsey-company-4443516563",
+    "tecnologias": []
   },
   {
     "id": 1970,
@@ -12132,6 +13240,20 @@
     "fonte": "gupy",
     "url": "https://e-deploy.gupy.io/job/eyJqb2JJZCI6MTIwNTgyODAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Python",
+      "JavaScript",
+      "SQL",
+      "Power BI",
+      "Excel",
+      "BI",
+      "Oracle",
+      "Git",
+      "Linux",
+      "Windows",
+      "ERP",
+      "SAP",
+      "TOTVS",
+      "Jira",
       "Help Desk"
     ]
   },
@@ -12197,7 +13319,9 @@
     "data_publicacao": "12/08/2026",
     "fonte": "gupy",
     "url": "https://expansaoassaiosascocentro.gupy.io/job/eyJqb2JJZCI6MTIwNTYzNDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Algoritmos"
+    ]
   },
   {
     "id": 1791,
@@ -12227,7 +13351,12 @@
     "data_publicacao": "12/08/2026",
     "fonte": "gupy",
     "url": "https://pecval.gupy.io/job/eyJqb2JJZCI6MTIwNTcyMzgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Linux",
+      "Office 365",
+      "Hardware",
+      "Inglês"
+    ]
   },
   {
     "id": 1634,
@@ -12289,9 +13418,7 @@
     "data_publicacao": "12/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-infraestrutura-de-ti-at-ppg-brasil-4453376446",
-    "tecnologias": [
-      "ERP"
-    ]
+    "tecnologias": []
   },
   {
     "id": 1481,
@@ -12494,18 +13621,13 @@
     "data_publicacao": "12/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-suporte-j%C3%BAnior-at-place-logistics-4453071992",
-    "tecnologias": [
-      "Linux",
-      "Windows",
-      "Redes de Computadores",
-      "Office 365"
-    ]
+    "tecnologias": []
   },
   {
     "id": 407,
     "titulo": "Técnico de Suporte Junior - Field Service Interno | Belo Horizonte",
     "empresa": "Voke",
-    "area": "Field Service / Hardware",
+    "area": "Suporte Técnico",
     "senioridade": "Júnior",
     "localidade": "Belo Horizonte, Minas Gerais",
     "polo": "Belo Horizonte",
@@ -12514,7 +13636,13 @@
     "data_publicacao": "12/08/2026",
     "fonte": "gupy",
     "url": "https://voke.gupy.io/job/eyJqb2JJZCI6MTIwNTY4NzksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "Redes de Computadores",
+      "ITIL",
+      "Hardware",
+      "Eletrônica"
+    ]
   },
   {
     "id": 397,
@@ -12620,7 +13748,13 @@
     "fonte": "gupy",
     "url": "https://sidi.gupy.io/job/eyJqb2JJZCI6MTIwNjA3NjAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Android"
+      "Java",
+      "Kotlin",
+      "SQL",
+      "Android",
+      "Design Patterns",
+      "Algoritmos",
+      "Inglês"
     ]
   },
   {
@@ -12703,7 +13837,13 @@
     "data_publicacao": "11/08/2026",
     "fonte": "gupy",
     "url": "https://credsystem.gupy.io/job/eyJqb2JJZCI6MTIwNDQ1NDYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel",
+      "Active Directory",
+      "Windows",
+      "Office 365",
+      "Hardware"
+    ]
   },
   {
     "id": 1948,
@@ -12718,7 +13858,13 @@
     "data_publicacao": "11/08/2026",
     "fonte": "gupy",
     "url": "https://icarotech.gupy.io/job/eyJqb2JJZCI6MTIwNDQ4OTgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Linux",
+      "Windows",
+      "ITIL",
+      "Office 365",
+      "IAM"
+    ]
   },
   {
     "id": 1933,
@@ -12812,7 +13958,17 @@
     "data_publicacao": "11/08/2026",
     "fonte": "gupy",
     "url": "https://voxtecnologia.gupy.io/job/eyJqb2JJZCI6MTIwNDA1MjMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Linux",
+      "Windows",
+      "VPN",
+      "Firewall",
+      "ITIL",
+      "Zendesk",
+      "GLPI",
+      "Hardware",
+      "Inglês"
+    ]
   },
   {
     "id": 1690,
@@ -13123,7 +14279,14 @@
     "fonte": "gupy",
     "url": "https://yduqstech.gupy.io/job/eyJqb2JJZCI6MTE5NTE5NDEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Salesforce"
+      "JavaScript",
+      "Apex",
+      "Inteligência Artificial",
+      "API REST",
+      "POO",
+      "Estrutura de Dados",
+      "Salesforce",
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -13154,7 +14317,13 @@
     "data_publicacao": "11/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-engenharia-de-desenvolvimento-de-software-at-aumovio-4448616161",
-    "tecnologias": []
+    "tecnologias": [
+      "Next.js",
+      "Redes de Computadores",
+      "Inglês",
+      "Microcontroladores",
+      "Eletrônica"
+    ]
   },
   {
     "id": 216,
@@ -13216,7 +14385,18 @@
     "data_publicacao": "11/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-sistemas-j%C3%BAnior-at-mac-construtora-e-incorporadora-4452489365",
-    "tecnologias": []
+    "tecnologias": [
+      "JavaScript",
+      "C#",
+      "SQL",
+      "HTML",
+      "CSS",
+      "Angular",
+      ".NET",
+      "jQuery",
+      "SQL Server",
+      "Git"
+    ]
   },
   {
     "id": 76,
@@ -13266,6 +14446,71 @@
     "tecnologias": []
   },
   {
+    "id": 2051,
+    "titulo": "28418 | Pessoa Estagiária em Suporte Técnico | Segurança Eletrônica",
+    "empresa": "Intelbras",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "São Jose, SC",
+    "polo": "Florianópolis",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "10/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/28418-pessoa-estagi%C3%A1ria-em-suporte-t%C3%A9cnico-seguran%C3%A7a-eletr%C3%B4nica-at-intelbras-4451464487",
+    "tecnologias": [
+      "Eletrônica",
+      "CFTV"
+    ]
+  },
+  {
+    "id": 2044,
+    "titulo": "Cxs - Técnico TI jr",
+    "empresa": "Transportes Panex",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "Caxias do Sul, RS",
+    "polo": "Caxias do Sul",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "10/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/cxs-t%C3%A9cnico-ti-jr-at-transportes-panex-4452062423",
+    "tecnologias": []
+  },
+  {
+    "id": 2018,
+    "titulo": "SOFTWARE DEVELOPER SPECIALIST I",
+    "empresa": "Inter",
+    "area": "Engenharia de Software",
+    "senioridade": "Júnior",
+    "localidade": "Belo Horizonte, MG",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "10/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/software-developer-specialist-i-at-inter-4424784723",
+    "tecnologias": []
+  },
+  {
+    "id": 2010,
+    "titulo": "Estagiário de Backoffice - Foco Tech/Dados/IA",
+    "empresa": "VMB Invest",
+    "area": "Data",
+    "senioridade": "Estágio",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "10/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-de-backoffice-foco-tech-dados-ia-at-vmb-invest-4451419193",
+    "tecnologias": [
+      "Inteligência Artificial"
+    ]
+  },
+  {
     "id": 1982,
     "titulo": "Estágio - Suporte ao Cliente - JUNDIAÍ",
     "empresa": "TAM Aviação Executiva",
@@ -13278,7 +14523,10 @@
     "data_publicacao": "10/08/2026",
     "fonte": "gupy",
     "url": "https://tamaviacaoexecutiva.gupy.io/job/eyJqb2JJZCI6MTIwMjY3MTUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel",
+      "Inglês"
+    ]
   },
   {
     "id": 1928,
@@ -13295,7 +14543,16 @@
     "url": "https://unecx.gupy.io/job/eyJqb2JJZCI6MTIwMjkzMjMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
       "Windows",
-      "Hardware"
+      "Redes de Computadores",
+      "VPN",
+      "ITIL",
+      "GLPI",
+      "VoIP",
+      "Hardware",
+      "ISO 27001",
+      "Estrutura de Dados",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -13394,7 +14651,7 @@
     "id": 1704,
     "titulo": "Assistente de TI - Maceió",
     "empresa": "Grupo JRCA",
-    "area": "Outros/TI Geral",
+    "area": "Field Service / Hardware",
     "senioridade": "Júnior",
     "localidade": "Maceió, Alagoas",
     "polo": "Maceió",
@@ -13403,7 +14660,13 @@
     "data_publicacao": "10/08/2026",
     "fonte": "gupy",
     "url": "https://jrca.gupy.io/job/eyJqb2JJZCI6MTE5NzQxNzIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "Hardware",
+      "Algoritmos",
+      "Help Desk",
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 1669,
@@ -13418,7 +14681,16 @@
     "data_publicacao": "10/08/2026",
     "fonte": "gupy",
     "url": "https://votorantimcimentostalentos.gupy.io/job/eyJqb2JJZCI6MTIwMjM4NDIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "Excel",
+      "Spark",
+      "Databricks",
+      "Estatística",
+      "Azure",
+      "Git"
+    ]
   },
   {
     "id": 1658,
@@ -13680,7 +14952,7 @@
     "id": 387,
     "titulo": "Estágio em TI - Colégio Sagrado Coração de Maria (Pará de Minas/MG)",
     "empresa": "Rede Verbita de Educação",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Estágio",
     "localidade": "Pará de Minas, Minas Gerais",
     "polo": "Não informado",
@@ -13690,14 +14962,16 @@
     "fonte": "gupy",
     "url": "https://redeverbita.gupy.io/job/eyJqb2JJZCI6MTIwMjgxNDIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Hardware"
+      "Redes de Computadores",
+      "Hardware",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
     "id": 386,
     "titulo": "Estágio em TI - Colégio Arnaldo Funcionários",
     "empresa": "Rede Verbita de Educação",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Estágio",
     "localidade": "Belo Horizonte, Minas Gerais",
     "polo": "Belo Horizonte",
@@ -13707,7 +14981,9 @@
     "fonte": "gupy",
     "url": "https://redeverbita.gupy.io/job/eyJqb2JJZCI6MTIwMjYxOTksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Hardware"
+      "Redes de Computadores",
+      "Hardware",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -13723,7 +14999,15 @@
     "data_publicacao": "10/08/2026",
     "fonte": "gupy",
     "url": "https://timeplayers.gupy.io/job/eyJqb2JJZCI6MTE5NzM3MzIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel",
+      "Linux",
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Hardware",
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 339,
@@ -13738,7 +15022,13 @@
     "data_publicacao": "10/08/2026",
     "fonte": "gupy",
     "url": "https://confidencialoportunidadestech.gupy.io/job/eyJqb2JJZCI6MTE5Mzg1NjgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "VPN",
+      "Service Desk",
+      "Hardware",
+      "Estrutura de Dados",
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 276,
@@ -13791,7 +15081,7 @@
     "id": 143,
     "titulo": "Desenvolvedor Júnior",
     "empresa": "Ux Group",
-    "area": "Outros/TI Geral",
+    "area": "Design / UI / UX",
     "senioridade": "Júnior",
     "localidade": "Barueri, São Paulo",
     "polo": "São Paulo",
@@ -13801,6 +15091,9 @@
     "fonte": "gupy",
     "url": "https://uxgroup.gupy.io/job/eyJqb2JJZCI6MTIwMzEwMzQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Python",
+      "C#",
+      "Git",
       "UX/UI"
     ]
   },
@@ -13818,7 +15111,26 @@
     "fonte": "gupy",
     "url": "https://stefanini.gupy.io/job/eyJqb2JJZCI6MTE5ODg5NjIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Java"
+      "Java",
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Angular",
+      "Spring",
+      "Hibernate",
+      "Kafka",
+      "GCP",
+      "Docker",
+      "Git",
+      "CI/CD",
+      "RabbitMQ",
+      "JUnit",
+      "Jest",
+      "TDD",
+      "OAuth/JWT",
+      "API REST",
+      "OpenAPI/Swagger",
+      "Microserviços"
     ]
   },
   {
@@ -13834,6 +15146,29 @@
     "data_publicacao": "10/08/2026",
     "fonte": "gupy",
     "url": "https://tokiomarine.gupy.io/job/eyJqb2JJZCI6MTIwMjQyNTksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "Power BI",
+      "Airflow",
+      "ETL",
+      "Estatística",
+      "Modelagem de Dados"
+    ]
+  },
+  {
+    "id": 2015,
+    "titulo": "Especialista em Desenvolvimento de Software I",
+    "empresa": "Serasa Experian",
+    "area": "Engenharia de Software",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "09/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/especialista-em-desenvolvimento-de-software-i-at-serasa-experian-4258069288",
     "tecnologias": []
   },
   {
@@ -14229,7 +15564,9 @@
     "data_publicacao": "07/08/2026",
     "fonte": "gupy",
     "url": "https://uoledtech.gupy.io/job/eyJqb2JJZCI6MTE5MjgwNTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel"
+    ]
   },
   {
     "id": 1935,
@@ -14244,7 +15581,13 @@
     "data_publicacao": "07/08/2026",
     "fonte": "gupy",
     "url": "https://eletromidia.gupy.io/job/eyJqb2JJZCI6MTE5ODk2NzQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Android",
+      "Linux",
+      "Windows",
+      "Service Desk",
+      "Help Desk"
+    ]
   },
   {
     "id": 1884,
@@ -14277,7 +15620,12 @@
     "data_publicacao": "07/08/2026",
     "fonte": "gupy",
     "url": "https://penso.gupy.io/job/eyJqb2JJZCI6MTE5ODE1OTAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Hardware",
+      "Algoritmos",
+      "Help Desk",
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 1717,
@@ -14292,7 +15640,10 @@
     "data_publicacao": "07/08/2026",
     "fonte": "gupy",
     "url": "https://pic.gupy.io/job/eyJqb2JJZCI6MTE5ODUzODksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Hardware",
+      "Microcontroladores"
+    ]
   },
   {
     "id": 1716,
@@ -14345,7 +15696,7 @@
     "id": 1568,
     "titulo": "Estagiário na área de Tecnologia da Informação",
     "empresa": "Jobbol",
-    "area": "Engenharia de Software",
+    "area": "Outros/TI Geral",
     "senioridade": "Estágio",
     "localidade": "São Paulo, SP",
     "polo": "São Paulo",
@@ -14354,15 +15705,13 @@
     "data_publicacao": "07/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-na-%C3%A1rea-de-tecnologia-da-informa%C3%A7%C3%A3o-at-jobbol-4448705033",
-    "tecnologias": [
-      "Redes de Computadores"
-    ]
+    "tecnologias": []
   },
   {
     "id": 1535,
     "titulo": "ASSISTENTE TI",
     "empresa": "Diamante Tintas",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "Campinas, SP",
     "polo": "Campinas",
@@ -14371,7 +15720,16 @@
     "data_publicacao": "07/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-ti-at-casa-diamante-tintas-diamante-com%C3%A9rcio-de-tintas-ltda-4450508140",
-    "tecnologias": []
+    "tecnologias": [
+      "Redes de Computadores",
+      "Service Desk",
+      "VoIP",
+      "Hardware",
+      "IAM",
+      "CFTV",
+      "Help Desk",
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 1512,
@@ -14751,7 +16109,7 @@
     "id": 266,
     "titulo": "Estágio em Tecnologia da Informação - São Paulo",
     "empresa": "Souto Correa Advogados",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Estágio",
     "localidade": "São Paulo, São Paulo",
     "polo": "São Paulo",
@@ -14760,7 +16118,13 @@
     "data_publicacao": "07/08/2026",
     "fonte": "gupy",
     "url": "https://soutocorrea.gupy.io/job/eyJqb2JJZCI6MTE4OTE0OTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Inteligência Artificial",
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Office 365"
+    ]
   },
   {
     "id": 211,
@@ -14780,8 +16144,8 @@
   {
     "id": 202,
     "titulo": "Desenvolvedor Low-code Júnior",
-    "empresa": "ACERTA! Crédito Fácil",
-    "area": "Outros/TI Geral",
+    "empresa": "Viacerta Promotora",
+    "area": "Engenharia de Software",
     "senioridade": "Júnior",
     "localidade": "Santo Cristo, Rio Grande do Sul",
     "polo": "Pelotas",
@@ -14790,7 +16154,11 @@
     "data_publicacao": "07/08/2026",
     "fonte": "gupy",
     "url": "https://acertapromotora.gupy.io/job/eyJqb2JJZCI6MTE5ODkxNjMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Java",
+      "SQL",
+      "POO"
+    ]
   },
   {
     "id": 183,
@@ -14805,7 +16173,17 @@
     "data_publicacao": "07/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-sistemas-j%C3%BAnior-at-netra-tecnologia-4449234429",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "Java",
+      "PHP",
+      "Groovy",
+      "SQL",
+      "JavaEE",
+      "MySQL",
+      "SQL Server",
+      "UML"
+    ]
   },
   {
     "id": 159,
@@ -14835,7 +16213,25 @@
     "data_publicacao": "07/08/2026",
     "fonte": "gupy",
     "url": "https://cuponomia.gupy.io/job/eyJqb2JJZCI6MTE5ODc0NzgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "JavaScript",
+      "TypeScript",
+      "HTML",
+      "CSS",
+      "React",
+      "Angular",
+      "Vue.js",
+      "Svelte",
+      "Inteligência Artificial",
+      "Git",
+      "Jest",
+      "API REST",
+      "Clean Code",
+      "Inglês",
+      "UX/UI",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa"
+    ]
   },
   {
     "id": 112,
@@ -14914,7 +16310,11 @@
     "data_publicacao": "06/08/2026",
     "fonte": "gupy",
     "url": "https://ivannegocios.gupy.io/job/eyJqb2JJZCI6MTE5NzQ5MzYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel",
+      "BI",
+      "IAM"
+    ]
   },
   {
     "id": 1893,
@@ -14947,7 +16347,22 @@
     "fonte": "gupy",
     "url": "https://bellinatiperez.gupy.io/job/eyJqb2JJZCI6MTE5NjkxNjIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Gestão de Vulnerabilidades"
+      "Python",
+      "SQL",
+      "Shell/Bash",
+      "Excel",
+      "Pandas",
+      "Azure",
+      "Linux",
+      "Windows Server",
+      "Windows",
+      "Redes de Computadores",
+      "Firewall",
+      "GLPI",
+      "LGPD",
+      "ISO 27001",
+      "Gestão de Vulnerabilidades",
+      "Inglês"
     ]
   },
   {
@@ -14964,6 +16379,14 @@
     "fonte": "gupy",
     "url": "https://bellinatiperez.gupy.io/job/eyJqb2JJZCI6MTE5NzYyOTMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Shell/Bash",
+      "Active Directory",
+      "Office 365",
+      "LGPD",
+      "ISO 27001",
+      "IAM",
+      "SIEM/SOC",
+      "Inglês",
       "Governança e Riscos (GRC)"
     ]
   },
@@ -14980,13 +16403,15 @@
     "data_publicacao": "06/08/2026",
     "fonte": "gupy",
     "url": "https://assai.gupy.io/job/eyJqb2JJZCI6MTE5NzA4ODYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Algoritmos"
+    ]
   },
   {
     "id": 1770,
     "titulo": "Auxiliar de TI",
     "empresa": "Importadora Bagé",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "Porto Alegre, Rio Grande do Sul",
     "polo": "Porto Alegre",
@@ -14995,7 +16420,16 @@
     "data_publicacao": "06/08/2026",
     "fonte": "gupy",
     "url": "https://importadorabage.gupy.io/job/eyJqb2JJZCI6MTE5NjA3MTAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Firewall",
+      "VoIP",
+      "Office 365",
+      "CFTV",
+      "Copilots & Assistentes de IA"
+    ]
   },
   {
     "id": 1763,
@@ -15071,7 +16505,12 @@
     "fonte": "gupy",
     "url": "https://votorantimcoe.gupy.io/job/eyJqb2JJZCI6MTE1MzE5NDksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Inteligência Artificial"
+      "Python",
+      "SQL",
+      "Power BI",
+      "Excel",
+      "Inteligência Artificial",
+      "Estatística"
     ]
   },
   {
@@ -15087,13 +16526,7 @@
     "data_publicacao": "06/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-em-ti-suporte-t%C3%A9cnico-at-solim-medicina-diagn%C3%B3stica-4449954478",
-    "tecnologias": [
-      "Windows",
-      "Redes de Computadores",
-      "Hardware",
-      "Help Desk",
-      "Manutenção Preventiva"
-    ]
+    "tecnologias": []
   },
   {
     "id": 1539,
@@ -15114,7 +16547,7 @@
     "id": 1492,
     "titulo": "Assistente de TI",
     "empresa": "Gertec",
-    "area": "Infraestrutura / Redes",
+    "area": "Outros/TI Geral",
     "senioridade": "Júnior",
     "localidade": "São Paulo, SP",
     "polo": "São Paulo",
@@ -15123,10 +16556,7 @@
     "data_publicacao": "06/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-ti-at-gertec-4448441371",
-    "tecnologias": [
-      "Redes de Computadores",
-      "Hardware"
-    ]
+    "tecnologias": []
   },
   {
     "id": 1426,
@@ -15351,6 +16781,7 @@
     "fonte": "gupy",
     "url": "https://sbsc.gupy.io/job/eyJqb2JJZCI6MTE5NzM2NjgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "SQL",
       "ERP",
       "TOTVS"
     ]
@@ -15478,6 +16909,23 @@
     "tecnologias": []
   },
   {
+    "id": 2008,
+    "titulo": "ESTÁGIO - THEMA INFORMÁTICA - ANÁLISE/RELATÓRIOS SQL",
+    "empresa": "PUCRS Carreiras",
+    "area": "Data",
+    "senioridade": "Estágio",
+    "localidade": "Porto Alegre e Região",
+    "polo": "Porto Alegre",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "05/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-thema-inform%C3%A1tica-an%C3%A1lise-relat%C3%B3rios-sql-at-pucrs-carreiras-4449136399",
+    "tecnologias": [
+      "SQL"
+    ]
+  },
+  {
     "id": 1973,
     "titulo": "Auxiliar de Suporte de TI",
     "empresa": "Jobbol",
@@ -15573,7 +17021,7 @@
     "id": 1691,
     "titulo": "Analista de Operações Cloud Júnior | Segunda a Sexta – 14h às 23h",
     "empresa": "Dedalus Prime",
-    "area": "Outros/TI Geral",
+    "area": "DevOps",
     "senioridade": "Júnior",
     "localidade": "Brasil",
     "polo": "Remoto",
@@ -15582,13 +17030,24 @@
     "data_publicacao": "05/08/2026",
     "fonte": "gupy",
     "url": "https://dedalus.gupy.io/job/eyJqb2JJZCI6MTE4ODEyMjQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Inteligência Artificial",
+      "AWS",
+      "Azure",
+      "GCP",
+      "Kubernetes",
+      "Linux",
+      "Windows",
+      "ITIL",
+      "Zabbix",
+      "Inglês"
+    ]
   },
   {
     "id": 1650,
     "titulo": "Assistente de TI",
     "empresa": "Escola Mais",
-    "area": "Outros/TI Geral",
+    "area": "Backend",
     "senioridade": "Júnior",
     "localidade": "São Paulo, São Paulo",
     "polo": "São Paulo",
@@ -15597,13 +17056,25 @@
     "data_publicacao": "05/08/2026",
     "fonte": "gupy",
     "url": "https://escolamais.gupy.io/job/eyJqb2JJZCI6MTE5NTgxMzksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "Java",
+      "JavaScript",
+      "C#",
+      "PHP",
+      "SQL",
+      "MySQL",
+      "SQL Server",
+      "Firewall",
+      "Hardware",
+      "Metodologias Ágeis"
+    ]
   },
   {
     "id": 1564,
     "titulo": "Estagiário de TI",
     "empresa": "Imex Medical",
-    "area": "Infraestrutura / Redes",
+    "area": "Outros/TI Geral",
     "senioridade": "Estágio",
     "localidade": "São José, SC",
     "polo": "Florianópolis",
@@ -15612,13 +17083,7 @@
     "data_publicacao": "05/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-de-ti-at-imex-medical-4449495966",
-    "tecnologias": [
-      "Linux",
-      "Windows",
-      "Redes de Computadores",
-      "Hardware",
-      "Montagem e Manutenção de PCs"
-    ]
+    "tecnologias": []
   },
   {
     "id": 1500,
@@ -15654,7 +17119,7 @@
     "id": 1490,
     "titulo": "Assistente de TI",
     "empresa": "Porter",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "São José, SC",
     "polo": "Florianópolis",
@@ -15663,7 +17128,11 @@
     "data_publicacao": "05/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-ti-at-porter-4449137643",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "Redes de Computadores",
+      "LGPD"
+    ]
   },
   {
     "id": 1462,
@@ -15724,14 +17193,19 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/service-desk-junior-analyst-at-lenovo-4449130978",
     "tecnologias": [
-      "Service Desk"
+      "Next.js",
+      "Windows",
+      "ITIL",
+      "Service Desk",
+      "Hardware",
+      "Help Desk"
     ]
   },
   {
     "id": 1176,
     "titulo": "Assistente Jr de T.I",
     "empresa": "Omniteca",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "Extrema, MG",
     "polo": "Estado/MG",
@@ -15740,7 +17214,20 @@
     "data_publicacao": "05/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-jr-de-t-i-at-omniteca-4449330345",
-    "tecnologias": []
+    "tecnologias": [
+      "SQL",
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Firewall",
+      "ITIL",
+      "Service Desk",
+      "Zabbix",
+      "Office 365",
+      "ERP",
+      "TOTVS",
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 1143,
@@ -16049,7 +17536,42 @@
     "fonte": "gupy",
     "url": "https://minsait.gupy.io/job/eyJqb2JJZCI6MTE5NTIzNDAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Java"
+      "Java",
+      "JavaScript",
+      "TypeScript",
+      "C#",
+      "SQL",
+      "React",
+      "Node.js",
+      "Spring",
+      "SQL Server",
+      "AWS",
+      "Docker",
+      "Git",
+      "API REST",
+      "Scrum",
+      "Metodologias Ágeis",
+      "Microserviços",
+      "Inglês",
+      "Jira",
+      "Confluence"
+    ]
+  },
+  {
+    "id": 2028,
+    "titulo": "Consultor de Dados & IA Júnior (AI Engineer Júnior)",
+    "empresa": "APGAR",
+    "area": "Inteligência Artificial",
+    "senioridade": "Júnior",
+    "localidade": "Porto Alegre e Região",
+    "polo": "Porto Alegre",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "04/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/consultor-de-dados-ia-j%C3%BAnior-ai-engineer-j%C3%BAnior-at-apgar-4446635700",
+    "tecnologias": [
+      "Inteligência Artificial"
     ]
   },
   {
@@ -16080,7 +17602,13 @@
     "data_publicacao": "04/08/2026",
     "fonte": "gupy",
     "url": "https://softexpert.gupy.io/job/eyJqb2JJZCI6MTE5Mzc3MzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "SQL",
+      "Windows",
+      "ITIL",
+      "Service Desk",
+      "ERP"
+    ]
   },
   {
     "id": 1927,
@@ -16111,6 +17639,10 @@
     "fonte": "gupy",
     "url": "https://redbeltsecurity.gupy.io/job/eyJqb2JJZCI6MTE1ODc4OTksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "AWS",
+      "GCP",
+      "Redes de Computadores",
+      "Firewall",
       "SIEM/SOC"
     ]
   },
@@ -16128,6 +17660,11 @@
     "fonte": "gupy",
     "url": "https://americanas.gupy.io/job/eyJqb2JJZCI6MTE5NDExMzYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Oracle",
+      "Azure",
+      "GCP",
+      "Active Directory",
+      "OAuth/JWT",
       "IAM"
     ]
   },
@@ -16195,7 +17732,7 @@
     "id": 1785,
     "titulo": "Âmbar Energia - Assistente de TI - Boa Vista/RR",
     "empresa": "Âmbar Energia",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "Boa Vista, Roraima",
     "polo": "Boa Vista",
@@ -16204,13 +17741,23 @@
     "data_publicacao": "04/08/2026",
     "fonte": "gupy",
     "url": "https://ambarenergia.gupy.io/job/eyJqb2JJZCI6MTE5MzY4NTksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Service Desk",
+      "VoIP",
+      "Office 365",
+      "Hardware",
+      "Help Desk",
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 1781,
     "titulo": "TECNICO INFORMATICA JR - CARUARU/PE",
     "empresa": "Cogna Educação",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "Caruaru, Pernambuco",
     "polo": "Caruaru",
@@ -16219,7 +17766,13 @@
     "data_publicacao": "04/08/2026",
     "fonte": "gupy",
     "url": "https://cogna.gupy.io/job/eyJqb2JJZCI6MTE4ODg3MjcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Redes de Computadores",
+      "Hardware",
+      "VMware",
+      "Inglês",
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 1706,
@@ -16249,7 +17802,13 @@
     "data_publicacao": "04/08/2026",
     "fonte": "gupy",
     "url": "https://franq.gupy.io/job/eyJqb2JJZCI6MTE5NDM0ODQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "Excel",
+      "CRM",
+      "Jira"
+    ]
   },
   {
     "id": 1665,
@@ -16803,7 +18362,19 @@
     "data_publicacao": "04/08/2026",
     "fonte": "gupy",
     "url": "https://fiscaltech.gupy.io/job/eyJqb2JJZCI6MTE5MzY2ODcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "Shell/Bash",
+      "Kubernetes",
+      "Terraform",
+      "Ansible",
+      "CI/CD",
+      "Linux",
+      "Grafana",
+      "Zabbix",
+      "VMware",
+      "Cibersegurança"
+    ]
   },
   {
     "id": 85,
@@ -16834,7 +18405,23 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/engenheiro-de-dados-j%C3%BAnior-at-apgar-4446636552",
     "tecnologias": [
-      "Inteligência Artificial"
+      "Python",
+      "SQL",
+      "Pandas",
+      "Spark",
+      "Airflow",
+      "ETL",
+      "Data Warehouse",
+      "Data Lake",
+      "BigQuery",
+      "Databricks",
+      "Machine Learning",
+      "Inteligência Artificial",
+      "AWS",
+      "Azure",
+      "GCP",
+      "Git",
+      "Inglês"
     ]
   },
   {
@@ -16871,7 +18458,7 @@
     "id": 1,
     "titulo": "Analista Desenvolvedor Junior",
     "empresa": "BANCO INDUSTRIAL DO BRASIL",
-    "area": "Segurança",
+    "area": "Backend",
     "senioridade": "Júnior",
     "localidade": "São Paulo, São Paulo",
     "polo": "São Paulo",
@@ -16880,13 +18467,33 @@
     "data_publicacao": "04/08/2026",
     "fonte": "gupy",
     "url": "https://bib.gupy.io/job/eyJqb2JJZCI6MTE2MjUyMTAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": [
+      "C#",
+      "SQL",
+      ".NET",
+      "SQL Server"
+    ]
+  },
+  {
+    "id": 2056,
+    "titulo": "Estágio de Suporte de TI - Canoas/RS",
+    "empresa": "Pibernat",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Canoas, RS",
+    "polo": "Porto Alegre",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-de-suporte-de-ti-canoas-rs-at-grupo-pibernat-4448615653",
     "tecnologias": []
   },
   {
     "id": 1997,
     "titulo": "TECNICO INFORMATICA JR. - CACHOEIRO DE ITAPEMIRIM/ES",
     "empresa": "Cogna Educação",
-    "area": "Outros/TI Geral",
+    "area": "Suporte Técnico",
     "senioridade": "Júnior",
     "localidade": "Cachoeiro de Itapemirim, Espírito Santo",
     "polo": "Interior Capixaba",
@@ -16895,7 +18502,15 @@
     "data_publicacao": "03/08/2026",
     "fonte": "gupy",
     "url": "https://cogna.gupy.io/job/eyJqb2JJZCI6MTE4NjQyNDEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Linux",
+      "Windows",
+      "Redes de Computadores",
+      "Hardware",
+      "VMware",
+      "Inglês",
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 1905,
@@ -17005,13 +18620,21 @@
     "data_publicacao": "03/08/2026",
     "fonte": "gupy",
     "url": "https://telium.gupy.io/job/eyJqb2JJZCI6MTE4NzQzNDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Linux",
+      "Windows",
+      "Redes de Computadores",
+      "VPN",
+      "Firewall",
+      "Cisco",
+      "Algoritmos"
+    ]
   },
   {
     "id": 1723,
     "titulo": "Técnico(a) de Informática JR - Matriz (Joinville/SC) - Exclusivo para Pessoas com Deficiência",
     "empresa": "CLAMED Administrativo",
-    "area": "Outros/TI Geral",
+    "area": "Field Service / Hardware",
     "senioridade": "Júnior",
     "localidade": "Joinville, Santa Catarina",
     "polo": "Joinville",
@@ -17020,7 +18643,13 @@
     "data_publicacao": "03/08/2026",
     "fonte": "gupy",
     "url": "https://clamed.gupy.io/job/eyJqb2JJZCI6MTE5MjE5NDksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Linux",
+      "Windows",
+      "Redes de Computadores",
+      "Hardware",
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 1714,
@@ -17043,7 +18672,7 @@
     "id": 1698,
     "titulo": "Assistente de TI - Douraglass",
     "empresa": "Grupo Capema",
-    "area": "Suporte Técnico",
+    "area": "Engenharia de Software",
     "senioridade": "Júnior",
     "localidade": "Dourados, Mato Grosso do Sul",
     "polo": "Campo Grande",
@@ -17053,7 +18682,12 @@
     "fonte": "gupy",
     "url": "https://grupocapema.gupy.io/job/eyJqb2JJZCI6MTE5MjA3NzQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Hardware"
+      "Python",
+      "Shell/Bash",
+      "Linux",
+      "Windows",
+      "Hardware",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -17069,7 +18703,13 @@
     "data_publicacao": "03/08/2026",
     "fonte": "gupy",
     "url": "https://vempragestaods.gupy.io/job/eyJqb2JJZCI6MTE5MjU5ODcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "Excel",
+      "Git",
+      "Windows"
+    ]
   },
   {
     "id": 1649,
@@ -17460,7 +19100,18 @@
     "data_publicacao": "03/08/2026",
     "fonte": "gupy",
     "url": "https://e-deploy.gupy.io/job/eyJqb2JJZCI6MTE5MjY2MTksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "SQL",
+      "Inteligência Artificial",
+      "Git",
+      "Postman",
+      "Insomnia",
+      "Testes Automatizados",
+      "Inglês",
+      "ERP",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa"
+    ]
   },
   {
     "id": 315,
@@ -17490,7 +19141,11 @@
     "data_publicacao": "03/08/2026",
     "fonte": "gupy",
     "url": "https://admpmenos.gupy.io/job/eyJqb2JJZCI6MTE5Mjk5MzgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel",
+      "ITIL",
+      "Hardware"
+    ]
   },
   {
     "id": 232,
@@ -17521,7 +19176,22 @@
     "fonte": "gupy",
     "url": "https://aviator.gupy.io/job/eyJqb2JJZCI6MTE5MjMwODgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Inteligência Artificial"
+      "Python",
+      "JavaScript",
+      "TypeScript",
+      "PHP",
+      "SQL",
+      "React",
+      "Node.js",
+      "Inteligência Artificial",
+      "MySQL",
+      "SQL Server",
+      "Git",
+      "Inglês",
+      "ERP",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -17657,9 +19327,7 @@
     "data_publicacao": "01/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-suporte-t%C3%A9cnico-at-passerine-advogados-4447784523",
-    "tecnologias": [
-      "Windows"
-    ]
+    "tecnologias": []
   },
   {
     "id": 1566,
@@ -17890,6 +19558,38 @@
     "tecnologias": []
   },
   {
+    "id": 2042,
+    "titulo": "Auxiliar de TI",
+    "empresa": "Fitas Progresso",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "Campinas e Região",
+    "polo": "Campinas",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "31/07/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/auxiliar-de-ti-at-fitas-progresso-4459001165",
+    "tecnologias": []
+  },
+  {
+    "id": 2020,
+    "titulo": "Software Engineer Júnior (IA & Integrações)",
+    "empresa": "PlanetaEXO",
+    "area": "Engenharia de Software",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "31/07/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/software-engineer-j%C3%BAnior-ia-integra%C3%A7%C3%B5es-at-planetaexo-4457617513",
+    "tecnologias": [
+      "Inteligência Artificial"
+    ]
+  },
+  {
     "id": 1901,
     "titulo": "Estágio de suporte a postos (service desk) - vespertino",
     "empresa": "Soutag",
@@ -17934,7 +19634,28 @@
     "data_publicacao": "31/07/2026",
     "fonte": "gupy",
     "url": "https://inatel.gupy.io/job/eyJqb2JJZCI6MTE4NDc3NDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "JavaScript",
+      "TypeScript",
+      "SQL",
+      "Shell/Bash",
+      "HTML",
+      "CSS",
+      "React",
+      "Angular",
+      "PostgreSQL",
+      "Docker",
+      "Kubernetes",
+      "Terraform",
+      "Ansible",
+      "Jenkins",
+      "Git",
+      "CI/CD",
+      "Linux",
+      "API REST",
+      "Inglês"
+    ]
   },
   {
     "id": 1676,
@@ -17949,7 +19670,11 @@
     "data_publicacao": "31/07/2026",
     "fonte": "gupy",
     "url": "https://credsystem.gupy.io/job/eyJqb2JJZCI6MTE4OTQ1OTUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Power BI",
+      "Databricks",
+      "Estatística"
+    ]
   },
   {
     "id": 1646,
@@ -17970,7 +19695,7 @@
     "id": 1544,
     "titulo": "Assistente de TI",
     "empresa": "Complexo Vale do Cerrado",
-    "area": "Suporte Técnico",
+    "area": "Outros/TI Geral",
     "senioridade": "Júnior",
     "localidade": "Brasil",
     "polo": "Remoto",
@@ -17979,9 +19704,7 @@
     "data_publicacao": "31/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-ti-at-complexo-vale-do-cerrado-4447237016",
-    "tecnologias": [
-      "Hardware"
-    ]
+    "tecnologias": []
   },
   {
     "id": 1526,
@@ -18364,7 +20087,13 @@
     "data_publicacao": "31/07/2026",
     "fonte": "gupy",
     "url": "https://voke.gupy.io/job/eyJqb2JJZCI6MTE1OTU5MDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "Redes de Computadores",
+      "ITIL",
+      "Hardware",
+      "Eletrônica"
+    ]
   },
   {
     "id": 382,
@@ -18380,7 +20109,14 @@
     "fonte": "gupy",
     "url": "https://hpe.gupy.io/job/eyJqb2JJZCI6MTE4NzYxNDQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Service Desk"
+      "PHP",
+      "Laravel",
+      "Power BI",
+      "Inteligência Artificial",
+      "Service Desk",
+      "Scrum",
+      "Metodologias Ágeis",
+      "Inglês"
     ]
   },
   {
@@ -18411,7 +20147,9 @@
     "data_publicacao": "31/07/2026",
     "fonte": "gupy",
     "url": "https://votorantimcimentostalentos.gupy.io/job/eyJqb2JJZCI6MTE4OTQ5ODcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel"
+    ]
   },
   {
     "id": 70,
@@ -18426,7 +20164,10 @@
     "data_publicacao": "31/07/2026",
     "fonte": "gupy",
     "url": "https://tokiomarine.gupy.io/job/eyJqb2JJZCI6MTE4OTUxMTgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Power BI",
+      "Inglês"
+    ]
   },
   {
     "id": 56,
@@ -18447,7 +20188,7 @@
     "id": 31,
     "titulo": "Estágio Tecnologia - Financeiro",
     "empresa": "Villares Metals",
-    "area": "Outros/TI Geral",
+    "area": "Sistemas / ERP",
     "senioridade": "Estágio",
     "localidade": "Sumaré, São Paulo",
     "polo": "São Paulo",
@@ -18457,7 +20198,13 @@
     "fonte": "gupy",
     "url": "https://villaresmetals.gupy.io/job/eyJqb2JJZCI6MTE4OTM2NDEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Metodologias Ágeis"
+      "Python",
+      "Visual Basic/VBA",
+      "Power BI",
+      "Metodologias Ágeis",
+      "Inglês",
+      "UX/UI",
+      "SAP"
     ]
   },
   {
@@ -18948,6 +20695,8 @@
       "JavaScript",
       "PHP",
       "SQL",
+      "ERP",
+      "TOTVS",
       "Manutenção Preventiva"
     ]
   },
@@ -18955,7 +20704,7 @@
     "id": 118,
     "titulo": "Desenvolvedor(a) Júnior (NestJS, Vue.js e SQL Server) - 153541",
     "empresa": "Agenda Assessoria",
-    "area": "Data",
+    "area": "Frontend",
     "senioridade": "Júnior",
     "localidade": "Cuiabá, Mato Grosso",
     "polo": "Cuiabá",
@@ -18966,10 +20715,22 @@
     "url": "https://agendaassessoria.gupy.io/job/eyJqb2JJZCI6MTE4NzM2MTcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
       "JavaScript",
+      "TypeScript",
       "SQL",
+      "HTML",
+      "CSS",
       "Vue.js",
       "NestJS",
-      "SQL Server"
+      "Prisma",
+      "SQL Server",
+      "Docker",
+      "Git",
+      "Testes Automatizados",
+      "API REST",
+      "Scrum",
+      "Metodologias Ágeis",
+      "Clean Code",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -18985,6 +20746,34 @@
     "data_publicacao": "30/07/2026",
     "fonte": "gupy",
     "url": "https://vemserbenner.gupy.io/job/eyJqb2JJZCI6MTE1MTM4NTcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": [
+      "JavaScript",
+      "C#",
+      "Delphi",
+      "SQL",
+      "React",
+      "Angular",
+      "Vue.js",
+      ".NET",
+      "Prisma",
+      "SQL Server",
+      "Git",
+      "Metodologias Ágeis"
+    ]
+  },
+  {
+    "id": 2036,
+    "titulo": "Assistente de TI - Temporário",
+    "empresa": "SGI",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "Salvador, BA",
+    "polo": "Salvador",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "29/07/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/assistente-de-ti-tempor%C3%A1rio-at-sgi-4444138658",
     "tecnologias": []
   },
   {
@@ -19000,7 +20789,14 @@
     "data_publicacao": "29/07/2026",
     "fonte": "gupy",
     "url": "https://tfcarreira.gupy.io/job/eyJqb2JJZCI6MTE4NjIzNTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "Redes de Computadores",
+      "ITIL",
+      "Hardware",
+      "Criptografia",
+      "ERP"
+    ]
   },
   {
     "id": 1740,
@@ -19021,7 +20817,7 @@
     "id": 1711,
     "titulo": "CAIO BOTUCATU - Assistente de TI",
     "empresa": "Grupo Caio",
-    "area": "Outros/TI Geral",
+    "area": "Field Service / Hardware",
     "senioridade": "Júnior",
     "localidade": "Botucatu, São Paulo",
     "polo": "São Paulo",
@@ -19030,7 +20826,14 @@
     "data_publicacao": "29/07/2026",
     "fonte": "gupy",
     "url": "https://grupocaio.gupy.io/job/eyJqb2JJZCI6MTE4NTg3MDMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Service Desk",
+      "Hardware",
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 1666,
@@ -19456,7 +21259,13 @@
     "data_publicacao": "29/07/2026",
     "fonte": "gupy",
     "url": "https://voke.gupy.io/job/eyJqb2JJZCI6MTE2Nzk4NDIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "Redes de Computadores",
+      "ITIL",
+      "Hardware",
+      "Eletrônica"
+    ]
   },
   {
     "id": 401,
@@ -19533,7 +21342,27 @@
     "data_publicacao": "29/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/engenheiro-de-dados-junior-at-qualificar-ti-4446517569",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "Power BI",
+      "Spark",
+      "Airflow",
+      "ETL",
+      "Data Warehouse",
+      "Data Lake",
+      "BigQuery",
+      "Estatística",
+      "AWS",
+      "Azure",
+      "GCP",
+      "Jenkins",
+      "Git",
+      "CI/CD",
+      "Scrum",
+      "Metodologias Ágeis",
+      "Algoritmos"
+    ]
   },
   {
     "id": 59,
@@ -19551,6 +21380,21 @@
     "tecnologias": [
       "BI"
     ]
+  },
+  {
+    "id": 2038,
+    "titulo": "Auxiliar de Informática",
+    "empresa": "Frigorífico Better Beef",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "28/07/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/auxiliar-de-inform%C3%A1tica-at-frigor%C3%ADfico-better-beef-4447822783",
+    "tecnologias": []
   },
   {
     "id": 1953,
@@ -19580,7 +21424,24 @@
     "data_publicacao": "28/07/2026",
     "fonte": "gupy",
     "url": "https://vdev.gupy.io/job/eyJqb2JJZCI6MTE4MzU0MTcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "Shell/Bash",
+      "Linux",
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "ITIL",
+      "Service Desk",
+      "Zendesk",
+      "GLPI",
+      "Office 365",
+      "Inglês",
+      "IoT",
+      "Eletrônica",
+      "Help Desk",
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 1934,
@@ -19611,7 +21472,14 @@
     "fonte": "gupy",
     "url": "https://penso.gupy.io/job/eyJqb2JJZCI6MTE4NDQ0MTEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Service Desk"
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Service Desk",
+      "Office 365",
+      "Hardware",
+      "Algoritmos",
+      "Inglês"
     ]
   },
   {
@@ -19635,7 +21503,7 @@
     "id": 1756,
     "titulo": "Assistente Administrativo - TI",
     "empresa": "Way Brasil",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "Uberaba, Minas Gerais",
     "polo": "Uberlândia",
@@ -19644,13 +21512,21 @@
     "data_publicacao": "28/07/2026",
     "fonte": "gupy",
     "url": "https://waybrasil.gupy.io/job/eyJqb2JJZCI6MTE4NDk0MzYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel",
+      "Redes de Computadores",
+      "Service Desk",
+      "Hardware",
+      "ERP",
+      "SAP",
+      "TOTVS"
+    ]
   },
   {
     "id": 1724,
     "titulo": "Assistente de TI",
     "empresa": "Fragata e Antunes Advogados",
-    "area": "Outros/TI Geral",
+    "area": "Frontend",
     "senioridade": "Júnior",
     "localidade": "Salvador, Bahia",
     "polo": "Salvador",
@@ -19659,7 +21535,12 @@
     "data_publicacao": "28/07/2026",
     "fonte": "gupy",
     "url": "https://fragataeantunes.gupy.io/job/eyJqb2JJZCI6MTE1ODgwNzAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Excel"
+    ]
   },
   {
     "id": 1712,
@@ -19674,7 +21555,9 @@
     "data_publicacao": "28/07/2026",
     "fonte": "gupy",
     "url": "https://irssl.gupy.io/job/eyJqb2JJZCI6MTE2NzY1NzcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Redes de Computadores"
+    ]
   },
   {
     "id": 1657,
@@ -19689,7 +21572,13 @@
     "data_publicacao": "28/07/2026",
     "fonte": "gupy",
     "url": "https://bellinatiperez.gupy.io/job/eyJqb2JJZCI6MTE4NDQwNDMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "Power BI",
+      "Excel",
+      "Estatística"
+    ]
   },
   {
     "id": 1599,
@@ -20094,7 +21983,9 @@
     "data_publicacao": "28/07/2026",
     "fonte": "gupy",
     "url": "https://vaga-ja.com/vagas/shopping-juridico/shopping-juridico-estagio-em-desenvolvimento-de-sistema?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Inteligência Artificial"
+    ]
   },
   {
     "id": 264,
@@ -20154,13 +22045,39 @@
     "data_publicacao": "28/07/2026",
     "fonte": "gupy",
     "url": "https://minsait.gupy.io/job/eyJqb2JJZCI6MTE4Mjk3MjUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Java",
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Angular",
+      "Node.js",
+      "Spring",
+      "Quarkus",
+      "Bootstrap",
+      "MySQL",
+      "Oracle",
+      "AWS",
+      "Azure",
+      "GCP",
+      "Docker",
+      "Kubernetes",
+      "Jenkins",
+      "Git",
+      "CI/CD",
+      "Grafana",
+      "Prometheus",
+      "API REST",
+      "Scrum",
+      "Metodologias Ágeis",
+      "Microserviços"
+    ]
   },
   {
     "id": 113,
     "titulo": "Estágio em TI - Infraestrutura",
     "empresa": "Programa de Estágio | Tecon Suape",
-    "area": "DevOps",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Estágio",
     "localidade": "Ipojuca, Pernambuco",
     "polo": "Recife",
@@ -20169,7 +22086,11 @@
     "data_publicacao": "28/07/2026",
     "fonte": "gupy",
     "url": "https://estagioteconsuape.gupy.io/job/eyJqb2JJZCI6MTE4NDUwNDYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "Redes de Computadores",
+      "Hardware"
+    ]
   },
   {
     "id": 61,
@@ -20246,7 +22167,9 @@
     "data_publicacao": "27/07/2026",
     "fonte": "gupy",
     "url": "https://positivotecnologia.gupy.io/job/eyJqb2JJZCI6MTE4Mjc3OTEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Governança e Riscos (GRC)"
+    ]
   },
   {
     "id": 1882,
@@ -20261,7 +22184,14 @@
     "data_publicacao": "27/07/2026",
     "fonte": "gupy",
     "url": "https://estagioanbima.gupy.io/job/eyJqb2JJZCI6MTE3MzM5MzIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "AWS",
+      "Azure",
+      "Linux",
+      "Redes de Computadores",
+      "VPN",
+      "ISO 27001"
+    ]
   },
   {
     "id": 1831,
@@ -20336,7 +22266,9 @@
     "data_publicacao": "27/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-jr-qcertifica-at-quick-soft-tecnologia-4445408807",
-    "tecnologias": []
+    "tecnologias": [
+      "Algoritmos"
+    ]
   },
   {
     "id": 1463,
@@ -20396,7 +22328,11 @@
     "data_publicacao": "27/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-ti-jr-matriz-cuiab%C3%A1-at-scheffer-oficial-4442898630",
-    "tecnologias": []
+    "tecnologias": [
+      "SQL",
+      "Algoritmos",
+      "ERP"
+    ]
   },
   {
     "id": 1160,
@@ -20534,7 +22470,7 @@
     "id": 398,
     "titulo": "Programador CLP Júnior",
     "empresa": "INFORMI",
-    "area": "Engenharia de Software",
+    "area": "Hardware / Eletrônica",
     "senioridade": "Júnior",
     "localidade": "São Bernardo do Campo, São Paulo",
     "polo": "São Paulo",
@@ -20544,6 +22480,7 @@
     "fonte": "gupy",
     "url": "https://vaga-ja.com/vagas/informi/informi-programador-clp-junior?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Eletrônica",
       "Automação Industrial"
     ]
   },
@@ -20575,7 +22512,9 @@
     "data_publicacao": "27/07/2026",
     "fonte": "gupy",
     "url": "https://ambev.gupy.io/job/eyJqb2JJZCI6MTE2NzUxMzMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Express"
+    ]
   },
   {
     "id": 66,
@@ -20897,7 +22836,13 @@
     "fonte": "gupy",
     "url": "https://hapvidandi.gupy.io/job/eyJqb2JJZCI6MTE2NzUwNDYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Suporte N1/N2"
+      "Excel",
+      "Windows",
+      "Redes de Computadores",
+      "Hardware",
+      "Suporte N1/N2",
+      "Montagem e Manutenção de PCs",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -20913,7 +22858,21 @@
     "data_publicacao": "24/07/2026",
     "fonte": "gupy",
     "url": "https://carreirasallos.gupy.io/job/eyJqb2JJZCI6MTE3MTQyMDEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "AWS",
+      "Azure",
+      "GCP",
+      "Terraform",
+      "Linux",
+      "Testes Automatizados",
+      "Active Directory",
+      "Windows",
+      "OWASP",
+      "Pentest",
+      "SIEM/SOC",
+      "Cibersegurança",
+      "Governança e Riscos (GRC)"
+    ]
   },
   {
     "id": 1858,
@@ -20949,7 +22908,7 @@
     "id": 1782,
     "titulo": "Técnico (a) Informática JR",
     "empresa": "Confidencial",
-    "area": "Suporte Técnico",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "Brasil",
     "polo": "Não informado",
@@ -20959,6 +22918,7 @@
     "fonte": "gupy",
     "url": "https://confidencial72763.gupy.io/job/eyJqb2JJZCI6MTE2NDgzNDYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Android",
       "Manutenção Preventiva"
     ]
   },
@@ -21050,7 +23010,11 @@
     "data_publicacao": "24/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-jr-manaus-at-faber-castell-brasil-4441840726",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel",
+      "ITIL",
+      "Hardware"
+    ]
   },
   {
     "id": 1141,
@@ -21321,7 +23285,12 @@
     "data_publicacao": "24/07/2026",
     "fonte": "gupy",
     "url": "https://vemproitau.gupy.io/job/eyJqb2JJZCI6MTE2MzQ0NzYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "Criptografia",
+      "Inglês"
+    ]
   },
   {
     "id": 102,
@@ -21344,7 +23313,7 @@
     "id": 14,
     "titulo": "Desenvolvedor Júnior - 153315",
     "empresa": "Agenda Assessoria",
-    "area": "Outros/TI Geral",
+    "area": "Engenharia de Software",
     "senioridade": "Júnior",
     "localidade": "Cuiabá, Mato Grosso",
     "polo": "Cuiabá",
@@ -21353,7 +23322,18 @@
     "data_publicacao": "24/07/2026",
     "fonte": "gupy",
     "url": "https://agendaassessoria.gupy.io/job/eyJqb2JJZCI6MTE3ODM0MDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "C#",
+      "SQL",
+      "PostgreSQL",
+      "SQL Server",
+      "Oracle",
+      "Git",
+      "API REST",
+      "Metodologias Ágeis",
+      "Clean Code",
+      "Algoritmos"
+    ]
   },
   {
     "id": 10,
@@ -21369,7 +23349,25 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-java-j%C3%BAnior-at-grupo-pernambucanas-4444051350",
     "tecnologias": [
-      "Java"
+      "Java",
+      "Spring",
+      "Kafka",
+      "PostgreSQL",
+      "MySQL",
+      "AWS",
+      "Azure",
+      "GCP",
+      "Docker",
+      "Git",
+      "CI/CD",
+      "RabbitMQ",
+      "JUnit",
+      "Testes Automatizados",
+      "API REST",
+      "Scrum",
+      "Metodologias Ágeis",
+      "Microserviços",
+      "Inglês"
     ]
   },
   {
@@ -21423,7 +23421,7 @@
     "id": 1817,
     "titulo": "Assistente de Tecnologia da Informação",
     "empresa": "By Moto",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "Belo Horizonte e Região",
     "polo": "Belo Horizonte",
@@ -21432,7 +23430,14 @@
     "data_publicacao": "23/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-tecnologia-da-informa%C3%A7%C3%A3o-at-by-moto-4444430815",
-    "tecnologias": []
+    "tecnologias": [
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Office 365",
+      "LGPD",
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 1540,
@@ -21940,7 +23945,7 @@
     "id": 162,
     "titulo": "Analista Desenvolvedor Automação com IA JR",
     "empresa": "Grupo SysMap",
-    "area": "Outros/TI Geral",
+    "area": "Engenharia de Software",
     "senioridade": "Júnior",
     "localidade": "São Paulo, São Paulo",
     "polo": "São Paulo",
@@ -21950,7 +23955,11 @@
     "fonte": "gupy",
     "url": "https://gruposysmap.gupy.io/job/eyJqb2JJZCI6MTE3NDg2MDksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Inteligência Artificial"
+      "Inteligência Artificial",
+      "Git",
+      "Estrutura de Dados",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -22101,6 +24110,11 @@
     "fonte": "gupy",
     "url": "https://alvoarlacteos.gupy.io/job/eyJqb2JJZCI6MTE3NDYwODksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Windows",
+      "ITIL",
+      "Service Desk",
+      "Office 365",
+      "Hardware",
       "Suporte N1/N2"
     ]
   },
@@ -22108,7 +24122,7 @@
     "id": 1784,
     "titulo": "Âmbar Energia - Assistente Administrativo - TI",
     "empresa": "Âmbar Energia",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "Manaus, Amazonas",
     "polo": "Manaus",
@@ -22117,13 +24131,16 @@
     "data_publicacao": "22/07/2026",
     "fonte": "gupy",
     "url": "https://ambarenergia.gupy.io/job/eyJqb2JJZCI6MTE3NDcwNjAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel",
+      "SAP"
+    ]
   },
   {
     "id": 1764,
     "titulo": "Assistente de TI",
     "empresa": "Autoamerica Group",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "Campina Grande do Sul, Paraná",
     "polo": "Curitiba",
@@ -22132,7 +24149,17 @@
     "data_publicacao": "22/07/2026",
     "fonte": "gupy",
     "url": "https://autoamerica.gupy.io/job/eyJqb2JJZCI6MTE3NDE4NjksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "GLPI",
+      "Office 365",
+      "Hardware",
+      "TOTVS",
+      "Jira",
+      "Help Desk"
+    ]
   },
   {
     "id": 1728,
@@ -22155,7 +24182,7 @@
     "id": 1709,
     "titulo": "Auxiliar de TI",
     "empresa": "Amara NZero - Página de talentos",
-    "area": "Outros/TI Geral",
+    "area": "Field Service / Hardware",
     "senioridade": "Júnior",
     "localidade": "Salvador, Bahia",
     "polo": "Salvador",
@@ -22242,7 +24269,7 @@
     "area": "Engenharia de Software",
     "senioridade": "Estágio",
     "localidade": "Criciúma, SC",
-    "polo": "Estado/SC",
+    "polo": "Criciúma",
     "regiao": "Sul",
     "modalidade": "Presencial",
     "data_publicacao": "22/07/2026",
@@ -22372,9 +24399,7 @@
     "data_publicacao": "22/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-de-tecnologia-da-informa%C3%A7%C3%A3o-at-lanlink-inform%C3%A1tica-ltda-4441088416",
-    "tecnologias": [
-      "Inglês"
-    ]
+    "tecnologias": []
   },
   {
     "id": 520,
@@ -22463,7 +24488,17 @@
     "data_publicacao": "22/07/2026",
     "fonte": "gupy",
     "url": "https://riachuelo.gupy.io/job/eyJqb2JJZCI6MTE3NDE4NzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "SQL",
+      "Excel",
+      "Git",
+      "OWASP",
+      "API REST",
+      "POO",
+      "ERP",
+      "SAP",
+      "IoT"
+    ]
   },
   {
     "id": 325,
@@ -22493,6 +24528,36 @@
     "data_publicacao": "22/07/2026",
     "fonte": "gupy",
     "url": "https://agrotis.gupy.io/job/eyJqb2JJZCI6MTE3NDcwMDAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": [
+      "Java",
+      "JavaScript",
+      "SQL",
+      "React",
+      "Angular",
+      "Spring",
+      "Hibernate",
+      "Docker",
+      "Git",
+      "JUnit",
+      "API REST",
+      "Metodologias Ágeis",
+      "Microserviços",
+      "Jira"
+    ]
+  },
+  {
+    "id": 2053,
+    "titulo": "Assistente de Suporte Técnico",
+    "empresa": "EQS ENGENHARIA",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "São José, SC",
+    "polo": "Florianópolis",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "21/07/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-t%C3%A9cnico-at-eqs-engenharia-4443088615",
     "tecnologias": []
   },
   {
@@ -22634,7 +24699,12 @@
     "fonte": "gupy",
     "url": "https://institutoeldorado.gupy.io/job/eyJqb2JJZCI6MTE2NjExNzksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Android"
+      "Java",
+      "Kotlin",
+      "Android",
+      "Git",
+      "Linux",
+      "Inglês"
     ]
   },
   {
@@ -22651,6 +24721,10 @@
     "fonte": "gupy",
     "url": "https://aramis.gupy.io/job/eyJqb2JJZCI6MTE3MzM3MjYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Python",
+      "SQL",
+      "Excel",
+      "Machine Learning",
       "Inteligência Artificial"
     ]
   },
@@ -22798,6 +24872,26 @@
     "data_publicacao": "20/07/2026",
     "fonte": "gupy",
     "url": "https://csn.gupy.io/job/eyJqb2JJZCI6MTE2NDkzNDQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": [
+      "Azure",
+      "Active Directory",
+      "SAP",
+      "Governança e Riscos (GRC)"
+    ]
+  },
+  {
+    "id": 2041,
+    "titulo": "Auxiliar de TI",
+    "empresa": "Grupo Lewis",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "Rio de Janeiro e Região",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "18/07/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/auxiliar-de-ti-at-grupo-lewis-4453161397",
     "tecnologias": []
   },
   {
@@ -23000,7 +25094,9 @@
     "data_publicacao": "17/07/2026",
     "fonte": "gupy",
     "url": "https://sicredi.gupy.io/job/eyJqb2JJZCI6MTE2NjYxNzMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Hardware"
+    ]
   },
   {
     "id": 1679,
@@ -23021,7 +25117,7 @@
     "id": 1538,
     "titulo": "Analista de Tecnologia da Informação I",
     "empresa": "Brisanet Telecomunicações",
-    "area": "Backend",
+    "area": "Outros/TI Geral",
     "senioridade": "Júnior",
     "localidade": "Pereiro, CE",
     "polo": "Estado/CE",
@@ -23030,22 +25126,7 @@
     "data_publicacao": "17/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-tecnologia-da-informa%C3%A7%C3%A3o-i-at-brisanet-telecomunica%C3%A7%C3%B5es-4439207902",
-    "tecnologias": [
-      "Python",
-      "JavaScript",
-      "C#",
-      "SQL",
-      "RPA",
-      "Inteligência Artificial",
-      "GCP",
-      "Git",
-      "Postman",
-      "API REST",
-      "Scrum",
-      "Metodologias Ágeis",
-      "LLMs & IA Generativa",
-      "Manutenção Preventiva"
-    ]
+    "tecnologias": []
   },
   {
     "id": 1473,
@@ -23308,7 +25389,28 @@
     "data_publicacao": "17/07/2026",
     "fonte": "gupy",
     "url": "https://vempraclaro.gupy.io/job/eyJqb2JJZCI6MTE2NDYyMTgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Java",
+      "JavaScript",
+      "TypeScript",
+      "Kotlin",
+      "React",
+      "Angular",
+      "Spring",
+      "Spark",
+      "Inteligência Artificial",
+      "PostgreSQL",
+      "MongoDB",
+      "Docker",
+      "Kubernetes",
+      "Git",
+      "RabbitMQ",
+      "API REST",
+      "Microserviços",
+      "POO",
+      "Estrutura de Dados",
+      "LLMs & IA Generativa"
+    ]
   },
   {
     "id": 1733,
@@ -23841,7 +25943,17 @@
     "data_publicacao": "16/07/2026",
     "fonte": "gupy",
     "url": "https://rodonaves.gupy.io/job/eyJqb2JJZCI6MTE2NTgxMTIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "C#",
+      "Angular",
+      "Android",
+      "Flutter",
+      "PostgreSQL",
+      "Oracle",
+      "RabbitMQ",
+      "Windows",
+      "Microserviços"
+    ]
   },
   {
     "id": 1993,
@@ -23980,7 +26092,10 @@
     "data_publicacao": "15/07/2026",
     "fonte": "gupy",
     "url": "https://unimedbelem.gupy.io/job/eyJqb2JJZCI6MTE2NDk4ODIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Redes de Computadores",
+      "VoIP"
+    ]
   },
   {
     "id": 1737,
@@ -24220,7 +26335,10 @@
     "data_publicacao": "15/07/2026",
     "fonte": "gupy",
     "url": "https://lotsgroup.gupy.io/job/eyJqb2JJZCI6MTE2NTE5NjgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Power BI",
+      "Excel"
+    ]
   },
   {
     "id": 79,
@@ -24267,7 +26385,12 @@
     "data_publicacao": "14/07/2026",
     "fonte": "gupy",
     "url": "https://maminfo.gupy.io/job/eyJqb2JJZCI6MTE2MjIyOTYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Redes de Computadores",
+      "Firewall",
+      "Cisco",
+      "Firmware"
+    ]
   },
   {
     "id": 1865,
@@ -24343,7 +26466,8 @@
     "fonte": "gupy",
     "url": "https://nuclea.gupy.io/job/eyJqb2JJZCI6MTE2MzUzNzcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Inteligência Artificial"
+      "Inteligência Artificial",
+      "Estatística"
     ]
   },
   {
@@ -24389,12 +26513,7 @@
     "data_publicacao": "14/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-t%C3%A9cnico-jr-at-eternit-s-a-4440370280",
-    "tecnologias": [
-      "Windows Server",
-      "Windows",
-      "Hardware",
-      "Montagem e Manutenção de PCs"
-    ]
+    "tecnologias": []
   },
   {
     "id": 788,
@@ -24409,7 +26528,14 @@
     "data_publicacao": "14/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-sistemas-de-informa%C3%A7%C3%A3o-an%C3%A1lise-e-desenvolvimento-de-sistemas-engenharia-de-software-at-iel-sc-4439927634",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "Java",
+      "C#",
+      "SQL",
+      "Git",
+      "Metodologias Ágeis"
+    ]
   },
   {
     "id": 669,
@@ -24460,7 +26586,7 @@
     "id": 531,
     "titulo": "Estagiário(a) de TI",
     "empresa": "Maxsoy Alimentos",
-    "area": "Infraestrutura / Redes",
+    "area": "Outros/TI Geral",
     "senioridade": "Estágio",
     "localidade": "Brasil",
     "polo": "Remoto",
@@ -24469,9 +26595,7 @@
     "data_publicacao": "14/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-de-ti-at-maxsoy-alimentos-ltda-4440373020",
-    "tecnologias": [
-      "Montagem e Manutenção de PCs"
-    ]
+    "tecnologias": []
   },
   {
     "id": 499,
@@ -24593,7 +26717,13 @@
     "data_publicacao": "13/07/2026",
     "fonte": "gupy",
     "url": "https://meliuz.gupy.io/job/eyJqb2JJZCI6MTE1OTE0NjcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel",
+      "Inteligência Artificial",
+      "Inglês",
+      "CRM",
+      "LLMs & IA Generativa"
+    ]
   },
   {
     "id": 1929,
@@ -24623,7 +26753,14 @@
     "data_publicacao": "13/07/2026",
     "fonte": "gupy",
     "url": "https://argenta.gupy.io/job/eyJqb2JJZCI6MTE2MTY1NjQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Shell/Bash",
+      "Linux",
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Hardware"
+    ]
   },
   {
     "id": 1487,
@@ -24932,8 +27069,57 @@
     "data_publicacao": "11/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-t%C3%A9cnico-j%C3%BAnior-at-associated-nerd-global-4438384687",
+    "tecnologias": []
+  },
+  {
+    "id": 2043,
+    "titulo": "Auxiliar de Tecnologia da Informação",
+    "empresa": "Opção Agro",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "10/07/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/auxiliar-de-tecnologia-da-informa%C3%A7%C3%A3o-at-op%C3%A7%C3%A3o-agro-4439677676",
+    "tecnologias": []
+  },
+  {
+    "id": 2040,
+    "titulo": "Auxiliar de TI",
+    "empresa": "Jobbol",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "Rondonópolis, MT",
+    "polo": "Cuiabá",
+    "regiao": "Centro-Oeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "10/07/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/auxiliar-de-ti-at-jobbol-4439083469",
+    "tecnologias": []
+  },
+  {
+    "id": 2011,
+    "titulo": "Estágio em Ciência de Dados e Gen Ai | Núcleo de Ia Hstern",
+    "empresa": "HStern",
+    "area": "Data",
+    "senioridade": "Estágio",
+    "localidade": "Rio de Janeiro / RJ A empresa aceita candidaturas de Rio de Janeiro e cidades próximas",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "10/07/2026",
+    "fonte": "vagas",
+    "url": "https://www.vagas.com.br/vagas/v2824894/estagio-em-ciencia-de-dados-e-gen-ai-nucleo-de-ia-hstern",
     "tecnologias": [
-      "Hardware"
+      "Python",
+      "Machine Learning",
+      "Inteligência Artificial",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -25110,7 +27296,9 @@
       "Kotlin",
       "Android",
       "BigQuery",
-      "GCP"
+      "GCP",
+      "CI/CD",
+      "Inglês"
     ]
   },
   {
@@ -25373,7 +27561,9 @@
     "data_publicacao": "08/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-j%C3%BAnior-at-jobbol-4438130525",
-    "tecnologias": []
+    "tecnologias": [
+      "LGPD"
+    ]
   },
   {
     "id": 572,
@@ -25433,7 +27623,28 @@
     "data_publicacao": "08/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-full-stack-jr-at-orsegups-participa%C3%A7%C3%B5es-s-a-4438518149",
-    "tecnologias": []
+    "tecnologias": [
+      "Java",
+      "JavaScript",
+      "React",
+      "Angular",
+      "Vue.js",
+      "Inteligência Artificial",
+      "MySQL",
+      "AWS",
+      "Docker",
+      "Jenkins",
+      "Git",
+      "CI/CD",
+      "Serverless",
+      "API REST",
+      "Metodologias Ágeis",
+      "Estrutura de Dados",
+      "UX/UI",
+      "Jira",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa"
+    ]
   },
   {
     "id": 452,
@@ -25481,7 +27692,9 @@
     "data_publicacao": "08/07/2026",
     "fonte": "gupy",
     "url": "https://alea.gupy.io/job/eyJqb2JJZCI6MTE2MDczNDIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Inglês"
+    ]
   },
   {
     "id": 252,
@@ -25497,8 +27710,16 @@
     "fonte": "gupy",
     "url": "https://sidi.gupy.io/job/eyJqb2JJZCI6MTE2MDM1MTUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Python",
+      "JavaScript",
+      "TypeScript",
       "Machine Learning",
-      "Inteligência Artificial"
+      "Inteligência Artificial",
+      "Git",
+      "Metodologias Ágeis",
+      "Estrutura de Dados",
+      "Inglês",
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -25520,7 +27741,7 @@
     "id": 1898,
     "titulo": "Assistente de TI",
     "empresa": "Viemar Automotive",
-    "area": "Outros/TI Geral",
+    "area": "Service Desk / Help Desk",
     "senioridade": "Júnior",
     "localidade": "Viamão, Rio Grande do Sul",
     "polo": "Pelotas",
@@ -25529,7 +27750,12 @@
     "data_publicacao": "07/07/2026",
     "fonte": "gupy",
     "url": "https://viemar.gupy.io/job/eyJqb2JJZCI6MTE1OTAzNzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Linux",
+      "Windows",
+      "Metodologias Ágeis",
+      "Help Desk"
+    ]
   },
   {
     "id": 633,
@@ -25688,7 +27914,11 @@
     "data_publicacao": "06/07/2026",
     "fonte": "gupy",
     "url": "https://confidencial554444445.gupy.io/job/eyJqb2JJZCI6MTE1OTA0MjgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "Redes de Computadores",
+      "ITIL"
+    ]
   },
   {
     "id": 1794,
@@ -25703,7 +27933,9 @@
     "data_publicacao": "06/07/2026",
     "fonte": "gupy",
     "url": "https://vemserunifique.gupy.io/job/eyJqb2JJZCI6MTE1NjY5MzYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "ITIL"
+    ]
   },
   {
     "id": 1230,
@@ -25808,7 +28040,11 @@
     "data_publicacao": "03/07/2026",
     "fonte": "gupy",
     "url": "https://trabalheconoscosenacmg.gupy.io/job/eyJqb2JJZCI6MTE1ODQ4NjUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Hardware",
+      "Criptografia",
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 1296,
@@ -25838,7 +28074,14 @@
     "data_publicacao": "03/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-de-ti-j%C3%BAnior-vaga-exclusiva-para-pessoa-com-defici%C3%AAncia-s%C3%A3o-paulo-sp-at-klabin-4436150019",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel",
+      "Windows",
+      "ITIL",
+      "Office 365",
+      "Hardware",
+      "SAP"
+    ]
   },
   {
     "id": 634,
@@ -25936,7 +28179,11 @@
     "tecnologias": [
       "Java",
       "JavaScript",
-      "Spring"
+      "CSS",
+      "Spring",
+      "Hibernate",
+      "jQuery",
+      "Inglês"
     ]
   },
   {
@@ -25968,8 +28215,30 @@
     "fonte": "gupy",
     "url": "https://maisdiversidade.gupy.io/job/eyJqb2JJZCI6MTE1ODEwNjksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "ERP"
+      "SQL",
+      "Power BI",
+      "Inteligência Artificial",
+      "Oracle",
+      "Testes de Regressão",
+      "Inglês",
+      "ERP",
+      "Agentes de IA & RAG"
     ]
+  },
+  {
+    "id": 2025,
+    "titulo": "Administrador de Redes I",
+    "empresa": "Ilha Service Tecnologia e Serviços",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Júnior",
+    "localidade": "Taboão da Serra, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/07/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/administrador-de-redes-i-at-ilha-service-tecnologia-ltda-4436169396",
+    "tecnologias": []
   },
   {
     "id": 1975,
@@ -25999,7 +28268,9 @@
     "data_publicacao": "02/07/2026",
     "fonte": "gupy",
     "url": "https://mroativa.gupy.io/job/eyJqb2JJZCI6MTE1NzY3MTcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel"
+    ]
   },
   {
     "id": 1416,
@@ -26114,7 +28385,7 @@
     "id": 393,
     "titulo": "Estágio em Tecnologia da Informação",
     "empresa": "Página de Carreira - Confidencial",
-    "area": "Suporte Técnico",
+    "area": "Field Service / Hardware",
     "senioridade": "Estágio",
     "localidade": "Brasília, Distrito Federal",
     "polo": "Brasília",
@@ -26123,7 +28394,13 @@
     "data_publicacao": "02/07/2026",
     "fonte": "gupy",
     "url": "https://talento360.gupy.io/job/eyJqb2JJZCI6MTE1NzkwMjMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel",
+      "Inteligência Artificial",
+      "Service Desk",
+      "Hardware",
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 254,
@@ -26138,7 +28415,12 @@
     "data_publicacao": "02/07/2026",
     "fonte": "gupy",
     "url": "https://sidi.gupy.io/job/eyJqb2JJZCI6MTE1NzkzNjcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "Shell/Bash",
+      "Machine Learning",
+      "Inglês"
+    ]
   },
   {
     "id": 1805,
@@ -26159,7 +28441,7 @@
     "id": 1655,
     "titulo": "Assistente Administrativo de Cooperativa (TI) | Cresol Mais",
     "empresa": "Cresol Oficial",
-    "area": "Outros/TI Geral",
+    "area": "Data",
     "senioridade": "Júnior",
     "localidade": "Quilombo, Santa Catarina",
     "polo": "Não informado",
@@ -26168,7 +28450,12 @@
     "data_publicacao": "01/07/2026",
     "fonte": "gupy",
     "url": "https://cresolcarreiras.gupy.io/job/eyJqb2JJZCI6MTE1NDE4NzcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "SQL",
+      "Power BI",
+      "Excel",
+      "ETL"
+    ]
   },
   {
     "id": 1268,
@@ -26319,7 +28606,36 @@
     "data_publicacao": "01/07/2026",
     "fonte": "gupy",
     "url": "https://cidacs.gupy.io/job/eyJqb2JJZCI6MTE0NDk4NzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "Shell/Bash",
+      "Pandas",
+      "Spark",
+      "ETL",
+      "Estatística",
+      "Git",
+      "Linux",
+      "Estrutura de Dados",
+      "Inglês"
+    ]
+  },
+  {
+    "id": 2048,
+    "titulo": "Assistente de Segurança da Informação - Foco em SecOps",
+    "empresa": "Cooperativa Central Ailos",
+    "area": "Segurança",
+    "senioridade": "Júnior",
+    "localidade": "Blumenau, SC",
+    "polo": "Blumenau",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "30/06/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/assistente-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-foco-em-secops-at-cooperativa-central-ailos-4431978546",
+    "tecnologias": [
+      "Cibersegurança"
+    ]
   },
   {
     "id": 1719,
@@ -26334,7 +28650,10 @@
     "data_publicacao": "30/06/2026",
     "fonte": "gupy",
     "url": "https://positivotecnologia.gupy.io/job/eyJqb2JJZCI6MTE1NjYxNjMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Hardware",
+      "Eletrônica"
+    ]
   },
   {
     "id": 1570,
@@ -26355,7 +28674,7 @@
     "id": 1488,
     "titulo": "Assistente de TI",
     "empresa": "POLISHOP",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "São Paulo e Região",
     "polo": "São Paulo",
@@ -26364,7 +28683,11 @@
     "data_publicacao": "30/06/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-ti-at-polishop-4435325183",
-    "tecnologias": []
+    "tecnologias": [
+      "SQL",
+      "Redes de Computadores",
+      "Help Desk"
+    ]
   },
   {
     "id": 789,
@@ -26489,7 +28812,26 @@
     "fonte": "gupy",
     "url": "https://minsait.gupy.io/job/eyJqb2JJZCI6MTE1NjA3MzgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "RPA"
+      "Python",
+      "C#",
+      "SQL",
+      "Shell/Bash",
+      ".NET",
+      "RPA",
+      "Inteligência Artificial",
+      "SQL Server",
+      "Oracle",
+      "Git",
+      "CI/CD",
+      "Selenium",
+      "API REST",
+      "Scrum",
+      "Metodologias Ágeis",
+      "POO",
+      "SOLID",
+      "Design Patterns",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -26571,7 +28913,10 @@
     "data_publicacao": "29/06/2026",
     "fonte": "gupy",
     "url": "https://positivotecnologia.gupy.io/job/eyJqb2JJZCI6MTE1NTk3OTcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Hardware",
+      "IAM"
+    ]
   },
   {
     "id": 7,
@@ -26880,7 +29225,12 @@
     "data_publicacao": "26/06/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-de-desenvolvimento-trainee-at-levty-4433542912",
-    "tecnologias": []
+    "tecnologias": [
+      "JavaScript",
+      "Inteligência Artificial",
+      "MongoDB",
+      "Elasticsearch"
+    ]
   },
   {
     "id": 157,
@@ -26973,6 +29323,36 @@
     "data_publicacao": "25/06/2026",
     "fonte": "gupy",
     "url": "https://pessemdor.gupy.io/job/eyJqb2JJZCI6MTE1NDU0MjYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": []
+  },
+  {
+    "id": 2039,
+    "titulo": "Auxiliar de T.I (Belém-PA)",
+    "empresa": "Zoo Center Distribuidora",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "Belém, PA",
+    "polo": "Belém",
+    "regiao": "Norte",
+    "modalidade": "Presencial",
+    "data_publicacao": "24/06/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/auxiliar-de-t-i-bel%C3%A9m-pa-at-zoo-center-distribuidora-4432489662",
+    "tecnologias": []
+  },
+  {
+    "id": 2034,
+    "titulo": "AUXILIAR DE T.I (Manaus-AM)",
+    "empresa": "Zoo Center Distribuidora",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "Manaus, AM",
+    "polo": "Manaus",
+    "regiao": "Norte",
+    "modalidade": "Presencial",
+    "data_publicacao": "24/06/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/auxiliar-de-t-i-manaus-am-at-zoo-center-distribuidora-4432474912",
     "tecnologias": []
   },
   {
@@ -27106,7 +29486,10 @@
     "data_publicacao": "23/06/2026",
     "fonte": "gupy",
     "url": "https://pabu.gupy.io/job/eyJqb2JJZCI6MTE1MTczNzMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Hardware",
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 1269,
@@ -27286,7 +29669,7 @@
     "id": 240,
     "titulo": "Estágio Desenvolvedor",
     "empresa": "Signo Tech",
-    "area": "Outros/TI Geral",
+    "area": "Engenharia de Software",
     "senioridade": "Estágio",
     "localidade": "Curitiba, PR",
     "polo": "Curitiba",
@@ -27295,13 +29678,19 @@
     "data_publicacao": "23/06/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-desenvolvedor-at-signo-tech-4432463496",
-    "tecnologias": []
+    "tecnologias": [
+      "JavaScript",
+      "TypeScript",
+      "PHP",
+      "SQL",
+      "Git"
+    ]
   },
   {
     "id": 1967,
     "titulo": "Assistente de TI JR",
     "empresa": "Walsywa - Fixação para Construção Civil",
-    "area": "Outros/TI Geral",
+    "area": "Suporte Técnico",
     "senioridade": "Júnior",
     "localidade": "Jundiaí, São Paulo",
     "polo": "São Paulo",
@@ -27310,7 +29699,14 @@
     "data_publicacao": "22/06/2026",
     "fonte": "gupy",
     "url": "https://walsywa.gupy.io/job/eyJqb2JJZCI6MTE1MjgwODIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "Hardware",
+      "Inglês",
+      "ERP",
+      "TOTVS",
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 1881,
@@ -27486,7 +29882,10 @@
     "fonte": "gupy",
     "url": "https://viadeacesso.gupy.io/job/eyJqb2JJZCI6MTE1MTc5MjYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Redes de Computadores",
+      "Criptografia",
       "LGPD",
+      "Inglês",
       "Governança e Riscos (GRC)"
     ]
   },
@@ -27551,6 +29950,23 @@
     "fonte": "gupy",
     "url": "https://uxgroup.gupy.io/job/eyJqb2JJZCI6MTE1MDk4MjgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Python",
+      "SQL",
+      "Airflow",
+      "dbt",
+      "ETL",
+      "Data Lake",
+      "BigQuery",
+      "Databricks",
+      "Snowflake",
+      "Estatística",
+      "PostgreSQL",
+      "MySQL",
+      "MongoDB",
+      "AWS",
+      "Git",
+      "Linux",
+      "LGPD",
       "UX/UI"
     ]
   },
@@ -27653,6 +30069,23 @@
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-vis%C3%A3o-computacional-e-automa%C3%A7%C3%A3o-at-exxata-4430148639",
     "tecnologias": [
       "Machine Learning",
+      "Inteligência Artificial"
+    ]
+  },
+  {
+    "id": 2032,
+    "titulo": "Programa de Estágio em IA",
+    "empresa": "Grupo Vilarejo",
+    "area": "Inteligência Artificial",
+    "senioridade": "Estágio",
+    "localidade": "Casimiro de Abreu, RJ",
+    "polo": "Estado/RJ",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "16/06/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/programa-de-est%C3%A1gio-em-ia-at-grupo-vilarejo-4429178601",
+    "tecnologias": [
       "Inteligência Artificial"
     ]
   },
@@ -27793,7 +30226,13 @@
     "data_publicacao": "15/06/2026",
     "fonte": "gupy",
     "url": "https://fey.gupy.io/job/eyJqb2JJZCI6MTEyOTU2NzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Active Directory",
+      "Zabbix",
+      "Office 365",
+      "Hardware",
+      "Algoritmos"
+    ]
   },
   {
     "id": 666,
@@ -27824,6 +30263,23 @@
     "fonte": "gupy",
     "url": "https://viaappia.gupy.io/job/eyJqb2JJZCI6MTE0OTI1MzcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": []
+  },
+  {
+    "id": 2049,
+    "titulo": "Assistente de Help Desk",
+    "empresa": "Inetvip Internet Fibra Óptica",
+    "area": "Service Desk / Help Desk",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "12/06/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/assistente-de-help-desk-at-inetvip-internet-fibra-%C3%B3ptica-4427677186",
+    "tecnologias": [
+      "Help Desk"
+    ]
   },
   {
     "id": 587,
@@ -27877,7 +30333,15 @@
     "data_publicacao": "12/06/2026",
     "fonte": "gupy",
     "url": "https://sidi.gupy.io/job/eyJqb2JJZCI6MTE0ODM3NzQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "Java",
+      "JavaScript",
+      "Node.js",
+      "Testes Automatizados",
+      "Estrutura de Dados",
+      "Algoritmos"
+    ]
   },
   {
     "id": 111,
@@ -28198,7 +30662,12 @@
     "data_publicacao": "05/06/2026",
     "fonte": "gupy",
     "url": "https://unimedvaledosinos.gupy.io/job/eyJqb2JJZCI6MTE0NDE5MzIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel",
+      "LGPD",
+      "ISO 27001",
+      "Governança e Riscos (GRC)"
+    ]
   },
   {
     "id": 1751,
@@ -28213,7 +30682,14 @@
     "data_publicacao": "05/06/2026",
     "fonte": "gupy",
     "url": "https://unimedvaledosinos.gupy.io/job/eyJqb2JJZCI6MTE0NDE2ODUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Linux",
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "VMware",
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 792,
@@ -28259,6 +30735,20 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/programador-junior-at-wise-system-4423343233",
     "tecnologias": [
+      "JavaScript",
+      "C#",
+      "SQL",
+      "HTML",
+      "CSS",
+      "React",
+      "Angular",
+      "Vue.js",
+      ".NET",
+      "SQL Server",
+      "Git",
+      "API REST",
+      "POO",
+      "Modelagem de Dados",
       "ERP"
     ]
   },
@@ -28276,6 +30766,33 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/programador-est%C3%A1gio-at-wise-system-4423346142",
     "tecnologias": []
+  },
+  {
+    "id": 2052,
+    "titulo": "ANALISTA DE SUPORTE JÚNIOR",
+    "empresa": "Proative Technology",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "03/06/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-j%C3%BAnior-at-proative-technology-4422654108",
+    "tecnologias": [
+      "SQL",
+      "MySQL",
+      "SQL Server",
+      "Oracle",
+      "Linux",
+      "Grafana",
+      "Windows Server",
+      "Windows",
+      "Redes de Computadores",
+      "Zabbix",
+      "VMware"
+    ]
   },
   {
     "id": 1417,
@@ -28341,7 +30858,7 @@
     "id": 390,
     "titulo": "Estágio em TI - Uniacademia - JF/MG",
     "empresa": "Rede Verbita de Educação",
-    "area": "Suporte Técnico",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Estágio",
     "localidade": "Juiz de Fora, Minas Gerais",
     "polo": "Juiz de Fora",
@@ -28350,7 +30867,12 @@
     "data_publicacao": "03/06/2026",
     "fonte": "gupy",
     "url": "https://redeverbita.gupy.io/job/eyJqb2JJZCI6MTE0MjgyMDksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "Redes de Computadores",
+      "Hardware",
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 1959,
@@ -28474,7 +30996,22 @@
     "data_publicacao": "02/06/2026",
     "fonte": "gupy",
     "url": "https://cocobambu.gupy.io/job/eyJqb2JJZCI6MTE0MTg2NDEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "React",
+      "Angular",
+      "Django",
+      "Flask",
+      "Flutter",
+      "AWS",
+      "Azure",
+      "GCP",
+      "Docker",
+      "CI/CD",
+      "Linux",
+      "WebSockets",
+      "Metodologias Ágeis"
+    ]
   },
   {
     "id": 82,
@@ -28539,6 +31076,21 @@
     ]
   },
   {
+    "id": 2054,
+    "titulo": "ESTAGIARIO SUPORTE SISTEMAS",
+    "empresa": "Daniele Molinari Architetto",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "30/05/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagiario-suporte-sistemas-at-daniele-molinari-architetto-4421262944",
+    "tecnologias": []
+  },
+  {
     "id": 1930,
     "titulo": "Analista de Suporte Junior - ERP",
     "empresa": "Softgran",
@@ -28552,6 +31104,7 @@
     "fonte": "gupy",
     "url": "https://softgran.gupy.io/job/eyJqb2JJZCI6MTEzOTcyMTksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Excel",
       "ERP"
     ]
   },
@@ -28618,6 +31171,14 @@
     "fonte": "gupy",
     "url": "https://orizon.gupy.io/job/eyJqb2JJZCI6MTEyOTY1MDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Excel",
+      "Windows Server",
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Hardware",
+      "Inglês",
+      "Montagem e Manutenção de PCs",
       "Manutenção Preventiva"
     ]
   },
@@ -28713,7 +31274,9 @@
     "data_publicacao": "26/05/2026",
     "fonte": "gupy",
     "url": "https://inatel.gupy.io/job/eyJqb2JJZCI6MTEzMjc0NDksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Inglês"
+    ]
   },
   {
     "id": 1263,
@@ -28788,7 +31351,11 @@
     "data_publicacao": "25/05/2026",
     "fonte": "gupy",
     "url": "https://wyntech.gupy.io/job/eyJqb2JJZCI6MTEzNDU1MjUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "ITIL",
+      "Algoritmos"
+    ]
   },
   {
     "id": 1890,
@@ -28811,7 +31378,7 @@
     "id": 1705,
     "titulo": "Auxiliar Administrativo - TI",
     "empresa": "Way Brasil",
-    "area": "Outros/TI Geral",
+    "area": "Field Service / Hardware",
     "senioridade": "Júnior",
     "localidade": "Uberaba, Minas Gerais",
     "polo": "Uberlândia",
@@ -28820,7 +31387,12 @@
     "data_publicacao": "25/05/2026",
     "fonte": "gupy",
     "url": "https://waybrasil.gupy.io/job/eyJqb2JJZCI6MTEzNTg0MzQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Redes de Computadores",
+      "Hardware",
+      "Modelagem de Dados",
+      "CFTV"
+    ]
   },
   {
     "id": 1685,
@@ -28835,7 +31407,19 @@
     "data_publicacao": "25/05/2026",
     "fonte": "gupy",
     "url": "https://vdev.gupy.io/job/eyJqb2JJZCI6MTEzNTc2NjMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "Pandas",
+      "ETL",
+      "Data Warehouse",
+      "Data Lake",
+      "Machine Learning",
+      "Metodologias Ágeis",
+      "Algoritmos",
+      "Modelagem de Dados",
+      "LLMs & IA Generativa"
+    ]
   },
   {
     "id": 1684,
@@ -28850,7 +31434,19 @@
     "data_publicacao": "25/05/2026",
     "fonte": "gupy",
     "url": "https://vdev.gupy.io/job/eyJqb2JJZCI6MTEzNTc1NTgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "Pandas",
+      "ETL",
+      "Data Warehouse",
+      "Data Lake",
+      "Machine Learning",
+      "Metodologias Ágeis",
+      "Algoritmos",
+      "Modelagem de Dados",
+      "LLMs & IA Generativa"
+    ]
   },
   {
     "id": 1683,
@@ -28865,7 +31461,19 @@
     "data_publicacao": "25/05/2026",
     "fonte": "gupy",
     "url": "https://vdev.gupy.io/job/eyJqb2JJZCI6MTEzNTgwNjgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "Pandas",
+      "ETL",
+      "Data Warehouse",
+      "Data Lake",
+      "Machine Learning",
+      "Metodologias Ágeis",
+      "Algoritmos",
+      "Modelagem de Dados",
+      "LLMs & IA Generativa"
+    ]
   },
   {
     "id": 1457,
@@ -28896,7 +31504,12 @@
     "fonte": "gupy",
     "url": "https://centrouniversitariofei.gupy.io/job/eyJqb2JJZCI6MTEzNTUzNTMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Inteligência Artificial"
+      "SQL",
+      ".NET",
+      "Inteligência Artificial",
+      "SQL Server",
+      "Oracle",
+      "API REST"
     ]
   },
   {
@@ -28974,7 +31587,16 @@
     "data_publicacao": "22/05/2026",
     "fonte": "gupy",
     "url": "https://institutoeldorado.gupy.io/job/eyJqb2JJZCI6MTEzNDM4MzUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "Java",
+      "JavaScript",
+      "C#",
+      "Git",
+      "Scrum",
+      "Metodologias Ágeis",
+      "UX/UI"
+    ]
   },
   {
     "id": 1200,
@@ -29060,7 +31682,7 @@
     "id": 89,
     "titulo": "Estágio TI / Sistemas (Palhoça - SC)",
     "empresa": "Strattner",
-    "area": "Outros/TI Geral",
+    "area": "Engenharia de Software",
     "senioridade": "Estágio",
     "localidade": "Palhoça, Santa Catarina",
     "polo": "Florianópolis",
@@ -29069,7 +31691,14 @@
     "data_publicacao": "20/05/2026",
     "fonte": "gupy",
     "url": "https://strattner.gupy.io/job/eyJqb2JJZCI6MTEyODg5NjAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "SQL",
+      "Power BI",
+      "Excel",
+      "Criptografia",
+      "LGPD",
+      "Metodologias Ágeis"
+    ]
   },
   {
     "id": 29,
@@ -29084,7 +31713,15 @@
     "data_publicacao": "20/05/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-em-desenvolvimento-back-end-at-madalozzo-seguros-4417338324",
-    "tecnologias": []
+    "tecnologias": [
+      "JavaScript",
+      "PHP",
+      "HTML",
+      "CSS",
+      "Node.js",
+      "Git",
+      "Clean Code"
+    ]
   },
   {
     "id": 593,
@@ -29220,7 +31857,9 @@
     "fonte": "gupy",
     "url": "https://mattosfilho.gupy.io/job/eyJqb2JJZCI6MTEyMDc1NDUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "LGPD"
+      "Firewall",
+      "LGPD",
+      "Inglês"
     ]
   },
   {
@@ -29236,7 +31875,9 @@
     "data_publicacao": "12/05/2026",
     "fonte": "gupy",
     "url": "https://grupovalence.gupy.io/job/eyJqb2JJZCI6MTEyMTY4MzUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Algoritmos"
+    ]
   },
   {
     "id": 1552,
@@ -29251,7 +31892,10 @@
     "data_publicacao": "12/05/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/auxiliar-de-ti-at-grupo-zucatelli-4416059031",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel",
+      "Windows"
+    ]
   },
   {
     "id": 1729,
@@ -29312,6 +31956,8 @@
     "fonte": "gupy",
     "url": "https://aviator.gupy.io/job/eyJqb2JJZCI6MTEyNTU2NzYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Inglês",
+      "Montagem e Manutenção de PCs",
       "Manutenção Preventiva"
     ]
   },
@@ -29368,7 +32014,7 @@
     "id": 1507,
     "titulo": "Auxiliar de TI - Escritório |O Boticário Banco de Talentos",
     "empresa": "Grupo Femina",
-    "area": "Outros/TI Geral",
+    "area": "Suporte Técnico",
     "senioridade": "Júnior",
     "localidade": "Florianópolis, SC",
     "polo": "Florianópolis",
@@ -29467,7 +32113,22 @@
     "data_publicacao": "04/05/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-de-desenvolvimento-back-end-at-oceanpact-servi%C3%A7os-mar%C3%ADtimos-4419350867",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "Flask",
+      "FastAPI",
+      "Pandas",
+      "Azure",
+      "Git",
+      "CI/CD",
+      "Testes Automatizados",
+      "API REST",
+      "SOLID",
+      "Clean Code",
+      "Design Patterns",
+      "Estrutura de Dados",
+      "Algoritmos"
+    ]
   },
   {
     "id": 1914,
@@ -29529,7 +32190,12 @@
     "data_publicacao": "29/04/2026",
     "fonte": "gupy",
     "url": "https://estagio-tech-infnet.gupy.io/job/eyJqb2JJZCI6MTEyMTc4NjIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "React",
+      "React Native",
+      "Hardware",
+      "Inglês"
+    ]
   },
   {
     "id": 1594,
@@ -29559,6 +32225,21 @@
     "data_publicacao": "24/04/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-redes-i-j%C3%BAnior-100%25-presencial-rj-at-talent-s-club-4405046759",
+    "tecnologias": []
+  },
+  {
+    "id": 2027,
+    "titulo": "Analista de Redes Jr - Presencial - Florianópolis - CLT",
+    "empresa": "Costao do Santinho",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Júnior",
+    "localidade": "Florianópolis, SC",
+    "polo": "Florianópolis",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "23/04/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-redes-jr-presencial-florian%C3%B3polis-clt-at-costao-do-santinho-4406102058",
     "tecnologias": []
   },
   {
@@ -29797,7 +32478,7 @@
     "id": 1702,
     "titulo": "ASSISTENTE DE TI - VAGA AFIRMATIVA PARA PCD",
     "empresa": "PRATICA",
-    "area": "Outros/TI Geral",
+    "area": "Field Service / Hardware",
     "senioridade": "Júnior",
     "localidade": "Pouso Alegre, Minas Gerais",
     "polo": "Santa Rita do Sapucaí",
@@ -29806,7 +32487,13 @@
     "data_publicacao": "09/04/2026",
     "fonte": "gupy",
     "url": "https://vemserpratica.gupy.io/job/eyJqb2JJZCI6MTExMTE2ODMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Linux",
+      "Windows",
+      "Hardware",
+      "IAM",
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 4,
@@ -29821,7 +32508,13 @@
     "data_publicacao": "08/04/2026",
     "fonte": "gupy",
     "url": "https://domo.gupy.io/job/eyJqb2JJZCI6MTExMDU5MzQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "C#",
+      "COBOL",
+      "SQL",
+      ".NET",
+      "SQL Server"
+    ]
   },
   {
     "id": 1774,
@@ -29882,14 +32575,23 @@
     "fonte": "gupy",
     "url": "https://franq.gupy.io/job/eyJqb2JJZCI6MTEwOTgzMjAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Clean Code"
+      "Flutter",
+      "Firebase",
+      "Git",
+      "CI/CD",
+      "Testes Automatizados",
+      "API REST",
+      "Clean Code",
+      "Clean Architecture",
+      "Figma",
+      "UX/UI"
     ]
   },
   {
     "id": 35,
     "titulo": "Estágio em Desenvolvimento C++/C#",
     "empresa": "SiDi",
-    "area": "Backend",
+    "area": "Engenharia de Software",
     "senioridade": "Estágio",
     "localidade": "Campinas, São Paulo",
     "polo": "São Paulo",
@@ -29899,16 +32601,21 @@
     "fonte": "gupy",
     "url": "https://sidi.gupy.io/job/eyJqb2JJZCI6MTEwOTI1NjYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Python",
       "C#",
       "C++",
-      "Windows"
+      ".NET",
+      "Git",
+      "Windows",
+      "POO",
+      "Design Patterns"
     ]
   },
   {
     "id": 560,
     "titulo": "Estágio em TI",
     "empresa": "Olinda Distribuidora",
-    "area": "Suporte Técnico",
+    "area": "Outros/TI Geral",
     "senioridade": "Estágio",
     "localidade": "Brasil",
     "polo": "Remoto",
@@ -29923,7 +32630,7 @@
     "id": 1468,
     "titulo": "Analista de Suporte N1",
     "empresa": "WTime Business Intelligence",
-    "area": "Service Desk / Help Desk",
+    "area": "Suporte Técnico",
     "senioridade": "Júnior",
     "localidade": "São Paulo, SP",
     "polo": "São Paulo",
@@ -29933,6 +32640,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-at-wtime-business-intelligence-4391239641",
     "tecnologias": [
+      "Hardware",
       "Suporte N1/N2"
     ]
   },
@@ -30045,7 +32753,7 @@
     "id": 21,
     "titulo": "Desenvolvedor(a) Júnior",
     "empresa": "Porto",
-    "area": "Outros/TI Geral",
+    "area": "Backend",
     "senioridade": "Júnior",
     "localidade": "São Paulo, São Paulo",
     "polo": "São Paulo",
@@ -30054,7 +32762,23 @@
     "data_publicacao": "02/03/2026",
     "fonte": "gupy",
     "url": "https://porto.gupy.io/job/eyJqb2JJZCI6MTA5MDE2MDEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Java",
+      "JavaScript",
+      "SQL",
+      "HTML",
+      "CSS",
+      "React",
+      "Angular",
+      "Spring",
+      "PostgreSQL",
+      "MySQL",
+      "Git",
+      "CI/CD",
+      "Scrum",
+      "Metodologias Ágeis",
+      "Inglês"
+    ]
   },
   {
     "id": 1148,
@@ -30123,7 +32847,7 @@
     "id": 545,
     "titulo": "Estágio TI",
     "empresa": "LocExpress",
-    "area": "Engenharia de Software",
+    "area": "Outros/TI Geral",
     "senioridade": "Estágio",
     "localidade": "Brasil",
     "polo": "Remoto",
@@ -30132,9 +32856,7 @@
     "data_publicacao": "19/02/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-ti-at-locexpress-4375079064",
-    "tecnologias": [
-      "Manutenção Preventiva"
-    ]
+    "tecnologias": []
   },
   {
     "id": 1536,
@@ -30199,7 +32921,13 @@
     "data_publicacao": "10/02/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/auxiliar-de-suporte-t%C3%A9cnico-n1-at-fios-4370984908",
-    "tecnologias": []
+    "tecnologias": [
+      "Redes de Computadores",
+      "Hardware",
+      "ERP",
+      "Help Desk",
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 455,
@@ -30220,7 +32948,7 @@
     "id": 30,
     "titulo": "Estágio TI",
     "empresa": "Confidencial430",
-    "area": "Outros/TI Geral",
+    "area": "Backend",
     "senioridade": "Estágio",
     "localidade": "Osasco, São Paulo",
     "polo": "São Paulo",
@@ -30230,8 +32958,29 @@
     "fonte": "gupy",
     "url": "https://paginaconfidencial430.gupy.io/job/eyJqb2JJZCI6MTA4MTk5MjAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "RPA"
+      "Python",
+      "SQL",
+      "Power BI",
+      "RPA",
+      "PostgreSQL",
+      "MySQL",
+      "TOTVS"
     ]
+  },
+  {
+    "id": 2021,
+    "titulo": "DESENVOLVEDOR FULLSTACK PLENO I",
+    "empresa": "Doutor-IE | Inteligência Automotiva",
+    "area": "Fullstack",
+    "senioridade": "Júnior",
+    "localidade": "Florianópolis, SC",
+    "polo": "Florianópolis",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "05/02/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-fullstack-pleno-i-at-doutor-ie-intelig%C3%AAncia-automotiva-4369628281",
+    "tecnologias": []
   },
   {
     "id": 1284,

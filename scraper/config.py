@@ -69,6 +69,9 @@ SEARCH_TERMS: list[str] = [
     "analista de dados junior",
     "analista de bi junior",
     "cientista de dados junior",
+    "desenvolvedor ia junior",
+    "engenheiro de ia junior",
+    "inteligencia artificial junior",
 
     # Cloud, DevOps & QA
     "qa junior",
@@ -95,6 +98,8 @@ SEARCH_TERMS: list[str] = [
     "estagio ti",
     "estagio tecnologia",
     "estagio dados",
+    "estagio ia",
+    "estagio inteligencia artificial",
     "estagio suporte",
     "estagio redes",
     "estagio seguranca",
@@ -102,6 +107,7 @@ SEARCH_TERMS: list[str] = [
     # Trainee
     "trainee tecnologia",
     "trainee ti",
+
 ]
 
 
