@@ -191,7 +191,8 @@ suporte_infra:
   Windows Server: [windows server]
   Active Directory: [active directory, ad, ldap]
   Windows: [windows, windows 10, windows 11]
-  Redes/TCP-IP: [tcp ip, redes de computadores, redes, switches, roteadores, dhcp, dns, lan, wan]
+  Redes de Computadores: [tcp ip, redes de computadores, redes corporativas, redes locais, switches, roteadores, routing, switching, dhcp, dns, lan, wan, vlan, cabeamento estruturado, mikrotik]
+
   VPN: [vpn]
   Firewall: [firewall, pfSense, fortinet]
   ITIL: [itil, itil v3, itil v4]
