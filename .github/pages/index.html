@@ -564,7 +564,15 @@ function renderAreaDetail() {
   const tbody = document.querySelector("#table-area-skills tbody");
   tbody.innerHTML = "";
 
+  if (!areaInfo.skills || areaInfo.skills.length === 0) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td colspan="5" style="text-align: center; color: var(--text-muted); padding: 18px;">As vagas desta especialidade focam em atribuições funcionais de cargo (ex: montagem, bancada, circuitos, firmware) sem stacks padronizadas de software listadas no corpo do anúncio.</td>`;
+    tbody.appendChild(tr);
+    return;
+  }
+
   (areaInfo.skills || []).forEach(s => {
+
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td><strong style="color: var(--text-bright);">${s.nome}</strong></td>
