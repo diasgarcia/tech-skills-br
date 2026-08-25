@@ -54,6 +54,9 @@ CAMPOS_TEXTO = [
     "regiao", "polo",
 ]
 
+MIN_DATA_CORTE = date(2026, 1, 1)
+
+
 
 
 def _data_iso(valor: str) -> date:
@@ -113,11 +116,17 @@ def _garantir_colunas(engine) -> None:
         conn.commit()
 
 
+def ler_csv(csv_path: Path):
+    with open(csv_path, encoding="utf-8-sig", newline="") as fh:
+        yield from csv.DictReader(fh)
+
+
 def importar(
     csv_path: Path,
     db_path: Path | str | None = None,
     recriar: bool = False,
     referencia: date | None = None,
+    data_minima: date | None = MIN_DATA_CORTE,
 ) -> dict:
     engine = make_engine(db_path)
     if recriar:
@@ -125,28 +134,24 @@ def importar(
     Base.metadata.create_all(engine)
     _garantir_colunas(engine)
 
-
-    # Datas relativas ("Ontem", "Há 3 dias") so fazem sentido contra a data em
-    # que o CSV foi gerado -- nao contra hoje.
-    #
-    # Sem `referencia` explicita, a data sai do timestamp no nome do arquivo e,
-    # como ultimo recurso, do mtime. O mtime e fragil fora da maquina que
-    # coletou: num deploy, o clone do git carimba a data do deploy no arquivo,
-    # e as datas relativas passariam a mudar a cada redeploy. Por isso o
-    # snapshot versionado em seed/ e importado com --referencia fixa.
     if referencia is None:
         referencia = reference_date_from_csv(csv_path)
     logger.info("Data de referência do CSV: %s", referencia)
 
+    limite_data = data_minima if (referencia is None or referencia >= MIN_DATA_CORTE) else None
+
     criadas = atualizadas = sem_data = 0
+
+    clf = default_classifier()
+    geo = default_geo_classifier()
+    valid_areas = set(vocabulary.areas())
+
+    # Rastreia external_ids ja processados neste lote para evitar INSERTs duplicados
+    lote_seen_ids: set[tuple[str, str]] = set()
 
     with Session(engine) as db:
         tecnologias = semear_tecnologias(db)
         conhecidas = {n.lower(): t for n, t in tecnologias.items()}
-        clf = default_classifier()
-        geo = default_geo_classifier()
-        valid_areas = set(vocabulary.areas())
-
 
         with open(csv_path, encoding="utf-8-sig", newline="") as fh:
             for linha in csv.DictReader(fh):
@@ -155,14 +160,23 @@ def importar(
                 if not source or not external_id or not (linha.get("title") or "").strip():
                     continue
 
+                if (source, external_id) in lote_seen_ids:
+                    continue
+                lote_seen_ids.add((source, external_id))
+
+                pub_date = parse_published_date(
+                    linha.get("published_date"), referencia
+                )
+                if limite_data and pub_date is not None and pub_date < limite_data:
+                    continue
+
                 url_csv = (linha.get("url") or "").strip()
                 vaga = db.scalar(
                     select(Vaga).where(
                         Vaga.source == source, Vaga.external_id == external_id
                     )
                 )
-                if vaga is None and url_csv:
-                    vaga = db.scalar(select(Vaga).where(Vaga.url == url_csv))
+
 
                 if vaga is None:
                     vaga = Vaga(source=source, external_id=external_id)
@@ -188,9 +202,7 @@ def importar(
                     vaga.area = area_csv
                     vaga.area_score = _float_ou_none(linha.get("area_score"))
 
-                vaga.published_date = parse_published_date(
-                    linha.get("published_date"), referencia
-                )
+                vaga.published_date = pub_date
                 if vaga.published_date is None:
                     sem_data += 1
 
@@ -213,6 +225,11 @@ def importar(
                 vaga.tecnologias = [
                     conhecidas[n.lower()] for n in nomes if n.lower() in conhecidas
                 ]
+
+        if limite_data:
+            from sqlalchemy import delete
+            db.execute(delete(Vaga).where(Vaga.published_date < limite_data))
+
 
         # Enriquecimento retroativo de todas as vagas existentes no banco
         todas_vagas = db.scalars(select(Vaga)).all()
