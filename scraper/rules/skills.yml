@@ -197,8 +197,11 @@ suporte_infra:
   VPN: [vpn]
   Firewall: [firewall, pfSense, fortinet]
   ITIL: [itil, itil v3, itil v4]
-  Service Desk: [service desk, help desk, helpdesk, suporte n1, suporte n2, suporte n3]
+  Service Desk: [service desk, central de servicos, servicedesk]
+  Help Desk: [help desk, helpdesk]
+  Suporte N1/N2: [suporte n1, suporte n2, suporte n3]
   Zendesk: [zendesk]
+
   GLPI: [glpi]
   Zabbix: [zabbix]
   VoIP: [voip, telefonia ip]
