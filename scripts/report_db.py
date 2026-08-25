@@ -319,8 +319,16 @@ def main(argv: list[str] | None = None) -> int:
         export_md=not args.no_export,
         with_charts=not args.no_charts,
     )
+
+    try:
+        from scripts.export_pages_data import export_all_pages_data
+        export_all_pages_data()
+    except Exception as exc:
+        logging.warning(f"Nao foi possivel exportar endpoints estaticos do Pages: {exc}")
+
     return 0
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
