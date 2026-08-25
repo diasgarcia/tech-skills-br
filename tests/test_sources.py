@@ -469,8 +469,10 @@ SERPAPI_JOB = {
     "location": "Curitiba, PR",
     "description": "Buscamos profissional para dashboards e modelagem.",
     "share_link": "https://google.com/search?jobs=12345",
-    "related_links": [{"link": "https://vagas.empresa.com/view"}],
+    "related_links": [{"link": "https://google.com/search?other=1"}],
+    "apply_options": [{"title": "Candidatar-se no Gupy", "link": "https://vagas.empresa.com/view"}],
     "detected_extensions": {
+
         "posted_at": "há 2 dias",
         "schedule_type": "Tempo integral",
         "work_from_home": True,
