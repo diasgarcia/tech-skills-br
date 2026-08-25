@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (1649 vagas)
 
-- **Data de geração:** 25/08/2026 12:44
+- **Data de geração:** 25/08/2026 12:55
 - **Período coberto:** 05/01/2026 até 25/08/2026
 - **Total de vagas consolidadas:** 1649
 
@@ -88,26 +88,26 @@
 
 | Posição | Tecnologia | Vagas Citadas |
 |---|---|---|
-| 1 | Redes/TCP-IP | 121 |
-| 2 | Inteligência Artificial | 108 |
-| 3 | SQL | 93 |
-| 4 | Hardware | 89 |
-| 5 | JavaScript | 87 |
-| 6 | Git | 84 |
-| 7 | Python | 81 |
-| 8 | Inglês | 74 |
-| 9 | Java | 68 |
-| 10 | Service Desk | 61 |
-| 11 | React | 53 |
-| 12 | Metodologias Ágeis | 53 |
-| 13 | API REST | 53 |
-| 14 | Windows | 51 |
-| 15 | Segurança da Informação | 45 |
-| 16 | Node.js | 41 |
-| 17 | C# | 39 |
-| 18 | ERP | 37 |
-| 19 | Angular | 37 |
-| 20 | Algoritmos | 37 |
+| 1 | Inteligência Artificial | 108 |
+| 2 | SQL | 93 |
+| 3 | Hardware | 89 |
+| 4 | JavaScript | 87 |
+| 5 | Git | 84 |
+| 6 | Python | 81 |
+| 7 | Inglês | 74 |
+| 8 | Java | 68 |
+| 9 | Service Desk | 61 |
+| 10 | React | 53 |
+| 11 | Metodologias Ágeis | 53 |
+| 12 | API REST | 53 |
+| 13 | Windows | 51 |
+| 14 | Segurança da Informação | 45 |
+| 15 | Node.js | 41 |
+| 16 | C# | 39 |
+| 17 | ERP | 37 |
+| 18 | Angular | 37 |
+| 19 | Algoritmos | 37 |
+| 20 | .NET | 34 |
 
 ## Top 10 Empresas com Mais Vagas
 
