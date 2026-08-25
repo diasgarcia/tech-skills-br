@@ -126,12 +126,12 @@ Acesse a documentação interativa no navegador: **[http://localhost:8000/docs](
 
 ```text
 tech-skills-br/
-├── .github/workflows/     # Automação de CI e coleta diária de segunda a sexta (GitHub Actions)
+├── .github/
+│   ├── pages/             # Site roots e API JSON estática pública (.github/pages/api/)
+│   └── workflows/         # Automação de CI e coleta diária de segunda a sexta (GitHub Actions)
 ├── api/                   # API FastAPI (endpoints, modelos ORM, schemas Pydantic)
 ├── data/                  # Base de dados local SQLite (vagas.db)
-├── docs/                  # Site roots, API estática e documentação acadêmica
-│   ├── api/               # Endpoints estáticos JSON (resumo, vagas, areas, tecnologias)
-│   ├── index.html         # Frontend roots minimalista do GitHub Pages
+├── docs/                  # Documentação acadêmica e relatórios consolidados
 │   ├── manual_de_uso.md   # Guia detalhado de todos os comandos e parâmetros
 │   ├── arquitetura_tecnica.md # Especificação técnica da arquitetura
 │   └── relatorios/        # Relatório consolidado e gráficos analíticos PNG
@@ -146,9 +146,10 @@ tech-skills-br/
 ├── scripts/               # Ferramentas de CLI
 │   ├── import_csv.py      # Importação, deduplicação e enriquecimento no banco
 │   ├── export_seed.py     # Exportação do snapshot consolidado para seed/vagas.csv
-│   ├── export_pages_data.py # Geração dos endpoints JSON estáticos para docs/api/
+│   ├── export_pages_data.py # Geração dos endpoints JSON estáticos para .github/pages/api/
 │   └── report_db.py       # Emissão de relatório estatístico e gráficos PNG
 ├── seed/                  # Snapshot de dados versionado para reprodutibilidade (seed/vagas.csv)
 └── tests/                 # Suíte com +270 testes automatizados (pytest)
 ```
+
 
