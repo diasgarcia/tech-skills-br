@@ -26,8 +26,14 @@ from __future__ import annotations
 
 import logging
 import re
-
 from bs4 import BeautifulSoup
+
+
+try:
+    from curl_cffi import requests as cffi_requests
+    _HAS_CURL_CFFI = True
+except ImportError:
+    _HAS_CURL_CFFI = False
 
 from ..models import REMOTO, Job, normalize_workplace
 from .base import JobSource
@@ -36,6 +42,7 @@ logger = logging.getLogger(__name__)
 
 BASE_URL = "https://programathor.com.br"
 JOBS_URL = f"{BASE_URL}/jobs"
+
 
 # Filtros nativos que correspondem a nivel de entrada. As chaves viram os
 # "termos" desta fonte (ver `fetch`).
@@ -79,6 +86,25 @@ class ProgramathorSource(JobSource):
             )
         return super().fetch(list(FILTROS_NIVEL_ENTRADA))
 
+    def _get_page_html(self, url: str, params: dict) -> str | None:
+        """Faz a requisicao contornando Cloudflare TLS fingerprinting com curl_cffi quando disponivel."""
+        if _HAS_CURL_CFFI:
+            try:
+                with cffi_requests.Session(impersonate="chrome124") as s:
+                    r = s.get(url, params=params, timeout=20)
+                    if r.status_code == 200:
+                        return r.text
+                    logger.warning("[%s] HTTP %s em %s (params=%s)", self.name, r.status_code, url, params)
+                    return None
+            except Exception as e:
+                logger.warning("[%s] Erro com curl_cffi: %s, tentando fallback", self.name, e)
+
+        # Fallback para PoliteSession padrao
+        if self.session:
+            response = self.session.get(url, params=params)
+            return response.text if response is not None else None
+        return None
+
     def fetch_term(self, term: str) -> list[Job]:
         """Coleta um filtro nativo (`term` e uma chave de FILTROS_NIVEL_ENTRADA)."""
         params = FILTROS_NIVEL_ENTRADA.get(term, {"expertise": term})
@@ -91,12 +117,13 @@ class ProgramathorSource(JobSource):
         end_page = max(start_page, self.settings.max_pages_per_term)
 
         for page in range(start_page, end_page + 1):
-            response = self.session.get(JOBS_URL, params={**params, "page": page})
+            html = self._get_page_html(JOBS_URL, params={**params, "page": page})
 
-            if response is None:
+            if not html:
                 break
 
-            batch = self._parse_page(response.text, term)
+            batch = self._parse_page(html, term)
+
             ids_pagina = {job.external_id for job in batch}
             if not ids_pagina or ids_pagina == anterior:
                 break  # fim da lista, ou o site repetiu a pagina anterior
