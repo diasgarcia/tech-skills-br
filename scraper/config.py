@@ -108,7 +108,8 @@ class Settings:
     # Limites de coleta
     page_size: int = 100  # a API da Gupy rejeita limit > 100 (HTTP 400)
     start_page: int = 1
-    max_pages_per_term: int = 5
+    max_pages_per_term: int = 15
+
 
 
     # Filtros
