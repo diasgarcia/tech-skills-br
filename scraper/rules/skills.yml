@@ -242,6 +242,18 @@ engenharia_praticas:
   SAP: [sap, sap s4hana, sap ecc]
   TOTVS: [totvs, protheus, rm totvs, fluig]
   CRM: [crm, hubspot]
+
   Salesforce: [salesforce]
   Jira: [jira]
   Confluence: [confluence]
+
+hardware_eletronica:
+
+  Firmware: [firmware, desenvolvimento de firmware]
+  Sistemas Embarcados: [sistemas embarcados, embarcados, embedded systems, embedded c]
+  Microcontroladores: [microcontroladores, microcontrolador, stm32, pic, avr, arm cortex, esp32, esp8266, arduino, raspberry pi]
+  IoT: [iot, internet das coisas, internet of things]
+  Eletrônica: [eletronica, circuitos eletricos, circuitos eletronicos, pcb, esquematicos, osciloscopio]
+  CFTV: [cftv, cftv ip, cameras ip, seguranca eletronica]
+  Automação Industrial: [automacao industrial, clp, plc, scada]
+
