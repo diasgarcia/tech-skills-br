@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (2001 vagas)
 
-- **Data de geração:** 25/08/2026 14:55
+- **Data de geração:** 25/08/2026 15:12
 - **Período coberto:** 05/01/2026 até 25/08/2026
 - **Total de vagas consolidadas:** 2001
 
@@ -90,19 +90,19 @@
 |---|---|---|
 | 1 | Inteligência Artificial | 94 |
 | 2 | Hardware | 74 |
-| 3 | Service Desk | 71 |
-| 4 | Segurança da Informação | 67 |
-| 5 | JavaScript | 64 |
-| 6 | SQL | 62 |
-| 7 | Python | 59 |
-| 8 | Java | 51 |
-| 9 | ERP | 43 |
-| 10 | React | 38 |
-| 11 | Inglês | 38 |
-| 12 | Git | 38 |
-| 13 | Windows | 32 |
-| 14 | Redes de Computadores | 32 |
-| 15 | Node.js | 30 |
+| 3 | Segurança da Informação | 67 |
+| 4 | JavaScript | 64 |
+| 5 | SQL | 62 |
+| 6 | Python | 59 |
+| 7 | Java | 51 |
+| 8 | ERP | 43 |
+| 9 | React | 38 |
+| 10 | Inglês | 38 |
+| 11 | Git | 38 |
+| 12 | Windows | 32 |
+| 13 | Redes de Computadores | 32 |
+| 14 | Node.js | 30 |
+| 15 | Service Desk | 27 |
 | 16 | .NET | 27 |
 | 17 | C# | 25 |
 | 18 | API REST | 24 |
