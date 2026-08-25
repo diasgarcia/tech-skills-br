@@ -45,16 +45,17 @@ A coleta combina portais de alto volume com APIs especializadas de mercado:
 - **Fontes Nativas:** Gupy, LinkedIn Jobs, Vagas.com.br, ProgramaThor e Trampos.co.
 - **APIs Especializadas:** SerpApi (Google Jobs) e TheirStack API.
 
-### 2. Amostragem Estratificada por Polos Regionais
+### 2. Amostragem Estratificada por Macrorregiões e Polos Nacionais
 
-Para evitar o viés de concentração geográfica exclusiva no Sudeste, a coleta cobre as 5 macrorregiões do país e 14 polos tecnológicos consolidados:
+Para evitar o viés de concentração geográfica exclusiva no Sudeste e mapear a demanda de tecnologia em todo o território brasileiro, a taxonomia e os coletores cobrem as 5 macrorregiões do país, todas as 27 capitais e polos tecnológicos consolidados:
 
-- **Sudeste:** São Paulo, Campinas, Rio de Janeiro, Belo Horizonte.
-- **Sul:** Curitiba, Florianópolis, Porto Alegre.
-- **Nordeste:** Recife (Porto Digital), Salvador, Fortaleza.
-- **Centro-Oeste:** Brasília, Goiânia.
-- **Norte:** Manaus, Belém.
+- **Sudeste:** São Paulo, Campinas, Rio de Janeiro, Belo Horizonte, Vitória, São José dos Campos, Ribeirão Preto, etc.
+- **Sul:** Curitiba, Florianópolis, Porto Alegre, Joinville, Londrina, Maringá, Caxias do Sul, etc.
+- **Nordeste:** Recife (Porto Digital), Salvador, Fortaleza, Natal, João Pessoa, Maceió, Aracaju, São Luís, Teresina.
+- **Centro-Oeste:** Brasília, Goiânia, Cuiabá, Campo Grande.
+- **Norte:** Manaus, Belém, Porto Velho, Palmas, Macapá, Boa Vista, Rio Branco.
 - **Remoto Nacional:** Vagas 100% remotas de abrangência nacional.
+
 
 ### 3. Extração e Normalização de Skills (Taxonomia Curada)
 
