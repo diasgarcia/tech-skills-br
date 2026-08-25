@@ -154,8 +154,8 @@ def test_tech_gate_usa_a_descricao_quando_o_titulo_e_generico(clf):
 
 
 def test_suporte_tecnico_vai_para_area_propria(clf):
-    assert clf.classify("Analista de Suporte Técnico Júnior").area == "Suporte/Infra"
-    assert clf.classify("Técnico de Suporte Júnior").area == "Suporte/Infra"
+    assert clf.classify("Analista de Suporte Técnico Júnior").area == "Suporte Técnico"
+    assert clf.classify("Técnico de Suporte Júnior").area == "Suporte Técnico"
 
 
 def test_seguranca_nao_dispara_com_a_palavra_solta(clf):
@@ -181,7 +181,7 @@ def test_keyword_contida_em_outra_nao_pontua_duas_vezes(clf):
     """'suporte tecnico' contém 'suporte' -- o mesmo trecho não pode somar duas vezes."""
     scores = {s.area: s.score for s in clf.score_all("Suporte Técnico Júnior")}
     # peso_alto (4.0) x title_boost (3.0) = 12, e não 15 (12 + 3 do 'suporte' contido).
-    assert scores["Suporte/Infra"] == 12.0
+    assert scores["Suporte Técnico"] == 12.0
 
 
 def test_frases_que_so_se_sobrepoem_em_parte_ainda_somam(clf):
@@ -189,7 +189,8 @@ def test_frases_que_so_se_sobrepoem_em_parte_ainda_somam(clf):
     scores = {s.area: s.score for s in clf.score_all("Analista de Suporte Técnico Jr")}
     # 'analista de suporte' e 'suporte tecnico' compartilham uma palavra, mas
     # nenhuma está contida na outra -- são dois sinais fortes de verdade.
-    assert scores["Suporte/Infra"] == 24.0
+    assert scores["Suporte Técnico"] == 24.0
+
 
 
 def test_titulo_backend_com_suporte_nao_vira_suporte(clf):

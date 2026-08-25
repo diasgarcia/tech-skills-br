@@ -37,9 +37,11 @@ from api.database import (  # noqa: E402
 )
 from api.dates import parse_published_date, reference_date_from_csv  # noqa: E402
 from api.models import Tecnologia, Vaga  # noqa: E402
+from scraper.classifier import default_classifier  # noqa: E402
 from scraper.config import PROJECT_ROOT  # noqa: E402
 from scraper.geo import default_geo_classifier  # noqa: E402
 from scraper.models import infer_workplace  # noqa: E402
+
 
 
 logger = logging.getLogger("import_csv")
@@ -141,7 +143,10 @@ def importar(
     with Session(engine) as db:
         tecnologias = semear_tecnologias(db)
         conhecidas = {n.lower(): t for n, t in tecnologias.items()}
+        clf = default_classifier()
         geo = default_geo_classifier()
+        valid_areas = set(vocabulary.areas())
+
 
         with open(csv_path, encoding="utf-8-sig", newline="") as fh:
             for linha in csv.DictReader(fh):
@@ -166,13 +171,24 @@ def importar(
                     setattr(vaga, campo, (linha.get(campo) or "").strip() or None)
 
                 vaga.title = (linha.get("title") or "").strip()
-                vaga.area = (linha.get("area") or "").strip() or "Outros/TI Geral"
-                vaga.area_score = _float_ou_none(linha.get("area_score"))
+                
+                # Classifica dinamicamente usando as regras mais recentes
+                area_csv = (linha.get("area") or "").strip()
+                if not area_csv or area_csv not in valid_areas or area_csv == "Outros/TI Geral":
+                    classified = clf.classify(vaga.title, vaga.description or "")
+                    vaga.area = classified.area
+                    vaga.area_score = classified.score
+                    vaga.area_matches = ", ".join(classified.matches)
+                else:
+                    vaga.area = area_csv
+                    vaga.area_score = _float_ou_none(linha.get("area_score"))
+
                 vaga.published_date = parse_published_date(
                     linha.get("published_date"), referencia
                 )
                 if vaga.published_date is None:
                     sem_data += 1
+
 
                 # Infere modalidade e polo/regiao caso nao tenham vindo estruturados
                 vaga.workplace_type = infer_workplace(
