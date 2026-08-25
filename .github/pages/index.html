@@ -342,22 +342,11 @@
             <td><a href="api/vagas.json" target="_blank">[abrir JSON]</a></td>
           </tr>
         </tbody>
-      </table>
-
-      <div class="card-title" style="font-weight: 700; margin-top: 16px;">Como consumir via Python:</div>
-      <pre><code>import requests
-
-url = "https://diasgarcia.github.io/tech-skills-br/api/resumo.json"
-dados = requests.get(url).json()
-
-print(f"Total de Vagas: {dados['metadados']['total_vagas']}")
-for area in dados['areas']:
-    print(f"- {area['area']}: {area['vagas']} vagas ({area['percentual']}%)")</code></pre>
-
-      <div class="card-title" style="font-weight: 700; margin-top: 14px;">Como consumir via cURL / Terminal:</div>
+      <div class="card-title" style="font-weight: 700; margin-top: 16px;">Terminal:</div>
       <pre><code>curl -s https://diasgarcia.github.io/tech-skills-br/api/tecnologias.json | jq .[0:5]</code></pre>
     </div>
   </div>
+
 
   <!-- FOOTER -->
   <footer>
