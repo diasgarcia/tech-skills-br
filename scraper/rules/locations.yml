@@ -11,91 +11,382 @@ regioes:
   Sudeste:
     - nome: "São Paulo"
       uf: "SP"
-      aliases: ["sao paulo", "capital paulista", "grande sao paulo", "paulista", "alphaville", "barueri", "santo andre", "sao bernardo", "sao caetano", "osasco", "guarulhos"]
+      aliases: ["sao paulo", "capital paulista", "grande sao paulo", "paulista", "alphaville", "barueri", "santo andre", "sao bernardo", "sao caetano", "osasco", "guarulhos", "diadema", "maua", "mogi das cruzes", "cotia", "taboao da serra", "embu das artes", "suzano", "itaquaquecetuba", "franco da rocha", "santana de parnaiba", "carapicuiba", "itapevi", "jandira", "caieiras", "aruja"]
+
       serpapi_location: "Sao Paulo, State of Sao Paulo, Brazil"
       theirstack_id: 3448439
 
     - nome: "Campinas"
       uf: "SP"
-      aliases: ["campinas", "regiao metropolitana de campinas", "hortolandia", "indaiatuba", "sumare", "paulinia"]
+      aliases: ["campinas", "regiao metropolitana de campinas", "rmc", "hortolandia", "indaiatuba", "sumare", "paulinia", "valinhos", "vinhedo", "americana", "santa barbara d oeste", "jaguariuna", "itapira", "cosmopolis", "nova odessa", "artur nogueira"]
       serpapi_location: "Campinas, State of Sao Paulo, Brazil"
       theirstack_id: 3467865
 
+    - nome: "São José dos Campos"
+      uf: "SP"
+      aliases: ["sao jose dos campos", "sjc", "vale do paraiba", "taubate", "jacarei", "pindamonhangaba", "guaratingueta", "cacapava", "lorena", "cruzeiro", "aparecida", "caraguatatuba", "ubatuba", "sao sebastiao"]
+      serpapi_location: "Sao Jose dos Campos, State of Sao Paulo, Brazil"
+      theirstack_id: 3448639
+
+    - nome: "São Carlos"
+      uf: "SP"
+      aliases: ["sao carlos", "araraquara", "rio claro", "ibate", "porto ferreira", "matao", "leme", "descalvado", "pirassununga"]
+      serpapi_location: "Sao Carlos, State of Sao Paulo, Brazil"
+      theirstack_id: 3448766
+
+    - nome: "Ribeirão Preto"
+      uf: "SP"
+      aliases: ["ribeirao preto", "sertaozinho", "franca", "barretos", "bebedouro", "jaboticabal", "cravinhos", "batatais", "monte alto", "mococa"]
+      serpapi_location: "Ribeirao Preto, State of Sao Paulo, Brazil"
+      theirstack_id: 3451336
+
+    - nome: "Sorocaba"
+      uf: "SP"
+      aliases: ["sorocaba", "itu", "salto", "votorantim", "tatui", "itapetininga", "boituva", "sao roque", "porto feliz", "piedade", "ibina"]
+      serpapi_location: "Sorocaba, State of Sao Paulo, Brazil"
+      theirstack_id: 3446865
+
+    - nome: "Santos"
+      uf: "SP"
+      aliases: ["santos", "sao vicente", "praia grande", "guaruja", "cubatao", "bertioga", "itanahem", "peruibe", "mongagua", "baixada santista"]
+      serpapi_location: "Santos, State of Sao Paulo, Brazil"
+      theirstack_id: 3448433
+
+    - nome: "Jundiaí"
+      uf: "SP"
+      aliases: ["jundiai", "varzea paulista", "campo limpo paulista", "itupeva", "louveira", "cajamar", "cabreuva", "jarinu"]
+      serpapi_location: "Jundiai, State of Sao Paulo, Brazil"
+      theirstack_id: 3459740
+
+    - nome: "Interior Paulista Ocidental"
+      uf: "SP"
+      aliases: ["bauru", "marilia", "presidente prudente", "botucatu", "jau", "aracatuba", "sao jose do rio preto", "rio preto", "assis", "ourinhos", "lins", "birigui", "votuporanga", "catanduva", "piracicaba", "limeira", "araras", "atibaia", "braganca paulista"]
+      serpapi_location: "Bauru, State of Sao Paulo, Brazil"
+      theirstack_id: 3470125
+
     - nome: "Rio de Janeiro"
       uf: "RJ"
-      aliases: ["rio de janeiro", "capital fluminense", "niteroi", "duque de caxias", "barra da tijuca"]
+      aliases: ["rio de janeiro", "capital fluminense", "niteroi", "duque de caxias", "barra da tijuca", "nova iguacu", "sao goncalo", "belford roxo", "sao joao de meriti", "mage", "itaborai", "mesquita", "nilopolis", "queimados", "marica", "itaguai"]
       serpapi_location: "Rio de Janeiro, State of Rio de Janeiro, Brazil"
       theirstack_id: 3451190
 
+    - nome: "Petrópolis"
+      uf: "RJ"
+      aliases: ["petropolis", "serratec", "teresopolis", "nova friburgo", "regiao serrana rj"]
+      serpapi_location: "Petropolis, State of Rio de Janeiro, Brazil"
+      theirstack_id: 3453702
+
+    - nome: "Volta Redonda"
+      uf: "RJ"
+      aliases: ["volta redonda", "resende", "barra mansa", "angra dos reis", "porto real", "itatiaia", "valenca", "barra do pirai", "sul fluminense"]
+      serpapi_location: "Volta Redonda, State of Rio de Janeiro, Brazil"
+      theirstack_id: 3445417
+
+    - nome: "Campos dos Goytacazes"
+      uf: "RJ"
+      aliases: ["campos dos goytacazes", "campos", "macae", "rio das ostras", "cabo frio", "araruama", "saquarema", "sao pedro da aldeia", "itaperuna"]
+      serpapi_location: "Campos dos Goytacazes, State of Rio de Janeiro, Brazil"
+      theirstack_id: 3467824
+
     - nome: "Belo Horizonte"
       uf: "MG"
-      aliases: ["belo horizonte", "bh", "san pedro valley", "contagem", "betim", "nova lima"]
+      aliases: ["belo horizonte", "bh", "san pedro valley", "contagem", "betim", "nova lima", "sabara", "ribeirao das neves", "santa luzia", "vespasiano", "lagoa santa", "brumadinho", "ibirite", "sete lagoas", "pedro leopoldo"]
       serpapi_location: "Belo Horizonte, State of Minas Gerais, Brazil"
       theirstack_id: 3470127
+
+    - nome: "Uberlândia"
+      uf: "MG"
+      aliases: ["uberlandia", "uberaba", "araguari", "patos de minas", "ituiutaba", "frutal", "araxa", "patrocinio", "triangulo mineiro"]
+      serpapi_location: "Uberlandia, State of Minas Gerais, Brazil"
+      theirstack_id: 3445839
+
+    - nome: "Juiz de Fora"
+      uf: "MG"
+      aliases: ["juiz de fora", "vicosa", "uba", "cataguases", "muriae", "barbacena", "sao joao del rei", "leopoldina", "zona da mata mg"]
+      serpapi_location: "Juiz de Fora, State of Minas Gerais, Brazil"
+      theirstack_id: 3459746
+
+    - nome: "Santa Rita do Sapucaí"
+      uf: "MG"
+      aliases: ["santa rita do sapucai", "vale da eletronica", "pouso alegre", "varginha", "pocos de caldas", "itajuba", "lavras", "passos", "tres coracoes", "sul de minas"]
+      serpapi_location: "Pouso Alegre, State of Minas Gerais, Brazil"
+      theirstack_id: 3453303
+
+    - nome: "Ipatinga"
+      uf: "MG"
+      aliases: ["ipatinga", "coronel fabriciano", "timoteo", "governador valadares", "vale do aco", "joao monlevade", "itabira", "manhuacu", "caratinga"]
+      serpapi_location: "Ipatinga, State of Minas Gerais, Brazil"
+      theirstack_id: 3460333
+
+    - nome: "Montes Claros"
+      uf: "MG"
+      aliases: ["montes claros", "diamantina", "teofilo otoni", "januaria", "pirapora", "norte de minas"]
+      serpapi_location: "Montes Claros, State of Minas Gerais, Brazil"
+      theirstack_id: 3456381
+
+    - nome: "Vitória"
+      uf: "ES"
+      aliases: ["vitoria", "vila velha", "serra", "cariacica", "viana", "guarapari", "grande vitoria", "fundao"]
+      serpapi_location: "Vitoria, State of Espirito Santo, Brazil"
+      theirstack_id: 3444924
+
+
+    - nome: "Interior Capixaba"
+      uf: "ES"
+      aliases: ["cachoeiro de itapemirim", "linhares", "colatina", "sao mateus", "aracruz", "marataizes"]
+      serpapi_location: "Linhares, State of Espirito Santo, Brazil"
+      theirstack_id: 3458632
 
   Sul:
     - nome: "Curitiba"
       uf: "PR"
-      aliases: ["curitiba", "regiao metropolitana de curitiba", "sao jose dos pinhais", "araucaria"]
+      aliases: ["curitiba", "cwb", "regiao metropolitana de curitiba", "sao jose dos pinhais", "araucaria", "colombo", "pinhais", "campo largo", "fazenda rio grande", "almirante tamandare", "quatro barras", "campina grande do sul", "paranagua"]
       serpapi_location: "Curitiba, State of Parana, Brazil"
       theirstack_id: 3464975
 
+    - nome: "Londrina"
+      uf: "PR"
+      aliases: ["londrina", "cambe", "rolandia", "ibipora", "arapongas", "apucarana", "cornelio procopio", "santo antonio da platina"]
+      serpapi_location: "Londrina, State of Parana, Brazil"
+      theirstack_id: 3458421
+
+    - nome: "Maringá"
+      uf: "PR"
+      aliases: ["maringa", "sarandi", "paicandu", "paranavai", "cianorte", "campo mourao", "umuarama", "mandaguari", "marialva"]
+      serpapi_location: "Maringa, State of Parana, Brazil"
+      theirstack_id: 3457039
+
+    - nome: "Cascavel"
+      uf: "PR"
+      aliases: ["cascavel", "foz do iguacu", "toledo", "medianeira", "marechal candido rondon", "palotina", "santa terezinha de itaipu"]
+      serpapi_location: "Cascavel, State of Parana, Brazil"
+      theirstack_id: 3467389
+
+    - nome: "Ponta Grossa"
+      uf: "PR"
+      aliases: ["ponta grossa", "castro", "telemaco borba", "uniao da vitoria", "guarapuava", "irati", "palmeira"]
+      serpapi_location: "Ponta Grossa, State of Parana, Brazil"
+      theirstack_id: 3453479
+
+    - nome: "Pato Branco"
+      uf: "PR"
+      aliases: ["pato branco", "francisco beltrao", "dois vizinhos", "palmas pr", "sudoeste pr"]
+      serpapi_location: "Pato Branco, State of Parana, Brazil"
+      theirstack_id: 3453888
+
     - nome: "Florianópolis"
       uf: "SC"
-      aliases: ["florianopolis", "floripa", "ilha do silicio", "sao jose", "palhoca", "joinville", "blumenau"]
+      aliases: ["florianopolis", "floripa", "ilha do silicio", "sao jose", "palhoca", "biguacu", "santo amaro da imperatriz", "governador celso ramos", "tijucas"]
       serpapi_location: "Florianopolis, State of Santa Catarina, Brazil"
       theirstack_id: 3463237
 
+    - nome: "Joinville"
+      uf: "SC"
+      aliases: ["joinville", "jaragua do sul", "sao bento do sul", "porto uniao", "guaramirim", "araquari", "sao francisco do sul", "mafra", "canoinhas"]
+      serpapi_location: "Joinville, State of Santa Catarina, Brazil"
+      theirstack_id: 3459957
+
+    - nome: "Blumenau"
+      uf: "SC"
+      aliases: ["blumenau", "itajaí", "itajai", "balneario camboriu", "brusque", "gaspar", "indaial", "pomerode", "camboriu", "navegantes", "itapema", "porto belo", "vale do itajai"]
+      serpapi_location: "Blumenau, State of Santa Catarina, Brazil"
+      theirstack_id: 3469850
+
+    - nome: "Criciúma"
+      uf: "SC"
+      aliases: ["criciuma", "tubarao", "ararangua", "icara", "laguna", "imbituba", "urussanga", "sul catarinense"]
+      serpapi_location: "Criciuma, State of Santa Catarina, Brazil"
+      theirstack_id: 3465134
+
+    - nome: "Chapecó"
+      uf: "SC"
+      aliases: ["chapeco", "concordia", "joacaba", "xanxere", "sao miguel do oeste", "cacador", "lages", "videira", "curitibanos", "oeste catarinense"]
+      serpapi_location: "Chapeco, State of Santa Catarina, Brazil"
+      theirstack_id: 3466827
+
     - nome: "Porto Alegre"
       uf: "RS"
-      aliases: ["porto alegre", "poa", "tecnopuc", "canoas", "sao leopoldo", "caxias do sul", "novo hamburgo"]
+      aliases: ["porto alegre", "poa", "tecnopuc", "canoas", "sao leopoldo", "novo hamburgo", "gravatai", "viamao", "alvorada", "esteio", "sapucaia do sul", "campo bom", "montenegro", "vale dos sinos", "guaiba", "taquara", "sapiranga", "estancia velha"]
       serpapi_location: "Porto Alegre, State of Rio Grande do Sul, Brazil"
       theirstack_id: 3452925
+
+    - nome: "Caxias do Sul"
+      uf: "RS"
+      aliases: ["caxias do sul", "bento goncalves", "farroupilha", "gramado", "canela", "vacaria", "serra gaucha", "garibaldi", "carlos barbosa", "nova prata", "flores da cunha"]
+      serpapi_location: "Caxias do Sul, State of Rio Grande do Sul, Brazil"
+      theirstack_id: 3467204
+
+    - nome: "Passo Fundo"
+      uf: "RS"
+      aliases: ["passo fundo", "erechim", "marau", "carazinho", "soledade", "lagoa vermelha"]
+      serpapi_location: "Passo Fundo, State of Rio Grande do Sul, Brazil"
+      theirstack_id: 3453965
+
+    - nome: "Pelotas"
+      uf: "RS"
+      aliases: ["pelotas", "rio grande", "bage", "santana do livramento", "chui", "camaqua"]
+      serpapi_location: "Pelotas, State of Rio Grande do Sul, Brazil"
+      theirstack_id: 3453805
+
+    - nome: "Santa Maria"
+      uf: "RS"
+      aliases: ["santa maria", "santa cruz do sul", "ijui", "santo angelo", "uruguaiana", "lajeado", "venancio aires", "cruz alta", "sao borja"]
+      serpapi_location: "Santa Maria, State of Rio Grande do Sul, Brazil"
+      theirstack_id: 3450083
 
   Nordeste:
     - nome: "Recife"
       uf: "PE"
-      aliases: ["recife", "porto digital", "olinda", "jaboatao", "paulista"]
+      aliases: ["recife", "porto digital", "olinda", "jaboatao dos guararapes", "jaboatao", "paulista", "camaragibe", "cabo de santo agostinho", "sao lourenco da mata", "igarassu", "abreu e lima", "ipojuca", "moreno"]
       serpapi_location: "Recife, State of Pernambuco, Brazil"
       theirstack_id: 3451940
 
+    - nome: "Caruaru"
+      uf: "PE"
+      aliases: ["caruaru", "petrolina", "garanhuns", "vitoria de santo antao", "serra talhada", "arcoverde", "santa cruz do capibaribe", "toritama", "agreste pe", "sertao pe"]
+      serpapi_location: "Caruaru, State of Pernambuco, Brazil"
+      theirstack_id: 3467554
+
     - nome: "Salvador"
       uf: "BA"
-      aliases: ["salvador", "lauro de freitas", "camacari"]
+      aliases: ["salvador", "lauro de freitas", "camacari", "simoes filho", "candeias", "dias d avila", "madre de deus", "vera cruz", "itaparica"]
       serpapi_location: "Salvador, State of Bahia, Brazil"
       theirstack_id: 3450554
 
+    - nome: "Interior Baiano"
+      uf: "BA"
+      aliases: ["feira de santana", "vitoria da conquista", "itabuna", "ilheus", "juazeiro", "barreiras", "jequie", "alagoinhas", "porto seguro", "luis eduardo magalhaes", "teixeira de freitas", "santo antonio de jesus", "valenca ba", "paulo afonso"]
+      serpapi_location: "Feira de Santana, State of Bahia, Brazil"
+      theirstack_id: 3463870
+
     - nome: "Fortaleza"
       uf: "CE"
-      aliases: ["fortaleza", "caucaia", "maracanau", "eusebio"]
+      aliases: ["fortaleza", "caucaia", "maracanau", "eusebio", "aquiraz", "pacatuba", "maranguape", "horizonte", "itaitinga", "sao goncalo do amarante ce", "cascavel ce"]
       serpapi_location: "Fortaleza, State of Ceara, Brazil"
       theirstack_id: 3463930
+
+    - nome: "Interior Cearense"
+      uf: "CE"
+      aliases: ["sobral", "juazeiro do norte", "crato", "barbalha", "quixada", "iguatu", "itapipoca", "crateus", "rusas", "tiangua"]
+      serpapi_location: "Juazeiro do Norte, State of Ceara, Brazil"
+      theirstack_id: 3459800
+
+    - nome: "João Pessoa"
+      uf: "PB"
+      aliases: ["joao pessoa", "santa rita", "bayeux", "cabedelo", "conde pb", "lucena"]
+      serpapi_location: "Joao Pessoa, State of Paraiba, Brazil"
+      theirstack_id: 3460036
+
+    - nome: "Campina Grande"
+      uf: "PB"
+      aliases: ["campina grande", "polo de campina grande", "patos", "sousa", "cajazeiras", "guarabira", "esperanca", "queimadas"]
+      serpapi_location: "Campina Grande, State of Paraiba, Brazil"
+      theirstack_id: 3467882
+
+    - nome: "Natal"
+      uf: "RN"
+      aliases: ["natal", "parnamirim", "sao goncalo do amarante rn", "macaiba", "ceara-mirim", "instituto metropole digital", "imd", "extremoz", "sao jose de mipibu"]
+      serpapi_location: "Natal, State of Rio Grande do Norte, Brazil"
+      theirstack_id: 3456421
+
+    - nome: "Mossoró"
+      uf: "RN"
+      aliases: ["mossoro", "caico", "acu", "currais novos", "santa cruz rn"]
+      serpapi_location: "Mossoro, State of Rio Grande do Norte, Brazil"
+      theirstack_id: 3456327
+
+    - nome: "Maceió"
+      uf: "AL"
+      aliases: ["maceio", "rio largo", "marechal deodoro", "arapiraca", "palmeira dos indios", "penedo", "uniao dos palmares", "coruripe", "delmiro gouveia"]
+      serpapi_location: "Maceio, State of Alagoas, Brazil"
+      theirstack_id: 3458514
+
+    - nome: "Aracaju"
+      uf: "SE"
+      aliases: ["aracaju", "nossa senhora do socorro", "sao cristovao", "barra dos coqueiros", "estancia", "lagarto", "itabaiana", "propria"]
+      serpapi_location: "Aracaju, State of Sergipe, Brazil"
+      theirstack_id: 3472091
+
+    - nome: "Teresina"
+      uf: "PI"
+      aliases: ["teresina", "timon pi", "parnaiba", "picos", "floriano", "piripiri", "campo maior"]
+      serpapi_location: "Teresina, State of Piaui, Brazil"
+      theirstack_id: 3446066
+
+    - nome: "São Luís"
+      uf: "MA"
+      aliases: ["sao luis", "sao jose de ribamar", "paco do lumiar", "raposa", "imperatriz", "caxias ma", "timon ma", "bacabal", "balsas", "acailandia", "santa ines"]
+      serpapi_location: "Sao Luis, State of Maranhao, Brazil"
+      theirstack_id: 3448600
 
   Centro-Oeste:
     - nome: "Brasília"
       uf: "DF"
-      aliases: ["brasilia", "distrito federal", "taguatinga", "aguas claras", "ceilandia"]
+      aliases: ["brasilia", "distrito federal", "taguatinga", "aguas claras", "ceilandia", "guara", "samambaia", "sobradinho", "gama", "planaltina", "nucleo bandeirante", "vicente pires", "sudoeste", "asa norte", "asa sul", "lago norte", "lago sul", "valparaiso de goias", "cidade ocidental", "luziania", "novo gama", "aguas lindas de goias", "formosa go"]
       serpapi_location: "Brasilia, Federal District, Brazil"
       theirstack_id: 3469058
 
+
     - nome: "Goiânia"
       uf: "GO"
-      aliases: ["goiania", "aparecida de goiania", "anapolis"]
+      aliases: ["goiania", "aparecida de goiania", "senador canedo", "trindade", "anapolis", "rio verde", "itumbiara", "jatai", "caldas novas", "catalao", "formosa", "valparaiso", "luziania", "cristalina"]
       serpapi_location: "Goiania, State of Goias, Brazil"
       theirstack_id: 3463504
+
+    - nome: "Cuiabá"
+      uf: "MT"
+      aliases: ["cuiaba", "varzea grande", "rondonopolis", "sinop", "sorriso", "lucas do rio verde", "tangara da serra", "barra do garcas", "primavera do leste", "caceres", "campo verde", "nova mutum"]
+      serpapi_location: "Cuiaba, State of Mato Grosso, Brazil"
+      theirstack_id: 3465038
+
+    - nome: "Campo Grande"
+      uf: "MS"
+      aliases: ["campo grande", "dourados", "tres lagoas", "corumba", "ponta pora", "navirai", "sidrolandia", "nova andradina", "aquidauana", "maracaju"]
+      serpapi_location: "Campo Grande, State of Mato Grosso do Sul, Brazil"
+      theirstack_id: 3467889
 
   Norte:
     - nome: "Manaus"
       uf: "AM"
-      aliases: ["manaus", "polo industrial de manaus"]
+      aliases: ["manaus", "polo industrial de manaus", "pim", "itacoatiara", "manacapuru", "parintins", "coari", "tefe", "iranduba"]
       serpapi_location: "Manaus, State of Amazonas, Brazil"
       theirstack_id: 3457193
 
     - nome: "Belém"
       uf: "PA"
-      aliases: ["belem", "ananindeua"]
+      aliases: ["belem", "ananindeua", "marituba", "benevides", "santarem", "maraba", "castanhal", "parauapebas", "altamira", "tucurui", "barcarena", "itaituba", "redencao"]
       serpapi_location: "Belem, State of Para, Brazil"
       theirstack_id: 3467865
+
+    - nome: "Porto Velho"
+      uf: "RO"
+      aliases: ["porto velho", "ji-parana", "ariquemes", "vilhena", "cacoal", "jaru", "guajara-mirim", "rolim de moura"]
+      serpapi_location: "Porto Velho, State of Rondonia, Brazil"
+      theirstack_id: 3452912
+
+    - nome: "Palmas"
+      uf: "TO"
+      aliases: ["palmas", "araguaina", "gurupi", "porto nacional", "paraiso do tocantins", "colinas do tocantins"]
+      serpapi_location: "Palmas, State of Tocantins, Brazil"
+      theirstack_id: 3454318
+
+    - nome: "Rio Branco"
+      uf: "AC"
+      aliases: ["rio branco", "cruzeiro do sul", "sena madureira", "tarauaca", "brasileia"]
+      serpapi_location: "Rio Branco, State of Acre, Brazil"
+      theirstack_id: 3451189
+
+    - nome: "Macapá"
+      uf: "AP"
+      aliases: ["macapa", "santana ap", "laranjal do jari", "oiapoque"]
+      serpapi_location: "Macapa, State of Amapa, Brazil"
+      theirstack_id: 3458564
+
+    - nome: "Boa Vista"
+      uf: "RR"
+      aliases: ["boa vista", "rorainopolis", "caracarai", "pacaraima"]
+      serpapi_location: "Boa Vista, State of Roraima, Brazil"
+      theirstack_id: 3469800
 
 # Mapeamento de UFs para casos onde a vaga informa apenas o estado
 ufs_para_regioes:
@@ -126,3 +417,4 @@ ufs_para_regioes:
   TO: "Norte"
   RR: "Norte"
   AP: "Norte"
+
