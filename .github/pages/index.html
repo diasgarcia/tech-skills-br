@@ -436,10 +436,10 @@ function initKPIs() {
     const topMod = modalidades[0];
     document.getElementById("kpi-top-mod-title").innerText = `Modalidade: ${topMod.modalidade}`;
     document.getElementById("kpi-top-mod-value").innerText = `${topMod.percentual}%`;
-    const outras = modalidades.slice(1).map(m => `${m.vagas} ${m.modalidade.toLowerCase()}`).join(" · ");
-    document.getElementById("kpi-top-mod-sub").innerText = `${topMod.vagas.toLocaleString("pt-BR")} vagas · ${outras}`;
+    document.getElementById("kpi-top-mod-sub").innerText = `${topMod.vagas.toLocaleString("pt-BR")} vagas nesta modalidade`;
   }
 }
+
 
 function renderSummaryTables() {
   // Áreas
