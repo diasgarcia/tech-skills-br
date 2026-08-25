@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (1649 vagas)
 
-- **Data de geração:** 25/08/2026 12:26
+- **Data de geração:** 25/08/2026 12:44
 - **Período coberto:** 05/01/2026 até 25/08/2026
 - **Total de vagas consolidadas:** 1649
 
@@ -58,9 +58,9 @@
 
 | Modalidade | Vagas | % | Gráfico |
 |---|---|---|---|
-| Presencial | 1270 | 77.0% | ###############..... |
+| Presencial | 1269 | 77.0% | ###############..... |
 | Remoto | 256 | 15.5% | ###................. |
-| Híbrido | 79 | 4.8% | #................... |
+| Híbrido | 80 | 4.9% | #................... |
 | Não informado | 44 | 2.7% | #................... |
 
 ## Distribuição por Nível de Entrada

@@ -120,6 +120,7 @@ class LinkedInSource(JobSource):
         publicada = (momento.get("datetime") or "") if momento else ""
 
         location = self._text(card.select_one("span.job-search-card__location"))
+        card_text = self._text(card)
 
         return Job(
             source=self.name,
@@ -129,31 +130,35 @@ class LinkedInSource(JobSource):
             url=url,
             description="",  # o card da busca nao traz a descricao
             location=location,
-            workplace_type=self._modalidade(location),
+            workplace_type=self._modalidade(location, card_text),
             published_date=publicada[:10],
             search_term=term,
         )
 
     @staticmethod
-    def _modalidade(location: str) -> str:
+    def _modalidade(location: str, card_text: str = "") -> str:
         """Infere a modalidade com base no padrao do LinkedIn.
 
+        - Card/Local contendo 'Híbrido'/'Hybrid' -> Híbrido
+        - Card/Local contendo 'Remoto'/'Remote' -> Remoto
         - 'Brasil' / 'Brazil' / 'Nacional' -> Remoto (vagas de escopo nacional)
-        - 'Brasil (Remoto)' / 'Remoto' -> Remoto
-        - 'São Paulo (Híbrido)' / 'Híbrido' -> Híbrido
         - Cidade física ('Rio de Janeiro e Região', 'Curitiba, PR') -> Presencial
         - Vazio -> Não informado
         """
-        texto = normalize(location)
-        if not texto:
+        full_text = normalize(f"{location} {card_text}")
+        if not full_text:
             return NAO_INFORMADO
-        if "remoto" in texto or "remote" in texto:
-            return REMOTO
-        if "hibrid" in texto or "hybrid" in texto:
+        if "hibrid" in full_text or "hybrid" in full_text:
             return HIBRIDO
-        if texto in ("brasil", "brazil", "nacional"):
+        if "remoto" in full_text or "remote" in full_text:
             return REMOTO
-        return PRESENCIAL
+        loc_norm = normalize(location)
+        if loc_norm in ("brasil", "brazil", "nacional"):
+            return REMOTO
+        if loc_norm:
+            return PRESENCIAL
+        return NAO_INFORMADO
+
 
 
 
