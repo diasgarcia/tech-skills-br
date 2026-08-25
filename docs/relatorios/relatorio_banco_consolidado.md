@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (2001 vagas)
 
-- **Data de geração:** 25/08/2026 17:48
+- **Data de geração:** 25/08/2026 14:55
 - **Período coberto:** 05/01/2026 até 25/08/2026
 - **Total de vagas consolidadas:** 2001
 
@@ -88,26 +88,26 @@
 
 | Posição | Tecnologia | Vagas Citadas |
 |---|---|---|
-| 1 | Hardware | 134 |
-| 2 | SQL | 121 |
-| 3 | Inteligência Artificial | 118 |
-| 4 | Python | 104 |
-| 5 | Segurança da Informação | 103 |
-| 6 | JavaScript | 96 |
-| 7 | Inglês | 95 |
-| 8 | Service Desk | 93 |
-| 9 | Windows | 89 |
-| 10 | Git | 89 |
-| 11 | Redes de Computadores | 83 |
-| 12 | Java | 67 |
-| 13 | Metodologias Ágeis | 62 |
-| 14 | Excel | 60 |
-| 15 | ERP | 57 |
-| 16 | React | 56 |
-| 17 | Linux | 52 |
-| 18 | Algoritmos | 51 |
-| 19 | API REST | 49 |
-| 20 | Node.js | 41 |
+| 1 | Inteligência Artificial | 94 |
+| 2 | Hardware | 74 |
+| 3 | Service Desk | 71 |
+| 4 | Segurança da Informação | 67 |
+| 5 | JavaScript | 64 |
+| 6 | SQL | 62 |
+| 7 | Python | 59 |
+| 8 | Java | 51 |
+| 9 | ERP | 43 |
+| 10 | React | 38 |
+| 11 | Inglês | 38 |
+| 12 | Git | 38 |
+| 13 | Windows | 32 |
+| 14 | Redes de Computadores | 32 |
+| 15 | Node.js | 30 |
+| 16 | .NET | 27 |
+| 17 | C# | 25 |
+| 18 | API REST | 24 |
+| 19 | Metodologias Ágeis | 23 |
+| 20 | Excel | 23 |
 
 ## Top 10 Empresas com Mais Vagas
 
