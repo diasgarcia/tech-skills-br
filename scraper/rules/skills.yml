@@ -214,16 +214,18 @@ suporte_infra:
   Cisco: [cisco]
 
 seguranca:
-  Segurança da Informação: [seguranca da informacao, info sec, cybersecurity, seguranca cibernetica]
+  Cibersegurança: [cybersecurity, ciberseguranca, seguranca cibernetica, blue team, red team, appsec, secops]
+  Governança e Riscos (GRC): [grc, tprm, governanca de seguranca, controles de seguranca, auditoria de ti, gestao de riscos]
   OWASP: [owasp, owasp top 10]
   Criptografia: [criptografia, ssl, tls, https]
   LGPD: [lgpd, protecao de dados]
   ISO 27001: [iso 27001, iso27001]
-  Pentest: [pentest, penetration test, teste de invasao]
+  Pentest: [pentest, penetration test, teste de invasao, burpsuite]
   Gestão de Vulnerabilidades: [gestao de vulnerabilidades, analise de vulnerabilidades, scans]
   OAuth/JWT: [oauth, oauth2, jwt, json web token]
   IAM: [iam, identity and access management, gestao de acessos, keycloak]
-  SIEM/SOC: [siem, soc, splunk]
+  SIEM/SOC: [siem, soc, splunk, elastic security]
+
 
 engenharia_praticas:
   API REST: [api rest, rest, restful, apis rest, web api]
