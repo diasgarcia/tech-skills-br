@@ -7,8 +7,9 @@ from api import vocabulary
 
 def test_lista_as_areas(client):
     corpo = client.get("/areas").json()
-    assert len(corpo) == len(vocabulary.areas()) == 17
+    assert len(corpo) == len(vocabulary.areas()) == 18
     assert {a["area"] for a in corpo} == set(vocabulary.areas())
+
 
 
 

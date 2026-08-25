@@ -147,8 +147,6 @@ areas:
       - data analyst
       - analytics engineer
       - engenheiro de analytics
-      - engenheiro de ia
-      - engenheiro de inteligencia artificial
       - business intelligence
       - analista de bi
       - etl
@@ -156,6 +154,8 @@ areas:
       - databricks
       - big data
       - pipeline de dados
+      - data lake
+      - data lakehouse
     peso_medio:
       # "data" sozinho NAO entra: em portugues casa com "data de admissao".
       - dados
@@ -173,19 +173,65 @@ areas:
       - bigquery
       - dbt
       - kafka
-      - machine learning
-      - aprendizado de maquina
-      - inteligencia artificial
-      - ia generativa
-      - llm
-      - visao computacional
-      - nlp
       - estatistica
       - pandas
       - analytics
       - modelagem de dados
       - dataviz
       - governanca de dados
+
+  Inteligência Artificial:
+    peso_alto:
+      - agentes de ia
+      - ai agents
+      - ia agentica
+      - engenheiro de ia
+      - engenheira de ia
+      - engenharia de ia
+      - engenheiro de inteligencia artificial
+      - engenheira de inteligencia artificial
+      - desenvolvedor de ia
+      - desenvolvedora de ia
+      - desenvolvedor ia
+      - desenvolvedora ia
+      - desenvolvedor de agentes de ia
+      - desenvolvedor de agentes
+      - ai engineer
+      - artificial intelligence engineer
+      - cientista de machine learning
+      - machine learning engineer
+      - engenheiro de machine learning
+      - prompt engineer
+      - engenheiro de prompts
+      - especialista em ia
+      - especialista em llm
+      - estagio em ia
+      - estagio em inteligencia artificial
+      - estagio ia
+      - estagio inteligencia artificial
+      - visao computacional
+      - nlp
+    peso_medio:
+      - inteligencia artificial
+      - artificial intelligence
+      - machine learning
+      - aprendizado de maquina
+      - deep learning
+      - ia generativa
+      - genai
+      - generative ai
+      - llm
+      - llms
+      - processamento de linguagem natural
+      - langchain
+      - llamaindex
+      - crewai
+      - rag
+      - vector database
+      - bancos vetoriais
+
+
+
 
   Frontend:
     peso_alto:
