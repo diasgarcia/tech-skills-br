@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (2001 vagas)
 
-- **Data de geração:** 25/08/2026 15:25
+- **Data de geração:** 25/08/2026 16:17
 - **Período coberto:** 05/01/2026 até 25/08/2026
 - **Total de vagas consolidadas:** 2001
 
@@ -102,12 +102,12 @@
 | 12 | Redes de Computadores | 32 |
 | 13 | Node.js | 30 |
 | 14 | Service Desk | 27 |
-| 15 | .NET | 27 |
-| 16 | C# | 25 |
-| 17 | API REST | 24 |
-| 18 | Metodologias Ágeis | 23 |
-| 19 | Excel | 23 |
-| 20 | PHP | 20 |
+| 15 | Help Desk | 27 |
+| 16 | .NET | 27 |
+| 17 | C# | 25 |
+| 18 | API REST | 24 |
+| 19 | Metodologias Ágeis | 23 |
+| 20 | Excel | 23 |
 
 ## Top 10 Empresas com Mais Vagas
 
