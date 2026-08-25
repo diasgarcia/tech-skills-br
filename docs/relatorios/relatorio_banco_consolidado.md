@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (1649 vagas)
 
-- **Data de geração:** 25/08/2026 12:55
+- **Data de geração:** 25/08/2026 13:09
 - **Período coberto:** 05/01/2026 até 25/08/2026
 - **Total de vagas consolidadas:** 1649
 
@@ -8,21 +8,21 @@
 
 | Posição | Área | Vagas | % | Gráfico |
 |---|---|---|---|---|
-| 1 | Outros/TI Geral | 390 | 23.7% | #####............... |
-| 2 | Suporte Técnico | 352 | 21.3% | ####................ |
-| 3 | Engenharia de Software | 205 | 12.4% | ##.................. |
-| 4 | Backend | 166 | 10.1% | ##.................. |
-| 5 | Data | 138 | 8.4% | ##.................. |
-| 6 | QA | 84 | 5.1% | #................... |
+| 1 | Suporte Técnico | 374 | 22.7% | #####............... |
+| 2 | Outros/TI Geral | 303 | 18.4% | ####................ |
+| 3 | Engenharia de Software | 224 | 13.6% | ###................. |
+| 4 | Backend | 175 | 10.6% | ##.................. |
+| 5 | Data | 140 | 8.5% | ##.................. |
+| 6 | QA | 85 | 5.2% | #................... |
 | 7 | Fullstack | 76 | 4.6% | #................... |
-| 8 | DevOps | 42 | 2.5% | .................... |
-| 9 | Frontend | 42 | 2.5% | .................... |
-| 10 | Infraestrutura / Redes | 40 | 2.4% | .................... |
-| 11 | Mobile | 29 | 1.8% | .................... |
-| 12 | Sistemas / ERP | 29 | 1.8% | .................... |
-| 13 | Service Desk / Help Desk | 16 | 1.0% | .................... |
-| 14 | Segurança | 15 | 0.9% | .................... |
-| 15 | Field Service / Hardware | 13 | 0.8% | .................... |
+| 8 | Infraestrutura / Redes | 57 | 3.5% | #................... |
+| 9 | Frontend | 44 | 2.7% | #................... |
+| 10 | DevOps | 42 | 2.5% | .................... |
+| 11 | Sistemas / ERP | 32 | 1.9% | .................... |
+| 12 | Mobile | 29 | 1.8% | .................... |
+| 13 | Field Service / Hardware | 20 | 1.2% | .................... |
+| 14 | Service Desk / Help Desk | 20 | 1.2% | .................... |
+| 15 | Segurança | 16 | 1.0% | .................... |
 | 16 | Hardware / Eletrônica | 10 | 0.6% | .................... |
 | 17 | Design / UI / UX | 2 | 0.1% | .................... |
 
@@ -88,26 +88,26 @@
 
 | Posição | Tecnologia | Vagas Citadas |
 |---|---|---|
-| 1 | Inteligência Artificial | 108 |
-| 2 | SQL | 93 |
-| 3 | Hardware | 89 |
-| 4 | JavaScript | 87 |
-| 5 | Git | 84 |
-| 6 | Python | 81 |
-| 7 | Inglês | 74 |
-| 8 | Java | 68 |
-| 9 | Service Desk | 61 |
-| 10 | React | 53 |
-| 11 | Metodologias Ágeis | 53 |
-| 12 | API REST | 53 |
-| 13 | Windows | 51 |
-| 14 | Segurança da Informação | 45 |
-| 15 | Node.js | 41 |
-| 16 | C# | 39 |
-| 17 | ERP | 37 |
-| 18 | Angular | 37 |
-| 19 | Algoritmos | 37 |
-| 20 | .NET | 34 |
+| 1 | SQL | 148 |
+| 2 | Hardware | 117 |
+| 3 | Python | 113 |
+| 4 | Inteligência Artificial | 110 |
+| 5 | JavaScript | 104 |
+| 6 | Inglês | 104 |
+| 7 | Git | 89 |
+| 8 | Redes de Computadores | 75 |
+| 9 | Windows | 74 |
+| 10 | Java | 72 |
+| 11 | Service Desk | 64 |
+| 12 | API REST | 58 |
+| 13 | Segurança da Informação | 57 |
+| 14 | Metodologias Ágeis | 56 |
+| 15 | ERP | 56 |
+| 16 | Excel | 55 |
+| 17 | React | 48 |
+| 18 | AWS | 45 |
+| 19 | Linux | 44 |
+| 20 | Node.js | 42 |
 
 ## Top 10 Empresas com Mais Vagas
 
