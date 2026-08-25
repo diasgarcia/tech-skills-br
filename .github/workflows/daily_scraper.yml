@@ -17,6 +17,8 @@ jobs:
 
     permissions:
       contents: write  # Permite que o bot do GitHub commite as novas vagas
+      pages: write     # Permite deploy no GitHub Pages
+      id-token: write  # Necessario para autenticacao do GitHub Pages
 
     steps:
     - name: 1. Baixar repositorio
@@ -48,16 +50,37 @@ jobs:
         # 3. Exporta a base acumulada e regenera os relatorios e graficos:
         python scripts/export_seed.py
         python scripts/report_db.py
-        # 4. Exporta os endpoints JSON da API estatica para o GitHub Pages:
+        # 4. Exporta os endpoints JSON da API estatica para .github/pages/api:
         python scripts/export_pages_data.py
 
     - name: 6. Comitar e enviar dados atualizados para o GitHub
       run: |
         git config --global user.name "diasgarcia"
         git config --global user.email "rafdgar@gmail.com"
-        git add seed/vagas.csv docs/
+        git add seed/vagas.csv docs/relatorios/ .github/pages/
         
         DATA_HOJE=$(date +'%d/%m/%Y')
         git diff --quiet && git diff --staged --quiet || (git commit -m "chore(data): coleta automatizada de vagas [${DATA_HOJE}] [skip ci]" && git push)
+
+    - name: 7. Preparar artefato do GitHub Pages
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: '.github/pages'
+
+  deploy-pages:
+    name: Publicar Dashboard no GitHub Pages
+    needs: scrape-and-update
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
 
 
