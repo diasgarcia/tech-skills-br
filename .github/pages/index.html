@@ -368,9 +368,10 @@
       <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;" id="vagas-count-info"></p>
 
       <table id="table-vagas">
-        <thead><tr><th>Título da Vaga</th><th class="hide-mobile">Empresa</th><th class="hide-mobile">Área</th><th>Local / Mod.</th><th>Publicação</th><th class="hide-mobile" style="text-align: center; width: 45px;">Link</th></tr></thead>
+        <thead><tr><th>Título da Vaga</th><th class="hide-mobile">Empresa</th><th class="hide-mobile">Área</th><th>Local / Mod.</th><th class="hide-mobile" style="text-align: center; width: 45px;">Link</th></tr></thead>
         <tbody></tbody>
       </table>
+
 
     </div>
   </div>
@@ -663,18 +664,6 @@ function renderVagasTable() {
       ? `<a href="${v.url}" target="_blank" rel="noopener noreferrer" title="Abrir vaga" style="font-size: 14px; text-decoration: none;">↗</a>` 
       : "-";
 
-    const daysAgo = getDaysAgo(v.data_publicacao);
-    let dateBadge = "-";
-    if (v.data_publicacao) {
-      if (daysAgo <= 7) {
-        dateBadge = `<span class="badge" style="color: var(--green); border-color: rgba(63, 185, 80, 0.4); background: rgba(63, 185, 80, 0.15);" title="Publicada há ${daysAgo} dias">⚡ ${v.data_publicacao}</span>`;
-      } else if (daysAgo <= 30) {
-        dateBadge = `<span class="badge" style="color: var(--green); border-color: rgba(63, 185, 80, 0.3); background: rgba(63, 185, 80, 0.08);" title="Publicada há ${daysAgo} dias">🟢 ${v.data_publicacao}</span>`;
-      } else {
-        dateBadge = `<span class="badge" style="color: var(--text-muted);" title="Registro histórico coletado em ${v.data_publicacao}">🕒 ${v.data_publicacao}</span>`;
-      }
-    }
-
     const mobileTitleLink = v.url 
       ? `<a href="${v.url}" target="_blank" rel="noopener noreferrer" style="color: var(--accent); font-weight: 700; text-decoration: none;">${v.titulo} <span style="font-size: 11px; opacity: 0.8;">↗</span></a>`
       : `<strong>${v.titulo}</strong>`;
@@ -684,7 +673,6 @@ function renderVagasTable() {
         <div class="show-mobile">
           ${mobileTitleLink}
           <div style="color: var(--text-muted); font-size: 11px; margin-top: 2px;">${v.empresa}</div>
-          <div style="margin-top: 4px;">${dateBadge}</div>
         </div>
         <div class="hide-mobile">
           <strong>${v.titulo}</strong>
@@ -693,12 +681,12 @@ function renderVagasTable() {
       <td class="hide-mobile">${v.empresa}</td>
       <td class="hide-mobile"><span class="badge">${v.area}</span></td>
       <td>${v.polo || v.localidade} &middot; <em style="color: var(--text-muted);">${v.modalidade}</em></td>
-      <td>${dateBadge}</td>
       <td class="hide-mobile" style="text-align: center;">${linkHtml}</td>
     `;
     tbody.appendChild(tr);
   });
 }
+
 
 
 
