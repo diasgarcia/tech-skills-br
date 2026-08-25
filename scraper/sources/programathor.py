@@ -35,7 +35,14 @@ try:
 except ImportError:
     _HAS_CURL_CFFI = False
 
+try:
+    from playwright.sync_api import sync_playwright
+    _HAS_PLAYWRIGHT = True
+except ImportError:
+    _HAS_PLAYWRIGHT = False
+
 from ..models import REMOTO, Job, normalize_workplace
+
 from .base import JobSource
 
 logger = logging.getLogger(__name__)
@@ -86,8 +93,45 @@ class ProgramathorSource(JobSource):
             )
         return super().fetch(list(FILTROS_NIVEL_ENTRADA))
 
+    def _fetch_with_playwright(self, url: str, params: dict) -> str | None:
+        """Carrega a pagina com Chromium headless resolvendo desafios JS da Cloudflare."""
+        if not _HAS_PLAYWRIGHT:
+            return None
+        from urllib.parse import urlencode
+        full_url = f"{url}?{urlencode(params)}" if params else url
+        try:
+            with sync_playwright() as p:
+                browser = p.chromium.launch(
+                    headless=True,
+                    args=["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"]
+                )
+                context = browser.new_context(
+                    user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+                    viewport={"width": 1280, "height": 800},
+                    locale="pt-BR",
+                )
+                page = context.new_page()
+                page.goto(full_url, wait_until="domcontentloaded", timeout=25000)
+                try:
+                    page.wait_for_selector(".wrapper-jobs-list, h3", timeout=6000)
+                except Exception:
+                    pass
+                content = page.content()
+                browser.close()
+                if "wrapper-jobs-list" in content or "job-item" in content:
+                    return content
+        except Exception as e:
+            logger.debug("[%s] Playwright indisponivel ou falhou: %s", self.name, e)
+        return None
+
     def _get_page_html(self, url: str, params: dict) -> str | None:
-        """Faz a requisicao contornando Cloudflare TLS fingerprinting com curl_cffi quando disponivel."""
+        """Obtem o HTML da pagina tentando Playwright, curl_cffi ou PoliteSession."""
+        # 1. Tentar Playwright (Chromium real com bypass de JS challenge em nuvem)
+        html = self._fetch_with_playwright(url, params)
+        if html:
+            return html
+
+        # 2. Tentar curl_cffi (impersonate TLS)
         if _HAS_CURL_CFFI:
             try:
                 with cffi_requests.Session(impersonate="chrome124") as s:
@@ -95,15 +139,15 @@ class ProgramathorSource(JobSource):
                     if r.status_code == 200:
                         return r.text
                     logger.warning("[%s] HTTP %s em %s (params=%s)", self.name, r.status_code, url, params)
-                    return None
             except Exception as e:
                 logger.warning("[%s] Erro com curl_cffi: %s, tentando fallback", self.name, e)
 
-        # Fallback para PoliteSession padrao
+        # 3. Fallback para PoliteSession padrao
         if self.session:
             response = self.session.get(url, params=params)
             return response.text if response is not None else None
         return None
+
 
     def fetch_term(self, term: str) -> list[Job]:
         """Coleta um filtro nativo (`term` e uma chave de FILTROS_NIVEL_ENTRADA)."""
