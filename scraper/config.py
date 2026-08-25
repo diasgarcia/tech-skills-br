@@ -54,20 +54,56 @@ USER_AGENT = (
 
 # Termos usados na busca. Cada termo vira uma consulta separada em cada portal.
 SEARCH_TERMS: list[str] = [
+    # Desenvolvimento de Software
     "desenvolvedor junior",
     "desenvolvedor jr",
     "programador junior",
     "analista de sistemas junior",
+    "frontend junior",
+    "backend junior",
+    "fullstack junior",
+    "desenvolvedor mobile junior",
+
+    # Dados & IA
+    "engenheiro de dados junior",
+    "analista de dados junior",
+    "analista de bi junior",
+    "cientista de dados junior",
+
+    # Cloud, DevOps & QA
+    "qa junior",
+    "analista de testes junior",
+    "devops junior",
+    "cloud junior",
+
+    # Infraestrutura, Redes & Segurança
+    "analista de infraestrutura junior",
+    "analista de redes junior",
+    "analista de seguranca junior",
+    "seguranca da informacao junior",
+    "cybersecurity junior",
+
+    # Suporte & TI Operacional
+    "suporte tecnico junior",
+    "analista de suporte junior",
+    "assistente de ti",
+    "auxiliar de ti",
+    "tecnico de informatica",
+
+    # Estágios Segmentados
     "estagio desenvolvimento",
     "estagio ti",
     "estagio tecnologia",
+    "estagio dados",
+    "estagio suporte",
+    "estagio redes",
+    "estagio seguranca",
+
+    # Trainee
     "trainee tecnologia",
-    "engenheiro de dados junior",
-    "analista de dados junior",
-    "qa junior",
-    "devops junior",
-    "suporte tecnico junior",
+    "trainee ti",
 ]
+
 
 
 @dataclass
