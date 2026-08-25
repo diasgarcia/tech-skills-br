@@ -5,7 +5,7 @@
     "grupo": "dados_ia",
     "vagas": 94,
     "percentual_total": 4.7,
-    "percentual_base_tech": 13.6
+    "percentual_base_tech": 14.3
   },
   {
     "posicao": 2,
@@ -13,119 +13,119 @@
     "grupo": "suporte_infra",
     "vagas": 74,
     "percentual_total": 3.7,
-    "percentual_base_tech": 10.7
+    "percentual_base_tech": 11.3
   },
   {
     "posicao": 3,
-    "nome": "Service Desk",
-    "grupo": "suporte_infra",
-    "vagas": 71,
-    "percentual_total": 3.5,
-    "percentual_base_tech": 10.3
-  },
-  {
-    "posicao": 4,
     "nome": "Segurança da Informação",
     "grupo": "seguranca",
     "vagas": 67,
     "percentual_total": 3.3,
-    "percentual_base_tech": 9.7
+    "percentual_base_tech": 10.2
   },
   {
-    "posicao": 5,
+    "posicao": 4,
     "nome": "JavaScript",
     "grupo": "linguagens",
     "vagas": 64,
     "percentual_total": 3.2,
-    "percentual_base_tech": 9.3
+    "percentual_base_tech": 9.8
   },
   {
-    "posicao": 6,
+    "posicao": 5,
     "nome": "SQL",
     "grupo": "linguagens",
     "vagas": 62,
     "percentual_total": 3.1,
-    "percentual_base_tech": 9.0
+    "percentual_base_tech": 9.5
   },
   {
-    "posicao": 7,
+    "posicao": 6,
     "nome": "Python",
     "grupo": "linguagens",
     "vagas": 59,
     "percentual_total": 2.9,
-    "percentual_base_tech": 8.6
+    "percentual_base_tech": 9.0
   },
   {
-    "posicao": 8,
+    "posicao": 7,
     "nome": "Java",
     "grupo": "linguagens",
     "vagas": 51,
     "percentual_total": 2.5,
-    "percentual_base_tech": 7.4
+    "percentual_base_tech": 7.8
   },
   {
-    "posicao": 9,
+    "posicao": 8,
     "nome": "ERP",
     "grupo": "engenharia_praticas",
     "vagas": 43,
     "percentual_total": 2.1,
-    "percentual_base_tech": 6.2
+    "percentual_base_tech": 6.6
   },
   {
-    "posicao": 10,
+    "posicao": 9,
     "nome": "React",
     "grupo": "frameworks",
     "vagas": 38,
     "percentual_total": 1.9,
-    "percentual_base_tech": 5.5
+    "percentual_base_tech": 5.8
   },
   {
-    "posicao": 11,
+    "posicao": 10,
     "nome": "Git",
     "grupo": "cloud_devops",
     "vagas": 38,
     "percentual_total": 1.9,
-    "percentual_base_tech": 5.5
+    "percentual_base_tech": 5.8
   },
   {
-    "posicao": 12,
+    "posicao": 11,
     "nome": "Inglês",
     "grupo": "engenharia_praticas",
     "vagas": 38,
     "percentual_total": 1.9,
-    "percentual_base_tech": 5.5
+    "percentual_base_tech": 5.8
   },
   {
-    "posicao": 13,
+    "posicao": 12,
     "nome": "Windows",
     "grupo": "suporte_infra",
     "vagas": 32,
     "percentual_total": 1.6,
-    "percentual_base_tech": 4.6
+    "percentual_base_tech": 4.9
   },
   {
-    "posicao": 14,
+    "posicao": 13,
     "nome": "Redes de Computadores",
     "grupo": "suporte_infra",
     "vagas": 32,
     "percentual_total": 1.6,
-    "percentual_base_tech": 4.6
+    "percentual_base_tech": 4.9
   },
   {
-    "posicao": 15,
+    "posicao": 14,
     "nome": "Node.js",
     "grupo": "frameworks",
     "vagas": 30,
     "percentual_total": 1.5,
-    "percentual_base_tech": 4.3
+    "percentual_base_tech": 4.6
   },
   {
-    "posicao": 16,
+    "posicao": 15,
     "nome": ".NET",
     "grupo": "frameworks",
     "vagas": 27,
     "percentual_total": 1.3,
-    "percentual_base_tech": 3.9
+    "percentual_base_tech": 4.1
+  },
+  {
+    "posicao": 16,
+    "nome": "Service Desk",
+    "grupo": "suporte_infra",
+    "vagas": 27,
+    "percentual_total": 1.3,
+    "percentual_base_tech": 4.1
   },
   {
     "posicao": 17,
@@ -133,7 +133,7 @@
     "grupo": "linguagens",
     "vagas": 25,
     "percentual_total": 1.2,
-    "percentual_base_tech": 3.6
+    "percentual_base_tech": 3.8
   },
   {
     "posicao": 18,
@@ -141,7 +141,7 @@
     "grupo": "engenharia_praticas",
     "vagas": 24,
     "percentual_total": 1.2,
-    "percentual_base_tech": 3.5
+    "percentual_base_tech": 3.7
   },
   {
     "posicao": 19,
@@ -149,7 +149,7 @@
     "grupo": "dados_ia",
     "vagas": 23,
     "percentual_total": 1.1,
-    "percentual_base_tech": 3.3
+    "percentual_base_tech": 3.5
   },
   {
     "posicao": 20,
@@ -157,7 +157,7 @@
     "grupo": "engenharia_praticas",
     "vagas": 23,
     "percentual_total": 1.1,
-    "percentual_base_tech": 3.3
+    "percentual_base_tech": 3.5
   },
   {
     "posicao": 21,
@@ -165,7 +165,7 @@
     "grupo": "linguagens",
     "vagas": 20,
     "percentual_total": 1.0,
-    "percentual_base_tech": 2.9
+    "percentual_base_tech": 3.0
   },
   {
     "posicao": 22,
@@ -173,7 +173,7 @@
     "grupo": "cloud_devops",
     "vagas": 19,
     "percentual_total": 0.9,
-    "percentual_base_tech": 2.8
+    "percentual_base_tech": 2.9
   },
   {
     "posicao": 23,
@@ -181,7 +181,7 @@
     "grupo": "cloud_devops",
     "vagas": 19,
     "percentual_total": 0.9,
-    "percentual_base_tech": 2.8
+    "percentual_base_tech": 2.9
   },
   {
     "posicao": 24,
@@ -189,7 +189,7 @@
     "grupo": "engenharia_praticas",
     "vagas": 19,
     "percentual_total": 0.9,
-    "percentual_base_tech": 2.8
+    "percentual_base_tech": 2.9
   },
   {
     "posicao": 25,
@@ -197,7 +197,7 @@
     "grupo": "bancos",
     "vagas": 18,
     "percentual_total": 0.9,
-    "percentual_base_tech": 2.6
+    "percentual_base_tech": 2.7
   },
   {
     "posicao": 26,
@@ -205,7 +205,7 @@
     "grupo": "engenharia_praticas",
     "vagas": 18,
     "percentual_total": 0.9,
-    "percentual_base_tech": 2.6
+    "percentual_base_tech": 2.7
   },
   {
     "posicao": 27,
@@ -213,7 +213,7 @@
     "grupo": "engenharia_praticas",
     "vagas": 18,
     "percentual_total": 0.9,
-    "percentual_base_tech": 2.6
+    "percentual_base_tech": 2.7
   },
   {
     "posicao": 28,
@@ -221,7 +221,7 @@
     "grupo": "mobile",
     "vagas": 17,
     "percentual_total": 0.8,
-    "percentual_base_tech": 2.5
+    "percentual_base_tech": 2.6
   },
   {
     "posicao": 29,
@@ -229,7 +229,7 @@
     "grupo": "bancos",
     "vagas": 17,
     "percentual_total": 0.8,
-    "percentual_base_tech": 2.5
+    "percentual_base_tech": 2.6
   },
   {
     "posicao": 30,
@@ -237,7 +237,7 @@
     "grupo": "qa_testes",
     "vagas": 16,
     "percentual_total": 0.8,
-    "percentual_base_tech": 2.3
+    "percentual_base_tech": 2.4
   },
   {
     "posicao": 31,
@@ -245,7 +245,7 @@
     "grupo": "frameworks",
     "vagas": 15,
     "percentual_total": 0.7,
-    "percentual_base_tech": 2.2
+    "percentual_base_tech": 2.3
   },
   {
     "posicao": 32,
@@ -253,7 +253,7 @@
     "grupo": "dados_ia",
     "vagas": 15,
     "percentual_total": 0.7,
-    "percentual_base_tech": 2.2
+    "percentual_base_tech": 2.3
   },
   {
     "posicao": 33,
@@ -261,7 +261,7 @@
     "grupo": "cloud_devops",
     "vagas": 15,
     "percentual_total": 0.7,
-    "percentual_base_tech": 2.2
+    "percentual_base_tech": 2.3
   },
   {
     "posicao": 34,
@@ -269,7 +269,7 @@
     "grupo": "engenharia_praticas",
     "vagas": 15,
     "percentual_total": 0.7,
-    "percentual_base_tech": 2.2
+    "percentual_base_tech": 2.3
   },
   {
     "posicao": 35,
@@ -277,7 +277,7 @@
     "grupo": "hardware_eletronica",
     "vagas": 15,
     "percentual_total": 0.7,
-    "percentual_base_tech": 2.2
+    "percentual_base_tech": 2.3
   },
   {
     "posicao": 36,
@@ -285,7 +285,7 @@
     "grupo": "linguagens",
     "vagas": 14,
     "percentual_total": 0.7,
-    "percentual_base_tech": 2.0
+    "percentual_base_tech": 2.1
   },
   {
     "posicao": 37,
@@ -293,7 +293,7 @@
     "grupo": "linguagens",
     "vagas": 13,
     "percentual_total": 0.6,
-    "percentual_base_tech": 1.9
+    "percentual_base_tech": 2.0
   },
   {
     "posicao": 38,
@@ -301,7 +301,7 @@
     "grupo": "engenharia_praticas",
     "vagas": 13,
     "percentual_total": 0.6,
-    "percentual_base_tech": 1.9
+    "percentual_base_tech": 2.0
   },
   {
     "posicao": 39,
@@ -309,7 +309,7 @@
     "grupo": "linguagens",
     "vagas": 12,
     "percentual_total": 0.6,
-    "percentual_base_tech": 1.7
+    "percentual_base_tech": 1.8
   },
   {
     "posicao": 40,
@@ -317,7 +317,7 @@
     "grupo": "dados_ia",
     "vagas": 12,
     "percentual_total": 0.6,
-    "percentual_base_tech": 1.7
+    "percentual_base_tech": 1.8
   },
   {
     "posicao": 41,
@@ -325,7 +325,7 @@
     "grupo": "bancos",
     "vagas": 12,
     "percentual_total": 0.6,
-    "percentual_base_tech": 1.7
+    "percentual_base_tech": 1.8
   },
   {
     "posicao": 42,
@@ -333,7 +333,7 @@
     "grupo": "dados_ia",
     "vagas": 11,
     "percentual_total": 0.5,
-    "percentual_base_tech": 1.6
+    "percentual_base_tech": 1.7
   },
   {
     "posicao": 43,
@@ -341,7 +341,7 @@
     "grupo": "cloud_devops",
     "vagas": 11,
     "percentual_total": 0.5,
-    "percentual_base_tech": 1.6
+    "percentual_base_tech": 1.7
   },
   {
     "posicao": 44,
@@ -349,7 +349,7 @@
     "grupo": "bancos",
     "vagas": 10,
     "percentual_total": 0.5,
-    "percentual_base_tech": 1.4
+    "percentual_base_tech": 1.5
   },
   {
     "posicao": 45,
@@ -357,7 +357,7 @@
     "grupo": "suporte_infra",
     "vagas": 10,
     "percentual_total": 0.5,
-    "percentual_base_tech": 1.4
+    "percentual_base_tech": 1.5
   },
   {
     "posicao": 46,
@@ -365,7 +365,7 @@
     "grupo": "suporte_infra",
     "vagas": 10,
     "percentual_total": 0.5,
-    "percentual_base_tech": 1.4
+    "percentual_base_tech": 1.5
   },
   {
     "posicao": 47,
@@ -373,7 +373,7 @@
     "grupo": "engenharia_praticas",
     "vagas": 10,
     "percentual_total": 0.5,
-    "percentual_base_tech": 1.4
+    "percentual_base_tech": 1.5
   },
   {
     "posicao": 48,
@@ -381,7 +381,7 @@
     "grupo": "engenharia_praticas",
     "vagas": 10,
     "percentual_total": 0.5,
-    "percentual_base_tech": 1.4
+    "percentual_base_tech": 1.5
   },
   {
     "posicao": 49,
@@ -389,7 +389,7 @@
     "grupo": "hardware_eletronica",
     "vagas": 10,
     "percentual_total": 0.5,
-    "percentual_base_tech": 1.4
+    "percentual_base_tech": 1.5
   },
   {
     "posicao": 50,
@@ -397,7 +397,7 @@
     "grupo": "frameworks",
     "vagas": 9,
     "percentual_total": 0.4,
-    "percentual_base_tech": 1.3
+    "percentual_base_tech": 1.4
   },
   {
     "posicao": 51,
@@ -405,7 +405,7 @@
     "grupo": "cloud_devops",
     "vagas": 9,
     "percentual_total": 0.4,
-    "percentual_base_tech": 1.3
+    "percentual_base_tech": 1.4
   },
   {
     "posicao": 52,
@@ -413,7 +413,7 @@
     "grupo": "qa_testes",
     "vagas": 9,
     "percentual_total": 0.4,
-    "percentual_base_tech": 1.3
+    "percentual_base_tech": 1.4
   },
   {
     "posicao": 53,
@@ -421,7 +421,7 @@
     "grupo": "engenharia_praticas",
     "vagas": 9,
     "percentual_total": 0.4,
-    "percentual_base_tech": 1.3
+    "percentual_base_tech": 1.4
   },
   {
     "posicao": 54,
@@ -493,7 +493,7 @@
     "grupo": "frameworks",
     "vagas": 7,
     "percentual_total": 0.3,
-    "percentual_base_tech": 1.0
+    "percentual_base_tech": 1.1
   },
   {
     "posicao": 63,
@@ -501,7 +501,7 @@
     "grupo": "frameworks",
     "vagas": 7,
     "percentual_total": 0.3,
-    "percentual_base_tech": 1.0
+    "percentual_base_tech": 1.1
   },
   {
     "posicao": 64,
@@ -509,7 +509,7 @@
     "grupo": "dados_ia",
     "vagas": 7,
     "percentual_total": 0.3,
-    "percentual_base_tech": 1.0
+    "percentual_base_tech": 1.1
   },
   {
     "posicao": 65,
@@ -517,7 +517,7 @@
     "grupo": "dados_ia",
     "vagas": 7,
     "percentual_total": 0.3,
-    "percentual_base_tech": 1.0
+    "percentual_base_tech": 1.1
   },
   {
     "posicao": 66,
@@ -581,7 +581,7 @@
     "grupo": "linguagens",
     "vagas": 5,
     "percentual_total": 0.2,
-    "percentual_base_tech": 0.7
+    "percentual_base_tech": 0.8
   },
   {
     "posicao": 74,
@@ -589,7 +589,7 @@
     "grupo": "linguagens",
     "vagas": 5,
     "percentual_total": 0.2,
-    "percentual_base_tech": 0.7
+    "percentual_base_tech": 0.8
   },
   {
     "posicao": 75,
@@ -597,7 +597,7 @@
     "grupo": "linguagens",
     "vagas": 5,
     "percentual_total": 0.2,
-    "percentual_base_tech": 0.7
+    "percentual_base_tech": 0.8
   },
   {
     "posicao": 76,
@@ -605,7 +605,7 @@
     "grupo": "mobile",
     "vagas": 5,
     "percentual_total": 0.2,
-    "percentual_base_tech": 0.7
+    "percentual_base_tech": 0.8
   },
   {
     "posicao": 77,
@@ -613,7 +613,7 @@
     "grupo": "dados_ia",
     "vagas": 5,
     "percentual_total": 0.2,
-    "percentual_base_tech": 0.7
+    "percentual_base_tech": 0.8
   },
   {
     "posicao": 78,
@@ -621,7 +621,7 @@
     "grupo": "seguranca",
     "vagas": 5,
     "percentual_total": 0.2,
-    "percentual_base_tech": 0.7
+    "percentual_base_tech": 0.8
   },
   {
     "posicao": 79,
@@ -629,7 +629,7 @@
     "grupo": "engenharia_praticas",
     "vagas": 5,
     "percentual_total": 0.2,
-    "percentual_base_tech": 0.7
+    "percentual_base_tech": 0.8
   },
   {
     "posicao": 80,
@@ -637,7 +637,7 @@
     "grupo": "hardware_eletronica",
     "vagas": 5,
     "percentual_total": 0.2,
-    "percentual_base_tech": 0.7
+    "percentual_base_tech": 0.8
   },
   {
     "posicao": 81,
@@ -749,7 +749,7 @@
     "grupo": "linguagens",
     "vagas": 3,
     "percentual_total": 0.1,
-    "percentual_base_tech": 0.4
+    "percentual_base_tech": 0.5
   },
   {
     "posicao": 95,
@@ -757,7 +757,7 @@
     "grupo": "dados_ia",
     "vagas": 3,
     "percentual_total": 0.1,
-    "percentual_base_tech": 0.4
+    "percentual_base_tech": 0.5
   },
   {
     "posicao": 96,
@@ -765,7 +765,7 @@
     "grupo": "cloud_devops",
     "vagas": 3,
     "percentual_total": 0.1,
-    "percentual_base_tech": 0.4
+    "percentual_base_tech": 0.5
   },
   {
     "posicao": 97,
@@ -773,7 +773,7 @@
     "grupo": "qa_testes",
     "vagas": 3,
     "percentual_total": 0.1,
-    "percentual_base_tech": 0.4
+    "percentual_base_tech": 0.5
   },
   {
     "posicao": 98,
@@ -781,7 +781,7 @@
     "grupo": "suporte_infra",
     "vagas": 3,
     "percentual_total": 0.1,
-    "percentual_base_tech": 0.4
+    "percentual_base_tech": 0.5
   },
   {
     "posicao": 99,
@@ -789,7 +789,7 @@
     "grupo": "suporte_infra",
     "vagas": 3,
     "percentual_total": 0.1,
-    "percentual_base_tech": 0.4
+    "percentual_base_tech": 0.5
   },
   {
     "posicao": 100,
@@ -797,7 +797,7 @@
     "grupo": "seguranca",
     "vagas": 3,
     "percentual_total": 0.1,
-    "percentual_base_tech": 0.4
+    "percentual_base_tech": 0.5
   },
   {
     "posicao": 101,
@@ -805,7 +805,7 @@
     "grupo": "engenharia_praticas",
     "vagas": 3,
     "percentual_total": 0.1,
-    "percentual_base_tech": 0.4
+    "percentual_base_tech": 0.5
   },
   {
     "posicao": 102,
@@ -813,7 +813,7 @@
     "grupo": "hardware_eletronica",
     "vagas": 3,
     "percentual_total": 0.1,
-    "percentual_base_tech": 0.4
+    "percentual_base_tech": 0.5
   },
   {
     "posicao": 103,
@@ -981,7 +981,7 @@
     "grupo": "linguagens",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 124,
@@ -989,7 +989,7 @@
     "grupo": "linguagens",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 125,
@@ -997,7 +997,7 @@
     "grupo": "linguagens",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 126,
@@ -1005,7 +1005,7 @@
     "grupo": "linguagens",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 127,
@@ -1013,7 +1013,7 @@
     "grupo": "linguagens",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 128,
@@ -1021,7 +1021,7 @@
     "grupo": "frameworks",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 129,
@@ -1029,7 +1029,7 @@
     "grupo": "frameworks",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 130,
@@ -1037,7 +1037,7 @@
     "grupo": "frameworks",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 131,
@@ -1045,7 +1045,7 @@
     "grupo": "frameworks",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 132,
@@ -1053,7 +1053,7 @@
     "grupo": "frameworks",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 133,
@@ -1061,7 +1061,7 @@
     "grupo": "frameworks",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 134,
@@ -1069,7 +1069,7 @@
     "grupo": "dados_ia",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 135,
@@ -1077,7 +1077,7 @@
     "grupo": "dados_ia",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 136,
@@ -1085,7 +1085,7 @@
     "grupo": "dados_ia",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 137,
@@ -1093,7 +1093,7 @@
     "grupo": "dados_ia",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 138,
@@ -1101,7 +1101,7 @@
     "grupo": "bancos",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 139,
@@ -1109,7 +1109,7 @@
     "grupo": "cloud_devops",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 140,
@@ -1117,7 +1117,7 @@
     "grupo": "cloud_devops",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 141,
@@ -1125,7 +1125,7 @@
     "grupo": "cloud_devops",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 142,
@@ -1133,7 +1133,7 @@
     "grupo": "cloud_devops",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 143,
@@ -1141,7 +1141,7 @@
     "grupo": "cloud_devops",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 144,
@@ -1149,7 +1149,7 @@
     "grupo": "qa_testes",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 145,
@@ -1157,7 +1157,7 @@
     "grupo": "qa_testes",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 146,
@@ -1165,7 +1165,7 @@
     "grupo": "suporte_infra",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 147,
@@ -1173,7 +1173,7 @@
     "grupo": "suporte_infra",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 148,
@@ -1181,7 +1181,7 @@
     "grupo": "seguranca",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 149,
@@ -1189,7 +1189,7 @@
     "grupo": "seguranca",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 150,
@@ -1197,7 +1197,7 @@
     "grupo": "seguranca",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 151,
@@ -1205,7 +1205,7 @@
     "grupo": "seguranca",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   },
   {
     "posicao": 152,
@@ -1213,6 +1213,6 @@
     "grupo": "engenharia_praticas",
     "vagas": 1,
     "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
+    "percentual_base_tech": 0.2
   }
 ]

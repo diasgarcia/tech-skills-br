@@ -242,79 +242,79 @@
   "skills_by_area": {
     "Suporte Técnico": {
       "total_vagas": 447,
-      "vagas_com_tech": 109,
+      "vagas_com_tech": 101,
       "skills": [
         {
           "nome": "Hardware",
           "grupo": "suporte_infra",
           "vagas": 46,
-          "percentual": 42.2
+          "percentual": 45.5
         },
         {
           "nome": "Windows",
           "grupo": "suporte_infra",
           "vagas": 22,
-          "percentual": 20.2
-        },
-        {
-          "nome": "Service Desk",
-          "grupo": "suporte_infra",
-          "vagas": 22,
-          "percentual": 20.2
+          "percentual": 21.8
         },
         {
           "nome": "Redes de Computadores",
           "grupo": "suporte_infra",
           "vagas": 16,
-          "percentual": 14.7
+          "percentual": 15.8
         },
         {
           "nome": "Segurança da Informação",
           "grupo": "seguranca",
           "vagas": 12,
-          "percentual": 11.0
+          "percentual": 11.9
         },
         {
           "nome": "ERP",
           "grupo": "engenharia_praticas",
           "vagas": 12,
-          "percentual": 11.0
+          "percentual": 11.9
         },
         {
           "nome": "Inglês",
           "grupo": "engenharia_praticas",
           "vagas": 10,
-          "percentual": 9.2
+          "percentual": 9.9
+        },
+        {
+          "nome": "Service Desk",
+          "grupo": "suporte_infra",
+          "vagas": 8,
+          "percentual": 7.9
         },
         {
           "nome": "Algoritmos",
           "grupo": "engenharia_praticas",
           "vagas": 8,
-          "percentual": 7.3
+          "percentual": 7.9
         },
         {
           "nome": "TOTVS",
           "grupo": "engenharia_praticas",
           "vagas": 8,
-          "percentual": 7.3
+          "percentual": 7.9
         },
         {
           "nome": "Office 365",
           "grupo": "suporte_infra",
           "vagas": 7,
-          "percentual": 6.4
+          "percentual": 6.9
         },
         {
           "nome": "Linux",
           "grupo": "cloud_devops",
           "vagas": 6,
-          "percentual": 5.5
+          "percentual": 5.9
         },
         {
           "nome": "ITIL",
           "grupo": "suporte_infra",
           "vagas": 6,
-          "percentual": 5.5
+          "percentual": 5.9
         }
       ]
     },
@@ -1100,97 +1100,91 @@
     },
     "Service Desk / Help Desk": {
       "total_vagas": 44,
-      "vagas_com_tech": 43,
+      "vagas_com_tech": 20,
       "skills": [
         {
           "nome": "Service Desk",
           "grupo": "suporte_infra",
-          "vagas": 42,
-          "percentual": 97.7
+          "vagas": 17,
+          "percentual": 85.0
         },
         {
           "nome": "Metodologias Ágeis",
           "grupo": "engenharia_praticas",
           "vagas": 2,
-          "percentual": 4.7
+          "percentual": 10.0
         },
         {
           "nome": "Excel",
           "grupo": "dados_ia",
           "vagas": 1,
-          "percentual": 2.3
+          "percentual": 5.0
         },
         {
           "nome": "Linux",
           "grupo": "cloud_devops",
           "vagas": 1,
-          "percentual": 2.3
+          "percentual": 5.0
         },
         {
           "nome": "Windows",
           "grupo": "suporte_infra",
           "vagas": 1,
-          "percentual": 2.3
+          "percentual": 5.0
         },
         {
           "nome": "Scrum",
           "grupo": "engenharia_praticas",
           "vagas": 1,
-          "percentual": 2.3
+          "percentual": 5.0
         },
         {
           "nome": "Inglês",
           "grupo": "engenharia_praticas",
           "vagas": 1,
-          "percentual": 2.3
+          "percentual": 5.0
         },
         {
           "nome": "SAP",
           "grupo": "engenharia_praticas",
           "vagas": 1,
-          "percentual": 2.3
+          "percentual": 5.0
         },
         {
           "nome": "CRM",
           "grupo": "engenharia_praticas",
           "vagas": 1,
-          "percentual": 2.3
+          "percentual": 5.0
         },
         {
           "nome": "Jira",
           "grupo": "engenharia_praticas",
           "vagas": 1,
-          "percentual": 2.3
+          "percentual": 5.0
         }
       ]
     },
     "Field Service / Hardware": {
       "total_vagas": 36,
-      "vagas_com_tech": 7,
+      "vagas_com_tech": 4,
       "skills": [
-        {
-          "nome": "Service Desk",
-          "grupo": "suporte_infra",
-          "vagas": 3,
-          "percentual": 42.9
-        },
         {
           "nome": "Hardware",
           "grupo": "suporte_infra",
           "vagas": 3,
-          "percentual": 42.9
+          "percentual": 75.0
         },
         {
           "nome": "Inglês",
           "grupo": "engenharia_praticas",
           "vagas": 1,
-          "percentual": 14.3
+          "percentual": 25.0
         },
         {
           "nome": "CFTV",
           "grupo": "hardware_eletronica",
           "vagas": 1,
-          "percentual": 14.3
+          "percentual": 25.0
         }
       ]
     },
