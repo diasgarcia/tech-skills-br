@@ -222,11 +222,12 @@ def chart_workplace(jobs: list[Job], output_path: Path, subtitle: str = "") -> P
 def chart_skills(
     jobs: list[Job],
     output_path: Path,
-    top_areas: int = 8,
+    top_areas: int = 14,
     top_skills: int = 8,
     min_jobs: int = 6,
     subtitle: str = "",
 ) -> Path | None:
+
     """Grafico 2 -- small multiples: principais tecnologias por area.
 
     As barras sao **percentuais**, e nao contagens: as areas tem tamanhos muito
