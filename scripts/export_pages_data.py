@@ -1,10 +1,10 @@
-"""Exporta os dados consolidados do banco SQLite para a pasta `docs/api/`.
+"""Exporta os dados consolidados do banco SQLite para a pasta `.github/pages/api/`.
 
 Gera os endpoints estáticos JSON que alimentam o site e funcionam como uma API pública:
-  - `docs/api/resumo.json`      -> Metadados gerais, KPIs e distribuições
-  - `docs/api/vagas.json`       -> Lista consolidada de todas as vagas
-  - `docs/api/areas.json`       -> Ranking das áreas técnicas
-  - `docs/api/tecnologias.json`  -> Ranking de tecnologias demandadas
+  - `.github/pages/api/resumo.json`      -> Metadados gerais, KPIs e distribuições
+  - `.github/pages/api/vagas.json`       -> Lista consolidada de todas as vagas
+  - `.github/pages/api/areas.json`       -> Ranking das áreas técnicas
+  - `.github/pages/api/tecnologias.json`  -> Ranking de tecnologias demandadas
 """
 
 from __future__ import annotations
@@ -26,15 +26,16 @@ from api.database import SessionLocal, init_db
 from api.models import Tecnologia, Vaga, vaga_tecnologia
 from scraper.config import PROJECT_ROOT
 
-DOCS_API_DIR = PROJECT_ROOT / "docs" / "api"
+PAGES_API_DIR = PROJECT_ROOT / ".github" / "pages" / "api"
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)-7s %(message)s")
 logger = logging.getLogger(__name__)
 
 
 def export_all_pages_data(output_dir: Path | None = None) -> dict[str, Path]:
-    """Exporta todos os endpoints JSON para `docs/api/`."""
-    out_dir = output_dir or DOCS_API_DIR
+    """Exporta todos os endpoints JSON para `.github/pages/api/`."""
+    out_dir = output_dir or PAGES_API_DIR
+
     out_dir.mkdir(parents=True, exist_ok=True)
 
     init_db()
