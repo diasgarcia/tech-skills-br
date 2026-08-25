@@ -23,6 +23,7 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html {
+      overflow-y: scroll;
       scrollbar-gutter: stable;
     }
     body {
@@ -33,6 +34,23 @@
       line-height: 1.5;
       padding: 16px;
     }
+
+    /* Scrollbar discreta integrada ao tema escuro */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-muted);
+    }
+
 
 
     a { color: var(--accent); text-decoration: none; }
