@@ -288,9 +288,8 @@ def chart_skills(
         ax.set_ylim(-0.6, len(names) - 0.4)
         _bare_axes(ax)
         ax.set_title(
-            f"{area}  ·  {bases.get(area, 0)} de {area_sizes.get(area, 0)} vagas "
-            "informam tecnologias",
-            loc="left", fontsize=10.5, fontweight="600",
+            f"{area}",
+            loc="left", fontsize=11, fontweight="600",
             color=INK_PRIMARY, pad=10,
         )
 
@@ -299,11 +298,9 @@ def chart_skills(
         x=0.02, y=0.985, ha="left", fontsize=15, fontweight="600",
         color=INK_PRIMARY,
     )
-    note = subtitle or (
-        "Percentual das vagas da área que citam cada tecnologia — "
-        "base: só as vagas em que o portal informa tecnologias"
-    )
-    fig.text(0.02, 0.952, note, ha="left", fontsize=9.5, color=INK_MUTED)
+    if subtitle:
+        fig.text(0.02, 0.952, subtitle, ha="left", fontsize=9.5, color=INK_MUTED)
+
 
     fig.tight_layout(rect=(0, 0, 1, 0.93), h_pad=2.6, w_pad=4.0)
     for ax, counts in panels:
