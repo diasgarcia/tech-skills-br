@@ -48,9 +48,10 @@ def build_parser() -> argparse.ArgumentParser:
         help="Pagina inicial da busca por portal (padrao: 1). Util para pular paginas iniciais.",
     )
     parser.add_argument(
-        "--max-pages", type=int, default=5,
-        help="Maximo de paginas por termo, por portal (padrao: 5).",
+        "--max-pages", type=int, default=15,
+        help="Maximo de paginas por termo, por portal (padrao: 15).",
     )
+
     parser.add_argument(
         "--page-size", type=int, default=100,
         help="Vagas por pagina; a Gupy aceita no maximo 100 (padrao: 100).",
