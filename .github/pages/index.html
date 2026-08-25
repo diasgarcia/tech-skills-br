@@ -187,12 +187,8 @@
       <div>
         <h1>tech-skills-br // Observatório de Vagas Tech Júnior (PIBIC)</h1>
         <p style="color: var(--text-muted); font-size: 11px; margin-top: 2px;">
-          Pesquisa sobre demandas do mercado de trabalho vs. matrizes curriculares universitárias
+          Mineração de dados e mapeamento contínuo das habilidades demandadas pelo mercado brasileiro
         </p>
-      </div>
-      <div style="text-align: right;">
-        <span class="badge badge-green">● Base Ativa: <strong id="kpi-total-header">--</strong> vagas</span>
-        <span class="badge badge-accent"><strong id="kpi-areas-header">--</strong> Áreas Técnicas</span>
       </div>
     </div>
 
@@ -201,9 +197,8 @@
       <button class="nav-btn active" onclick="setTab('resumo')">[1] Visão Geral</button>
       <button class="nav-btn" onclick="setTab('skills')">[2] Ranking de Habilidades</button>
       <button class="nav-btn" onclick="setTab('areas')">[3] Explorador por Área</button>
-      <button class="nav-btn" onclick="setTab('academico')">[4] Mercado vs. Universidade</button>
-      <button class="nav-btn" onclick="setTab('vagas')">[5] Explorador de Vagas</button>
-      <button class="nav-btn" onclick="setTab('api')">[6] Endpoints da API JSON</button>
+      <button class="nav-btn" onclick="setTab('vagas')">[4] Explorador de Vagas</button>
+      <button class="nav-btn" onclick="setTab('api')">[5] Endpoints da API JSON</button>
     </div>
   </header>
 
@@ -213,22 +208,22 @@
       <div class="card">
         <div class="card-title">Amostra Total de Vagas</div>
         <div class="card-value" id="kpi-total">--</div>
-        <p style="color: var(--text-muted); font-size: 11px; margin-top: 4px;" id="kpi-periodo">Período: --</p>
+        <p style="color: var(--text-muted); font-size: 11px; margin-top: 4px;" id="kpi-periodo">--</p>
       </div>
       <div class="card">
         <div class="card-title">Empresas Contratantes</div>
         <div class="card-value" id="kpi-empresas">--</div>
-        <p style="color: var(--text-muted); font-size: 11px; margin-top: 4px;">Empresas únicas no Brasil</p>
+        <p style="color: var(--text-muted); font-size: 11px; margin-top: 4px;">Empresas únicas catalogadas</p>
       </div>
       <div class="card">
-        <div class="card-title">Tecnologia Top 1</div>
+        <div class="card-title">Tecnologia Mais Demandada</div>
         <div class="card-value" style="color: var(--green);" id="kpi-top-skill">--</div>
         <p style="color: var(--text-muted); font-size: 11px; margin-top: 4px;" id="kpi-top-skill-count">--</p>
       </div>
       <div class="card">
-        <div class="card-title">Modalidade Remota</div>
-        <div class="card-value" id="kpi-remoto">--</div>
-        <p style="color: var(--text-muted); font-size: 11px; margin-top: 4px;" id="kpi-presencial">--</p>
+        <div class="card-title" id="kpi-top-mod-title">Modalidade Dominante</div>
+        <div class="card-value" id="kpi-top-mod-value">--</div>
+        <p style="color: var(--text-muted); font-size: 11px; margin-top: 4px;" id="kpi-top-mod-sub">--</p>
       </div>
     </div>
 
@@ -295,41 +290,27 @@
     </div>
   </div>
 
-  <!-- TAB 4: MERCADO VS UNIVERSIDADE (PIBIC) -->
-  <div id="tab-academico" class="tab-section">
-    <div class="card" style="margin-bottom: 16px;">
-      <div class="card-title" style="font-weight: 700; color: var(--text-bright);">Análise de Aderência Curricular (PIBIC)</div>
-      <p style="color: var(--text-muted); font-size: 11px; margin-top: 4px;">
-        Comparativo entre as disciplinas e bases ensinadas nos cursos de graduação (Ciência da Computação, Engenharia de Software, ADS) e as ferramentas exigidas nas vagas de entrada.
-      </p>
-    </div>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px;" id="academic-cards-container">
-      <!-- Preenchido via JS -->
-    </div>
-  </div>
-
-  <!-- TAB 5: EXPLORADOR DE VAGAS -->
+  <!-- TAB 4: EXPLORADOR DE VAGAS -->
   <div id="tab-vagas" class="tab-section">
     <div class="card">
       <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 8px;">
         <div>
           <div class="card-title" style="font-weight: 700;">Navegador de Vagas Ativas</div>
-          <p style="color: var(--text-muted); font-size: 11px;">Consulte anúncios, tecnologias exigidas, localidade e links.</p>
+          <p style="color: var(--text-muted); font-size: 11px;">Consulte anúncios, modalidade, localidade e links originais.</p>
         </div>
-        <input type="text" class="search-input" id="search-vagas" placeholder="Buscar por título, empresa ou skill..." oninput="renderVagasTable()">
+        <input type="text" class="search-input" id="search-vagas" placeholder="Buscar por título, empresa ou área..." oninput="renderVagasTable()">
       </div>
 
       <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;" id="vagas-count-info"></p>
 
       <table id="table-vagas">
-        <thead><tr><th>ID</th><th>Título</th><th>Empresa</th><th>Área</th><th>Local / Mod.</th><th>Tecnologias</th><th>Link</th></tr></thead>
+        <thead><tr><th>ID</th><th>Título</th><th>Empresa</th><th>Área</th><th>Local / Mod.</th><th style="text-align: center; width: 60px;">Link</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
   </div>
 
-  <!-- TAB 6: API JSON -->
+  <!-- TAB 5: API JSON -->
   <div id="tab-api" class="tab-section">
     <div class="card space-y-4">
       <div class="card-title" style="font-weight: 700; color: var(--text-bright);">Endpoints da API JSON Estática (CORS Aberto)</div>
@@ -342,7 +323,7 @@
         <tbody>
           <tr>
             <td><code>GET /api/resumo.json</code></td>
-            <td>Metadados gerais, KPIs, distribuições de áreas, regiões e comparativo PIBIC</td>
+            <td>Metadados gerais, KPIs e distribuições de áreas e regiões</td>
             <td><a href="api/resumo.json" target="_blank">[abrir JSON]</a></td>
           </tr>
           <tr>
@@ -413,7 +394,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderSummaryTables();
     renderSkillsTable();
     initAreaPills();
-    renderAcademicSection();
     renderVagasTable();
   } catch (err) {
     console.error("Erro ao carregar dados da API estática:", err);
@@ -427,7 +407,7 @@ function setTab(tabId) {
   const target = document.getElementById("tab-" + tabId);
   if (target) target.classList.add("active");
 
-  const btnIndex = { resumo: 0, skills: 1, areas: 2, academico: 3, vagas: 4, api: 5 }[tabId];
+  const btnIndex = { resumo: 0, skills: 1, areas: 2, vagas: 3, api: 4 }[tabId];
   const btns = document.querySelectorAll(".nav-btn");
   if (btns[btnIndex]) btns[btnIndex].classList.add("active");
 }
@@ -436,12 +416,11 @@ function initKPIs() {
   const meta = resumoData.metadados || {};
   const total = meta.total_vagas || 0;
 
-  document.getElementById("kpi-total-header").innerText = total.toLocaleString("pt-BR");
-  document.getElementById("kpi-areas-header").innerText = (areasData || []).length;
   document.getElementById("kpi-total").innerText = total.toLocaleString("pt-BR");
   document.getElementById("kpi-periodo").innerText = meta.periodo ? `Período: ${meta.periodo}` : "";
   document.getElementById("kpi-empresas").innerText = (meta.total_empresas || 0).toLocaleString("pt-BR");
 
+  // Top 1 Tecnologia Dinâmica (ordenação vinda da base)
   const topTech = (tecnologiasData && tecnologiasData.length > 0) ? tecnologiasData[0] : null;
   if (topTech) {
     document.getElementById("kpi-top-skill").innerText = topTech.nome;
@@ -451,14 +430,16 @@ function initKPIs() {
     document.getElementById("kpi-top-skill-count").innerText = "--";
   }
 
+  // Modalidade Dominante Dinâmica (pega a maior da lista)
   const modalidades = resumoData.modalidades || [];
-  const remoto = modalidades.find(m => m.modalidade === "Remoto") || { percentual: 0, vagas: 0 };
-  const presencial = modalidades.find(m => m.modalidade === "Presencial") || { vagas: 0 };
-
-  document.getElementById("kpi-remoto").innerText = `${remoto.percentual}%`;
-  document.getElementById("kpi-presencial").innerText = `${remoto.vagas} remotas · ${presencial.vagas} presenciais`;
+  if (modalidades.length > 0) {
+    const topMod = modalidades[0];
+    document.getElementById("kpi-top-mod-title").innerText = `Modalidade: ${topMod.modalidade}`;
+    document.getElementById("kpi-top-mod-value").innerText = `${topMod.percentual}%`;
+    const outras = modalidades.slice(1).map(m => `${m.vagas} ${m.modalidade.toLowerCase()}`).join(" · ");
+    document.getElementById("kpi-top-mod-sub").innerText = `${topMod.vagas.toLocaleString("pt-BR")} vagas · ${outras}`;
+  }
 }
-
 
 function renderSummaryTables() {
   // Áreas
@@ -569,34 +550,6 @@ function renderAreaDetail() {
   });
 }
 
-function renderAcademicSection() {
-  const container = document.getElementById("academic-cards-container");
-  container.innerHTML = "";
-  const comp = resumoData.comparativo_academico || {};
-
-  Object.entries(comp).forEach(([catTitle, items]) => {
-    const card = document.createElement("div");
-    card.className = "card";
-    
-    let rowsHtml = items.map(item => `
-      <tr>
-        <td><strong>${item.nome}</strong></td>
-        <td><span class="badge">${item.grupo}</span></td>
-        <td><strong>${item.percentual}%</strong></td>
-      </tr>
-    `).join("");
-
-    card.innerHTML = `
-      <div class="card-title" style="font-weight: 700; color: var(--text-bright);">${catTitle}</div>
-      <table>
-        <thead><tr><th>Tecnologia</th><th>Categoria</th><th>Demanda %</th></tr></thead>
-        <tbody>${rowsHtml}</tbody>
-      </table>
-    `;
-    container.appendChild(card);
-  });
-}
-
 function renderVagasTable() {
   const query = (document.getElementById("search-vagas").value || "").toLowerCase().trim();
   const tbody = document.querySelector("#table-vagas tbody");
@@ -607,8 +560,7 @@ function renderVagasTable() {
     items = items.filter(v => 
       v.titulo.toLowerCase().includes(query) || 
       v.empresa.toLowerCase().includes(query) ||
-      v.area.toLowerCase().includes(query) ||
-      (v.tecnologias || []).some(t => t.toLowerCase().includes(query))
+      v.area.toLowerCase().includes(query)
     );
   }
 
@@ -616,8 +568,7 @@ function renderVagasTable() {
 
   items.slice(0, 50).forEach(v => {
     const tr = document.createElement("tr");
-    const techPills = (v.tecnologias || []).slice(0, 4).map(t => `<span class="badge" style="font-size: 10px;">${t}</span>`).join(" ");
-    const linkHtml = v.url ? `<a href="${v.url}" target="_blank" rel="noopener noreferrer">[ver]</a>` : "-";
+    const linkHtml = v.url ? `<a href="${v.url}" target="_blank" rel="noopener noreferrer" title="Abrir vaga" style="font-size: 14px; text-decoration: none;">↗</a>` : "-";
 
     tr.innerHTML = `
       <td style="color: var(--text-muted);">${v.id}</td>
@@ -625,8 +576,7 @@ function renderVagasTable() {
       <td>${v.empresa}</td>
       <td><span class="badge">${v.area}</span></td>
       <td>${v.polo || v.localidade} &middot; <em style="color: var(--text-muted);">${v.modalidade}</em></td>
-      <td>${techPills}</td>
-      <td>${linkHtml}</td>
+      <td style="text-align: center;">${linkHtml}</td>
     `;
     tbody.appendChild(tr);
   });
