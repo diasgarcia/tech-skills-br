@@ -99,6 +99,9 @@ tech_gate:
     - tecnologia textil
     - odontologia digital
     - marketing digital
+    - redes sociais
+    - midias sociais
+    - social media
     - seguranca do trabalho
     - tecnico em enfermagem
     - pedagogia
@@ -107,6 +110,7 @@ tech_gate:
     - nutricao
     - fisioterapia
     - odontologia
+
 
   descricao: # sinais estritos -- precisam sobreviver ao boilerplate das descricoes
     - desenvolvimento de software
@@ -351,7 +355,37 @@ areas:
       - desenvolvedor full
     peso_medio: []
 
-  Suporte/Infra:
+  Engenharia de Software:
+    peso_alto:
+      - engenharia de software
+      - engenheiro de software
+      - engenheira de software
+      - desenvolvedor de software
+      - desenvolvedora de software
+      - desenvolvimento de software
+      - desenvolvedor de sistemas
+      - desenvolvimento de sistemas
+      - analista de desenvolvimento
+      - analista de sistemas
+      - software engineer
+      - software developer
+    peso_medio:
+      - programador
+      - programadora
+      - programacao
+      - algoritmos
+      - estrutura de dados
+      - desenvolvimento web
+      - orientacao a objetos
+      - poo
+      - clean code
+      - arquitetura de software
+      - padroes de projeto
+
+      - design patterns
+      - solid
+
+  Suporte Técnico:
     peso_alto:
       - suporte tecnico
       - help desk
@@ -364,23 +398,16 @@ areas:
       - assistente de ti
       - auxiliar de ti
       - analista de ti
-      - analista de infraestrutura
-      - analista de infra
       - suporte de ti
-      - infraestrutura de ti
-      - analista de redes
       - field service
       - analista de implantacao
       - implantacao de sistemas
-      - operador de noc
       - suporte n1
       - suporte n2
       - suporte nivel 1
       - suporte nivel 2
     peso_medio:
       - suporte
-      - infra
-      - infraestrutura
       - chamados
       - ticket
       - atendimento ao usuario
@@ -388,16 +415,53 @@ areas:
       - gestao de ativos
       - ativos de ti
       - hardware
-      - windows server
-      - active directory
-      - redes
-      - switch
-      - roteador
-      - telefonia
       - impressora
       - implantador
       - suporte a sistemas
       - atendimento n1
+      - suporte presencial
+      - suporte remoto
+
+  Infraestrutura / Redes:
+    peso_alto:
+      - infraestrutura de ti
+      - analista de infraestrutura
+      - analista de infra
+      - analista de redes
+      - administrador de redes
+      - engenheiro de redes
+      - redes de computadores
+      - administracao de redes
+      - operador de noc
+      - noc analyst
+      - sysadmin
+      - administrador de sistemas
+      - tecnico de redes
+      - cabeamento estruturado
+      - telecomunicacoes
+    peso_medio:
+      - infra
+      - infraestrutura
+      - redes
+      - windows server
+      - active directory
+      - switch
+      - roteador
+      - roteadores
+      - firewall de rede
+      - telefonia
+      - voip
+      - servidores
+      - virtualizacao
+      - vmware
+      - hyper-v
+      - vpn
+      - mikrotik
+      - cisco
+      - pfsense
+      - dns
+      - dhcp
+
 
 
   Segurança:

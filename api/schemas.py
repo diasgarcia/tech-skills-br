@@ -91,7 +91,8 @@ class VagaPage(BaseModel):
 
 
 class AreaOut(BaseModel):
-    area: str = Field(examples=["Suporte/Infra"])
+    area: str = Field(examples=["Backend"])
+
     vagas: int = Field(description="Quantidade de vagas classificadas nesta área.")
     percentual: float = Field(description="Percentual sobre o total de vagas.")
 
