@@ -2,8 +2,9 @@ name: Coleta Diaria de Vagas (PIBIC)
 
 on:
   schedule:
-    # Executa todos os dias as 19:00 BRT (22:00 UTC):
-    - cron: '0 22 * * *'
+    # Executa todos os dias as 19:16 BRT (22:16 UTC):
+    - cron: '16 22 * * *'
+
 
   # Permite disparo manual com 1 clique pelo navegador:
   workflow_dispatch:
