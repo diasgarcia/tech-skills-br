@@ -216,11 +216,33 @@ areas:
       - backend
       - back-end
       - desenvolvedor back
+      - desenvolvedor backend
+      - desenvolvedora backend
       - desenvolvimento de apis
       - desenvolvedor rpa
       - engenheiro de rpa
       - software embarcado
       - sistemas embarcados
+      - desenvolvedor delphi
+      - desenvolvedora delphi
+      - programador delphi
+      - programadora delphi
+      - desenvolvedor cobol
+      - programador cobol
+      - desenvolvedor c++
+      - programador c++
+      - desenvolvedor c#
+      - programador c#
+      - desenvolvedor java
+      - programador java
+      - desenvolvedor python
+      - programador python
+      - desenvolvedor php
+      - programador php
+      - desenvolvedor node
+      - desenvolvedor ruby
+      - desenvolvedor golang
+      - desenvolvedor rust
     peso_medio:
       - api rest
       - apis
@@ -230,6 +252,11 @@ areas:
       - rpa
       - embarcados
       - iot
+      - delphi
+      - object pascal
+      - pascal
+      - cobol
+      - rust
       - c++
       - c/c++
       - java
@@ -261,6 +288,7 @@ areas:
       - oracle
       - abap
       - sap
+
 
 
   Mobile:
@@ -370,6 +398,10 @@ areas:
       - software engineer
       - software developer
     peso_medio:
+      - estagio desenvolvimento
+      - estagio em desenvolvimento
+      - estagiario de desenvolvimento
+      - estagio software
       - programador
       - programadora
       - programacao
@@ -381,9 +413,79 @@ areas:
       - clean code
       - arquitetura de software
       - padroes de projeto
-
       - design patterns
       - solid
+
+
+  Design / UI / UX:
+    peso_alto:
+      - ui ux
+      - ui/ux
+      - ux ui
+      - ux/ui
+      - ui designer
+      - ux designer
+      - product designer
+      - designer de produto
+      - design de interface
+      - designer de interfaces
+      - web designer
+      - web design
+      - designer grafico
+      - designer instrucional
+      - motion designer
+    peso_medio:
+      - figma
+      - adobe xd
+      - photoshop
+      - illustrator
+      - wireframe
+      - wireframes
+      - prototipagem
+      - prototipos
+      - design system
+      - usabilidade
+      - ux research
+      - journey map
+      - sketch
+      - visual design
+
+  Sistemas / ERP:
+    peso_alto:
+      - analista de erp
+      - consultor erp
+      - analista totvs
+      - analista sap
+      - consultor sap
+      - consultor totvs
+      - analista protheus
+      - implantador erp
+      - analista de implantacao
+      - implantacao de sistemas
+      - implantacao de software
+      - analista de negocios de ti
+      - analista de processos de ti
+      - governanca de ti
+      - gestao de ti
+      - pmo de ti
+    peso_medio:
+      - erp
+      - sap
+      - totvs
+      - protheus
+      - senior sistemas
+      - sankhya
+      - rm totvs
+      - datasul
+      - dynamics 365
+      - salesforce
+      - itil
+      - cobit
+      - pmo
+      - scrum master
+      - product owner
+      - business analyst
+      - implantacao
 
   Suporte Técnico:
     peso_alto:
@@ -393,30 +495,24 @@ areas:
       - service desk
       - analista de suporte
       - tecnico de suporte
-      - tecnico de ti
       - tecnico de informatica
-      - assistente de ti
-      - auxiliar de ti
-      - analista de ti
-      - suporte de ti
       - field service
-      - analista de implantacao
-      - implantacao de sistemas
       - suporte n1
       - suporte n2
       - suporte nivel 1
       - suporte nivel 2
+      - suporte de ti
     peso_medio:
       - suporte
       - chamados
       - ticket
+      - tickets
       - atendimento ao usuario
       - manutencao de computadores
       - gestao de ativos
       - ativos de ti
       - hardware
       - impressora
-      - implantador
       - suporte a sistemas
       - atendimento n1
       - suporte presencial
@@ -462,8 +558,6 @@ areas:
       - dns
       - dhcp
 
-
-
   Segurança:
     peso_alto:
       - seguranca da informacao
@@ -475,14 +569,13 @@ areas:
       - analista de seguranca
       - seguranca de redes
     peso_medio:
-      # NAO colocar "seguranca" sozinho aqui: casa com "seguranca do trabalho" e
-      # com boilerplate de "normas de seguranca" em vaga de suporte tecnico.
       - vulnerabilidade
       - firewall
       - siem
       - lgpd
       - iso 27001
       - criptografia
+
 
 # Peso numerico de cada faixa.
 weights:
