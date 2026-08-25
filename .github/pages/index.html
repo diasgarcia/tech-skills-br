@@ -192,7 +192,7 @@
       </div>
       <div style="text-align: right;">
         <span class="badge badge-green">● Base Ativa: <strong id="kpi-total-header">--</strong> vagas</span>
-        <span class="badge badge-accent">17 Áreas</span>
+        <span class="badge badge-accent"><strong id="kpi-areas-header">--</strong> Áreas Técnicas</span>
       </div>
     </div>
 
@@ -200,7 +200,7 @@
     <div class="nav-tabs">
       <button class="nav-btn active" onclick="setTab('resumo')">[1] Visão Geral</button>
       <button class="nav-btn" onclick="setTab('skills')">[2] Ranking de Habilidades</button>
-      <button class="nav-btn" onclick="setTab('areas')">[3] Explorador por Área (17)</button>
+      <button class="nav-btn" onclick="setTab('areas')">[3] Explorador por Área</button>
       <button class="nav-btn" onclick="setTab('academico')">[4] Mercado vs. Universidade</button>
       <button class="nav-btn" onclick="setTab('vagas')">[5] Explorador de Vagas</button>
       <button class="nav-btn" onclick="setTab('api')">[6] Endpoints da API JSON</button>
@@ -213,7 +213,7 @@
       <div class="card">
         <div class="card-title">Amostra Total de Vagas</div>
         <div class="card-value" id="kpi-total">--</div>
-        <p style="color: var(--text-muted); font-size: 11px; margin-top: 4px;" id="kpi-periodo">Período: 2022 - 2026</p>
+        <p style="color: var(--text-muted); font-size: 11px; margin-top: 4px;" id="kpi-periodo">Período: --</p>
       </div>
       <div class="card">
         <div class="card-title">Empresas Contratantes</div>
@@ -338,31 +338,27 @@
       </p>
 
       <table style="margin: 14px 0;">
-        <thead><tr><th>Endpoint</th><th>Descrição</th><th>Tamanho</th><th>Link Direto</th></tr></thead>
+        <thead><tr><th>Endpoint</th><th>Descrição</th><th>Link Direto</th></tr></thead>
         <tbody>
           <tr>
             <td><code>GET /api/resumo.json</code></td>
             <td>Metadados gerais, KPIs, distribuições de áreas, regiões e comparativo PIBIC</td>
-            <td>~32 KB</td>
-            <td><a href="api/resumo.json" target="_blank">[abrir]</a></td>
+            <td><a href="api/resumo.json" target="_blank">[abrir JSON]</a></td>
           </tr>
           <tr>
             <td><code>GET /api/areas.json</code></td>
-            <td>Ranking consolidado das 17 áreas técnicas com contagem e percentuais</td>
-            <td>~1.3 KB</td>
-            <td><a href="api/areas.json" target="_blank">[abrir]</a></td>
+            <td>Ranking consolidado de todas as áreas técnicas com contagens e percentuais</td>
+            <td><a href="api/areas.json" target="_blank">[abrir JSON]</a></td>
           </tr>
           <tr>
             <td><code>GET /api/tecnologias.json</code></td>
             <td>Ranking completo de todas as tecnologias e habilidades demandadas</td>
-            <td>~26 KB</td>
-            <td><a href="api/tecnologias.json" target="_blank">[abrir]</a></td>
+            <td><a href="api/tecnologias.json" target="_blank">[abrir JSON]</a></td>
           </tr>
           <tr>
             <td><code>GET /api/vagas.json</code></td>
-            <td>Base completa com as 1.662 vagas ativas estruturadas</td>
-            <td>~990 KB</td>
-            <td><a href="api/vagas.json" target="_blank">[abrir]</a></td>
+            <td>Base completa e estruturada com todas as vagas ativas catalogadas</td>
+            <td><a href="api/vagas.json" target="_blank">[abrir JSON]</a></td>
           </tr>
         </tbody>
       </table>
@@ -441,13 +437,19 @@ function initKPIs() {
   const total = meta.total_vagas || 0;
 
   document.getElementById("kpi-total-header").innerText = total.toLocaleString("pt-BR");
+  document.getElementById("kpi-areas-header").innerText = (areasData || []).length;
   document.getElementById("kpi-total").innerText = total.toLocaleString("pt-BR");
-  document.getElementById("kpi-periodo").innerText = `Período: ${meta.periodo || "2022 - 2026"}`;
+  document.getElementById("kpi-periodo").innerText = meta.periodo ? `Período: ${meta.periodo}` : "";
   document.getElementById("kpi-empresas").innerText = (meta.total_empresas || 0).toLocaleString("pt-BR");
 
-  const topTech = tecnologiasData[0] || { nome: "SQL", vagas: 0, percentual_total: 0 };
-  document.getElementById("kpi-top-skill").innerText = topTech.nome;
-  document.getElementById("kpi-top-skill-count").innerText = `${topTech.vagas} citações (${topTech.percentual_total}% da base)`;
+  const topTech = (tecnologiasData && tecnologiasData.length > 0) ? tecnologiasData[0] : null;
+  if (topTech) {
+    document.getElementById("kpi-top-skill").innerText = topTech.nome;
+    document.getElementById("kpi-top-skill-count").innerText = `${topTech.vagas} citações (${topTech.percentual_total}% da base)`;
+  } else {
+    document.getElementById("kpi-top-skill").innerText = "--";
+    document.getElementById("kpi-top-skill-count").innerText = "--";
+  }
 
   const modalidades = resumoData.modalidades || [];
   const remoto = modalidades.find(m => m.modalidade === "Remoto") || { percentual: 0, vagas: 0 };
@@ -456,6 +458,7 @@ function initKPIs() {
   document.getElementById("kpi-remoto").innerText = `${remoto.percentual}%`;
   document.getElementById("kpi-presencial").innerText = `${remoto.vagas} remotas · ${presencial.vagas} presenciais`;
 }
+
 
 function renderSummaryTables() {
   // Áreas
