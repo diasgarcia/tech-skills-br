@@ -166,19 +166,18 @@ class ProgramathorSource(JobSource):
             if not html:
                 break
 
+            soup = BeautifulSoup(html, "html.parser")
+            raw_cards = soup.select('.wrapper-jobs-list a[href^="/jobs/"], .cell-list')
+            if not raw_cards:
+                break  # Fim real da listagem (nenhum card na pagina)
+
             batch = self._parse_page(html, term)
-
-            ids_pagina = {job.external_id for job in batch}
-            if not ids_pagina or ids_pagina == anterior:
-                break  # fim da lista, ou o site repetiu a pagina anterior
-
             for job in batch:
                 if job.external_id in seen:
                     continue
                 seen.add(job.external_id)
                 jobs.append(job)
 
-            anterior = ids_pagina
 
         return jobs
 
