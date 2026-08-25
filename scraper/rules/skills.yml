@@ -206,8 +206,11 @@ suporte_infra:
   Zabbix: [zabbix]
   VoIP: [voip, telefonia ip]
   Office 365: [office 365, o365, microsoft 365, m365]
-  Hardware: [hardware, manutencao de computadores, manutencao preventiva, montagem de computadores]
+  Hardware: [hardware, equipamentos de ti]
+  Montagem e Manutenção de PCs: [montagem de computadores, manutencao de computadores, montagem e manutencao, formatacao de computadores]
+  Manutenção Preventiva: [manutencao preventiva, manutencao corretiva]
   VMware: [vmware, virtualizacao, hyper v, proxmox]
+
   Cisco: [cisco]
 
 seguranca:
