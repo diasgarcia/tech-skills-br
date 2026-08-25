@@ -116,13 +116,26 @@ class SerpApiSource(JobSource):
         company = (raw.get("company_name") or "").strip()
         location = (raw.get("location") or "").strip()
 
-        # URL: preferencialmente o link de candidatura direta em related_links ou share_link
+        # URL: preferencialmente o link de candidatura direta em apply_options
         url = ""
-        related_links = raw.get("related_links") or []
-        if related_links and isinstance(related_links, list):
-            url = related_links[0].get("link") or ""
+        apply_options = raw.get("apply_options") or []
+        if apply_options and isinstance(apply_options, list):
+            for opt in apply_options:
+                if isinstance(opt, dict) and opt.get("link"):
+                    url = opt["link"]
+                    break
+
+        if not url:
+            related_links = raw.get("related_links") or []
+            if related_links and isinstance(related_links, list):
+                for rel in related_links:
+                    if isinstance(rel, dict) and rel.get("link"):
+                        url = rel["link"]
+                        break
+
         if not url:
             url = raw.get("share_link") or ""
+
 
         description = raw.get("description") or ""
 
