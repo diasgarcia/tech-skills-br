@@ -66,8 +66,21 @@ def deduplicate(jobs: list[Job]) -> tuple[list[Job], int]:
                 job.search_term = existing.search_term or job.search_term
             by_source_key[job.source_key] = job
 
-    by_fingerprint: dict[str, Job] = {}
+    # Passo 1.5: mesma URL de vaga anunciada
+    by_url: dict[str, Job] = {}
     for job in by_source_key.values():
+        clean_url = (job.url or "").strip()
+        if clean_url:
+            existing = by_url.get(clean_url)
+            if existing is None or len(job.description) > len(existing.description):
+                if existing is not None:
+                    job.search_term = existing.search_term or job.search_term
+                by_url[clean_url] = job
+        else:
+            by_url[job.source_key] = job
+
+    by_fingerprint: dict[str, Job] = {}
+    for job in by_url.values():
         # Vagas sem empresa identificavel nao sao seguras para cruzar entre
         # portais (titulos genericos colidiriam), entao mantemos como unicas.
         # Vale tanto para o campo vazio quanto para rotulos que nao identificam
@@ -79,6 +92,7 @@ def deduplicate(jobs: list[Job]) -> tuple[list[Job], int]:
         existing = by_fingerprint.get(job.fingerprint)
         if existing is None or len(job.description) > len(existing.description):
             by_fingerprint[job.fingerprint] = job
+
 
     # Passo 3: mesma vaga em portais diferentes, com o nome da empresa escrito
     # de outro jeito. Exige titulo identico -- ver o docstring do modulo.
