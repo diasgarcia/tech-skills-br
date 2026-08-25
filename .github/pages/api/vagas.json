@@ -57,7 +57,9 @@
     "data_publicacao": "25/08/2026",
     "fonte": "gupy",
     "url": "https://vivovita.gupy.io/job/eyJqb2JJZCI6MTIyODI1ODEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Cibersegurança"
+    ]
   },
   {
     "id": 1952,
@@ -789,7 +791,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-desenvolvimento-jr-de-ia-ag%C3%AAntica-at-eval-4456910838",
     "tecnologias": [
-      "Inteligência Artificial"
+      "Inteligência Artificial",
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -820,7 +823,9 @@
     "data_publicacao": "25/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-de-suporte-de-ti-%E2%80%93-help-desk-sp-at-grupo-viggo-4456557982",
-    "tecnologias": []
+    "tecnologias": [
+      "Help Desk"
+    ]
   },
   {
     "id": 1579,
@@ -1125,7 +1130,9 @@
     "data_publicacao": "24/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-help-desk-hs-cons%C3%B3rcios-at-grupo-herval-4456520667",
-    "tecnologias": []
+    "tecnologias": [
+      "Help Desk"
+    ]
   },
   {
     "id": 1887,
@@ -1140,7 +1147,9 @@
     "data_publicacao": "24/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-help-desk-jr-hs-cons%C3%B3rcios-at-grupo-herval-4456540067",
-    "tecnologias": []
+    "tecnologias": [
+      "Help Desk"
+    ]
   },
   {
     "id": 1852,
@@ -1344,7 +1353,9 @@
       "Linux",
       "Windows",
       "Redes de Computadores",
-      "Hardware"
+      "Hardware",
+      "Montagem e Manutenção de PCs",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -1485,7 +1496,9 @@
     "data_publicacao": "24/08/2026",
     "fonte": "gupy",
     "url": "https://qualitydigital.gupy.io/job/eyJqb2JJZCI6MTIyNjMzODEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 1441,
@@ -1563,7 +1576,7 @@
     "tecnologias": [
       "Excel",
       "Inteligência Artificial",
-      "LLM"
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -2326,7 +2339,8 @@
       "Redes de Computadores",
       "Firewall",
       "Service Desk",
-      "Hardware"
+      "Hardware",
+      "Help Desk"
     ]
   },
   {
@@ -2548,7 +2562,9 @@
     "tecnologias": [
       "ETL",
       "Inteligência Artificial",
-      "LLM"
+      "Bancos Vetoriais",
+      "LLMs & IA Generativa",
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -2648,7 +2664,8 @@
       "Active Directory",
       "ITIL",
       "Office 365",
-      "Inglês"
+      "Inglês",
+      "Copilots & Assistentes de IA"
     ]
   },
   {
@@ -2698,7 +2715,9 @@
       "ITIL",
       "LGPD",
       "Scrum",
-      "Metodologias Ágeis"
+      "Metodologias Ágeis",
+      "Suporte N1/N2",
+      "Cibersegurança"
     ]
   },
   {
@@ -2901,7 +2920,9 @@
     "data_publicacao": "21/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-suporte-n2-jr-indaiatuba-at-topaz-4456277129",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 1874,
@@ -2916,7 +2937,9 @@
     "data_publicacao": "21/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/cybersecurity-analyst-i-at-fis-4447053201",
-    "tecnologias": []
+    "tecnologias": [
+      "Cibersegurança"
+    ]
   },
   {
     "id": 1854,
@@ -2931,7 +2954,9 @@
     "data_publicacao": "21/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-jr-foco-em-tprm-s%C3%A3o-paulo-sp-at-deloitte-4429919420",
-    "tecnologias": []
+    "tecnologias": [
+      "Governança e Riscos (GRC)"
+    ]
   },
   {
     "id": 1842,
@@ -3092,7 +3117,9 @@
     "data_publicacao": "21/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-help-desk-at-soc-software-integrado-de-gest%C3%A3o-ocupacional-4454639266",
-    "tecnologias": []
+    "tecnologias": [
+      "Help Desk"
+    ]
   },
   {
     "id": 1406,
@@ -3189,9 +3216,9 @@
     "url": "https://br.linkedin.com/jobs/view/grupo-rezende-estagi%C3%A1rio-em-automa%C3%A7%C3%A3o-foco-em-programa%C3%A7%C3%A3o-desenvolvimento-ia-e-processos-at-grupo-rezende-4454680232",
     "tecnologias": [
       "Inteligência Artificial",
-      "Agentes de IA",
-      "LLM",
-      "LGPD"
+      "LGPD",
+      "LLMs & IA Generativa",
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -3358,7 +3385,9 @@
     "tecnologias": [
       "Redes de Computadores",
       "Service Desk",
-      "SAP"
+      "SAP",
+      "Help Desk",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -3701,7 +3730,9 @@
     "data_publicacao": "21/08/2026",
     "fonte": "serpapi",
     "url": "https://www.google.com/search?ibp=htl;jobs&q=suporte+tecnico+junior&htidocid=r0Q5Uf4o25GNDUjSAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xWOsQrCMBRFce0nOD0cRVoRXOrkVBU6Ka4lTZ9pNMmLeSl08Gcc_QRd-2O2yxkunMtJvrPkehk-0mlJ0CCcO08hIqCFo7tRsMM7aingNPycpgAvOKDxDfIjB4_87DSLyUPrAypicAQFkTI437Uxes6zjNmkiqMYj1JJNiOHNfXZnWqeUHErAnojIlab7bpPvVPLRRHGEiiF0uCQxyJDUph8XJzoeAX78g_RtSwzvAAAAA&shmds=v1_ARwrE20qVHiQB0Xd0X07oa3mo1zP62uzLm6BYMjPAvKzlaMkLg&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=suporte+tecnico+junior&htidocid=r0Q5Uf4o25GNDUjSAAAAAA%3D%3D",
-    "tecnologias": []
+    "tecnologias": [
+      "Help Desk"
+    ]
   },
   {
     "id": 913,
@@ -4394,7 +4425,9 @@
     "data_publicacao": "20/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-seguran%C3%A7a-de-aplica%C3%A7%C3%B5es-appsec-j%C3%BAnior-pleno-brl-6k-m%C3%AAs-clt-%2B-benef%C3%ADcios-at-nous-latam-4456038291",
-    "tecnologias": []
+    "tecnologias": [
+      "Cibersegurança"
+    ]
   },
   {
     "id": 1849,
@@ -4535,7 +4568,9 @@
     "data_publicacao": "20/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-suporte-n1-telecom-s%C3%A3o-paulo-sp-at-minsait-4454115570",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 1601,
@@ -4674,7 +4709,8 @@
     "url": "https://www.google.com/search?ibp=htl;jobs&q=suporte+tecnico+junior&htidocid=V2jcTJb2CV1c7AYIAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xWNOwrCQBBAsc0RrKaysMiKYBOt_KCIZfowWYfN6mRn3dlAriR4Cy-maR4PXvGKz6zY1d-3Dd4K3AkuxBGOpE-4DsFLqiCSvgavOFXqYyInCkHgLOKY5tsu56iVMapcOs2YvS2t9EYCtTKah7Q6odEOE0XGTM16sxrLGNzS3BY1HCTowFmSRzhNA8W_MgTSTMBikSvYJ1TPPzfuM26vAAAA&shmds=v1_ARwrE23bXeScu9jS7M7ycLYLCYLtxOQDhqsTl0UlP7TfuX19Tw&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=suporte+tecnico+junior&htidocid=V2jcTJb2CV1c7AYIAAAAAA%3D%3D",
     "tecnologias": [
       "Redes de Computadores",
-      "Hardware"
+      "Hardware",
+      "Help Desk"
     ]
   },
   {
@@ -4860,7 +4896,8 @@
     "fonte": "theirstack",
     "url": "http://br.indeed.com/job/est%C3%A1gio-em-tecnologia-da-informa%C3%A7%C3%A3o-ti-0c07e499bfa69d60",
     "tecnologias": [
-      "Hardware"
+      "Hardware",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -5204,7 +5241,6 @@
       ".NET",
       "Machine Learning",
       "Inteligência Artificial",
-      "LLM",
       "SQL Server",
       "Oracle",
       "Git",
@@ -5214,7 +5250,9 @@
       "Metodologias Ágeis",
       "POO",
       "SOLID",
-      "Design Patterns"
+      "Design Patterns",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -5985,7 +6023,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-ciberseguran%C3%A7a-soc-n1-at-accenture-brasil-4455446933",
     "tecnologias": [
-      "SIEM/SOC"
+      "SIEM/SOC",
+      "Cibersegurança"
     ]
   },
   {
@@ -6001,7 +6040,9 @@
     "data_publicacao": "19/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/consultor-a-j%C3%BAnior-em-auditoria-de-ti-para-institui%C3%A7%C3%B5es-financeiras-s%C3%A3o-paulo-at-ey-4454970003",
-    "tecnologias": []
+    "tecnologias": [
+      "Governança e Riscos (GRC)"
+    ]
   },
   {
     "id": 1802,
@@ -6501,7 +6542,9 @@
     "data_publicacao": "19/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/pessoa-analista-de-suporte-n1-j%C3%BAnior-h%C3%ADbrido-em-blumenau-sc-at-amcom-sistemas-de-informa%C3%A7%C3%A3o-4455488170",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 1307,
@@ -6828,7 +6871,9 @@
     "data_publicacao": "19/08/2026",
     "fonte": "theirstack",
     "url": "https://www.linkedin.com/jobs/view/4452816713/",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 1053,
@@ -6877,7 +6922,8 @@
       "JavaScript",
       "PHP",
       "Windows",
-      "Hardware"
+      "Hardware",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -7071,8 +7117,9 @@
     "fonte": "theirstack",
     "url": "https://www.linkedin.com/jobs/view/4455493132/",
     "tecnologias": [
+      "Machine Learning",
       "Inteligência Artificial",
-      "LLM"
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -7762,7 +7809,9 @@
     "data_publicacao": "18/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-stihl-ciberseguran%C3%A7a-at-pucrs-carreiras-4454922525",
-    "tecnologias": []
+    "tecnologias": [
+      "Cibersegurança"
+    ]
   },
   {
     "id": 1860,
@@ -7869,7 +7918,9 @@
     "data_publicacao": "18/08/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831050/tecnico-de-informatica-n1-lins-sp",
-    "tecnologias": []
+    "tecnologias": [
+      "Help Desk"
+    ]
   },
   {
     "id": 1701,
@@ -7931,7 +7982,9 @@
     "data_publicacao": "18/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-suporte-n1-s%C3%A3o-paulo-sp-at-minsait-4452842900",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 1587,
@@ -8539,7 +8592,8 @@
     "fonte": "serpapi",
     "url": "https://www.google.com/search?ibp=htl;jobs&q=suporte+tecnico+junior&htidocid=8lJighgprdvF8oSUAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xXLsQqCUBQAUFr9hIa4YzVoBC02mUUooaK2BfK0mxnPd1_eF_QL_UJb9BmN_li1nO1Yn4F18CJvF2S5B-sNZPskTvMN5P3DjwI_hrB_RkGcwnjVCW7UiSD40bX9yzSVmLigka-3hgUcEbDVHdbEoAi2RLXE4fJsjGbXcZilXbMRv2ZX1DqksKS7c6GS_xR8Fh1qKQwW88XsbmtVT0chlSVJUMgGQVIlpAtZ_yZIxE3SF71_cS2-AAAA&shmds=v1_ARwrE215iJ3DetwSI6nwM4fdRAaBdNVO6WYzC3i7rhKdHTXcDQ&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=suporte+tecnico+junior&htidocid=8lJighgprdvF8oSUAAAAAA%3D%3D",
     "tecnologias": [
-      "Hardware"
+      "Hardware",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -8750,7 +8804,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-suporte-junior-at-braga-it-4455545912",
     "tecnologias": [
-      "Hardware"
+      "Hardware",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -9241,7 +9296,9 @@
     "data_publicacao": "17/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/auxiliar-em-manuten%C3%A7%C3%A3o-de-computadores-at-crh-recursos-humanos-4454278109",
-    "tecnologias": []
+    "tecnologias": [
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 1607,
@@ -9271,7 +9328,9 @@
     "data_publicacao": "17/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/tecnico-de-suporte-n1-brasilia-df-at-wyntech-servi%C3%A7os-em-inform%C3%A1tica-4452532163",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 1499,
@@ -9301,7 +9360,9 @@
     "data_publicacao": "17/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-at-fcamara-4455305465",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 1413,
@@ -9395,7 +9456,7 @@
     "url": "https://br.linkedin.com/jobs/view/pessoa-desenvolvedora-de-agentes-de-ia-j%C3%BAnior-at-share-people-hub-vagas-4454404675",
     "tecnologias": [
       "Inteligência Artificial",
-      "Agentes de IA"
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -9583,7 +9644,8 @@
     "fonte": "serpapi",
     "url": "https://www.google.com/search?ibp=htl;jobs&q=suporte+tecnico+junior&htidocid=WBsZpIrffuDdNsZBAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xXOMQ6CMBSA4bh6BKc3GwPGxAWnikggIsaym1pfoKb0VV5JvJLnMN5LXf7lW_7pZzJNmvdLO6MJbghy9DQEhHJ0hoYEPPJjNKz-hr0fsCUGR5ATtRZnmy4Ez0kcM9uo5aCC0ZGmPiaHV3rGd7ryPxfu1IDeqoCX1Xr5jLxr5-X2LHIBspBNVgkJWQVNlh7rQ50XAnYCiuO-PlciFTUcmp2IwCH_3ixpZRNIVe-NU7wAefoC8CkEs8gAAAA&shmds=v1_ARwrE20u8aRZXLaBf7OGHLQny2ppTyb7shC8_6Z7IOWeS66bow&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=suporte+tecnico+junior&htidocid=WBsZpIrffuDdNsZBAAAAAA%3D%3D",
     "tecnologias": [
-      "Hardware"
+      "Hardware",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -9654,7 +9716,8 @@
       "VoIP",
       "Hardware",
       "Criptografia",
-      "Estrutura de Dados"
+      "Estrutura de Dados",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -9970,7 +10033,8 @@
       "Windows",
       "ITIL",
       "Hardware",
-      "Inglês"
+      "Inglês",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -10066,7 +10130,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-ti-at-aliare-4454827885",
     "tecnologias": [
-      "Hardware"
+      "Hardware",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -10082,7 +10147,9 @@
     "data_publicacao": "15/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-porto-alegre-e-regi%C3%A3o-at-seprol-computadores-e-sistemas-4454836310",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 1298,
@@ -10276,7 +10343,9 @@
     "data_publicacao": "14/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-j%C3%BAnior-at-realmate-4451230101",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 1799,
@@ -10399,7 +10468,9 @@
     "data_publicacao": "14/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-de-suporte-de-ti-%E2%80%93-help-desk-at-grupo-viggo-4450870518",
-    "tecnologias": []
+    "tecnologias": [
+      "Help Desk"
+    ]
   },
   {
     "id": 1589,
@@ -12013,7 +12084,8 @@
       "CI/CD",
       "API REST",
       "UX/UI",
-      "ERP"
+      "ERP",
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -12059,7 +12131,9 @@
     "data_publicacao": "12/08/2026",
     "fonte": "gupy",
     "url": "https://e-deploy.gupy.io/job/eyJqb2JJZCI6MTIwNTgyODAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Help Desk"
+    ]
   },
   {
     "id": 1885,
@@ -12074,7 +12148,9 @@
     "data_publicacao": "12/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-suporte-n1-jr-bil%C3%ADngue-espanhol-at-stefanini-group-4453166716",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 1876,
@@ -12089,7 +12165,9 @@
     "data_publicacao": "12/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/engenheiro-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-jr-appsec-at-pagbank-4442699057",
-    "tecnologias": []
+    "tecnologias": [
+      "Cibersegurança"
+    ]
   },
   {
     "id": 1823,
@@ -12685,7 +12763,9 @@
     "data_publicacao": "11/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-em-help-desk-j%C3%BAnior-at-forseti-solu%C3%A7%C3%B5es-em-licita%C3%A7%C3%A3o-4451484367",
-    "tecnologias": []
+    "tecnologias": [
+      "Help Desk"
+    ]
   },
   {
     "id": 1847,
@@ -14227,7 +14307,9 @@
     "data_publicacao": "07/08/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2829498/tecnico-de-informatica-n1-cajamar",
-    "tecnologias": []
+    "tecnologias": [
+      "Help Desk"
+    ]
   },
   {
     "id": 1693,
@@ -14353,7 +14435,8 @@
       "Android",
       "Linux",
       "Windows",
-      "Service Desk"
+      "Service Desk",
+      "Help Desk"
     ]
   },
   {
@@ -14613,7 +14696,9 @@
     "data_publicacao": "07/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/rocha-neto-consultoria-em-tecnologia-analista-de-suporte-n1-j%C3%BAnior-at-cdl-uberl%C3%A2ndia-4450783865",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 366,
@@ -14878,7 +14963,9 @@
     "data_publicacao": "06/08/2026",
     "fonte": "gupy",
     "url": "https://bellinatiperez.gupy.io/job/eyJqb2JJZCI6MTE5NzYyOTMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Governança e Riscos (GRC)"
+    ]
   },
   {
     "id": 1811,
@@ -15003,7 +15090,9 @@
     "tecnologias": [
       "Windows",
       "Redes de Computadores",
-      "Hardware"
+      "Hardware",
+      "Help Desk",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -15446,7 +15535,9 @@
     "data_publicacao": "05/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-cybersecurity-blue-team-at-agility-4448003037",
-    "tecnologias": []
+    "tecnologias": [
+      "Cibersegurança"
+    ]
   },
   {
     "id": 1839,
@@ -15525,7 +15616,8 @@
       "Linux",
       "Windows",
       "Redes de Computadores",
-      "Hardware"
+      "Hardware",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -16520,7 +16612,7 @@
       "ETL",
       "Machine Learning",
       "Inteligência Artificial",
-      "LLM"
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -16943,7 +17035,9 @@
     "data_publicacao": "03/08/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2828476/tecnico-de-informatica-n1",
-    "tecnologias": []
+    "tecnologias": [
+      "Help Desk"
+    ]
   },
   {
     "id": 1698,
@@ -17220,7 +17314,8 @@
     "url": "https://www.google.com/search?ibp=htl;jobs&q=estagio+ti&htidocid=6oD2Gx6spdgzHRJdAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xWMMQrCQBBFsc0RrMZOLRIRbGJlIEhsFCO2Yd2Mm5VNZt3ZQG7gObyCV8jF3MDjF-_Di36z6JKzF0qPX6cJaoRbAcsnSQJswWEQAUmt7b2oySGvUrDI716zmC5srUNFDB3BkUgZnO8b7y2nScJsYhXqXss4JBLq8EFD8qIHT1NxIxxaIzxW291miG2n1otDdoIyv96L8XMuoUP2CIakMClkTrA2f4KFQ061AAAA&shmds=v1_ARwrE21eddeE4ETKRbfQp09zj6ySpIC9-fB3MyfzKkEZzzn2DA&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=estagio+ti&htidocid=6oD2Gx6spdgzHRJdAAAAAA%3D%3D",
     "tecnologias": [
       "Redes de Computadores",
-      "Hardware"
+      "Hardware",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -18653,7 +18748,8 @@
       "Office 365",
       "Hardware",
       "Inglês",
-      "CFTV"
+      "CFTV",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -18812,7 +18908,10 @@
     "data_publicacao": "30/07/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2828070/analista-de-ciberseguranca-junior",
-    "tecnologias": []
+    "tecnologias": [
+      "Cibersegurança",
+      "Governança e Riscos (GRC)"
+    ]
   },
   {
     "id": 256,
@@ -18848,7 +18947,8 @@
       "Python",
       "JavaScript",
       "PHP",
-      "SQL"
+      "SQL",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -18978,7 +19078,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/auxiliar-de-tecnologia-da-informa%C3%A7%C3%A3o-at-dcco-4448437064",
     "tecnologias": [
-      "Redes de Computadores"
+      "Redes de Computadores",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -19165,7 +19266,9 @@
     "data_publicacao": "29/07/2026",
     "fonte": "serpapi",
     "url": "https://www.google.com/search?ibp=htl;jobs&q=suporte+tecnico+junior&htidocid=xJbEz3BECE00NlhGAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xXOsQrCMBRGYVz7CE53FmlEECFOToI4SOsuafqTVtLcmJtCX8nVV_DFbJezfqf4ropjPUZOGfT4fWzoLdN1DD0nTRHyHnsx1IIwxATHQoHpwuw81qcu5yhaKRFfOskm97a0PCgOaHhSL25kyVM6kxC9yXjuD7upjMFtdEWgG8XEFiJmQMi8OK1pFwQyD3m2xmu6z3dMZw-XsKWq_gOs3iaetQAAAA&shmds=v1_ARwrE23ZwTr1PxONdp2h9EZvLbbIkCjbpxHGc8b_bHzf3QZjHw&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=suporte+tecnico+junior&htidocid=xJbEz3BECE00NlhGAAAAAA%3D%3D",
-    "tecnologias": []
+    "tecnologias": [
+      "Help Desk"
+    ]
   },
   {
     "id": 872,
@@ -19253,7 +19356,9 @@
       "Hardware",
       "LGPD",
       "IAM",
-      "Jira"
+      "Jira",
+      "Help Desk",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -19829,7 +19934,9 @@
     "data_publicacao": "28/07/2026",
     "fonte": "gupy",
     "url": "https://flamengo.gupy.io/job/eyJqb2JJZCI6MTE4NDI3ODYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 595,
@@ -19902,8 +20009,9 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2827762/analista-de-ti-jr",
     "tecnologias": [
-      "LLM",
-      "LGPD"
+      "LGPD",
+      "LLMs & IA Generativa",
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -20351,7 +20459,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-suporte-n%C3%ADvel-1-at-jobbol-4446107823",
     "tecnologias": [
-      "ERP"
+      "ERP",
+      "Help Desk"
     ]
   },
   {
@@ -20496,7 +20605,9 @@
     "data_publicacao": "26/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-n2-presencial-em-porto-alegre-rs-at-andrade-maia-advogados-4456059494",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 1349,
@@ -20511,7 +20622,9 @@
     "data_publicacao": "26/07/2026",
     "fonte": "serpapi",
     "url": "https://www.google.com/search?ibp=htl;jobs&q=suporte+tecnico+junior&htidocid=Fl3Kqf3f9kCYMdaZAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_x2NsQrCMBBAce0nOJ2rQyKCS3RxKjiJha4lbY80cs3FXCr9Ghc_xR-zurzlwXvFa1WczsGSl2yhR6imyCkj3LBHgUsyEFEek5e_xTEmdCwQGEpmR7g-DjlHMVqLkHJLJftOdTxqDtjyrO_cyg-NDDZhJJux2R92s4rBbTe1fzLUfnkHlGVL3FkyUH3eDFc7EX8Bxb40CKEAAAA&shmds=v1_ARwrE23-VVB8XAWHaDBzbowjaEnCYXd2oa0Mm0-_REGiEP3YIA&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=suporte+tecnico+junior&htidocid=Fl3Kqf3f9kCYMdaZAAAAAA%3D%3D",
-    "tecnologias": []
+    "tecnologias": [
+      "Cibersegurança"
+    ]
   },
   {
     "id": 1345,
@@ -20657,7 +20770,9 @@
     "data_publicacao": "25/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-help-desk-j%C3%BAnior-a-at-antlia-4447792547",
-    "tecnologias": []
+    "tecnologias": [
+      "Help Desk"
+    ]
   },
   {
     "id": 1302,
@@ -20781,7 +20896,9 @@
     "data_publicacao": "24/07/2026",
     "fonte": "gupy",
     "url": "https://hapvidandi.gupy.io/job/eyJqb2JJZCI6MTE2NzUwNDYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 1870,
@@ -20841,7 +20958,9 @@
     "data_publicacao": "24/07/2026",
     "fonte": "gupy",
     "url": "https://confidencial72763.gupy.io/job/eyJqb2JJZCI6MTE2NDgzNDYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 1767,
@@ -20993,7 +21112,7 @@
     "url": "https://www.google.com/search?ibp=htl;jobs&q=trainee+tecnologia&htidocid=q5RyZC1wbk-dmRiEAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xWMMQ6CQBAAY8sTrDaxs-CMiYVYSSCG3p4ssDnOHLvn7Wn4jIVv8WNCM8UkM9lnk51rTWjd7xudwEDQXIGgwkG0gED6fDnF1dMUIllRYIGbiPW0vYwpBS2MUfW5XTbJ9XkvkxGmTmbzkE5XtDpipOAxUXs8HeY8sN3vmrq8Q8Ms76UTBiZNBF569AWUEdX5PzsvvwigAAAA&shmds=v1_ARwrE22QvUGU1lZqCVLMjFgGIQGPDO3XehhRtnZLEd1Yyskw7w&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=trainee+tecnologia&htidocid=q5RyZC1wbk-dmRiEAAAAAA%3D%3D",
     "tecnologias": [
       "Inteligência Artificial",
-      "Agentes de IA"
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -21042,7 +21161,8 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2827355/analista-de-segunraca-de-ti-junior",
     "tecnologias": [
-      "Pentest"
+      "Pentest",
+      "Cibersegurança"
     ]
   },
   {
@@ -21280,7 +21400,9 @@
     "data_publicacao": "23/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-help-desk-exclusiva-pcd-at-stoque-4444060038",
-    "tecnologias": []
+    "tecnologias": [
+      "Help Desk"
+    ]
   },
   {
     "id": 1856,
@@ -21518,7 +21640,8 @@
       "Redes de Computadores",
       "ITIL",
       "Office 365",
-      "Hardware"
+      "Hardware",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -21637,7 +21760,8 @@
       "OWASP",
       "Pentest",
       "Inglês",
-      "IoT"
+      "IoT",
+      "Cibersegurança"
     ]
   },
   {
@@ -21959,7 +22083,9 @@
     "data_publicacao": "22/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-suporte-n1-pcd-at-3am-it-services-4443723847",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 1903,
@@ -21974,7 +22100,9 @@
     "data_publicacao": "22/07/2026",
     "fonte": "gupy",
     "url": "https://alvoarlacteos.gupy.io/job/eyJqb2JJZCI6MTE3NDYwODksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 1784,
@@ -22141,7 +22269,8 @@
       "Windows",
       "ITIL",
       "Hardware",
-      "Inglês"
+      "Inglês",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -22206,8 +22335,10 @@
       "Python",
       "JavaScript",
       "Inteligência Artificial",
-      "Agentes de IA",
-      "Inglês"
+      "Inglês",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -22225,7 +22356,7 @@
     "url": "https://trampos.co/oportunidades/773874-estagiario-a-em-tecnologia",
     "tecnologias": [
       "Inteligência Artificial",
-      "Agentes de IA"
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -22750,7 +22881,8 @@
       "Windows",
       "ITIL",
       "Hardware",
-      "Inglês"
+      "Inglês",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -22770,7 +22902,8 @@
       "Windows",
       "ITIL",
       "Hardware",
-      "Inglês"
+      "Inglês",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -22790,7 +22923,8 @@
       "Windows",
       "ITIL",
       "Hardware",
-      "Inglês"
+      "Inglês",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -22908,7 +23042,9 @@
       "Postman",
       "API REST",
       "Scrum",
-      "Metodologias Ágeis"
+      "Metodologias Ágeis",
+      "LLMs & IA Generativa",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -23780,7 +23916,9 @@
     "data_publicacao": "15/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-grc-j%C3%BAnior-at-db1-group-4440736386",
-    "tecnologias": []
+    "tecnologias": [
+      "Governança e Riscos (GRC)"
+    ]
   },
   {
     "id": 1816,
@@ -24254,7 +24392,8 @@
     "tecnologias": [
       "Windows Server",
       "Windows",
-      "Hardware"
+      "Hardware",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -24330,7 +24469,9 @@
     "data_publicacao": "14/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-de-ti-at-maxsoy-alimentos-ltda-4440373020",
-    "tecnologias": []
+    "tecnologias": [
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 499,
@@ -24435,7 +24576,8 @@
       "Metodologias Ágeis",
       "ERP",
       "SAP",
-      "Jira"
+      "Jira",
+      "Help Desk"
     ]
   },
   {
@@ -24499,7 +24641,8 @@
     "tecnologias": [
       "Linux",
       "Windows",
-      "Metodologias Ágeis"
+      "Metodologias Ágeis",
+      "Help Desk"
     ]
   },
   {
@@ -24531,7 +24674,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n2-j%C3%BAnior-crm-espanhol-fluente-at-plusoft-4450008387",
     "tecnologias": [
-      "CRM"
+      "CRM",
+      "Suporte N1/N2"
     ]
   },
   {
@@ -25353,6 +25497,7 @@
     "fonte": "gupy",
     "url": "https://sidi.gupy.io/job/eyJqb2JJZCI6MTE2MDM1MTUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Machine Learning",
       "Inteligência Artificial"
     ]
   },
@@ -25400,7 +25545,8 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2824245/analista-junior-de-ti",
     "tecnologias": [
-      "VPN"
+      "VPN",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -25444,7 +25590,9 @@
       "Testes Automatizados",
       "API REST",
       "Scrum",
-      "Metodologias Ágeis"
+      "Metodologias Ágeis",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -26261,7 +26409,9 @@
     "data_publicacao": "30/06/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-junior-canasvieiras-at-sim-digital-florian%C3%B3polis-e-serra-ga%C3%BAcha-4434908585",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 583,
@@ -26387,7 +26537,9 @@
     "data_publicacao": "29/06/2026",
     "fonte": "gupy",
     "url": "https://verity.gupy.io/job/eyJqb2JJZCI6MTE1NTg1NjIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 548,
@@ -26497,7 +26649,8 @@
     "tecnologias": [
       "Windows",
       "Redes de Computadores",
-      "Hardware"
+      "Hardware",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -26576,7 +26729,9 @@
     "data_publicacao": "26/06/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2822673/analista-de-qualidade-junior",
-    "tecnologias": []
+    "tecnologias": [
+      "Governança e Riscos (GRC)"
+    ]
   },
   {
     "id": 1191,
@@ -26988,7 +27143,8 @@
       "Inteligência Artificial",
       "Inglês",
       "SAP",
-      "Automação Industrial"
+      "Automação Industrial",
+      "Cibersegurança"
     ]
   },
   {
@@ -27169,7 +27325,9 @@
     "data_publicacao": "22/06/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-de-sdr-em-ciberseguran%C3%A7a-vendas-6h-dia-at-excelo-tech-4430841528",
-    "tecnologias": []
+    "tecnologias": [
+      "Cibersegurança"
+    ]
   },
   {
     "id": 1226,
@@ -27294,7 +27452,9 @@
       "Java",
       "Machine Learning",
       "Inteligência Artificial",
-      "Inglês"
+      "Inglês",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -27326,7 +27486,8 @@
     "fonte": "gupy",
     "url": "https://viadeacesso.gupy.io/job/eyJqb2JJZCI6MTE1MTc5MjYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "LGPD"
+      "LGPD",
+      "Governança e Riscos (GRC)"
     ]
   },
   {
@@ -27491,6 +27652,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-vis%C3%A3o-computacional-e-automa%C3%A7%C3%A3o-at-exxata-4430148639",
     "tecnologias": [
+      "Machine Learning",
       "Inteligência Artificial"
     ]
   },
@@ -28019,7 +28181,8 @@
       "Redes de Computadores",
       "ITIL",
       "Zabbix",
-      "VMware"
+      "VMware",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -28454,7 +28617,9 @@
     "data_publicacao": "28/05/2026",
     "fonte": "gupy",
     "url": "https://orizon.gupy.io/job/eyJqb2JJZCI6MTEyOTY1MDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 1380,
@@ -28638,7 +28803,9 @@
     "data_publicacao": "25/05/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-turno-ferista-at-solor-4415255523",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 1705,
@@ -29144,7 +29311,9 @@
     "data_publicacao": "08/05/2026",
     "fonte": "gupy",
     "url": "https://aviator.gupy.io/job/eyJqb2JJZCI6MTEyNTU2NzYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
-    "tecnologias": []
+    "tecnologias": [
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 1543,
@@ -29160,7 +29329,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-ti-at-aviator-4411784318",
     "tecnologias": [
-      "Inglês"
+      "Inglês",
+      "Montagem e Manutenção de PCs",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -29326,7 +29497,9 @@
     "data_publicacao": "30/04/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/banco-de-talentos-jovem-aprendiz-em-ti-at-interop-4407607774",
-    "tecnologias": []
+    "tecnologias": [
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 391,
@@ -29759,7 +29932,9 @@
     "data_publicacao": "28/03/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-at-wtime-business-intelligence-4391239641",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte N1/N2"
+    ]
   },
   {
     "id": 1592,
@@ -29940,7 +30115,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-t%C3%A9cnico-j%C3%BAnior-at-pantheon-inc-4374316339",
     "tecnologias": [
-      "Excel"
+      "Excel",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -29956,7 +30132,9 @@
     "data_publicacao": "19/02/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-ti-at-locexpress-4375079064",
-    "tecnologias": []
+    "tecnologias": [
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 1536,
@@ -30448,7 +30626,8 @@
       "Active Directory",
       "Redes de Computadores",
       "Office 365",
-      "ERP"
+      "ERP",
+      "Help Desk"
     ]
   },
   {
@@ -30654,14 +30833,14 @@
     "fonte": "serpapi",
     "url": "https://www.google.com/search?ibp=htl;jobs&q=programador+junior&htidocid=vuqyXxWatl3Rcd5qAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_x2OsQrCUAxFcfUTnIKTCrYiuNSpDgpupU4uJdZQn6YvzyaF6qcJTv6Y1eVO53LO8D0YHlOP7NQQzgQHUiOFtDWp0dwTz6IwydIp7D8v76SBOWxbZsgNy1sCgfTeOv1_qQ4NVT3vBXYiFdNofTELmsSxKkdV7zBXRqXUsXg6SRdf5aS_KfSCDQVGo2K5WnRR8NVsnD_6mFrRemmWgv-1AUuJnMCmQXX8BeLLp43AAAAA&shmds=v1_ARwrE217B_mn6W9aFC6N_MiMUc5vWOCfSHH-miWpxTdffCv3OA&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=programador+junior&htidocid=vuqyXxWatl3Rcd5qAAAAAA%3D%3D",
     "tecnologias": [
-      "Agentes de IA",
       "Azure",
       "Git",
       "Playwright",
       "Testes Automatizados",
       "Testes Manuais",
       "Testes Funcionais",
-      "Testes de Regressão"
+      "Testes de Regressão",
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -30737,7 +30916,9 @@
     "data_publicacao": null,
     "fonte": "serpapi",
     "url": "https://www.google.com/search?ibp=htl;jobs&q=suporte+tecnico+junior&htidocid=v0j0x5-XoC-pYZHyAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xXNvwrCMBCAcVz7CE43d2hEEKROFUFb_AOte0nbI42muTMXoe_ji0qXb_kNX_JbJfsHY9ADBRgQLugYTihvqEIOjPL5WtGL4MQBDQl4gjORcbg-jDGy5EqJuMxI1NH2WU-TIo8dzepFnSxpZdQB2emI7Xa3mTP2Jk1v5b0pyicc66Ipr-BRIoKjXrscakvLs9IebaA_GT4yC6YAAAA&shmds=v1_ARwrE21o7yIAu6VnIQX9K4cWKwRBm-6-bW5kGgL1jEvjuqRJBw&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=suporte+tecnico+junior&htidocid=v0j0x5-XoC-pYZHyAAAAAA%3D%3D",
-    "tecnologias": []
+    "tecnologias": [
+      "Help Desk"
+    ]
   },
   {
     "id": 1095,
@@ -30979,7 +31160,8 @@
     "fonte": "serpapi",
     "url": "https://www.google.com/search?ibp=htl;jobs&q=suporte+tecnico+junior&htidocid=l2tWH5EJH0kJOTazAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_zWOMW7CQBBFlZYjpJoaIRuQ0jhKsZgVWoRjxzYSHVqWkTFa7yyetcR9qDgHd8h5AkWar6f3mj_6fRt91Y-7ca0hOCJUg6c-IJTYUSBY9wl45MvQsn5l7HyPDTE4ghVRY_H98xSC5ySOmW3UcNChNZGhLiaHB7rGZzrwa_Z80j16qwPu5x_Ta-RdM94tshks1UrVYgMqK_KyFqnIJ3L3jyAhzTNZpiqHpYRM_GzVt6ieWoJDfl61ZLRNoHrcCAo9WJpAVfwBmKZqAtkAAAA&shmds=v1_ARwrE20ubo6juFrlauTjAXRyKanaedGCgjqV4fvqPdLGsWonSQ&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=suporte+tecnico+junior&htidocid=l2tWH5EJH0kJOTazAAAAAA%3D%3D",
     "tecnologias": [
-      "Zendesk"
+      "Zendesk",
+      "Help Desk"
     ]
   },
   {
@@ -31091,7 +31273,8 @@
     "fonte": "serpapi",
     "url": "https://www.google.com/search?ibp=htl;jobs&q=estagio+tecnologia&htidocid=wXmGj7wPam9kknEvAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_yWOTQrCMBCFcesRBGHWLhoR3NSdUkRwIXqAMm3HGEkzMZNKr1NceJBewQPZUni8zcf7mf9m83cmse-0YfAYEK5UEQw6cO2biBUHEpU5Te6BwSBUCOWE-m__YXUzEqlGGTMnd-dQTyAFT_JqjOBIqPaBNAs4hiOztrTYPWL0kiolYhMtEaMpk6FasaOCW_XkQkbLZRgmbzFSvtmu28Q7vVqesjNcMPQdOBoOgOUSbQr7gGLsHydXyEDXAAAA&shmds=v1_ARwrE23lKxLqr1fjrweDSFhPkxmqa3VfhRu7KA3mLctQaGBXdA&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=estagio+tecnologia&htidocid=wXmGj7wPam9kknEvAAAAAA%3D%3D",
     "tecnologias": [
-      "Redes de Computadores"
+      "Redes de Computadores",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -31124,7 +31307,9 @@
     "data_publicacao": null,
     "fonte": "serpapi",
     "url": "https://www.google.com/search?ibp=htl;jobs&q=estagio+ti&htidocid=q4Z6744GMv5JdUDAAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_zWOMQrCQBAAsc0TrLawEkyCKErsBJXUipZhE9fLyV32vL1AviMWfsIuH9MUNlMNw0SfUXTZSeifSjOQhVMOBHDUEsiiwJUgb27sLfbv_sUwgzMqhEW6StcZOJJHqwUHjazzpFigYTgwK0PjTR2CkyxJREysJGDQVVyxTbihkrvkzqUMKKRGT85goGK-TLvYNWo62beh9Qj_uV-YflNguEKTwdajaPMFoVEPLr8AAAA&shmds=v1_ARwrE21gdcYn3Q0gyz5BKB9H2GFM8p0zEdZT-QdODv-kFutpbg&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=estagio+ti&htidocid=q4Z6744GMv5JdUDAAAAAAA%3D%3D",
-    "tecnologias": []
+    "tecnologias": [
+      "Montagem e Manutenção de PCs"
+    ]
   },
   {
     "id": 890,
@@ -31156,7 +31341,9 @@
     "data_publicacao": null,
     "fonte": "serpapi",
     "url": "https://www.google.com/search?ibp=htl;jobs&q=estagio+tecnologia&htidocid=0W7is6UokVZYCAF4AAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xWNMQrCMBRAce0RXPyzQyKCSxwEoXRzafeSxk8aSfNjfgq9jTh6jl7MdHnLg_eqz6661Zy1des3OYInQjtHShmhW38mOEMKIvJ7dqw3i1NMaIkhEDRE1uP-OuYcWUnJ7IUtseyMMDRJCjjQIl808IaeR50wep2xP19Oi4jBHg9NKj94dC0aCMhl7Mlor-CeNDv_B3Uz5gGiAAAA&shmds=v1_ARwrE21ox_d6ud26fV2u0wycd7iYMmTHP1BCHKBG_wE1T6RkSA&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=estagio+tecnologia&htidocid=0W7is6UokVZYCAF4AAAAAA%3D%3D",
-    "tecnologias": []
+    "tecnologias": [
+      "Cibersegurança"
+    ]
   },
   {
     "id": 874,
@@ -31314,14 +31501,14 @@
     "fonte": "serpapi",
     "url": "https://www.google.com/search?ibp=htl;jobs&q=desenvolvedor+junior&htidocid=vuqyXxWatl3Rcd5qAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_x2OsQrCUAxFcfUTnIKTCrYiuNSpDgpupU4uJdZQn6YvzyaF6qcJTv6Y1eVO53LO8D0YHlOP7NQQzgQHUiOFtDWp0dwTz6IwydIp7D8v76SBOWxbZsgNy1sCgfTeOv1_qQ4NVT3vBXYiFdNofTELmsSxKkdV7zBXRqXUsXg6SRdf5aS_KfSCDQVGo2K5WnRR8NVsnD_6mFrRemmWgv-1AUuJnMCmQXX8BeLLp43AAAAA&shmds=v1_ARwrE21zPnk9J9a_V5-oV6u065NxImMJAZRvulUhxB_WgtzVQg&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=desenvolvedor+junior&htidocid=vuqyXxWatl3Rcd5qAAAAAA%3D%3D",
     "tecnologias": [
-      "Agentes de IA",
       "Azure",
       "Git",
       "Playwright",
       "Testes Automatizados",
       "Testes Manuais",
       "Testes Funcionais",
-      "Testes de Regressão"
+      "Testes de Regressão",
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -31899,7 +32086,8 @@
       "SQL",
       "Node.js",
       "PostgreSQL",
-      "Estrutura de Dados"
+      "Estrutura de Dados",
+      "Help Desk"
     ]
   },
   {

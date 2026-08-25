@@ -123,13 +123,14 @@ dados_ia:
   Hadoop: [hadoop]
   BI: [business intelligence, ferramentas de bi]
   RPA: [rpa, robotic process automation, uipath, automation anywhere]
-  Machine Learning: [machine learning, aprendizado de maquina, ml]
+  Machine Learning: [machine learning, aprendizado de maquina, ml, visao computacional, nlp, processamento de linguagem natural]
   Inteligência Artificial: [inteligencia artificial, ia, artificial intelligence]
-  Agentes de IA: [agentes de ia, ai agents, agentes autonomos]
-  LLM: [llm, llms, large language model, genai, ia generativa, engenharia de prompts, prompt engineering]
-  LangChain: [langchain, lang chain, llamaindex]
-  Bancos Vetoriais: [pinecone, chromadb, chroma db, milvus, qdrant, vector database]
+  Copilots & Assistentes de IA: [copilot, github copilot, cursor, claude code, codex, tabnine, chatgpt, ferramentas de ia]
+  LLMs & IA Generativa: [llm, llms, large language model, genai, ia generativa, engenharia de prompts, prompt engineering, openai, claude, gemini, ollama, hugging face]
+  Agentes de IA & RAG: [agentes de ia, ai agents, agentes autonomos, ia agentica, rag, retrieval augmented generation, langchain, lang chain, llamaindex, crewai, autogen]
+  Bancos Vetoriais: [pinecone, chromadb, chroma db, milvus, qdrant, vector database, embeddings]
   Estatística: [estatistica, analise estatistica]
+
 
 bancos:
   PostgreSQL: [postgresql, postgres, pgsql]
