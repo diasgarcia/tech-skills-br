@@ -155,17 +155,22 @@ def importar(
                 if not source or not external_id or not (linha.get("title") or "").strip():
                     continue
 
+                url_csv = (linha.get("url") or "").strip()
                 vaga = db.scalar(
                     select(Vaga).where(
                         Vaga.source == source, Vaga.external_id == external_id
                     )
                 )
+                if vaga is None and url_csv:
+                    vaga = db.scalar(select(Vaga).where(Vaga.url == url_csv))
+
                 if vaga is None:
                     vaga = Vaga(source=source, external_id=external_id)
                     db.add(vaga)
                     criadas += 1
                 else:
                     atualizadas += 1
+
 
                 for campo in CAMPOS_TEXTO:
                     setattr(vaga, campo, (linha.get(campo) or "").strip() or None)
