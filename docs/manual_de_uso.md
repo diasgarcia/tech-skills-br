@@ -149,10 +149,55 @@ Uso: python scripts/report_db.py [OPÇÕES]
 | :--- | :--- | :--- | :--- |
 | **`--db`** | String | `data/vagas.db` | Caminho do banco SQLite ou URL do PostgreSQL. |
 | **`--no-export`** | Flag | `False` | Apenas exibe o resumo no terminal, sem salvar o arquivo `.md` em `output/`. |
+| **`--no-charts`** | Flag | `False` | Não gera os gráficos PNG analíticos. |
 
 #### Exemplo de Uso:
 ```powershell
 python scripts/report_db.py
+```
+
+---
+
+### 4. `scripts/export_pages_data.py` (Exportação da API Estática do Pages)
+
+Gera os arquivos JSON públicos que alimentam o site e servem como endpoints HTTP no GitHub Pages:
+
+```powershell
+python scripts/export_pages_data.py
+```
+
+> 💡 **Nota:** O `scripts/import_csv.py` e o `scripts/report_db.py` já executam este comando automaticamente ao final de suas execuções!
+
+---
+
+## 🌐 Consumo da API JSON Estática (GitHub Pages)
+
+Os dados consolidados da pesquisa são servidos gratuitamente com **CORS liberado** na URL pública:
+`https://diasgarcia.github.io/tech-skills-br/`
+
+### Endpoints Disponíveis:
+
+| Endpoint | O que retorna | URL Pública |
+| :--- | :--- | :--- |
+| **`/api/resumo.json`** | KPIs, metadados, distribuições e comparativo PIBIC | `https://diasgarcia.github.io/tech-skills-br/api/resumo.json` |
+| **`/api/areas.json`** | Ranking consolidado das 17 áreas técnicas | `https://diasgarcia.github.io/tech-skills-br/api/areas.json` |
+| **`/api/tecnologias.json`** | Ranking de todas as tecnologias e grupos | `https://diasgarcia.github.io/tech-skills-br/api/tecnologias.json` |
+| **`/api/vagas.json`** | Base completa das 1.662 vagas estruturadas | `https://diasgarcia.github.io/tech-skills-br/api/vagas.json` |
+
+### Exemplos de Consumo:
+
+#### A. No Postman / cURL:
+```powershell
+curl -s https://diasgarcia.github.io/tech-skills-br/api/areas.json
+```
+
+#### B. Em Python (`requests`):
+```python
+import requests
+
+res = requests.get("https://diasgarcia.github.io/tech-skills-br/api/resumo.json")
+dados = res.json()
+print(f"Total de Vagas: {dados['metadados']['total_vagas']}")
 ```
 
 ---
@@ -171,12 +216,12 @@ python scripts/report_db.py
 ```sql
 SELECT 
     t.nome AS tecnologia,
-    t.categoria,
+    t.grupo,
     COUNT(vt.vaga_id) AS total_vagas,
     ROUND(COUNT(vt.vaga_id) * 100.0 / (SELECT COUNT(*) FROM vagas), 1) AS percentual_vagas
 FROM tecnologias t
 JOIN vaga_tecnologia vt ON t.id = vt.tecnologia_id
-GROUP BY t.nome, t.categoria
+GROUP BY t.nome, t.grupo
 ORDER BY total_vagas DESC
 LIMIT 20;
 ```
@@ -208,7 +253,7 @@ LIMIT 15;
 
 ---
 
-## 🌐 Executando a API REST Localmente
+## 🚀 Executando a API REST Localmente (FastAPI)
 
 Para iniciar o servidor FastAPI e navegar pela documentação interativa (Swagger UI):
 
@@ -218,12 +263,11 @@ uvicorn api.app:app --reload
 
 Acesse no navegador: **[http://localhost:8000/docs](http://localhost:8000/docs)**.
 
-
 ---
 
 ## 🧪 Executando os Testes Automatizados
 
-O projeto possui uma suíte com **mais de 260 testes unitários automatizados** cobrindo classificadores, coletores, expressões regulares e banco de dados:
+O projeto possui uma suíte com **mais de 270 testes unitários automatizados** cobrindo classificadores, coletores, expressões regulares e banco de dados:
 
 ```powershell
 pytest
@@ -234,4 +278,5 @@ pytest
 ## 🤝 Créditos e Agradecimentos
 
 Este projeto foi construído e expandido a partir da concepção original do repositório [**vagas-tech-junior**](https://github.com/EmidioLP/vagas-tech-junior), de autoria de **Emidio Lopes de Souza Neto** ([GitHub](https://github.com/EmidioLP) / [LinkedIn](https://www.linkedin.com/in/emidio-lopes/)).
+
 
