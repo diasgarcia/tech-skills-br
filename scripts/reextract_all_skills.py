@@ -17,10 +17,20 @@ extractor = SkillExtractor(rules)
 conn = sqlite3.connect(PROJECT_ROOT / "data" / "vagas.db")
 c = conn.cursor()
 
+# Garante que todas as tecnologias de skills.yml existam na tabela
+c.execute("SELECT nome FROM tecnologias")
+existentes = {nome.lower() for (nome,) in c.fetchall()}
+for group, entries in rules.items():
+    for name in entries:
+        if name.lower() not in existentes:
+            c.execute("INSERT INTO tecnologias (nome, grupo) VALUES (?, ?)", (name, group))
+conn.commit()
+
 c.execute("SELECT id, nome FROM tecnologias")
 tech_map = {nome.lower(): tid for tid, nome in c.fetchall()}
 
 c.execute("DELETE FROM vaga_tecnologia")
+
 
 c.execute("SELECT id, title, description FROM vagas")
 rows = c.fetchall()
