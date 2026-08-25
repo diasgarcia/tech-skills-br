@@ -97,9 +97,22 @@ python scripts/report_db.py
 
 ---
 
-## API REST & Painel Interativo
+## 🌐 Site Público & API JSON Estática (GitHub Pages)
 
-O projeto disponibiliza uma API REST construída com **FastAPI** e **SQLAlchemy 2.0** para consumo dos dados em pesquisas acadêmicas:
+O projeto disponibiliza um painel web *roots* (minimalista e instantâneo) e uma **API JSON estática pública com CORS liberado** hospedada no GitHub Pages:
+
+- **Dashboard Web Roots:** **[https://diasgarcia.github.io/tech-skills-br/](https://diasgarcia.github.io/tech-skills-br/)**
+- **Endpoints Públicos (Prontos para Postman, Python, cURL e Power BI):**
+  - `GET https://diasgarcia.github.io/tech-skills-br/api/resumo.json` $\rightarrow$ Metadados gerais, KPIs e distribuições
+  - `GET https://diasgarcia.github.io/tech-skills-br/api/areas.json` $\rightarrow$ Ranking das 17 áreas técnicas
+  - `GET https://diasgarcia.github.io/tech-skills-br/api/tecnologias.json` $\rightarrow$ Ranking de tecnologias demandadas
+  - `GET https://diasgarcia.github.io/tech-skills-br/api/vagas.json` $\rightarrow$ Base completa com as 1.662 vagas estruturadas
+
+---
+
+## 🚀 API REST Local (FastAPI)
+
+Para consultas avançadas e filtros dinâmicos via backend relacional local:
 
 ```powershell
 uvicorn api.app:app --reload
@@ -107,40 +120,35 @@ uvicorn api.app:app --reload
 
 Acesse a documentação interativa no navegador: **[http://localhost:8000/docs](http://localhost:8000/docs)**.
 
-### Endpoints Principais:
-
-- `GET /vagas`: Listagem paginada de vagas com filtros por área, modalidade, polo e tecnologia.
-- `GET /tecnologias`: Ranking de tecnologias com contagem de vagas associadas.
-- `GET /areas`: Distribuição das vagas por área de especialidade.
-- `GET /estatisticas`: Resumo quantitativo global da base de dados.
-
 ---
 
 ## Estrutura do Repositório
 
 ```text
 tech-skills-br/
-├── api/                   		# API FastAPI (endpoints, modelos ORM, schemas Pydantic)
-│   ├── database.py        		# Configuração SQLAlchemy (SQLite / PostgreSQL)
-│   ├── models.py          		# Modelos de dados (Vaga, Tecnologia, VagaTecnologia)
-│   └── routes/            		# Rotas da API REST
-├── data/                  		# Base de dados local (vagas.db)
-├── docs/                  		# Documentação acadêmica e manuais
-│   ├── arquitetura_tecnica.md 	# Especificação técnica da arquitetura e créditos
-│   ├── manual_de_uso.md   		# Guia detalhado de todos os comandos e parâmetros
-│   └── relatorios/        		# Relatório consolidado e gráficos analíticos PNG
-
-├── output/                		# Relatórios em Markdown, rankings CSV e gráficos PNG
-├── scraper/               		# Mecanismo de mineração e processamento de dados
-│   ├── classifier.py      		# Classificador de áreas de tecnologia
-│   ├── dedupe.py          		# Deduplicação cruzada entre portais
-│   ├── geo.py             		# Classificador geográfico de polos e regiões
-│   ├── skills.py          		# Extrator de tecnologias (taxonomia curada)
-│   ├── rules/             		# Regras declarativas em YAML (skills, áreas, polos)
-│   └── sources/           		# Implementação dos coletores por portal / API
-├── scripts/               		# Ferramentas de CLI
-│   ├── import_csv.py      		# Importação e consolidação idempotente no banco
-│   └── report_db.py       		# Emissão de relatório estatístico do banco
-├── seed/                  		# Snapshot de dados versionado para reprodutibilidade
-└── tests/                 		# Suíte com +260 testes automatizados (pytest)
+├── .github/workflows/     # Automação de CI e coleta diária de segunda a sexta (GitHub Actions)
+├── api/                   # API FastAPI (endpoints, modelos ORM, schemas Pydantic)
+├── data/                  # Base de dados local SQLite (vagas.db)
+├── docs/                  # Site roots, API estática e documentação acadêmica
+│   ├── api/               # Endpoints estáticos JSON (resumo, vagas, areas, tecnologias)
+│   ├── index.html         # Frontend roots minimalista do GitHub Pages
+│   ├── manual_de_uso.md   # Guia detalhado de todos os comandos e parâmetros
+│   ├── arquitetura_tecnica.md # Especificação técnica da arquitetura
+│   └── relatorios/        # Relatório consolidado e gráficos analíticos PNG
+├── output/                # Relatórios em Markdown, rankings CSV e gráficos PNG
+├── scraper/               # Mecanismo de mineração e processamento de dados
+│   ├── classifier.py      # Classificador de 17 áreas de tecnologia
+│   ├── dedupe.py          # Deduplicação canônica por URL e identidade de empresa
+│   ├── geo.py             # Classificador geográfico (27 capitais + 350 polos)
+│   ├── skills.py          # Extrator de tecnologias (taxonomia curada com +200 skills)
+│   ├── rules/             # Regras declarativas em YAML (skills, áreas, localizações)
+│   └── sources/           # Implementação dos coletores por portal / API
+├── scripts/               # Ferramentas de CLI
+│   ├── import_csv.py      # Importação, deduplicação e enriquecimento no banco
+│   ├── export_seed.py     # Exportação do snapshot consolidado para seed/vagas.csv
+│   ├── export_pages_data.py # Geração dos endpoints JSON estáticos para docs/api/
+│   └── report_db.py       # Emissão de relatório estatístico e gráficos PNG
+├── seed/                  # Snapshot de dados versionado para reprodutibilidade (seed/vagas.csv)
+└── tests/                 # Suíte com +270 testes automatizados (pytest)
 ```
+
