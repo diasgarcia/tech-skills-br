@@ -21,9 +21,11 @@ if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
 from sqlalchemy import func, select
+from sqlalchemy.orm import Session
 
-from api.database import SessionLocal, init_db
+from api.database import init_db, make_engine
 from api.models import Tecnologia, Vaga, vaga_tecnologia
+
 from scraper.config import PROJECT_ROOT
 
 PAGES_API_DIR = PROJECT_ROOT / ".github" / "pages" / "api"
@@ -32,18 +34,23 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)-7s %(message)s")
 logger = logging.getLogger(__name__)
 
 
-def export_all_pages_data(output_dir: Path | None = None) -> dict[str, Path]:
+def export_all_pages_data(
+    output_dir: Path | None = None, db_path: str | Path | None = None
+) -> dict[str, Path]:
     """Exporta todos os endpoints JSON para `.github/pages/api/`."""
     out_dir = output_dir or PAGES_API_DIR
 
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    init_db()
-    with SessionLocal() as db:
+    eng = make_engine(db_path)
+    init_db(eng)
+    with Session(eng) as db:
         total_vagas = db.scalar(select(func.count(Vaga.id))) or 0
+
         if total_vagas == 0:
             logger.warning("Nenhuma vaga encontrada no banco para exportar.")
             return {}
+
 
         total_empresas = db.scalar(
             select(func.count(func.distinct(Vaga.company))).where(Vaga.company.isnot(None))
