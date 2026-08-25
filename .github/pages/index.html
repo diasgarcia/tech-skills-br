@@ -177,6 +177,8 @@
       gap: 8px;
     }
 
+    .show-mobile { display: none; }
+
     /* RESPONSIVIDADE MOBILE ROOTS (ENCAIXA SEM ROLAGEM) */
     @media (max-width: 768px) {
       body { padding: 10px; font-size: 12px; }
@@ -192,7 +194,9 @@
 
       /* Oculta colunas secundárias para caber 100% na largura do celular */
       .hide-mobile { display: none !important; }
+      .show-mobile { display: block !important; }
     }
+
 
     @media (max-width: 420px) {
       .grid-kpi { grid-template-columns: 1fr; }
@@ -326,9 +330,10 @@
       <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;" id="vagas-count-info"></p>
 
       <table id="table-vagas">
-        <thead><tr><th class="hide-mobile" style="width: 45px;">ID</th><th>Título</th><th>Empresa</th><th class="hide-mobile">Área</th><th>Local / Mod.</th><th style="text-align: center; width: 45px;">Link</th></tr></thead>
+        <thead><tr><th>Título da Vaga</th><th class="hide-mobile">Empresa</th><th class="hide-mobile">Área</th><th>Local / Mod.</th></tr></thead>
         <tbody></tbody>
       </table>
+
     </div>
   </div>
 
@@ -579,19 +584,23 @@ function renderVagasTable() {
 
   items.slice(0, 50).forEach(v => {
     const tr = document.createElement("tr");
-    const linkHtml = v.url ? `<a href="${v.url}" target="_blank" rel="noopener noreferrer" title="Abrir vaga" style="font-size: 14px; text-decoration: none;">↗</a>` : "-";
+    const tituloHtml = v.url 
+      ? `<a href="${v.url}" target="_blank" rel="noopener noreferrer" style="color: var(--accent); font-weight: 700; text-decoration: none;">${v.titulo} <span style="font-size: 11px; opacity: 0.8;">↗</span></a>`
+      : `<strong>${v.titulo}</strong>`;
 
     tr.innerHTML = `
-      <td class="hide-mobile" style="color: var(--text-muted);">${v.id}</td>
-      <td><strong>${v.titulo}</strong></td>
-      <td>${v.empresa}</td>
+      <td>
+        ${tituloHtml}
+        <div class="show-mobile" style="color: var(--text-muted); font-size: 11px; margin-top: 2px;">${v.empresa}</div>
+      </td>
+      <td class="hide-mobile">${v.empresa}</td>
       <td class="hide-mobile"><span class="badge">${v.area}</span></td>
       <td>${v.polo || v.localidade} &middot; <em style="color: var(--text-muted);">${v.modalidade}</em></td>
-      <td style="text-align: center;">${linkHtml}</td>
     `;
     tbody.appendChild(tr);
   });
 }
+
 </script>
 
 </body>
