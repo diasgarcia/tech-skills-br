@@ -1,0 +1,126 @@
+"""Enriquecedor de descricoes e tecnologias para vagas do LinkedIn."""
+
+import logging
+import sqlite3
+import sys
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
+
+import requests
+from bs4 import BeautifulSoup
+import yaml
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from api.database import SessionLocal, init_db
+from api.models import Tecnologia, Vaga, vaga_tecnologia
+from scraper.config import RULES_DIR, USER_AGENT
+from scraper.skills import SkillExtractor
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)-7s %(message)s")
+logger = logging.getLogger("enrich")
+
+DETAIL_API_URL = "https://www.linkedin.com/jobs-guest/jobs/api/jobPosting/{job_id}"
+HEADERS = {
+    "User-Agent": USER_AGENT,
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    "Accept-Language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+}
+
+
+def fetch_one_description(job_id: str) -> tuple[str, str]:
+    url = DETAIL_API_URL.format(job_id=job_id)
+    try:
+        with requests.Session() as s:
+            r = s.get(url, headers=HEADERS, timeout=15)
+            if r.status_code == 200:
+                soup = BeautifulSoup(r.text, "html.parser")
+                el = soup.select_one(".show-more-less-html__markup, .description__text")
+                if el:
+                    return job_id, el.get_text(" ", strip=True)
+            elif r.status_code == 429:
+                time.sleep(1.5)
+    except Exception as e:
+        logger.debug("Erro ao buscar job %s: %s", job_id, e)
+    return job_id, ""
+
+
+
+def enrich_linkedin_jobs(limit: int | None = None, max_workers: int = 6):
+    init_db()
+    with open(RULES_DIR / "skills.yml", encoding="utf-8") as fh:
+        rules = yaml.safe_load(fh) or {}
+    extractor = SkillExtractor(rules)
+
+    conn = sqlite3.connect(PROJECT_ROOT / "data" / "vagas.db")
+    c = conn.cursor()
+
+    query = """
+        SELECT id, external_id, title, url
+        FROM vagas
+        WHERE source = 'linkedin'
+          AND (description IS NULL OR LENGTH(description) < 30)
+    """
+    if limit:
+        query += f" LIMIT {limit}"
+
+    c.execute(query)
+    jobs_to_enrich = c.fetchall()
+    logger.info("Total de vagas do LinkedIn para enriquecer: %d", len(jobs_to_enrich))
+
+    if not jobs_to_enrich:
+        logger.info("Nenhuma vaga pendente de enriquecimento.")
+        return
+
+    # Buscar todas as tecnologias do banco para mapear id por nome
+    c.execute("SELECT id, nome FROM tecnologias")
+    tech_map = {nome.lower(): tid for tid, nome in c.fetchall()}
+    enriched_count = 0
+
+    with ThreadPoolExecutor(max_workers=max_workers) as pool:
+
+
+        futures = {
+            pool.submit(fetch_one_description, ext_id): (db_id, ext_id, title)
+            for db_id, ext_id, title, url in jobs_to_enrich
+        }
+
+
+        for future in as_completed(futures):
+            db_id, ext_id, title = futures[future]
+            try:
+                _, desc = future.result()
+                if desc:
+                    # 1. Atualiza descricao no banco
+                    c.execute("UPDATE vagas SET description = ? WHERE id = ?", (desc, db_id))
+
+                    # 2. Extrai novas habilidades
+                    full_text = f"{title} {desc}"
+                    extracted_skills = extractor.extract(full_text)
+
+                    # 3. Atualiza relacionamentos em vaga_tecnologia
+                    for s in extracted_skills:
+                        tid = tech_map.get(s.lower())
+                        if tid:
+                            c.execute(
+                                "INSERT OR IGNORE INTO vaga_tecnologia (vaga_id, tecnologia_id) VALUES (?, ?)",
+                                (db_id, tid),
+                            )
+
+                    enriched_count += 1
+                    if enriched_count % 25 == 0:
+                        conn.commit()
+                        logger.info("Enriquecidas %d / %d vagas...", enriched_count, len(jobs_to_enrich))
+            except Exception as e:
+                logger.warning("Falha ao processar job %s: %s", ext_id, e)
+
+    conn.commit()
+    conn.close()
+    logger.info("Enriquecimento concluido com sucesso: %d vagas enriquecidas!", enriched_count)
+
+
+if __name__ == "__main__":
+    enrich_linkedin_jobs()
