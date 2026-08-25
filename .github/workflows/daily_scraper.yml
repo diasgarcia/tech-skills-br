@@ -1,4 +1,4 @@
-﻿name: Coleta Diaria de Vagas (PIBIC)
+name: Coleta Diaria de Vagas (PIBIC)
 
 on:
   schedule:
@@ -36,11 +36,16 @@ jobs:
       env:
         PYTHONPATH: .
 
-    - name: 5. Consolidar no banco e atualizar snapshot seed e relatorios
+    - name: 5. Carregar historico, consolidar novas vagas e atualizar snapshot
       run: |
+        # 1. Carrega o snapshot historico versionado no banco SQLite do runner:
+        python scripts/import_csv.py --csv seed/vagas.csv
+        # 2. Faz o UPSERT incremental das novas vagas mineradas na rodada:
         python scripts/import_csv.py
+        # 3. Exporta a base acumulada e regenera os relatorios e graficos:
         python scripts/export_seed.py
         python scripts/report_db.py
+
 
     - name: 6. Comitar e enviar dados atualizados para o GitHub
       run: |
