@@ -5,10 +5,11 @@ from __future__ import annotations
 from api import vocabulary
 
 
-def test_lista_as_dez_areas(client):
+def test_lista_as_areas(client):
     corpo = client.get("/areas").json()
-    assert len(corpo) == len(vocabulary.areas()) == 10
+    assert len(corpo) == len(vocabulary.areas()) == 12
     assert {a["area"] for a in corpo} == set(vocabulary.areas())
+
 
 
 def test_areas_ordenadas_por_quantidade(client):

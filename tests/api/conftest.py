@@ -79,10 +79,11 @@ def seed(db_session):
         Vaga(
             source="vagas", external_id="2002",
             title="Estágio em Suporte Técnico", company="Umbrella",
-            area="Suporte/Infra", seniority="Estágio", location="Curitiba / PR",
+            area="Suporte Técnico", seniority="Estágio", location="Curitiba / PR",
             workplace_type="Não informado", published_date=None,
             url="https://exemplo.test/2002", description="Atendimento e chamados.",
         ),
+
     ])
     db_session.commit()
     return db_session
