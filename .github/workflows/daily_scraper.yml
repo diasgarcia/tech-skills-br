@@ -1,0 +1,52 @@
+﻿name: Coleta Diaria de Vagas (PIBIC)
+
+on:
+  schedule:
+    # Executa todos os dias as 09:00 BRT (12:00 UTC):
+    - cron: '0 12 * * *'
+  # Permite disparo manual com 1 clique pelo navegador:
+  workflow_dispatch:
+
+jobs:
+  scrape-and-update:
+    name: Mineracao e Consolidacao de Vagas
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # Permite que o bot do GitHub commite as novas vagas
+
+    steps:
+    - name: 1. Baixar repositorio
+      uses: actions/checkout@v4
+
+    - name: 2. Configurar Python 3.12
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+        cache: 'pip'
+
+    - name: 3. Instalar dependencias
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: 4. Executar rodada comum gratuita (Gupy, LinkedIn, Vagas, ProgramaThor, Trampos)
+      run: |
+        python main.py
+      env:
+        PYTHONPATH: .
+
+    - name: 5. Consolidar no banco e atualizar snapshot seed e relatorios
+      run: |
+        python scripts/import_csv.py
+        python scripts/export_seed.py
+        python scripts/report_db.py
+
+    - name: 6. Comitar e enviar dados atualizados para o GitHub
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add seed/vagas.csv docs/relatorios/
+        
+        DATA_HOJE=$(date +'%d/%m/%Y')
+        git diff --quiet && git diff --staged --quiet || (git commit -m "chore(data): coleta automatizada de vagas [${DATA_HOJE}] [skip ci]" && git push)
