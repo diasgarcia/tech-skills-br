@@ -83,6 +83,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Nao gera os graficos PNG (util se matplotlib nao estiver instalado).",
     )
     parser.add_argument(
+        "--no-enrich", action="store_true",
+        help="Nao busca descricoes do LinkedIn durante a coleta (o enriquecimento "
+             "fica para scripts/enrich_descriptions.py, so para vagas pendentes).",
+    )
+    parser.add_argument(
         "-v", "--verbose", action="store_true", help="Log detalhado (DEBUG)."
     )
     return parser
@@ -107,6 +112,7 @@ def main(argv: list[str] | None = None) -> int:
         start_page=max(1, args.start_page),
         max_pages_per_term=args.max_pages,
         only_junior=not args.all_levels,
+        enrich_linkedin=not args.no_enrich,
     )
 
 
