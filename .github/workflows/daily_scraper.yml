@@ -2,13 +2,20 @@ name: Coleta Diaria de Vagas (PIBIC)
 
 on:
   schedule:
-    # Executa de Segunda a Sexta-feira as 19:16 BRT (22:16 UTC):
+    # Executa de Segunda a Sexta-feira em 3 horarios BRT:
+    # 09:16 BRT (12:16 UTC), 14:16 BRT (17:16 UTC) e 19:16 BRT (22:16 UTC).
+    - cron: '16 12 * * 1-5'
+    - cron: '16 17 * * 1-5'
     - cron: '16 22 * * 1-5'
 
 
 
   # Permite disparo manual com 1 clique pelo navegador:
   workflow_dispatch:
+
+concurrency:
+  group: coleta-diaria
+  cancel-in-progress: false
 
 jobs:
   scrape-and-update:
@@ -39,7 +46,9 @@ jobs:
 
     - name: 4. Executar rodada comum gratuita (Gupy, LinkedIn, Vagas, ProgramaThor, Trampos)
       run: |
-        python main.py
+        # Sem enriquecimento de descricoes aqui: ele roda no passo 6, so para
+        # vagas pendentes, evitando refazer requests de vagas ja salvas.
+        python main.py --max-pages 10 --delay 2 --no-enrich
       env:
         PYTHONPATH: .
 
@@ -49,10 +58,12 @@ jobs:
         python scripts/import_csv.py --csv seed/vagas.csv
         # 2. Faz o UPSERT incremental das novas vagas mineradas na rodada:
         python scripts/import_csv.py
-        # 3. Exporta a base acumulada e regenera os relatorios e graficos:
+        # 3. Busca descricoes apenas das vagas do LinkedIn ainda pendentes:
+        python scripts/enrich_descriptions.py
+        # 4. Exporta a base acumulada e regenera os relatorios e graficos:
         python scripts/export_seed.py
         python scripts/report_db.py
-        # 4. Exporta os endpoints JSON da API estatica para .github/pages/api:
+        # 5. Exporta os endpoints JSON da API estatica para .github/pages/api:
         python scripts/export_pages_data.py
 
     - name: 6. Comitar e enviar dados atualizados para o GitHub
