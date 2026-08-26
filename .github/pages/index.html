@@ -427,7 +427,7 @@ let resumoData = null;
 let tecnologiasData = [];
 let areasData = [];
 let vagasData = [];
-let currentArea = "Backend";
+let currentArea = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
@@ -443,6 +443,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     areasData = resAreas;
     vagasData = resVagas;
 
+    if (areasData && areasData.length > 0) {
+      currentArea = areasData[0].area;
+    }
+
     initKPIs();
     renderSummaryTables();
     renderSkillsTable();
@@ -452,6 +456,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Erro ao carregar dados da API estática:", err);
   }
 });
+
 
 function setTab(tabId) {
   document.querySelectorAll(".tab-section").forEach(el => el.classList.remove("active"));
@@ -562,7 +567,11 @@ function renderSkillsTable() {
 }
 
 function initAreaPills() {
+  if (!currentArea && areasData && areasData.length > 0) {
+    currentArea = areasData[0].area;
+  }
   const container = document.getElementById("area-pills-container");
+
   container.innerHTML = "";
 
   areasData.forEach(a => {
