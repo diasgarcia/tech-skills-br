@@ -176,35 +176,7 @@ def export_all_pages_data(
                 ]
             }
 
-        # 5. Comparativo Acadêmico PIBIC
-        academic_categories = {
-            "Fundamentos Tradicionais (Ensinado no Currículo)": [
-                "SQL", "Java", "Python", "C#", "C++", "Redes/TCP-IP",
-                "Algoritmos", "Estrutura de Dados", "POO", "Linux"
-            ],
-            "Gaps de Mercado (Alta Demanda, Pouco Ensinado)": [
-                "Git", "Docker", "React", "Node.js", "API REST", "Metodologias Ágeis",
-                "AWS", "Azure", "Kubernetes", "CI/CD", "TypeScript"
-            ],
-            "Tendências Emergentes": [
-                "Inteligência Artificial", "Power BI", "Figma", "Databricks",
-                "Machine Learning", "Segurança da Informação", "FastAPI"
-            ]
-        }
-        tech_lookup = {s["nome"]: s for s in tecnologias_payload}
-        academic_comparison = {}
-        for cat_name, tech_list in academic_categories.items():
-            academic_comparison[cat_name] = []
-            for t_name in tech_list:
-                info = tech_lookup.get(t_name)
-                academic_comparison[cat_name].append({
-                    "nome": t_name,
-                    "vagas": info["vagas"] if info else 0,
-                    "percentual": info["percentual_total"] if info else 0.0,
-                    "grupo": info["grupo"] if info else "Outros"
-                })
-
-        # 6. Payload de Resumo
+        # 5. Payload de Resumo
         resumo_payload = {
             "metadados": {
                 "total_vagas": total_vagas,
@@ -223,10 +195,10 @@ def export_all_pages_data(
             "regioes": regioes,
             "polos": polos,
             "skills_by_area": skills_by_area,
-            "comparativo_academico": academic_comparison
         }
 
-        # 7. Payload de Vagas (Lista enxuta e estruturada)
+
+        # 6. Payload de Vagas (Lista enxuta e estruturada)
         vagas_db = db.execute(
             select(Vaga).order_by(Vaga.published_date.desc().nullslast(), Vaga.id.desc())
         ).scalars().all()

@@ -505,14 +505,6 @@
   },
   {
     "posicao": 64,
-    "nome": "Governança e Riscos (GRC)",
-    "grupo": "seguranca",
-    "vagas": 15,
-    "percentual_total": 0.7,
-    "percentual_base_tech": 1.8
-  },
-  {
-    "posicao": 65,
     "nome": "POO",
     "grupo": "engenharia_praticas",
     "vagas": 15,
@@ -520,15 +512,15 @@
     "percentual_base_tech": 1.8
   },
   {
-    "posicao": 66,
-    "nome": "Agentes de IA & RAG",
-    "grupo": "inteligencia_artificial",
-    "vagas": 14,
+    "posicao": 65,
+    "nome": "Governança e Riscos (GRC)",
+    "grupo": "seguranca",
+    "vagas": 15,
     "percentual_total": 0.7,
-    "percentual_base_tech": 1.7
+    "percentual_base_tech": 1.8
   },
   {
-    "posicao": 67,
+    "posicao": 66,
     "nome": "Criptografia",
     "grupo": "seguranca",
     "vagas": 14,
@@ -536,7 +528,7 @@
     "percentual_base_tech": 1.7
   },
   {
-    "posicao": 68,
+    "posicao": 67,
     "nome": "Modelagem de Dados",
     "grupo": "engenharia_praticas",
     "vagas": 14,
@@ -544,9 +536,17 @@
     "percentual_base_tech": 1.7
   },
   {
-    "posicao": 69,
+    "posicao": 68,
     "nome": "Jira",
     "grupo": "engenharia_praticas",
+    "vagas": 14,
+    "percentual_total": 0.7,
+    "percentual_base_tech": 1.7
+  },
+  {
+    "posicao": 69,
+    "nome": "Agentes de IA & RAG",
+    "grupo": "inteligencia_artificial",
     "vagas": 14,
     "percentual_total": 0.7,
     "percentual_base_tech": 1.7
@@ -1361,38 +1361,6 @@
   },
   {
     "posicao": 171,
-    "nome": "dbt",
-    "grupo": "dados",
-    "vagas": 1,
-    "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
-  },
-  {
-    "posicao": 172,
-    "nome": "Looker",
-    "grupo": "dados",
-    "vagas": 1,
-    "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
-  },
-  {
-    "posicao": 173,
-    "nome": "Snowflake",
-    "grupo": "dados",
-    "vagas": 1,
-    "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
-  },
-  {
-    "posicao": 174,
-    "nome": "Bancos Vetoriais",
-    "grupo": "inteligencia_artificial",
-    "vagas": 1,
-    "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
-  },
-  {
-    "posicao": 175,
     "nome": "PyTorch",
     "grupo": "inteligencia_artificial",
     "vagas": 1,
@@ -1400,7 +1368,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 176,
+    "posicao": 172,
     "nome": "TensorFlow",
     "grupo": "inteligencia_artificial",
     "vagas": 1,
@@ -1408,8 +1376,40 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 177,
+    "posicao": 173,
     "nome": "Keras",
+    "grupo": "inteligencia_artificial",
+    "vagas": 1,
+    "percentual_total": 0.0,
+    "percentual_base_tech": 0.1
+  },
+  {
+    "posicao": 174,
+    "nome": "dbt",
+    "grupo": "dados",
+    "vagas": 1,
+    "percentual_total": 0.0,
+    "percentual_base_tech": 0.1
+  },
+  {
+    "posicao": 175,
+    "nome": "Looker",
+    "grupo": "dados",
+    "vagas": 1,
+    "percentual_total": 0.0,
+    "percentual_base_tech": 0.1
+  },
+  {
+    "posicao": 176,
+    "nome": "Snowflake",
+    "grupo": "dados",
+    "vagas": 1,
+    "percentual_total": 0.0,
+    "percentual_base_tech": 0.1
+  },
+  {
+    "posicao": 177,
+    "nome": "Bancos Vetoriais",
     "grupo": "inteligencia_artificial",
     "vagas": 1,
     "percentual_total": 0.0,

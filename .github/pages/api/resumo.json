@@ -316,8 +316,8 @@
           "percentual": 3.8
         },
         {
-          "nome": "LLMs & IA Generativa",
-          "grupo": "inteligencia_artificial",
+          "nome": "MongoDB",
+          "grupo": "bancos",
           "vagas": 2,
           "percentual": 3.8
         }
@@ -364,14 +364,14 @@
           "percentual": 12.9
         },
         {
-          "nome": "Manutenção Preventiva",
-          "grupo": "suporte_infra",
+          "nome": "ERP",
+          "grupo": "engenharia_praticas",
           "vagas": 16,
           "percentual": 12.9
         },
         {
-          "nome": "ERP",
-          "grupo": "engenharia_praticas",
+          "nome": "Manutenção Preventiva",
+          "grupo": "suporte_infra",
           "vagas": 16,
           "percentual": 12.9
         },
@@ -1066,12 +1066,6 @@
           "percentual": 10.7
         },
         {
-          "nome": "Manutenção Preventiva",
-          "grupo": "suporte_infra",
-          "vagas": 3,
-          "percentual": 10.7
-        },
-        {
           "nome": "Algoritmos",
           "grupo": "engenharia_praticas",
           "vagas": 3,
@@ -1080,6 +1074,12 @@
         {
           "nome": "Inglês",
           "grupo": "engenharia_praticas",
+          "vagas": 3,
+          "percentual": 10.7
+        },
+        {
+          "nome": "Manutenção Preventiva",
+          "grupo": "suporte_infra",
           "vagas": 3,
           "percentual": 10.7
         },
@@ -1234,12 +1234,6 @@
           "percentual": 9.1
         },
         {
-          "nome": "LLMs & IA Generativa",
-          "grupo": "inteligencia_artificial",
-          "vagas": 2,
-          "percentual": 9.1
-        },
-        {
           "nome": "Oracle",
           "grupo": "bancos",
           "vagas": 2,
@@ -1253,6 +1247,12 @@
         },
         {
           "nome": "API REST",
+          "grupo": "engenharia_praticas",
+          "vagas": 2,
+          "percentual": 9.1
+        },
+        {
+          "nome": "Scrum",
           "grupo": "engenharia_praticas",
           "vagas": 2,
           "percentual": 9.1
@@ -1534,12 +1534,6 @@
           "percentual": 13.3
         },
         {
-          "nome": "Copilots & Assistentes de IA",
-          "grupo": "inteligencia_artificial",
-          "vagas": 2,
-          "percentual": 13.3
-        },
-        {
           "nome": "Metodologias Ágeis",
           "grupo": "engenharia_praticas",
           "vagas": 2,
@@ -1548,6 +1542,12 @@
         {
           "nome": "Inglês",
           "grupo": "engenharia_praticas",
+          "vagas": 2,
+          "percentual": 13.3
+        },
+        {
+          "nome": "Copilots & Assistentes de IA",
+          "grupo": "inteligencia_artificial",
           "vagas": 2,
           "percentual": 13.3
         },
@@ -1589,181 +1589,5 @@
         }
       ]
     }
-  },
-  "comparativo_academico": {
-    "Fundamentos Tradicionais (Ensinado no Currículo)": [
-      {
-        "nome": "SQL",
-        "vagas": 126,
-        "percentual": 6.0,
-        "grupo": "linguagens"
-      },
-      {
-        "nome": "Java",
-        "vagas": 68,
-        "percentual": 3.2,
-        "grupo": "linguagens"
-      },
-      {
-        "nome": "Python",
-        "vagas": 103,
-        "percentual": 4.9,
-        "grupo": "linguagens"
-      },
-      {
-        "nome": "C#",
-        "vagas": 39,
-        "percentual": 1.9,
-        "grupo": "linguagens"
-      },
-      {
-        "nome": "C++",
-        "vagas": 4,
-        "percentual": 0.2,
-        "grupo": "linguagens"
-      },
-      {
-        "nome": "Redes/TCP-IP",
-        "vagas": 0,
-        "percentual": 0.0,
-        "grupo": "Outros"
-      },
-      {
-        "nome": "Algoritmos",
-        "vagas": 50,
-        "percentual": 2.4,
-        "grupo": "engenharia_praticas"
-      },
-      {
-        "nome": "Estrutura de Dados",
-        "vagas": 29,
-        "percentual": 1.4,
-        "grupo": "engenharia_praticas"
-      },
-      {
-        "nome": "POO",
-        "vagas": 15,
-        "percentual": 0.7,
-        "grupo": "engenharia_praticas"
-      },
-      {
-        "nome": "Linux",
-        "vagas": 50,
-        "percentual": 2.4,
-        "grupo": "cloud_devops"
-      }
-    ],
-    "Gaps de Mercado (Alta Demanda, Pouco Ensinado)": [
-      {
-        "nome": "Git",
-        "vagas": 87,
-        "percentual": 4.2,
-        "grupo": "cloud_devops"
-      },
-      {
-        "nome": "Docker",
-        "vagas": 29,
-        "percentual": 1.4,
-        "grupo": "cloud_devops"
-      },
-      {
-        "nome": "React",
-        "vagas": 55,
-        "percentual": 2.6,
-        "grupo": "frameworks"
-      },
-      {
-        "nome": "Node.js",
-        "vagas": 40,
-        "percentual": 1.9,
-        "grupo": "frameworks"
-      },
-      {
-        "nome": "API REST",
-        "vagas": 49,
-        "percentual": 2.3,
-        "grupo": "engenharia_praticas"
-      },
-      {
-        "nome": "Metodologias Ágeis",
-        "vagas": 61,
-        "percentual": 2.9,
-        "grupo": "engenharia_praticas"
-      },
-      {
-        "nome": "AWS",
-        "vagas": 36,
-        "percentual": 1.7,
-        "grupo": "cloud_devops"
-      },
-      {
-        "nome": "Azure",
-        "vagas": 33,
-        "percentual": 1.6,
-        "grupo": "cloud_devops"
-      },
-      {
-        "nome": "Kubernetes",
-        "vagas": 11,
-        "percentual": 0.5,
-        "grupo": "cloud_devops"
-      },
-      {
-        "nome": "CI/CD",
-        "vagas": 27,
-        "percentual": 1.3,
-        "grupo": "cloud_devops"
-      },
-      {
-        "nome": "TypeScript",
-        "vagas": 28,
-        "percentual": 1.3,
-        "grupo": "linguagens"
-      }
-    ],
-    "Tendências Emergentes": [
-      {
-        "nome": "Inteligência Artificial",
-        "vagas": 129,
-        "percentual": 6.2,
-        "grupo": "inteligencia_artificial"
-      },
-      {
-        "nome": "Power BI",
-        "vagas": 31,
-        "percentual": 1.5,
-        "grupo": "dados"
-      },
-      {
-        "nome": "Figma",
-        "vagas": 1,
-        "percentual": 0.0,
-        "grupo": "engenharia_praticas"
-      },
-      {
-        "nome": "Databricks",
-        "vagas": 11,
-        "percentual": 0.5,
-        "grupo": "dados"
-      },
-      {
-        "nome": "Machine Learning",
-        "vagas": 21,
-        "percentual": 1.0,
-        "grupo": "inteligencia_artificial"
-      },
-      {
-        "nome": "Segurança da Informação",
-        "vagas": 0,
-        "percentual": 0.0,
-        "grupo": "Outros"
-      },
-      {
-        "nome": "FastAPI",
-        "vagas": 1,
-        "percentual": 0.0,
-        "grupo": "frameworks"
-      }
-    ]
   }
 }
