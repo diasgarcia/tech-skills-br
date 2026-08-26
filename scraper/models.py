@@ -171,9 +171,10 @@ class Job:
     def searchable_text(self) -> str:
         return normalize(f"{self.title} {self.description}")
 
-    def to_row(self, description_chars: int = 500) -> dict[str, Any]:
+    def to_row(self, description_chars: int | None = None) -> dict[str, Any]:
         row = asdict(self)
-        row["description"] = self.description[:description_chars]
+        if description_chars is not None:
+            row["description"] = self.description[:description_chars]
         row["skills"] = ", ".join(self.skills)
         return row
 
