@@ -159,6 +159,11 @@ class Settings:
     # Filtros
     only_junior: bool = True
 
+    # Se False, o pipeline nao busca descricoes do LinkedIn durante a coleta.
+    # Util no fluxo agendado, onde o enriquecimento roda depois da importacao
+    # (so para vagas pendentes, via scripts/enrich_descriptions.py).
+    enrich_linkedin: bool = True
+
     def ensure_output_dir(self) -> Path:
         self.output_dir.mkdir(parents=True, exist_ok=True)
         return self.output_dir
