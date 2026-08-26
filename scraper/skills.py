@@ -24,6 +24,8 @@ _WS_RE = re.compile(r"\s+")
 _KEEP_RE = re.compile(r"[^a-z0-9#+ ]+")
 # Caracteres que "colam" numa keyword -- usados como limite de palavra.
 _BOUNDARY = r"[a-z0-9#+]"
+# Mesma coisa para o casamento case-sensitive, que roda no texto original.
+_CASE_BOUNDARY = r"[A-Za-z0-9#+]"
 
 
 def normalize_tech(text: str | None) -> str:
@@ -43,17 +45,42 @@ def _compile_alias(alias: str) -> re.Pattern:
     return re.compile(rf"(?<!{_BOUNDARY}){re.escape(token)}(?!{_BOUNDARY})")
 
 
+def _compile_case_alias(alias: str) -> re.Pattern:
+    """Alias casado no texto original, preservando maiusculas/minusculas."""
+    token = _WS_RE.sub(" ", alias).strip()
+    if not token:
+        return re.compile(r"(?!x)x")
+    return re.compile(rf"(?<!{_CASE_BOUNDARY}){re.escape(token)}(?!{_CASE_BOUNDARY})")
+
+
 class SkillExtractor:
     """Encontra tecnologias no texto da vaga, a partir de `skills.yml`."""
 
     def __init__(self, rules: dict) -> None:
         # nome canonico -> lista de padroes; guarda tambem o grupo (linguagens...)
         self.skills: dict[str, list[re.Pattern]] = {}
+        self.case_sensitive: dict[str, list[re.Pattern]] = {}
         self.groups: dict[str, str] = {}
         for group, entries in (rules or {}).items():
             for canonical, aliases in (entries or {}).items():
-                patterns = [_compile_alias(a) for a in (aliases or [canonical])]
+                patterns = []
+                case_patterns = []
+                for a in (aliases or [canonical]):
+                    case_only = a.startswith("~")
+                    if case_only:
+                        a = a[1:]
+                    if any(c.isupper() for c in a):
+                        # Alias com maiuscula casa no texto original preservando
+                        # caixa ("Go" != "go" != "GO"). A nao ser que o alias
+                        # comece com "~" (so caixa exata), mantem tambem o
+                        # casamento normal, insensivel a caixa (ex.: "pfSense").
+                        case_patterns.append(_compile_case_alias(a))
+                        if not case_only:
+                            patterns.append(_compile_alias(a))
+                    else:
+                        patterns.append(_compile_alias(a))
                 self.skills[canonical] = patterns
+                self.case_sensitive[canonical] = case_patterns
                 self.groups[canonical] = group
 
     @classmethod
@@ -64,13 +91,15 @@ class SkillExtractor:
 
     def extract(self, *texts: str) -> list[str]:
         """Tecnologias citadas nos textos, sem repetir, em ordem alfabetica."""
-        haystack = normalize_tech(" ".join(t for t in texts if t))
+        raw = " ".join(t for t in texts if t)
+        haystack = normalize_tech(raw)
         if not haystack:
             return []
         found = [
             name
             for name, patterns in self.skills.items()
             if any(p.search(haystack) for p in patterns)
+            or any(p.search(raw) for p in self.case_sensitive.get(name, ()))
         ]
         return sorted(found)
 
