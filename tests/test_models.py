@@ -31,3 +31,8 @@ def test_fingerprint_ignora_caixa_e_acento():
 def test_to_row_trunca_descricao():
     job = Job(source="t", external_id="1", title="Dev", description="x" * 1000)
     assert len(job.to_row(description_chars=100)["description"]) == 100
+
+
+def test_to_row_mantem_descricao_completa_por_padrao():
+    job = Job(source="t", external_id="1", title="Dev", description="x" * 1000)
+    assert len(job.to_row()["description"]) == 1000
