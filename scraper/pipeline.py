@@ -101,7 +101,7 @@ def run(
 
     # Enriquecimento paralelo das descricoes do LinkedIn apenas para vagas unicas filtradas
     linkedin_to_enrich = [j for j in jobs if j.source == "linkedin" and not j.description]
-    if linkedin_to_enrich:
+    if settings.enrich_linkedin and linkedin_to_enrich:
         logger.info("Enriquecendo descricoes de %d vagas unicas do LinkedIn em paralelo...", len(linkedin_to_enrich))
         _enrich_linkedin_parallel(linkedin_to_enrich)
 
@@ -138,32 +138,53 @@ def run(
                           stats=stats, meta=meta)
 
 
-def _enrich_linkedin_parallel(jobs: list[Job], max_workers: int = 6) -> None:
-    """Busca descricoes completas em paralelo apenas para as vagas unicas filtradas."""
+def _enrich_linkedin_parallel(jobs: list[Job], max_workers: int = 3) -> None:
+    """Busca descricoes completas apenas para as vagas unicas filtradas.
+
+    Usa PoliteSession (delay + retry em 429/5xx) e registra falhas no log em
+    vez de engoli-las. O lock serializa os GETs para que o delay da sessao
+    valha de verdade; o parse roda em paralelo.
+    """
     from concurrent.futures import ThreadPoolExecutor, as_completed
-    import requests
+    from threading import Lock
+
     from bs4 import BeautifulSoup
 
+    from .http_client import PoliteSession
+
     detail_url = "https://www.linkedin.com/jobs-guest/jobs/api/jobPosting/{job_id}"
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-        "Accept-Language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    }
+    user_agent = (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+    )
+    lock = Lock()
 
-    def _fetch(job: Job) -> None:
+    def _fetch(job: Job, session: PoliteSession) -> None:
         try:
-            with requests.Session() as s:
-                r = s.get(detail_url.format(job_id=job.external_id), headers=headers, timeout=12)
-                if r.status_code == 200:
-                    soup = BeautifulSoup(r.text, "html.parser")
-                    el = soup.select_one(".show-more-less-html__markup, .description__text")
-                    if el:
-                        job.description = el.get_text(" ", strip=True)
-        except Exception:
-            pass
+            with lock:
+                response = session.get(detail_url.format(job_id=job.external_id))
+            if response is None:
+                return  # falha ja registrada pelo PoliteSession
+            soup = BeautifulSoup(response.text, "html.parser")
+            el = soup.select_one(".show-more-less-html__markup, .description__text")
+            if el:
+                job.description = el.get_text(" ", strip=True)
+            else:
+                logger.warning("[linkedin] Descricao nao encontrada na vaga %s",
+                               job.external_id)
+        except Exception as exc:
+            logger.warning("[linkedin] Falha ao enriquecer a vaga %s: %s",
+                           job.external_id, exc)
 
-    with ThreadPoolExecutor(max_workers=max_workers) as pool:
-        futures = [pool.submit(_fetch, j) for j in jobs]
-        for f in as_completed(futures):
-            pass
+    with PoliteSession(
+        user_agent=user_agent,
+        delay_seconds=1.0,
+        timeout_seconds=12,
+        max_retries=2,
+        backoff_factor=1.5,
+    ) as session:
+        with ThreadPoolExecutor(max_workers=max_workers) as pool:
+            futures = [pool.submit(_fetch, job, session) for job in jobs]
+            for _ in as_completed(futures):
+                pass
 
