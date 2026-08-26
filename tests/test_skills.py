@@ -41,6 +41,61 @@ def test_nao_casa_dentro_de_outra_palavra(ext):
     assert "Java" not in java_only
 
 
+def test_go_casa_so_com_g_maiusculo(ext):
+    # "Go" (linguagem) casa; "go" minusculo e palavra comum do ingles.
+    assert "Go" in ext.extract("Dev", "Conhecimento de Go.")
+    assert "Go" not in ext.extract("Dev", "Apoiar o go live do sistema.")
+    assert "Go" not in ext.extract("Dev", "Vaga em Anápolis, GO.")
+
+
+def test_alias_de_caixa_mista_casa_em_qualquer_caixa(ext):
+    # "pfSense" tem maiuscula no proprio nome: continua casando normalizado.
+    assert "Firewall" in ext.extract("Dev", "Configurar pfSense na rede.")
+    assert "Firewall" in ext.extract("Dev", "Configurar PFSENSE na rede.")
+    assert "Firewall" in ext.extract("Dev", "Configurar pfsense na rede.")
+
+
+def test_extrai_tecnologias_recentemente_adicionadas(ext):
+    desc = (
+        "Noções de Kubernetes e Argo CD, Temporal.io, Camunda, Retool e WireMock. "
+        "Inglês intermediário e espanhol."
+    )
+    found = ext.extract("Dev", desc)
+    assert {"Kubernetes", "ArgoCD", "Temporal.io", "Camunda",
+            "Retool", "WireMock", "Inglês", "Espanhol"} <= set(found)
+
+
+def test_extrai_requisitos_genericos_de_engenharia(ext):
+    desc = (
+        "Requisitos: lógica de programação, qualidade de software, "
+        "engenharia de software e métodos ágeis."
+    )
+    found = ext.extract("Dev", desc)
+    assert {"Lógica de Programação", "Qualidade de Software",
+            "Engenharia de Software", "Metodologias Ágeis"} <= set(found)
+
+
+def test_complexidade_generica_nao_vira_algoritmos(ext):
+    # "requisições de baixa complexidade" nao e complexidade algoritmica.
+    assert "Algoritmos" not in ext.extract(
+        "Analista", "Tratar incidentes e requisições de baixa complexidade.")
+
+
+def test_https_de_link_nao_vira_criptografia(ext):
+    assert "Criptografia" not in ext.extract(
+        "Analista", "Saiba mais em https://exemplo.com/pagina")
+
+
+def test_extrai_conceitos_genericos_de_dados(ext):
+    desc = (
+        "Análise de dados, qualidade de dados, conceitos de bancos de dados "
+        "e processos de automação."
+    )
+    found = ext.extract("Analista de Dados Júnior", desc)
+    assert {"Análise de Dados", "Qualidade de Dados", "Banco de Dados",
+            "Automação"} <= set(found)
+
+
 def test_sem_texto_devolve_lista_vazia(ext):
     assert ext.extract("") == []
     assert ext.extract("Analista Júnior", "") == []

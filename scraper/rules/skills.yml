@@ -8,6 +8,11 @@
 # (para "C#" e "C++" nao virarem "c"). Pontos viram espaco: escreva "node js",
 # nao "node.js". O casamento e por palavra/frase inteira -- "go" nao casa dentro
 # de "Goiania", "java" nao casa dentro de "javascript".
+#
+# Aliases com letra maiuscula tambem casam preservando caixa no texto original
+# (ex.: "pfSense" casa com "pfSense" e "pfsense"). Comecar o alias com "~"
+# restringe a caixa exata: "~Go" casa com "Conhecimento de Go", mas nao com
+# "go live", "GO" nem "golang".
 
 linguagens:
   Python: [python, python3]
@@ -18,7 +23,7 @@ linguagens:
   "C++": ["c++", cpp]
   C: [linguagem c, c ansi]
   PHP: [php, php7, php8]
-  Go: [golang, go lang, linguagem go]
+  Go: [golang, go lang, linguagem go, ~Go]
   Ruby: [ruby, ruby on rails]
   Rust: [rust, linguagem rust]
   Kotlin: [kotlin]
@@ -119,7 +124,10 @@ dados:
   Hadoop: [hadoop]
   BI: [business intelligence, ferramentas de bi]
   RPA: [rpa, robotic process automation, uipath, automation anywhere]
+  Automação: [automacao de processos, processos de automacao, ferramentas de automacao]
   Estatística: [estatistica, analise estatistica]
+  Análise de Dados: [analise de dados, analises de dados, manipulacao de dados, tratamento de dados]
+  Qualidade de Dados: [qualidade de dados, qualidade dos dados, confiabilidade dos dados]
 
 inteligencia_artificial:
   Inteligência Artificial: [inteligencia artificial, ia, artificial intelligence]
@@ -136,6 +144,7 @@ inteligencia_artificial:
 
 
 bancos:
+  Banco de Dados: [banco de dados, bancos de dados, base de dados]
   PostgreSQL: [postgresql, postgres, pgsql]
   MySQL: [mysql]
   SQL Server: [sql server, sqlserver, ms sql]
@@ -167,9 +176,13 @@ cloud_devops:
   AWS SQS: [sqs, aws sqs, sns]
   Serverless: [serverless, aws lambda, lambda, cloud functions]
   Helm: [helm]
+  ArgoCD: [argocd, argo cd]
   Grafana: [grafana]
   Prometheus: [prometheus]
   Datadog: [datadog]
+  Temporal.io: [temporal, temporal io, temporal workflow]
+  Camunda: [camunda]
+  Retool: [retool]
   Sentry: [sentry]
   SonarQube: [sonarqube, sonar]
   Cloudflare: [cloudflare]
@@ -185,12 +198,14 @@ qa_testes:
   Jest: [jest]
   K6: [k6]
   JMeter: [jmeter, apache jmeter]
+  WireMock: [wiremock, wire mock]
   Testes Automatizados: [testes automatizados, automacao de testes, teste automatizado]
   Testes Manuais: [testes manuais, teste manual]
   Testes Funcionais: [testes funcionais, teste funcional]
   Testes de Regressão: [testes de regressao, teste de regressao]
   TDD: [tdd, test driven development, desenvolvimento orientado a testes]
   BDD: [bdd, behavior driven development, cucumber]
+  Qualidade de Software: [qualidade de software, praticas de qualidade de software]
 
 suporte_infra:
   Windows Server: [windows server]
@@ -221,7 +236,7 @@ seguranca:
   Cibersegurança: [cybersecurity, ciberseguranca, seguranca cibernetica, blue team, red team, appsec, secops]
   Governança e Riscos (GRC): [grc, tprm, governanca de seguranca, controles de seguranca, auditoria de ti, gestao de riscos]
   OWASP: [owasp, owasp top 10]
-  Criptografia: [criptografia, ssl, tls, https]
+  Criptografia: [criptografia, ssl, tls]
   LGPD: [lgpd, protecao de dados]
   ISO 27001: [iso 27001, iso27001]
   Pentest: [pentest, penetration test, teste de invasao, burpsuite]
@@ -237,7 +252,7 @@ engenharia_praticas:
   WebSockets: [websockets, websocket]
   OpenAPI/Swagger: [swagger, openapi]
   Scrum: [scrum, sprint, daily]
-  Metodologias Ágeis: [metodologias ageis, agile, metodologia agil, kanban]
+  Metodologias Ágeis: [metodologias ageis, agile, metodologia agil, kanban, metodos ageis]
   Microserviços: [microservicos, microsservicos, microservices]
   POO: [poo, orientacao a objetos, programacao orientada a objetos, oop]
   SOLID: [solid, principios solid]
@@ -246,10 +261,13 @@ engenharia_praticas:
   Design Patterns: [design patterns, padroes de projeto, padroes de software]
   DDD: [ddd, domain driven design]
   Estrutura de Dados: [estrutura de dados, estruturas de dados, listas, pilhas, filas, arvores, grafos]
-  Algoritmos: [algoritmos, analise de algoritmos, complexidade, big o]
+  Algoritmos: [algoritmos, analise de algoritmos, big o]
+  Lógica de Programação: [logica de programacao, logica de desenvolvimento]
+  Engenharia de Software: [engenharia de software, fundamentos de desenvolvimento de software]
   Modelagem de Dados: [modelagem de dados, modelo relacional, diagrama er, der]
   UML: [uml, diagrama de classes, casos de uso]
   Inglês: [ingles, english, ingles intermediario, ingles avancado, ingles fluente, intermediate english]
+  Espanhol: [espanhol, spanish, espanhol basico, espanhol intermediario, espanhol avancado]
   Figma: [figma]
   UX/UI: [ux, ui, ux ui, design system]
   ERP: [erp, sistemas erp, sistema integrado]
