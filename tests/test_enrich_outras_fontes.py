@@ -3,6 +3,7 @@
 from threading import Lock
 
 from scripts.enrich_outras_fontes import (
+    fetch_gupy,
     fetch_programathor,
     fetch_trampos,
     fetch_vagas_com,
@@ -117,3 +118,19 @@ def test_fetch_programathor_extrai_da_pagina_de_detalhe():
 def test_fetch_programathor_sem_pagina_devolve_vazio():
     fonte = FonteFake(None)
     assert fetch_programathor(fonte, Lock(), "https://programathor.com.br/jobs/1-x") == ""
+
+
+def test_fetch_gupy_extrai_e_limpa_html_da_descricao():
+    payload = {
+        "id": 123,
+        "description": "<p>Vaga para atuar com <b>Python</b> e Django.</p>",
+    }
+    session = FakeSession([FakeResponse(payload=payload)])
+    desc = fetch_gupy(session, Lock(), "123")
+    assert "Python" in desc
+    assert "<p>" not in desc
+
+
+def test_fetch_gupy_job_removido_devolve_vazio():
+    session = FakeSession([None])  # PoliteSession devolve None em 404
+    assert fetch_gupy(session, Lock(), "123") == ""
