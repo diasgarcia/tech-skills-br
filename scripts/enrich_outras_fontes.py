@@ -13,6 +13,10 @@ banco e re-extrai as tecnologias com o skills.yml atual.
   -> PoliteSession) na pagina de detalhe da vaga e parse de
   `div.wrapper-content-job-show`. A descricao do card e sintetica
   (comeca com "Tecnologias:"), e e isso que marca a vaga como pendente.
+- Gupy: apenas as descricoes TRUNCADAS (exatamente 500 caracteres, legado
+  do corte antigo do CSV). GET no endpoint publico de detalhe
+  employability-portal.gupy.io/api/v1/jobs/{id}; vagas ja removidas
+  respondem 404 e ficam como estao.
 
 Vagas publicadas ha mais de 30 dias nao sao tentadas (anuncio quase
 certamente expirado). PoliteSession com delay/retry; o lock serializa os
@@ -37,6 +41,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from scraper.config import RULES_DIR, USER_AGENT, Settings  # noqa: E402
 from scraper.http_client import PoliteSession  # noqa: E402
+from scraper.models import strip_html  # noqa: E402
 from scraper.skills import SkillExtractor  # noqa: E402
 from scraper.sources.programathor import ProgramathorSource  # noqa: E402
 
@@ -46,6 +51,8 @@ logger = logging.getLogger("enrich_outras")
 JANELA_TENTATIVA_DIAS = 30
 
 TRAMPOS_API_URL = "https://trampos.co/api/v2/opportunities/{slug}"
+
+GUPY_API_URL = "https://employability-portal.gupy.io/api/v1/jobs/{job_id}"
 
 # Descricao do card/API e um trecho curto; abaixo disso, vale buscar o detalhe.
 MIN_DESCRICAO_VAGAS_COM = 300
@@ -91,6 +98,18 @@ def fetch_programathor(source: ProgramathorSource, lock: Lock, url: str) -> str:
     soup = BeautifulSoup(html, "html.parser")
     el = soup.select_one("div.wrapper-content-job-show, div[class*=content]")
     return el.get_text(" ", strip=True) if el else ""
+
+
+def fetch_gupy(session: PoliteSession, lock: Lock, job_id: str) -> str:
+    with lock:
+        response = session.get(GUPY_API_URL.format(job_id=job_id))
+    if response is None:
+        return ""
+    try:
+        desc = (response.json() or {}).get("description") or ""
+    except ValueError:
+        return ""
+    return strip_html(desc)
 
 
 def _enriquecer(
@@ -171,6 +190,16 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
     """
     args_programathor = list(janela)
 
+    # Gupy: so as truncadas legadas (exatamente 500 caracteres). As vagas
+    # atuais ja chegam com a descricao completa na listagem.
+    query_gupy = """
+        SELECT id, external_id, title FROM vagas
+        WHERE source = 'gupy'
+          AND LENGTH(description) = 500
+          AND (published_date IS NULL OR published_date >= date('now', ?))
+    """
+    args_gupy = list(janela)
+
     if limit:
         query_vagas += " LIMIT ?"
         args_vagas.append(limit)
@@ -178,6 +207,8 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
         args_trampos.append(limit)
         query_programathor += " LIMIT ?"
         args_programathor.append(limit)
+        query_gupy += " LIMIT ?"
+        args_gupy.append(limit)
 
     with PoliteSession(
         user_agent=USER_AGENT,
@@ -212,11 +243,18 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
             lambda sess, lk, url: fetch_programathor(fonte, lk, url),
         )
 
+        c.execute(query_gupy, args_gupy)
+        logger.info("Gupy truncadas pendentes: %d", len(c.fetchall()))
+        total_gupy = _enriquecer(
+            c, session, lock, extractor, tech_map, query_gupy, args_gupy,
+            lambda sess, lk, job_id: fetch_gupy(sess, lk, job_id),
+        )
+
     conn.commit()
     conn.close()
     logger.info(
-        "Enriquecimento concluido: %d vagas.com, %d trampos e %d programathor.",
-        total_vagas, total_trampos, total_programathor,
+        "Enriquecimento concluido: %d vagas.com, %d trampos, %d programathor e %d gupy.",
+        total_vagas, total_trampos, total_programathor, total_gupy,
     )
 
 
