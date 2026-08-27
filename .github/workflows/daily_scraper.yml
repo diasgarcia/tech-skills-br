@@ -69,7 +69,9 @@ jobs:
         
         DATA_HOJE=$(date +'%d/%m/%Y')
         git diff --quiet && git diff --staged --quiet && exit 0
-        git commit -m "chore(data): coleta automatizada de vagas [${DATA_HOJE}] [skip ci]"
+        # Sem [skip ci]: o push em .github/pages/** precisa disparar o
+        # deploy_pages.yml (o marcador suprimiria todos os workflows do push).
+        git commit -m "chore(data): coleta automatizada de vagas [${DATA_HOJE}]"
         # Em caso de corrida com outro push, rebaseia e tenta de novo.
         # Se o rebase conflitar em arquivos de dados (seed, docs, pages),
         # a versao do bot e a mais nova - vem do banco da propria run.
@@ -83,7 +85,7 @@ jobs:
             git rebase --abort 2>/dev/null || true
             git reset --soft origin/main
             git add seed/vagas.csv docs/relatorios/ .github/pages/
-            git commit -m "chore(data): coleta automatizada de vagas [${DATA_HOJE}] [skip ci]"
+            git commit -m "chore(data): coleta automatizada de vagas [${DATA_HOJE}]"
           fi
           sleep 10
         done
