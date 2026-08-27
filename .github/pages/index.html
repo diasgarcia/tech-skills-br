@@ -496,10 +496,11 @@ function setTab(tabId) {
 }
 
 function ajustaAlturaScrollTables() {
+  const footer = document.querySelector("footer");
+  const folgaFooter = (footer ? footer.offsetHeight : 60) + 48;
   document.querySelectorAll(".scroll-table").forEach(el => {
     if (!el.offsetParent) return; // aba escondida
     const topo = el.getBoundingClientRect().top;
-    const folgaFooter = 90;
     const altura = window.innerHeight - topo - folgaFooter;
     el.style.maxHeight = Math.max(200, altura) + "px";
   });
