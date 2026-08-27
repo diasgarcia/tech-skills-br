@@ -1,16 +1,10 @@
 name: Coleta Diaria de Vagas (PIBIC)
 
 on:
-  schedule:
-    # Executa de Segunda a Sexta-feira em 3 horarios BRT:
-    # 09:16 BRT (12:16 UTC), 14:16 BRT (17:16 UTC) e 19:16 BRT (22:16 UTC).
-    - cron: '16 12 * * 1-5'
-    - cron: '16 17 * * 1-5'
-    - cron: '16 22 * * 1-5'
-
-
-
-  # Permite disparo manual com 1 clique pelo navegador:
+  # Sem crons nativos: o agendador do GitHub atrasava/derrubava as runs
+  # (30min -> 5h -> drop). O gatilho agora e externo (cron-job.org chama a
+  # API de dispatch nos horarios 09:16, 14:16 e 19:16 BRT), e o botao
+  # manual continua disponivel.
   workflow_dispatch:
 
 concurrency:
