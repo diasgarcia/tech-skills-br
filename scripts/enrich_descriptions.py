@@ -3,6 +3,10 @@
 Busca a descricao apenas de vagas PENDENTES (sem descricao no banco), com
 PoliteSession (delay + retry em 429/5xx). O lock serializa os GETs para o
 delay valer; o parse roda em paralelo.
+
+Vagas publicadas ha mais de 30 dias nao sao tentadas: se ainda estao sem
+descricao a essa altura, o anuncio quase certamente expirou (o LinkedIn
+responde 404) e retentar para sempre so geraria requests e warnings inuteis.
 """
 
 import logging
@@ -29,6 +33,9 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)-7s %(me
 logger = logging.getLogger("enrich")
 
 DETAIL_API_URL = "https://www.linkedin.com/jobs-guest/jobs/api/jobPosting/{job_id}"
+
+# Janela em que uma vaga sem descricao ainda vale a pena tentar buscar.
+JANELA_TENTATIVA_DIAS = 30
 
 
 def fetch_one_description(session: PoliteSession, lock: Lock, job_id: str) -> tuple[str, str]:
@@ -62,11 +69,14 @@ def enrich_linkedin_jobs(limit: int | None = None, max_workers: int = 3):
         FROM vagas
         WHERE source = 'linkedin'
           AND (description IS NULL OR LENGTH(description) < 30)
+          AND (published_date IS NULL
+               OR published_date >= date('now', ?))
     """
+    args = [f"-{JANELA_TENTATIVA_DIAS} days"]
     if limit:
         query += f" LIMIT {limit}"
 
-    c.execute(query)
+    c.execute(query, args)
     jobs_to_enrich = c.fetchall()
     logger.info("Total de vagas do LinkedIn para enriquecer: %d", len(jobs_to_enrich))
 
