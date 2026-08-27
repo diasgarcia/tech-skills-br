@@ -60,7 +60,11 @@ def fetch_one_description(session: PoliteSession, lock: Lock, job_id: str) -> tu
     return job_id, ""
 
 
-def enrich_linkedin_jobs(limit: int | None = None, max_workers: int = 3):
+def enrich_linkedin_jobs(
+    limit: int | None = None,
+    max_workers: int = 3,
+    janela_dias: int = JANELA_TENTATIVA_DIAS,
+):
     init_db()
     with open(RULES_DIR / "skills.yml", encoding="utf-8") as fh:
         rules = yaml.safe_load(fh) or {}
@@ -79,7 +83,7 @@ def enrich_linkedin_jobs(limit: int | None = None, max_workers: int = 3):
           AND (published_date IS NULL
                OR published_date >= date('now', ?))
     """
-    args = [f"-{JANELA_TENTATIVA_DIAS} days"]
+    args = [f"-{janela_dias} days"]
     if limit:
         query += f" LIMIT {limit}"
 
@@ -160,4 +164,13 @@ def enrich_linkedin_jobs(limit: int | None = None, max_workers: int = 3):
 
 
 if __name__ == "__main__":
-    enrich_linkedin_jobs()
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Enriquece descricoes de vagas do LinkedIn pendentes."
+    )
+    parser.add_argument("--limit", type=int, default=None)
+    parser.add_argument("--janela", type=int, default=JANELA_TENTATIVA_DIAS,
+                        help="Dias de janela de publicacao (padrao: 30).")
+    args = parser.parse_args()
+    enrich_linkedin_jobs(limit=args.limit, janela_dias=args.janela)
