@@ -47,7 +47,7 @@ jobs:
     - name: 4. Executar rodada comum gratuita (Gupy, LinkedIn, Vagas, ProgramaThor, Trampos)
       run: |
         # Sem enriquecimento de descricoes aqui: ele roda no passo 5,
-        # apenas na rodada das 09h16, so para vagas pendentes.
+        # apenas na primeira coleta do dia, so para vagas pendentes.
         python main.py --max-pages 10 --delay 2 --no-enrich
       env:
         PYTHONPATH: .
@@ -59,9 +59,11 @@ jobs:
         # 2. Faz o UPSERT incremental das novas vagas mineradas na rodada:
         python scripts/import_csv.py
         # 3. Busca descricoes apenas das vagas do LinkedIn ainda pendentes.
-        #    Roda somente na rodada das 09h16 BRT (12h16 UTC): concentrar os
-        #    requests de detalhe numa rodada so reduz o 429 do LinkedIn.
-        if [ "$(date -u +%H)" = "12" ]; then
+        #    Roda somente na PRIMEIRA coleta do dia (na pratica a das 09h16):
+        #    concentrar os requests de detalhe numa rodada so reduz o 429, e
+        #    o criterio nao depende do horario exato em que o GitHub dispara
+        #    o schedule (que ja chegou a atrasar 5 horas).
+        if ! git log --since="today 00:00" --oneline | grep -q "coleta automatizada"; then
           python scripts/enrich_descriptions.py
         fi
         # 4. Exporta a base acumulada e regenera os relatorios e graficos:
