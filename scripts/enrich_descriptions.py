@@ -7,6 +7,9 @@ delay valer; o parse roda em paralelo.
 Vagas publicadas ha mais de 30 dias nao sao tentadas: se ainda estao sem
 descricao a essa altura, o anuncio quase certamente expirou (o LinkedIn
 responde 404) e retentar para sempre so geraria requests e warnings inuteis.
+
+Descricoes com exatamente 500 caracteres tambem entram na fila: sao as que o
+CSV de coleta truncava antes de o projeto passar a salvar o texto completo.
 """
 
 import logging
@@ -68,7 +71,8 @@ def enrich_linkedin_jobs(limit: int | None = None, max_workers: int = 3):
         SELECT id, external_id, title, url
         FROM vagas
         WHERE source = 'linkedin'
-          AND (description IS NULL OR LENGTH(description) < 30)
+          AND (description IS NULL OR LENGTH(description) < 30
+               OR LENGTH(description) = 500)
           AND (published_date IS NULL
                OR published_date >= date('now', ?))
     """
