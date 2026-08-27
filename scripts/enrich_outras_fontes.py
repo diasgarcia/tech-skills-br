@@ -9,6 +9,10 @@ banco e re-extrai as tecnologias com o skills.yml atual.
 - Trampos: GET em https://trampos.co/api/v2/opportunities/{slug}, onde o
   slug e o ultimo segmento da URL da vaga; junta description,
   prerequisite, desirable e other_info.
+- ProgramaThor: reusa a cadeia do proprio coletor (Playwright -> curl_cffi
+  -> PoliteSession) na pagina de detalhe da vaga e parse de
+  `div.wrapper-content-job-show`. A descricao do card e sintetica
+  (comeca com "Tecnologias:"), e e isso que marca a vaga como pendente.
 
 Vagas publicadas ha mais de 30 dias nao sao tentadas (anuncio quase
 certamente expirado). PoliteSession com delay/retry; o lock serializa os
@@ -31,9 +35,10 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from scraper.config import RULES_DIR, USER_AGENT  # noqa: E402
+from scraper.config import RULES_DIR, USER_AGENT, Settings  # noqa: E402
 from scraper.http_client import PoliteSession  # noqa: E402
 from scraper.skills import SkillExtractor  # noqa: E402
+from scraper.sources.programathor import ProgramathorSource  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)-7s %(message)s")
 logger = logging.getLogger("enrich_outras")
@@ -76,6 +81,16 @@ def fetch_trampos(session: PoliteSession, lock: Lock, slug: str) -> str:
             if texto:
                 partes.append(texto)
     return " ".join(partes)
+
+
+def fetch_programathor(source: ProgramathorSource, lock: Lock, url: str) -> str:
+    with lock:
+        html = source._get_page_html(url, {})
+    if not html:
+        return ""
+    soup = BeautifulSoup(html, "html.parser")
+    el = soup.select_one("div.wrapper-content-job-show, div[class*=content]")
+    return el.get_text(" ", strip=True) if el else ""
 
 
 def _enriquecer(
@@ -146,11 +161,23 @@ def enriquecer(limit: int | None = None) -> None:
     """
     args_trampos = [MIN_DESCRICAO_TRAMPOS, *janela]
 
+    # A descricao sintetica do card comeca com "Tecnologias:"; a completa,
+    # vinda da pagina de detalhe, nao.
+    query_programathor = """
+        SELECT id, url, title FROM vagas
+        WHERE source = 'programathor'
+          AND (description IS NULL OR description LIKE 'Tecnologias:%')
+          AND (published_date IS NULL OR published_date >= date('now', ?))
+    """
+    args_programathor = list(janela)
+
     if limit:
         query_vagas += " LIMIT ?"
         args_vagas.append(limit)
         query_trampos += " LIMIT ?"
         args_trampos.append(limit)
+        query_programathor += " LIMIT ?"
+        args_programathor.append(limit)
 
     with PoliteSession(
         user_agent=USER_AGENT,
@@ -175,10 +202,22 @@ def enriquecer(limit: int | None = None) -> None:
             ),
         )
 
+        # O ProgramaThor reusa a cadeia Playwright/curl_cffi do coletor.
+        fonte = ProgramathorSource(session=session, settings=Settings())
+        c.execute(query_programathor, args_programathor)
+        logger.info("ProgramaThor pendentes: %d", len(c.fetchall()))
+        total_programathor = _enriquecer(
+            c, session, lock, extractor, tech_map,
+            query_programathor, args_programathor,
+            lambda sess, lk, url: fetch_programathor(fonte, lk, url),
+        )
+
     conn.commit()
     conn.close()
-    logger.info("Enriquecimento concluido: %d vagas.com e %d trampos.",
-                total_vagas, total_trampos)
+    logger.info(
+        "Enriquecimento concluido: %d vagas.com, %d trampos e %d programathor.",
+        total_vagas, total_trampos, total_programathor,
+    )
 
 
 if __name__ == "__main__":
