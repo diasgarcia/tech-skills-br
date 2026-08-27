@@ -23,8 +23,8 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html {
-      overflow-y: hidden;
-      height: 100%;
+      overflow-y: scroll;
+      scrollbar-gutter: stable;
     }
     body {
       background-color: var(--bg);
@@ -33,10 +33,6 @@
       font-size: 13px;
       line-height: 1.5;
       padding: 16px;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
     }
 
     /* Scrollbar discreta integrada ao tema escuro */
@@ -66,7 +62,6 @@
       border-bottom: 1px solid var(--border);
       padding-bottom: 14px;
       margin-bottom: 18px;
-      flex-shrink: 0;
     }
     
     .title-row {
@@ -96,7 +91,6 @@
       margin: 16px 0;
       border-bottom: 1px solid var(--border);
       padding-bottom: 10px;
-      flex-shrink: 0;
     }
 
     .nav-btn {
@@ -192,31 +186,16 @@
     .pill.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
 
     .tab-section { display: none; }
-    .tab-section.active {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      min-height: 0;
-      overflow-y: auto;
-    }
-
-    /* Cards que abrigam listas longas: esticam para preencher a altura da aba */
-    .card-fill {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      min-height: 0;
-    }
+    .tab-section.active { display: block; }
 
     /* Listas longas rolam dentro do card, sem esticar a pagina */
     .scroll-table {
+      max-height: calc(100vh - 330px);
       overflow-y: auto;
       border: 1px solid var(--border);
       border-radius: 6px;
       margin-top: 10px;
-      min-height: 0;
     }
-    .card-fill .scroll-table { flex: 1; }
     .scroll-table table { margin-top: 0; }
     .scroll-table thead th {
       position: sticky;
@@ -228,14 +207,13 @@
     footer {
       border-top: 1px solid var(--border);
       padding-top: 14px;
-      margin-top: 14px;
+      margin-top: 28px;
       color: var(--text-muted);
       font-size: 11px;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 8px;
-      flex-shrink: 0;
     }
 
     .show-mobile { display: none; }
@@ -344,7 +322,7 @@
 
   <!-- TAB 2: RANKING DE HABILIDADES -->
   <div id="tab-skills" class="tab-section">
-    <div class="card card-fill">
+    <div class="card">
       <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 8px;">
         <div>
           <div class="card-title" style="font-weight: 700;">Ranking Geral de Tecnologias Demandadas</div>
@@ -370,7 +348,7 @@
       <div id="area-pills-container"></div>
     </div>
 
-    <div class="card card-fill">
+    <div class="card">
       <div class="card-title" style="font-weight: 700;" id="area-detail-title">Habilidades em Destaque</div>
       <p style="color: var(--text-muted); font-size: 11px; margin-bottom: 10px;" id="area-detail-subtitle"></p>
 
@@ -385,7 +363,7 @@
 
   <!-- TAB 4: EXPLORADOR DE VAGAS -->
   <div id="tab-vagas" class="tab-section">
-    <div class="card card-fill">
+    <div class="card">
       <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px;">
         <div>
           <div class="card-title" style="font-weight: 700;">Navegador de Vagas Recentes</div>
@@ -496,6 +474,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderSkillsTable();
     initAreaPills();
     renderVagasTable();
+    ajustaAlturaScrollTables();
   } catch (err) {
     console.error("Erro ao carregar dados da API estática:", err);
   }
@@ -512,7 +491,21 @@ function setTab(tabId) {
   const btnIndex = { resumo: 0, skills: 1, areas: 2, vagas: 3, api: 4 }[tabId];
   const btns = document.querySelectorAll(".nav-btn");
   if (btns[btnIndex]) btns[btnIndex].classList.add("active");
+
+  ajustaAlturaScrollTables();
 }
+
+function ajustaAlturaScrollTables() {
+  const footer = document.querySelector("footer");
+  const folgaFooter = (footer ? footer.offsetHeight : 60) + 48;
+  document.querySelectorAll(".scroll-table").forEach(el => {
+    if (!el.offsetParent) return; // aba escondida
+    const topo = el.getBoundingClientRect().top;
+    const altura = window.innerHeight - topo - folgaFooter;
+    el.style.maxHeight = Math.max(200, altura) + "px";
+  });
+}
+window.addEventListener("resize", ajustaAlturaScrollTables);
 
 function initKPIs() {
   const meta = resumoData.metadados || {};
