@@ -132,7 +132,7 @@ def _enriquecer(
     return total
 
 
-def enriquecer(limit: int | None = None) -> None:
+def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIAS) -> None:
     with open(RULES_DIR / "skills.yml", encoding="utf-8") as fh:
         rules = yaml.safe_load(fh) or {}
     extractor = SkillExtractor(rules)
@@ -142,7 +142,7 @@ def enriquecer(limit: int | None = None) -> None:
     c.execute("SELECT id, nome FROM tecnologias")
     tech_map = {nome.lower(): tid for tid, nome in c.fetchall()}
 
-    janela = [f"-{JANELA_TENTATIVA_DIAS} days"]
+    janela = [f"-{janela_dias} days"]
     lock = Lock()
 
     query_vagas = """
@@ -221,4 +221,13 @@ def enriquecer(limit: int | None = None) -> None:
 
 
 if __name__ == "__main__":
-    enriquecer()
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Enriquece descricoes de Vagas.com, Trampos e ProgramaThor."
+    )
+    parser.add_argument("--limit", type=int, default=None)
+    parser.add_argument("--janela", type=int, default=JANELA_TENTATIVA_DIAS,
+                        help="Dias de janela de publicacao (padrao: 30).")
+    args = parser.parse_args()
+    enriquecer(limit=args.limit, janela_dias=args.janela)
