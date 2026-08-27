@@ -60,7 +60,7 @@ _HIBRIDO_RE = re.compile(
     r"\b(hibrid[oa]|regime hibrido|modelo hibrido|trabalho hibrido|formato hibrido|escala hibrida|dias presenciais)\b"
 )
 _REMOTO_RE = re.compile(
-    r"\b(100% remoto|totalmente remoto|remoto|home office|trabalho remoto|modelo remoto|regime remoto|formato remoto|vaga remota|atuacao remota|teletrabalho)\b"
+    r"\b(100 remoto|100 remota|totalmente remoto|totalmente remota|remoto|remota|home office|trabalho remoto|modelo remoto|regime remoto|formato remoto|vaga remota|atuacao remota|teletrabalho|remotamente)\b"
 )
 _PRESENCIAL_RE = re.compile(
     r"\b(100% presencial|totalmente presencial|presencial|regime presencial|modelo presencial|trabalho presencial|formato presencial|atuacao presencial|in loco)\b"

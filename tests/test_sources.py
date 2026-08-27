@@ -401,6 +401,18 @@ def test_linkedin_ignora_card_sem_urn_ou_titulo():
     ) == []
 
 
+def test_linkedin_titulo_com_remoto_vence_cidade_do_card():
+    # O card lista uma cidade, mas o titulo anuncia "Trabalho Remoto"
+    # (padrao comum em empresas 100% remotas). O titulo e o sinal mais forte.
+    assert LinkedInSource._modalidade(
+        "Goiânia, GO", title="Desenvolvedor Python Junior - Trabalho Remoto"
+    ) == "Remoto"
+    # Sem mencao no titulo, a cidade segue indicando presencial.
+    assert LinkedInSource._modalidade(
+        "Goiânia, GO", title="Desenvolvedor Python Junior"
+    ) == "Presencial"
+
+
 def test_linkedin_pagina_vazia():
     assert _source(LinkedInSource)._parse_page("<html></html>", "x") == []
 
