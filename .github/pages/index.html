@@ -668,6 +668,18 @@ function renderVagasTable() {
       ? `<a href="${v.url}" target="_blank" rel="noopener noreferrer" style="color: var(--accent); font-weight: 700; text-decoration: none;">${v.titulo} <span style="font-size: 11px; opacity: 0.8;">↗</span></a>`
       : `<strong>${v.titulo}</strong>`;
 
+    const polo = v.polo || v.localidade || "";
+    const modalidade = v.modalidade || "";
+    const emModalidade = `<em style="color: var(--text-muted);">${modalidade}</em>`;
+    let celulaLocal;
+    if (polo.toLowerCase() === modalidade.toLowerCase() && polo) {
+      celulaLocal = emModalidade;
+    } else if (polo && modalidade) {
+      celulaLocal = `${polo} &middot; ${emModalidade}`;
+    } else {
+      celulaLocal = polo || emModalidade;
+    }
+
     tr.innerHTML = `
       <td>
         <div class="show-mobile">
@@ -680,7 +692,7 @@ function renderVagasTable() {
       </td>
       <td class="hide-mobile">${v.empresa}</td>
       <td class="hide-mobile"><span class="badge">${v.area}</span></td>
-      <td>${v.polo || v.localidade} &middot; <em style="color: var(--text-muted);">${v.modalidade}</em></td>
+      <td>${celulaLocal}</td>
       <td class="hide-mobile" style="text-align: center;">${linkHtml}</td>
     `;
     tbody.appendChild(tr);
