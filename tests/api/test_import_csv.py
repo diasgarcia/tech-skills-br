@@ -188,3 +188,40 @@ def test_recriar_limpa_o_banco(tmp_path):
     importar(_escrever_csv(tmp_path, [_linha(), _linha(external_id="2")]), db_path)
     resultado = importar(_escrever_csv(tmp_path, [_linha()]), db_path, recriar=True)
     assert resultado["total"] == 1
+
+
+def test_linkedin_descricao_remota_corrige_palpite_de_cidade(tmp_path):
+    """O card do LinkedIn lista a cidade e o palpite vira Presencial; a
+    descricao completa ("100% remota") tem que corrigir isso no import."""
+    csv_path = _escrever_csv(
+        tmp_path,
+        [_linha(
+            source="linkedin",
+            workplace_type="Presencial",
+            location="Goiânia, GO",
+            title="Desenvolvedor Python Junior - Trabalho Remoto",
+            description="Modalidade 100% remota - trabalhe de qualquer lugar.",
+        )],
+    )
+    importar(csv_path, tmp_path / "t.db")
+
+    with Session(make_engine(tmp_path / "t.db")) as db:
+        vaga = db.scalar(select(Vaga))
+        assert vaga.workplace_type == "Remoto"
+
+
+def test_linkedin_sem_sinal_de_modalidade_mantem_o_palpite(tmp_path):
+    csv_path = _escrever_csv(
+        tmp_path,
+        [_linha(
+            source="linkedin",
+            workplace_type="Presencial",
+            location="Goiânia, GO",
+            title="Desenvolvedor Python Junior",
+            description="Atuacao na area de back-end com Python e Django.",
+        )],
+    )
+    importar(csv_path, tmp_path / "t.db")
+
+    with Session(make_engine(tmp_path / "t.db")) as db:
+        assert db.scalar(select(Vaga)).workplace_type == "Presencial"

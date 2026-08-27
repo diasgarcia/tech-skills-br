@@ -153,22 +153,26 @@ class LinkedInSource(JobSource):
             url=url,
             description="",  # o card da busca nao traz a descricao
             location=location,
-            workplace_type=self._modalidade(location, card_text),
+            workplace_type=self._modalidade(location, card_text, title),
             published_date=publicada[:10],
             search_term=term,
         )
 
     @staticmethod
-    def _modalidade(location: str, card_text: str = "") -> str:
+    def _modalidade(location: str, card_text: str = "", title: str = "") -> str:
         """Infere a modalidade com base no padrao do LinkedIn.
 
-        - Card/Local contendo 'Híbrido'/'Hybrid' -> Híbrido
-        - Card/Local contendo 'Remoto'/'Remote' -> Remoto
+        - Card/Local/Titulo contendo 'Híbrido'/'Hybrid' -> Híbrido
+        - Card/Local/Titulo contendo 'Remoto'/'Remote' -> Remoto
         - 'Brasil' / 'Brazil' / 'Nacional' -> Remoto (vagas de escopo nacional)
         - Cidade física ('Rio de Janeiro e Região', 'Curitiba, PR') -> Presencial
         - Vazio -> Não informado
+
+        O titulo entra na analise porque o card da busca nao informa modalidade,
+        e anuncios remotos costumam dizer isso no titulo ("Trabalho Remoto")
+        enquanto a localizacao do card lista uma cidade qualquer.
         """
-        full_text = normalize(f"{location} {card_text}")
+        full_text = normalize(f"{location} {card_text} {title}")
         if not full_text:
             return NAO_INFORMADO
         if "hibrid" in full_text or "hybrid" in full_text:
