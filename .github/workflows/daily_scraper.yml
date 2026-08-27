@@ -50,11 +50,9 @@ jobs:
         python scripts/import_csv.py --csv seed/vagas.csv
         # 2. Faz o UPSERT incremental das novas vagas mineradas na rodada:
         python scripts/import_csv.py
-        # 3. Busca descricoes das vagas do LinkedIn ainda pendentes.
-        #    Cada rodada so enriquece as vagas novas daquele horario
-        #    (backlog ja drenado), entao o volume e pequeno e o ganho de
-        #    frescor vale: descricao e skills entram no mesmo dia.
+        # 3. Busca descricoes das vagas ainda pendentes (novas da rodada):
         python scripts/enrich_descriptions.py
+        python scripts/enrich_outras_fontes.py
         # 4. Exporta a base acumulada e regenera os relatorios e graficos:
         python scripts/export_seed.py
         python scripts/report_db.py
