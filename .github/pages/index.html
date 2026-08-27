@@ -188,6 +188,22 @@
     .tab-section { display: none; }
     .tab-section.active { display: block; }
 
+    /* Listas longas rolam dentro do card, sem esticar a pagina */
+    .scroll-table {
+      max-height: calc(100vh - 330px);
+      overflow-y: auto;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+    .scroll-table table { margin-top: 0; }
+    .scroll-table thead th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: var(--card-bg);
+    }
+
     footer {
       border-top: 1px solid var(--border);
       padding-top: 14px;
@@ -315,10 +331,12 @@
         <input type="text" class="search-input" id="search-skills" placeholder="Filtrar tecnologia..." oninput="renderSkillsTable()">
       </div>
 
-      <table id="table-skills">
-        <thead><tr><th>#</th><th>Tecnologia</th><th class="hide-mobile">Categoria</th><th>Vagas</th><th>Demanda %</th><th class="hide-mobile" style="width: 35%;">Proporção</th></tr></thead>
-        <tbody></tbody>
-      </table>
+      <div class="scroll-table">
+        <table id="table-skills">
+          <thead><tr><th>#</th><th>Tecnologia</th><th class="hide-mobile">Categoria</th><th>Vagas</th><th>Demanda %</th><th class="hide-mobile" style="width: 35%;">Proporção</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
 
     </div>
   </div>
@@ -333,11 +351,13 @@
     <div class="card">
       <div class="card-title" style="font-weight: 700;" id="area-detail-title">Habilidades em Destaque</div>
       <p style="color: var(--text-muted); font-size: 11px; margin-bottom: 10px;" id="area-detail-subtitle"></p>
-      
-      <table id="table-area-skills">
-        <thead><tr><th>Tecnologia</th><th class="hide-mobile">Categoria</th><th>Vagas na Área</th><th>Aderência %</th><th class="hide-mobile" style="width: 40%;">Proporção</th></tr></thead>
-        <tbody></tbody>
-      </table>
+
+      <div class="scroll-table">
+        <table id="table-area-skills">
+          <thead><tr><th>Tecnologia</th><th class="hide-mobile">Categoria</th><th>Vagas na Área</th><th>Aderência %</th><th class="hide-mobile" style="width: 40%;">Proporção</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
     </div>
   </div>
 
@@ -363,10 +383,12 @@
 
       <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;" id="vagas-count-info"></p>
 
-      <table id="table-vagas">
-        <thead><tr><th>Título da Vaga</th><th class="hide-mobile">Empresa</th><th class="hide-mobile">Área</th><th>Local / Mod.</th><th class="hide-mobile" style="text-align: center; width: 45px;">Link</th></tr></thead>
-        <tbody></tbody>
-      </table>
+      <div class="scroll-table">
+        <table id="table-vagas">
+          <thead><tr><th>Título da Vaga</th><th class="hide-mobile">Empresa</th><th class="hide-mobile">Área</th><th>Local / Mod.</th><th class="hide-mobile" style="text-align: center; width: 45px;">Link</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
 
 
     </div>
@@ -452,6 +474,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderSkillsTable();
     initAreaPills();
     renderVagasTable();
+    ajustaAlturaScrollTables();
   } catch (err) {
     console.error("Erro ao carregar dados da API estática:", err);
   }
@@ -468,7 +491,20 @@ function setTab(tabId) {
   const btnIndex = { resumo: 0, skills: 1, areas: 2, vagas: 3, api: 4 }[tabId];
   const btns = document.querySelectorAll(".nav-btn");
   if (btns[btnIndex]) btns[btnIndex].classList.add("active");
+
+  ajustaAlturaScrollTables();
 }
+
+function ajustaAlturaScrollTables() {
+  document.querySelectorAll(".scroll-table").forEach(el => {
+    if (!el.offsetParent) return; // aba escondida
+    const topo = el.getBoundingClientRect().top;
+    const folgaFooter = 90;
+    const altura = window.innerHeight - topo - folgaFooter;
+    el.style.maxHeight = Math.max(200, altura) + "px";
+  });
+}
+window.addEventListener("resize", ajustaAlturaScrollTables);
 
 function initKPIs() {
   const meta = resumoData.metadados || {};
@@ -552,7 +588,7 @@ function renderSkillsTable() {
     items = items.filter(t => t.nome.toLowerCase().includes(query) || t.grupo.toLowerCase().includes(query));
   }
 
-  items.slice(0, 40).forEach(t => {
+  items.forEach(t => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td style="color: var(--text-muted);">${t.posicao}</td>
@@ -593,7 +629,7 @@ function selectArea(areaName) {
 function renderAreaDetail() {
   const areaInfo = (resumoData.skills_by_area && resumoData.skills_by_area[currentArea]) || { total_vagas: 0, skills: [] };
   document.getElementById("area-detail-title").innerText = `Habilidades mais exigidas em ${currentArea}`;
-  document.getElementById("area-detail-subtitle").innerText = `Base: ${areaInfo.total_vagas} vagas na área. Mostrando tecnologias com maior aderência:`;
+  document.getElementById("area-detail-subtitle").innerText = `Base: ${areaInfo.total_vagas} vagas na área. Todas as tecnologias com ao menos 1 registro:`;
 
   const tbody = document.querySelector("#table-area-skills tbody");
   tbody.innerHTML = "";
@@ -655,10 +691,10 @@ function renderVagasTable() {
     );
   }
 
-  document.getElementById("vagas-count-info").innerText = `Exibindo ${Math.min(items.length, 50)} de ${items.length} vagas recentes encontradas`;
+  document.getElementById("vagas-count-info").innerText = `Exibindo ${items.length} vagas recentes encontradas`;
 
 
-  items.slice(0, 50).forEach(v => {
+  items.forEach(v => {
     const tr = document.createElement("tr");
     const linkHtml = v.url 
       ? `<a href="${v.url}" target="_blank" rel="noopener noreferrer" title="Abrir vaga" style="font-size: 14px; text-decoration: none;">↗</a>` 
