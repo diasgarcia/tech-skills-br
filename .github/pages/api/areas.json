@@ -1,58 +1,58 @@
 [
   {
     "area": "Suporte Técnico",
-    "vagas": 496,
-    "percentual": 22.5
-  },
-  {
-    "area": "Engenharia de Software",
-    "vagas": 347,
-    "percentual": 15.7
+    "vagas": 475,
+    "percentual": 21.3
   },
   {
     "area": "Outros/TI Geral",
-    "vagas": 264,
-    "percentual": 12.0
+    "vagas": 378,
+    "percentual": 17.0
+  },
+  {
+    "area": "Engenharia de Software",
+    "vagas": 331,
+    "percentual": 14.9
   },
   {
     "area": "Data",
-    "vagas": 190,
-    "percentual": 8.6
+    "vagas": 193,
+    "percentual": 8.7
   },
   {
     "area": "Backend",
-    "vagas": 169,
-    "percentual": 7.7
+    "vagas": 159,
+    "percentual": 7.1
   },
   {
     "area": "Infraestrutura / Redes",
-    "vagas": 148,
-    "percentual": 6.7
+    "vagas": 119,
+    "percentual": 5.3
   },
   {
     "area": "QA",
-    "vagas": 99,
-    "percentual": 4.5
+    "vagas": 97,
+    "percentual": 4.4
   },
   {
     "area": "Fullstack",
-    "vagas": 81,
+    "vagas": 83,
     "percentual": 3.7
   },
   {
-    "area": "Field Service / Hardware",
-    "vagas": 77,
-    "percentual": 3.5
+    "area": "Service Desk / Help Desk",
+    "vagas": 66,
+    "percentual": 3.0
   },
   {
-    "area": "Service Desk / Help Desk",
-    "vagas": 69,
-    "percentual": 3.1
+    "area": "Field Service / Hardware",
+    "vagas": 65,
+    "percentual": 2.9
   },
   {
     "area": "Segurança",
-    "vagas": 62,
-    "percentual": 2.8
+    "vagas": 61,
+    "percentual": 2.7
   },
   {
     "area": "DevOps",
@@ -61,8 +61,8 @@
   },
   {
     "area": "Sistemas / ERP",
-    "vagas": 43,
-    "percentual": 2.0
+    "vagas": 42,
+    "percentual": 1.9
   },
   {
     "area": "Frontend",
@@ -71,7 +71,7 @@
   },
   {
     "area": "Mobile",
-    "vagas": 29,
+    "vagas": 28,
     "percentual": 1.3
   },
   {
@@ -81,12 +81,12 @@
   },
   {
     "area": "Inteligência Artificial",
-    "vagas": 18,
+    "vagas": 17,
     "percentual": 0.8
   },
   {
     "area": "Design / UI / UX",
-    "vagas": 7,
+    "vagas": 6,
     "percentual": 0.3
   }
 ]
