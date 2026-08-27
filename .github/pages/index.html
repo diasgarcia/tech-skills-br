@@ -299,7 +299,7 @@
       <div class="card">
         <div class="card-title" style="font-weight: 700;">Distribuição por Área Técnica</div>
         <table id="table-areas-summary">
-          <thead><tr><th>Área</th><th style="text-align: center;">Vagas</th><th style="text-align: center;">%</th><th class="hide-mobile" style="width: 35%;">Distribuição</th></tr></thead>
+          <thead><tr><th>Área</th><th style="text-align: center;">Vagas</th><th style="text-align: right;">%</th><th class="hide-mobile" style="width: 35%;">Distribuição</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -308,13 +308,13 @@
       <div class="card">
         <div class="card-title" style="font-weight: 700;">Macrorregiões do Brasil</div>
         <table id="table-regioes-summary">
-          <thead><tr><th>Região</th><th style="text-align: center;">Vagas</th><th style="text-align: center;">%</th><th class="hide-mobile" style="width: 35%;">Distribuição</th></tr></thead>
+          <thead><tr><th>Região</th><th style="text-align: center;">Vagas</th><th style="text-align: right;">%</th><th class="hide-mobile" style="width: 35%;">Distribuição</th></tr></thead>
           <tbody></tbody>
         </table>
         
         <div class="card-title" style="font-weight: 700; margin-top: 16px;">Modalidade de Trabalho</div>
         <table id="table-modalidades-summary">
-          <thead><tr><th>Modalidade</th><th style="text-align: center;">Vagas</th><th style="text-align: center;">%</th><th class="hide-mobile" style="width: 35%;">Distribuição</th></tr></thead>
+          <thead><tr><th>Modalidade</th><th style="text-align: center;">Vagas</th><th style="text-align: right;">%</th><th class="hide-mobile" style="width: 35%;">Distribuição</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -545,7 +545,7 @@ function renderSummaryTables() {
     tr.innerHTML = `
       <td><strong>${a.area}</strong></td>
       <td style="text-align: center;">${a.vagas}</td>
-      <td style="text-align: center;">${a.percentual}%</td>
+      <td style="text-align: right;">${a.percentual}%</td>
       <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${a.percentual}%;"></div></div></td>
     `;
     tbodyAreas.appendChild(tr);
@@ -559,7 +559,7 @@ function renderSummaryTables() {
     tr.innerHTML = `
       <td>${r.regiao}</td>
       <td style="text-align: center;">${r.vagas}</td>
-      <td style="text-align: center;">${r.percentual}%</td>
+      <td style="text-align: right;">${r.percentual}%</td>
       <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${r.percentual}%; background: var(--green);"></div></div></td>
     `;
     tbodyReg.appendChild(tr);
@@ -573,7 +573,7 @@ function renderSummaryTables() {
     tr.innerHTML = `
       <td>${m.modalidade}</td>
       <td style="text-align: center;">${m.vagas}</td>
-      <td style="text-align: center;">${m.percentual}%</td>
+      <td style="text-align: right;">${m.percentual}%</td>
       <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${m.percentual}%; background: var(--amber);"></div></div></td>
     `;
     tbodyMod.appendChild(tr);
