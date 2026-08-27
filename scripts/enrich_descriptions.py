@@ -29,7 +29,9 @@ if str(PROJECT_ROOT) not in sys.path:
 from api.database import SessionLocal, init_db  # noqa: E402
 from api.models import Tecnologia, Vaga, vaga_tecnologia  # noqa: E402
 from scraper.config import RULES_DIR, USER_AGENT  # noqa: E402
+from scraper.geo import default_geo_classifier  # noqa: E402
 from scraper.http_client import PoliteSession  # noqa: E402
+from scraper.models import NAO_INFORMADO, infer_workplace  # noqa: E402
 from scraper.skills import SkillExtractor  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)-7s %(message)s")
@@ -63,12 +65,13 @@ def enrich_linkedin_jobs(limit: int | None = None, max_workers: int = 3):
     with open(RULES_DIR / "skills.yml", encoding="utf-8") as fh:
         rules = yaml.safe_load(fh) or {}
     extractor = SkillExtractor(rules)
+    geo = default_geo_classifier()
 
     conn = sqlite3.connect(PROJECT_ROOT / "data" / "vagas.db")
     c = conn.cursor()
 
     query = """
-        SELECT id, external_id, title, url
+        SELECT id, external_id, title, url, location, workplace_type
         FROM vagas
         WHERE source = 'linkedin'
           AND (description IS NULL OR LENGTH(description) < 30
@@ -103,23 +106,39 @@ def enrich_linkedin_jobs(limit: int | None = None, max_workers: int = 3):
     ) as session:
         with ThreadPoolExecutor(max_workers=max_workers) as pool:
             futures = {
-                pool.submit(fetch_one_description, session, lock, ext_id): (db_id, ext_id, title)
-                for db_id, ext_id, title, url in jobs_to_enrich
+                pool.submit(fetch_one_description, session, lock, ext_id): (db_id, ext_id, title, location, workplace)
+                for db_id, ext_id, title, url, location, workplace in jobs_to_enrich
             }
 
             for future in as_completed(futures):
-                db_id, ext_id, title = futures[future]
+                db_id, ext_id, title, location, workplace = futures[future]
                 try:
                     _, desc = future.result()
                     if desc:
                         # 1. Atualiza descricao no banco
                         c.execute("UPDATE vagas SET description = ? WHERE id = ?", (desc, db_id))
 
-                        # 2. Extrai novas habilidades
+                        # 2. Re-infere modalidade: a descricao completa e mais
+                        # confiavel que o palpite feito no card da busca.
+                        modalidade = infer_workplace(
+                            None, location=location, title=title, description=desc
+                        )
+                        if (
+                            modalidade
+                            and modalidade != NAO_INFORMADO
+                            and modalidade != (workplace or "")
+                        ):
+                            polo, regiao = geo.classify(location, modalidade)
+                            c.execute(
+                                "UPDATE vagas SET workplace_type = ?, polo = ?, regiao = ? WHERE id = ?",
+                                (modalidade, polo, regiao, db_id),
+                            )
+
+                        # 3. Extrai novas habilidades
                         full_text = f"{title} {desc}"
                         extracted_skills = extractor.extract(full_text)
 
-                        # 3. Atualiza relacionamentos em vaga_tecnologia
+                        # 4. Atualiza relacionamentos em vaga_tecnologia
                         for s in extracted_skills:
                             tid = tech_map.get(s.lower())
                             if tid:

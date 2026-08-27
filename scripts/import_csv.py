@@ -234,6 +234,18 @@ def importar(
         # Enriquecimento retroativo de todas as vagas existentes no banco
         todas_vagas = db.scalars(select(Vaga)).all()
         for v in todas_vagas:
+            # No LinkedIn o card nao informa modalidade: o palpite feito na
+            # coleta (cidade -> Presencial) pode contradizer a descricao
+            # completa ("Modalidade 100% remota"). A descricao e autoridade.
+            if v.source == "linkedin" and v.description:
+                reavaliada = infer_workplace(
+                    None, location=v.location, title=v.title,
+                    description=v.description,
+                )
+                if reavaliada and reavaliada != "Não informado" and reavaliada != v.workplace_type:
+                    v.workplace_type = reavaliada
+                    v.polo, v.regiao = geo.classify(v.location, reavaliada)
+
             if not v.workplace_type or v.workplace_type == "Não informado":
                 v.workplace_type = infer_workplace(
                     v.workplace_type,
