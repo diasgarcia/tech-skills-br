@@ -78,16 +78,21 @@ def export_all_pages_data(
             for a, c in area_rows
         ]
 
-        # 2. Ranking de Tecnologias
+        # 2. Ranking de Tecnologias (todo o vocabulario, inclusive sem mencao)
         tech_rows = db.execute(
             select(
                 Tecnologia.nome,
                 Tecnologia.grupo,
                 func.count(vaga_tecnologia.c.vaga_id).label("total_vagas")
             )
-            .join(vaga_tecnologia, Tecnologia.id == vaga_tecnologia.c.tecnologia_id)
+            .outerjoin(
+                vaga_tecnologia,
+                Tecnologia.id == vaga_tecnologia.c.tecnologia_id,
+            )
             .group_by(Tecnologia.id, Tecnologia.nome, Tecnologia.grupo)
-            .order_by(func.count(vaga_tecnologia.c.vaga_id).desc())
+            .order_by(
+                func.count(vaga_tecnologia.c.vaga_id).desc(), Tecnologia.nome
+            )
         ).all()
 
         vagas_com_tech = db.scalar(
