@@ -225,16 +225,16 @@
   },
   {
     "posicao": 29,
-    "nome": "Automação",
-    "grupo": "dados",
+    "nome": "Scrum",
+    "grupo": "engenharia_praticas",
     "vagas": 103,
     "percentual_total": 4.8,
     "percentual_base_tech": 6.0
   },
   {
     "posicao": 30,
-    "nome": "Scrum",
-    "grupo": "engenharia_praticas",
+    "nome": "Automação",
+    "grupo": "dados",
     "vagas": 103,
     "percentual_total": 4.8,
     "percentual_base_tech": 6.0
@@ -361,16 +361,16 @@
   },
   {
     "posicao": 46,
-    "nome": "Copilots & Assistentes de IA",
-    "grupo": "inteligencia_artificial",
+    "nome": "LGPD",
+    "grupo": "seguranca",
     "vagas": 66,
     "percentual_total": 3.1,
     "percentual_base_tech": 3.8
   },
   {
     "posicao": 47,
-    "nome": "LGPD",
-    "grupo": "seguranca",
+    "nome": "Copilots & Assistentes de IA",
+    "grupo": "inteligencia_artificial",
     "vagas": 66,
     "percentual_total": 3.1,
     "percentual_base_tech": 3.8
@@ -1545,16 +1545,16 @@
   },
   {
     "posicao": 194,
-    "nome": "Snowflake",
-    "grupo": "dados",
+    "nome": "Scikit-Learn",
+    "grupo": "inteligencia_artificial",
     "vagas": 2,
     "percentual_total": 0.1,
     "percentual_base_tech": 0.1
   },
   {
     "posicao": 195,
-    "nome": "Scikit-Learn",
-    "grupo": "inteligencia_artificial",
+    "nome": "Snowflake",
+    "grupo": "dados",
     "vagas": 2,
     "percentual_total": 0.1,
     "percentual_base_tech": 0.1
@@ -1577,30 +1577,6 @@
   },
   {
     "posicao": 198,
-    "nome": "Temporal.io",
-    "grupo": "cloud_devops",
-    "vagas": 2,
-    "percentual_total": 0.1,
-    "percentual_base_tech": 0.1
-  },
-  {
-    "posicao": 199,
-    "nome": "Camunda",
-    "grupo": "cloud_devops",
-    "vagas": 2,
-    "percentual_total": 0.1,
-    "percentual_base_tech": 0.1
-  },
-  {
-    "posicao": 200,
-    "nome": "Retool",
-    "grupo": "cloud_devops",
-    "vagas": 2,
-    "percentual_total": 0.1,
-    "percentual_base_tech": 0.1
-  },
-  {
-    "posicao": 201,
     "nome": "Cloudflare",
     "grupo": "cloud_devops",
     "vagas": 2,
@@ -1608,7 +1584,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 202,
+    "posicao": 199,
     "nome": "Pytest",
     "grupo": "qa_testes",
     "vagas": 2,
@@ -1616,9 +1592,33 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 203,
+    "posicao": 200,
     "nome": "WebSockets",
     "grupo": "engenharia_praticas",
+    "vagas": 2,
+    "percentual_total": 0.1,
+    "percentual_base_tech": 0.1
+  },
+  {
+    "posicao": 201,
+    "nome": "Temporal.io",
+    "grupo": "cloud_devops",
+    "vagas": 2,
+    "percentual_total": 0.1,
+    "percentual_base_tech": 0.1
+  },
+  {
+    "posicao": 202,
+    "nome": "Camunda",
+    "grupo": "cloud_devops",
+    "vagas": 2,
+    "percentual_total": 0.1,
+    "percentual_base_tech": 0.1
+  },
+  {
+    "posicao": 203,
+    "nome": "Retool",
+    "grupo": "cloud_devops",
     "vagas": 2,
     "percentual_total": 0.1,
     "percentual_base_tech": 0.1
@@ -1753,16 +1753,16 @@
   },
   {
     "posicao": 220,
-    "nome": "WireMock",
-    "grupo": "qa_testes",
+    "nome": "gRPC",
+    "grupo": "engenharia_praticas",
     "vagas": 1,
     "percentual_total": 0.0,
     "percentual_base_tech": 0.1
   },
   {
     "posicao": 221,
-    "nome": "gRPC",
-    "grupo": "engenharia_praticas",
+    "nome": "WireMock",
+    "grupo": "qa_testes",
     "vagas": 1,
     "percentual_total": 0.0,
     "percentual_base_tech": 0.1
