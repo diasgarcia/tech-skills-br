@@ -54,11 +54,13 @@ jobs:
         python scripts/import_csv.py
         # 3. Busca descricoes apenas das vagas do LinkedIn ainda pendentes.
         #    Roda somente na PRIMEIRA coleta do dia (na pratica a das 09h16):
-        #    concentrar os requests de detalhe numa rodada so reduz o 429, e
-        #    o criterio nao depende do horario exato em que o GitHub dispara
-        #    o schedule (que ja chegou a atrasar 5 horas).
-        if ! git log --since="today 00:00" --oneline | grep -q "coleta automatizada"; then
+        #    o marcador seed/.ultimo_enrich.txt guarda a data UTC da ultima
+        #    execucao e e commitado junto com os dados. Nao depende do
+        #    historico do git (o checkout e raso, fetch-depth 1) nem do
+        #    horario exato em que a run dispara.
+        if [ "$(cat seed/.ultimo_enrich.txt 2>/dev/null)" != "$(date -u +%F)" ]; then
           python scripts/enrich_descriptions.py
+          date -u +%F > seed/.ultimo_enrich.txt
         fi
         # 4. Exporta a base acumulada e regenera os relatorios e graficos:
         python scripts/export_seed.py
@@ -71,7 +73,7 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-        git add seed/vagas.csv docs/relatorios/ .github/pages/
+        git add seed/vagas.csv seed/.ultimo_enrich.txt docs/relatorios/ .github/pages/
 
         
         DATA_HOJE=$(date +'%d/%m/%Y')
