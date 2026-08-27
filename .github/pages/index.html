@@ -192,6 +192,7 @@
     .scroll-table {
       max-height: calc(100vh - 330px);
       overflow-y: auto;
+      scrollbar-gutter: stable;
       border: 1px solid var(--border);
       border-radius: 6px;
       margin-top: 10px;
@@ -497,7 +498,7 @@ function setTab(tabId) {
 
 function ajustaAlturaScrollTables() {
   const footer = document.querySelector("footer");
-  const folgaFooter = (footer ? footer.offsetHeight : 60) + 48;
+  const folgaFooter = (footer ? footer.offsetHeight : 60) + 68;
   document.querySelectorAll(".scroll-table").forEach(el => {
     if (!el.offsetParent) return; // aba escondida
     const topo = el.getBoundingClientRect().top;
