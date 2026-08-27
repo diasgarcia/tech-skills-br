@@ -1,29 +1,6 @@
 [
   {
-    "id": 2216,
-    "titulo": "Estagiário, Suporte de TI",
-    "empresa": "Auth21",
-    "area": "Suporte Técnico",
-    "senioridade": "Estágio",
-    "localidade": "João Pessoa, PB",
-    "polo": "João Pessoa",
-    "regiao": "Nordeste",
-    "modalidade": "Remoto",
-    "data_publicacao": "27/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-suporte-de-ti-at-auth21-4459660278",
-    "tecnologias": [
-      "Active Directory",
-      "Windows",
-      "Redes de Computadores",
-      "Hardware",
-      "Manutenção Preventiva",
-      "ERP",
-      "TOTVS"
-    ]
-  },
-  {
-    "id": 2215,
+    "id": 2203,
     "titulo": "Estagiário(a) Suporte TI",
     "empresa": "Auth21",
     "area": "Suporte Técnico",
@@ -43,7 +20,7 @@
     ]
   },
   {
-    "id": 2214,
+    "id": 2202,
     "titulo": "Estagiário (a) de Suporte de TI - Nível 2",
     "empresa": "RAC Engenharia",
     "area": "Suporte Técnico",
@@ -61,90 +38,32 @@
     ]
   },
   {
-    "id": 2213,
-    "titulo": "Auxiliar de suporte técnico",
-    "empresa": "Grupo Integraseg Distribuidora",
+    "id": 2200,
+    "titulo": "Assistente de Suporte a Sistemas Jr",
+    "empresa": "Tata Consultancy Services",
     "area": "Suporte Técnico",
     "senioridade": "Júnior",
-    "localidade": "Sorocaba, SP",
-    "polo": "Sorocaba",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "27/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/auxiliar-de-suporte-t%C3%A9cnico-at-grupo-integraseg-distribuidora-4458002298",
-    "tecnologias": []
-  },
-  {
-    "id": 2212,
-    "titulo": "Assistente de Suporte de TI",
-    "empresa": "Auth21",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Embu das Artes, SP",
+    "localidade": "São Paulo, SP",
     "polo": "São Paulo",
     "regiao": "Sudeste",
     "modalidade": "Remoto",
     "data_publicacao": "27/08/2026",
     "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-de-ti-at-auth21-4459664166",
+    "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-a-sistemas-jr-at-tata-consultancy-services-4459838451",
     "tecnologias": [
+      "Active Directory",
       "Windows",
       "Redes de Computadores",
       "VPN",
-      "Hardware",
-      "Montagem e Manutenção de PCs",
-      "Manutenção Preventiva"
-    ]
-  },
-  {
-    "id": 2210,
-    "titulo": "Assistente de Suporte a Operações e Serviços de TI",
-    "empresa": "Auth21",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Belo Horizonte, MG",
-    "polo": "Belo Horizonte",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "27/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-a-opera%C3%A7%C3%B5es-e-servi%C3%A7os-de-ti-at-auth21-4459666140",
-    "tecnologias": [
-      "Linux",
-      "Windows",
       "ITIL",
-      "Help Desk",
+      "Service Desk",
       "Office 365",
       "Hardware",
-      "Montagem e Manutenção de PCs",
-      "Metodologias Ágeis"
+      "VMware"
     ]
   },
   {
-    "id": 2208,
-    "titulo": "Assistente de Suporte (TI), Belo Horizonte/MG",
-    "empresa": "Auth21",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Belo Horizonte, MG",
-    "polo": "Belo Horizonte",
-    "regiao": "Sudeste",
-    "modalidade": "Remoto",
-    "data_publicacao": "27/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-ti-belo-horizonte-mg-at-auth21-4459664114",
-    "tecnologias": [
-      "Windows",
-      "Service Desk",
-      "Help Desk",
-      "GLPI",
-      "Office 365",
-      "Inglês"
-    ]
-  },
-  {
-    "id": 2207,
+    "id": 2198,
     "titulo": "Analista de Suporte Web Júnior",
     "empresa": "Jobbol",
     "area": "Suporte Técnico",
@@ -159,7 +78,29 @@
     "tecnologias": []
   },
   {
-    "id": 2206,
+    "id": 2197,
+    "titulo": "Analista de Suporte Tecnico Jr",
+    "empresa": "Mercado Eletrônico",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Remoto",
+    "data_publicacao": "27/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-tecnico-jr-at-mercado-eletr%C3%B4nico-4458669021",
+    "tecnologias": [
+      "SQL",
+      "T-SQL",
+      "Windows",
+      "ITIL",
+      "Inglês",
+      "Espanhol"
+    ]
+  },
+  {
+    "id": 2196,
     "titulo": "Analista de Suporte JR - Joinville",
     "empresa": "RotaExata",
     "area": "Suporte Técnico",
@@ -176,29 +117,28 @@
     ]
   },
   {
-    "id": 2205,
-    "titulo": "Analista Suporte JR | Tecnologia da Informação | Onco Cehon Bahia",
-    "empresa": "Auth21",
+    "id": 2195,
+    "titulo": "ANALISTA DE SUPORTE (TI) JUNIOR P/D5- TJMG",
+    "empresa": "Wyntech",
     "area": "Suporte Técnico",
     "senioridade": "Júnior",
-    "localidade": "Salvador, BA",
-    "polo": "Salvador",
-    "regiao": "Nordeste",
-    "modalidade": "Presencial",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
     "data_publicacao": "27/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/analista-suporte-jr-tecnologia-da-informa%C3%A7%C3%A3o-onco-cehon-bahia-at-auth21-4459676058",
+    "fonte": "gupy",
+    "url": "https://wyntech.gupy.io/job/eyJqb2JJZCI6MTIzMTcxMzcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Windows",
-      "Office 365",
-      "Hardware"
+      "ITIL",
+      "Service Desk"
     ]
   },
   {
-    "id": 2204,
-    "titulo": "Analista Suporte JR | Tecnologia da Informação | Morumbi São Paulo",
-    "empresa": "Auth21",
-    "area": "Suporte Técnico",
+    "id": 2192,
+    "titulo": "Jr QA Engineer",
+    "empresa": "Better Collective",
+    "area": "QA",
     "senioridade": "Júnior",
     "localidade": "São Paulo, SP",
     "polo": "São Paulo",
@@ -206,96 +146,14 @@
     "modalidade": "Presencial",
     "data_publicacao": "27/08/2026",
     "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/analista-suporte-jr-tecnologia-da-informa%C3%A7%C3%A3o-morumbi-s%C3%A3o-paulo-at-auth21-4459671214",
+    "url": "https://br.linkedin.com/jobs/view/jr-qa-engineer-at-better-collective-4459843597",
     "tecnologias": [
-      "Windows",
-      "Montagem e Manutenção de PCs"
-    ]
-  },
-  {
-    "id": 2202,
-    "titulo": "Consultor de Segurança da Informação Jr, SOC | Threat hunting",
-    "empresa": "Auth21",
-    "area": "Segurança",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Híbrido",
-    "data_publicacao": "27/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/consultor-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-jr-soc-threat-hunting-at-auth21-4459669186",
-    "tecnologias": [
-      "Qualidade de Dados",
-      "AWS",
-      "Azure",
-      "Linux",
-      "Windows",
-      "Redes de Computadores",
-      "Firewall",
-      "Service Desk",
-      "Office 365",
-      "Cibersegurança",
-      "Governança e Riscos (GRC)",
-      "LGPD",
-      "SIEM/SOC",
-      "UML",
+      "LLMs & IA Generativa",
       "Inglês"
     ]
   },
   {
-    "id": 2201,
-    "titulo": "Analista de Segurança da Informação Junior",
-    "empresa": "Auth21",
-    "area": "Segurança",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Híbrido",
-    "data_publicacao": "27/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/analista-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-junior-at-auth21-4459666235",
-    "tecnologias": [
-      "Linux",
-      "Active Directory",
-      "Windows",
-      "Redes de Computadores",
-      "VPN",
-      "Governança e Riscos (GRC)",
-      "Gestão de Vulnerabilidades",
-      "IAM"
-    ]
-  },
-  {
-    "id": 2200,
-    "titulo": "Analista de Segurança da Informação Jr. (SOC)",
-    "empresa": "Auth21",
-    "area": "Segurança",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "27/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/analista-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-jr-soc-at-auth21-4459672186",
-    "tecnologias": [
-      "Python",
-      "Banco de Dados",
-      "AWS",
-      "Linux",
-      "Cloudflare",
-      "Windows",
-      "Redes de Computadores",
-      "Firewall",
-      "Cibersegurança",
-      "SIEM/SOC",
-      "Jira"
-    ]
-  },
-  {
-    "id": 2197,
+    "id": 2190,
     "titulo": "Analista de Qualidade Jr.",
     "empresa": "MANN+HUMMEL",
     "area": "QA",
@@ -312,7 +170,7 @@
     ]
   },
   {
-    "id": 2196,
+    "id": 2189,
     "titulo": "Analista de Qualidade Jr (ênfase em Sistemas de Gestão, Certificações e Melhoria Contínua)",
     "empresa": "CPFL Energia",
     "area": "QA",
@@ -331,7 +189,44 @@
     ]
   },
   {
-    "id": 2194,
+    "id": 2188,
+    "titulo": "Técnico em Informática Jr",
+    "empresa": "Refricon Alimentos",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "João Pessoa, PB",
+    "polo": "João Pessoa",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "27/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-em-inform%C3%A1tica-jr-at-refricon-alimentos-4459853516",
+    "tecnologias": [
+      "Help Desk",
+      "Hardware"
+    ]
+  },
+  {
+    "id": 2187,
+    "titulo": "TECNICO INFORMATICA JR - LONDRINA/PR",
+    "empresa": "Cogna Educação",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "Londrina, Paraná",
+    "polo": "Londrina",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "27/08/2026",
+    "fonte": "gupy",
+    "url": "https://cogna.gupy.io/job/eyJqb2JJZCI6MTIyNjE0NjgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": [
+      "Windows",
+      "Redes de Computadores",
+      "Firewall"
+    ]
+  },
+  {
+    "id": 2186,
     "titulo": "Estágio em Tecnologia, Automação, IA & Desenvolvimento",
     "empresa": "Auth21",
     "area": "Outros/TI Geral",
@@ -353,7 +248,7 @@
     ]
   },
   {
-    "id": 2193,
+    "id": 2185,
     "titulo": "Estágio em TI - SC",
     "empresa": "Fundatec (Fundação Universidade Empresa de Tecnologia e Ciências)",
     "area": "Outros/TI Geral",
@@ -368,7 +263,7 @@
     "tecnologias": []
   },
   {
-    "id": 2188,
+    "id": 2181,
     "titulo": "Estagiário de TI",
     "empresa": "XIS DESIGN COMUNICAÇÃO VISUAL",
     "area": "Outros/TI Geral",
@@ -383,7 +278,7 @@
     "tecnologias": []
   },
   {
-    "id": 2187,
+    "id": 2180,
     "titulo": "Estagiário de TI",
     "empresa": "Auth21",
     "area": "Outros/TI Geral",
@@ -420,7 +315,7 @@
     ]
   },
   {
-    "id": 2186,
+    "id": 2179,
     "titulo": "Estagiário de TI",
     "empresa": "Vertem",
     "area": "Outros/TI Geral",
@@ -457,40 +352,29 @@
     ]
   },
   {
-    "id": 2185,
-    "titulo": "Estagiário (a) em TI, Salvador/BA",
-    "empresa": "Auth21",
+    "id": 2178,
+    "titulo": "Desenvolvedor(a) Júnior",
+    "empresa": "Qaracter Brasil",
     "area": "Outros/TI Geral",
-    "senioridade": "Estágio",
-    "localidade": "Salvador, BA",
-    "polo": "Salvador",
-    "regiao": "Nordeste",
-    "modalidade": "Remoto",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
     "data_publicacao": "27/08/2026",
     "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-em-ti-salvador-ba-at-auth21-4459680012",
-    "tecnologias": []
-  },
-  {
-    "id": 2184,
-    "titulo": "ESTÁGIO EM TI",
-    "empresa": "Auth21",
-    "area": "Outros/TI Geral",
-    "senioridade": "Estágio",
-    "localidade": "Teresina, PI",
-    "polo": "Teresina",
-    "regiao": "Nordeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "27/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-ti-at-auth21-4459651956",
+    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-j%C3%BAnior-at-qaracter-brasil-4457797464",
     "tecnologias": [
-      "Android",
-      "Montagem e Manutenção de PCs"
+      "Python",
+      "Java",
+      ".NET",
+      "AWS",
+      "Serverless",
+      "Espanhol"
     ]
   },
   {
-    "id": 2183,
+    "id": 2177,
     "titulo": "Desenvolvedor Web Junior",
     "empresa": "Auth21",
     "area": "Outros/TI Geral",
@@ -514,103 +398,32 @@
     ]
   },
   {
-    "id": 2181,
-    "titulo": "Assistente de Tecnologia da Informação",
-    "empresa": "Auth21",
-    "area": "Outros/TI Geral",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP",
+    "id": 2172,
+    "titulo": "Estágio em Gestão de Desenvolvimento Android",
+    "empresa": "Instituto de Pesquisas ELDORADO",
+    "area": "Mobile",
+    "senioridade": "Estágio",
+    "localidade": "Campinas, São Paulo",
     "polo": "São Paulo",
     "regiao": "Sudeste",
     "modalidade": "Híbrido",
     "data_publicacao": "27/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/assistente-de-tecnologia-da-informa%C3%A7%C3%A3o-at-auth21-4459668223",
+    "fonte": "gupy",
+    "url": "https://institutoeldorado.gupy.io/job/eyJqb2JJZCI6MTIwNzY0ODksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Active Directory",
-      "Windows",
-      "ITIL",
-      "Office 365",
-      "Manutenção Preventiva"
-    ]
-  },
-  {
-    "id": 2179,
-    "titulo": "Assistente de TI",
-    "empresa": "Auth21",
-    "area": "Outros/TI Geral",
-    "senioridade": "Júnior",
-    "localidade": "Salvador, BA",
-    "polo": "Salvador",
-    "regiao": "Nordeste",
-    "modalidade": "Híbrido",
-    "data_publicacao": "27/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/assistente-de-ti-at-auth21-4459677061",
-    "tecnologias": [
-      "JavaScript",
-      "HTML",
-      "CSS",
-      "Excel",
-      "Lógica de Programação"
-    ]
-  },
-  {
-    "id": 2175,
-    "titulo": "[Mobile Search] Desenvolvedor Android JR",
-    "empresa": "Auth21",
-    "area": "Mobile",
-    "senioridade": "Júnior",
-    "localidade": "Manaus, AM",
-    "polo": "Manaus",
-    "regiao": "Norte",
-    "modalidade": "Híbrido",
-    "data_publicacao": "27/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/mobile-search-desenvolvedor-android-jr-at-auth21-4459656924",
-    "tecnologias": [
-      "Java",
-      "Kotlin",
-      "SQL",
+      "Python",
+      "C++",
       "Android",
-      "Banco de Dados",
-      "Design Patterns",
+      "Inteligência Artificial",
+      "Copilots & Assistentes de IA",
+      "Jenkins",
+      "Git",
+      "POO",
       "Inglês"
     ]
   },
   {
-    "id": 2171,
-    "titulo": "Analista de Infraestrutura N3 Junior",
-    "empresa": "Hub Seven",
-    "area": "Infraestrutura / Redes",
-    "senioridade": "Júnior",
-    "localidade": "Porto Alegre, RS",
-    "polo": "Porto Alegre",
-    "regiao": "Sul",
-    "modalidade": "Híbrido",
-    "data_publicacao": "27/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/analista-de-infraestrutura-n3-junior-at-hub-seven-4457779116",
-    "tecnologias": [
-      "Shell/Bash",
-      "Automação",
-      "AWS",
-      "Azure",
-      "Linux",
-      "Windows Server",
-      "Active Directory",
-      "Windows",
-      "Redes de Computadores",
-      "VPN",
-      "Firewall",
-      "ITIL",
-      "VMware",
-      "Criptografia",
-      "LGPD"
-    ]
-  },
-  {
-    "id": 2170,
+    "id": 2169,
     "titulo": "ANALISTA REDES ATM JR - SÃO PAULO - SP",
     "empresa": "Prosegur",
     "area": "Infraestrutura / Redes",
@@ -631,7 +444,24 @@
     ]
   },
   {
-    "id": 2169,
+    "id": 2168,
+    "titulo": "Estágio area de informática ou Eletrônica",
+    "empresa": "Original Vet.",
+    "area": "Hardware / Eletrônica",
+    "senioridade": "Estágio",
+    "localidade": "Palhoça, SC",
+    "polo": "Florianópolis",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "27/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-area-de-inform%C3%A1tica-ou-eletr%C3%B4nica-at-original-vet-4459838794",
+    "tecnologias": [
+      "Eletrônica"
+    ]
+  },
+  {
+    "id": 2167,
     "titulo": "Estagiário de T.I. - Telecom",
     "empresa": "Bellinati Perez",
     "area": "Hardware / Eletrônica",
@@ -651,53 +481,7 @@
     ]
   },
   {
-    "id": 2168,
-    "titulo": "Desenvolvedor(a) Full Stack .NET Júnior | SEGIMOB",
-    "empresa": "Auth21",
-    "area": "Fullstack",
-    "senioridade": "Júnior",
-    "localidade": "Uberlândia, MG",
-    "polo": "Uberlândia",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "27/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-full-stack-net-j%C3%BAnior-segimob-at-auth21-4459656997",
-    "tecnologias": [
-      "JavaScript",
-      "TypeScript",
-      "C#",
-      "SQL",
-      "HTML",
-      "CSS",
-      "Angular",
-      ".NET",
-      "Entity Framework",
-      "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "Banco de Dados",
-      "MySQL",
-      "SQL Server",
-      "Redis",
-      "AWS",
-      "Docker",
-      "Git",
-      "CI/CD",
-      "Serverless",
-      "Datadog",
-      "Postman",
-      "API REST",
-      "Microserviços",
-      "POO",
-      "SOLID",
-      "Clean Architecture",
-      "Design Patterns",
-      "DDD",
-      "Engenharia de Software"
-    ]
-  },
-  {
-    "id": 2164,
+    "id": 2165,
     "titulo": "DESENVOLVEDOR FRONT-END JR",
     "empresa": "Auth21",
     "area": "Frontend",
@@ -724,7 +508,7 @@
     ]
   },
   {
-    "id": 2163,
+    "id": 2164,
     "titulo": "ESTAGIÁRIO TÉCNICO DE INFORMÁTICA",
     "empresa": "Live Marketing Cenográfico",
     "area": "Field Service / Hardware",
@@ -741,7 +525,7 @@
     ]
   },
   {
-    "id": 2161,
+    "id": 2162,
     "titulo": "Junior Software Engineer (Remote)",
     "empresa": "Hire Feed",
     "area": "Engenharia de Software",
@@ -761,68 +545,98 @@
     ]
   },
   {
-    "id": 2157,
-    "titulo": "ENGENHARIA DE SOFTWARE .NET JR, JURIDICO E ASSUNTOS CORPORATIVOS (VAGA EXCLUSIVA PARA PESSOAS COM DEFICIÊNCIA) Smart",
-    "empresa": "Auth21",
+    "id": 2158,
+    "titulo": "ANALISTA DE SISTEMAS JÚNIOR",
+    "empresa": "Proativa Capital",
     "area": "Engenharia de Software",
     "senioridade": "Júnior",
-    "localidade": "São Paulo, SP",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "27/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-sistemas-j%C3%BAnior-at-proativa-capital-4458646789",
+    "tecnologias": [
+      "Python",
+      "JavaScript",
+      "SQL",
+      "Power BI",
+      "Excel",
+      "ETL",
+      "BI",
+      "Análise de Dados",
+      "Qualidade de Dados",
+      "Inteligência Artificial",
+      "Banco de Dados",
+      "Git",
+      "Office 365",
+      "API REST",
+      "Estrutura de Dados",
+      "Lógica de Programação",
+      "Modelagem de Dados"
+    ]
+  },
+  {
+    "id": 2157,
+    "titulo": "DevOps JR",
+    "empresa": "HSystem",
+    "area": "DevOps",
+    "senioridade": "Júnior",
+    "localidade": "Florianópolis, SC",
+    "polo": "Florianópolis",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "27/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/devops-jr-at-hsystem-4458007676",
+    "tecnologias": [
+      "Python",
+      "Shell/Bash",
+      "AWS",
+      "Terraform",
+      "Linux",
+      "Grafana",
+      "Firewall",
+      "Criptografia",
+      "LGPD",
+      "ISO 27001",
+      "Pentest",
+      "Gestão de Vulnerabilidades",
+      "IAM",
+      "SIEM/SOC"
+    ]
+  },
+  {
+    "id": 2155,
+    "titulo": "Estágio em BI (Business Intelligence)",
+    "empresa": "Equifax",
+    "area": "Data",
+    "senioridade": "Estágio",
+    "localidade": "Barueri, SP",
     "polo": "São Paulo",
     "regiao": "Sudeste",
     "modalidade": "Híbrido",
     "data_publicacao": "27/08/2026",
     "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/engenharia-de-software-net-jr-juridico-e-assuntos-corporativos-vaga-exclusiva-para-pessoas-com-defici%C3%AAncia-smart-at-auth21-4459663191",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-bi-business-intelligence-at-equifax-4458648766",
     "tecnologias": [
-      "JavaScript",
-      "C#",
       "SQL",
-      "React",
-      "Angular",
-      ".NET",
+      "Looker",
+      "BigQuery",
+      "BI",
+      "Análise de Dados",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
       "LLMs & IA Generativa",
       "Banco de Dados",
-      "AWS",
-      "Git",
-      "CI/CD",
-      "API REST",
-      "Scrum",
-      "Metodologias Ágeis",
-      "DDD",
-      "Lógica de Programação",
-      "Engenharia de Software"
+      "GCP",
+      "Inglês",
+      "Salesforce",
+      "Confluence"
     ]
   },
   {
-    "id": 2155,
-    "titulo": "Analista DevOps Júnior",
-    "empresa": "Auth21",
-    "area": "DevOps",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "27/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/analista-devops-j%C3%BAnior-at-auth21-4459665234",
-    "tecnologias": [
-      ".NET",
-      "Docker",
-      "Kubernetes",
-      "Terraform",
-      "Git",
-      "CI/CD",
-      "Linux",
-      "Redes de Computadores",
-      "Engenharia de Software",
-      "Inglês"
-    ]
-  },
-  {
-    "id": 2153,
+    "id": 2154,
     "titulo": "Estágio Nível Superior, Extração de dados TI",
     "empresa": "Auth21",
     "area": "Data",
@@ -839,7 +653,115 @@
     ]
   },
   {
+    "id": 2153,
+    "titulo": "Estágio Business Intelligence",
+    "empresa": "NAU Capital",
+    "area": "Data",
+    "senioridade": "Estágio",
+    "localidade": "Belo Horizonte e Região",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "27/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-business-intelligence-at-nau-capital-4456957258",
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "Power BI",
+      "Excel",
+      "Spark",
+      "ETL",
+      "Databricks",
+      "BI",
+      "Estatística",
+      "Análise de Dados",
+      "Inteligência Artificial",
+      "LLMs & IA Generativa",
+      "Banco de Dados",
+      "Modelagem de Dados"
+    ]
+  },
+  {
+    "id": 2152,
+    "titulo": "Estagiário Engenharia de Dados",
+    "empresa": "FalaBoss",
+    "area": "Data",
+    "senioridade": "Estágio",
+    "localidade": "São José dos Campos, SP",
+    "polo": "São José dos Campos",
+    "regiao": "Sudeste",
+    "modalidade": "Remoto",
+    "data_publicacao": "27/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-engenharia-de-dados-at-falaboss-4459841625",
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "Pandas",
+      "NumPy",
+      "Spark",
+      "Airflow",
+      "ETL",
+      "Hadoop",
+      "Análise de Dados",
+      "PyTorch",
+      "TensorFlow",
+      "Scikit-Learn",
+      "Keras",
+      "GCP",
+      "Docker",
+      "Linux",
+      "Windows",
+      "API REST",
+      "Algoritmos"
+    ]
+  },
+  {
+    "id": 2151,
+    "titulo": "Data Scientist I",
+    "empresa": "Bradesco",
+    "area": "Data",
+    "senioridade": "Júnior",
+    "localidade": "Osasco, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": "27/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/data-scientist-i-at-banco-bradesco-4459856822",
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "Estatística",
+      "Análise de Dados"
+    ]
+  },
+  {
     "id": 2150,
+    "titulo": "Business Intelligence I",
+    "empresa": "Bradesco",
+    "area": "Data",
+    "senioridade": "Júnior",
+    "localidade": "Osasco, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": "27/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/business-intelligence-i-at-banco-bradesco-4459861865",
+    "tecnologias": [
+      "Python",
+      "Power BI",
+      "Excel",
+      "Databricks",
+      "BI",
+      "Automação",
+      "Estatística"
+    ]
+  },
+  {
+    "id": 2149,
     "titulo": "Analista de Dados Jr.",
     "empresa": "OndeTrabalhar",
     "area": "Data",
@@ -874,6 +796,61 @@
     ]
   },
   {
+    "id": 2148,
+    "titulo": "Desenvolvedor(a) PHP Júnior (Vaga Exclusiva para Pessoas com Deficiência)",
+    "empresa": "PicPay",
+    "area": "Backend",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo e Região",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Remoto",
+    "data_publicacao": "27/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-php-j%C3%BAnior-vaga-exclusiva-para-pessoas-com-defici%C3%AAncia-at-picpay-4458657023",
+    "tecnologias": [
+      "PHP",
+      "Laravel",
+      "Kafka",
+      "MySQL",
+      "MongoDB",
+      "Docker",
+      "Git",
+      "RabbitMQ",
+      "TDD",
+      "OWASP",
+      "Metodologias Ágeis",
+      "SOLID",
+      "Clean Code",
+      "Design Patterns"
+    ]
+  },
+  {
+    "id": 2147,
+    "titulo": "Desenvolvedor Junior .NET - Trabalho Remoto",
+    "empresa": "BairesDev",
+    "area": "Backend",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Remoto",
+    "data_publicacao": "27/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-junior-net-trabalho-remoto-at-bairesdev-4458659642",
+    "tecnologias": [
+      "C#",
+      ".NET",
+      "Banco de Dados",
+      "Git",
+      "Hardware",
+      "Clean Code",
+      "Estrutura de Dados",
+      "Algoritmos",
+      "Inglês"
+    ]
+  },
+  {
     "id": 313,
     "titulo": "Analista de Automação de Testes Júnior - Vaga Afirmativa",
     "empresa": "DBC Company",
@@ -902,7 +879,7 @@
     ]
   },
   {
-    "id": 2217,
+    "id": 2204,
     "titulo": "Locaweb | Analista de Suporte Técnico Júnior | N1 | Presencial",
     "empresa": "Locaweb",
     "area": "Suporte Técnico",
@@ -917,7 +894,7 @@
     "tecnologias": []
   },
   {
-    "id": 2211,
+    "id": 2201,
     "titulo": "Assistente de Suporte de Sistemas",
     "empresa": "Perfor Máquinas",
     "area": "Suporte Técnico",
@@ -938,28 +915,7 @@
     ]
   },
   {
-    "id": 2203,
-    "titulo": "Estagiário em Segurança da Informação, Governança, Riscos e Compliance",
-    "empresa": "Auth21",
-    "area": "Segurança",
-    "senioridade": "Estágio",
-    "localidade": "Curitiba, PR",
-    "polo": "Curitiba",
-    "regiao": "Sul",
-    "modalidade": "Híbrido",
-    "data_publicacao": "26/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-em-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-governan%C3%A7a-riscos-e-compliance-at-auth21-4459120534",
-    "tecnologias": [
-      "Excel",
-      "ITIL",
-      "Governança e Riscos (GRC)",
-      "LGPD",
-      "ISO 27001"
-    ]
-  },
-  {
-    "id": 2199,
+    "id": 2193,
     "titulo": "QA Junior",
     "empresa": "CRM DataCrazy",
     "area": "QA",
@@ -983,7 +939,7 @@
     ]
   },
   {
-    "id": 2198,
+    "id": 2191,
     "titulo": "Analista de Qualidade Júnior",
     "empresa": "Jobbol",
     "area": "QA",
@@ -998,25 +954,7 @@
     "tecnologias": []
   },
   {
-    "id": 2195,
-    "titulo": "Programa de Estágio de Férias Genial Investimentos, Tecnologia | São Paulo, Capital | Jan/2027",
-    "empresa": "Auth21",
-    "area": "Outros/TI Geral",
-    "senioridade": "Estágio",
-    "localidade": "São Paulo, SP",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "26/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/programa-de-est%C3%A1gio-de-f%C3%A9rias-genial-investimentos-tecnologia-s%C3%A3o-paulo-capital-jan-2027-at-auth21-4459159025",
-    "tecnologias": [
-      "Engenharia de Software",
-      "Inglês"
-    ]
-  },
-  {
-    "id": 2192,
+    "id": 2184,
     "titulo": "Estágio - Superior em Ciências da Computação e Engenharia da Computação",
     "empresa": "IEL VAGAS PE",
     "area": "Outros/TI Geral",
@@ -1035,26 +973,7 @@
     ]
   },
   {
-    "id": 2191,
-    "titulo": "Estagiário(a) em Inovação e Tecnologia",
-    "empresa": "Auth21",
-    "area": "Outros/TI Geral",
-    "senioridade": "Estágio",
-    "localidade": "Belo Horizonte, MG",
-    "polo": "Belo Horizonte",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "26/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-em-inova%C3%A7%C3%A3o-e-tecnologia-at-auth21-4459131151",
-    "tecnologias": [
-      "Excel",
-      "Análise de Dados",
-      "Inteligência Artificial"
-    ]
-  },
-  {
-    "id": 2190,
+    "id": 2183,
     "titulo": "Estagiário na área de Tecnologia da Informação",
     "empresa": "Jobbol",
     "area": "Outros/TI Geral",
@@ -1073,7 +992,7 @@
     ]
   },
   {
-    "id": 2189,
+    "id": 2182,
     "titulo": "Estagiário na área de TI",
     "empresa": "Jobbol",
     "area": "Outros/TI Geral",
@@ -1092,7 +1011,7 @@
     ]
   },
   {
-    "id": 2182,
+    "id": 2176,
     "titulo": "Auxiliar de T.I. Pleno",
     "empresa": "PANROTAS",
     "area": "Outros/TI Geral",
@@ -1107,7 +1026,7 @@
     "tecnologias": []
   },
   {
-    "id": 2178,
+    "id": 2174,
     "titulo": "Assistente TI",
     "empresa": "ALZ Grãos",
     "area": "Outros/TI Geral",
@@ -1128,7 +1047,7 @@
     ]
   },
   {
-    "id": 2177,
+    "id": 2173,
     "titulo": "AUXILIAR ADMINISTRATIVO T.I.",
     "empresa": "Trael Transformadores Elétricos Ltda",
     "area": "Outros/TI Geral",
@@ -1145,27 +1064,7 @@
     ]
   },
   {
-    "id": 2176,
-    "titulo": "0746/2026, Analista de TI JR (SENAI RONDONÓPOLIS/MT)",
-    "empresa": "Auth21",
-    "area": "Outros/TI Geral",
-    "senioridade": "Júnior",
-    "localidade": "Rondonópolis, MT",
-    "polo": "Cuiabá",
-    "regiao": "Centro-Oeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "26/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/0746-2026-analista-de-ti-jr-senai-rondon%C3%B3polis-mt-at-auth21-4459135082",
-    "tecnologias": [
-      "Excel",
-      "Hardware",
-      "Manutenção Preventiva",
-      "LGPD"
-    ]
-  },
-  {
-    "id": 2174,
+    "id": 2171,
     "titulo": "Jovem Aprendiz - Infraestrutura de TI",
     "empresa": "Monte Bravo",
     "area": "Infraestrutura / Redes",
@@ -1184,141 +1083,7 @@
     ]
   },
   {
-    "id": 2172,
-    "titulo": "Estágio Nível Superior, Governança e Infraestrutura de TI",
-    "empresa": "Auth21",
-    "area": "Infraestrutura / Redes",
-    "senioridade": "Estágio",
-    "localidade": "Belo Horizonte, MG",
-    "polo": "Belo Horizonte",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "26/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-n%C3%ADvel-superior-governan%C3%A7a-e-infraestrutura-de-ti-at-auth21-4459134057",
-    "tecnologias": [
-      "Redes de Computadores"
-    ]
-  },
-  {
-    "id": 2167,
-    "titulo": "Desenvolvedor Fullstack Jr",
-    "empresa": "Auth21",
-    "area": "Fullstack",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Híbrido",
-    "data_publicacao": "26/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-fullstack-jr-at-auth21-4459144039",
-    "tecnologias": [
-      "Python",
-      "JavaScript",
-      "TypeScript",
-      "SQL",
-      "HTML",
-      "CSS",
-      "React",
-      "Next.js",
-      "Node.js",
-      "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "Banco de Dados",
-      "Git",
-      "Active Directory",
-      "API REST",
-      "Lógica de Programação",
-      "CRM",
-      "Salesforce"
-    ]
-  },
-  {
-    "id": 2166,
-    "titulo": "DESENVOLVEDOR FULL STACK JR",
-    "empresa": "Auth21",
-    "area": "Fullstack",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "26/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-full-stack-jr-at-auth21-4459150029",
-    "tecnologias": [
-      "JavaScript",
-      "Angular",
-      "Node.js",
-      ".NET",
-      "Kafka",
-      "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "Banco de Dados",
-      "PostgreSQL",
-      "MongoDB",
-      "AWS",
-      "Git",
-      "RabbitMQ",
-      "Metodologias Ágeis",
-      "SOLID",
-      "Clean Code",
-      "Estrutura de Dados",
-      "Lógica de Programação"
-    ]
-  },
-  {
-    "id": 2165,
-    "titulo": "Assistente Desenvolvedor FullStack",
-    "empresa": "Auth21",
-    "area": "Fullstack",
-    "senioridade": "Júnior",
-    "localidade": "São Leopoldo, RS",
-    "polo": "Porto Alegre",
-    "regiao": "Sul",
-    "modalidade": "Presencial",
-    "data_publicacao": "26/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/assistente-desenvolvedor-fullstack-at-auth21-4459138108",
-    "tecnologias": [
-      "Python",
-      "JavaScript",
-      "C++",
-      "SQL",
-      "HTML",
-      "CSS",
-      "React",
-      "Angular",
-      "Vue.js",
-      "Django",
-      "Flask",
-      "FastAPI",
-      "Inteligência Artificial",
-      "LLMs & IA Generativa",
-      "Agentes de IA & RAG",
-      "Bancos Vetoriais",
-      "Banco de Dados",
-      "PostgreSQL",
-      "MySQL",
-      "MongoDB",
-      "Docker",
-      "Git",
-      "Linux",
-      "API REST",
-      "Scrum",
-      "Metodologias Ágeis",
-      "Estrutura de Dados",
-      "Lógica de Programação",
-      "Engenharia de Software",
-      "Inglês",
-      "UX/UI",
-      "ERP",
-      "IoT"
-    ]
-  },
-  {
-    "id": 2162,
+    "id": 2163,
     "titulo": "Software Engineer Intern",
     "empresa": "KIS Solutions",
     "area": "Engenharia de Software",
@@ -1335,28 +1100,7 @@
     ]
   },
   {
-    "id": 2160,
-    "titulo": "Estágio em OPERAÇÕES: Ciência de Dados, Sistemas de Informação, Engenharia de Software, Análise e Desenvolvimento de Sistemas, Ticket Serviços",
-    "empresa": "Auth21",
-    "area": "Engenharia de Software",
-    "senioridade": "Estágio",
-    "localidade": "São Paulo, SP",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Híbrido",
-    "data_publicacao": "26/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-opera%C3%A7%C3%B5es-ci%C3%AAncia-de-dados-sistemas-de-informa%C3%A7%C3%A3o-engenharia-de-software-an%C3%A1lise-e-desenvolvimento-de-sistemas-ticket-servi%C3%A7os-at-auth21-4459126257",
-    "tecnologias": [
-      "Python",
-      "Power BI",
-      "Excel",
-      "Engenharia de Software",
-      "Inglês"
-    ]
-  },
-  {
-    "id": 2159,
+    "id": 2161,
     "titulo": "Estágio em Desenvolvimento de Software",
     "empresa": "ABRH Estágio",
     "area": "Engenharia de Software",
@@ -1376,7 +1120,7 @@
     ]
   },
   {
-    "id": 2158,
+    "id": 2160,
     "titulo": "Estágio em Desenvolvimento de Software",
     "empresa": "DB1 Group",
     "area": "Engenharia de Software",
@@ -1395,152 +1139,6 @@
       "Inteligência Artificial",
       "PostgreSQL",
       "Oracle"
-    ]
-  },
-  {
-    "id": 2156,
-    "titulo": "DevOps JR",
-    "empresa": "Auth21",
-    "area": "DevOps",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "26/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/devops-jr-at-auth21-4459123404",
-    "tecnologias": [
-      "Shell/Bash",
-      "Docker",
-      "Kubernetes",
-      "Git",
-      "CI/CD",
-      "Linux",
-      "Testes Automatizados",
-      "Redes de Computadores",
-      "Engenharia de Software"
-    ]
-  },
-  {
-    "id": 2152,
-    "titulo": "Analista de dados Júnior, Vaga exclusiva para Mulheres 👩 | Inteligência de Dados Operacionais",
-    "empresa": "Auth21",
-    "area": "Data",
-    "senioridade": "Júnior",
-    "localidade": "Rio de Janeiro, RJ",
-    "polo": "Rio de Janeiro",
-    "regiao": "Sudeste",
-    "modalidade": "Remoto",
-    "data_publicacao": "26/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/analista-de-dados-j%C3%BAnior-vaga-exclusiva-para-mulheres-%F0%9F%91%A9-intelig%C3%AAncia-de-dados-operacionais-at-auth21-4459129164",
-    "tecnologias": [
-      "SQL",
-      "Power BI",
-      "Excel",
-      "Automação",
-      "Estatística",
-      "Análise de Dados",
-      "Qualidade de Dados",
-      "Inteligência Artificial",
-      "Banco de Dados",
-      "Modelagem de Dados"
-    ]
-  },
-  {
-    "id": 2151,
-    "titulo": "Analista de Dados Jr.",
-    "empresa": "Auth21",
-    "area": "Data",
-    "senioridade": "Júnior",
-    "localidade": "Rio de Janeiro, RJ",
-    "polo": "Rio de Janeiro",
-    "regiao": "Sudeste",
-    "modalidade": "Híbrido",
-    "data_publicacao": "26/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/analista-de-dados-jr-at-auth21-4459147044",
-    "tecnologias": [
-      "Python",
-      "SQL",
-      "Power BI",
-      "Excel",
-      "Análise de Dados",
-      "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa"
-    ]
-  },
-  {
-    "id": 2149,
-    "titulo": "Analista de Dados JR | Compliance Engineering",
-    "empresa": "Auth21",
-    "area": "Data",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Híbrido",
-    "data_publicacao": "26/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/analista-de-dados-jr-compliance-engineering-at-auth21-4459116835",
-    "tecnologias": [
-      "Python",
-      "SQL",
-      "Vue.js",
-      "Power BI",
-      "ETL",
-      "Estatística",
-      "AWS",
-      "Modelagem de Dados"
-    ]
-  },
-  {
-    "id": 2148,
-    "titulo": "Desenvolvedor(a) Backend Júnior/Pleno, IT Trading",
-    "empresa": "Auth21",
-    "area": "Backend",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "26/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-backend-j%C3%BAnior-pleno-it-trading-at-auth21-4459125302",
-    "tecnologias": [
-      "Python",
-      "Java",
-      "C#",
-      "SQL",
-      "AWS",
-      "Azure",
-      "Git",
-      "Microserviços"
-    ]
-  },
-  {
-    "id": 2147,
-    "titulo": "Desenvolvedor(a) Backend Junior/Pleno | Renda Fixa",
-    "empresa": "Auth21",
-    "area": "Backend",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "26/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-backend-junior-pleno-renda-fixa-at-auth21-4459137093",
-    "tecnologias": [
-      "Python",
-      ".NET",
-      "MySQL",
-      "MongoDB",
-      "DynamoDB",
-      "AWS",
-      "POO"
     ]
   },
   {
@@ -1920,7 +1518,17 @@
     "data_publicacao": "26/08/2026",
     "fonte": "trampos",
     "url": "https://trampos.co/oportunidades/774313-assistente-de-ti",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel",
+      "Windows Server",
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Help Desk",
+      "VoIP",
+      "Office 365",
+      "Hardware"
+    ]
   },
   {
     "id": 2119,
@@ -2759,7 +2367,8 @@
       "Redes de Computadores",
       "Help Desk",
       "Hardware",
-      "Montagem e Manutenção de PCs"
+      "Montagem e Manutenção de PCs",
+      "Estrutura de Dados"
     ]
   },
   {
@@ -3643,7 +3252,7 @@
     "id": 1789,
     "titulo": "ASSISTENTE DE TI - CE",
     "empresa": "Grupo Cultivar",
-    "area": "Field Service / Hardware",
+    "area": "Outros/TI Geral",
     "senioridade": "Júnior",
     "localidade": "Fortaleza, CE",
     "polo": "Fortaleza",
@@ -7207,6 +6816,50 @@
     ]
   },
   {
+    "id": 2205,
+    "titulo": "TECNICO DE SUPORTE JUNIOR",
+    "empresa": "Minsait an Indra Company",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, São Paulo",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": "21/08/2026",
+    "fonte": "gupy",
+    "url": "https://minsait.gupy.io/job/eyJqb2JJZCI6MTIxNTA2MzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": [
+      "Metodologias Ágeis"
+    ]
+  },
+  {
+    "id": 2166,
+    "titulo": "DESENVOLVEDOR FRONT-END JR",
+    "empresa": "Stefanini Brasil",
+    "area": "Frontend",
+    "senioridade": "Júnior",
+    "localidade": "Brasília, DF",
+    "polo": "Brasília",
+    "regiao": "Centro-Oeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "21/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-front-end-jr-at-stefanini-brasil-4457505175",
+    "tecnologias": [
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Power BI",
+      "Tableau",
+      "Análise de Dados",
+      "Inteligência Artificial",
+      "Banco de Dados",
+      "Scrum",
+      "Metodologias Ágeis",
+      "UX/UI"
+    ]
+  },
+  {
     "id": 2142,
     "titulo": "Assistente de Suporte de TI",
     "empresa": "IMPAKTO SISTEMAS DE LIMPEZA E DESCARTAVEIS",
@@ -8756,7 +8409,11 @@
     "data_publicacao": "21/08/2026",
     "fonte": "trampos",
     "url": "https://trampos.co/oportunidades/774266-estagiario-a-em-qa",
-    "tecnologias": []
+    "tecnologias": [
+      "Metodologias Ágeis",
+      "Engenharia de Software",
+      "Inglês"
+    ]
   },
   {
     "id": 296,
@@ -10795,7 +10452,12 @@
     "data_publicacao": "20/08/2026",
     "fonte": "trampos",
     "url": "https://trampos.co/oportunidades/774117-estagiario-a-em-redes-sociais",
-    "tecnologias": []
+    "tecnologias": [
+      "Inteligência Artificial",
+      "Office 365",
+      "Inglês",
+      "Espanhol"
+    ]
   },
   {
     "id": 364,
@@ -11034,7 +10696,9 @@
     "data_publicacao": "20/08/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831507/analista-de-desenvolvimento-analitico-junior",
-    "tecnologias": []
+    "tecnologias": [
+      "Inglês"
+    ]
   },
   {
     "id": 109,
@@ -13674,7 +13338,7 @@
     ]
   },
   {
-    "id": 2154,
+    "id": 2156,
     "titulo": "Estágio | Governança de dados",
     "empresa": "domoinovacao",
     "area": "Data",
@@ -15259,7 +14923,9 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831091/analista-administrativo-de-vendas-jr",
     "tecnologias": [
-      "Banco de Dados"
+      "Excel",
+      "Banco de Dados",
+      "TOTVS"
     ]
   },
   {
@@ -15604,7 +15270,7 @@
     "id": 1814,
     "titulo": "Assistente de Tecnologia da Informação",
     "empresa": "Grupo Pro Security",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "São Paulo, SP",
     "polo": "São Paulo",
@@ -15635,7 +15301,12 @@
     "data_publicacao": "17/08/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830770/assistente-de-operacoes-i-exclusiva-para-pessoas-com-deficiencia",
-    "tecnologias": []
+    "tecnologias": [
+      "Power BI",
+      "Excel",
+      "BI",
+      "CRM"
+    ]
   },
   {
     "id": 1786,
@@ -18059,7 +17730,15 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830594/estagiario-em-desenvolvimento-de-software",
     "tecnologias": [
-      "ERP"
+      "SQL",
+      "Banco de Dados",
+      "Oracle",
+      "Metodologias Ágeis",
+      "Lógica de Programação",
+      "Inglês",
+      "ERP",
+      "Jira",
+      "Confluence"
     ]
   },
   {
@@ -19534,6 +19213,27 @@
     ]
   },
   {
+    "id": 2159,
+    "titulo": "Analista de Sistemas Jr",
+    "empresa": "Inbrands Indústria S.A.",
+    "area": "Engenharia de Software",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "12/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-sistemas-jr-at-inbrands-ind%C3%BAstria-s-a-4453161197",
+    "tecnologias": [
+      "SQL",
+      "Banco de Dados",
+      "Testes Funcionais",
+      "Lógica de Programação",
+      "ERP"
+    ]
+  },
+  {
     "id": 2062,
     "titulo": "Assistente/Analista de Projetos - Programação, IA, Dados",
     "empresa": "STAR7 Latam",
@@ -20340,6 +20040,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830028/programa-de-estagio-2026-ti-sap-administracao-ciencias-da-computacao",
     "tecnologias": [
+      "Estrutura de Dados",
       "SAP"
     ]
   },
@@ -21832,7 +21533,15 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2829673/desenvolvedor-de-solucoes-jr-rpa",
     "tecnologias": [
-      "RPA"
+      "SQL",
+      "RPA",
+      "Automação",
+      "Análise de Dados",
+      "Banco de Dados",
+      "PostgreSQL",
+      "SQL Server",
+      "Oracle",
+      "API REST"
     ]
   },
   {
@@ -22500,7 +22209,7 @@
     ]
   },
   {
-    "id": 2173,
+    "id": 2170,
     "titulo": "Estágio na área de Infraestrutura de TI",
     "empresa": "Equinix",
     "area": "Infraestrutura / Redes",
@@ -23193,6 +22902,8 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2829382/tecnico-de-automacao-junior-shopping-cidade-jardim",
     "tecnologias": [
+      "Manutenção Preventiva",
+      "Eletrônica",
       "CFTV"
     ]
   },
@@ -26706,7 +26417,9 @@
     "data_publicacao": "03/08/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2828482/analista-de-gestao-de-saude-jr",
-    "tecnologias": []
+    "tecnologias": [
+      "Análise de Dados"
+    ]
   },
   {
     "id": 328,
@@ -26973,7 +26686,7 @@
     ]
   },
   {
-    "id": 2209,
+    "id": 2199,
     "titulo": "Assistente de Suporte Técnico I",
     "empresa": "Fitcard",
     "area": "Suporte Técnico",
@@ -27283,6 +26996,32 @@
       "Excel",
       "Automação",
       "Análise de Dados"
+    ]
+  },
+  {
+    "id": 2194,
+    "titulo": "Estágio Sistemas (Service Desk TI) | Catalão/GO",
+    "empresa": "HPE Automotores do Brasil Ltda.",
+    "area": "Service Desk / Help Desk",
+    "senioridade": "Estágio",
+    "localidade": "Catalão, GO",
+    "polo": "Goiânia",
+    "regiao": "Centro-Oeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "31/07/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-sistemas-service-desk-ti-catal%C3%A3o-go-at-hpe-automotores-do-brasil-ltda-4445559205",
+    "tecnologias": [
+      "PHP",
+      "Laravel",
+      "Power BI",
+      "Inteligência Artificial",
+      "Banco de Dados",
+      "Service Desk",
+      "Scrum",
+      "Metodologias Ágeis",
+      "Lógica de Programação",
+      "Inglês"
     ]
   },
   {
@@ -28951,7 +28690,7 @@
     "id": 1504,
     "titulo": "Auxiliar de TI",
     "empresa": "hirezon",
-    "area": "Outros/TI Geral",
+    "area": "Field Service / Hardware",
     "senioridade": "Júnior",
     "localidade": "Campinas, SP",
     "polo": "Campinas",
@@ -29531,7 +29270,9 @@
     "data_publicacao": "28/07/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2827754/assistente-academico",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel"
+    ]
   },
   {
     "id": 1951,
@@ -29761,6 +29502,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2820709/analista-de-qualidade-jr",
     "tecnologias": [
+      "Excel",
       "Análise de Dados"
     ]
   },
@@ -30454,9 +30196,7 @@
     "data_publicacao": "27/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagio-ci%C3%AAncia-da-informa%C3%A7%C3%A3o-tecnologia-da-informa%C3%A7%C3%A3o-at-iel-sc-4445404352",
-    "tecnologias": [
-      "ERP"
-    ]
+    "tecnologias": []
   },
   {
     "id": 1558,
@@ -30517,11 +30257,16 @@
     "localidade": "Cambé, PR",
     "polo": "Londrina",
     "regiao": "Sul",
-    "modalidade": "Presencial",
+    "modalidade": "Remoto",
     "data_publicacao": "27/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-jr-at-pado-s-a-4445168613",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "Redes de Computadores",
+      "Hardware",
+      "Engenharia de Software"
+    ]
   },
   {
     "id": 1424,
@@ -31105,25 +30850,11 @@
     "localidade": "São Paulo, SP",
     "polo": "São Paulo",
     "regiao": "Sudeste",
-    "modalidade": "Presencial",
+    "modalidade": "Híbrido",
     "data_publicacao": "24/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-seguran%C3%A7a-de-ti-j%C3%BAnior%0As%C3%A3o-paulo-sp-and-hybrid%0Afull-time-employee-at-allos-4445237952",
-    "tecnologias": [
-      "AWS",
-      "Azure",
-      "GCP",
-      "Terraform",
-      "Linux",
-      "Testes Automatizados",
-      "Active Directory",
-      "Windows",
-      "Cibersegurança",
-      "Governança e Riscos (GRC)",
-      "OWASP",
-      "Pentest",
-      "SIEM/SOC"
-    ]
+    "tecnologias": []
   },
   {
     "id": 1899,
@@ -32011,7 +31742,13 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-an%C3%A1lise-de-dados-programa%C3%A7%C3%A3o-desenvolvimento-at-evosolar-cabo-frio-4444291692",
     "tecnologias": [
-      "Análise de Dados"
+      "Python",
+      "SQL",
+      "Estatística",
+      "Análise de Dados",
+      "Banco de Dados",
+      "Estrutura de Dados",
+      "CRM"
     ]
   },
   {
@@ -35356,7 +35093,7 @@
     ]
   },
   {
-    "id": 2180,
+    "id": 2175,
     "titulo": "Assistente de TI",
     "empresa": "Jobbol",
     "area": "Outros/TI Geral",
@@ -35523,7 +35260,9 @@
     "data_publicacao": "13/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/software-engineer-intern-mts-br-at-komatsu-4440306963",
-    "tecnologias": []
+    "tecnologias": [
+      "Inglês"
+    ]
   },
   {
     "id": 1248,
@@ -36805,7 +36544,14 @@
     "data_publicacao": "04/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-implanta%C3%A7%C3%A3o-j%C3%BAnior-at-getconnect-gest%C3%A3o-em-sa%C3%BAde-digital-4436921097",
-    "tecnologias": []
+    "tecnologias": [
+      "SQL",
+      "Banco de Dados",
+      "ITIL",
+      "LGPD",
+      "Scrum",
+      "Metodologias Ágeis"
+    ]
   },
   {
     "id": 1128,
@@ -37123,22 +36869,16 @@
     "id": 769,
     "titulo": "Analista de TI Jr",
     "empresa": "Sá Cavalcante",
-    "area": "Infraestrutura / Redes",
+    "area": "Outros/TI Geral",
     "senioridade": "Júnior",
     "localidade": "São Luis, MA",
     "polo": "São Luís",
     "regiao": "Nordeste",
-    "modalidade": "Remoto",
+    "modalidade": "Presencial",
     "data_publicacao": "02/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-ti-jr-at-s%C3%A1-cavalcante-4435018142",
-    "tecnologias": [
-      "Linux",
-      "Windows",
-      "Service Desk",
-      "GLPI",
-      "Manutenção Preventiva"
-    ]
+    "tecnologias": []
   },
   {
     "id": 660,
@@ -38750,7 +38490,7 @@
     "id": 1211,
     "titulo": "Estagiário TI - Desenvolvimento",
     "empresa": "Maxiforja Componentes Automotivos Ltda",
-    "area": "Engenharia de Software",
+    "area": "Outros/TI Geral",
     "senioridade": "Estágio",
     "localidade": "Canoas, RS",
     "polo": "Porto Alegre",
@@ -38759,10 +38499,7 @@
     "data_publicacao": "22/06/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-ti-desenvolvimento-at-maxiforja-componentes-automotivos-ltda-4432025763",
-    "tecnologias": [
-      "Banco de Dados",
-      "TOTVS"
-    ]
+    "tecnologias": []
   },
   {
     "id": 459,
@@ -39115,7 +38852,7 @@
     "id": 1792,
     "titulo": "AUXILIAR DE TI",
     "empresa": "Unimed Presidente Prudente",
-    "area": "Service Desk / Help Desk",
+    "area": "Outros/TI Geral",
     "senioridade": "Júnior",
     "localidade": "Presidente Prudente, SP",
     "polo": "Interior Paulista Ocidental",
@@ -39124,9 +38861,7 @@
     "data_publicacao": "16/06/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/auxiliar-de-ti-at-unimed-presidente-prudente-4429548815",
-    "tecnologias": [
-      "Help Desk"
-    ]
+    "tecnologias": []
   },
   {
     "id": 1772,
@@ -41394,15 +41129,11 @@
     "localidade": "São Paulo, SP",
     "polo": "São Paulo",
     "regiao": "Sudeste",
-    "modalidade": "Remoto",
+    "modalidade": "Presencial",
     "data_publicacao": "28/04/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/auxiliar-de-suporte-de-ti-at-col%C3%A9gio-pent%C3%A1gono-4406002202",
-    "tecnologias": [
-      "Windows",
-      "Redes de Computadores",
-      "Manutenção Preventiva"
-    ]
+    "tecnologias": []
   },
   {
     "id": 1783,
@@ -42449,16 +42180,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-programador-web-com-rails-at-plug-crm-4358240078",
     "tecnologias": [
-      "JavaScript",
-      "Ruby",
-      "HTML",
-      "CSS",
-      "Angular",
-      "Ruby on Rails",
-      "MongoDB",
-      "Git",
-      "Linux",
-      "POO"
+      "Ruby on Rails"
     ]
   },
   {
@@ -44189,7 +43911,10 @@
     "tecnologias": [
       "Python",
       "JavaScript",
-      "Testes Funcionais"
+      "HTML",
+      "Testes Manuais",
+      "Testes Funcionais",
+      "UX/UI"
     ]
   },
   {
@@ -44209,8 +43934,14 @@
       "JavaScript",
       "Angular",
       "Node.js",
+      "Automação",
+      "Inteligência Artificial",
+      "Banco de Dados",
       "PostgreSQL",
-      "MySQL"
+      "MySQL",
+      "Git",
+      "Scrum",
+      "Inglês"
     ]
   },
   {
@@ -44229,9 +43960,20 @@
     "tecnologias": [
       "Python",
       "SQL",
+      "Spark",
+      "Databricks",
+      "Snowflake",
+      "Kafka",
+      "Inteligência Artificial",
+      "Agentes de IA & RAG",
       "AWS",
       "Azure",
-      "Git"
+      "GCP",
+      "Terraform",
+      "Git",
+      "CI/CD",
+      "Testes Automatizados",
+      "Inglês"
     ]
   },
   {
@@ -44250,9 +43992,25 @@
     "tecnologias": [
       "Java",
       "JavaScript",
+      "SQL",
+      "HTML",
+      "CSS",
       "Vue.js",
       "Spring",
-      "JavaEE"
+      "JavaEE",
+      "Banco de Dados",
+      "PostgreSQL",
+      "Oracle",
+      "Git",
+      "CI/CD",
+      "JUnit",
+      "Testes Automatizados",
+      "API REST",
+      "Scrum",
+      "Metodologias Ágeis",
+      "Microserviços",
+      "Design Patterns",
+      "Modelagem de Dados"
     ]
   },
   {
@@ -44272,7 +44030,14 @@
       "JavaScript",
       "SQL",
       "Node.js",
-      "PostgreSQL"
+      "Express",
+      "Banco de Dados",
+      "PostgreSQL",
+      "Git",
+      "Help Desk",
+      "API REST",
+      "Estrutura de Dados",
+      "CRM"
     ]
   },
   {
