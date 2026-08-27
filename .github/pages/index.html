@@ -23,7 +23,7 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html {
-      overflow-y: scroll;
+      overflow-y: auto;
       scrollbar-gutter: stable;
     }
     body {
@@ -355,7 +355,7 @@
 
       <div class="scroll-table">
         <table id="table-area-skills">
-          <thead><tr><th>Tecnologia</th><th class="hide-mobile">Categoria</th><th>Vagas na Área</th><th>Aderência %</th><th class="hide-mobile" style="width: 40%;">Proporção</th></tr></thead>
+          <thead><tr><th>Tecnologia</th><th class="hide-mobile">Categoria</th><th>Vagas na Área</th><th>Demanda %</th><th class="hide-mobile" style="width: 35%;">Proporção</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -546,7 +546,7 @@ function renderSummaryTables() {
       <td><strong>${a.area}</strong></td>
       <td>${a.vagas}</td>
       <td>${a.percentual}%</td>
-      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${a.percentual * 3.5}%;"></div></div></td>
+      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${a.percentual}%;"></div></div></td>
     `;
     tbodyAreas.appendChild(tr);
   });
@@ -560,7 +560,7 @@ function renderSummaryTables() {
       <td>${r.regiao}</td>
       <td>${r.vagas}</td>
       <td>${r.percentual}%</td>
-      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${r.percentual * 1.8}%; background: var(--green);"></div></div></td>
+      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${r.percentual}%; background: var(--green);"></div></div></td>
     `;
     tbodyReg.appendChild(tr);
   });
@@ -574,7 +574,7 @@ function renderSummaryTables() {
       <td>${m.modalidade}</td>
       <td>${m.vagas}</td>
       <td>${m.percentual}%</td>
-      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${m.percentual * 1.2}%; background: var(--amber);"></div></div></td>
+      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${m.percentual}%; background: var(--amber);"></div></div></td>
     `;
     tbodyMod.appendChild(tr);
   });
@@ -598,7 +598,7 @@ function renderSkillsTable() {
       <td class="hide-mobile"><span class="badge">${t.grupo}</span></td>
       <td>${t.vagas}</td>
       <td><strong>${t.percentual_total}%</strong></td>
-      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${t.percentual_total * 4}%;"></div></div></td>
+      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${t.percentual_total}%;"></div></div></td>
     `;
     tbody.appendChild(tr);
   });
