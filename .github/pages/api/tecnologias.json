@@ -19,9 +19,9 @@
     "posicao": 3,
     "nome": "Inglês",
     "grupo": "engenharia_praticas",
-    "vagas": 373,
+    "vagas": 374,
     "percentual_total": 17.4,
-    "percentual_base_tech": 21.6
+    "percentual_base_tech": 21.7
   },
   {
     "posicao": 4,
@@ -35,17 +35,17 @@
     "posicao": 5,
     "nome": "Windows",
     "grupo": "suporte_infra",
-    "vagas": 318,
-    "percentual_total": 14.8,
-    "percentual_base_tech": 18.4
+    "vagas": 319,
+    "percentual_total": 14.9,
+    "percentual_base_tech": 18.5
   },
   {
     "posicao": 6,
     "nome": "Redes de Computadores",
     "grupo": "suporte_infra",
-    "vagas": 302,
+    "vagas": 303,
     "percentual_total": 14.1,
-    "percentual_base_tech": 17.5
+    "percentual_base_tech": 17.6
   },
   {
     "posicao": 7,
@@ -67,7 +67,7 @@
     "posicao": 9,
     "nome": "Inteligência Artificial",
     "grupo": "inteligencia_artificial",
-    "vagas": 279,
+    "vagas": 280,
     "percentual_total": 13.0,
     "percentual_base_tech": 16.2
   },
@@ -137,7 +137,7 @@
   },
   {
     "posicao": 18,
-    "nome": "Lógica de Programação",
+    "nome": "ERP",
     "grupo": "engenharia_praticas",
     "vagas": 141,
     "percentual_total": 6.6,
@@ -145,11 +145,11 @@
   },
   {
     "posicao": 19,
-    "nome": "ERP",
+    "nome": "Lógica de Programação",
     "grupo": "engenharia_praticas",
-    "vagas": 140,
-    "percentual_total": 6.5,
-    "percentual_base_tech": 8.1
+    "vagas": 141,
+    "percentual_total": 6.6,
+    "percentual_base_tech": 8.2
   },
   {
     "posicao": 20,
@@ -171,7 +171,7 @@
     "posicao": 22,
     "nome": "Office 365",
     "grupo": "suporte_infra",
-    "vagas": 120,
+    "vagas": 121,
     "percentual_total": 5.6,
     "percentual_base_tech": 7.0
   },
@@ -193,16 +193,16 @@
   },
   {
     "posicao": 25,
-    "nome": "React",
-    "grupo": "frameworks",
-    "vagas": 108,
-    "percentual_total": 5.0,
+    "nome": "Active Directory",
+    "grupo": "suporte_infra",
+    "vagas": 109,
+    "percentual_total": 5.1,
     "percentual_base_tech": 6.3
   },
   {
     "posicao": 26,
-    "nome": "Active Directory",
-    "grupo": "suporte_infra",
+    "nome": "React",
+    "grupo": "frameworks",
     "vagas": 108,
     "percentual_total": 5.0,
     "percentual_base_tech": 6.3
@@ -211,7 +211,7 @@
     "posicao": 27,
     "nome": "Power BI",
     "grupo": "dados",
-    "vagas": 105,
+    "vagas": 106,
     "percentual_total": 4.9,
     "percentual_base_tech": 6.1
   },
@@ -259,9 +259,9 @@
     "posicao": 33,
     "nome": "LLMs & IA Generativa",
     "grupo": "inteligencia_artificial",
-    "vagas": 97,
-    "percentual_total": 4.5,
-    "percentual_base_tech": 5.6
+    "vagas": 98,
+    "percentual_total": 4.6,
+    "percentual_base_tech": 5.7
   },
   {
     "posicao": 34,
@@ -275,22 +275,22 @@
     "posicao": 35,
     "nome": "Service Desk",
     "grupo": "suporte_infra",
-    "vagas": 91,
-    "percentual_total": 4.2,
+    "vagas": 92,
+    "percentual_total": 4.3,
     "percentual_base_tech": 5.3
   },
   {
     "posicao": 36,
-    "nome": "Docker",
-    "grupo": "cloud_devops",
-    "vagas": 89,
-    "percentual_total": 4.1,
+    "nome": "ITIL",
+    "grupo": "suporte_infra",
+    "vagas": 90,
+    "percentual_total": 4.2,
     "percentual_base_tech": 5.2
   },
   {
     "posicao": 37,
-    "nome": "ITIL",
-    "grupo": "suporte_infra",
+    "nome": "Docker",
+    "grupo": "cloud_devops",
     "vagas": 89,
     "percentual_total": 4.1,
     "percentual_base_tech": 5.2
@@ -363,17 +363,17 @@
     "posicao": 46,
     "nome": "LGPD",
     "grupo": "seguranca",
-    "vagas": 66,
+    "vagas": 67,
     "percentual_total": 3.1,
-    "percentual_base_tech": 3.8
+    "percentual_base_tech": 3.9
   },
   {
     "posicao": 47,
     "nome": "Copilots & Assistentes de IA",
     "grupo": "inteligencia_artificial",
-    "vagas": 66,
+    "vagas": 67,
     "percentual_total": 3.1,
-    "percentual_base_tech": 3.8
+    "percentual_base_tech": 3.9
   },
   {
     "posicao": 48,
@@ -457,17 +457,17 @@
   },
   {
     "posicao": 58,
-    "nome": "SAP",
-    "grupo": "engenharia_praticas",
+    "nome": "Oracle",
+    "grupo": "bancos",
     "vagas": 56,
     "percentual_total": 2.6,
     "percentual_base_tech": 3.2
   },
   {
     "posicao": 59,
-    "nome": "Oracle",
-    "grupo": "bancos",
-    "vagas": 55,
+    "nome": "SAP",
+    "grupo": "engenharia_praticas",
+    "vagas": 56,
     "percentual_total": 2.6,
     "percentual_base_tech": 3.2
   },
@@ -673,6 +673,14 @@
   },
   {
     "posicao": 85,
+    "nome": "CFTV",
+    "grupo": "hardware_eletronica",
+    "vagas": 30,
+    "percentual_total": 1.4,
+    "percentual_base_tech": 1.7
+  },
+  {
+    "posicao": 86,
     "nome": "Next.js",
     "grupo": "frameworks",
     "vagas": 29,
@@ -680,7 +688,7 @@
     "percentual_base_tech": 1.7
   },
   {
-    "posicao": 86,
+    "posicao": 87,
     "nome": "RPA",
     "grupo": "dados",
     "vagas": 29,
@@ -688,17 +696,9 @@
     "percentual_base_tech": 1.7
   },
   {
-    "posicao": 87,
+    "posicao": 88,
     "nome": "VMware",
     "grupo": "suporte_infra",
-    "vagas": 29,
-    "percentual_total": 1.4,
-    "percentual_base_tech": 1.7
-  },
-  {
-    "posicao": 88,
-    "nome": "CFTV",
-    "grupo": "hardware_eletronica",
     "vagas": 29,
     "percentual_total": 1.4,
     "percentual_base_tech": 1.7

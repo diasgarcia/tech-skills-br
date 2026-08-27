@@ -106,40 +106,40 @@
   "modalidades": [
     {
       "modalidade": "Presencial",
-      "vagas": 1659,
-      "percentual": 77.3
+      "vagas": 1371,
+      "percentual": 63.9
     },
     {
       "modalidade": "Remoto",
-      "vagas": 312,
-      "percentual": 14.5
+      "vagas": 466,
+      "percentual": 21.7
     },
     {
       "modalidade": "Híbrido",
-      "vagas": 131,
-      "percentual": 6.1
+      "vagas": 266,
+      "percentual": 12.4
     },
     {
       "modalidade": "Não informado",
-      "vagas": 44,
-      "percentual": 2.1
+      "vagas": 43,
+      "percentual": 2.0
     }
   ],
   "regioes": [
     {
       "regiao": "Sudeste",
-      "vagas": 1124,
-      "percentual": 52.4
+      "vagas": 1126,
+      "percentual": 52.5
     },
     {
       "regiao": "Sul",
-      "vagas": 350,
-      "percentual": 16.3
+      "vagas": 348,
+      "percentual": 16.2
     },
     {
       "regiao": "Remoto Nacional",
-      "vagas": 267,
-      "percentual": 12.4
+      "vagas": 256,
+      "percentual": 11.9
     },
     {
       "regiao": "Nordeste",
@@ -153,8 +153,8 @@
     },
     {
       "regiao": "Nacional",
-      "vagas": 73,
-      "percentual": 3.4
+      "vagas": 84,
+      "percentual": 3.9
     },
     {
       "regiao": "Norte",
@@ -175,8 +175,8 @@
     },
     {
       "polo": "Remoto",
-      "vagas": 267,
-      "percentual": 12.4
+      "vagas": 256,
+      "percentual": 11.9
     },
     {
       "polo": "Belo Horizonte",
@@ -189,19 +189,19 @@
       "percentual": 4.4
     },
     {
+      "polo": "Nacional",
+      "vagas": 84,
+      "percentual": 3.9
+    },
+    {
       "polo": "Porto Alegre",
       "vagas": 82,
       "percentual": 3.8
     },
     {
-      "polo": "Nacional",
-      "vagas": 73,
-      "percentual": 3.4
-    },
-    {
       "polo": "Florianópolis",
-      "vagas": 68,
-      "percentual": 3.2
+      "vagas": 66,
+      "percentual": 3.1
     },
     {
       "polo": "Curitiba",
@@ -210,12 +210,12 @@
     },
     {
       "polo": "Campinas",
-      "vagas": 58,
+      "vagas": 59,
       "percentual": 2.7
     },
     {
       "polo": "Estado/SP",
-      "vagas": 48,
+      "vagas": 47,
       "percentual": 2.2
     },
     {
@@ -239,7 +239,7 @@
       "percentual": 1.5
     },
     {
-      "polo": "Não informado",
+      "polo": "Interior Paulista Ocidental",
       "vagas": 32,
       "percentual": 1.5
     }
@@ -1188,8 +1188,8 @@
         {
           "nome": "ERP",
           "grupo": "engenharia_praticas",
-          "vagas": 12,
-          "percentual": 31.6
+          "vagas": 13,
+          "percentual": 34.2
         },
         {
           "nome": "Salesforce",
@@ -1198,22 +1198,22 @@
           "percentual": 31.6
         },
         {
+          "nome": "Inglês",
+          "grupo": "engenharia_praticas",
+          "vagas": 11,
+          "percentual": 28.9
+        },
+        {
           "nome": "SQL",
           "grupo": "linguagens",
           "vagas": 10,
           "percentual": 26.3
         },
         {
-          "nome": "Inglês",
-          "grupo": "engenharia_praticas",
-          "vagas": 10,
-          "percentual": 26.3
-        },
-        {
           "nome": "Inteligência Artificial",
           "grupo": "inteligencia_artificial",
-          "vagas": 8,
-          "percentual": 21.1
+          "vagas": 9,
+          "percentual": 23.7
         },
         {
           "nome": "Apex",
@@ -1234,6 +1234,12 @@
           "percentual": 13.2
         },
         {
+          "nome": "Redes de Computadores",
+          "grupo": "suporte_infra",
+          "vagas": 5,
+          "percentual": 13.2
+        },
+        {
           "nome": "Hardware",
           "grupo": "suporte_infra",
           "vagas": 5,
@@ -1247,12 +1253,6 @@
         },
         {
           "nome": "Scrum",
-          "grupo": "engenharia_praticas",
-          "vagas": 5,
-          "percentual": 13.2
-        },
-        {
-          "nome": "Metodologias Ágeis",
           "grupo": "engenharia_praticas",
           "vagas": 5,
           "percentual": 13.2
