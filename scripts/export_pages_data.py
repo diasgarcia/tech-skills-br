@@ -153,7 +153,6 @@ def export_all_pages_data(
                 .where(Vaga.area == area_name)
                 .group_by(Tecnologia.id, Tecnologia.nome, Tecnologia.grupo)
                 .order_by(func.count(Vaga.id).desc())
-                .limit(12)
             ).all()
 
             area_base_tech = db.scalar(
