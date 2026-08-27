@@ -68,6 +68,8 @@ def test_ranking_lista_vazia():
         ("", "São Paulo, SP", "Dev Júnior", "Atuação 100% presencial no escritório", "Presencial"),
         ("", "Curitiba, PR", "Estágio TI", "Modelo de trabalho híbrido com 2 dias presenciais", "Híbrido"),
         ("", "Recife, PE", "Dev Jr", "Vaga 100% Home Office", "Remoto"),
+        ("", "Goiânia, GO", "Dev Python Junior", "Modalidade 100% remota - trabalhe de qualquer lugar", "Remoto"),
+        ("", "Goiânia, GO", "Dev Python Junior", "Time trabalhando remotamente em cargos globais", "Remoto"),
         ("", "", "Dev Jr", "", "Não informado"),
     ],
 )
