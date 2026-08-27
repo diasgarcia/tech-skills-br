@@ -70,11 +70,24 @@ jobs:
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+        # Sincroniza com commits que possam ter entrado durante a coleta
+        git pull --rebase origin main
+
         git add seed/vagas.csv docs/relatorios/ .github/pages/
 
         
         DATA_HOJE=$(date +'%d/%m/%Y')
-        git diff --quiet && git diff --staged --quiet || (git commit -m "chore(data): coleta automatizada de vagas [${DATA_HOJE}] [skip ci]" && git push)
+        git diff --quiet && git diff --staged --quiet && exit 0
+        git commit -m "chore(data): coleta automatizada de vagas [${DATA_HOJE}] [skip ci]"
+        # Em caso de corrida com outro push, rebaseia e tenta de novo
+        for tentativa in 1 2 3; do
+          if git pull --rebase origin main && git push; then
+            exit 0
+          fi
+          sleep 10
+        done
+        exit 1
 
     - name: 7. Preparar artefato do GitHub Pages
       uses: actions/upload-pages-artifact@v3
