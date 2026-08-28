@@ -111,7 +111,7 @@ O comando `python scripts/export_seed.py` consolida o banco no arquivo `seed/vag
 
 ### 5.1 Endpoints JSON Estáticos (`scripts/export_pages_data.py`)
 
-Os dados são publicados como arquivos JSON estáticos no GitHub Pages (`.github/pages/api/`):
+Os dados são publicados como arquivos JSON estáticos no GitHub Pages (`site/api/`):
 
 - `resumo.json`: KPIs, metadados e distribuições consolidadas.
 - `areas.json`: ranking percentual e absoluto das áreas técnicas.
