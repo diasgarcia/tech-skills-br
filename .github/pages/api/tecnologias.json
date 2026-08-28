@@ -1,6 +1,14 @@
 [
   {
     "posicao": 1,
+    "nome": "Banco de Dados",
+    "grupo": "bancos",
+    "vagas": 358,
+    "percentual_total": 16.1,
+    "percentual_base_tech": 21.7
+  },
+  {
+    "posicao": 2,
     "nome": "SQL",
     "grupo": "linguagens",
     "vagas": 357,
@@ -8,20 +16,12 @@
     "percentual_base_tech": 21.7
   },
   {
-    "posicao": 2,
-    "nome": "Banco de Dados",
-    "grupo": "bancos",
-    "vagas": 355,
-    "percentual_total": 15.9,
-    "percentual_base_tech": 21.6
-  },
-  {
     "posicao": 3,
     "nome": "Inglês",
     "grupo": "engenharia_praticas",
     "vagas": 355,
     "percentual_total": 15.9,
-    "percentual_base_tech": 21.6
+    "percentual_base_tech": 21.5
   },
   {
     "posicao": 4,
@@ -43,7 +43,7 @@
     "posicao": 6,
     "nome": "Inteligência Artificial",
     "grupo": "inteligencia_artificial",
-    "vagas": 278,
+    "vagas": 279,
     "percentual_total": 12.5,
     "percentual_base_tech": 16.9
   },
@@ -51,7 +51,7 @@
     "posicao": 7,
     "nome": "Python",
     "grupo": "linguagens",
-    "vagas": 278,
+    "vagas": 279,
     "percentual_total": 12.5,
     "percentual_base_tech": 16.9
   },
@@ -59,16 +59,16 @@
     "posicao": 8,
     "nome": "Git",
     "grupo": "cloud_devops",
-    "vagas": 267,
-    "percentual_total": 12.0,
-    "percentual_base_tech": 16.2
+    "vagas": 273,
+    "percentual_total": 12.3,
+    "percentual_base_tech": 16.6
   },
   {
     "posicao": 9,
     "nome": "Redes de Computadores",
     "grupo": "suporte_infra",
-    "vagas": 266,
-    "percentual_total": 11.9,
+    "vagas": 267,
+    "percentual_total": 12.0,
     "percentual_base_tech": 16.2
   },
   {
@@ -91,38 +91,38 @@
     "posicao": 12,
     "nome": "Metodologias Ágeis",
     "grupo": "engenharia_praticas",
-    "vagas": 168,
-    "percentual_total": 7.5,
-    "percentual_base_tech": 10.2
+    "vagas": 172,
+    "percentual_total": 7.7,
+    "percentual_base_tech": 10.4
   },
   {
     "posicao": 13,
-    "nome": "Linux",
-    "grupo": "cloud_devops",
-    "vagas": 162,
-    "percentual_total": 7.3,
-    "percentual_base_tech": 9.8
+    "nome": "API REST",
+    "grupo": "engenharia_praticas",
+    "vagas": 164,
+    "percentual_total": 7.4,
+    "percentual_base_tech": 10.0
   },
   {
     "posicao": 14,
-    "nome": "API REST",
-    "grupo": "engenharia_praticas",
-    "vagas": 159,
-    "percentual_total": 7.1,
-    "percentual_base_tech": 9.7
+    "nome": "Linux",
+    "grupo": "cloud_devops",
+    "vagas": 163,
+    "percentual_total": 7.3,
+    "percentual_base_tech": 9.9
   },
   {
     "posicao": 15,
-    "nome": "Análise de Dados",
-    "grupo": "dados",
-    "vagas": 158,
+    "nome": "Engenharia de Software",
+    "grupo": "engenharia_praticas",
+    "vagas": 159,
     "percentual_total": 7.1,
     "percentual_base_tech": 9.6
   },
   {
     "posicao": 16,
-    "nome": "Engenharia de Software",
-    "grupo": "engenharia_praticas",
+    "nome": "Análise de Dados",
+    "grupo": "dados",
     "vagas": 158,
     "percentual_total": 7.1,
     "percentual_base_tech": 9.6
@@ -139,17 +139,17 @@
     "posicao": 18,
     "nome": "Lógica de Programação",
     "grupo": "engenharia_praticas",
-    "vagas": 135,
-    "percentual_total": 6.1,
-    "percentual_base_tech": 8.2
+    "vagas": 137,
+    "percentual_total": 6.2,
+    "percentual_base_tech": 8.3
   },
   {
     "posicao": 19,
     "nome": "AWS",
     "grupo": "cloud_devops",
-    "vagas": 134,
-    "percentual_total": 6.0,
-    "percentual_base_tech": 8.1
+    "vagas": 135,
+    "percentual_total": 6.1,
+    "percentual_base_tech": 8.2
   },
   {
     "posicao": 20,
@@ -195,15 +195,15 @@
     "posicao": 25,
     "nome": "React",
     "grupo": "frameworks",
-    "vagas": 103,
-    "percentual_total": 4.6,
+    "vagas": 104,
+    "percentual_total": 4.7,
     "percentual_base_tech": 6.3
   },
   {
     "posicao": 26,
     "nome": "Manutenção Preventiva",
     "grupo": "suporte_infra",
-    "vagas": 100,
+    "vagas": 101,
     "percentual_total": 4.5,
     "percentual_base_tech": 6.1
   },
@@ -221,7 +221,7 @@
     "grupo": "dados",
     "vagas": 98,
     "percentual_total": 4.4,
-    "percentual_base_tech": 6.0
+    "percentual_base_tech": 5.9
   },
   {
     "posicao": 29,
@@ -235,29 +235,29 @@
     "posicao": 30,
     "nome": "LLMs & IA Generativa",
     "grupo": "inteligencia_artificial",
-    "vagas": 96,
+    "vagas": 97,
+    "percentual_total": 4.4,
+    "percentual_base_tech": 5.9
+  },
+  {
+    "posicao": 31,
+    "nome": "CSS",
+    "grupo": "linguagens",
+    "vagas": 95,
     "percentual_total": 4.3,
     "percentual_base_tech": 5.8
   },
   {
-    "posicao": 31,
+    "posicao": 32,
     "nome": "HTML",
     "grupo": "linguagens",
-    "vagas": 93,
+    "vagas": 94,
     "percentual_total": 4.2,
     "percentual_base_tech": 5.7
   },
   {
-    "posicao": 32,
-    "nome": "C#",
-    "grupo": "linguagens",
-    "vagas": 91,
-    "percentual_total": 4.1,
-    "percentual_base_tech": 5.5
-  },
-  {
     "posicao": 33,
-    "nome": "CSS",
+    "nome": "C#",
     "grupo": "linguagens",
     "vagas": 91,
     "percentual_total": 4.1,
@@ -273,6 +273,14 @@
   },
   {
     "posicao": 35,
+    "nome": "CI/CD",
+    "grupo": "cloud_devops",
+    "vagas": 89,
+    "percentual_total": 4.0,
+    "percentual_base_tech": 5.4
+  },
+  {
+    "posicao": 36,
     "nome": "ITIL",
     "grupo": "suporte_infra",
     "vagas": 89,
@@ -280,28 +288,20 @@
     "percentual_base_tech": 5.4
   },
   {
-    "posicao": 36,
-    "nome": "CI/CD",
-    "grupo": "cloud_devops",
-    "vagas": 88,
-    "percentual_total": 4.0,
-    "percentual_base_tech": 5.3
-  },
-  {
     "posicao": 37,
-    "nome": "Help Desk",
-    "grupo": "suporte_infra",
+    "nome": "Docker",
+    "grupo": "cloud_devops",
     "vagas": 87,
     "percentual_total": 3.9,
     "percentual_base_tech": 5.3
   },
   {
     "posicao": 38,
-    "nome": "Docker",
-    "grupo": "cloud_devops",
-    "vagas": 86,
+    "nome": "Help Desk",
+    "grupo": "suporte_infra",
+    "vagas": 87,
     "percentual_total": 3.9,
-    "percentual_base_tech": 5.2
+    "percentual_base_tech": 5.3
   },
   {
     "posicao": 39,
@@ -321,16 +321,16 @@
   },
   {
     "posicao": 41,
-    "nome": ".NET",
-    "grupo": "frameworks",
-    "vagas": 68,
+    "nome": "Copilots & Assistentes de IA",
+    "grupo": "inteligencia_artificial",
+    "vagas": 69,
     "percentual_total": 3.1,
-    "percentual_base_tech": 4.1
+    "percentual_base_tech": 4.2
   },
   {
     "posicao": 42,
-    "nome": "Copilots & Assistentes de IA",
-    "grupo": "inteligencia_artificial",
+    "nome": ".NET",
+    "grupo": "frameworks",
     "vagas": 68,
     "percentual_total": 3.1,
     "percentual_base_tech": 4.1
@@ -345,6 +345,14 @@
   },
   {
     "posicao": 44,
+    "nome": "Testes Automatizados",
+    "grupo": "qa_testes",
+    "vagas": 67,
+    "percentual_total": 3.0,
+    "percentual_base_tech": 4.1
+  },
+  {
+    "posicao": 45,
     "nome": "TypeScript",
     "grupo": "linguagens",
     "vagas": 67,
@@ -352,26 +360,18 @@
     "percentual_base_tech": 4.1
   },
   {
-    "posicao": 45,
-    "nome": "Testes Automatizados",
-    "grupo": "qa_testes",
-    "vagas": 66,
-    "percentual_total": 3.0,
-    "percentual_base_tech": 4.0
-  },
-  {
     "posicao": 46,
     "nome": "Estrutura de Dados",
     "grupo": "engenharia_praticas",
-    "vagas": 62,
-    "percentual_total": 2.8,
-    "percentual_base_tech": 3.8
+    "vagas": 65,
+    "percentual_total": 2.9,
+    "percentual_base_tech": 3.9
   },
   {
     "posicao": 47,
     "nome": "GCP",
     "grupo": "cloud_devops",
-    "vagas": 62,
+    "vagas": 63,
     "percentual_total": 2.8,
     "percentual_base_tech": 3.8
   },
@@ -425,6 +425,14 @@
   },
   {
     "posicao": 54,
+    "nome": "SAP",
+    "grupo": "engenharia_praticas",
+    "vagas": 56,
+    "percentual_total": 2.5,
+    "percentual_base_tech": 3.4
+  },
+  {
+    "posicao": 55,
     "nome": "LGPD",
     "grupo": "seguranca",
     "vagas": 55,
@@ -432,7 +440,7 @@
     "percentual_base_tech": 3.3
   },
   {
-    "posicao": 55,
+    "posicao": 56,
     "nome": "Microserviços",
     "grupo": "engenharia_praticas",
     "vagas": 55,
@@ -440,16 +448,8 @@
     "percentual_base_tech": 3.3
   },
   {
-    "posicao": 56,
-    "nome": "Modelagem de Dados",
-    "grupo": "engenharia_praticas",
-    "vagas": 55,
-    "percentual_total": 2.5,
-    "percentual_base_tech": 3.3
-  },
-  {
     "posicao": 57,
-    "nome": "SAP",
+    "nome": "Modelagem de Dados",
     "grupo": "engenharia_praticas",
     "vagas": 55,
     "percentual_total": 2.5,
@@ -483,9 +483,9 @@
     "posicao": 61,
     "nome": "Clean Code",
     "grupo": "engenharia_praticas",
-    "vagas": 48,
+    "vagas": 49,
     "percentual_total": 2.2,
-    "percentual_base_tech": 2.9
+    "percentual_base_tech": 3.0
   },
   {
     "posicao": 62,
@@ -499,9 +499,9 @@
     "posicao": 63,
     "nome": "TOTVS",
     "grupo": "engenharia_praticas",
-    "vagas": 46,
+    "vagas": 47,
     "percentual_total": 2.1,
-    "percentual_base_tech": 2.8
+    "percentual_base_tech": 2.9
   },
   {
     "posicao": 64,
@@ -533,7 +533,7 @@
     "grupo": "cloud_devops",
     "vagas": 42,
     "percentual_total": 1.9,
-    "percentual_base_tech": 2.6
+    "percentual_base_tech": 2.5
   },
   {
     "posicao": 68,
@@ -657,19 +657,19 @@
   },
   {
     "posicao": 83,
-    "nome": "Spark",
-    "grupo": "dados",
+    "nome": "Algoritmos",
+    "grupo": "engenharia_praticas",
     "vagas": 29,
     "percentual_total": 1.3,
     "percentual_base_tech": 1.8
   },
   {
     "posicao": 84,
-    "nome": "Algoritmos",
-    "grupo": "engenharia_praticas",
-    "vagas": 28,
+    "nome": "Spark",
+    "grupo": "dados",
+    "vagas": 29,
     "percentual_total": 1.3,
-    "percentual_base_tech": 1.7
+    "percentual_base_tech": 1.8
   },
   {
     "posicao": 85,
@@ -873,6 +873,14 @@
   },
   {
     "posicao": 110,
+    "nome": "Laravel",
+    "grupo": "frameworks",
+    "vagas": 16,
+    "percentual_total": 0.7,
+    "percentual_base_tech": 1.0
+  },
+  {
+    "posicao": 111,
     "nome": "React Native",
     "grupo": "mobile",
     "vagas": 16,
@@ -880,7 +888,7 @@
     "percentual_base_tech": 1.0
   },
   {
-    "posicao": 111,
+    "posicao": 112,
     "nome": "Tableau",
     "grupo": "dados",
     "vagas": 16,
@@ -888,7 +896,7 @@
     "percentual_base_tech": 1.0
   },
   {
-    "posicao": 112,
+    "posicao": 113,
     "nome": "Firmware",
     "grupo": "hardware_eletronica",
     "vagas": 15,
@@ -896,7 +904,7 @@
     "percentual_base_tech": 0.9
   },
   {
-    "posicao": 113,
+    "posicao": 114,
     "nome": "ISO 27001",
     "grupo": "seguranca",
     "vagas": 15,
@@ -904,7 +912,7 @@
     "percentual_base_tech": 0.9
   },
   {
-    "posicao": 114,
+    "posicao": 115,
     "nome": "Kotlin",
     "grupo": "linguagens",
     "vagas": 15,
@@ -912,7 +920,7 @@
     "percentual_base_tech": 0.9
   },
   {
-    "posicao": 115,
+    "posicao": 116,
     "nome": "VoIP",
     "grupo": "suporte_infra",
     "vagas": 15,
@@ -920,39 +928,39 @@
     "percentual_base_tech": 0.9
   },
   {
-    "posicao": 116,
+    "posicao": 117,
     "nome": "Data Lake",
     "grupo": "dados",
     "vagas": 14,
     "percentual_total": 0.6,
-    "percentual_base_tech": 0.9
+    "percentual_base_tech": 0.8
   },
   {
-    "posicao": 117,
+    "posicao": 118,
     "nome": "Flutter",
     "grupo": "mobile",
     "vagas": 14,
     "percentual_total": 0.6,
-    "percentual_base_tech": 0.9
-  },
-  {
-    "posicao": 118,
-    "nome": "Laravel",
-    "grupo": "frameworks",
-    "vagas": 14,
-    "percentual_total": 0.6,
-    "percentual_base_tech": 0.9
+    "percentual_base_tech": 0.8
   },
   {
     "posicao": 119,
+    "nome": "Redis",
+    "grupo": "bancos",
+    "vagas": 14,
+    "percentual_total": 0.6,
+    "percentual_base_tech": 0.8
+  },
+  {
+    "posicao": 120,
     "nome": "TDD",
     "grupo": "qa_testes",
     "vagas": 14,
     "percentual_total": 0.6,
-    "percentual_base_tech": 0.9
+    "percentual_base_tech": 0.8
   },
   {
-    "posicao": 120,
+    "posicao": 121,
     "nome": "Hibernate",
     "grupo": "frameworks",
     "vagas": 13,
@@ -960,7 +968,7 @@
     "percentual_base_tech": 0.8
   },
   {
-    "posicao": 121,
+    "posicao": 122,
     "nome": "IoT",
     "grupo": "hardware_eletronica",
     "vagas": 13,
@@ -968,7 +976,7 @@
     "percentual_base_tech": 0.8
   },
   {
-    "posicao": 122,
+    "posicao": 123,
     "nome": "NestJS",
     "grupo": "frameworks",
     "vagas": 13,
@@ -976,7 +984,7 @@
     "percentual_base_tech": 0.8
   },
   {
-    "posicao": 123,
+    "posicao": 124,
     "nome": "Postman",
     "grupo": "qa_testes",
     "vagas": 13,
@@ -984,7 +992,7 @@
     "percentual_base_tech": 0.8
   },
   {
-    "posicao": 124,
+    "posicao": 125,
     "nome": "Serverless",
     "grupo": "cloud_devops",
     "vagas": 13,
@@ -992,7 +1000,7 @@
     "percentual_base_tech": 0.8
   },
   {
-    "posicao": 125,
+    "posicao": 126,
     "nome": "jQuery",
     "grupo": "frameworks",
     "vagas": 13,
@@ -1000,7 +1008,7 @@
     "percentual_base_tech": 0.8
   },
   {
-    "posicao": 126,
+    "posicao": 127,
     "nome": "BigQuery",
     "grupo": "dados",
     "vagas": 12,
@@ -1008,7 +1016,7 @@
     "percentual_base_tech": 0.7
   },
   {
-    "posicao": 127,
+    "posicao": 128,
     "nome": "Visual Basic/VBA",
     "grupo": "linguagens",
     "vagas": 12,
@@ -1016,7 +1024,7 @@
     "percentual_base_tech": 0.7
   },
   {
-    "posicao": 128,
+    "posicao": 129,
     "nome": "Cisco",
     "grupo": "suporte_infra",
     "vagas": 11,
@@ -1024,17 +1032,9 @@
     "percentual_base_tech": 0.7
   },
   {
-    "posicao": 129,
+    "posicao": 130,
     "nome": "PL/SQL",
     "grupo": "linguagens",
-    "vagas": 11,
-    "percentual_total": 0.5,
-    "percentual_base_tech": 0.7
-  },
-  {
-    "posicao": 130,
-    "nome": "Redis",
-    "grupo": "bancos",
     "vagas": 11,
     "percentual_total": 0.5,
     "percentual_base_tech": 0.7
@@ -1457,6 +1457,14 @@
   },
   {
     "posicao": 183,
+    "nome": "CodeIgniter",
+    "grupo": "frameworks",
+    "vagas": 3,
+    "percentual_total": 0.1,
+    "percentual_base_tech": 0.2
+  },
+  {
+    "posicao": 184,
     "nome": "Dart",
     "grupo": "linguagens",
     "vagas": 3,
@@ -1464,7 +1472,7 @@
     "percentual_base_tech": 0.2
   },
   {
-    "posicao": 184,
+    "posicao": 185,
     "nome": "Groovy",
     "grupo": "linguagens",
     "vagas": 3,
@@ -1472,7 +1480,7 @@
     "percentual_base_tech": 0.2
   },
   {
-    "posicao": 185,
+    "posicao": 186,
     "nome": "Perl",
     "grupo": "linguagens",
     "vagas": 3,
@@ -1480,7 +1488,7 @@
     "percentual_base_tech": 0.2
   },
   {
-    "posicao": 186,
+    "posicao": 187,
     "nome": "Prisma",
     "grupo": "frameworks",
     "vagas": 3,
@@ -1488,7 +1496,7 @@
     "percentual_base_tech": 0.2
   },
   {
-    "posicao": 187,
+    "posicao": 188,
     "nome": "Ruby on Rails",
     "grupo": "frameworks",
     "vagas": 3,
@@ -1496,7 +1504,7 @@
     "percentual_base_tech": 0.2
   },
   {
-    "posicao": 188,
+    "posicao": 189,
     "nome": "Rust",
     "grupo": "linguagens",
     "vagas": 3,
@@ -1504,7 +1512,7 @@
     "percentual_base_tech": 0.2
   },
   {
-    "posicao": 189,
+    "posicao": 190,
     "nome": "Scala",
     "grupo": "linguagens",
     "vagas": 3,
@@ -1512,7 +1520,7 @@
     "percentual_base_tech": 0.2
   },
   {
-    "posicao": 190,
+    "posicao": 191,
     "nome": "dbt",
     "grupo": "dados",
     "vagas": 3,
@@ -1520,7 +1528,7 @@
     "percentual_base_tech": 0.2
   },
   {
-    "posicao": 191,
+    "posicao": 192,
     "nome": "C",
     "grupo": "linguagens",
     "vagas": 2,
@@ -1528,7 +1536,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 192,
+    "posicao": 193,
     "nome": "Camunda",
     "grupo": "cloud_devops",
     "vagas": 2,
@@ -1536,7 +1544,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 193,
+    "posicao": 194,
     "nome": "Cassandra",
     "grupo": "bancos",
     "vagas": 2,
@@ -1544,7 +1552,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 194,
+    "posicao": 195,
     "nome": "Entity Framework",
     "grupo": "frameworks",
     "vagas": 2,
@@ -1552,7 +1560,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 195,
+    "posicao": 196,
     "nome": "JMeter",
     "grupo": "qa_testes",
     "vagas": 2,
@@ -1560,7 +1568,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 196,
+    "posicao": 197,
     "nome": "Keras",
     "grupo": "inteligencia_artificial",
     "vagas": 2,
@@ -1568,7 +1576,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 197,
+    "posicao": 198,
     "nome": "Nginx",
     "grupo": "cloud_devops",
     "vagas": 2,
@@ -1576,7 +1584,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 198,
+    "posicao": 199,
     "nome": "NumPy",
     "grupo": "dados",
     "vagas": 2,
@@ -1584,7 +1592,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 199,
+    "posicao": 200,
     "nome": "PyTorch",
     "grupo": "inteligencia_artificial",
     "vagas": 2,
@@ -1592,7 +1600,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 200,
+    "posicao": 201,
     "nome": "Pytest",
     "grupo": "qa_testes",
     "vagas": 2,
@@ -1600,7 +1608,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 201,
+    "posicao": 202,
     "nome": "Redshift",
     "grupo": "dados",
     "vagas": 2,
@@ -1608,7 +1616,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 202,
+    "posicao": 203,
     "nome": "Retool",
     "grupo": "cloud_devops",
     "vagas": 2,
@@ -1616,7 +1624,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 203,
+    "posicao": 204,
     "nome": "Svelte",
     "grupo": "frameworks",
     "vagas": 2,
@@ -1624,7 +1632,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 204,
+    "posicao": 205,
     "nome": "Temporal.io",
     "grupo": "cloud_devops",
     "vagas": 2,
@@ -1632,7 +1640,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 205,
+    "posicao": 206,
     "nome": "TensorFlow",
     "grupo": "inteligencia_artificial",
     "vagas": 2,
@@ -1640,7 +1648,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 206,
+    "posicao": 207,
     "nome": "WebSockets",
     "grupo": "engenharia_praticas",
     "vagas": 2,
@@ -1648,7 +1656,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 207,
+    "posicao": 208,
     "nome": "Assembly",
     "grupo": "linguagens",
     "vagas": 1,
@@ -1656,17 +1664,9 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 208,
+    "posicao": 209,
     "nome": "Cloudflare",
     "grupo": "cloud_devops",
-    "vagas": 1,
-    "percentual_total": 0.0,
-    "percentual_base_tech": 0.1
-  },
-  {
-    "posicao": 209,
-    "nome": "CodeIgniter",
-    "grupo": "frameworks",
     "vagas": 1,
     "percentual_total": 0.0,
     "percentual_base_tech": 0.1

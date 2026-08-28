@@ -30729,7 +30729,10 @@
     "data_publicacao": "27/07/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2827448/assistente-de-rede-e-operacoes",
-    "tecnologias": []
+    "tecnologias": [
+      "Linux",
+      "Redes de Computadores"
+    ]
   },
   {
     "id": 1464,
@@ -31496,7 +31499,10 @@
     "data_publicacao": "24/07/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2827332/designer-grafico-analista-de-marketing-i",
-    "tecnologias": []
+    "tecnologias": [
+      "HTML",
+      "CSS"
+    ]
   },
   {
     "id": 1677,
@@ -44677,7 +44683,10 @@
       "SQL",
       "PL/SQL",
       "SQL Server",
-      "ERP"
+      "ERP",
+      "SAP",
+      "TOTVS",
+      "Banco de Dados"
     ]
   },
   {
@@ -44694,11 +44703,25 @@
     "fonte": "programathor",
     "url": "https://programathor.com.br/jobs/33728-desenvolvedor-a-de-software-full-stack",
     "tecnologias": [
+      "Python",
       "JavaScript",
       "TypeScript",
+      "React",
       "Next.js",
       "Node.js",
-      "PostgreSQL"
+      "Inteligência Artificial",
+      "PostgreSQL",
+      "AWS",
+      "GCP",
+      "Docker",
+      "Git",
+      "CI/CD",
+      "Testes Automatizados",
+      "API REST",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Banco de Dados",
+      "Lógica de Programação"
     ]
   },
   {
@@ -44721,7 +44744,9 @@
       "HTML",
       ".NET",
       "SQL Server",
-      "Git"
+      "Git",
+      "Manutenção Preventiva",
+      "Engenharia de Software"
     ]
   },
   {
@@ -44743,7 +44768,14 @@
       ".NET",
       "PostgreSQL",
       "SQL Server",
-      "Oracle"
+      "Oracle",
+      "Git",
+      "API REST",
+      "Metodologias Ágeis",
+      "Clean Code",
+      "Algoritmos",
+      "Banco de Dados",
+      "Lógica de Programação"
     ]
   },
   {
@@ -44763,7 +44795,15 @@
       "JavaScript",
       "PHP",
       "HTML",
-      "MySQL"
+      "CSS",
+      "Laravel",
+      "CodeIgniter",
+      "MySQL",
+      "Redis",
+      "Git",
+      "API REST",
+      "Metodologias Ágeis",
+      "Estrutura de Dados"
     ]
   },
   {
@@ -44783,7 +44823,15 @@
       "JavaScript",
       "PHP",
       "HTML",
-      "MySQL"
+      "CSS",
+      "Laravel",
+      "CodeIgniter",
+      "MySQL",
+      "Redis",
+      "Git",
+      "API REST",
+      "Metodologias Ágeis",
+      "Estrutura de Dados"
     ]
   },
   {
@@ -44803,8 +44851,14 @@
       "JavaScript",
       "PHP",
       "HTML",
+      "CSS",
       "CodeIgniter",
-      "MySQL"
+      "MySQL",
+      "Redis",
+      "Git",
+      "API REST",
+      "Metodologias Ágeis",
+      "Estrutura de Dados"
     ]
   },
   {
@@ -44845,7 +44899,8 @@
     "tecnologias": [
       "C#",
       "SQL",
-      ".NET"
+      ".NET",
+      "Git"
     ]
   }
 ]
