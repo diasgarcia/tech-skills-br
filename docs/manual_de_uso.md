@@ -108,6 +108,8 @@ Uso: python main.py [OPÇÕES]
 
 Espelha os dados do CSV mais recente (ou de um CSV específico) para o banco de dados relacional.
 
+Linhas que não passam no portão de relevância (`tech_gate` em `scraper/rules/areas.yml` — título e descrição sem sinal de tecnologia) são ignoradas e contabilizadas como "Fora do escopo". Como o import é idempotente, re-importar o `seed/vagas.csv` com `--recriar` também remove da base vagas antigas que deixaram de ser tech após um ajuste do portão.
+
 ```text
 Uso: python scripts/import_csv.py [OPÇÕES]
 ```

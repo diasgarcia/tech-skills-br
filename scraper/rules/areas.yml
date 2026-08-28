@@ -118,6 +118,22 @@ tech_gate:
     - biomedicina
     - nutricao
     - fisioterapia
+    - arquitetura e urbanismo
+    - tecnologia do concreto
+    - desenvolvimento de produto
+    - engenharia quimica
+    - sistema da qualidade
+    - sistema de gestao da qualidade
+    - sistema de gestao integrado
+    - gestao da qualidade
+    - tecnologia de produto
+    - sistema da gestao
+    - eng quimica
+    - administrativo de vendas
+    - adm pessoal
+    - sistemas de utilidades
+    - sistemas de engenharia
+    - estagiario a administrativo
     - odontologia
 
 
@@ -155,6 +171,7 @@ areas:
       - big data
       - pipeline de dados
       - data lake
+      - anaplan
       - data lakehouse
     peso_medio:
       # "data" sozinho NAO entra: em portugues casa com "data de admissao".
@@ -198,6 +215,8 @@ areas:
       - desenvolvedor de agentes
       - ai engineer
       - artificial intelligence engineer
+      - agentic
+      - rag
       - cientista de machine learning
       - machine learning engineer
       - engenheiro de machine learning
@@ -226,7 +245,6 @@ areas:
       - langchain
       - llamaindex
       - crewai
-      - rag
       - vector database
       - bancos vetoriais
 
@@ -240,6 +258,8 @@ areas:
       - desenvolvedor front
       - front-end
       - desenvolvimento web front
+      - web developer
+      - desenvolvedor web junior
     peso_medio:
       - react
       - reactjs
@@ -276,6 +296,11 @@ areas:
       - desenvolvimento de apis
       - desenvolvedor rpa
       - engenheiro de rpa
+      - power platform
+      - power apps
+      - powerapps
+      - low code
+      - low-code
       - software embarcado
       - sistemas embarcados
       - desenvolvedor delphi
@@ -298,6 +323,7 @@ areas:
       - desenvolvedor ruby
       - desenvolvedor golang
       - desenvolvedor rust
+      - pl sql
     peso_medio:
       - api rest
       - apis
@@ -355,8 +381,12 @@ areas:
       - desenvolvedor ios
       - aplicativos moveis
       - app mobile
-    peso_medio:
       - flutter
+      - software android
+      - software ios
+      - desenvolvedor de software android
+      - desenvolvedor de software ios
+    peso_medio:
       - react native
       - swift
       - swiftui
@@ -450,9 +480,27 @@ areas:
       - desenvolvimento de sistemas
       - analista de desenvolvimento
       - analista de sistemas
+      - analise de sistemas
       - software engineer
       - software developer
+      - software engineering
+      - engenheiro a de software
+      - progettista software
     peso_medio:
+      # Devs genericos sem stack especifica. Peso medio de proposito: no
+      # titulo vale exatamente min_score, entao qualquer area com stack
+      # ("front-end", "python") continua vencendo ("desenvolvedor junior"
+      # nao casa "desenvolvedor java junior" -- e quando casa, cede).
+      - desenvolvedor junior
+      - desenvolvedora junior
+      - desenvolvedor jr
+      - desenvolvedora jr
+      - desenvolvedor a junior
+      - desenvolvedor a jr
+      - desenvolvedor trainee
+      - desenvolvedor a trainee
+      - analista desenvolvedor
+      - estagiario a de desenvolvimento
       - estagio desenvolvimento
       - estagio em desenvolvimento
       - estagiario de desenvolvimento
@@ -523,6 +571,14 @@ areas:
       - governanca de ti
       - gestao de ti
       - pmo de ti
+      # Titulos sem preposicao ("analista sistemas" nao casa "analista de sistemas")
+      - analista sistemas
+      - assistente sistemas
+      - estagio sistemas
+      - itsm
+      - servicenow
+      - salesforce
+      - analise de processos e sistemas
     peso_medio:
       - erp
       - sap
@@ -533,7 +589,6 @@ areas:
       - rm totvs
       - datasul
       - dynamics 365
-      - salesforce
       - itil
       - cobit
       - pmo
@@ -587,6 +642,7 @@ areas:
       - manutencao de micro
       - manutencao de micros
       - tecnico de informatica
+      - tecnico a de informatica
       - suporte a hardware
       - suporte presencial
       - tecnico de campo
@@ -614,6 +670,30 @@ areas:
       - estagio suporte
       - estagio em suporte
       - estagiario de suporte
+      # Titulos genericos que na pratica sao suporte/help desk
+      # (sem preposicao: "tecnico informatica" nao casa "tecnico de informatica").
+      - assistente de ti
+      - auxiliar de ti
+      - tecnico de ti
+      - tecnico em ti
+      - tecnico informatica
+      - tecnico em informatica
+      - estagiario de ti
+      - estagio de ti
+      - estagio ti
+      - aprendiz de ti
+      - jovem aprendiz de ti
+      - aprendiz ti
+      - aprendiz em ti
+      - auxiliar de informatica
+      - assistente de informatica
+      # Variantes com "(a)" e abreviacao "T.I." que o normalize preserva
+      - estagiario a de ti
+      - auxiliar de t i
+      - assistente de tecnologia da informacao
+      - auxiliar de tecnologia da informacao
+      - software support
+      - soporte
       - operador de suporte
     peso_medio:
       - suporte
@@ -690,6 +770,9 @@ areas:
       - desenvolvimento de firmware
       - firmware
       - desenvolvedor de hardware
+      - engenheiro de automacao
+      - engenharia de automacao
+      - automacao industrial
     peso_medio:
       - eletronica
       - circuitos
@@ -702,7 +785,6 @@ areas:
       - telecom
       - telecomunicacoes
       - sensores
-      - automacao industrial
       - clp
 
 
