@@ -22,9 +22,7 @@ from .models import Job
 
 _WS_RE = re.compile(r"\s+")
 _KEEP_RE = re.compile(r"[^a-z0-9#+ ]+")
-# Caracteres que "colam" numa keyword -- usados como limite de palavra.
 _BOUNDARY = r"[a-z0-9#+]"
-# Mesma coisa para o casamento case-sensitive, que roda no texto original.
 _CASE_BOUNDARY = r"[A-Za-z0-9#+]"
 
 ARQUIVO_SECOES_DESCARTE = RULES_DIR / "secoes_descarte.yml"
@@ -74,7 +72,6 @@ class SkillExtractor:
         rules: dict,
         secoes_descarte: list[str] | None = None,
     ) -> None:
-        # nome canonico -> lista de padroes; guarda tambem o grupo (linguagens...)
         self.skills: dict[str, list[re.Pattern]] = {}
         self.case_sensitive: dict[str, list[re.Pattern]] = {}
         self.groups: dict[str, str] = {}
@@ -126,7 +123,6 @@ class SkillExtractor:
         haystack = normalize_tech(raw)
         if not haystack:
             return []
-        # Ignora secoes finais de beneficios/termos: nao sao requisito.
         haystack = self._recortar_secoes_finais(haystack)
         if not haystack:
             return []

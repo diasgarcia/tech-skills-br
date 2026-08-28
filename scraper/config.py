@@ -52,9 +52,7 @@ USER_AGENT = (
 
 
 
-# Termos usados na busca. Cada termo vira uma consulta separada em cada portal.
 SEARCH_TERMS: list[str] = [
-    # Desenvolvimento de Software
     "desenvolvedor junior",
     "desenvolvedor jr",
     "programador junior",
@@ -64,7 +62,6 @@ SEARCH_TERMS: list[str] = [
     "fullstack junior",
     "desenvolvedor mobile junior",
 
-    # Dados & IA
     "engenheiro de dados junior",
     "analista de dados junior",
     "analista de bi junior",
@@ -73,27 +70,23 @@ SEARCH_TERMS: list[str] = [
     "engenheiro de ia junior",
     "inteligencia artificial junior",
 
-    # Cloud, DevOps & QA
     "qa junior",
     "analista de testes junior",
     "devops junior",
     "cloud junior",
 
-    # Infraestrutura, Redes & Segurança
     "analista de infraestrutura junior",
     "analista de redes junior",
     "analista de seguranca junior",
     "seguranca da informacao junior",
     "cybersecurity junior",
 
-    # Suporte & TI Operacional
     "suporte tecnico junior",
     "analista de suporte junior",
     "assistente de ti",
     "auxiliar de ti",
     "tecnico de informatica",
 
-    # Estágios Segmentados
     "estagio desenvolvimento",
     "estagio ti",
     "estagio tecnologia",
@@ -104,10 +97,8 @@ SEARCH_TERMS: list[str] = [
     "estagio redes",
     "estagio seguranca",
 
-    # Trainee
     "trainee tecnologia",
     "trainee ti",
-
 ]
 
 
@@ -117,7 +108,6 @@ class Settings:
     """Parametros de execucao. Sobrescritos pela CLI em `main.py`."""
 
     search_terms: list[str] = field(default_factory=lambda: list(SEARCH_TERMS))
-    # Todos os portais que funcionam hoje. Ver `scraper/sources/__init__.py`.
     sources: list[str] = field(
         default_factory=lambda: [
             "gupy",
@@ -128,13 +118,9 @@ class Settings:
         ]
     )
 
-
-    # Escopo geografico / polos (padrao: "todos")
     locations: list[str] = field(default_factory=lambda: ["todos"])
     output_dir: Path = DEFAULT_OUTPUT_DIR
 
-
-    # Chaves de API para fontes especializadas
     theirstack_api_key: str = field(
         default_factory=lambda: os.getenv("THEIRSTACK_API_KEY", "")
     )
@@ -142,21 +128,16 @@ class Settings:
         default_factory=lambda: os.getenv("SERPAPI_API_KEY", "")
     )
 
-    # Educacao com o servidor
     delay_seconds: float = 1.5
     timeout_seconds: float = 30.0
     max_retries: int = 3
     backoff_factor: float = 1.5
     user_agent: str = USER_AGENT
 
-    # Limites de coleta
     page_size: int = 100  # a API da Gupy rejeita limit > 100 (HTTP 400)
     start_page: int = 1
     max_pages_per_term: int = 15
 
-
-
-    # Filtros
     only_junior: bool = True
 
     # Se False, o pipeline nao busca descricoes do LinkedIn durante a coleta.

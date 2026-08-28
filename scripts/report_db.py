@@ -19,7 +19,6 @@ from pathlib import Path
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
-# Permite importar pacotes do projeto
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from api.database import Base, database_url, make_engine, url_sem_senha
@@ -54,7 +53,6 @@ def generate_db_report(
             print("O banco de dados está vazio. Nenhuma vaga cadastrada.")
             return ""
 
-        # Datas min e max
         min_date = session.scalar(select(func.min(Vaga.published_date)))
         max_date = session.scalar(select(func.max(Vaga.published_date)))
         periodo_str = (
@@ -63,21 +61,18 @@ def generate_db_report(
             else "Sem data informada"
         )
 
-        # 1. Distribuicao por Area
         area_counts = session.execute(
             select(Vaga.area, func.count(Vaga.id))
             .group_by(Vaga.area)
             .order_by(func.count(Vaga.id).desc())
         ).all()
 
-        # 2. Distribuicao por Regiao
         regiao_counts = session.execute(
             select(func.coalesce(Vaga.regiao, "Não informado"), func.count(Vaga.id))
             .group_by(Vaga.regiao)
             .order_by(func.count(Vaga.id).desc())
         ).all()
 
-        # 3. Top Polos
         polo_counts = session.execute(
             select(Vaga.polo, func.count(Vaga.id))
             .where(Vaga.polo.isnot(None), Vaga.polo != "", Vaga.polo != "Não informado")
@@ -86,28 +81,24 @@ def generate_db_report(
             .limit(10)
         ).all()
 
-        # 4. Modalidade
         modalidade_counts = session.execute(
             select(func.coalesce(Vaga.workplace_type, "Não informado"), func.count(Vaga.id))
             .group_by(Vaga.workplace_type)
             .order_by(func.count(Vaga.id).desc())
         ).all()
 
-        # 5. Senioridade
         seniority_counts = session.execute(
             select(func.coalesce(Vaga.seniority, "Não informado"), func.count(Vaga.id))
             .group_by(Vaga.seniority)
             .order_by(func.count(Vaga.id).desc())
         ).all()
 
-        # 6. Fontes / Portais
         source_counts = session.execute(
             select(Vaga.source, func.count(Vaga.id))
             .group_by(Vaga.source)
             .order_by(func.count(Vaga.id).desc())
         ).all()
 
-        # 7. Top 20 Tecnologias
         tech_counts = session.execute(
             select(Tecnologia.nome, func.count(vaga_tecnologia.c.vaga_id))
             .join(vaga_tecnologia, Tecnologia.id == vaga_tecnologia.c.tecnologia_id)
@@ -116,7 +107,6 @@ def generate_db_report(
             .limit(20)
         ).all()
 
-        # 8. Top 10 Empresas
         company_counts = session.execute(
             select(Vaga.company, func.count(Vaga.id))
             .where(Vaga.company.isnot(None), Vaga.company != "")
@@ -125,7 +115,6 @@ def generate_db_report(
             .limit(10)
         ).all()
 
-        # Coleta de todas as vagas para geracao de graficos analiticos
         all_vagas = session.scalars(select(Vaga)).all()
         jobs: list[Job] = []
         for v in all_vagas:
@@ -148,7 +137,6 @@ def generate_db_report(
                 )
             )
 
-    # Construcao do Relatorio Textual / Markdown
     now_str = datetime.now().strftime("%d/%m/%Y %H:%M")
     header = (
         "=" * 68 + "\n"
@@ -166,7 +154,6 @@ def generate_db_report(
     lines.append(f"- **Total de vagas consolidadas:** {total_vagas}")
     lines.append("")
 
-    # Secao Areas
     print("\n[RANKING DE ÁREAS DE TECNOLOGIA]")
     lines.append("## Ranking de Áreas de Tecnologia\n")
     lines.append("| Posição | Área | Vagas | % | Gráfico |")
@@ -177,7 +164,6 @@ def generate_db_report(
         print(f"  {pos:2d}. {area:<20} {count:4d} vagas ({pct:5.1f}%) {bar}")
         lines.append(f"| {pos} | {area} | {count} | {pct}% | {bar} |")
 
-    # Secao Regioes
     print("\n[DISTRIBUIÇÃO POR MACRORREGIÃO]")
     lines.append("\n## Distribuição por Macrorregião\n")
     lines.append("| Região | Vagas | % | Gráfico |")
@@ -188,7 +174,6 @@ def generate_db_report(
         print(f"  - {reg:<20} {count:4d} vagas ({pct:5.1f}%) {bar}")
         lines.append(f"| {reg} | {count} | {pct}% | {bar} |")
 
-    # Secao Top Polos
     if polo_counts:
         print("\n[TOP 10 POLOS TECNOLÓGICOS REGIONAIS]")
         lines.append("\n## Top 10 Polos Tecnológicos Regionais\n")
@@ -200,7 +185,6 @@ def generate_db_report(
             print(f"  {pos:2d}. {polo:<20} {count:4d} vagas ({pct:5.1f}%) {bar}")
             lines.append(f"| {pos} | {polo} | {count} | {pct}% | {bar} |")
 
-    # Secao Modalidade
     print("\n[DISTRIBUIÇÃO POR MODALIDADE DE TRABALHO]")
     lines.append("\n## Distribuição por Modalidade de Trabalho\n")
     lines.append("| Modalidade | Vagas | % | Gráfico |")
@@ -211,7 +195,6 @@ def generate_db_report(
         print(f"  - {mod:<20} {count:4d} vagas ({pct:5.1f}%) {bar}")
         lines.append(f"| {mod} | {count} | {pct}% | {bar} |")
 
-    # Secao Senioridade
     print("\n[DISTRIBUIÇÃO POR NÍVEL DE ENTRADA]")
     lines.append("\n## Distribuição por Nível de Entrada\n")
     lines.append("| Senioridade | Vagas | % |")
@@ -221,7 +204,6 @@ def generate_db_report(
         print(f"  - {sen:<20} {count:4d} vagas ({pct:5.1f}%)")
         lines.append(f"| {sen} | {count} | {pct}% |")
 
-    # Secao Portais
     print("\n[DISTRIBUIÇÃO POR PORTAL / FONTE]")
     lines.append("\n## Distribuição por Portal de Origem\n")
     lines.append("| Portal | Vagas | % |")
@@ -231,7 +213,6 @@ def generate_db_report(
         print(f"  - {src:<20} {count:4d} vagas ({pct:5.1f}%)")
         lines.append(f"| {src} | {count} | {pct}% |")
 
-    # Secao Tecnologias
     if tech_counts:
         print("\n[TOP 20 TECNOLOGIAS MAIS DEMANDADAS]")
         lines.append("\n## Top 20 Tecnologias Mais Demandadas\n")
@@ -241,7 +222,6 @@ def generate_db_report(
             print(f"  {pos:2d}. {tech:<20} {count:4d} citações")
             lines.append(f"| {pos} | {tech} | {count} |")
 
-    # Secao Empresas
     if company_counts:
         print("\n[TOP 10 EMPRESAS CONTRATANDO]")
         lines.append("\n## Top 10 Empresas com Mais Vagas\n")
@@ -264,7 +244,6 @@ def generate_db_report(
         print(f"\nArquivos gerados:")
         print(f"  - Relatório Markdown: {report_path}")
 
-        # Atualiza a pasta organizada docs/relatorios/ com a versao mais recente
         docs_reports_dir = PROJECT_ROOT / "docs" / "relatorios"
         docs_reports_dir.mkdir(parents=True, exist_ok=True)
         docs_md_path = docs_reports_dir / "relatorio_banco_consolidado.md"

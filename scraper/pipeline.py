@@ -99,7 +99,6 @@ def run(
         logger.info("Apos filtro de tecnologia: %d vagas (-%d nao-tech)",
                     len(jobs), dropped_non_tech)
 
-    # Enriquecimento paralelo das descricoes do LinkedIn apenas para vagas unicas filtradas
     linkedin_to_enrich = [j for j in jobs if j.source == "linkedin" and not j.description]
     if settings.enrich_linkedin and linkedin_to_enrich:
         logger.info("Enriquecendo descricoes de %d vagas unicas do LinkedIn em paralelo...", len(linkedin_to_enrich))

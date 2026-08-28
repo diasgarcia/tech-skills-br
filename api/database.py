@@ -74,13 +74,11 @@ def make_engine(destino: str | Path | None = None):
     opcoes: dict = {"future": True}
 
     if url.startswith("sqlite"):
-        # check_same_thread: threads diferentes podem compartilhar a conexao.
         opcoes["connect_args"] = {"check_same_thread": False}
         caminho = url.replace("sqlite:///", "")
         if caminho and caminho != ":memory:":
             Path(caminho).parent.mkdir(parents=True, exist_ok=True)
     else:
-        # pool_pre_ping: se o Postgres reiniciar, a proxima sessao reconecta.
         opcoes["pool_pre_ping"] = True
 
     return create_engine(url, **opcoes)

@@ -21,7 +21,7 @@ from pathlib import Path
 
 import matplotlib
 
-matplotlib.use("Agg")  # sem interface grafica: so grava arquivo
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.patches import FancyBboxPatch, Rectangle  # noqa: E402
 
@@ -36,7 +36,6 @@ from .skills import jobs_with_skills_by_area, skills_by_area  # noqa: E402
 
 logger = logging.getLogger(__name__)
 
-# Paleta (modo claro). Cores de marca ficam nas barras; texto usa tokens de texto.
 SURFACE = "#fcfcfb"
 SERIES_1 = "#2a78d6"
 INK_PRIMARY = "#0b0b0b"
@@ -44,9 +43,9 @@ INK_SECONDARY = "#52514e"
 INK_MUTED = "#898781"
 
 FONT_STACK = ["Segoe UI", "DejaVu Sans", "sans-serif"]
-BAR_THICKNESS = 0.46  # fracao da faixa: marca fina, com ar entre as barras
-MAX_BAR_PX = 46  # teto absoluto da espessura: a barra nunca preenche a faixa
-CORNER_PX = 9  # raio do canto arredondado, em pixels da imagem final
+BAR_THICKNESS = 0.46
+MAX_BAR_PX = 46
+CORNER_PX = 9
 
 
 def _style() -> None:
@@ -155,7 +154,7 @@ def chart_areas(jobs: list[Job], output_path: Path, subtitle: str = "") -> Path:
     ax.set_ylim(-0.6, len(rows) - 0.4)
     _bare_axes(ax)
 
-    # Titulo preso ao eixo (e nao a figura): assim o tight_layout reserva o
+    # Titulo preso ao eixo (e nao a figura): o tight_layout reserva o
     # espaco certo e nao sobra faixa vazia entre o subtitulo e a primeira barra.
     ax.set_title(
         "Vagas júnior de tecnologia por área",
