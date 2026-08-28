@@ -12,7 +12,7 @@ O sistema é estruturado em quatro camadas desacopladas e complementares:
 flowchart LR
     A["1. Ingestão Multi-fonte<br>• Gupy (REST)<br>• LinkedIn (HTML)<br>• Vagas.com & ProgramaThor<br>• Trampos.co<br>• SerpApi (Google Jobs)<br>• TheirStack API"] --> B["2. Processamento & Mineração<br>• Portão Tech & Nível Júnior<br>• Deduplicação Inter-portais<br>• Extração de +200 Skills<br>• Classificação em 10 Áreas<br>• Estratificação Geográfica"]
     B --> C["3. Persistência & Snapshot<br>• Banco Relacional (SQLite)<br>• Ingestão Idempotente (UPSERT)<br>• Snapshot seed/vagas.csv"]
-    C --> D["4. Consumo & Analytics<br>• API REST (FastAPI /docs)<br>• Relatórios Estatísticos MD<br>• Gráficos Analíticos (PNG)"]
+    C --> D["4. Consumo & Analytics<br>• JSON Estáticos (GitHub Pages)<br>• Relatórios Estatísticos MD<br>• Gráficos Analíticos (PNG)"]
 ```
 
 ---
@@ -123,20 +123,20 @@ O script realiza operações de **UPSERT**:
 
 ### 4.3 Snapshot Versionado (`scripts/export_seed.py`)
 
-Para garantir a reprodutibilidade científica e permitir deploys na nuvem sem depender de arquivos SQLite locais, o comando `python scripts/export_seed.py` consolida todo o banco de dados no arquivo `seed/vagas.csv`.
+Para garantir a reprodutibilidade científica e permitir a reconstrução do banco sem depender de arquivos SQLite locais, o comando `python scripts/export_seed.py` consolida todo o banco de dados no arquivo `seed/vagas.csv`.
 
 ---
 
-## 5. API REST e Geração de Gráficos
+## 5. Consumo, API Estática e Geração de Gráficos
 
-### 5.1 FastAPI (`api/app.py`)
+### 5.1 Endpoints JSON Estáticos (`scripts/export_pages_data.py`)
 
-A API disponibiliza endpoints de consulta estruturada:
+O consumo dos dados é feito por arquivos JSON estáticos hospedados no GitHub Pages (`GET` em `.github/pages/api/`):
 
-- `GET /vagas`: Listagem paginada com suporte a múltiplos filtros simultâneos (`area`, `tecnologia`, `modalidade`, `fonte`, `q`).
-- `GET /tecnologias`: Ranking agregado de menções com parâmetro `com_vagas=true`.
-- `GET /areas`: Distribuição percentual e absoluta de cada especialidade.
-- `GET /docs`: Documentação interativa Swagger UI.
+- `resumo.json`: KPIs, metadados e distribuições consolidadas.
+- `areas.json`: Ranking percentual e absoluto das áreas técnicas.
+- `tecnologias.json`: Ranking agregado de menções de tecnologias.
+- `vagas.json`: Base completa de vagas estruturadas para consumo externo.
 
 ### 5.2 Geração Gráfica (`scraper/charts.py`)
 
