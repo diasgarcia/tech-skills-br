@@ -16,8 +16,8 @@
       "Windows",
       "ITIL",
       "Hardware",
-      "Montagem e Manutenção de PCs",
       "Metodologias Ágeis",
+      "Montagem e Manutenção de PCs",
       "Engenharia de Software"
     ]
   },
@@ -37,8 +37,8 @@
     "tecnologias": [
       "Redes de Computadores",
       "Hardware",
-      "Manutenção Preventiva",
-      "VMware"
+      "VMware",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -93,12 +93,12 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1giario-de-suporte-at-eagle-solu%C3%A7%C3%B5es-4460166630",
     "tecnologias": [
-      "Banco de Dados",
       "Windows",
       "Hardware",
       "Inglês",
       "Eletrônica",
-      "CFTV"
+      "CFTV",
+      "Banco de Dados"
     ]
   },
   {
@@ -139,11 +139,11 @@
       "HTML",
       "CSS",
       ".NET",
-      "Banco de Dados",
       "SQL Server",
       "Git",
       "API REST",
       "POO",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -199,12 +199,12 @@
     "fonte": "gupy",
     "url": "https://cogna.gupy.io/job/eyJqb2JJZCI6MTIzMTkxMjIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Banco de Dados",
       "Linux",
       "Windows",
       "Hardware",
       "VMware",
-      "Inglês"
+      "Inglês",
+      "Banco de Dados"
     ]
   },
   {
@@ -224,9 +224,9 @@
       "Redes de Computadores",
       "VPN",
       "Firewall",
-      "Manutenção Preventiva",
       "Inglês",
-      "Firmware"
+      "Firmware",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -247,9 +247,9 @@
       "Jest",
       "Testes Automatizados",
       "Testes Funcionais",
-      "Qualidade de Software",
       "Scrum",
       "Metodologias Ágeis",
+      "Qualidade de Software",
       "Lógica de Programação",
       "Engenharia de Software"
     ]
@@ -258,7 +258,7 @@
     "id": 2272,
     "titulo": "Software Development Engineer Intern, Amazon University Talent Acquisition",
     "empresa": "Amazon",
-    "area": "Outros/TI Geral",
+    "area": "Backend",
     "senioridade": "Estágio",
     "localidade": "São Paulo e Região",
     "polo": "São Paulo",
@@ -279,7 +279,7 @@
     "id": 2270,
     "titulo": "Estágio em TI",
     "empresa": "Olinda Fine Art",
-    "area": "Outros/TI Geral",
+    "area": "Suporte Técnico",
     "senioridade": "Estágio",
     "localidade": "Benevides, PA",
     "polo": "Belém",
@@ -309,7 +309,7 @@
     "id": 2268,
     "titulo": "Estágiario de TI",
     "empresa": "Rio Diesel Veículos e Peças",
-    "area": "Outros/TI Geral",
+    "area": "Suporte Técnico",
     "senioridade": "Estágio",
     "localidade": "Nova Iguaçu, RJ",
     "polo": "Rio de Janeiro",
@@ -320,17 +320,17 @@
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1giario-de-ti-at-rio-diesel-ve%C3%ADculos-e-pe%C3%A7as-4460144769",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "Azure",
       "Active Directory",
-      "Hardware"
+      "Hardware",
+      "Banco de Dados"
     ]
   },
   {
     "id": 2264,
     "titulo": "Desenvolvimento de Aplicações – TI Júnior (ingles fluente)",
     "empresa": "Ahoy by Belago",
-    "area": "Outros/TI Geral",
+    "area": "Backend",
     "senioridade": "Júnior",
     "localidade": "Curitiba e Região",
     "polo": "Curitiba",
@@ -354,7 +354,7 @@
     "id": 2263,
     "titulo": "Auxiliar De TI",
     "empresa": "CAMISARIA FMW",
-    "area": "Outros/TI Geral",
+    "area": "Suporte Técnico",
     "senioridade": "Júnior",
     "localidade": "São Paulo e Região",
     "polo": "São Paulo",
@@ -373,7 +373,7 @@
     "id": 2261,
     "titulo": "Assistente de Tecnologia da Informação",
     "empresa": "Real Guindastes",
-    "area": "Outros/TI Geral",
+    "area": "Suporte Técnico",
     "senioridade": "Júnior",
     "localidade": "Nova Lima, MG",
     "polo": "Belo Horizonte",
@@ -390,7 +390,7 @@
     "id": 2260,
     "titulo": "Assistente de TI Indústria Distrito Industrial",
     "empresa": "RDANILLO",
-    "area": "Outros/TI Geral",
+    "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "Cuiabá, MT",
     "polo": "Cuiabá",
@@ -409,7 +409,7 @@
     "id": 2257,
     "titulo": "ASSISTENTE DE TI",
     "empresa": "Grupo Cultivar",
-    "area": "Outros/TI Geral",
+    "area": "Field Service / Hardware",
     "senioridade": "Júnior",
     "localidade": "Fortaleza, CE",
     "polo": "Fortaleza",
@@ -468,15 +468,15 @@
     "tecnologias": [
       "Python",
       "JavaScript",
-      "Automação",
-      "Análise de Dados",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
-      "Banco de Dados",
       "Docker",
       "Git",
       "API REST",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Automação",
+      "Análise de Dados",
+      "Banco de Dados",
       "Lógica de Programação"
     ]
   },
@@ -499,12 +499,8 @@
       "C++",
       "Go",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
-      "Agentes de IA & RAG",
       "Linux",
       "Hardware",
-      "Cibersegurança",
       "Criptografia",
       "LGPD",
       "Metodologias Ágeis",
@@ -512,7 +508,11 @@
       "Inglês",
       "Firmware",
       "Sistemas Embarcados",
-      "Microcontroladores"
+      "Microcontroladores",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Agentes de IA & RAG",
+      "Cibersegurança"
     ]
   },
   {
@@ -728,9 +728,9 @@
       "Windows",
       "Redes de Computadores",
       "Hardware",
-      "Manutenção Preventiva",
       "ERP",
-      "TOTVS"
+      "TOTVS",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -747,8 +747,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-de-suporte-retail-bh-at-teknisa-software-4458036233",
     "tecnologias": [
-      "Banco de Dados",
-      "Windows"
+      "Windows",
+      "Banco de Dados"
     ]
   },
   {
@@ -787,10 +787,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-t-i-at-grupo-spasso-armaz%C3%A9ns-4458908265",
     "tecnologias": [
-      "Help Desk",
       "Hardware",
-      "Engenharia de Software",
-      "ERP"
+      "ERP",
+      "Help Desk",
+      "Engenharia de Software"
     ]
   },
   {
@@ -809,10 +809,10 @@
     "tecnologias": [
       "Windows",
       "Service Desk",
-      "Help Desk",
       "GLPI",
       "Office 365",
-      "Inglês"
+      "Inglês",
+      "Help Desk"
     ]
   },
   {
@@ -870,7 +870,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/consultor-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-jr-soc-threat-hunting-at-auth21-4459669186",
     "tecnologias": [
-      "Qualidade de Dados",
       "AWS",
       "Azure",
       "Linux",
@@ -879,12 +878,13 @@
       "Firewall",
       "Service Desk",
       "Office 365",
-      "Cibersegurança",
-      "Governança e Riscos (GRC)",
       "LGPD",
       "SIEM/SOC",
       "UML",
-      "Inglês"
+      "Inglês",
+      "Cibersegurança",
+      "Governança e Riscos (GRC)",
+      "Qualidade de Dados"
     ]
   },
   {
@@ -906,9 +906,9 @@
       "Windows",
       "Redes de Computadores",
       "VPN",
-      "Governança e Riscos (GRC)",
       "Gestão de Vulnerabilidades",
-      "IAM"
+      "IAM",
+      "Governança e Riscos (GRC)"
     ]
   },
   {
@@ -926,23 +926,23 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-jr-soc-at-auth21-4459672186",
     "tecnologias": [
       "Python",
-      "Banco de Dados",
       "AWS",
       "Linux",
       "Cloudflare",
       "Windows",
       "Redes de Computadores",
       "Firewall",
-      "Cibersegurança",
       "SIEM/SOC",
-      "Jira"
+      "Jira",
+      "Cibersegurança",
+      "Banco de Dados"
     ]
   },
   {
     "id": 2266,
     "titulo": "Estagiário (a) em TI, Salvador/BA",
     "empresa": "Auth21",
-    "area": "Outros/TI Geral",
+    "area": "Suporte Técnico",
     "senioridade": "Estágio",
     "localidade": "Salvador, BA",
     "polo": "Salvador",
@@ -957,7 +957,7 @@
     "id": 2265,
     "titulo": "ESTÁGIO EM TI",
     "empresa": "Auth21",
-    "area": "Outros/TI Geral",
+    "area": "Field Service / Hardware",
     "senioridade": "Estágio",
     "localidade": "Teresina, PI",
     "polo": "Teresina",
@@ -975,7 +975,7 @@
     "id": 2262,
     "titulo": "Assistente de Tecnologia da Informação",
     "empresa": "Auth21",
-    "area": "Outros/TI Geral",
+    "area": "Suporte Técnico",
     "senioridade": "Júnior",
     "localidade": "São Paulo, SP",
     "polo": "São Paulo",
@@ -1042,9 +1042,9 @@
       "Kotlin",
       "SQL",
       "Android",
-      "Banco de Dados",
       "Design Patterns",
-      "Inglês"
+      "Inglês",
+      "Banco de Dados"
     ]
   },
   {
@@ -1067,16 +1067,16 @@
       "Airflow",
       "ETL",
       "Data Lake",
-      "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
       "Machine Learning",
+      "Inteligência Artificial",
       "AWS",
       "Docker",
       "Git",
       "Serverless",
       "Clean Code",
       "Algoritmos",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
       "Engenharia de Software"
     ]
   },
@@ -1119,8 +1119,6 @@
       ".NET",
       "Entity Framework",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "Banco de Dados",
       "MySQL",
       "SQL Server",
       "Redis",
@@ -1138,6 +1136,8 @@
       "Clean Architecture",
       "Design Patterns",
       "DDD",
+      "Copilots & Assistentes de IA",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -1165,8 +1165,6 @@
       ".NET",
       "Entity Framework",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "Banco de Dados",
       "MySQL",
       "SQL Server",
       "Redis",
@@ -1184,6 +1182,8 @@
       "Clean Architecture",
       "Design Patterns",
       "DDD",
+      "Copilots & Assistentes de IA",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -1204,8 +1204,6 @@
       "TypeScript",
       "Angular",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
       "AWS",
       "Docker",
       "Git",
@@ -1219,12 +1217,14 @@
       "Clean Code",
       "Clean Architecture",
       "Inglês",
-      "Espanhol",
       "UX/UI",
       "SAP",
       "Salesforce",
       "Jira",
-      "Confluence"
+      "Confluence",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Espanhol"
     ]
   },
   {
@@ -1248,9 +1248,6 @@
       "Angular",
       ".NET",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
-      "Banco de Dados",
       "AWS",
       "Git",
       "CI/CD",
@@ -1258,6 +1255,9 @@
       "Scrum",
       "Metodologias Ágeis",
       "DDD",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Banco de Dados",
       "Lógica de Programação",
       "Engenharia de Software"
     ]
@@ -1277,10 +1277,10 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-sistemas-jr-at-inbrands-4458017998",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "Testes Funcionais",
-      "Lógica de Programação",
-      "ERP"
+      "ERP",
+      "Banco de Dados",
+      "Lógica de Programação"
     ]
   },
   {
@@ -1305,8 +1305,8 @@
       "CI/CD",
       "Linux",
       "Redes de Computadores",
-      "Engenharia de Software",
-      "Inglês"
+      "Inglês",
+      "Engenharia de Software"
     ]
   },
   {
@@ -1468,11 +1468,7 @@
       "C++",
       "Go",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
-      "Agentes de IA & RAG",
       "Linux",
-      "Cibersegurança",
       "Criptografia",
       "LGPD",
       "Metodologias Ágeis",
@@ -1480,7 +1476,11 @@
       "Inglês",
       "Firmware",
       "Sistemas Embarcados",
-      "Microcontroladores"
+      "Microcontroladores",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Agentes de IA & RAG",
+      "Cibersegurança"
     ]
   },
   {
@@ -1501,12 +1501,12 @@
       "SQL",
       "Tableau",
       "BI",
-      "Estatística",
-      "Análise de Dados",
-      "Qualidade de Dados",
       "Inteligência Artificial",
+      "Estatística",
+      "Inglês",
       "LLMs & IA Generativa",
-      "Inglês"
+      "Análise de Dados",
+      "Qualidade de Dados"
     ]
   },
   {
@@ -1526,11 +1526,11 @@
       "Python",
       "JavaScript",
       "Go",
-      "Análise de Dados",
       "Ansible",
       "Linux",
-      "Lógica de Programação",
-      "Inglês"
+      "Inglês",
+      "Análise de Dados",
+      "Lógica de Programação"
     ]
   },
   {
@@ -1577,8 +1577,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-dados-j%C3%BAnior-at-datagro-4458022180",
     "tecnologias": [
-      "Análise de Dados",
-      "Inglês"
+      "Inglês",
+      "Análise de Dados"
     ]
   },
   {
@@ -1629,8 +1629,8 @@
       "Power BI",
       "ETL",
       "BI",
-      "Análise de Dados",
-      "Modelagem de Dados"
+      "Modelagem de Dados",
+      "Análise de Dados"
     ]
   },
   {
@@ -1652,14 +1652,14 @@
       "Node.js",
       "Android",
       "iOS",
-      "Banco de Dados",
       "AWS",
       "Azure",
       "GCP",
       "Docker",
       "Scrum",
       "Metodologias Ágeis",
-      "UX/UI"
+      "UX/UI",
+      "Banco de Dados"
     ]
   },
   {
@@ -1959,11 +1959,11 @@
       "C++",
       "Android",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
       "Jenkins",
       "Git",
       "POO",
-      "Inglês"
+      "Inglês",
+      "Copilots & Assistentes de IA"
     ]
   },
   {
@@ -2032,12 +2032,12 @@
       "CSS",
       "Power BI",
       "Tableau",
-      "Análise de Dados",
       "Inteligência Artificial",
-      "Banco de Dados",
       "Scrum",
       "Metodologias Ágeis",
-      "UX/UI"
+      "UX/UI",
+      "Análise de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -2159,12 +2159,12 @@
       "ETL",
       "Databricks",
       "BI",
-      "Estatística",
-      "Análise de Dados",
       "Inteligência Artificial",
+      "Estatística",
+      "Modelagem de Dados",
       "LLMs & IA Generativa",
-      "Banco de Dados",
-      "Modelagem de Dados"
+      "Análise de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -2313,16 +2313,16 @@
     "tecnologias": [
       "Excel",
       "ITIL",
-      "Governança e Riscos (GRC)",
       "LGPD",
-      "ISO 27001"
+      "ISO 27001",
+      "Governança e Riscos (GRC)"
     ]
   },
   {
     "id": 2271,
     "titulo": "Programa de Estágio de Férias Genial Investimentos, Tecnologia | São Paulo, Capital | Jan/2027",
     "empresa": "Auth21",
-    "area": "Outros/TI Geral",
+    "area": "Engenharia de Software",
     "senioridade": "Estágio",
     "localidade": "São Paulo, SP",
     "polo": "São Paulo",
@@ -2332,15 +2332,15 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/programa-de-est%C3%A1gio-de-f%C3%A9rias-genial-investimentos-tecnologia-s%C3%A3o-paulo-capital-jan-2027-at-auth21-4459159025",
     "tecnologias": [
-      "Engenharia de Software",
-      "Inglês"
+      "Inglês",
+      "Engenharia de Software"
     ]
   },
   {
     "id": 2267,
     "titulo": "Estagiário(a) em Inovação e Tecnologia",
     "empresa": "Auth21",
-    "area": "Outros/TI Geral",
+    "area": "Engenharia de Software",
     "senioridade": "Estágio",
     "localidade": "Belo Horizonte, MG",
     "polo": "Belo Horizonte",
@@ -2351,15 +2351,15 @@
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-em-inova%C3%A7%C3%A3o-e-tecnologia-at-auth21-4459131151",
     "tecnologias": [
       "Excel",
-      "Análise de Dados",
-      "Inteligência Artificial"
+      "Inteligência Artificial",
+      "Análise de Dados"
     ]
   },
   {
     "id": 2256,
     "titulo": "0746/2026, Analista de TI JR (SENAI RONDONÓPOLIS/MT)",
     "empresa": "Auth21",
-    "area": "Outros/TI Geral",
+    "area": "Suporte Técnico",
     "senioridade": "Júnior",
     "localidade": "Rondonópolis, MT",
     "polo": "Cuiabá",
@@ -2371,8 +2371,8 @@
     "tecnologias": [
       "Excel",
       "Hardware",
-      "Manutenção Preventiva",
-      "LGPD"
+      "LGPD",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -2416,14 +2416,14 @@
       "Next.js",
       "Node.js",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "Banco de Dados",
       "Git",
       "Active Directory",
       "API REST",
-      "Lógica de Programação",
       "CRM",
-      "Salesforce"
+      "Salesforce",
+      "Copilots & Assistentes de IA",
+      "Banco de Dados",
+      "Lógica de Programação"
     ]
   },
   {
@@ -2446,8 +2446,6 @@
       ".NET",
       "Kafka",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "Banco de Dados",
       "PostgreSQL",
       "MongoDB",
       "AWS",
@@ -2457,6 +2455,8 @@
       "SOLID",
       "Clean Code",
       "Estrutura de Dados",
+      "Copilots & Assistentes de IA",
+      "Banco de Dados",
       "Lógica de Programação"
     ]
   },
@@ -2487,10 +2487,7 @@
       "Flask",
       "FastAPI",
       "Inteligência Artificial",
-      "LLMs & IA Generativa",
-      "Agentes de IA & RAG",
       "Bancos Vetoriais",
-      "Banco de Dados",
       "PostgreSQL",
       "MySQL",
       "MongoDB",
@@ -2501,12 +2498,15 @@
       "Scrum",
       "Metodologias Ágeis",
       "Estrutura de Dados",
-      "Lógica de Programação",
-      "Engenharia de Software",
       "Inglês",
       "UX/UI",
       "ERP",
-      "IoT"
+      "IoT",
+      "LLMs & IA Generativa",
+      "Agentes de IA & RAG",
+      "Banco de Dados",
+      "Lógica de Programação",
+      "Engenharia de Software"
     ]
   },
   {
@@ -2526,8 +2526,8 @@
       "Python",
       "Power BI",
       "Excel",
-      "Engenharia de Software",
-      "Inglês"
+      "Inglês",
+      "Engenharia de Software"
     ]
   },
   {
@@ -2572,13 +2572,13 @@
       "SQL",
       "Power BI",
       "Excel",
-      "Automação",
+      "Inteligência Artificial",
       "Estatística",
+      "Modelagem de Dados",
+      "Automação",
       "Análise de Dados",
       "Qualidade de Dados",
-      "Inteligência Artificial",
-      "Banco de Dados",
-      "Modelagem de Dados"
+      "Banco de Dados"
     ]
   },
   {
@@ -2599,10 +2599,10 @@
       "SQL",
       "Power BI",
       "Excel",
-      "Análise de Dados",
       "Inteligência Artificial",
       "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa"
+      "LLMs & IA Generativa",
+      "Análise de Dados"
     ]
   },
   {
@@ -2701,9 +2701,9 @@
       "Playwright",
       "Postman",
       "Testes Funcionais",
+      "Jira",
       "Qualidade de Software",
-      "Engenharia de Software",
-      "Jira"
+      "Engenharia de Software"
     ]
   },
   {
@@ -2902,11 +2902,11 @@
     "fonte": "gupy",
     "url": "https://cogna.gupy.io/job/eyJqb2JJZCI6MTIyMTY5MDIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Banco de Dados",
       "Linux",
       "Windows",
       "Hardware",
-      "VMware"
+      "VMware",
+      "Banco de Dados"
     ]
   },
   {
@@ -3028,8 +3028,8 @@
       "Redes de Computadores",
       "ITIL",
       "Service Desk",
-      "Suporte N1/N2",
       "Hardware",
+      "Suporte N1/N2",
       "Montagem e Manutenção de PCs"
     ]
   },
@@ -3049,9 +3049,9 @@
     "tecnologias": [
       "Excel",
       "ITIL",
-      "Governança e Riscos (GRC)",
       "LGPD",
-      "ISO 27001"
+      "ISO 27001",
+      "Governança e Riscos (GRC)"
     ]
   },
   {
@@ -3117,10 +3117,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-t-i-at-lg-electronics-brasil-4457974411",
     "tecnologias": [
-      "Automação",
       "Inteligência Artificial",
+      "Inglês",
       "Copilots & Assistentes de IA",
-      "Inglês"
+      "Automação"
     ]
   },
   {
@@ -3188,7 +3188,7 @@
     "id": 2120,
     "titulo": "Assistente de TI",
     "empresa": "Igreja Deus é Amor",
-    "area": "Outros/TI Geral",
+    "area": "Field Service / Hardware",
     "senioridade": "Júnior",
     "localidade": "Brasil",
     "polo": "Não informado",
@@ -3203,10 +3203,10 @@
       "Active Directory",
       "Windows",
       "Redes de Computadores",
-      "Help Desk",
       "VoIP",
       "Office 365",
-      "Hardware"
+      "Hardware",
+      "Help Desk"
     ]
   },
   {
@@ -3224,8 +3224,8 @@
     "url": "https://br.linkedin.com/jobs/view/assistente-de-t-i-at-kits-paran%C3%A1-4457254532",
     "tecnologias": [
       "Hardware",
-      "Montagem e Manutenção de PCs",
-      "CFTV"
+      "CFTV",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -3367,8 +3367,8 @@
     "fonte": "gupy",
     "url": "https://programaestagiargrendene.gupy.io/job/eyJqb2JJZCI6MTIzMDQzMzMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Banco de Dados",
-      "TOTVS"
+      "TOTVS",
+      "Banco de Dados"
     ]
   },
   {
@@ -3441,10 +3441,10 @@
       "Inteligência Artificial",
       "AWS",
       "ITIL",
-      "Governança e Riscos (GRC)",
       "ISO 27001",
       "Inglês",
-      "Confluence"
+      "Confluence",
+      "Governança e Riscos (GRC)"
     ]
   },
   {
@@ -3497,12 +3497,12 @@
       "Tableau",
       "Looker",
       "Databricks",
-      "Qualidade de Dados",
       "Inteligência Artificial",
-      "LLMs & IA Generativa",
       "Git",
       "UML",
-      "Inglês"
+      "Inglês",
+      "LLMs & IA Generativa",
+      "Qualidade de Dados"
     ]
   },
   {
@@ -3521,16 +3521,16 @@
     "tecnologias": [
       "Python",
       "Pandas",
-      "Machine Learning",
       "Scikit-Learn",
-      "Banco de Dados",
+      "Machine Learning",
       "MySQL",
       "MongoDB",
       "AWS",
       "Azure",
       "GCP",
       "Git",
-      "Inglês"
+      "Inglês",
+      "Banco de Dados"
     ]
   },
   {
@@ -3611,7 +3611,6 @@
       "Angular",
       "Node.js",
       "Bootstrap",
-      "Banco de Dados",
       "Git",
       "CI/CD",
       "JUnit",
@@ -3623,7 +3622,8 @@
       "Microserviços",
       "Design Patterns",
       "DDD",
-      "Modelagem de Dados"
+      "Modelagem de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -3749,9 +3749,9 @@
     "tecnologias": [
       "Power BI",
       "Excel",
-      "Análise de Dados",
       "Modelagem de Dados",
-      "Inglês"
+      "Inglês",
+      "Análise de Dados"
     ]
   },
   {
@@ -3803,11 +3803,11 @@
     "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-t%C3%A9cnico-j%C3%BAnior-at-max-work-sistemas-4456954615",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "Windows",
       "Redes de Computadores",
+      "ERP",
       "Help Desk",
-      "ERP"
+      "Banco de Dados"
     ]
   },
   {
@@ -3896,10 +3896,10 @@
       "Excel",
       "VPN",
       "Service Desk",
-      "Suporte N1/N2",
       "Office 365",
       "Hardware",
-      "Estrutura de Dados"
+      "Estrutura de Dados",
+      "Suporte N1/N2"
     ]
   },
   {
@@ -4016,14 +4016,14 @@
       "Python",
       "Power BI",
       "Excel",
-      "Automação",
-      "Análise de Dados",
       "Inteligência Artificial",
-      "Cibersegurança",
-      "Engenharia de Software",
       "Inglês",
       "SAP",
-      "Automação Industrial"
+      "Automação Industrial",
+      "Cibersegurança",
+      "Automação",
+      "Análise de Dados",
+      "Engenharia de Software"
     ]
   },
   {
@@ -4042,9 +4042,7 @@
     "tecnologias": [
       "Java",
       "Spring",
-      "Análise de Dados",
       "Inteligência Artificial",
-      "Banco de Dados",
       "AWS",
       "Docker",
       "Kubernetes",
@@ -4056,6 +4054,8 @@
       "Metodologias Ágeis",
       "Microserviços",
       "Clean Code",
+      "Análise de Dados",
+      "Banco de Dados",
       "Lógica de Programação"
     ]
   },
@@ -4109,13 +4109,13 @@
       "SQL",
       "Power BI",
       "Excel",
-      "Automação",
+      "Inteligência Artificial",
       "Estatística",
+      "Modelagem de Dados",
+      "Automação",
       "Análise de Dados",
       "Qualidade de Dados",
-      "Inteligência Artificial",
-      "Banco de Dados",
-      "Modelagem de Dados"
+      "Banco de Dados"
     ]
   },
   {
@@ -4266,13 +4266,13 @@
     "url": "https://br.linkedin.com/jobs/view/0903-assistente-de-desenvolvimento-de-sistemas-sede-dourados-ms-at-sicredi-4458799815",
     "tecnologias": [
       "RPA",
+      "Metodologias Ágeis",
+      "Modelagem de Dados",
       "Automação",
       "Banco de Dados",
       "Qualidade de Software",
-      "Metodologias Ágeis",
       "Lógica de Programação",
-      "Engenharia de Software",
-      "Modelagem de Dados"
+      "Engenharia de Software"
     ]
   },
   {
@@ -4346,13 +4346,13 @@
     "fonte": "gupy",
     "url": "https://cogna.gupy.io/job/eyJqb2JJZCI6MTIyNjg0OTAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Banco de Dados",
       "Redes de Computadores",
       "Hardware",
-      "Manutenção Preventiva",
       "VMware",
       "Metodologias Ágeis",
-      "Inglês"
+      "Inglês",
+      "Manutenção Preventiva",
+      "Banco de Dados"
     ]
   },
   {
@@ -4424,10 +4424,10 @@
       "SQL",
       "HTML",
       "CSS",
-      "Banco de Dados",
       "Linux",
       "Windows",
-      "Hardware"
+      "Hardware",
+      "Banco de Dados"
     ]
   },
   {
@@ -4459,9 +4459,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-jr-at-paradigma-business-solutions-ltda-4456947121",
     "tecnologias": [
-      "Banco de Dados",
+      "Eletrônica",
       "Suporte N1/N2",
-      "Eletrônica"
+      "Banco de Dados"
     ]
   },
   {
@@ -4562,8 +4562,8 @@
     "fonte": "gupy",
     "url": "https://wilsonsons.gupy.io/job/eyJqb2JJZCI6MTIyODE3NzksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Banco de Dados",
-      "TOTVS"
+      "TOTVS",
+      "Banco de Dados"
     ]
   },
   {
@@ -4802,12 +4802,12 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1giario-de-suporte-sc-at-eagle-solu%C3%A7%C3%B5es-4456548760",
     "tecnologias": [
-      "Banco de Dados",
       "Windows",
       "Hardware",
       "Inglês",
       "Eletrônica",
-      "CFTV"
+      "CFTV",
+      "Banco de Dados"
     ]
   },
   {
@@ -4824,12 +4824,12 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1giario-de-suporte-c%C3%B3pia-sc-at-eagle-solu%C3%A7%C3%B5es-4456565825",
     "tecnologias": [
-      "Banco de Dados",
       "Windows",
       "Hardware",
       "Inglês",
       "Eletrônica",
-      "CFTV"
+      "CFTV",
+      "Banco de Dados"
     ]
   },
   {
@@ -4997,10 +4997,10 @@
       "ETL",
       "BigQuery",
       "Databricks",
-      "Análise de Dados",
       "Inteligência Artificial",
-      "Banco de Dados",
       "Inglês",
+      "Análise de Dados",
+      "Banco de Dados",
       "Espanhol"
     ]
   },
@@ -5072,8 +5072,8 @@
       "Redes de Computadores",
       "ITIL",
       "Hardware",
-      "Cibersegurança",
-      "Inglês"
+      "Inglês",
+      "Cibersegurança"
     ]
   },
   {
@@ -5105,9 +5105,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-qualidade-junior-at-woson-latam-4458760095",
     "tecnologias": [
-      "Governança e Riscos (GRC)",
       "ERP",
-      "TOTVS"
+      "TOTVS",
+      "Governança e Riscos (GRC)"
     ]
   },
   {
@@ -5221,9 +5221,9 @@
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-de-software-junior-at-softise-4456917704",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "Metodologias Ágeis",
       "POO",
+      "Banco de Dados",
       "Lógica de Programação"
     ]
   },
@@ -5262,14 +5262,14 @@
       ".NET",
       "FastAPI",
       "Inteligência Artificial",
+      "Git",
+      "LGPD",
+      "Inglês",
       "Copilots & Assistentes de IA",
       "LLMs & IA Generativa",
       "Agentes de IA & RAG",
-      "Git",
       "Cibersegurança",
-      "LGPD",
-      "Lógica de Programação",
-      "Inglês"
+      "Lógica de Programação"
     ]
   },
   {
@@ -5304,9 +5304,9 @@
       "Excel",
       "Windows",
       "Redes de Computadores",
-      "Help Desk",
       "Office 365",
       "Hardware",
+      "Help Desk",
       "Manutenção Preventiva"
     ]
   },
@@ -5408,15 +5408,15 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-testes-qa-j%C3%BAnior-es-at-webposto-4456550568",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "Postman",
       "Testes Funcionais",
-      "Qualidade de Software",
       "Scrum",
       "Metodologias Ágeis",
+      "Jira",
+      "Banco de Dados",
+      "Qualidade de Software",
       "Lógica de Programação",
-      "Engenharia de Software",
-      "Jira"
+      "Engenharia de Software"
     ]
   },
   {
@@ -5597,12 +5597,12 @@
       "JavaScript",
       "Apex",
       "Inteligência Artificial",
-      "LLMs & IA Generativa",
       "API REST",
       "POO",
       "Estrutura de Dados",
-      "Lógica de Programação",
-      "Salesforce"
+      "Salesforce",
+      "LLMs & IA Generativa",
+      "Lógica de Programação"
     ]
   },
   {
@@ -5637,9 +5637,9 @@
     "url": "https://br.linkedin.com/jobs/view/auxiliar-de-informatica-atibaia-at-atacad%C3%A3o-4458508023",
     "tecnologias": [
       "Excel",
-      "Banco de Dados",
       "Linux",
-      "Windows"
+      "Windows",
+      "Banco de Dados"
     ]
   },
   {
@@ -5672,8 +5672,8 @@
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-suporte-t%C3%A9cnico-at-abrh-est%C3%A1gio-4457119061",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
-      "SQL Server"
+      "SQL Server",
+      "Banco de Dados"
     ]
   },
   {
@@ -5770,8 +5770,8 @@
     "url": "https://br.linkedin.com/jobs/view/assistente-de-telecomunica%C3%A7%C3%B5es-infraestrutura-at-gsm-bahia-4455893009",
     "tecnologias": [
       "Redes de Computadores",
-      "Manutenção Preventiva",
-      "Eletrônica"
+      "Eletrônica",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -5885,8 +5885,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/inbrasp-botucatu-analista-de-suporte-de-sistemas-jr-at-caio-perfil-oficial-fabricante-de-%C3%B4nibus-4456532512",
     "tecnologias": [
-      "Banco de Dados",
-      "ERP"
+      "ERP",
+      "Banco de Dados"
     ]
   },
   {
@@ -5935,12 +5935,12 @@
     "tecnologias": [
       "Python",
       "Git",
-      "Qualidade de Software",
       "Hardware",
       "Clean Code",
       "Estrutura de Dados",
       "Algoritmos",
-      "Inglês"
+      "Inglês",
+      "Qualidade de Software"
     ]
   },
   {
@@ -5994,9 +5994,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/caio-botucatu-analista-de-suporte-de-sistemas-jr-at-caio-perfil-oficial-fabricante-de-%C3%B4nibus-4456519631",
     "tecnologias": [
+      "ERP",
       "Banco de Dados",
-      "Lógica de Programação",
-      "ERP"
+      "Lógica de Programação"
     ]
   },
   {
@@ -6034,12 +6034,12 @@
       "Active Directory",
       "Windows",
       "Redes de Computadores",
-      "Help Desk",
       "GLPI",
       "Office 365",
       "Hardware",
       "TOTVS",
-      "Jira"
+      "Jira",
+      "Help Desk"
     ]
   },
   {
@@ -6104,12 +6104,12 @@
       "SQL",
       "Excel",
       "Inteligência Artificial",
-      "Banco de Dados",
       "Service Desk",
       "GLPI",
       "Office 365",
       "ERP",
-      "Jira"
+      "Jira",
+      "Banco de Dados"
     ]
   },
   {
@@ -6210,9 +6210,9 @@
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-j%C3%BAnior-intelig%C3%AAncia-comercial-%E2%80%94-flamingo-pap%C3%A9is-at-flamingo-pap%C3%A9is-psa-4456518060",
     "tecnologias": [
       "Excel",
-      "Análise de Dados",
       "Inteligência Artificial",
       "LLMs & IA Generativa",
+      "Análise de Dados",
       "Banco de Dados"
     ]
   },
@@ -6236,8 +6236,6 @@
       ".NET",
       "Kafka",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "Banco de Dados",
       "PostgreSQL",
       "MongoDB",
       "AWS",
@@ -6247,6 +6245,8 @@
       "SOLID",
       "Clean Code",
       "Estrutura de Dados",
+      "Copilots & Assistentes de IA",
+      "Banco de Dados",
       "Lógica de Programação"
     ]
   },
@@ -6315,17 +6315,17 @@
       "Python",
       "SQL",
       "RPA",
-      "Automação",
-      "Análise de Dados",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "Banco de Dados",
       "Git",
       "Zendesk",
       "Office 365",
       "LGPD",
       "OAuth/JWT",
       "API REST",
+      "Copilots & Assistentes de IA",
+      "Automação",
+      "Análise de Dados",
+      "Banco de Dados",
       "Lógica de Programação",
       "Engenharia de Software"
     ]
@@ -6393,11 +6393,11 @@
       "PHP",
       "HTML",
       "CSS",
-      "Banco de Dados",
       "Testes Automatizados",
       "POO",
       "Design Patterns",
-      "Inglês"
+      "Inglês",
+      "Banco de Dados"
     ]
   },
   {
@@ -6446,8 +6446,8 @@
     "fonte": "gupy",
     "url": "https://vemserixcsoft.gupy.io/job/eyJqb2JJZCI6MTIyMjk2NjYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Análise de Dados",
-      "Inteligência Artificial"
+      "Inteligência Artificial",
+      "Análise de Dados"
     ]
   },
   {
@@ -6540,8 +6540,8 @@
     "url": "https://viadeacesso.gupy.io/job/eyJqb2JJZCI6MTIyNjUwNjIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
       "LGPD",
-      "Engenharia de Software",
-      "Inglês"
+      "Inglês",
+      "Engenharia de Software"
     ]
   },
   {
@@ -6632,10 +6632,10 @@
       "Next.js",
       "Node.js",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "Banco de Dados",
       "Git",
       "API REST",
+      "Copilots & Assistentes de IA",
+      "Banco de Dados",
       "Lógica de Programação"
     ]
   },
@@ -6690,23 +6690,23 @@
       "Data Warehouse",
       "Data Lake",
       "BI",
-      "Estatística",
-      "Análise de Dados",
-      "Qualidade de Dados",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
-      "Agentes de IA & RAG",
-      "Banco de Dados",
+      "Estatística",
       "PostgreSQL",
       "SQL Server",
       "Azure",
       "Git",
       "API REST",
       "Estrutura de Dados",
+      "Modelagem de Dados",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Agentes de IA & RAG",
+      "Análise de Dados",
+      "Qualidade de Dados",
+      "Banco de Dados",
       "Lógica de Programação",
-      "Engenharia de Software",
-      "Modelagem de Dados"
+      "Engenharia de Software"
     ]
   },
   {
@@ -6738,8 +6738,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/tecnico-informatica-junior-at-bella-capri-franchising-4458518982",
     "tecnologias": [
-      "Banco de Dados",
-      "Hardware"
+      "Hardware",
+      "Banco de Dados"
     ]
   },
   {
@@ -6833,8 +6833,8 @@
       "JavaScript",
       "PHP",
       "SQL",
-      "Automação",
-      "POO"
+      "POO",
+      "Automação"
     ]
   },
   {
@@ -6932,8 +6932,8 @@
     "tecnologias": [
       "Redes de Computadores",
       "Hardware",
-      "Manutenção Preventiva",
-      "VMware"
+      "VMware",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -6952,8 +6952,8 @@
     "tecnologias": [
       "Redes de Computadores",
       "Hardware",
-      "Manutenção Preventiva",
-      "VMware"
+      "VMware",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -7148,8 +7148,8 @@
       "Redes de Computadores",
       "Firewall",
       "Service Desk",
-      "Help Desk",
-      "Hardware"
+      "Hardware",
+      "Help Desk"
     ]
   },
   {
@@ -7186,8 +7186,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-jr-engenharia-seguran%C3%A7a-at-rede-am%C3%A9ricas-4454791969",
     "tecnologias": [
-      "Cibersegurança",
-      "Inglês"
+      "Inglês",
+      "Cibersegurança"
     ]
   },
   {
@@ -7240,9 +7240,9 @@
     "tecnologias": [
       "JavaScript",
       "SQL",
+      "Testes Funcionais",
       "Automação",
       "Análise de Dados",
-      "Testes Funcionais",
       "Lógica de Programação",
       "Engenharia de Software"
     ]
@@ -7280,10 +7280,6 @@
       ".NET",
       "Kafka",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
-      "Agentes de IA & RAG",
-      "Banco de Dados",
       "PostgreSQL",
       "SQL Server",
       "AWS",
@@ -7293,7 +7289,11 @@
       "RabbitMQ",
       "Serverless",
       "Testes Automatizados",
-      "Microserviços"
+      "Microserviços",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Agentes de IA & RAG",
+      "Banco de Dados"
     ]
   },
   {
@@ -7410,9 +7410,9 @@
     "tecnologias": [
       "ETL",
       "Inteligência Artificial",
+      "Bancos Vetoriais",
       "LLMs & IA Generativa",
-      "Agentes de IA & RAG",
-      "Bancos Vetoriais"
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -7509,11 +7509,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-ti-at-borgwarner-4447190887",
     "tecnologias": [
-      "Copilots & Assistentes de IA",
       "Active Directory",
       "ITIL",
       "Office 365",
-      "Inglês"
+      "Inglês",
+      "Copilots & Assistentes de IA"
     ]
   },
   {
@@ -7560,14 +7560,14 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-sistemas-i-at-my-corp-4454684821",
     "tecnologias": [
-      "Automação",
-      "Banco de Dados",
       "ITIL",
-      "Suporte N1/N2",
-      "Cibersegurança",
       "LGPD",
       "Scrum",
       "Metodologias Ágeis",
+      "Suporte N1/N2",
+      "Cibersegurança",
+      "Automação",
+      "Banco de Dados",
       "Lógica de Programação"
     ]
   },
@@ -7593,8 +7593,8 @@
       "Inteligência Artificial",
       "Git",
       "Testes Automatizados",
-      "Qualidade de Software",
-      "Clean Code"
+      "Clean Code",
+      "Qualidade de Software"
     ]
   },
   {
@@ -7679,9 +7679,7 @@
     "tecnologias": [
       "Java",
       "Spring",
-      "Análise de Dados",
       "Inteligência Artificial",
-      "Banco de Dados",
       "AWS",
       "Docker",
       "Kubernetes",
@@ -7693,6 +7691,8 @@
       "Metodologias Ágeis",
       "Microserviços",
       "Clean Code",
+      "Análise de Dados",
+      "Banco de Dados",
       "Lógica de Programação"
     ]
   },
@@ -7777,12 +7777,12 @@
       "CSS",
       "Power BI",
       "Tableau",
-      "Análise de Dados",
       "Inteligência Artificial",
-      "Banco de Dados",
       "Scrum",
       "Metodologias Ágeis",
-      "UX/UI"
+      "UX/UI",
+      "Análise de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -7823,8 +7823,8 @@
     "tecnologias": [
       "C#",
       "SQL",
-      "Lógica de Programação",
-      "Modelagem de Dados"
+      "Modelagem de Dados",
+      "Lógica de Programação"
     ]
   },
   {
@@ -7841,15 +7841,15 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-desenvolvedor-jr-at-stefanini-brasil-4457336773",
     "tecnologias": [
-      "Análise de Dados",
       "Inteligência Artificial",
-      "Banco de Dados",
       "Elasticsearch",
       "Grafana",
       "Prometheus",
       "ITIL",
       "Scrum",
-      "Metodologias Ágeis"
+      "Metodologias Ágeis",
+      "Análise de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -7978,10 +7978,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/cybersecurity-analyst-i-at-fis-4447053201",
     "tecnologias": [
-      "Automação",
-      "Cibersegurança",
       "IAM",
       "Inglês",
+      "Cibersegurança",
+      "Automação",
       "Espanhol"
     ]
   },
@@ -8072,8 +8072,8 @@
       "Looker",
       "Databricks",
       "Estatística",
-      "Análise de Dados",
-      "Azure"
+      "Azure",
+      "Análise de Dados"
     ]
   },
   {
@@ -8129,8 +8129,8 @@
       "SQL",
       "PL/SQL",
       "Estatística",
-      "Banco de Dados",
-      "ITIL"
+      "ITIL",
+      "Banco de Dados"
     ]
   },
   {
@@ -8216,10 +8216,10 @@
     "url": "https://br.linkedin.com/jobs/view/analista-programador-j%C3%BAnior-solu%C3%A7%C3%B5es-em-agroneg%C3%B3cio-at-viasoft-4457393945",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "Git",
       "Metodologias Ágeis",
       "Estrutura de Dados",
+      "Banco de Dados",
       "Lógica de Programação"
     ]
   },
@@ -8289,13 +8289,13 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/grupo-rezende-estagi%C3%A1rio-em-automa%C3%A7%C3%A3o-foco-em-programa%C3%A7%C3%A3o-desenvolvimento-ia-e-processos-at-grupo-rezende-4454680232",
     "tecnologias": [
-      "Automação",
-      "Análise de Dados",
       "Inteligência Artificial",
+      "LGPD",
       "LLMs & IA Generativa",
       "Agentes de IA & RAG",
+      "Automação",
+      "Análise de Dados",
       "Banco de Dados",
-      "LGPD",
       "Lógica de Programação",
       "Engenharia de Software"
     ]
@@ -8323,11 +8323,11 @@
       "Next.js",
       "Node.js",
       "React Native",
-      "Banco de Dados",
       "Git",
       "Testes Automatizados",
       "API REST",
-      "Scrum"
+      "Scrum",
+      "Banco de Dados"
     ]
   },
   {
@@ -8468,9 +8468,9 @@
     "tecnologias": [
       "Redes de Computadores",
       "Service Desk",
+      "SAP",
       "Help Desk",
-      "Manutenção Preventiva",
-      "SAP"
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -8522,8 +8522,8 @@
     "fonte": "theirstack",
     "url": "https://construmarket.gupy.io/job/eyJqb2JJZCI6MTIyMTI1OTcsInNvdXJjZSI6ImluZGVlZCJ9?jobBoardSource=indeed",
     "tecnologias": [
-      "Banco de Dados",
-      "Git"
+      "Git",
+      "Banco de Dados"
     ]
   },
   {
@@ -8781,8 +8781,8 @@
       "SQL",
       "React",
       "Node.js",
-      "Automação",
-      "Inteligência Artificial"
+      "Inteligência Artificial",
+      "Automação"
     ]
   },
   {
@@ -8910,12 +8910,12 @@
       "SQL",
       "React",
       "Node.js",
-      "Automação",
       "Inteligência Artificial",
-      "LLMs & IA Generativa",
       "Git",
       "Inglês",
-      "TOTVS"
+      "TOTVS",
+      "LLMs & IA Generativa",
+      "Automação"
     ]
   },
   {
@@ -8954,9 +8954,8 @@
       "CSS",
       "React",
       "FastAPI",
-      "Inteligência Artificial",
       "Machine Learning",
-      "Banco de Dados",
+      "Inteligência Artificial",
       "PostgreSQL",
       "AWS",
       "Docker",
@@ -8964,8 +8963,9 @@
       "Testes Automatizados",
       "API REST",
       "Metodologias Ágeis",
-      "Engenharia de Software",
-      "Inglês"
+      "Inglês",
+      "Banco de Dados",
+      "Engenharia de Software"
     ]
   },
   {
@@ -9087,9 +9087,9 @@
       "Angular",
       ".NET",
       "jQuery",
-      "Banco de Dados",
       "Git",
-      "Metodologias Ágeis"
+      "Metodologias Ágeis",
+      "Banco de Dados"
     ]
   },
   {
@@ -9208,8 +9208,8 @@
     "url": "https://trampos.co/oportunidades/774266-estagiario-a-em-qa",
     "tecnologias": [
       "Metodologias Ágeis",
-      "Engenharia de Software",
-      "Inglês"
+      "Inglês",
+      "Engenharia de Software"
     ]
   },
   {
@@ -9229,8 +9229,8 @@
       "Python",
       "SQL",
       "RPA",
-      "Automação",
       "Inteligência Artificial",
+      "Automação",
       "Banco de Dados"
     ]
   },
@@ -9347,12 +9347,12 @@
       "CSS",
       "Power BI",
       "Tableau",
-      "Análise de Dados",
       "Inteligência Artificial",
-      "Banco de Dados",
       "Scrum",
       "Metodologias Ágeis",
-      "UX/UI"
+      "UX/UI",
+      "Análise de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -9438,11 +9438,11 @@
     "tecnologias": [
       "COBOL",
       "SQL",
-      "Banco de Dados",
       "Scrum",
       "Metodologias Ágeis",
       "Algoritmos",
-      "Modelagem de Dados"
+      "Modelagem de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -9495,12 +9495,12 @@
       "SQL",
       "PL/SQL",
       "Spring",
-      "Banco de Dados",
       "Oracle",
       "Git",
       "Scrum",
       "Metodologias Ágeis",
-      "Design Patterns"
+      "Design Patterns",
+      "Banco de Dados"
     ]
   },
   {
@@ -9519,10 +9519,10 @@
     "tecnologias": [
       "Delphi",
       "SQL",
-      "Banco de Dados",
       "Git",
       "Metodologias Ágeis",
       "Estrutura de Dados",
+      "Banco de Dados",
       "Lógica de Programação"
     ]
   },
@@ -9560,9 +9560,9 @@
       "Python",
       "SQL",
       "Spark",
-      "Estatística",
-      "Inteligência Artificial",
       "Machine Learning",
+      "Inteligência Artificial",
+      "Estatística",
       "Git"
     ]
   },
@@ -9605,12 +9605,12 @@
     "fonte": "gupy",
     "url": "https://arborevagas.gupy.io/job/eyJqb2JJZCI6MTIyMDQ3NzUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Banco de Dados",
       "Active Directory",
       "Redes de Computadores",
       "Firewall",
       "Hardware",
-      "Manutenção Preventiva"
+      "Manutenção Preventiva",
+      "Banco de Dados"
     ]
   },
   {
@@ -9860,8 +9860,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/ri-estagi%C3%A1rio-a-em-ti-an%C3%A1lise-de-dados-e-suporte-t%C3%A9cnico-at-machado-pereira-advogados-4456427809",
     "tecnologias": [
-      "Análise de Dados",
-      "ERP"
+      "ERP",
+      "Análise de Dados"
     ]
   },
   {
@@ -9878,8 +9878,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-suporte-n1-telecom-s%C3%A3o-paulo-sp-at-minsait-4454115570",
     "tecnologias": [
-      "Suporte N1/N2",
-      "Metodologias Ágeis"
+      "Metodologias Ágeis",
+      "Suporte N1/N2"
     ]
   },
   {
@@ -10017,15 +10017,15 @@
       "ETL",
       "Databricks",
       "Hadoop",
-      "Automação",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
-      "Banco de Dados",
       "AWS",
       "Azure",
       "GCP",
-      "Modelagem de Dados"
+      "Modelagem de Dados",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Automação",
+      "Banco de Dados"
     ]
   },
   {
@@ -10043,8 +10043,8 @@
     "url": "https://www.google.com/search?ibp=htl;jobs&q=suporte+tecnico+junior&htidocid=V2jcTJb2CV1c7AYIAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xWNOwrCQBBAsc0RrKaysMiKYBOt_KCIZfowWYfN6mRn3dlAriR4Cy-maR4PXvGKz6zY1d-3Dd4K3AkuxBGOpE-4DsFLqiCSvgavOFXqYyInCkHgLOKY5tsu56iVMapcOs2YvS2t9EYCtTKah7Q6odEOE0XGTM16sxrLGNzS3BY1HCTowFmSRzhNA8W_MgTSTMBikSvYJ1TPPzfuM26vAAAA&shmds=v1_ARwrE23bXeScu9jS7M7ycLYLCYLtxOQDhqsTl0UlP7TfuX19Tw&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=suporte+tecnico+junior&htidocid=V2jcTJb2CV1c7AYIAAAAAA%3D%3D",
     "tecnologias": [
       "Redes de Computadores",
-      "Help Desk",
-      "Hardware"
+      "Hardware",
+      "Help Desk"
     ]
   },
   {
@@ -10079,8 +10079,6 @@
       "SQL",
       "Shell/Bash",
       "Inteligência Artificial",
-      "LLMs & IA Generativa",
-      "Banco de Dados",
       "SQL Server",
       "Oracle",
       "Linux",
@@ -10088,7 +10086,9 @@
       "Windows Server",
       "Windows",
       "ITIL",
-      "Inglês"
+      "Inglês",
+      "LLMs & IA Generativa",
+      "Banco de Dados"
     ]
   },
   {
@@ -10106,9 +10106,9 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-t%C3%A9cnico-erp-j%C3%BAnior-pleno-at-areco-4455485399",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "SQL Server",
-      "ERP"
+      "ERP",
+      "Banco de Dados"
     ]
   },
   {
@@ -10201,8 +10201,8 @@
       "Power BI",
       "AWS",
       "Git",
-      "Engenharia de Software",
-      "Inglês"
+      "Inglês",
+      "Engenharia de Software"
     ]
   },
   {
@@ -10355,8 +10355,8 @@
     "tecnologias": [
       "Python",
       "C++",
-      "Automação",
-      "Eletrônica"
+      "Eletrônica",
+      "Automação"
     ]
   },
   {
@@ -10610,11 +10610,8 @@
       "C#",
       "SQL",
       ".NET",
-      "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
       "Machine Learning",
-      "Banco de Dados",
+      "Inteligência Artificial",
       "SQL Server",
       "Oracle",
       "Git",
@@ -10624,7 +10621,10 @@
       "Metodologias Ágeis",
       "POO",
       "SOLID",
-      "Design Patterns"
+      "Design Patterns",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Banco de Dados"
     ]
   },
   {
@@ -10867,9 +10867,9 @@
     "tecnologias": [
       "PHP",
       "Angular",
-      "Banco de Dados",
       "MySQL",
-      "API REST"
+      "API REST",
+      "Banco de Dados"
     ]
   },
   {
@@ -10890,12 +10890,12 @@
       "SQL",
       "PL/SQL",
       "Spring",
-      "Banco de Dados",
       "Oracle",
       "Git",
       "Scrum",
       "Metodologias Ágeis",
-      "Design Patterns"
+      "Design Patterns",
+      "Banco de Dados"
     ]
   },
   {
@@ -10969,12 +10969,12 @@
       "Tableau",
       "BI",
       "Estatística",
-      "Análise de Dados",
-      "Banco de Dados",
       "SQL Server",
       "Oracle",
       "Modelagem de Dados",
-      "Inglês"
+      "Inglês",
+      "Análise de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -11109,19 +11109,19 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/qa-j%C3%BAnior-at-reply-4455492342",
     "tecnologias": [
-      "Inteligência Artificial",
       "Machine Learning",
+      "Inteligência Artificial",
       "Oracle",
       "AWS",
       "Git",
       "CI/CD",
       "Selenium",
       "BDD",
-      "Qualidade de Software",
       "Scrum",
       "Metodologias Ágeis",
       "Inglês",
-      "SAP"
+      "SAP",
+      "Qualidade de Software"
     ]
   },
   {
@@ -11144,9 +11144,9 @@
       "Git",
       "Testes Automatizados",
       "Testes Manuais",
-      "Qualidade de Software",
       "Scrum",
       "Metodologias Ágeis",
+      "Qualidade de Software",
       "Lógica de Programação"
     ]
   },
@@ -11164,8 +11164,8 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831365/estagio-em-desenvolvimento-de-novos-negocios",
     "tecnologias": [
-      "Análise de Dados",
-      "SAP"
+      "SAP",
+      "Análise de Dados"
     ]
   },
   {
@@ -11386,11 +11386,11 @@
     "tecnologias": [
       "SQL",
       "iOS",
-      "Automação",
-      "Banco de Dados",
       "Hardware",
       "Estrutura de Dados",
-      "Inglês"
+      "Inglês",
+      "Automação",
+      "Banco de Dados"
     ]
   },
   {
@@ -11409,8 +11409,6 @@
     "tecnologias": [
       "Power BI",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
       "Oracle",
       "Active Directory",
       "Windows",
@@ -11422,7 +11420,9 @@
       "LGPD",
       "Inglês",
       "ERP",
-      "CFTV"
+      "CFTV",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -11463,13 +11463,13 @@
     "url": "https://br.linkedin.com/jobs/view/pessoa-estagi%C3%A1ria-em-banco-de-dados-at-arcelormittal-4455422362",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "AWS",
       "Azure",
       "Linux",
       "Windows",
       "Modelagem de Dados",
-      "Inglês"
+      "Inglês",
+      "Banco de Dados"
     ]
   },
   {
@@ -11486,9 +11486,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-suporte-ao-cliente-h%C3%ADbrido-florian%C3%B3polis-sucesso-do-cliente-at-paripassu-4453806158",
     "tecnologias": [
+      "CRM",
       "Análise de Dados",
-      "Espanhol",
-      "CRM"
+      "Espanhol"
     ]
   },
   {
@@ -11522,10 +11522,10 @@
     "tecnologias": [
       "Windows",
       "Service Desk",
-      "Help Desk",
       "GLPI",
       "Office 365",
-      "Inglês"
+      "Inglês",
+      "Help Desk"
     ]
   },
   {
@@ -11561,9 +11561,9 @@
     "tecnologias": [
       "Excel",
       "ITIL",
-      "Governança e Riscos (GRC)",
       "LGPD",
-      "ISO 27001"
+      "ISO 27001",
+      "Governança e Riscos (GRC)"
     ]
   },
   {
@@ -11595,8 +11595,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-ciberseguran%C3%A7a-soc-n1-at-accenture-brasil-4455446933",
     "tecnologias": [
-      "Cibersegurança",
-      "SIEM/SOC"
+      "SIEM/SOC",
+      "Cibersegurança"
     ]
   },
   {
@@ -11662,12 +11662,12 @@
     "tecnologias": [
       "Power BI",
       "Excel",
-      "Análise de Dados",
       "Inteligência Artificial",
       "ITIL",
       "Office 365",
       "Hardware",
-      "Estrutura de Dados"
+      "Estrutura de Dados",
+      "Análise de Dados"
     ]
   },
   {
@@ -11721,12 +11721,12 @@
     "url": "https://br.linkedin.com/jobs/view/junior-data-scientist-at-cesar-4443934504",
     "tecnologias": [
       "ETL",
-      "Análise de Dados",
+      "Machine Learning",
       "Inteligência Artificial",
+      "Git",
       "LLMs & IA Generativa",
       "Agentes de IA & RAG",
-      "Machine Learning",
-      "Git",
+      "Análise de Dados",
       "Engenharia de Software"
     ]
   },
@@ -11805,9 +11805,9 @@
       "SQL",
       "Databricks",
       "Estatística",
-      "Análise de Dados",
+      "Metodologias Ágeis",
       "Governança e Riscos (GRC)",
-      "Metodologias Ágeis"
+      "Análise de Dados"
     ]
   },
   {
@@ -11907,8 +11907,6 @@
       "SQL",
       "HTML",
       "CSS",
-      "Automação",
-      "Banco de Dados",
       "PostgreSQL",
       "MySQL",
       "SQL Server",
@@ -11918,10 +11916,12 @@
       "Git",
       "CI/CD",
       "LGPD",
-      "Engenharia de Software",
       "Inglês",
       "Figma",
-      "UX/UI"
+      "UX/UI",
+      "Automação",
+      "Banco de Dados",
+      "Engenharia de Software"
     ]
   },
   {
@@ -12023,10 +12023,10 @@
     "tecnologias": [
       "SQL",
       "Excel",
-      "Banco de Dados",
       "Redes de Computadores",
       "Hardware",
-      "CFTV"
+      "CFTV",
+      "Banco de Dados"
     ]
   },
   {
@@ -12268,8 +12268,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-t%C3%A9cnico-j%C3%BAnior-at-jobbol-4452877450",
     "tecnologias": [
-      "Help Desk",
       "Hardware",
+      "Help Desk",
       "Montagem e Manutenção de PCs",
       "Manutenção Preventiva"
     ]
@@ -12306,12 +12306,12 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-atua%C3%A7%C3%A3o-na-ger%C3%AAncia-de-ti-sede-nova-petr%C3%B3polis-rs-at-sicredi-4456380045",
     "tecnologias": [
-      "Automação",
       "Azure",
       "Scrum",
       "Metodologias Ágeis",
-      "Lógica de Programação",
-      "Jira"
+      "Jira",
+      "Automação",
+      "Lógica de Programação"
     ]
   },
   {
@@ -12412,11 +12412,11 @@
     "tecnologias": [
       "Power BI",
       "Excel",
-      "Banco de Dados",
       "ITIL",
       "GLPI",
       "LGPD",
-      "Jira"
+      "Jira",
+      "Banco de Dados"
     ]
   },
   {
@@ -12466,13 +12466,13 @@
     "url": "https://br.linkedin.com/jobs/view/pessoa-estagi%C3%A1ria-em-banco-de-dados-at-arcelormittal-long-carbon-latam-4456369070",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "AWS",
       "Azure",
       "Linux",
       "Windows",
       "Modelagem de Dados",
-      "Inglês"
+      "Inglês",
+      "Banco de Dados"
     ]
   },
   {
@@ -12532,12 +12532,12 @@
     "tecnologias": [
       "Python",
       "Git",
-      "Qualidade de Software",
       "Hardware",
       "Clean Code",
       "Estrutura de Dados",
       "Algoritmos",
-      "Inglês"
+      "Inglês",
+      "Qualidade de Software"
     ]
   },
   {
@@ -12838,9 +12838,9 @@
     "fonte": "theirstack",
     "url": "https://www.linkedin.com/jobs/view/4455493132/",
     "tecnologias": [
+      "Machine Learning",
       "Inteligência Artificial",
       "LLMs & IA Generativa",
-      "Machine Learning",
       "Engenharia de Software"
     ]
   },
@@ -12877,8 +12877,8 @@
     "tecnologias": [
       "Python",
       "SQL",
-      "Automação",
-      "Inteligência Artificial"
+      "Inteligência Artificial",
+      "Automação"
     ]
   },
   {
@@ -13419,9 +13419,9 @@
       "JavaScript",
       "HTML",
       "CSS",
-      "Banco de Dados",
       "POO",
-      "Modelagem de Dados"
+      "Modelagem de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -13453,9 +13453,7 @@
       "Power BI",
       "Pandas",
       "Databricks",
-      "Automação",
       "Inteligência Artificial",
-      "Banco de Dados",
       "PostgreSQL",
       "MySQL",
       "SQL Server",
@@ -13471,11 +13469,13 @@
       "Metodologias Ágeis",
       "Microserviços",
       "Algoritmos",
-      "Lógica de Programação",
       "Modelagem de Dados",
       "UML",
       "ERP",
-      "SAP"
+      "SAP",
+      "Automação",
+      "Banco de Dados",
+      "Lógica de Programação"
     ]
   },
   {
@@ -13495,11 +13495,11 @@
       "JavaScript",
       "HTML",
       "CSS",
-      "Banco de Dados",
       "Git",
       "Metodologias Ágeis",
-      "Engenharia de Software",
-      "UX/UI"
+      "UX/UI",
+      "Banco de Dados",
+      "Engenharia de Software"
     ]
   },
   {
@@ -13523,8 +13523,8 @@
       "CI/CD",
       "Linux",
       "Redes de Computadores",
-      "Engenharia de Software",
-      "Inglês"
+      "Inglês",
+      "Engenharia de Software"
     ]
   },
   {
@@ -13544,15 +13544,15 @@
       "Java",
       "SQL",
       "RPA",
-      "Automação",
-      "Análise de Dados",
-      "Banco de Dados",
       "AWS",
       "Azure",
       "Scrum",
       "Metodologias Ágeis",
       "Inglês",
-      "Jira"
+      "Jira",
+      "Automação",
+      "Análise de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -13695,10 +13695,10 @@
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-de-ti-infraestrutura-at-coritiba-saf-4455533981",
     "tecnologias": [
       "Redes de Computadores",
-      "Help Desk",
       "Hardware",
-      "Manutenção Preventiva",
-      "CFTV"
+      "CFTV",
+      "Help Desk",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -13795,9 +13795,9 @@
       "Windows",
       "Redes de Computadores",
       "VPN",
-      "Governança e Riscos (GRC)",
       "Gestão de Vulnerabilidades",
-      "IAM"
+      "IAM",
+      "Governança e Riscos (GRC)"
     ]
   },
   {
@@ -13832,8 +13832,8 @@
     "url": "https://gfpneus.gupy.io/job/eyJqb2JJZCI6MTIwNDUyMjMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
       "Windows",
-      "Suporte N1/N2",
-      "Hardware"
+      "Hardware",
+      "Suporte N1/N2"
     ]
   },
   {
@@ -13930,9 +13930,9 @@
     "fonte": "gupy",
     "url": "https://tpc.gupy.io/job/eyJqb2JJZCI6MTIxNjAyNDgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Banco de Dados",
+      "ERP",
       "Governança e Riscos (GRC)",
-      "ERP"
+      "Banco de Dados"
     ]
   },
   {
@@ -13964,9 +13964,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-suporte-n1-s%C3%A3o-paulo-sp-at-minsait-4452842900",
     "tecnologias": [
-      "Suporte N1/N2",
       "Metodologias Ágeis",
-      "SAP"
+      "SAP",
+      "Suporte N1/N2"
     ]
   },
   {
@@ -14051,9 +14051,9 @@
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-de-tecnologia-b2c-at-coritiba-saf-4455546884",
     "tecnologias": [
       "Excel",
+      "Testes Funcionais",
       "Análise de Dados",
       "Banco de Dados",
-      "Testes Funcionais",
       "Engenharia de Software"
     ]
   },
@@ -14086,13 +14086,13 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-t-i-at-blue-tree-hotels-4452855286",
     "tecnologias": [
-      "Banco de Dados",
       "Windows Server",
       "Windows",
       "Hardware",
-      "Montagem e Manutenção de PCs",
       "VMware",
-      "TOTVS"
+      "TOTVS",
+      "Montagem e Manutenção de PCs",
+      "Banco de Dados"
     ]
   },
   {
@@ -14166,10 +14166,10 @@
       "CSS",
       "React",
       "Vue.js",
-      "Banco de Dados",
       "PostgreSQL",
       "API REST",
-      "ERP"
+      "ERP",
+      "Banco de Dados"
     ]
   },
   {
@@ -14188,16 +14188,16 @@
     "tecnologias": [
       "Java",
       "SQL",
-      "Inteligência Artificial",
       "Machine Learning",
-      "Banco de Dados",
+      "Inteligência Artificial",
       "Oracle",
       "AWS",
       "Linux",
       "Inglês",
-      "Espanhol",
       "SAP",
-      "Jira"
+      "Jira",
+      "Banco de Dados",
+      "Espanhol"
     ]
   },
   {
@@ -14235,8 +14235,8 @@
     "tecnologias": [
       "C#",
       "SQL",
-      "Lógica de Programação",
-      "Modelagem de Dados"
+      "Modelagem de Dados",
+      "Lógica de Programação"
     ]
   },
   {
@@ -14406,8 +14406,8 @@
       "Power BI",
       "Excel",
       "Looker",
-      "Análise de Dados",
-      "ERP"
+      "ERP",
+      "Análise de Dados"
     ]
   },
   {
@@ -14713,8 +14713,8 @@
     "fonte": "serpapi",
     "url": "https://www.google.com/search?ibp=htl;jobs&q=estagio+desenvolvimento&htidocid=dpPLm8iluC6iuzIiAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xXMsQ3CMBAAQNFmBETxJVDECIkmdAgIFQPQRI55OY9sv_E7UdahYAJGyGJAc-UV71lxOUnWlqZXIl7qFRxRMAzsBvIYMsMV7fQxxFJBRHn2JBruCOhjQssCgaFmtg7n-y7nKJVSIq60vzWTKQ17xQFbHtWDW_nTSKcTRqczNtvdZixjsOvF7Qx14j5CQMkIjo12FRySFnJfhDS116gAAAA&shmds=v1_ARwrE22ucPeTg6hvbU2121rsDbxfheB1tkL-mquAC0W1HDrCCA&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=estagio+desenvolvimento&htidocid=dpPLm8iluC6iuzIiAAAAAA%3D%3D",
     "tecnologias": [
-      "Análise de Dados",
-      "SAP"
+      "SAP",
+      "Análise de Dados"
     ]
   },
   {
@@ -14734,8 +14734,8 @@
       "Python",
       "SQL",
       "RPA",
-      "Inteligência Artificial",
       "Machine Learning",
+      "Inteligência Artificial",
       "Inglês",
       "SAP"
     ]
@@ -15075,8 +15075,8 @@
     "url": "https://www.vagas.com.br/vagas/v2831091/analista-administrativo-de-vendas-jr",
     "tecnologias": [
       "Excel",
-      "Banco de Dados",
-      "TOTVS"
+      "TOTVS",
+      "Banco de Dados"
     ]
   },
   {
@@ -15198,7 +15198,6 @@
       "React",
       "Spring",
       "Inteligência Artificial",
-      "Banco de Dados",
       "MySQL",
       "Oracle",
       "Azure",
@@ -15209,7 +15208,8 @@
       "API REST",
       "Scrum",
       "Metodologias Ágeis",
-      "Design Patterns"
+      "Design Patterns",
+      "Banco de Dados"
     ]
   },
   {
@@ -15227,9 +15227,9 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-j%C3%BAnior-at-jobbol-4455365487",
     "tecnologias": [
       "Android",
-      "Help Desk",
       "Office 365",
-      "Hardware"
+      "Hardware",
+      "Help Desk"
     ]
   },
   {
@@ -15329,11 +15329,11 @@
     "tecnologias": [
       "SQL",
       "Redes de Computadores",
-      "Suporte N1/N2",
       "GLPI",
-      "Engenharia de Software",
       "ERP",
-      "Jira"
+      "Jira",
+      "Suporte N1/N2",
+      "Engenharia de Software"
     ]
   },
   {
@@ -15407,7 +15407,7 @@
     "id": 1797,
     "titulo": "Assistente de Operações I (Exclusiva para Pessoas com Deficiência)",
     "empresa": "Ticket",
-    "area": "Outros/TI Geral",
+    "area": "Data",
     "senioridade": "Júnior",
     "localidade": "São Paulo / SP A empresa aceita candidaturas de São Paulo e cidades próximas",
     "polo": "São Paulo",
@@ -15532,12 +15532,12 @@
       "Linux",
       "Windows",
       "Redes de Computadores",
-      "Suporte N1/N2",
       "Zabbix",
       "VoIP",
       "Hardware",
       "Cisco",
-      "Estrutura de Dados"
+      "Estrutura de Dados",
+      "Suporte N1/N2"
     ]
   },
   {
@@ -15683,11 +15683,11 @@
     "tecnologias": [
       "Python",
       "Excel",
-      "Análise de Dados",
-      "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
       "Machine Learning",
-      "Git"
+      "Inteligência Artificial",
+      "Git",
+      "Copilots & Assistentes de IA",
+      "Análise de Dados"
     ]
   },
   {
@@ -15752,9 +15752,6 @@
       "TypeScript",
       "React",
       "Node.js",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
-      "Agentes de IA & RAG",
       "Bancos Vetoriais",
       "PostgreSQL",
       "AWS",
@@ -15764,7 +15761,10 @@
       "Serverless",
       "Active Directory",
       "OAuth/JWT",
-      "API REST"
+      "API REST",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -15797,8 +15797,6 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-sistemas-j%C3%BAnior-%E2%80%93-infraestrutura-e-dados-at-intelltech-4455362657",
     "tecnologias": [
       "SQL",
-      "Análise de Dados",
-      "Banco de Dados",
       "SQL Server",
       "Oracle",
       "Azure",
@@ -15806,6 +15804,8 @@
       "Active Directory",
       "Metodologias Ágeis",
       "Inglês",
+      "Análise de Dados",
+      "Banco de Dados",
       "Espanhol"
     ]
   },
@@ -15963,8 +15963,8 @@
       "Redes de Computadores",
       "VoIP",
       "Hardware",
-      "Manutenção Preventiva",
-      "Estrutura de Dados"
+      "Estrutura de Dados",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -16036,12 +16036,12 @@
       "Node.js",
       "Django",
       "Inteligência Artificial",
+      "Scrum",
+      "Metodologias Ágeis",
       "Copilots & Assistentes de IA",
       "LLMs & IA Generativa",
       "Agentes de IA & RAG",
-      "Banco de Dados",
-      "Scrum",
-      "Metodologias Ágeis"
+      "Banco de Dados"
     ]
   },
   {
@@ -16167,14 +16167,14 @@
     "url": "https://santahelena.gupy.io/job/eyJqb2JJZCI6MTIxNDA1MDYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "Testes Funcionais",
       "ITIL",
       "Scrum",
       "Metodologias Ágeis",
       "Inglês",
       "ERP",
-      "SAP"
+      "SAP",
+      "Banco de Dados"
     ]
   },
   {
@@ -16258,12 +16258,12 @@
       "CSS",
       "Angular",
       ".NET",
-      "Banco de Dados",
       "SQL Server",
       "Oracle",
       "API REST",
       "Scrum",
       "Metodologias Ágeis",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -16313,11 +16313,11 @@
     "tecnologias": [
       "PHP",
       "Laravel",
-      "Banco de Dados",
       "MySQL",
+      "Modelagem de Dados",
+      "Banco de Dados",
       "Lógica de Programação",
-      "Engenharia de Software",
-      "Modelagem de Dados"
+      "Engenharia de Software"
     ]
   },
   {
@@ -16337,8 +16337,8 @@
       "Windows",
       "ITIL",
       "Hardware",
-      "Montagem e Manutenção de PCs",
-      "Inglês"
+      "Inglês",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -16437,9 +16437,9 @@
     "tecnologias": [
       "Python",
       "Databricks",
-      "Estatística",
-      "Inteligência Artificial",
       "Machine Learning",
+      "Inteligência Artificial",
+      "Estatística",
       "Azure",
       "Inglês",
       "Espanhol"
@@ -16516,16 +16516,16 @@
     "tecnologias": [
       "Java",
       "SQL",
-      "Inteligência Artificial",
       "Machine Learning",
-      "Banco de Dados",
+      "Inteligência Artificial",
       "Oracle",
       "AWS",
       "Linux",
       "Inglês",
-      "Espanhol",
       "SAP",
-      "Jira"
+      "Jira",
+      "Banco de Dados",
+      "Espanhol"
     ]
   },
   {
@@ -16575,8 +16575,8 @@
     "url": "https://www.linkedin.com/jobs/view/4440360078/",
     "tecnologias": [
       "Apex",
-      "Engenharia de Software",
-      "Salesforce"
+      "Salesforce",
+      "Engenharia de Software"
     ]
   },
   {
@@ -16656,7 +16656,6 @@
       "Flutter",
       "Kafka",
       "RPA",
-      "Banco de Dados",
       "Oracle",
       "Docker",
       "Git",
@@ -16672,10 +16671,11 @@
       "SOLID",
       "Clean Code",
       "Design Patterns",
-      "Engenharia de Software",
       "Modelagem de Dados",
       "UX/UI",
-      "Jira"
+      "Jira",
+      "Banco de Dados",
+      "Engenharia de Software"
     ]
   },
   {
@@ -16730,12 +16730,12 @@
       "Python",
       "Java",
       "JavaScript",
-      "Análise de Dados",
-      "Banco de Dados",
       "AWS",
       "Azure",
       "GCP",
       "Cibersegurança",
+      "Análise de Dados",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -16755,11 +16755,11 @@
     "tecnologias": [
       "Python",
       "JavaScript",
-      "Automação",
       "Inteligência Artificial",
+      "Inglês",
       "Copilots & Assistentes de IA",
       "LLMs & IA Generativa",
-      "Inglês"
+      "Automação"
     ]
   },
   {
@@ -16793,9 +16793,9 @@
     "fonte": "gupy",
     "url": "https://fcamara.gupy.io/job/eyJqb2JJZCI6MTIwOTAxMzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Banco de Dados",
-      "Governança e Riscos (GRC)",
       "Inglês",
+      "Governança e Riscos (GRC)",
+      "Banco de Dados",
       "Espanhol"
     ]
   },
@@ -16917,8 +16917,8 @@
     "fonte": "gupy",
     "url": "https://penso.gupy.io/job/eyJqb2JJZCI6MTIwNDEzMzQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Help Desk",
       "Hardware",
+      "Help Desk",
       "Montagem e Manutenção de PCs"
     ]
   },
@@ -16980,9 +16980,9 @@
       "Excel",
       "Windows",
       "Redes de Computadores",
-      "Help Desk",
       "Office 365",
       "Hardware",
+      "Help Desk",
       "Manutenção Preventiva"
     ]
   },
@@ -17042,9 +17042,9 @@
       "Excel",
       "ETL",
       "Estatística",
+      "Modelagem de Dados",
       "Análise de Dados",
-      "Banco de Dados",
-      "Modelagem de Dados"
+      "Banco de Dados"
     ]
   },
   {
@@ -17237,9 +17237,9 @@
       "Python",
       "SQL",
       "Excel",
-      "Análise de Dados",
       "AWS",
-      "Inglês"
+      "Inglês",
+      "Análise de Dados"
     ]
   },
   {
@@ -17273,8 +17273,8 @@
     "tecnologias": [
       "Python",
       "SQL",
-      "Automação",
-      "Inteligência Artificial"
+      "Inteligência Artificial",
+      "Automação"
     ]
   },
   {
@@ -17368,8 +17368,8 @@
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-e-digitaliza%C3%A7%C3%A3o-at-hitachi-energy-4436123147",
     "tecnologias": [
       "Power BI",
-      "Análise de Dados",
       "Inglês",
+      "Análise de Dados",
       "Espanhol"
     ]
   },
@@ -17388,13 +17388,13 @@
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-at-renault-group-4453721859",
     "tecnologias": [
       "Excel",
-      "Análise de Dados",
       "Scrum",
       "Metodologias Ágeis",
       "Inglês",
-      "Espanhol",
       "SAP",
-      "Jira"
+      "Jira",
+      "Análise de Dados",
+      "Espanhol"
     ]
   },
   {
@@ -17523,14 +17523,14 @@
     "url": "https://www.vagas.com.br/vagas/v2830594/estagiario-em-desenvolvimento-de-software",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "Oracle",
       "Metodologias Ágeis",
-      "Lógica de Programação",
       "Inglês",
       "ERP",
       "Jira",
-      "Confluence"
+      "Confluence",
+      "Banco de Dados",
+      "Lógica de Programação"
     ]
   },
   {
@@ -17596,8 +17596,8 @@
       "Testes Automatizados",
       "Scrum",
       "Metodologias Ágeis",
-      "Engenharia de Software",
-      "Inglês"
+      "Inglês",
+      "Engenharia de Software"
     ]
   },
   {
@@ -17621,8 +17621,8 @@
       "Pandas",
       "ETL",
       "RPA",
-      "Automação",
-      "Modelagem de Dados"
+      "Modelagem de Dados",
+      "Automação"
     ]
   },
   {
@@ -17799,9 +17799,9 @@
       "Scrum",
       "Metodologias Ágeis",
       "Inglês",
-      "Espanhol",
       "SAP",
-      "Salesforce"
+      "Salesforce",
+      "Espanhol"
     ]
   },
   {
@@ -18060,9 +18060,9 @@
       "Scrum",
       "Metodologias Ágeis",
       "Inglês",
-      "Espanhol",
       "SAP",
-      "Salesforce"
+      "Salesforce",
+      "Espanhol"
     ]
   },
   {
@@ -18090,8 +18090,8 @@
       "API REST",
       "Estrutura de Dados",
       "Algoritmos",
-      "Lógica de Programação",
-      "Inglês"
+      "Inglês",
+      "Lógica de Programação"
     ]
   },
   {
@@ -18235,9 +18235,9 @@
     "fonte": "theirstack",
     "url": "https://proxxima.rhgestor.com.br/vagas/detalhes/NwHOSw7187350B4hkhHs",
     "tecnologias": [
-      "Automação",
       "ERP",
-      "TOTVS"
+      "TOTVS",
+      "Automação"
     ]
   },
   {
@@ -18356,10 +18356,10 @@
       "Testes Automatizados",
       "Modelagem de Dados",
       "Inglês",
-      "Espanhol",
       "UX/UI",
       "SAP",
-      "Salesforce"
+      "Salesforce",
+      "Espanhol"
     ]
   },
   {
@@ -18431,8 +18431,8 @@
       "Active Directory",
       "Windows",
       "Redes de Computadores",
-      "Help Desk",
-      "Hardware"
+      "Hardware",
+      "Help Desk"
     ]
   },
   {
@@ -18624,10 +18624,10 @@
       "Visual Basic/VBA",
       "SQL",
       ".NET",
-      "Análise de Dados",
       "Windows",
-      "Lógica de Programação",
-      "Inglês"
+      "Inglês",
+      "Análise de Dados",
+      "Lógica de Programação"
     ]
   },
   {
@@ -18684,8 +18684,8 @@
       "Scrum",
       "Metodologias Ágeis",
       "POO",
-      "Lógica de Programação",
-      "Inglês"
+      "Inglês",
+      "Lógica de Programação"
     ]
   },
   {
@@ -18749,9 +18749,6 @@
       "React",
       "Node.js",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
-      "Banco de Dados",
       "Firebase",
       "GCP",
       "Git",
@@ -18759,7 +18756,10 @@
       "Serverless",
       "Testes Automatizados",
       "IAM",
-      "Estrutura de Dados"
+      "Estrutura de Dados",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Banco de Dados"
     ]
   },
   {
@@ -18781,10 +18781,10 @@
       "ETL",
       "Databricks",
       "Kafka",
-      "Qualidade de Dados",
-      "Banco de Dados",
       "Azure",
-      "Docker"
+      "Docker",
+      "Qualidade de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -18830,14 +18830,14 @@
       "Angular",
       ".NET",
       "Inteligência Artificial",
-      "Agentes de IA & RAG",
       "PostgreSQL",
       "SQL Server",
       "Git",
       "CI/CD",
       "API REST",
       "UX/UI",
-      "ERP"
+      "ERP",
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -18855,10 +18855,10 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-sistemas-jr-at-inbrands-ind%C3%BAstria-s-a-4453161197",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "Testes Funcionais",
-      "Lógica de Programação",
-      "ERP"
+      "ERP",
+      "Banco de Dados",
+      "Lógica de Programação"
     ]
   },
   {
@@ -18878,9 +18878,9 @@
       "Python",
       "Power BI",
       "Excel",
-      "Automação",
       "Inteligência Artificial",
-      "Inglês"
+      "Inglês",
+      "Automação"
     ]
   },
   {
@@ -18984,11 +18984,11 @@
       "Git",
       "Linux",
       "Windows",
-      "Help Desk",
       "ERP",
       "SAP",
       "TOTVS",
-      "Jira"
+      "Jira",
+      "Help Desk"
     ]
   },
   {
@@ -19172,9 +19172,9 @@
       "Linux",
       "Windows",
       "ITIL",
-      "Help Desk",
       "Office 365",
       "Hardware",
+      "Help Desk",
       "Montagem e Manutenção de PCs"
     ]
   },
@@ -19365,13 +19365,13 @@
       "Node.js",
       "Express",
       "Spring",
-      "Banco de Dados",
       "Oracle",
       "MongoDB",
       "Jenkins",
       "Git",
       "API REST",
-      "Microserviços"
+      "Microserviços",
+      "Banco de Dados"
     ]
   },
   {
@@ -19472,12 +19472,12 @@
       "JavaScript",
       "C#",
       ".NET",
-      "Banco de Dados",
       "Azure",
       "Git",
       "CI/CD",
       "API REST",
-      "Inglês"
+      "Inglês",
+      "Banco de Dados"
     ]
   },
   {
@@ -19528,9 +19528,9 @@
       "Kotlin",
       "SQL",
       "Android",
-      "Banco de Dados",
       "Design Patterns",
-      "Inglês"
+      "Inglês",
+      "Banco de Dados"
     ]
   },
   {
@@ -20155,8 +20155,6 @@
       "Node.js",
       "Spring",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "Banco de Dados",
       "AWS",
       "Azure",
       "Docker",
@@ -20164,9 +20162,11 @@
       "Scrum",
       "Metodologias Ágeis",
       "POO",
+      "Inglês",
+      "Copilots & Assistentes de IA",
+      "Banco de Dados",
       "Lógica de Programação",
-      "Engenharia de Software",
-      "Inglês"
+      "Engenharia de Software"
     ]
   },
   {
@@ -20184,8 +20184,8 @@
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-de-desenvolvimento-at-grupo-setta-4452453397",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
-      "Git"
+      "Git",
+      "Banco de Dados"
     ]
   },
   {
@@ -20236,14 +20236,14 @@
     "tecnologias": [
       "SQL",
       "ETL",
-      "Análise de Dados",
       "Inteligência Artificial",
-      "Banco de Dados",
       "AWS",
       "Azure",
       "GCP",
       "Metodologias Ágeis",
-      "Modelagem de Dados"
+      "Modelagem de Dados",
+      "Análise de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -20284,7 +20284,6 @@
       "React Native",
       "Flutter",
       "Kafka",
-      "Banco de Dados",
       "PostgreSQL",
       "MongoDB",
       "Redis",
@@ -20293,6 +20292,7 @@
       "Kubernetes",
       "Prometheus",
       "Metodologias Ágeis",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -20369,7 +20369,6 @@
       "Spring",
       "Micronaut",
       "Hibernate",
-      "Banco de Dados",
       "PostgreSQL",
       "SQL Server",
       "MongoDB",
@@ -20385,7 +20384,8 @@
       "OAuth/JWT",
       "API REST",
       "OpenAPI/Swagger",
-      "Microserviços"
+      "Microserviços",
+      "Banco de Dados"
     ]
   },
   {
@@ -20404,8 +20404,8 @@
     "tecnologias": [
       "Python",
       "Excel",
-      "Automação",
-      "Inteligência Artificial"
+      "Inteligência Artificial",
+      "Automação"
     ]
   },
   {
@@ -20440,8 +20440,6 @@
     "fonte": "gupy",
     "url": "https://unecx.gupy.io/job/eyJqb2JJZCI6MTIwMjkzMjMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
       "Windows",
       "Redes de Computadores",
       "VPN",
@@ -20450,7 +20448,9 @@
       "VoIP",
       "Hardware",
       "ISO 27001",
-      "Estrutura de Dados"
+      "Estrutura de Dados",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -20547,8 +20547,8 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2826092/estagio-tecnico-em-eletronica",
     "tecnologias": [
-      "Banco de Dados",
-      "Eletrônica"
+      "Eletrônica",
+      "Banco de Dados"
     ]
   },
   {
@@ -20566,8 +20566,8 @@
     "url": "https://jrca.gupy.io/job/eyJqb2JJZCI6MTE5NzQxNzIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
       "Windows",
-      "Help Desk",
       "Hardware",
+      "Help Desk",
       "Montagem e Manutenção de PCs"
     ]
   },
@@ -20703,8 +20703,8 @@
     "url": "https://br.linkedin.com/jobs/view/pessoa-analista-de-dados-j%C3%BAnior-at-amcom-sistemas-de-informa%C3%A7%C3%A3o-4451494004",
     "tecnologias": [
       "Python",
-      "Inteligência Artificial",
-      "Machine Learning"
+      "Machine Learning",
+      "Inteligência Artificial"
     ]
   },
   {
@@ -20971,13 +20971,13 @@
     "tecnologias": [
       "SQL",
       "RPA",
-      "Automação",
-      "Análise de Dados",
-      "Banco de Dados",
       "PostgreSQL",
       "SQL Server",
       "Oracle",
-      "API REST"
+      "API REST",
+      "Automação",
+      "Análise de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -21093,15 +21093,15 @@
       "Java",
       "Airflow",
       "ETL",
-      "Automação",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
       "AWS",
       "Azure",
       "GCP",
       "CI/CD",
-      "Microserviços"
+      "Microserviços",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Automação"
     ]
   },
   {
@@ -21155,7 +21155,6 @@
       "React",
       "Next.js",
       "React Native",
-      "LLMs & IA Generativa",
       "PostgreSQL",
       "MySQL",
       "Elasticsearch",
@@ -21165,7 +21164,8 @@
       "CI/CD",
       "Grafana",
       "Prometheus",
-      "SOLID"
+      "SOLID",
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -21184,11 +21184,11 @@
     "tecnologias": [
       "Service Desk",
       "Hardware",
-      "Manutenção Preventiva",
       "Inglês",
       "ERP",
       "CRM",
-      "Jira"
+      "Jira",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -21375,16 +21375,16 @@
       "ABAP",
       "React",
       "Node.js",
-      "Banco de Dados",
       "Docker",
       "Kubernetes",
       "Scrum",
       "POO",
       "Clean Code",
-      "Engenharia de Software",
       "Inglês",
       "ERP",
-      "SAP"
+      "SAP",
+      "Banco de Dados",
+      "Engenharia de Software"
     ]
   },
   {
@@ -21466,13 +21466,13 @@
       "Redes de Computadores",
       "VPN",
       "Service Desk",
-      "Help Desk",
       "Zendesk",
       "GLPI",
       "Office 365",
       "Hardware",
-      "Montagem e Manutenção de PCs",
-      "Jira"
+      "Jira",
+      "Help Desk",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -21569,12 +21569,12 @@
       "SQL",
       "Excel",
       "BI",
-      "Automação",
-      "Estatística",
-      "Análise de Dados",
       "Inteligência Artificial",
+      "Estatística",
       "ERP",
-      "SAP"
+      "SAP",
+      "Automação",
+      "Análise de Dados"
     ]
   },
   {
@@ -21647,8 +21647,8 @@
     "fonte": "gupy",
     "url": "https://penso.gupy.io/job/eyJqb2JJZCI6MTE5ODE1OTAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Help Desk",
       "Hardware",
+      "Help Desk",
       "Montagem e Manutenção de PCs"
     ]
   },
@@ -21839,8 +21839,6 @@
       "PHP",
       "SQL",
       "Shell/Bash",
-      "Análise de Dados",
-      "Banco de Dados",
       "PostgreSQL",
       "MySQL",
       "SQL Server",
@@ -21848,9 +21846,11 @@
       "Linux",
       "LGPD",
       "Estrutura de Dados",
-      "Engenharia de Software",
       "Inglês",
-      "IoT"
+      "IoT",
+      "Análise de Dados",
+      "Banco de Dados",
+      "Engenharia de Software"
     ]
   },
   {
@@ -22055,9 +22055,9 @@
       "C#",
       "SQL",
       "Excel",
+      "SQL Server",
       "Análise de Dados",
       "Banco de Dados",
-      "SQL Server",
       "Lógica de Programação"
     ]
   },
@@ -22114,12 +22114,12 @@
       "Windows",
       "Redes de Computadores",
       "Service Desk",
-      "Help Desk",
       "GLPI",
       "Office 365",
       "Hardware",
       "Inglês",
-      "ERP"
+      "ERP",
+      "Help Desk"
     ]
   },
   {
@@ -22138,20 +22138,20 @@
     "tecnologias": [
       "C#",
       "SQL",
-      "Banco de Dados",
       "MongoDB",
       "GCP",
       "Git",
       "Postman",
-      "Engenharia de Software",
-      "Jira"
+      "Jira",
+      "Banco de Dados",
+      "Engenharia de Software"
     ]
   },
   {
     "id": 304,
     "titulo": "Técnico de Automação Júnior | Shopping Cidade Jardim",
     "empresa": "JHSF",
-    "area": "Outros/TI Geral",
+    "area": "Engenharia de Software",
     "senioridade": "Júnior",
     "localidade": "São Paulo / SP A empresa aceita candidaturas de São Paulo e cidades próximas",
     "polo": "São Paulo",
@@ -22161,9 +22161,9 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2829382/tecnico-de-automacao-junior-shopping-cidade-jardim",
     "tecnologias": [
-      "Manutenção Preventiva",
       "Eletrônica",
-      "CFTV"
+      "CFTV",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -22274,14 +22274,14 @@
       "Vue.js",
       "Svelte",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
       "Git",
       "Jest",
       "API REST",
       "Clean Code",
       "Inglês",
-      "UX/UI"
+      "UX/UI",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -22415,8 +22415,6 @@
       "Shell/Bash",
       "Excel",
       "Pandas",
-      "Análise de Dados",
-      "Banco de Dados",
       "Azure",
       "Linux",
       "Windows Server",
@@ -22427,7 +22425,9 @@
       "LGPD",
       "ISO 27001",
       "Gestão de Vulnerabilidades",
-      "Inglês"
+      "Inglês",
+      "Análise de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -22447,12 +22447,12 @@
       "Shell/Bash",
       "Active Directory",
       "Office 365",
-      "Governança e Riscos (GRC)",
       "LGPD",
       "ISO 27001",
       "IAM",
       "SIEM/SOC",
-      "Inglês"
+      "Inglês",
+      "Governança e Riscos (GRC)"
     ]
   },
   {
@@ -22484,14 +22484,14 @@
     "fonte": "gupy",
     "url": "https://importadorabage.gupy.io/job/eyJqb2JJZCI6MTE5NjA3MTAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Copilots & Assistentes de IA",
       "Active Directory",
       "Windows",
       "Redes de Computadores",
       "Firewall",
       "VoIP",
       "Office 365",
-      "CFTV"
+      "CFTV",
+      "Copilots & Assistentes de IA"
     ]
   },
   {
@@ -22584,10 +22584,10 @@
       "SQL",
       "Power BI",
       "Excel",
-      "Automação",
+      "Inteligência Artificial",
       "Estatística",
-      "Análise de Dados",
-      "Inteligência Artificial"
+      "Automação",
+      "Análise de Dados"
     ]
   },
   {
@@ -22606,8 +22606,8 @@
     "tecnologias": [
       "Windows",
       "Redes de Computadores",
-      "Help Desk",
       "Hardware",
+      "Help Desk",
       "Manutenção Preventiva",
       "Engenharia de Software"
     ]
@@ -22628,8 +22628,8 @@
     "tecnologias": [
       "Windows",
       "Redes de Computadores",
-      "Manutenção Preventiva",
-      "Cisco"
+      "Cisco",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -22766,9 +22766,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-engenharia-de-dados-vaga-afirmativa-para-mulheres-cis-e-trans-at-artefact-4450216124",
     "tecnologias": [
-      "Estatística",
-      "Inteligência Artificial",
       "Machine Learning",
+      "Inteligência Artificial",
+      "Estatística",
       "API REST"
     ]
   },
@@ -23044,9 +23044,9 @@
       "VPN",
       "ITIL",
       "Hardware",
-      "Manutenção Preventiva",
       "VMware",
-      "Inglês"
+      "Inglês",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -23111,7 +23111,6 @@
     "url": "https://dedalus.gupy.io/job/eyJqb2JJZCI6MTE4ODEyMjQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
       "Inteligência Artificial",
-      "Banco de Dados",
       "AWS",
       "Azure",
       "GCP",
@@ -23121,6 +23120,7 @@
       "ITIL",
       "Zabbix",
       "Inglês",
+      "Banco de Dados",
       "Espanhol"
     ]
   },
@@ -23144,12 +23144,12 @@
       "C#",
       "PHP",
       "SQL",
-      "Banco de Dados",
       "MySQL",
       "SQL Server",
       "Firewall",
       "Hardware",
-      "Metodologias Ágeis"
+      "Metodologias Ágeis",
+      "Banco de Dados"
     ]
   },
   {
@@ -23634,10 +23634,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-de-t-i-belo-horizonte-mg-at-grupo-spasso-armaz%C3%A9ns-4448546715",
     "tecnologias": [
-      "Help Desk",
       "Hardware",
-      "Engenharia de Software",
-      "ERP"
+      "ERP",
+      "Help Desk",
+      "Engenharia de Software"
     ]
   },
   {
@@ -23655,12 +23655,12 @@
     "url": "https://softexpert.gupy.io/job/eyJqb2JJZCI6MTE5Mzc3MzEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "Windows",
       "ITIL",
       "Service Desk",
-      "Espanhol",
-      "ERP"
+      "ERP",
+      "Banco de Dados",
+      "Espanhol"
     ]
   },
   {
@@ -23809,10 +23809,10 @@
       "Windows",
       "Redes de Computadores",
       "Service Desk",
-      "Help Desk",
       "VoIP",
       "Office 365",
       "Hardware",
+      "Help Desk",
       "Manutenção Preventiva"
     ]
   },
@@ -23830,12 +23830,12 @@
     "fonte": "gupy",
     "url": "https://cogna.gupy.io/job/eyJqb2JJZCI6MTE4ODg3MjcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Banco de Dados",
       "Redes de Computadores",
       "Hardware",
-      "Manutenção Preventiva",
       "VMware",
-      "Inglês"
+      "Inglês",
+      "Manutenção Preventiva",
+      "Banco de Dados"
     ]
   },
   {
@@ -24102,9 +24102,9 @@
     "tecnologias": [
       "SQL",
       "Airflow",
+      "Machine Learning",
       "Estatística",
-      "Análise de Dados",
-      "Machine Learning"
+      "Análise de Dados"
     ]
   },
   {
@@ -24173,11 +24173,11 @@
       "SQL",
       "Spark",
       "ETL",
-      "Banco de Dados",
       "PostgreSQL",
       "MySQL",
       "MongoDB",
-      "Cassandra"
+      "Cassandra",
+      "Banco de Dados"
     ]
   },
   {
@@ -24212,9 +24212,9 @@
     "url": "https://www.linkedin.com/jobs/view/4446636561/",
     "tecnologias": [
       "ETL",
+      "Machine Learning",
       "Inteligência Artificial",
-      "LLMs & IA Generativa",
-      "Machine Learning"
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -24393,9 +24393,9 @@
     "url": "https://br.linkedin.com/jobs/view/analista-sistemas-jr-at-cofco-international-4448516160",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "Oracle",
-      "Inglês"
+      "Inglês",
+      "Banco de Dados"
     ]
   },
   {
@@ -24503,8 +24503,8 @@
       "C#",
       "SQL",
       ".NET",
-      "Banco de Dados",
       "SQL Server",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -24524,10 +24524,10 @@
     "tecnologias": [
       "Python",
       "Java",
-      "Banco de Dados",
       "Windows",
+      "Hardware",
       "Help Desk",
-      "Hardware"
+      "Banco de Dados"
     ]
   },
   {
@@ -24544,14 +24544,14 @@
     "fonte": "gupy",
     "url": "https://cogna.gupy.io/job/eyJqb2JJZCI6MTE4NjQyNDEsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Banco de Dados",
       "Linux",
       "Windows",
       "Redes de Computadores",
       "Hardware",
-      "Manutenção Preventiva",
       "VMware",
-      "Inglês"
+      "Inglês",
+      "Manutenção Preventiva",
+      "Banco de Dados"
     ]
   },
   {
@@ -24725,11 +24725,11 @@
     "tecnologias": [
       "Python",
       "Shell/Bash",
-      "Banco de Dados",
       "Linux",
       "Windows",
       "Hardware",
       "Manutenção Preventiva",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -24750,10 +24750,10 @@
       "Python",
       "SQL",
       "Excel",
-      "Análise de Dados",
-      "Banco de Dados",
       "Git",
-      "Windows"
+      "Windows",
+      "Análise de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -24770,8 +24770,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/operador-de-suporte-jr-at-farma-ponte-4448192654",
     "tecnologias": [
-      "Análise de Dados",
-      "Hardware"
+      "Hardware",
+      "Análise de Dados"
     ]
   },
   {
@@ -24806,9 +24806,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-de-ti-at-medtronic-4448606646",
     "tecnologias": [
+      "Inglês",
       "Help Desk",
-      "Manutenção Preventiva",
-      "Inglês"
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -24828,11 +24828,11 @@
       "Python",
       "Shell/Bash",
       "Power BI",
-      "Banco de Dados",
       "Linux",
       "Windows",
       "Hardware",
       "Manutenção Preventiva",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -25177,15 +25177,15 @@
     "tecnologias": [
       "SQL",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
       "Git",
       "Postman",
       "Insomnia",
       "Testes Automatizados",
-      "Qualidade de Software",
       "Inglês",
-      "ERP"
+      "ERP",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Qualidade de Software"
     ]
   },
   {
@@ -25259,14 +25259,14 @@
       "React",
       "Node.js",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
-      "Agentes de IA & RAG",
       "MySQL",
       "SQL Server",
       "Git",
       "Inglês",
-      "ERP"
+      "ERP",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -25312,13 +25312,13 @@
       "React",
       ".NET",
       "Entity Framework",
-      "Banco de Dados",
       "Git",
       "API REST",
       "Scrum",
       "Metodologias Ágeis",
       "POO",
       "Clean Code",
+      "Banco de Dados",
       "Lógica de Programação",
       "Engenharia de Software"
     ]
@@ -25375,8 +25375,8 @@
       "JavaScript",
       "PHP",
       "SQL",
-      "Automação",
-      "POO"
+      "POO",
+      "Automação"
     ]
   },
   {
@@ -25486,9 +25486,9 @@
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-projetos-de-telecomunica%C3%A7%C3%B5es-at-grupo-interjato-4447706934",
     "tecnologias": [
       "Inteligência Artificial",
+      "Redes de Computadores",
       "Copilots & Assistentes de IA",
       "LLMs & IA Generativa",
-      "Redes de Computadores",
       "Lógica de Programação"
     ]
   },
@@ -25540,11 +25540,11 @@
       "SQL",
       "Spark",
       "ETL",
-      "Banco de Dados",
       "PostgreSQL",
       "MySQL",
       "MongoDB",
-      "Cassandra"
+      "Cassandra",
+      "Banco de Dados"
     ]
   },
   {
@@ -25723,12 +25723,12 @@
       "Laravel",
       "Power BI",
       "Inteligência Artificial",
-      "Banco de Dados",
       "Service Desk",
       "Scrum",
       "Metodologias Ágeis",
-      "Lógica de Programação",
-      "Inglês"
+      "Inglês",
+      "Banco de Dados",
+      "Lógica de Programação"
     ]
   },
   {
@@ -26169,9 +26169,9 @@
       "SQL",
       "PL/SQL",
       "Inteligência Artificial",
+      "TOTVS",
       "Banco de Dados",
-      "Lógica de Programação",
-      "TOTVS"
+      "Lógica de Programação"
     ]
   },
   {
@@ -26209,14 +26209,14 @@
       "SQL",
       "T-SQL",
       "CSS",
-      "Automação",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
-      "Banco de Dados",
       "Hardware",
       "IAM",
       "API REST",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Automação",
+      "Banco de Dados",
       "Lógica de Programação"
     ]
   },
@@ -26239,16 +26239,16 @@
       "React",
       "Angular",
       "NestJS",
-      "Automação",
       "Inteligência Artificial",
-      "LLMs & IA Generativa",
-      "Banco de Dados",
       "Docker",
       "Git",
       "CI/CD",
       "Scrum",
       "Metodologias Ágeis",
-      "Microserviços"
+      "Microserviços",
+      "LLMs & IA Generativa",
+      "Automação",
+      "Banco de Dados"
     ]
   },
   {
@@ -26339,12 +26339,12 @@
       "Laravel",
       "Power BI",
       "Inteligência Artificial",
-      "Banco de Dados",
       "Service Desk",
       "Scrum",
       "Metodologias Ágeis",
-      "Lógica de Programação",
-      "Inglês"
+      "Inglês",
+      "Banco de Dados",
+      "Lógica de Programação"
     ]
   },
   {
@@ -26394,8 +26394,8 @@
     "url": "https://tokiomarine.gupy.io/job/eyJqb2JJZCI6MTE4OTUxMTgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
       "Power BI",
-      "Análise de Dados",
-      "Inglês"
+      "Inglês",
+      "Análise de Dados"
     ]
   },
   {
@@ -26418,10 +26418,10 @@
       "ETL",
       "Looker",
       "BI",
-      "Automação",
-      "Estatística",
-      "Análise de Dados",
       "Inteligência Artificial",
+      "Estatística",
+      "Automação",
+      "Análise de Dados",
       "Banco de Dados"
     ]
   },
@@ -26465,8 +26465,8 @@
       "Windows",
       "ITIL",
       "Hardware",
-      "Montagem e Manutenção de PCs",
-      "Inglês"
+      "Inglês",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -26491,16 +26491,16 @@
       "Vue.js",
       "NestJS",
       "Prisma",
-      "Análise de Dados",
       "SQL Server",
       "Docker",
       "Git",
       "Testes Automatizados",
-      "Manutenção Preventiva",
       "API REST",
       "Scrum",
       "Metodologias Ágeis",
       "Clean Code",
+      "Manutenção Preventiva",
+      "Análise de Dados",
       "Lógica de Programação",
       "Engenharia de Software"
     ]
@@ -26629,16 +26629,16 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-tecnologia-da-informa%C3%A7%C3%A3o-jr-sicoob-paulista-presidente-prudente-sp-at-sicoob-unimais-rio-4446932460",
     "tecnologias": [
-      "Banco de Dados",
       "Active Directory",
       "Windows",
       "Redes de Computadores",
       "Service Desk",
-      "Help Desk",
       "Hardware",
-      "Manutenção Preventiva",
       "LGPD",
-      "IAM"
+      "IAM",
+      "Help Desk",
+      "Manutenção Preventiva",
+      "Banco de Dados"
     ]
   },
   {
@@ -26819,9 +26819,9 @@
       "VoIP",
       "Office 365",
       "Hardware",
-      "Montagem e Manutenção de PCs",
       "Inglês",
-      "CFTV"
+      "CFTV",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -26900,11 +26900,11 @@
     "tecnologias": [
       "Python",
       "SQL",
-      "Qualidade de Dados",
-      "Inteligência Artificial",
       "Machine Learning",
-      "Banco de Dados",
-      "Modelagem de Dados"
+      "Inteligência Artificial",
+      "Modelagem de Dados",
+      "Qualidade de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -26948,8 +26948,6 @@
       "JavaEE",
       "Hibernate",
       "Power BI",
-      "Automação",
-      "Banco de Dados",
       "Docker",
       "Git",
       "API REST",
@@ -26957,6 +26955,8 @@
       "SOLID",
       "Clean Code",
       "Algoritmos",
+      "Automação",
+      "Banco de Dados",
       "Lógica de Programação",
       "Engenharia de Software"
     ]
@@ -26997,8 +26997,6 @@
       "Spring",
       "Hibernate",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
       "PostgreSQL",
       "MySQL",
       "MongoDB",
@@ -27011,7 +27009,9 @@
       "Metodologias Ágeis",
       "Microserviços",
       "SOLID",
-      "Design Patterns"
+      "Design Patterns",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -27108,10 +27108,10 @@
       "Vue.js",
       ".NET",
       "Prisma",
-      "Banco de Dados",
       "SQL Server",
       "Git",
-      "Metodologias Ágeis"
+      "Metodologias Ágeis",
+      "Banco de Dados"
     ]
   },
   {
@@ -27202,11 +27202,11 @@
     "url": "https://br.linkedin.com/jobs/view/assistente-de-ti-tempor%C3%A1rio-at-sgi-4444138658",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "Windows",
       "Redes de Computadores",
+      "Hardware",
       "Suporte N1/N2",
-      "Hardware"
+      "Banco de Dados"
     ]
   },
   {
@@ -27397,9 +27397,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/tecnico-de-suporte-junior-i-at-faculty-of-medical-sciences-of-minas-gerais-4446439367",
     "tecnologias": [
-      "Banco de Dados",
       "Linux",
-      "Hardware"
+      "Hardware",
+      "Banco de Dados"
     ]
   },
   {
@@ -27466,10 +27466,10 @@
       "Python",
       "SQL",
       "Power BI",
+      "LGPD",
       "Automação",
       "Análise de Dados",
-      "Qualidade de Dados",
-      "LGPD"
+      "Qualidade de Dados"
     ]
   },
   {
@@ -27606,12 +27606,12 @@
       "Linux",
       "Windows",
       "Redes de Computadores",
-      "Help Desk",
       "Hardware",
-      "Manutenção Preventiva",
       "LGPD",
       "IAM",
-      "Jira"
+      "Jira",
+      "Help Desk",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -27644,15 +27644,15 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-testes-qa-j%C3%BAnior-at-webposto-4446521377",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "Postman",
       "Testes Funcionais",
-      "Qualidade de Software",
       "Scrum",
       "Metodologias Ágeis",
+      "Jira",
+      "Banco de Dados",
+      "Qualidade de Software",
       "Lógica de Programação",
-      "Engenharia de Software",
-      "Jira"
+      "Engenharia de Software"
     ]
   },
   {
@@ -27876,14 +27876,14 @@
       "Redes de Computadores",
       "ITIL",
       "Service Desk",
-      "Help Desk",
       "Zendesk",
       "GLPI",
       "Office 365",
-      "Manutenção Preventiva",
       "Inglês",
       "IoT",
-      "Eletrônica"
+      "Eletrônica",
+      "Help Desk",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -28042,8 +28042,8 @@
       "Linux",
       "Windows Server",
       "Windows",
-      "Montagem e Manutenção de PCs",
-      "Inglês"
+      "Inglês",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -28167,13 +28167,13 @@
       "SQL",
       "Spark",
       "Databricks",
-      "Estatística",
-      "Análise de Dados",
-      "Qualidade de Dados",
-      "Inteligência Artificial",
       "Machine Learning",
+      "Inteligência Artificial",
+      "Estatística",
       "AWS",
-      "Testes Automatizados"
+      "Testes Automatizados",
+      "Análise de Dados",
+      "Qualidade de Dados"
     ]
   },
   {
@@ -28245,9 +28245,9 @@
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-tecnologia-da-informa%C3%A7%C3%A3o-at-nsc-4443636047",
     "tecnologias": [
       "Excel",
+      "Inteligência Artificial",
       "Automação",
       "Análise de Dados",
-      "Inteligência Artificial",
       "Banco de Dados",
       "Lógica de Programação",
       "Engenharia de Software"
@@ -28282,10 +28282,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/suporte-analista-de-suporte-t%C3%A9cnico-j%C3%BAnior-crm-at-totvs-4443630673",
     "tecnologias": [
-      "Banco de Dados",
-      "Lógica de Programação",
       "TOTVS",
-      "CRM"
+      "CRM",
+      "Banco de Dados",
+      "Lógica de Programação"
     ]
   },
   {
@@ -28305,9 +28305,9 @@
       "Active Directory",
       "Windows",
       "Service Desk",
-      "Help Desk",
       "Office 365",
       "Hardware",
+      "Help Desk",
       "Manutenção Preventiva"
     ]
   },
@@ -28389,9 +28389,9 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2827762/analista-de-ti-jr",
     "tecnologias": [
+      "LGPD",
       "LLMs & IA Generativa",
-      "Agentes de IA & RAG",
-      "LGPD"
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -28548,7 +28548,6 @@
       "Spring",
       "Quarkus",
       "Bootstrap",
-      "Banco de Dados",
       "MySQL",
       "Oracle",
       "AWS",
@@ -28559,13 +28558,14 @@
       "Jenkins",
       "Git",
       "CI/CD",
-      "ArgoCD",
       "Grafana",
       "Prometheus",
       "API REST",
       "Scrum",
       "Metodologias Ágeis",
-      "Microserviços"
+      "Microserviços",
+      "Banco de Dados",
+      "ArgoCD"
     ]
   },
   {
@@ -28605,10 +28605,10 @@
       "Power BI",
       "Excel",
       "ETL",
-      "Automação",
       "Estatística",
-      "Banco de Dados",
-      "Modelagem de Dados"
+      "Modelagem de Dados",
+      "Automação",
+      "Banco de Dados"
     ]
   },
   {
@@ -28928,8 +28928,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-suporte-n%C3%ADvel-1-at-jobbol-4446107823",
     "tecnologias": [
-      "Help Desk",
-      "ERP"
+      "ERP",
+      "Help Desk"
     ]
   },
   {
@@ -28949,14 +28949,14 @@
       "Python",
       "Pandas",
       "NumPy",
-      "Inteligência Artificial",
-      "Machine Learning",
       "PyTorch",
       "TensorFlow",
       "Keras",
+      "Machine Learning",
+      "Inteligência Artificial",
       "Git",
-      "Lógica de Programação",
-      "Inglês"
+      "Inglês",
+      "Lógica de Programação"
     ]
   },
   {
@@ -29245,8 +29245,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-help-desk-j%C3%BAnior-a-at-antlia-4447792547",
     "tecnologias": [
-      "Help Desk",
-      "IAM"
+      "IAM",
+      "Help Desk"
     ]
   },
   {
@@ -29268,7 +29268,6 @@
       "TypeScript",
       "PHP",
       "SQL",
-      "Banco de Dados",
       "Docker",
       "Git",
       "Linux",
@@ -29276,6 +29275,7 @@
       "Redes de Computadores",
       "VMware",
       "API REST",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -29331,9 +29331,8 @@
       "FastAPI",
       "Pandas",
       "Airflow",
-      "Inteligência Artificial",
       "Machine Learning",
-      "Banco de Dados",
+      "Inteligência Artificial",
       "PostgreSQL",
       "Docker",
       "Kubernetes",
@@ -29342,7 +29341,8 @@
       "Pytest",
       "Design Patterns",
       "Modelagem de Dados",
-      "Inglês"
+      "Inglês",
+      "Banco de Dados"
     ]
   },
   {
@@ -29422,8 +29422,8 @@
       "Excel",
       "Windows",
       "Redes de Computadores",
-      "Suporte N1/N2",
       "Hardware",
+      "Suporte N1/N2",
       "Montagem e Manutenção de PCs",
       "Manutenção Preventiva",
       "Engenharia de Software"
@@ -29451,11 +29451,11 @@
       "Testes Automatizados",
       "Active Directory",
       "Windows",
-      "Cibersegurança",
-      "Governança e Riscos (GRC)",
       "OWASP",
       "Pentest",
-      "SIEM/SOC"
+      "SIEM/SOC",
+      "Cibersegurança",
+      "Governança e Riscos (GRC)"
     ]
   },
   {
@@ -29686,9 +29686,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/suporte-analista-de-suporte-t%C3%A9cnico-j%C3%BAnior-ti-at-totvs-4441853179",
     "tecnologias": [
+      "TOTVS",
       "Banco de Dados",
-      "Lógica de Programação",
-      "TOTVS"
+      "Lógica de Programação"
     ]
   },
   {
@@ -29705,9 +29705,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-t%C3%A9cnico-j%C3%BAnior-ti-at-totvs-4441840005",
     "tecnologias": [
+      "TOTVS",
       "Banco de Dados",
-      "Lógica de Programação",
-      "TOTVS"
+      "Lógica de Programação"
     ]
   },
   {
@@ -29724,8 +29724,8 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2827355/analista-de-segunraca-de-ti-junior",
     "tecnologias": [
-      "Cibersegurança",
-      "Pentest"
+      "Pentest",
+      "Cibersegurança"
     ]
   },
   {
@@ -29744,8 +29744,8 @@
     "tecnologias": [
       "Python",
       "HTML",
-      "Banco de Dados",
       "Git",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -29827,7 +29827,6 @@
       "Node.js",
       "NestJS",
       "Kafka",
-      "Banco de Dados",
       "PostgreSQL",
       "MySQL",
       "AWS",
@@ -29836,11 +29835,12 @@
       "Docker",
       "Git",
       "Datadog",
-      "Temporal.io",
       "Testes Automatizados",
       "API REST",
       "Metodologias Ágeis",
-      "Microserviços"
+      "Microserviços",
+      "Banco de Dados",
+      "Temporal.io"
     ]
   },
   {
@@ -29880,9 +29880,9 @@
       "Node.js",
       "GraphQL",
       "Inteligência Artificial",
-      "Banco de Dados",
       "LGPD",
-      "API REST"
+      "API REST",
+      "Banco de Dados"
     ]
   },
   {
@@ -29906,12 +29906,12 @@
       "HTML",
       "CSS",
       "React",
-      "Automação",
       "Git",
       "API REST",
       "Figma",
       "UX/UI",
-      "CRM"
+      "CRM",
+      "Automação"
     ]
   },
   {
@@ -29930,9 +29930,9 @@
     "tecnologias": [
       "Python",
       "SQL",
+      "Inglês",
       "Análise de Dados",
-      "Lógica de Programação",
-      "Inglês"
+      "Lógica de Programação"
     ]
   },
   {
@@ -29968,7 +29968,6 @@
     "tecnologias": [
       "C#",
       "SQL",
-      "Banco de Dados",
       "PostgreSQL",
       "SQL Server",
       "Oracle",
@@ -29977,6 +29976,7 @@
       "Metodologias Ágeis",
       "Clean Code",
       "Algoritmos",
+      "Banco de Dados",
       "Lógica de Programação"
     ]
   },
@@ -30031,8 +30031,8 @@
     "tecnologias": [
       "Inteligência Artificial",
       "Service Desk",
-      "Help Desk",
-      "ERP"
+      "ERP",
+      "Help Desk"
     ]
   },
   {
@@ -30379,8 +30379,8 @@
       "Testes Automatizados",
       "Testes Manuais",
       "Testes Funcionais",
-      "Qualidade de Software",
       "Metodologias Ágeis",
+      "Qualidade de Software",
       "Lógica de Programação",
       "Engenharia de Software"
     ]
@@ -30400,11 +30400,11 @@
     "url": "https://br.linkedin.com/jobs/view/junior-pen-tester-35252-at-bosch-brasil-4443897939",
     "tecnologias": [
       "Python",
-      "Cibersegurança",
       "OWASP",
       "Pentest",
       "Inglês",
-      "IoT"
+      "IoT",
+      "Cibersegurança"
     ]
   },
   {
@@ -30438,10 +30438,10 @@
     "tecnologias": [
       "Python",
       "SQL",
-      "Automação",
-      "Banco de Dados",
       "Oracle",
-      "Manutenção Preventiva"
+      "Manutenção Preventiva",
+      "Automação",
+      "Banco de Dados"
     ]
   },
   {
@@ -30607,10 +30607,10 @@
     "url": "https://gruposysmap.gupy.io/job/eyJqb2JJZCI6MTE3NDg2MDksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
       "Git",
       "Estrutura de Dados",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
       "Lógica de Programação"
     ]
   },
@@ -30770,9 +30770,9 @@
       "Windows",
       "ITIL",
       "Service Desk",
-      "Suporte N1/N2",
       "Office 365",
-      "Hardware"
+      "Hardware",
+      "Suporte N1/N2"
     ]
   },
   {
@@ -30810,12 +30810,12 @@
       "Active Directory",
       "Windows",
       "Redes de Computadores",
-      "Help Desk",
       "GLPI",
       "Office 365",
       "Hardware",
       "TOTVS",
-      "Jira"
+      "Jira",
+      "Help Desk"
     ]
   },
   {
@@ -30839,12 +30839,12 @@
       "Next.js",
       "Node.js",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
-      "Banco de Dados",
       "Supabase",
       "Docker",
-      "Git"
+      "Git",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Banco de Dados"
     ]
   },
   {
@@ -30956,8 +30956,8 @@
       "Windows",
       "ITIL",
       "Hardware",
-      "Montagem e Manutenção de PCs",
-      "Inglês"
+      "Inglês",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -31021,13 +31021,13 @@
     "tecnologias": [
       "Python",
       "JavaScript",
-      "Automação",
       "Inteligência Artificial",
+      "Inglês",
       "Copilots & Assistentes de IA",
       "LLMs & IA Generativa",
       "Agentes de IA & RAG",
-      "Engenharia de Software",
-      "Inglês"
+      "Automação",
+      "Engenharia de Software"
     ]
   },
   {
@@ -31121,9 +31121,9 @@
     "tecnologias": [
       "Excel",
       "Testes Automatizados",
+      "Inglês",
       "Qualidade de Software",
-      "Engenharia de Software",
-      "Inglês"
+      "Engenharia de Software"
     ]
   },
   {
@@ -31142,14 +31142,14 @@
     "tecnologias": [
       "Java",
       "Kafka",
-      "Banco de Dados",
       "AWS",
       "Docker",
       "Git",
       "Linux",
       "RabbitMQ",
       "AWS SQS",
-      "API REST"
+      "API REST",
+      "Banco de Dados"
     ]
   },
   {
@@ -31168,17 +31168,17 @@
     "tecnologias": [
       "SQL",
       "Excel",
-      "Automação",
-      "Análise de Dados",
-      "Banco de Dados",
       "Git",
       "OWASP",
       "API REST",
       "POO",
-      "Lógica de Programação",
       "ERP",
       "SAP",
-      "IoT"
+      "IoT",
+      "Automação",
+      "Análise de Dados",
+      "Banco de Dados",
+      "Lógica de Programação"
     ]
   },
   {
@@ -31217,15 +31217,15 @@
       "Angular",
       "Spring",
       "Hibernate",
-      "Banco de Dados",
       "Docker",
       "Git",
       "JUnit",
       "API REST",
       "Metodologias Ágeis",
       "Microserviços",
-      "Engenharia de Software",
-      "Jira"
+      "Jira",
+      "Banco de Dados",
+      "Engenharia de Software"
     ]
   },
   {
@@ -31244,13 +31244,13 @@
     "tecnologias": [
       "Python",
       "SQL",
-      "Estatística",
-      "Análise de Dados",
-      "Inteligência Artificial",
-      "LLMs & IA Generativa",
       "Machine Learning",
-      "Banco de Dados",
-      "Metodologias Ágeis"
+      "Inteligência Artificial",
+      "Estatística",
+      "Metodologias Ágeis",
+      "LLMs & IA Generativa",
+      "Análise de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -31269,13 +31269,13 @@
     "tecnologias": [
       "Python",
       "SQL",
-      "Estatística",
-      "Análise de Dados",
-      "Inteligência Artificial",
-      "LLMs & IA Generativa",
       "Machine Learning",
-      "Banco de Dados",
-      "Metodologias Ágeis"
+      "Inteligência Artificial",
+      "Estatística",
+      "Metodologias Ágeis",
+      "LLMs & IA Generativa",
+      "Análise de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -31294,9 +31294,9 @@
     "tecnologias": [
       "Windows",
       "Redes de Computadores",
-      "Help Desk",
       "GLPI",
       "Hardware",
+      "Help Desk",
       "Manutenção Preventiva"
     ]
   },
@@ -31361,9 +31361,9 @@
     "tecnologias": [
       "SQL",
       "Excel",
-      "Análise de Dados",
       "API REST",
-      "ERP"
+      "ERP",
+      "Análise de Dados"
     ]
   },
   {
@@ -31399,7 +31399,6 @@
       "SQL",
       "Spring",
       "Kafka",
-      "Banco de Dados",
       "AWS",
       "Azure",
       "GCP",
@@ -31414,7 +31413,8 @@
       "Scrum",
       "Metodologias Ágeis",
       "Microserviços",
-      "POO"
+      "POO",
+      "Banco de Dados"
     ]
   },
   {
@@ -31486,9 +31486,9 @@
       "Python",
       "SQL",
       "Excel",
-      "Análise de Dados",
+      "Machine Learning",
       "Inteligência Artificial",
-      "Machine Learning"
+      "Análise de Dados"
     ]
   },
   {
@@ -31619,10 +31619,10 @@
       "Java",
       "SQL",
       "Spring",
-      "Banco de Dados",
       "Git",
       "API REST",
       "Microserviços",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -31642,8 +31642,8 @@
     "tecnologias": [
       "Azure",
       "Active Directory",
-      "Governança e Riscos (GRC)",
-      "SAP"
+      "SAP",
+      "Governança e Riscos (GRC)"
     ]
   },
   {
@@ -31693,8 +31693,8 @@
     "url": "https://br.linkedin.com/jobs/view/auxiliar-de-ti-at-op%C3%A7%C3%A3o-agro-4453158427",
     "tecnologias": [
       "Hardware",
-      "Montagem e Manutenção de PCs",
-      "ERP"
+      "ERP",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -31746,8 +31746,8 @@
       "Windows",
       "ITIL",
       "Hardware",
-      "Montagem e Manutenção de PCs",
-      "Inglês"
+      "Inglês",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -31767,8 +31767,8 @@
       "Windows",
       "ITIL",
       "Hardware",
-      "Montagem e Manutenção de PCs",
-      "Inglês"
+      "Inglês",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -31788,8 +31788,8 @@
       "Windows",
       "ITIL",
       "Hardware",
-      "Montagem e Manutenção de PCs",
-      "Inglês"
+      "Inglês",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -31855,12 +31855,12 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-j%C3%BAnior-banco-de-talentos-at-mk-solutions-4441331367",
     "tecnologias": [
-      "Banco de Dados",
       "PostgreSQL",
       "MySQL",
       "Zendesk",
       "ERP",
-      "Jira"
+      "Jira",
+      "Banco de Dados"
     ]
   },
   {
@@ -31907,8 +31907,8 @@
     "fonte": "gupy",
     "url": "https://sicredi.gupy.io/job/eyJqb2JJZCI6MTE2NjYxNzMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Banco de Dados",
-      "Hardware"
+      "Hardware",
+      "Banco de Dados"
     ]
   },
   {
@@ -31946,15 +31946,15 @@
       "SQL",
       "RPA",
       "Inteligência Artificial",
-      "LLMs & IA Generativa",
-      "Banco de Dados",
       "GCP",
       "Git",
       "Postman",
-      "Manutenção Preventiva",
       "API REST",
       "Scrum",
-      "Metodologias Ágeis"
+      "Metodologias Ágeis",
+      "LLMs & IA Generativa",
+      "Manutenção Preventiva",
+      "Banco de Dados"
     ]
   },
   {
@@ -32021,7 +32021,6 @@
       "Ruby",
       "SQL",
       "Ruby on Rails",
-      "Banco de Dados",
       "PostgreSQL",
       "MySQL",
       "Git",
@@ -32029,6 +32028,7 @@
       "API REST",
       "POO",
       "Estrutura de Dados",
+      "Banco de Dados",
       "Lógica de Programação"
     ]
   },
@@ -32064,8 +32064,8 @@
       "Windows",
       "ITIL",
       "Hardware",
-      "Montagem e Manutenção de PCs",
-      "Inglês"
+      "Inglês",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -32088,10 +32088,10 @@
       "CSS",
       "Angular",
       "Spring",
-      "Banco de Dados",
       "MySQL",
       "Docker",
       "Git",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -32144,7 +32144,6 @@
       "React",
       "Next.js",
       "NestJS",
-      "Banco de Dados",
       "PostgreSQL",
       "Redis",
       "AWS",
@@ -32153,6 +32152,7 @@
       "Serverless",
       "Testes Automatizados",
       "Clean Code",
+      "Banco de Dados",
       "Lógica de Programação"
     ]
   },
@@ -32192,8 +32192,8 @@
       ".NET",
       "SQL Server",
       "Git",
-      "Lógica de Programação",
-      "Inglês"
+      "Inglês",
+      "Lógica de Programação"
     ]
   },
   {
@@ -32249,8 +32249,6 @@
       "Spring",
       "Spark",
       "Inteligência Artificial",
-      "LLMs & IA Generativa",
-      "Banco de Dados",
       "PostgreSQL",
       "MongoDB",
       "Docker",
@@ -32260,7 +32258,9 @@
       "API REST",
       "Microserviços",
       "POO",
-      "Estrutura de Dados"
+      "Estrutura de Dados",
+      "LLMs & IA Generativa",
+      "Banco de Dados"
     ]
   },
   {
@@ -32656,7 +32656,6 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-testes-automatizados-j%C3%BAnior-at-wk-4440297978",
     "tecnologias": [
       "C#",
-      "Automação",
       "Azure",
       "Git",
       "Cypress",
@@ -32664,7 +32663,8 @@
       "Testes Manuais",
       "Testes Funcionais",
       "Metodologias Ágeis",
-      "Inglês"
+      "Inglês",
+      "Automação"
     ]
   },
   {
@@ -32789,12 +32789,12 @@
     "tecnologias": [
       "PHP",
       "Inteligência Artificial",
-      "Banco de Dados",
       "MySQL",
       "Docker",
       "Git",
       "CI/CD",
       "API REST",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -32816,12 +32816,12 @@
       "Angular",
       "Android",
       "Flutter",
-      "Banco de Dados",
       "PostgreSQL",
       "Oracle",
       "RabbitMQ",
       "Windows",
-      "Microserviços"
+      "Microserviços",
+      "Banco de Dados"
     ]
   },
   {
@@ -33061,13 +33061,13 @@
       "CSS",
       "Node.js",
       "ETL",
+      "Git",
+      "Modelagem de Dados",
+      "Inglês",
       "Análise de Dados",
       "Banco de Dados",
-      "Git",
       "Lógica de Programação",
-      "Engenharia de Software",
-      "Modelagem de Dados",
-      "Inglês"
+      "Engenharia de Software"
     ]
   },
   {
@@ -33161,8 +33161,6 @@
       "JavaScript",
       "TypeScript",
       "SQL",
-      "Automação",
-      "Banco de Dados",
       "SQL Server",
       "AWS",
       "Azure",
@@ -33181,7 +33179,9 @@
       "API REST",
       "OpenAPI/Swagger",
       "Scrum",
-      "Metodologias Ágeis"
+      "Metodologias Ágeis",
+      "Automação",
+      "Banco de Dados"
     ]
   },
   {
@@ -33240,14 +33240,14 @@
       "Vue.js",
       "Node.js",
       "jQuery",
-      "Banco de Dados",
       "Git",
       "API REST",
       "Scrum",
       "Metodologias Ágeis",
-      "Engenharia de Software",
       "Inglês",
-      "TOTVS"
+      "TOTVS",
+      "Banco de Dados",
+      "Engenharia de Software"
     ]
   },
   {
@@ -33396,9 +33396,9 @@
     "fonte": "gupy",
     "url": "https://nuclea.gupy.io/job/eyJqb2JJZCI6MTE2MzUzNzcsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Inteligência Artificial",
       "Estatística",
-      "Análise de Dados",
-      "Inteligência Artificial"
+      "Análise de Dados"
     ]
   },
   {
@@ -33505,15 +33505,15 @@
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-da-informa%C3%A7%C3%A3o-at-delfos-energy-4440364546",
     "tecnologias": [
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
       "Linux",
       "Windows",
       "Redes de Computadores",
       "VPN",
-      "Help Desk",
       "Hardware",
-      "Inglês"
+      "Inglês",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Help Desk"
     ]
   },
   {
@@ -33531,9 +33531,9 @@
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-ti-at-pratika-facilities-4439916620",
     "tecnologias": [
       "SQL",
+      "ERP",
       "Banco de Dados",
-      "Lógica de Programação",
-      "ERP"
+      "Lógica de Programação"
     ]
   },
   {
@@ -33550,9 +33550,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-de-ti-at-maxsoy-alimentos-ltda-4440373020",
     "tecnologias": [
+      "Montagem e Manutenção de PCs",
       "Automação",
       "Banco de Dados",
-      "Montagem e Manutenção de PCs",
       "Lógica de Programação"
     ]
   },
@@ -33590,8 +33590,8 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-ti-j%C3%BAnior-at-jobbol-4440561651",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
-      "ERP"
+      "ERP",
+      "Banco de Dados"
     ]
   },
   {
@@ -33626,7 +33626,6 @@
       "Java",
       "SQL",
       "Kafka",
-      "Banco de Dados",
       "Elasticsearch",
       "AWS",
       "Azure",
@@ -33639,7 +33638,8 @@
       "API REST",
       "Metodologias Ágeis",
       "Microserviços",
-      "Jira"
+      "Jira",
+      "Banco de Dados"
     ]
   },
   {
@@ -33659,18 +33659,18 @@
       "SQL",
       "Power BI",
       "BI",
-      "Análise de Dados",
-      "Banco de Dados",
       "SQL Server",
       "Service Desk",
-      "Help Desk",
       "GLPI",
       "Scrum",
       "Metodologias Ágeis",
-      "Engenharia de Software",
       "ERP",
       "SAP",
-      "Jira"
+      "Jira",
+      "Help Desk",
+      "Análise de Dados",
+      "Banco de Dados",
+      "Engenharia de Software"
     ]
   },
   {
@@ -33704,9 +33704,9 @@
     "tecnologias": [
       "Excel",
       "Inteligência Artificial",
-      "LLMs & IA Generativa",
       "Inglês",
-      "CRM"
+      "CRM",
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -33762,8 +33762,8 @@
     "tecnologias": [
       "Linux",
       "Windows",
-      "Help Desk",
-      "Metodologias Ágeis"
+      "Metodologias Ágeis",
+      "Help Desk"
     ]
   },
   {
@@ -33782,11 +33782,11 @@
     "tecnologias": [
       "SQL",
       "Excel",
-      "Análise de Dados",
-      "LLMs & IA Generativa",
       "ITIL",
       "Scrum",
-      "Metodologias Ágeis"
+      "Metodologias Ágeis",
+      "LLMs & IA Generativa",
+      "Análise de Dados"
     ]
   },
   {
@@ -33803,9 +33803,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n2-j%C3%BAnior-crm-espanhol-fluente-at-plusoft-4450008387",
     "tecnologias": [
+      "CRM",
       "Suporte N1/N2",
-      "Espanhol",
-      "CRM"
+      "Espanhol"
     ]
   },
   {
@@ -33823,9 +33823,9 @@
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-engenharia-teste-e-programa%C3%A7%C3%A3o-de-produto-at-abrh-est%C3%A1gio-4439448224",
     "tecnologias": [
       "SQL",
-      "Análise de Dados",
       "Hardware",
-      "Eletrônica"
+      "Eletrônica",
+      "Análise de Dados"
     ]
   },
   {
@@ -33874,13 +33874,13 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-sistemas-linux-jr-at-globalweb-corp-4437297688",
     "tecnologias": [
-      "Automação",
       "MySQL",
       "Docker",
       "Kubernetes",
       "Linux",
       "Nginx",
-      "VMware"
+      "VMware",
+      "Automação"
     ]
   },
   {
@@ -33905,8 +33905,8 @@
       "POO",
       "Clean Code",
       "Inglês",
-      "Espanhol",
-      "UX/UI"
+      "UX/UI",
+      "Espanhol"
     ]
   },
   {
@@ -34017,8 +34017,8 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2825182/estagio-ict-ti",
     "tecnologias": [
-      "Banco de Dados",
-      "ERP"
+      "ERP",
+      "Banco de Dados"
     ]
   },
   {
@@ -34066,9 +34066,9 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-t%C3%A9cnico-erp-j%C3%BAnior-pleno-at-areco-4438386614",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "SQL Server",
-      "ERP"
+      "ERP",
+      "Banco de Dados"
     ]
   },
   {
@@ -34086,8 +34086,8 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-t%C3%A9cnico-j%C3%BAnior-at-associated-nerd-global-4438384687",
     "tecnologias": [
       "Redes de Computadores",
-      "Help Desk",
-      "Hardware"
+      "Hardware",
+      "Help Desk"
     ]
   },
   {
@@ -34120,8 +34120,8 @@
     "url": "https://br.linkedin.com/jobs/view/auxiliar-de-tecnologia-da-informa%C3%A7%C3%A3o-at-op%C3%A7%C3%A3o-agro-4439677676",
     "tecnologias": [
       "Hardware",
-      "Montagem e Manutenção de PCs",
-      "ERP"
+      "ERP",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -34157,11 +34157,11 @@
     "url": "https://www.vagas.com.br/vagas/v2824894/estagio-em-ciencia-de-dados-e-gen-ai-nucleo-de-ia-hstern",
     "tecnologias": [
       "Python",
-      "Análise de Dados",
+      "Machine Learning",
       "Inteligência Artificial",
       "Copilots & Assistentes de IA",
       "LLMs & IA Generativa",
-      "Machine Learning"
+      "Análise de Dados"
     ]
   },
   {
@@ -34364,10 +34364,10 @@
     "url": "https://br.linkedin.com/jobs/view/assistente-de-sistemas-matriz-at-grupo-bamaq-4435919076",
     "tecnologias": [
       "JavaScript",
-      "Banco de Dados",
       "Testes Funcionais",
       "CRM",
-      "Salesforce"
+      "Salesforce",
+      "Banco de Dados"
     ]
   },
   {
@@ -34454,9 +34454,9 @@
     "tecnologias": [
       "Java",
       "SQL",
-      "Análise de Dados",
       "SQL Server",
-      "ERP"
+      "ERP",
+      "Análise de Dados"
     ]
   },
   {
@@ -34534,9 +34534,9 @@
       "HTML",
       "CSS",
       ".NET",
-      "Banco de Dados",
       "SQL Server",
-      "Git"
+      "Git",
+      "Banco de Dados"
     ]
   },
   {
@@ -34647,10 +34647,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/suporte-t%C3%A9cnico-j%C3%BAnior-escala-5x2-folgas-durante-a-semana-at-server-softwares-4438224304",
     "tecnologias": [
-      "Banco de Dados",
       "Linux",
       "Windows",
-      "ERP"
+      "ERP",
+      "Banco de Dados"
     ]
   },
   {
@@ -34722,13 +34722,13 @@
       "HTML",
       "Power BI",
       "Inteligência Artificial",
-      "Banco de Dados",
       "Git",
       "Estrutura de Dados",
       "Algoritmos",
+      "Inglês",
+      "Banco de Dados",
       "Lógica de Programação",
-      "Engenharia de Software",
-      "Inglês"
+      "Engenharia de Software"
     ]
   },
   {
@@ -34751,9 +34751,6 @@
       "Angular",
       "Vue.js",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
-      "Banco de Dados",
       "MySQL",
       "AWS",
       "Docker",
@@ -34764,9 +34761,12 @@
       "API REST",
       "Metodologias Ágeis",
       "Estrutura de Dados",
-      "Engenharia de Software",
       "UX/UI",
-      "Jira"
+      "Jira",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Banco de Dados",
+      "Engenharia de Software"
     ]
   },
   {
@@ -34838,14 +34838,14 @@
       "Python",
       "JavaScript",
       "TypeScript",
-      "Inteligência Artificial",
-      "LLMs & IA Generativa",
       "Machine Learning",
+      "Inteligência Artificial",
       "Git",
       "Metodologias Ágeis",
       "Estrutura de Dados",
-      "Lógica de Programação",
-      "Inglês"
+      "Inglês",
+      "LLMs & IA Generativa",
+      "Lógica de Programação"
     ]
   },
   {
@@ -34877,10 +34877,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-na-%C3%A1rea-de-ci%C3%AAncia-da-computa%C3%A7%C3%A3o-at-jobbol-4437745783",
     "tecnologias": [
-      "Automação",
       "Inteligência Artificial",
-      "Banco de Dados",
-      "Redes de Computadores"
+      "Redes de Computadores",
+      "Automação",
+      "Banco de Dados"
     ]
   },
   {
@@ -34899,8 +34899,8 @@
     "tecnologias": [
       "Linux",
       "Windows",
-      "Help Desk",
-      "Metodologias Ágeis"
+      "Metodologias Ágeis",
+      "Help Desk"
     ]
   },
   {
@@ -34959,14 +34959,14 @@
       "Node.js",
       ".NET",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
       "Azure",
       "Git",
       "Testes Automatizados",
       "API REST",
       "Scrum",
       "Metodologias Ágeis",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
       "Lógica de Programação",
       "Engenharia de Software"
     ]
@@ -35026,7 +35026,6 @@
       "SQL",
       "Node.js",
       "NestJS",
-      "Banco de Dados",
       "PostgreSQL",
       "MongoDB",
       "GCP",
@@ -35037,7 +35036,8 @@
       "API REST",
       "Clean Code",
       "Estrutura de Dados",
-      "Inglês"
+      "Inglês",
+      "Banco de Dados"
     ]
   },
   {
@@ -35156,11 +35156,11 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-implanta%C3%A7%C3%A3o-j%C3%BAnior-at-getconnect-gest%C3%A3o-em-sa%C3%BAde-digital-4436921097",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "ITIL",
       "LGPD",
       "Scrum",
-      "Metodologias Ágeis"
+      "Metodologias Ágeis",
+      "Banco de Dados"
     ]
   },
   {
@@ -35384,13 +35384,13 @@
     "tecnologias": [
       "SQL",
       "Power BI",
-      "Análise de Dados",
       "Inteligência Artificial",
-      "Agentes de IA & RAG",
       "Oracle",
       "Testes de Regressão",
       "Inglês",
-      "ERP"
+      "ERP",
+      "Agentes de IA & RAG",
+      "Análise de Dados"
     ]
   },
   {
@@ -35429,8 +35429,8 @@
       "Windows",
       "Redes de Computadores",
       "Hardware",
-      "Montagem e Manutenção de PCs",
-      "LGPD"
+      "LGPD",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -35576,13 +35576,13 @@
     "url": "https://talento360.gupy.io/job/eyJqb2JJZCI6MTE1NzkwMjMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
       "Excel",
-      "Automação",
-      "Análise de Dados",
       "Inteligência Artificial",
-      "Banco de Dados",
       "Service Desk",
       "Hardware",
       "Montagem e Manutenção de PCs",
+      "Automação",
+      "Análise de Dados",
+      "Banco de Dados",
       "Lógica de Programação"
     ]
   },
@@ -35698,8 +35698,6 @@
       "Spark",
       "Kafka",
       "Hadoop",
-      "Análise de Dados",
-      "Banco de Dados",
       "PostgreSQL",
       "MySQL",
       "Docker",
@@ -35709,8 +35707,10 @@
       "Scrum",
       "Metodologias Ágeis",
       "Estrutura de Dados",
-      "Lógica de Programação",
-      "Inglês"
+      "Inglês",
+      "Análise de Dados",
+      "Banco de Dados",
+      "Lógica de Programação"
     ]
   },
   {
@@ -35736,7 +35736,6 @@
       "Django",
       "Flask",
       "FastAPI",
-      "Banco de Dados",
       "AWS",
       "Docker",
       "Git",
@@ -35745,6 +35744,7 @@
       "API REST",
       "Microserviços",
       "Clean Code",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -35833,12 +35833,12 @@
       "Spark",
       "ETL",
       "Estatística",
-      "Análise de Dados",
       "Git",
       "Linux",
       "Estrutura de Dados",
-      "Engenharia de Software",
-      "Inglês"
+      "Inglês",
+      "Análise de Dados",
+      "Engenharia de Software"
     ]
   },
   {
@@ -35856,8 +35856,8 @@
     "url": "https://br.linkedin.com/jobs/view/assistente-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-foco-em-secops-at-cooperativa-central-ailos-4431978546",
     "tecnologias": [
       "ITIL",
-      "Cibersegurança",
-      "LGPD"
+      "LGPD",
+      "Cibersegurança"
     ]
   },
   {
@@ -35940,13 +35940,13 @@
       "Node.js",
       ".NET",
       "Bootstrap",
-      "Banco de Dados",
       "MySQL",
       "SQL Server",
       "Oracle",
       "AWS",
       "Hardware",
       "Design Patterns",
+      "Banco de Dados",
       "Lógica de Programação"
     ]
   },
@@ -36067,10 +36067,7 @@
       "Shell/Bash",
       ".NET",
       "RPA",
-      "Automação",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
       "SQL Server",
       "Oracle",
       "Git",
@@ -36082,6 +36079,9 @@
       "POO",
       "SOLID",
       "Design Patterns",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Automação",
       "Engenharia de Software"
     ]
   },
@@ -36226,9 +36226,9 @@
       "GLPI",
       "Zabbix",
       "Office 365",
-      "Montagem e Manutenção de PCs",
       "LGPD",
-      "Jira"
+      "Jira",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -36343,8 +36343,8 @@
       "AWS",
       "Azure",
       "Office 365",
-      "Governança e Riscos (GRC)",
-      "LGPD"
+      "LGPD",
+      "Governança e Riscos (GRC)"
     ]
   },
   {
@@ -36371,11 +36371,11 @@
       "Firewall",
       "Service Desk",
       "Office 365",
-      "Governança e Riscos (GRC)",
       "LGPD",
       "Gestão de Vulnerabilidades",
       "IAM",
-      "SIEM/SOC"
+      "SIEM/SOC",
+      "Governança e Riscos (GRC)"
     ]
   },
   {
@@ -36569,10 +36569,10 @@
     "tecnologias": [
       "SQL",
       "PL/SQL",
-      "Banco de Dados",
       "ERP",
       "SAP",
-      "TOTVS"
+      "TOTVS",
+      "Banco de Dados"
     ]
   },
   {
@@ -36593,8 +36593,6 @@
       "HTML",
       "CSS",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "Banco de Dados",
       "Docker",
       "Git",
       "VMware",
@@ -36602,8 +36600,10 @@
       "Scrum",
       "Metodologias Ágeis",
       "Clean Code",
-      "Engenharia de Software",
-      "Inglês"
+      "Inglês",
+      "Copilots & Assistentes de IA",
+      "Banco de Dados",
+      "Engenharia de Software"
     ]
   },
   {
@@ -36673,7 +36673,6 @@
       "HTML",
       "CSS",
       "Laravel",
-      "Banco de Dados",
       "PostgreSQL",
       "MySQL",
       "AWS",
@@ -36685,6 +36684,7 @@
       "POO",
       "SOLID",
       "Clean Code",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -36792,17 +36792,17 @@
       "JavaScript",
       "C#",
       "SQL",
-      "Inteligência Artificial",
-      "LLMs & IA Generativa",
-      "Agentes de IA & RAG",
       "Machine Learning",
-      "Banco de Dados",
+      "Inteligência Artificial",
       "Git",
-      "Cibersegurança",
       "OAuth/JWT",
       "SIEM/SOC",
       "Scrum",
       "Metodologias Ágeis",
+      "LLMs & IA Generativa",
+      "Agentes de IA & RAG",
+      "Cibersegurança",
+      "Banco de Dados",
       "Lógica de Programação",
       "Engenharia de Software"
     ]
@@ -36908,14 +36908,14 @@
       "Python",
       "Power BI",
       "Excel",
-      "Automação",
-      "Análise de Dados",
       "Inteligência Artificial",
-      "Cibersegurança",
-      "Engenharia de Software",
       "Inglês",
       "SAP",
-      "Automação Industrial"
+      "Automação Industrial",
+      "Cibersegurança",
+      "Automação",
+      "Análise de Dados",
+      "Engenharia de Software"
     ]
   },
   {
@@ -36951,10 +36951,10 @@
     "tecnologias": [
       "Windows",
       "Hardware",
-      "Manutenção Preventiva",
       "Inglês",
       "ERP",
-      "TOTVS"
+      "TOTVS",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -37061,13 +37061,13 @@
       "Node.js",
       "NestJS",
       "Inteligência Artificial",
+      "Bancos Vetoriais",
+      "API REST",
+      "Inglês",
       "Copilots & Assistentes de IA",
       "LLMs & IA Generativa",
       "Agentes de IA & RAG",
-      "Bancos Vetoriais",
-      "API REST",
-      "Engenharia de Software",
-      "Inglês"
+      "Engenharia de Software"
     ]
   },
   {
@@ -37115,8 +37115,8 @@
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-de-sdr-em-ciberseguran%C3%A7a-vendas-6h-dia-at-excelo-tech-4430841528",
     "tecnologias": [
       "Firewall",
-      "Cibersegurança",
-      "CRM"
+      "CRM",
+      "Cibersegurança"
     ]
   },
   {
@@ -37134,11 +37134,11 @@
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1giario-a-tecnologia-da-informa%C3%A7%C3%A3o-ti-indaiatuba-sp-at-vrental-4441337647",
     "tecnologias": [
       "ETL",
-      "Estatística",
-      "Análise de Dados",
-      "Inteligência Artificial",
-      "LLMs & IA Generativa",
       "Machine Learning",
+      "Inteligência Artificial",
+      "Estatística",
+      "LLMs & IA Generativa",
+      "Análise de Dados",
       "Banco de Dados"
     ]
   },
@@ -37156,8 +37156,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-ti-desenvolvimento-at-maxiforja-componentes-automotivos-ltda-4432025763",
     "tecnologias": [
-      "Banco de Dados",
-      "TOTVS"
+      "TOTVS",
+      "Banco de Dados"
     ]
   },
   {
@@ -37253,13 +37253,13 @@
     "tecnologias": [
       "Python",
       "Java",
-      "Automação",
+      "Machine Learning",
       "Inteligência Artificial",
+      "Inglês",
       "Copilots & Assistentes de IA",
       "LLMs & IA Generativa",
-      "Machine Learning",
-      "Engenharia de Software",
-      "Inglês"
+      "Automação",
+      "Engenharia de Software"
     ]
   },
   {
@@ -37292,9 +37292,9 @@
     "url": "https://viadeacesso.gupy.io/job/eyJqb2JJZCI6MTE1MTc5MjYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
       "Redes de Computadores",
-      "Governança e Riscos (GRC)",
       "LGPD",
-      "Inglês"
+      "Inglês",
+      "Governança e Riscos (GRC)"
     ]
   },
   {
@@ -37331,8 +37331,8 @@
       "Firewall",
       "VoIP",
       "Inglês",
-      "Espanhol",
-      "CRM"
+      "CRM",
+      "Espanhol"
     ]
   },
   {
@@ -37376,9 +37376,6 @@
       "Databricks",
       "Snowflake",
       "Estatística",
-      "Análise de Dados",
-      "Qualidade de Dados",
-      "Banco de Dados",
       "PostgreSQL",
       "MySQL",
       "MongoDB",
@@ -37386,8 +37383,11 @@
       "Git",
       "Linux",
       "LGPD",
-      "Lógica de Programação",
-      "UX/UI"
+      "UX/UI",
+      "Análise de Dados",
+      "Qualidade de Dados",
+      "Banco de Dados",
+      "Lógica de Programação"
     ]
   },
   {
@@ -37409,8 +37409,8 @@
       "HTML",
       "CSS",
       "Angular",
-      "Banco de Dados",
-      "Inglês"
+      "Inglês",
+      "Banco de Dados"
     ]
   },
   {
@@ -37644,17 +37644,17 @@
       "Java",
       "C#",
       "SQL",
-      "Inteligência Artificial",
       "Machine Learning",
-      "Banco de Dados",
+      "Inteligência Artificial",
       "PostgreSQL",
       "MySQL",
       "Git",
       "POO",
       "Estrutura de Dados",
+      "Inglês",
+      "Banco de Dados",
       "Lógica de Programação",
-      "Engenharia de Software",
-      "Inglês"
+      "Engenharia de Software"
     ]
   },
   {
@@ -37721,9 +37721,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-help-desk-at-inetvip-internet-fibra-%C3%B3ptica-4427677186",
     "tecnologias": [
-      "Banco de Dados",
+      "Hardware",
       "Help Desk",
-      "Hardware"
+      "Banco de Dados"
     ]
   },
   {
@@ -37760,10 +37760,10 @@
       "PHP",
       "React",
       "Node.js",
-      "Banco de Dados",
       "Git",
       "CI/CD",
       "Estrutura de Dados",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -37786,10 +37786,10 @@
       "JavaScript",
       "Go",
       "Node.js",
-      "Banco de Dados",
       "Testes Automatizados",
       "Estrutura de Dados",
       "Algoritmos",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -37879,11 +37879,11 @@
       "React",
       "Node.js",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
       "PostgreSQL",
       "Git",
-      "Estrutura de Dados"
+      "Estrutura de Dados",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -38115,8 +38115,8 @@
       "Redes de Computadores",
       "ITIL",
       "Zabbix",
-      "Manutenção Preventiva",
-      "VMware"
+      "VMware",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -38134,10 +38134,10 @@
     "url": "https://unimedvaledosinos.gupy.io/job/eyJqb2JJZCI6MTE0NDE5MzIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
       "Excel",
-      "Análise de Dados",
-      "Governança e Riscos (GRC)",
       "LGPD",
-      "ISO 27001"
+      "ISO 27001",
+      "Governança e Riscos (GRC)",
+      "Análise de Dados"
     ]
   },
   {
@@ -38158,8 +38158,8 @@
       "Active Directory",
       "Windows",
       "Redes de Computadores",
-      "Manutenção Preventiva",
-      "VMware"
+      "VMware",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -38243,7 +38243,6 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-j%C3%BAnior-at-proative-technology-4422654108",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "MySQL",
       "SQL Server",
       "Oracle",
@@ -38253,7 +38252,8 @@
       "Windows",
       "Redes de Computadores",
       "Zabbix",
-      "VMware"
+      "VMware",
+      "Banco de Dados"
     ]
   },
   {
@@ -38427,9 +38427,9 @@
       "JavaScript",
       "PHP",
       "jQuery",
+      "MySQL",
       "Análise de Dados",
-      "Banco de Dados",
-      "MySQL"
+      "Banco de Dados"
     ]
   },
   {
@@ -38560,10 +38560,10 @@
       "Next.js",
       "Tailwind",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
       "Figma",
-      "UX/UI"
+      "UX/UI",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa"
     ]
   },
   {
@@ -38676,9 +38676,9 @@
       "Windows",
       "Redes de Computadores",
       "Hardware",
+      "Inglês",
       "Montagem e Manutenção de PCs",
-      "Manutenção Preventiva",
-      "Inglês"
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -38720,9 +38720,9 @@
       "CSS",
       "Laravel",
       "Hibernate",
-      "Banco de Dados",
       "SQL Server",
-      "Inglês"
+      "Inglês",
+      "Banco de Dados"
     ]
   },
   {
@@ -38755,9 +38755,9 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-sistemas-junior-divin%C3%B3polis-mg-at-amev-repor-atacadista-4419999907",
     "tecnologias": [
       "SQL",
+      "ERP",
       "Banco de Dados",
-      "Lógica de Programação",
-      "ERP"
+      "Lógica de Programação"
     ]
   },
   {
@@ -38871,14 +38871,14 @@
       "Python",
       "SQL",
       "Excel",
-      "Estatística",
       "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "LLMs & IA Generativa",
-      "Agentes de IA & RAG",
+      "Estatística",
       "Active Directory",
       "Inglês",
-      "CRM"
+      "CRM",
+      "Copilots & Assistentes de IA",
+      "LLMs & IA Generativa",
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -38913,9 +38913,9 @@
       "Active Directory",
       "Windows",
       "Service Desk",
+      "Hardware",
       "Help Desk",
-      "Suporte N1/N2",
-      "Hardware"
+      "Suporte N1/N2"
     ]
   },
   {
@@ -38958,12 +38958,12 @@
       "ETL",
       "Data Warehouse",
       "Data Lake",
-      "LLMs & IA Generativa",
       "Machine Learning",
-      "Banco de Dados",
       "Metodologias Ágeis",
       "Algoritmos",
-      "Modelagem de Dados"
+      "Modelagem de Dados",
+      "LLMs & IA Generativa",
+      "Banco de Dados"
     ]
   },
   {
@@ -38986,12 +38986,12 @@
       "ETL",
       "Data Warehouse",
       "Data Lake",
-      "LLMs & IA Generativa",
       "Machine Learning",
-      "Banco de Dados",
       "Metodologias Ágeis",
       "Algoritmos",
-      "Modelagem de Dados"
+      "Modelagem de Dados",
+      "LLMs & IA Generativa",
+      "Banco de Dados"
     ]
   },
   {
@@ -39014,12 +39014,12 @@
       "ETL",
       "Data Warehouse",
       "Data Lake",
-      "LLMs & IA Generativa",
       "Machine Learning",
-      "Banco de Dados",
       "Metodologias Ágeis",
       "Algoritmos",
-      "Modelagem de Dados"
+      "Modelagem de Dados",
+      "LLMs & IA Generativa",
+      "Banco de Dados"
     ]
   },
   {
@@ -39057,10 +39057,10 @@
       "SQL",
       ".NET",
       "Inteligência Artificial",
-      "Banco de Dados",
       "SQL Server",
       "Oracle",
-      "API REST"
+      "API REST",
+      "Banco de Dados"
     ]
   },
   {
@@ -39143,14 +39143,14 @@
       "Java",
       "JavaScript",
       "C#",
-      "Análise de Dados",
-      "Banco de Dados",
       "Git",
       "Scrum",
       "Metodologias Ágeis",
+      "UX/UI",
+      "Análise de Dados",
+      "Banco de Dados",
       "Lógica de Programação",
-      "Engenharia de Software",
-      "UX/UI"
+      "Engenharia de Software"
     ]
   },
   {
@@ -39186,8 +39186,8 @@
       "SQL",
       "PL/SQL",
       "ETL",
-      "Banco de Dados",
-      "Oracle"
+      "Oracle",
+      "Banco de Dados"
     ]
   },
   {
@@ -39206,9 +39206,9 @@
     "tecnologias": [
       "Power BI",
       "Excel",
-      "Análise de Dados",
       "Estrutura de Dados",
-      "Automação Industrial"
+      "Automação Industrial",
+      "Análise de Dados"
     ]
   },
   {
@@ -39269,9 +39269,9 @@
       "SQL",
       "Power BI",
       "Excel",
-      "Análise de Dados",
       "LGPD",
       "Metodologias Ágeis",
+      "Análise de Dados",
       "Engenharia de Software"
     ]
   },
@@ -39327,7 +39327,6 @@
     "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-t%C3%A9cnico-j%C3%BAnior-ii-%E2%80%93-porto-alegre-%E2%80%93-rs-at-buscarvagas-empregos-brasil-4412216443",
     "tecnologias": [
       "Power BI",
-      "Banco de Dados",
       "Oracle",
       "Azure",
       "Linux",
@@ -39339,10 +39338,11 @@
       "Zabbix",
       "Office 365",
       "Hardware",
-      "Montagem e Manutenção de PCs",
       "VMware",
       "Inglês",
-      "CFTV"
+      "CFTV",
+      "Montagem e Manutenção de PCs",
+      "Banco de Dados"
     ]
   },
   {
@@ -39391,11 +39391,11 @@
     "tecnologias": [
       "SQL",
       "Excel",
-      "Banco de Dados",
       "Windows",
-      "Help Desk",
       "ERP",
-      "SAP"
+      "SAP",
+      "Help Desk",
+      "Banco de Dados"
     ]
   },
   {
@@ -39551,9 +39551,9 @@
     "fonte": "gupy",
     "url": "https://aviator.gupy.io/job/eyJqb2JJZCI6MTEyNTU2NzYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
+      "Inglês",
       "Montagem e Manutenção de PCs",
-      "Manutenção Preventiva",
-      "Inglês"
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -39570,9 +39570,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-ti-at-aviator-4411784318",
     "tecnologias": [
+      "Inglês",
       "Montagem e Manutenção de PCs",
-      "Manutenção Preventiva",
-      "Inglês"
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -39653,8 +39653,8 @@
     "tecnologias": [
       "Java",
       "SQL",
-      "Banco de Dados",
       "SQL Server",
+      "Banco de Dados",
       "Lógica de Programação"
     ]
   },
@@ -39788,8 +39788,8 @@
       "React",
       "React Native",
       "Hardware",
-      "Engenharia de Software",
-      "Inglês"
+      "Inglês",
+      "Engenharia de Software"
     ]
   },
   {
@@ -39895,11 +39895,11 @@
       "Visual Basic/VBA",
       "SQL",
       "RPA",
-      "Automação",
       "Linux",
       "Windows",
-      "Help Desk",
       "Hardware",
+      "Help Desk",
+      "Automação",
       "Lógica de Programação"
     ]
   },
@@ -39971,7 +39971,6 @@
       "Node.js",
       "NestJS",
       "Laravel",
-      "Banco de Dados",
       "PostgreSQL",
       "MongoDB",
       "Docker",
@@ -39980,6 +39979,7 @@
       "Metodologias Ágeis",
       "Clean Code",
       "Algoritmos",
+      "Banco de Dados",
       "Lógica de Programação",
       "Engenharia de Software"
     ]
@@ -40038,10 +40038,10 @@
     "tecnologias": [
       "C#",
       "SQL",
-      "Automação",
-      "Análise de Dados",
       "Inglês",
-      "ERP"
+      "ERP",
+      "Automação",
+      "Análise de Dados"
     ]
   },
   {
@@ -40123,8 +40123,8 @@
       "Linux",
       "Windows",
       "Hardware",
-      "Montagem e Manutenção de PCs",
-      "IAM"
+      "IAM",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -40145,8 +40145,8 @@
       "COBOL",
       "SQL",
       ".NET",
-      "Banco de Dados",
-      "SQL Server"
+      "SQL Server",
+      "Banco de Dados"
     ]
   },
   {
@@ -40399,12 +40399,12 @@
     "url": "https://br.linkedin.com/jobs/view/suporte-t%C3%A9cnico-n1-at-humgroup-4383103767",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
       "PostgreSQL",
       "SQL Server",
       "Windows",
       "Hardware",
-      "Eletrônica"
+      "Eletrônica",
+      "Banco de Dados"
     ]
   },
   {
@@ -40444,15 +40444,15 @@
       "React",
       "Angular",
       "Spring",
-      "Banco de Dados",
       "PostgreSQL",
       "MySQL",
       "Git",
       "CI/CD",
       "Scrum",
       "Metodologias Ágeis",
-      "Engenharia de Software",
       "Inglês",
+      "Banco de Dados",
+      "Engenharia de Software",
       "Espanhol"
     ]
   },
@@ -40618,9 +40618,9 @@
       "Visual Basic/VBA",
       "Next.js",
       "Power BI",
+      "Inglês",
       "Banco de Dados",
-      "Lógica de Programação",
-      "Inglês"
+      "Lógica de Programação"
     ]
   },
   {
@@ -40641,11 +40641,11 @@
       "SQL",
       "Power BI",
       "RPA",
-      "Automação",
-      "Banco de Dados",
       "PostgreSQL",
       "MySQL",
-      "TOTVS"
+      "TOTVS",
+      "Automação",
+      "Banco de Dados"
     ]
   },
   {
@@ -40667,7 +40667,6 @@
       "SQL",
       "Laravel",
       "Flutter",
-      "Banco de Dados",
       "PostgreSQL",
       "AWS",
       "Docker",
@@ -40676,6 +40675,7 @@
       "API REST",
       "Scrum",
       "Metodologias Ágeis",
+      "Banco de Dados",
       "Engenharia de Software"
     ]
   },
@@ -40748,9 +40748,9 @@
       "Looker",
       "BI",
       "Estatística",
+      "Modelagem de Dados",
       "Análise de Dados",
-      "Banco de Dados",
-      "Modelagem de Dados"
+      "Banco de Dados"
     ]
   },
   {
@@ -40804,8 +40804,8 @@
       "PHP",
       "jQuery",
       "Bootstrap",
-      "Banco de Dados",
-      "MySQL"
+      "MySQL",
+      "Banco de Dados"
     ]
   },
   {
@@ -41092,9 +41092,9 @@
     "tecnologias": [
       "Active Directory",
       "Redes de Computadores",
-      "Help Desk",
       "Office 365",
-      "ERP"
+      "ERP",
+      "Help Desk"
     ]
   },
   {
@@ -41300,14 +41300,14 @@
     "fonte": "serpapi",
     "url": "https://www.google.com/search?ibp=htl;jobs&q=programador+junior&htidocid=vuqyXxWatl3Rcd5qAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_x2OsQrCUAxFcfUTnIKTCrYiuNSpDgpupU4uJdZQn6YvzyaF6qcJTv6Y1eVO53LO8D0YHlOP7NQQzgQHUiOFtDWp0dwTz6IwydIp7D8v76SBOWxbZsgNy1sCgfTeOv1_qQ4NVT3vBXYiFdNofTELmsSxKkdV7zBXRqXUsXg6SRdf5aS_KfSCDQVGo2K5WnRR8NVsnD_6mFrRemmWgv-1AUuJnMCmQXX8BeLLp43AAAAA&shmds=v1_ARwrE217B_mn6W9aFC6N_MiMUc5vWOCfSHH-miWpxTdffCv3OA&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=programador+junior&htidocid=vuqyXxWatl3Rcd5qAAAAAA%3D%3D",
     "tecnologias": [
-      "Agentes de IA & RAG",
       "Azure",
       "Git",
       "Playwright",
       "Testes Automatizados",
       "Testes Manuais",
       "Testes Funcionais",
-      "Testes de Regressão"
+      "Testes de Regressão",
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -41539,8 +41539,8 @@
       "SQL",
       "Tableau",
       "BI",
-      "Análise de Dados",
-      "CRM"
+      "CRM",
+      "Análise de Dados"
     ]
   },
   {
@@ -41627,8 +41627,8 @@
     "fonte": "serpapi",
     "url": "https://www.google.com/search?ibp=htl;jobs&q=suporte+tecnico+junior&htidocid=l2tWH5EJH0kJOTazAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_zWOMW7CQBBFlZYjpJoaIRuQ0jhKsZgVWoRjxzYSHVqWkTFa7yyetcR9qDgHd8h5AkWar6f3mj_6fRt91Y-7ca0hOCJUg6c-IJTYUSBY9wl45MvQsn5l7HyPDTE4ghVRY_H98xSC5ySOmW3UcNChNZGhLiaHB7rGZzrwa_Z80j16qwPu5x_Ta-RdM94tshks1UrVYgMqK_KyFqnIJ3L3jyAhzTNZpiqHpYRM_GzVt6ieWoJDfl61ZLRNoHrcCAo9WJpAVfwBmKZqAtkAAAA&shmds=v1_ARwrE20ubo6juFrlauTjAXRyKanaedGCgjqV4fvqPdLGsWonSQ&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=suporte+tecnico+junior&htidocid=l2tWH5EJH0kJOTazAAAAAA%3D%3D",
     "tecnologias": [
-      "Help Desk",
-      "Zendesk"
+      "Zendesk",
+      "Help Desk"
     ]
   },
   {
@@ -41949,10 +41949,10 @@
       "Java",
       "JavaScript",
       "SQL",
-      "Banco de Dados",
       "API REST",
       "Metodologias Ágeis",
       "POO",
+      "Banco de Dados",
       "Lógica de Programação"
     ]
   },
@@ -41970,14 +41970,14 @@
     "fonte": "serpapi",
     "url": "https://www.google.com/search?ibp=htl;jobs&q=desenvolvedor+junior&htidocid=vuqyXxWatl3Rcd5qAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_x2OsQrCUAxFcfUTnIKTCrYiuNSpDgpupU4uJdZQn6YvzyaF6qcJTv6Y1eVO53LO8D0YHlOP7NQQzgQHUiOFtDWp0dwTz6IwydIp7D8v76SBOWxbZsgNy1sCgfTeOv1_qQ4NVT3vBXYiFdNofTELmsSxKkdV7zBXRqXUsXg6SRdf5aS_KfSCDQVGo2K5WnRR8NVsnD_6mFrRemmWgv-1AUuJnMCmQXX8BeLLp43AAAAA&shmds=v1_ARwrE21zPnk9J9a_V5-oV6u065NxImMJAZRvulUhxB_WgtzVQg&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=desenvolvedor+junior&htidocid=vuqyXxWatl3Rcd5qAAAAAA%3D%3D",
     "tecnologias": [
-      "Agentes de IA & RAG",
       "Azure",
       "Git",
       "Playwright",
       "Testes Automatizados",
       "Testes Manuais",
       "Testes Funcionais",
-      "Testes de Regressão"
+      "Testes de Regressão",
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -42010,8 +42010,8 @@
     "url": "https://www.google.com/search?ibp=htl;jobs&q=trainee+tecnologia&htidocid=IvFD5Co1oHDooMN5AAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_yXNsQrCMBCAYVz7CJ1uchDaiOBSJy0iOrtLmh5p5JqLuSv0dRx8El9MxeWfPviL16K4HEXfTx8YcIQrusjEPlg472EJLfHUQwVYtZyxgYTymIJY6PHLU0bPApHhxOwJy92gmqQxRoRqL2o1uNrxaDhix7O5cye_3GSwGRNZxdtmu57rFP2q_E8goigCsbPUwCFbCfQBNy_0jKgAAAA&shmds=v1_ARwrE20JnMy-PIf5nIO_aAnhaAVeD-pfi_w-b-ActqkakXf5nA&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=trainee+tecnologia&htidocid=IvFD5Co1oHDooMN5AAAAAA%3D%3D",
     "tecnologias": [
       "Inteligência Artificial",
-      "Engenharia de Software",
-      "Inglês"
+      "Inglês",
+      "Engenharia de Software"
     ]
   },
   {
@@ -42292,9 +42292,9 @@
     "fonte": "serpapi",
     "url": "https://www.google.com/search?ibp=htl;jobs&q=estagio+ti&htidocid=CuOtEvcTPcrwQRRdAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_x2MMQoCMRBFsd0jWE1tsRHBZu0EES3FfpnEMRuZzcRMhL2OWFh5ir2Yq83nPXj86jOrTjst6MP4zEEgIkxACBeCM7koLD5MhnCIV8k9ju_xJQ0k0vsj6L-jPmXyohAF9iKeab7pSknaGKPKtZ_-S3C1k95IJCuDuYnV37TaYabEWKhdrZdDnaJfzI9irTBE0kLA4pAb2GbUwF8CWsl9sAAAAA&shmds=v1_ARwrE233LXfIFWneg2Oyiw031XXECLowoWpur58QMwWkHJWLZA&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=estagio+ti&htidocid=CuOtEvcTPcrwQRRdAAAAAA%3D%3D",
     "tecnologias": [
-      "Automação",
       "Grafana",
-      "Jira"
+      "Jira",
+      "Automação"
     ]
   },
   {
@@ -42382,8 +42382,8 @@
       "SQL",
       "Tableau",
       "BI",
-      "Análise de Dados",
-      "CRM"
+      "CRM",
+      "Análise de Dados"
     ]
   },
   {
@@ -42484,8 +42484,8 @@
     "url": "https://www.google.com/search?ibp=htl;jobs&q=estagio+ti&htidocid=gIX0pKCFS8fd4F3DAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xWOMQrCQBAAsc0TbNxaMCeCTew0YiUKgm1Y43K5uLk9s2fId3yAb7DIx4zNMNUwyXeSFHuNw9s6AWogJyXfCXeuIR8Ftlg-yN9hAUespdVRro4RTjx8muDQXM4ZBNLnyynCncZGaMmKghc4iFim6aaKMWhmjCqnViNGV6alNEY83aQ3tdz0j0IrbCkwRipW62WfBm_nsx2O4VzGsw48aSRgKZEz2Laojn_KTp84wgAAAA&shmds=v1_ARwrE222JObkDEa4VFRlqjAkdxWAUc-vMuoPQ4-7I_Cd0oga8Q&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=estagio+ti&htidocid=gIX0pKCFS8fd4F3DAAAAAA%3D%3D",
     "tecnologias": [
       "SQL",
-      "Banco de Dados",
-      "PostgreSQL"
+      "PostgreSQL",
+      "Banco de Dados"
     ]
   },
   {
@@ -42523,8 +42523,8 @@
     "url": "https://www.google.com/search?ibp=htl;jobs&q=desenvolvedor+jr&htidocid=45_HW2ROcn8_HyZQAAAAAA%3D%3D&hl=pt-BR&shem=epsd1,rimspwouoe&shndl=37&shmd=H4sIAAAAAAAA_xXNsWoCQRCHcdL6CKmmNIHciRAIZ3d3oFiJFillbu_PenGdWXfW44o8WSBVXizafN3Hb_b7NGtbGGTUMKLXRJ_oaLunN6rZnSE9zXeb3UtFEXa9DcbUg3CJCV6NRGmt6gOeV6eco1VlaRYKb5nz4Aqnl1IFnU7ll3b2yNFOnBADZxyX74upiOJfPxqV-6F0gL8lpW9qWDg8qBby9yNu4DsGy6CgjkNFdWIbwj-Ggl8iwAAAAA&shmds=v1_ARwrE22EDvEdk6n68vip0DJkub_W4lDSWylaMmP7oA-wJ2R-Wg&source=sh/x/job/li/m1/1#fpstate=tldetail&htivrt=jobs&htiq=desenvolvedor+jr&htidocid=45_HW2ROcn8_HyZQAAAAAA%3D%3D",
     "tecnologias": [
       "PHP",
-      "Banco de Dados",
-      "MySQL"
+      "MySQL",
+      "Banco de Dados"
     ]
   },
   {
@@ -42561,10 +42561,10 @@
       "JavaScript",
       "SQL",
       "Node.js",
-      "Banco de Dados",
       "PostgreSQL",
+      "Estrutura de Dados",
       "Help Desk",
-      "Estrutura de Dados"
+      "Banco de Dados"
     ]
   },
   {
@@ -42606,14 +42606,14 @@
       "JavaScript",
       "Angular",
       "Node.js",
-      "Automação",
       "Inteligência Artificial",
-      "Banco de Dados",
       "PostgreSQL",
       "MySQL",
       "Git",
       "Scrum",
-      "Inglês"
+      "Inglês",
+      "Automação",
+      "Banco de Dados"
     ]
   },
   {
@@ -42637,7 +42637,6 @@
       "Snowflake",
       "Kafka",
       "Inteligência Artificial",
-      "Agentes de IA & RAG",
       "AWS",
       "Azure",
       "GCP",
@@ -42645,7 +42644,8 @@
       "Git",
       "CI/CD",
       "Testes Automatizados",
-      "Inglês"
+      "Inglês",
+      "Agentes de IA & RAG"
     ]
   },
   {
@@ -42670,7 +42670,6 @@
       "Vue.js",
       "Spring",
       "JavaEE",
-      "Banco de Dados",
       "PostgreSQL",
       "Oracle",
       "Git",
@@ -42682,7 +42681,8 @@
       "Metodologias Ágeis",
       "Microserviços",
       "Design Patterns",
-      "Modelagem de Dados"
+      "Modelagem de Dados",
+      "Banco de Dados"
     ]
   },
   {
@@ -42703,13 +42703,13 @@
       "SQL",
       "Node.js",
       "Express",
-      "Banco de Dados",
       "PostgreSQL",
       "Git",
-      "Help Desk",
       "API REST",
       "Estrutura de Dados",
-      "CRM"
+      "CRM",
+      "Help Desk",
+      "Banco de Dados"
     ]
   },
   {

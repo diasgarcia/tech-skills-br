@@ -1665,6 +1665,14 @@
   },
   {
     "posicao": 209,
+    "nome": "Agentes de IA",
+    "grupo": "dados_ia",
+    "vagas": 0,
+    "percentual_total": 0.0,
+    "percentual_base_tech": 0.0
+  },
+  {
+    "posicao": 210,
     "nome": "Clojure",
     "grupo": "linguagens",
     "vagas": 0,
@@ -1672,7 +1680,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 210,
+    "posicao": 211,
     "nome": "Erlang",
     "grupo": "linguagens",
     "vagas": 0,
@@ -1680,7 +1688,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 211,
+    "posicao": 212,
     "nome": "Expo",
     "grupo": "mobile",
     "vagas": 0,
@@ -1688,7 +1696,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 212,
+    "posicao": 213,
     "nome": "Fastify",
     "grupo": "frameworks",
     "vagas": 0,
@@ -1696,7 +1704,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 213,
+    "posicao": 214,
     "nome": "Fortran",
     "grupo": "linguagens",
     "vagas": 0,
@@ -1704,7 +1712,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 214,
+    "posicao": 215,
     "nome": "Haskell",
     "grupo": "linguagens",
     "vagas": 0,
@@ -1712,7 +1720,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 215,
+    "posicao": 216,
     "nome": "Helm",
     "grupo": "cloud_devops",
     "vagas": 0,
@@ -1720,7 +1728,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 216,
+    "posicao": 217,
     "nome": "Ionic",
     "grupo": "mobile",
     "vagas": 0,
@@ -1728,7 +1736,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 217,
+    "posicao": 218,
     "nome": "JMeter",
     "grupo": "qa_testes",
     "vagas": 0,
@@ -1736,7 +1744,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 218,
+    "posicao": 219,
     "nome": "Julia",
     "grupo": "linguagens",
     "vagas": 0,
@@ -1744,7 +1752,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 219,
+    "posicao": 220,
     "nome": "K6",
     "grupo": "qa_testes",
     "vagas": 0,
@@ -1752,7 +1760,23 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 220,
+    "posicao": 221,
+    "nome": "LLM",
+    "grupo": "dados_ia",
+    "vagas": 0,
+    "percentual_total": 0.0,
+    "percentual_base_tech": 0.0
+  },
+  {
+    "posicao": 222,
+    "nome": "LangChain",
+    "grupo": "dados_ia",
+    "vagas": 0,
+    "percentual_total": 0.0,
+    "percentual_base_tech": 0.0
+  },
+  {
+    "posicao": 223,
     "nome": "Lua",
     "grupo": "linguagens",
     "vagas": 0,
@@ -1760,7 +1784,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 221,
+    "posicao": 224,
     "nome": "MATLAB",
     "grupo": "linguagens",
     "vagas": 0,
@@ -1768,7 +1792,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 222,
+    "posicao": 225,
     "nome": "MariaDB",
     "grupo": "bancos",
     "vagas": 0,
@@ -1776,7 +1800,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 223,
+    "posicao": 226,
     "nome": "Nuxt.js",
     "grupo": "frameworks",
     "vagas": 0,
@@ -1784,7 +1808,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 224,
+    "posicao": 227,
     "nome": "Objective-C",
     "grupo": "linguagens",
     "vagas": 0,
@@ -1792,7 +1816,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 225,
+    "posicao": 228,
     "nome": "Pascal",
     "grupo": "linguagens",
     "vagas": 0,
@@ -1800,7 +1824,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 226,
+    "posicao": 229,
     "nome": "Perl",
     "grupo": "linguagens",
     "vagas": 0,
@@ -1808,7 +1832,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 227,
+    "posicao": 230,
     "nome": "Polars",
     "grupo": "dados",
     "vagas": 0,
@@ -1816,7 +1840,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 228,
+    "posicao": 231,
     "nome": "PowerBuilder",
     "grupo": "linguagens",
     "vagas": 0,
@@ -1824,7 +1848,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 229,
+    "posicao": 232,
     "nome": "Progress 4GL",
     "grupo": "linguagens",
     "vagas": 0,
@@ -1832,7 +1856,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 230,
+    "posicao": 233,
     "nome": "R",
     "grupo": "linguagens",
     "vagas": 0,
@@ -1840,7 +1864,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 231,
+    "posicao": 234,
     "nome": "RPG/AS400",
     "grupo": "linguagens",
     "vagas": 0,
@@ -1848,7 +1872,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 232,
+    "posicao": 235,
     "nome": "Redshift",
     "grupo": "dados",
     "vagas": 0,
@@ -1856,7 +1880,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 233,
+    "posicao": 236,
     "nome": "Retool",
     "grupo": "cloud_devops",
     "vagas": 0,
@@ -1864,7 +1888,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 234,
+    "posicao": 237,
     "nome": "SQLite",
     "grupo": "bancos",
     "vagas": 0,
@@ -1872,7 +1896,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 235,
+    "posicao": 238,
     "nome": "Scala",
     "grupo": "linguagens",
     "vagas": 0,
@@ -1880,7 +1904,15 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 236,
+    "posicao": 239,
+    "nome": "Segurança da Informação",
+    "grupo": "seguranca",
+    "vagas": 0,
+    "percentual_total": 0.0,
+    "percentual_base_tech": 0.0
+  },
+  {
+    "posicao": 240,
     "nome": "Sentry",
     "grupo": "cloud_devops",
     "vagas": 0,
@@ -1888,7 +1920,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 237,
+    "posicao": 241,
     "nome": "Sequelize",
     "grupo": "frameworks",
     "vagas": 0,
@@ -1896,7 +1928,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 238,
+    "posicao": 242,
     "nome": "Solidity",
     "grupo": "linguagens",
     "vagas": 0,
@@ -1904,7 +1936,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 239,
+    "posicao": 243,
     "nome": "TypeORM",
     "grupo": "frameworks",
     "vagas": 0,
@@ -1912,7 +1944,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 240,
+    "posicao": 244,
     "nome": "WireMock",
     "grupo": "qa_testes",
     "vagas": 0,
@@ -1920,7 +1952,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 241,
+    "posicao": 245,
     "nome": "gRPC",
     "grupo": "engenharia_praticas",
     "vagas": 0,
