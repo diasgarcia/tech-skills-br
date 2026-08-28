@@ -84,6 +84,8 @@ class Vaga(Base):
 
     regiao: Mapped[str | None] = mapped_column(String(40))
     polo: Mapped[str | None] = mapped_column(String(60))
+    # 1 = anuncio encerrado na fonte (404 no enriquecimento); nao tenta mais.
+    enrich_encerrada: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
 
     area_score: Mapped[float | None] = mapped_column(Float)
     area_matches: Mapped[str | None] = mapped_column(Text)
