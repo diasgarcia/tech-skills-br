@@ -225,3 +225,26 @@ def test_linkedin_sem_sinal_de_modalidade_mantem_o_palpite(tmp_path):
 
     with Session(make_engine(tmp_path / "t.db")) as db:
         assert db.scalar(select(Vaga)).workplace_type == "Presencial"
+
+
+def test_csv_sem_descricao_nao_rebaixa_area_nem_apaga_descricao(tmp_path):
+    """O pipeline roda com --no-enrich: a linha da rodada vem com area de
+    fallback e descricao vazia. Nao pode degradar a vaga ja classificada."""
+    db_path = tmp_path / "t.db"
+    importar(_escrever_csv(tmp_path, [_linha(
+        source="linkedin", workplace_type="Presencial",
+        location="Goiânia, GO", title="Assistente de TI",
+        area="Suporte Técnico", area_score="6.0",
+        description="Suporte tecnico presencial e remoto aos usuarios.",
+    )]), db_path)
+
+    importar(_escrever_csv(tmp_path, [_linha(
+        source="linkedin", workplace_type="Presencial",
+        location="Goiânia, GO", title="Assistente de TI",
+        area="Outros/TI Geral", area_score="0.0", description="",
+    )]), db_path)
+
+    with Session(make_engine(db_path)) as db:
+        vaga = db.scalar(select(Vaga))
+        assert vaga.area == "Suporte Técnico"
+        assert "Suporte tecnico" in (vaga.description or "")
