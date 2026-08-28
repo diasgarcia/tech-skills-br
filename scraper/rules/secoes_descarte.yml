@@ -1,0 +1,22 @@
+# Secoes finais tipicas de beneficios/termos nas descricoes de vagas.
+#
+# O texto a partir do inicio de qualquer uma dessas secao e ignorado NA
+# EXTRACAO DE SKILLS: o que vem ali nao e requisito e costuma gerar falso
+# positivo ("Open English" em parcerias, "hardware para trabalhar em casa"
+# em beneficios, clausulas de privacidade).
+#
+# O corte vale SO para o extrator: a descricao completa continua sendo
+# salva no banco/CSV. As strings sao comparadas no texto normalizado
+# (minusculas, sem acento).
+secoes_descarte:
+  - beneficios
+  - informacoes adicionais
+  - o que oferecemos
+  - o que voce pode esperar
+  - what to expect from us
+  - como tornamos seu trabalho
+  - parcerias com
+  - parceria com
+  - remuneracao e beneficios
+  - etapas do processo
+  - sobre o processo seletivo
