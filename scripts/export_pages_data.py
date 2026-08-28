@@ -15,7 +15,6 @@ import logging
 import sys
 from pathlib import Path
 
-# Garante a raiz do projeto no sys.path
 ROOT_DIR = Path(__file__).resolve().parent.parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
@@ -63,7 +62,6 @@ def export_all_pages_data(
             select(func.max(Vaga.published_date)).where(Vaga.published_date.isnot(None))
         )
 
-        # 1. Ranking de Áreas
         area_rows = db.execute(
             select(Vaga.area, func.count(Vaga.id))
             .group_by(Vaga.area)
@@ -78,7 +76,7 @@ def export_all_pages_data(
             for a, c in area_rows
         ]
 
-        # 2. Ranking de Tecnologias (todo o vocabulario, inclusive sem mencao)
+        # Todo o vocabulario, inclusive tecnologias sem nenhuma mencao.
         tech_rows = db.execute(
             select(
                 Tecnologia.nome,
@@ -111,7 +109,6 @@ def export_all_pages_data(
             for idx, (nome, grupo, c) in enumerate(tech_rows)
         ]
 
-        # 3. Modalidades & Regiões
         workplace_rows = db.execute(
             select(Vaga.workplace_type, func.count(Vaga.id))
             .group_by(Vaga.workplace_type)
@@ -143,7 +140,6 @@ def export_all_pages_data(
             for p, c in polo_rows
         ]
 
-        # 4. Habilidades por Área
         skills_by_area = {}
         for area_info in areas_payload:
             area_name = area_info["area"]
@@ -180,7 +176,6 @@ def export_all_pages_data(
                 ]
             }
 
-        # 5. Payload de Resumo
         resumo_payload = {
             "metadados": {
                 "total_vagas": total_vagas,
@@ -202,7 +197,6 @@ def export_all_pages_data(
         }
 
 
-        # 6. Payload de Vagas (Lista enxuta e estruturada)
         vagas_db = db.execute(
             select(Vaga).order_by(Vaga.published_date.desc().nullslast(), Vaga.id.desc())
         ).scalars().all()
@@ -226,7 +220,6 @@ def export_all_pages_data(
                 "tecnologias": techs
             })
 
-        # Gravação dos arquivos JSON
         files = {
             "resumo": out_dir / "resumo.json",
             "areas": out_dir / "areas.json",

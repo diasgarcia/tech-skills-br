@@ -36,7 +36,6 @@ logger = logging.getLogger(__name__)
 API_URL = "https://trampos.co/api/v2/opportunities"
 SITE_URL = "https://trampos.co"
 
-# `type_slug` que ja indica nivel de entrada, sem depender do titulo.
 TIPOS_DE_ENTRADA = {"estagio": "Estágio"}
 
 
