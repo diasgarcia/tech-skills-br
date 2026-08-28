@@ -114,11 +114,23 @@ def test_importacao_e_idempotente(tmp_path):
 
 def test_reimportacao_atualiza_campos_alterados(tmp_path):
     db_path = tmp_path / "t.db"
-    importar(_escrever_csv(tmp_path, [_linha(title="Título antigo")]), db_path)
-    importar(_escrever_csv(tmp_path, [_linha(title="Título novo")]), db_path)
+    importar(_escrever_csv(tmp_path, [_linha(title="Analista de Dados Pleno")]), db_path)
+    importar(_escrever_csv(tmp_path, [_linha(title="Cientista de Dados Pleno")]), db_path)
 
     with Session(make_engine(db_path)) as db:
-        assert db.scalar(select(Vaga)).title == "Título novo"
+        assert db.scalar(select(Vaga)).title == "Cientista de Dados Pleno"
+
+
+def test_vaga_fora_do_escopo_tech_nao_entra(tmp_path):
+    db_path = tmp_path / "t.db"
+    resultado = importar(
+        _escrever_csv(tmp_path, [_linha(title="Analista Contábil Jr", external_id="9")]),
+        db_path,
+    )
+
+    assert resultado["criadas"] == 0
+    assert resultado["nao_tech"] == 1
+    assert resultado["total"] == 0
 
 
 def test_mesma_external_id_em_fontes_diferentes_sao_vagas_distintas(tmp_path):
