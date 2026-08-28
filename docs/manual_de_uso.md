@@ -255,18 +255,6 @@ LIMIT 15;
 
 ---
 
-## 🚀 Executando a API REST Localmente (FastAPI)
-
-Para iniciar o servidor FastAPI e navegar pela documentação interativa (Swagger UI):
-
-```powershell
-uvicorn api.app:app --reload
-```
-
-Acesse no navegador: **[http://localhost:8000/docs](http://localhost:8000/docs)**.
-
----
-
 ## 🧪 Executando os Testes Automatizados
 
 O projeto possui uma suíte com **mais de 270 testes unitários automatizados** cobrindo classificadores, coletores, expressões regulares e banco de dados:
