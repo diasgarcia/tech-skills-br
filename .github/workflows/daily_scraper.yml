@@ -18,6 +18,8 @@ jobs:
 
     permissions:
       contents: write  # Permite que o bot do GitHub commite as novas vagas
+      pages: write     # Necessario para o artefato do Pages
+      id-token: write
 
     steps:
     - name: 1. Baixar repositorio
@@ -94,8 +96,28 @@ jobs:
         done
         exit 1
 
-    # Sem deploy aqui: o push em .github/pages/** dispara o workflow
-    # deploy_pages.yml, que publica no GitHub Pages.
+    - name: 7. Preparar artefato do GitHub Pages
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: '.github/pages'
+
+  deploy-pages:
+    # Deploy interno: o push do bot usa GITHUB_TOKEN e NAO dispara o
+    # deploy_pages.yml (eventos do GITHUB_TOKEN nao criam novos workflows),
+    # entao a publicacao precisa acontecer aqui, no mesmo run.
+    name: Publicar Dashboard no GitHub Pages
+    needs: scrape-and-update
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
 
 
