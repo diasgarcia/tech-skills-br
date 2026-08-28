@@ -5,14 +5,8 @@ beautifulsoup4>=4.12,<5
 PyYAML>=6.0,<7
 matplotlib>=3.7
 
-
-
-# API REST (opcional -- so precisa se for rodar a API):
-fastapi>=0.115
-uvicorn>=0.30
 SQLAlchemy>=2.0,<3
 psycopg[binary]>=3.1,<4
-pydantic>=2.0,<3
 
 
 # Testes (opcional em producao):
