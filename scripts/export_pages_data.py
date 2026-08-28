@@ -1,10 +1,10 @@
-"""Exporta os dados consolidados do banco SQLite para a pasta `.github/pages/api/`.
+"""Exporta os dados consolidados do banco SQLite para a pasta `site/api/`.
 
-Gera os endpoints estáticos JSON que alimentam o site e funcionam como uma API pública:
-  - `.github/pages/api/resumo.json`      -> Metadados gerais, KPIs e distribuições
-  - `.github/pages/api/vagas.json`       -> Lista consolidada de todas as vagas
-  - `.github/pages/api/areas.json`       -> Ranking das áreas técnicas
-  - `.github/pages/api/tecnologias.json`  -> Ranking de tecnologias demandadas
+Gera os endpoints estaticos JSON que alimentam o site e funcionam como uma API publica:
+  - `site/api/resumo.json`      -> Metadados gerais, KPIs e distribuicoes
+  - `site/api/vagas.json`       -> Lista consolidada de todas as vagas
+  - `site/api/areas.json`       -> Ranking das areas tecnicas
+  - `site/api/tecnologias.json`  -> Ranking de tecnologias demandadas
 """
 
 from __future__ import annotations
@@ -27,7 +27,7 @@ from api.models import Tecnologia, Vaga, vaga_tecnologia
 
 from scraper.config import PROJECT_ROOT
 
-PAGES_API_DIR = PROJECT_ROOT / ".github" / "pages" / "api"
+PAGES_API_DIR = PROJECT_ROOT / "site" / "api"
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)-7s %(message)s")
 logger = logging.getLogger(__name__)
@@ -36,7 +36,7 @@ logger = logging.getLogger(__name__)
 def export_all_pages_data(
     output_dir: Path | None = None, db_path: str | Path | None = None
 ) -> dict[str, Path]:
-    """Exporta todos os endpoints JSON para `.github/pages/api/`."""
+    """Exporta todos os endpoints JSON para `site/api/`."""
     out_dir = output_dir or PAGES_API_DIR
 
     out_dir.mkdir(parents=True, exist_ok=True)
