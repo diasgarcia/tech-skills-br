@@ -141,7 +141,18 @@ class AreaClassifier:
                     AreaScore(area, round(total, 2), matches, round(title_total, 2))
                 )
 
-        results.sort(key=lambda r: (-r.score, r.area))
+        # Empate de pontuacao: vence a area com evidencias mais especificas
+        # (maior soma de caracteres das keywords casadas). "Desenvolvedor de
+        # Software Android" empata entre Engenharia de Software ("desenvolvedor
+        # de software") e Mobile ("software android") -- a mais especifica
+        # decide.
+        results.sort(
+            key=lambda r: (
+                -r.score,
+                -sum(len(m) for m in r.matches),
+                r.area,
+            )
+        )
         return results
 
     def is_tech(self, title: str, description: str = "") -> bool:
@@ -170,16 +181,20 @@ class AreaClassifier:
     def classify(self, title: str, description: str = "") -> AreaScore:
         """Escolhe a area da vaga.
 
-        Regra do titulo dominante: se ALGUMA area foi sinalizada pelo titulo,
-        so essas areas disputam. Sem isso, uma descricao longa da Gupy que cita
-        "dados" de passagem ("protecao de dados", "dados cadastrais") faria uma
-        vaga de Governanca de TI virar vaga de Data.
+        Regra do titulo dominante: se ALGUMA area foi sinalizada pelo titulo
+        com forca acima do piso, so essas areas disputam. Sem isso, uma
+        descricao longa da Gupy que cita "dados" de passagem ("protecao de
+        dados", "dados cadastrais") faria uma vaga de Governanca de TI virar
+        vaga de Data.
+
+        Titulo exatamente no piso (como "Desenvolvedor Júnior") nao domina:
+        ai a descricao ainda pode decidir ("...pipelines de ETL e SQL" -> Data).
         """
         ranked = self.score_all(title, description)
         if not ranked:
             return AreaScore(self.fallback_area, 0.0, [])
 
-        titled = [r for r in ranked if r.title_score > 0]
+        titled = [r for r in ranked if r.title_score > self.min_score]
         best = (titled or ranked)[0]  # `ranked` ja vem ordenado por pontuacao
 
         if best.score < self.min_score:

@@ -144,7 +144,7 @@ def importar(
 
     limite_data = data_minima if (referencia is None or referencia >= MIN_DATA_CORTE) else None
 
-    criadas = atualizadas = sem_data = 0
+    criadas = atualizadas = sem_data = nao_tech = 0
 
     clf = default_classifier()
     geo = default_geo_classifier()
@@ -167,6 +167,11 @@ def importar(
                 if (source, external_id) in lote_seen_ids:
                     continue
                 lote_seen_ids.add((source, external_id))
+
+                # Gate de relevancia: vaga fora do escopo tech nao entra na base.
+                if not clf.is_tech(linha.get("title") or "", linha.get("description") or ""):
+                    nao_tech += 1
+                    continue
 
                 pub_date = parse_published_date(
                     linha.get("published_date"), referencia
@@ -299,6 +304,7 @@ def importar(
         "criadas": criadas,
         "atualizadas": atualizadas,
         "sem_data": sem_data,
+        "nao_tech": nao_tech,
         "total": total_vagas,
         "db": url_sem_senha(database_url(db_path)),
     }
@@ -342,6 +348,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"  Criadas .......... {resultado['criadas']}")
     print(f"  Atualizadas ...... {resultado['atualizadas']}")
     print(f"  Sem data ......... {resultado['sem_data']}")
+    print(f"  Fora do escopo ... {resultado['nao_tech']}")
     print(f"  Total no banco ... {resultado['total']}")
     print(f"  Banco ............ {resultado['db']}")
 
