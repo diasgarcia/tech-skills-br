@@ -113,6 +113,10 @@ def _garantir_colunas(engine) -> None:
             conn.execute(text("ALTER TABLE vagas ADD COLUMN regiao VARCHAR(40)"))
         if "polo" not in cols:
             conn.execute(text("ALTER TABLE vagas ADD COLUMN polo VARCHAR(60)"))
+        if "enrich_encerrada" not in cols:
+            conn.execute(
+                text("ALTER TABLE vagas ADD COLUMN enrich_encerrada INTEGER DEFAULT 0")
+            )
         conn.commit()
 
 

@@ -43,21 +43,23 @@ DETAIL_API_URL = "https://www.linkedin.com/jobs-guest/jobs/api/jobPosting/{job_i
 JANELA_TENTATIVA_DIAS = 30
 
 
-def fetch_one_description(session: PoliteSession, lock: Lock, job_id: str) -> tuple[str, str]:
+def fetch_one_description(session: PoliteSession, lock: Lock, job_id: str) -> tuple[str, str, int | None]:
     url = DETAIL_API_URL.format(job_id=job_id)
+    status = None
     try:
         with lock:
             response = session.get(url)
+            status = session.last_status_code
         if response is None:
-            return job_id, ""  # falha ja registrada pelo PoliteSession
+            return job_id, "", status  # falha ja registrada pelo PoliteSession
         soup = BeautifulSoup(response.text, "html.parser")
         el = soup.select_one(".show-more-less-html__markup, .description__text")
         if el:
-            return job_id, el.get_text(" ", strip=True)
+            return job_id, el.get_text(" ", strip=True), status
         logger.warning("[enrich] Descricao nao encontrada na vaga %s", job_id)
     except Exception as e:
         logger.warning("[enrich] Falha ao buscar a vaga %s: %s", job_id, e)
-    return job_id, ""
+    return job_id, "", status
 
 
 def enrich_linkedin_jobs(
@@ -78,6 +80,7 @@ def enrich_linkedin_jobs(
         SELECT id, external_id, title, url, location, workplace_type
         FROM vagas
         WHERE source = 'linkedin'
+          AND COALESCE(enrich_encerrada, 0) = 0
           AND (description IS NULL OR LENGTH(description) < 30
                OR LENGTH(description) = 500)
           AND (published_date IS NULL
@@ -117,7 +120,7 @@ def enrich_linkedin_jobs(
             for future in as_completed(futures):
                 db_id, ext_id, title, location, workplace = futures[future]
                 try:
-                    _, desc = future.result()
+                    _, desc, status = future.result()
                     if desc:
                         # 1. Atualiza descricao no banco
                         c.execute("UPDATE vagas SET description = ? WHERE id = ?", (desc, db_id))
@@ -155,6 +158,12 @@ def enrich_linkedin_jobs(
                         if enriched_count % 25 == 0:
                             conn.commit()
                             logger.info("Enriquecidas %d / %d vagas...", enriched_count, len(jobs_to_enrich))
+                    elif status == 404:
+                        # Anuncio encerrado: marca para nunca mais buscar.
+                        c.execute(
+                            "UPDATE vagas SET enrich_encerrada = 1 WHERE id = ?",
+                            (db_id,),
+                        )
                 except Exception as e:
                     logger.warning("Falha ao processar job %s: %s", ext_id, e)
 
