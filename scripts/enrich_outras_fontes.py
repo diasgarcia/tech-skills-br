@@ -28,6 +28,7 @@ from __future__ import annotations
 import logging
 import sqlite3
 import sys
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from threading import Lock
@@ -59,25 +60,27 @@ MIN_DESCRICAO_VAGAS_COM = 300
 MIN_DESCRICAO_TRAMPOS = 100
 
 
-def fetch_vagas_com(session: PoliteSession, lock: Lock, url: str) -> str:
+def fetch_vagas_com(session: PoliteSession, lock: Lock, url: str) -> tuple[str, int | None]:
     with lock:
         response = session.get(url)
+        status = session.last_status_code
     if response is None:
-        return ""
+        return "", status
     soup = BeautifulSoup(response.text, "html.parser")
     el = soup.select_one("div.job-description__text, div.texto")
-    return el.get_text(" ", strip=True) if el else ""
+    return (el.get_text(" ", strip=True) if el else ""), status
 
 
-def fetch_trampos(session: PoliteSession, lock: Lock, slug: str) -> str:
+def fetch_trampos(session: PoliteSession, lock: Lock, slug: str) -> tuple[str, int | None]:
     with lock:
         response = session.get(TRAMPOS_API_URL.format(slug=slug))
+        status = session.last_status_code
     if response is None:
-        return ""
+        return "", status
     try:
         opp = response.json().get("opportunity") or {}
     except ValueError:
-        return ""
+        return "", status
     partes: list[str] = []
     for campo in ("description", "prerequisite", "desirable", "other_info"):
         valor = opp.get(campo)
@@ -87,29 +90,33 @@ def fetch_trampos(session: PoliteSession, lock: Lock, slug: str) -> str:
             texto = " ".join(str(v) for v in valor if v).strip()
             if texto:
                 partes.append(texto)
-    return " ".join(partes)
+    return " ".join(partes), status
 
 
-def fetch_programathor(source: ProgramathorSource, lock: Lock, url: str) -> str:
+def fetch_programathor(source: ProgramathorSource, lock: Lock, url: str) -> tuple[str, int | None]:
     with lock:
+        # O Cloudflare do portal e sensivel a rajadas; espaca os requests.
+        time.sleep(4)
         html = source._get_page_html(url, {})
+        status = source.session.last_status_code if source.session else None
     if not html:
-        return ""
+        return "", status
     soup = BeautifulSoup(html, "html.parser")
     el = soup.select_one("div.wrapper-content-job-show, div[class*=content]")
-    return el.get_text(" ", strip=True) if el else ""
+    return (el.get_text(" ", strip=True) if el else ""), status
 
 
-def fetch_gupy(session: PoliteSession, lock: Lock, job_id: str) -> str:
+def fetch_gupy(session: PoliteSession, lock: Lock, job_id: str) -> tuple[str, int | None]:
     with lock:
         response = session.get(GUPY_API_URL.format(job_id=job_id))
+        status = session.last_status_code
     if response is None:
-        return ""
+        return "", status
     try:
         desc = (response.json() or {}).get("description") or ""
     except ValueError:
-        return ""
-    return strip_html(desc)
+        return "", status
+    return strip_html(desc), status
 
 
 def _enriquecer(
@@ -134,8 +141,14 @@ def _enriquecer(
         for future in as_completed(futures):
             vid, title = futures[future]
             try:
-                desc = future.result()
+                desc, status = future.result()
                 if not desc:
+                    # 404 = anuncio encerrado na fonte: nunca mais buscar.
+                    if status == 404:
+                        c.execute(
+                            "UPDATE vagas SET enrich_encerrada = 1 WHERE id = ?",
+                            (vid,),
+                        )
                     continue
                 c.execute("UPDATE vagas SET description = ? WHERE id = ?", (desc, vid))
                 for s in extractor.extract(title, desc):
@@ -167,6 +180,7 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
     query_vagas = """
         SELECT id, url, title FROM vagas
         WHERE source = 'vagas'
+          AND COALESCE(enrich_encerrada, 0) = 0
           AND (description IS NULL OR LENGTH(description) < ?)
           AND (published_date IS NULL OR published_date >= date('now', ?))
     """
@@ -175,6 +189,7 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
     query_trampos = """
         SELECT id, url, title FROM vagas
         WHERE source = 'trampos'
+          AND COALESCE(enrich_encerrada, 0) = 0
           AND (description IS NULL OR LENGTH(description) < ?)
           AND (published_date IS NULL OR published_date >= date('now', ?))
     """
@@ -185,6 +200,7 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
     query_programathor = """
         SELECT id, url, title FROM vagas
         WHERE source = 'programathor'
+          AND COALESCE(enrich_encerrada, 0) = 0
           AND (description IS NULL OR description LIKE 'Tecnologias:%')
           AND (published_date IS NULL OR published_date >= date('now', ?))
     """
@@ -195,6 +211,7 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
     query_gupy = """
         SELECT id, external_id, title FROM vagas
         WHERE source = 'gupy'
+          AND COALESCE(enrich_encerrada, 0) = 0
           AND LENGTH(description) = 500
           AND (published_date IS NULL OR published_date >= date('now', ?))
     """
@@ -217,6 +234,27 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
         max_retries=2,
         backoff_factor=1.5,
     ) as session:
+        # O ProgramaThor roda PRIMEIRO, com sessao propria e mais lenta:
+        # o Cloudflare do portal e sensivel a rajadas, e rodar antes das
+        # outras fontes pega o IP com menos requests acumulados.
+        with PoliteSession(
+            user_agent=USER_AGENT,
+            delay_seconds=5.0,
+            timeout_seconds=25,
+            max_retries=2,
+            backoff_factor=1.5,
+        ) as session_programathor:
+            fonte = ProgramathorSource(
+                session=session_programathor, settings=Settings()
+            )
+            c.execute(query_programathor, args_programathor)
+            logger.info("ProgramaThor pendentes: %d", len(c.fetchall()))
+            total_programathor = _enriquecer(
+                c, session_programathor, lock, extractor, tech_map,
+                query_programathor, args_programathor,
+                lambda sess, lk, url: fetch_programathor(fonte, lk, url),
+            )
+
         c.execute(query_vagas, args_vagas)
         logger.info("Vagas.com pendentes: %d", len(c.fetchall()))
         total_vagas = _enriquecer(
@@ -231,16 +269,6 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
             lambda sess, lk, url: fetch_trampos(
                 sess, lk, url.rstrip("/").split("/")[-1]
             ),
-        )
-
-        # O ProgramaThor reusa a cadeia Playwright/curl_cffi do coletor.
-        fonte = ProgramathorSource(session=session, settings=Settings())
-        c.execute(query_programathor, args_programathor)
-        logger.info("ProgramaThor pendentes: %d", len(c.fetchall()))
-        total_programathor = _enriquecer(
-            c, session, lock, extractor, tech_map,
-            query_programathor, args_programathor,
-            lambda sess, lk, url: fetch_programathor(fonte, lk, url),
         )
 
         c.execute(query_gupy, args_gupy)
