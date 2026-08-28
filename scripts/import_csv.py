@@ -187,17 +187,34 @@ def importar(
 
 
                 for campo in CAMPOS_TEXTO:
-                    setattr(vaga, campo, (linha.get(campo) or "").strip() or None)
+                    novo = (linha.get(campo) or "").strip() or None
+                    # Linha da rodada sem descricao nao pode apagar uma
+                    # descricao ja salva (pipeline --no-enrich deixa o campo
+                    # vazio para vagas do LinkedIn).
+                    if campo == "description" and not novo and vaga.description:
+                        continue
+                    setattr(vaga, campo, novo)
 
                 vaga.title = (linha.get("title") or "").strip()
                 
                 # Classifica dinamicamente usando as regras mais recentes
                 area_csv = (linha.get("area") or "").strip()
                 if not area_csv or area_csv not in valid_areas or area_csv == "Outros/TI Geral":
-                    classified = clf.classify(vaga.title, vaga.description or "")
-                    vaga.area = classified.area
-                    vaga.area_score = classified.score
-                    vaga.area_matches = ", ".join(classified.matches)
+                    # Nao deixa uma linha SEM descricao rebaixar uma area ja
+                    # bem classificada: o pipeline roda com --no-enrich, entao
+                    # o CSV da rodada traz area de fallback (so titulo) para
+                    # vagas do LinkedIn. A area boa fica; quando houver
+                    # descricao, a reclassificacao pode corrigir para melhor.
+                    ja_tem_area_valida = (
+                        vaga.area in valid_areas and vaga.area != "Outros/TI Geral"
+                    )
+                    if ja_tem_area_valida and not (vaga.description or "").strip():
+                        pass
+                    else:
+                        classified = clf.classify(vaga.title, vaga.description or "")
+                        vaga.area = classified.area
+                        vaga.area_score = classified.score
+                        vaga.area_matches = ", ".join(classified.matches)
                 else:
                     vaga.area = area_csv
                     vaga.area_score = _float_ou_none(linha.get("area_score"))
