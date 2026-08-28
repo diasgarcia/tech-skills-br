@@ -33,8 +33,7 @@ output/
 *.csv
 *.xlsx
 
-# Excecao: o snapshot que alimenta o deploy precisa ser versionado, senao a
-# API sobe vazia no servidor (o disco do Render e efemero).
+# Excecao: o snapshot que alimenta a consolidacao precisa ser versionado.
 !seed/*.csv
 
 # Editores / SO
