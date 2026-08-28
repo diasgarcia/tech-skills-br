@@ -3,7 +3,6 @@
 [![CI](https://github.com/diasgarcia/tech-skills-br/actions/workflows/ci.yml/badge.svg)](https://github.com/diasgarcia/tech-skills-br/actions/workflows/ci.yml)
 
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115%2B-009688.svg)](https://fastapi.tiangolo.com/)
 [![SQLite / PostgreSQL](<https://img.shields.io/badge/Database-SQLAlchemy%202.0-red.svg>)](api/database.py)
 [![Manual de Uso](<https://img.shields.io/badge/Docs-Manual%20de%20Uso-orange.svg>)](docs/manual_de_uso.md)
 [![Arquitetura Técnica](<https://img.shields.io/badge/Docs-Arquitetura%20T%C3%A9cnica-blueviolet.svg>)](docs/arquitetura_tecnica.md)
@@ -111,26 +110,14 @@ O projeto disponibiliza um painel web *roots* (minimalista e instantâneo) e uma
 
 ---
 
-## 🚀 API REST Local (FastAPI)
-
-Para consultas avançadas e filtros dinâmicos via backend relacional local:
-
-```powershell
-uvicorn api.app:app --reload
-```
-
-Acesse a documentação interativa no navegador: **[http://localhost:8000/docs](http://localhost:8000/docs)**.
-
----
-
 ## Estrutura do Repositório
 
 ```text
 tech-skills-br/
 ├── .github/
 │   ├── pages/             # Site roots e API JSON estática pública (.github/pages/api/)
-│   └── workflows/         # Automação de CI e coleta diária de segunda a sexta (GitHub Actions)
-├── api/                   # API FastAPI (endpoints, modelos ORM, schemas Pydantic)
+│   └── workflows/         # Automação de CI e coleta diária (GitHub Actions)
+├── api/                   # Banco, modelos ORM e utilitarios dos scripts de consolidacao
 ├── data/                  # Base de dados local SQLite (vagas.db)
 ├── docs/                  # Documentação acadêmica e relatórios consolidados
 │   ├── manual_de_uso.md   # Guia detalhado de todos os comandos e parâmetros
@@ -150,7 +137,7 @@ tech-skills-br/
 │   ├── export_pages_data.py # Geração dos endpoints JSON estáticos para .github/pages/api/
 │   └── report_db.py       # Emissão de relatório estatístico e gráficos PNG
 ├── seed/                  # Snapshot de dados versionado para reprodutibilidade (seed/vagas.csv)
-└── tests/                 # Suíte com +270 testes automatizados (pytest)
+└── tests/                 # Suíte com +300 testes automatizados (pytest)
 ```
 
 
