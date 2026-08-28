@@ -22,6 +22,7 @@ PROGRAMATHOR_HTML = """
 class FonteFake:
     def __init__(self, html):
         self._html = html
+        self.session = None
 
     def _get_page_html(self, url, params):
         return self._html
@@ -50,6 +51,7 @@ class FakeResponse:
 class FakeSession:
     def __init__(self, responses):
         self._responses = list(responses)
+        self.last_status_code = None
 
     def get(self, url):
         return self._responses.pop(0) if self._responses else None
@@ -57,19 +59,21 @@ class FakeSession:
 
 def test_fetch_vagas_com_extrai_a_descricao_completa():
     session = FakeSession([FakeResponse(text=VAGAS_HTML)])
-    desc = fetch_vagas_com(session, Lock(), "https://www.vagas.com.br/vagas/v1/x")
+    desc, status = fetch_vagas_com(session, Lock(), "https://www.vagas.com.br/vagas/v1/x")
     assert "Spring Boot" in desc
     assert "manutencao" in desc
+    assert status is None
 
 
 def test_fetch_vagas_com_sem_o_seletor_devolve_vazio():
     session = FakeSession([FakeResponse(text="<html>sem descricao</html>")])
-    assert fetch_vagas_com(session, Lock(), "http://x") == ""
+    desc, _ = fetch_vagas_com(session, Lock(), "http://x")
+    assert desc == ""
 
 
 def test_fetch_vagas_com_retorna_vazio_quando_api_falha():
     session = FakeSession([None])
-    assert fetch_vagas_com(session, Lock(), "http://x") == ""
+    assert fetch_vagas_com(session, Lock(), "http://x") == ("", None)
 
 
 def test_fetch_trampos_junta_os_campos_de_texto():
@@ -83,7 +87,7 @@ def test_fetch_trampos_junta_os_campos_de_texto():
         }
     }
     session = FakeSession([FakeResponse(payload=payload)])
-    desc = fetch_trampos(session, Lock(), "1-vaga-x")
+    desc, _ = fetch_trampos(session, Lock(), "1-vaga-x")
     assert "Django" in desc
     assert "Git" in desc
     assert "AWS" in desc
@@ -98,26 +102,28 @@ def test_fetch_trampos_suporta_listas_nos_campos():
         }
     }
     session = FakeSession([FakeResponse(payload=payload)])
-    desc = fetch_trampos(session, Lock(), "1-x")
+    desc, _ = fetch_trampos(session, Lock(), "1-x")
     assert "Logica de programacao" in desc
     assert "Testes automatizados" in desc
 
 
 def test_fetch_trampos_resposta_invalida_devolve_vazio():
     session = FakeSession([FakeResponse(text="<html>nao json</html>")])
-    assert fetch_trampos(session, Lock(), "1-x") == ""
+    assert fetch_trampos(session, Lock(), "1-x")[0] == ""
 
 
-def test_fetch_programathor_extrai_da_pagina_de_detalhe():
+def test_fetch_programathor_extrai_da_pagina_de_detalhe(monkeypatch):
+    monkeypatch.setattr("scripts.enrich_outras_fontes.time.sleep", lambda s: None)
     fonte = FonteFake(PROGRAMATHOR_HTML)
-    desc = fetch_programathor(fonte, Lock(), "https://programathor.com.br/jobs/1-x")
+    desc, _ = fetch_programathor(fonte, Lock(), "https://programathor.com.br/jobs/1-x")
     assert "Spring Boot" in desc
     assert "AWS" in desc
 
 
-def test_fetch_programathor_sem_pagina_devolve_vazio():
+def test_fetch_programathor_sem_pagina_devolve_vazio(monkeypatch):
+    monkeypatch.setattr("scripts.enrich_outras_fontes.time.sleep", lambda s: None)
     fonte = FonteFake(None)
-    assert fetch_programathor(fonte, Lock(), "https://programathor.com.br/jobs/1-x") == ""
+    assert fetch_programathor(fonte, Lock(), "https://programathor.com.br/jobs/1-x") == ("", None)
 
 
 def test_fetch_gupy_extrai_e_limpa_html_da_descricao():
@@ -126,11 +132,11 @@ def test_fetch_gupy_extrai_e_limpa_html_da_descricao():
         "description": "<p>Vaga para atuar com <b>Python</b> e Django.</p>",
     }
     session = FakeSession([FakeResponse(payload=payload)])
-    desc = fetch_gupy(session, Lock(), "123")
+    desc, _ = fetch_gupy(session, Lock(), "123")
     assert "Python" in desc
     assert "<p>" not in desc
 
 
 def test_fetch_gupy_job_removido_devolve_vazio():
     session = FakeSession([None])  # PoliteSession devolve None em 404
-    assert fetch_gupy(session, Lock(), "123") == ""
+    assert fetch_gupy(session, Lock(), "123") == ("", None)

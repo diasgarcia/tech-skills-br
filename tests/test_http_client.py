@@ -20,6 +20,16 @@ def test_get_bem_sucedido_devolve_resposta(polite):
     polite.session.get = MagicMock(return_value=resposta)
     assert polite.get("https://exemplo.com/vaga") is resposta
     assert polite.request_count == 1
+    assert polite.last_status_code == 200
+
+
+def test_get_erro_http_guarda_o_status(polite):
+    resposta = MagicMock()
+    resposta.status_code = 404
+    resposta.text = "nao encontrado"
+    polite.session.get = MagicMock(return_value=resposta)
+    assert polite.get("https://exemplo.com/vaga") is None
+    assert polite.last_status_code == 404
 
 
 def test_get_repassa_timeout_padrao(polite):

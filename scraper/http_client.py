@@ -33,6 +33,7 @@ class PoliteSession:
         self.timeout_seconds = timeout_seconds
         self._last_request_at = 0.0
         self.request_count = 0
+        self.last_status_code: int | None = None
 
         self.session = requests.Session()
         self.session.headers.update(
@@ -71,12 +72,14 @@ class PoliteSession:
         self._wait_turn()
         kwargs.setdefault("timeout", self.timeout_seconds)
         self.request_count += 1
+        self.last_status_code = None
         try:
             response = self.session.get(url, **kwargs)
         except requests.RequestException as exc:
             logger.warning("Falha de rede em %s: %s", url, exc)
             return None
 
+        self.last_status_code = response.status_code
         if response.status_code >= 400:
             logger.warning(
                 "HTTP %s em %s (params=%s, resp=%s)",
