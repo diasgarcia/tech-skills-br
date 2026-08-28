@@ -55,6 +55,34 @@ def test_alias_de_caixa_mista_casa_em_qualquer_caixa(ext):
     assert "Firewall" in ext.extract("Dev", "Configurar pfsense na rede.")
 
 
+def test_secao_de_beneficios_nao_conta_como_requisito(ext):
+    # "Open English" e uma parceria, nao requisito de ingles.
+    desc = (
+        "Requisitos: conhecimento em hardware e software. "
+        "Beneficios: plano de saude e parcerias com Open English e Gympass."
+    )
+    found = ext.extract("Analista de Suporte", desc)
+    assert "Hardware" in found
+    assert "Inglês" not in found
+
+
+def test_beneficio_de_hardware_nao_conta_como_skill(ext):
+    # Padrao BairesDev: hardware como item de beneficio, nao requisito.
+    desc = (
+        "Atuar com Python e Django. "
+        "What to Expect from Us: Home Office Setup: Complete hardware provision."
+    )
+    found = ext.extract("Desenvolvedor Python", desc)
+    assert "Python" in found
+    assert "Hardware" not in found
+
+
+def test_requisitos_depois_de_beneficios_seguem_valendo_antes(ext):
+    # O que vem ANTES da secao de beneficios continua sendo extraido.
+    desc = "Conhecimento em Git e AWS. Informações adicionais: vale refeição."
+    assert {"Git", "AWS"} <= set(ext.extract("Dev", desc))
+
+
 def test_extrai_tecnologias_recentemente_adicionadas(ext):
     desc = (
         "Noções de Kubernetes e Argo CD, Temporal.io, Camunda, Retool e WireMock. "
