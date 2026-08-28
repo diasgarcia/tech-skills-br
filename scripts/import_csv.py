@@ -150,7 +150,6 @@ def importar(
     geo = default_geo_classifier()
     valid_areas = set(vocabulary.areas())
 
-    # Rastreia external_ids ja processados neste lote para evitar INSERTs duplicados
     lote_seen_ids: set[tuple[str, str]] = set()
 
     with Session(engine) as db:
@@ -168,7 +167,6 @@ def importar(
                     continue
                 lote_seen_ids.add((source, external_id))
 
-                # Gate de relevancia: vaga fora do escopo tech nao entra na base.
                 if not clf.is_tech(linha.get("title") or "", linha.get("description") or ""):
                     nao_tech += 1
                     continue
@@ -195,11 +193,11 @@ def importar(
                     atualizadas += 1
 
 
+                # Linha da rodada sem descricao nao pode apagar uma
+                # descricao ja salva (pipeline --no-enrich deixa o campo
+                # vazio para vagas do LinkedIn).
                 for campo in CAMPOS_TEXTO:
                     novo = (linha.get(campo) or "").strip() or None
-                    # Linha da rodada sem descricao nao pode apagar uma
-                    # descricao ja salva (pipeline --no-enrich deixa o campo
-                    # vazio para vagas do LinkedIn).
                     if campo == "description" and not novo and vaga.description:
                         continue
                     setattr(vaga, campo, novo)
@@ -210,8 +208,7 @@ def importar(
                     vaga.enrich_encerrada = 1
 
                 vaga.title = (linha.get("title") or "").strip()
-                
-                # Classifica dinamicamente usando as regras mais recentes
+
                 area_csv = (linha.get("area") or "").strip()
                 if not area_csv or area_csv not in valid_areas or area_csv == "Outros/TI Geral":
                     # Nao deixa uma linha SEM descricao rebaixar uma area ja
@@ -238,7 +235,6 @@ def importar(
                     sem_data += 1
 
 
-                # Infere modalidade e polo/regiao caso nao tenham vindo estruturados
                 vaga.workplace_type = infer_workplace(
                     vaga.workplace_type,
                     location=vaga.location,
@@ -262,7 +258,6 @@ def importar(
             db.execute(delete(Vaga).where(Vaga.published_date < limite_data))
 
 
-        # Enriquecimento retroativo de todas as vagas existentes no banco
         todas_vagas = db.scalars(select(Vaga)).all()
         for v in todas_vagas:
             # No LinkedIn o card nao informa modalidade: o palpite feito na
