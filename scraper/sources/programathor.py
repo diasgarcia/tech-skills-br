@@ -51,8 +51,6 @@ BASE_URL = "https://programathor.com.br"
 JOBS_URL = f"{BASE_URL}/jobs"
 
 
-# Filtros nativos que correspondem a nivel de entrada. As chaves viram os
-# "termos" desta fonte (ver `fetch`).
 FILTROS_NIVEL_ENTRADA: dict[str, dict[str, str]] = {
     "Júnior": {"expertise": "Júnior"},
     "Estágio": {"contract_type": "Estágio"},
@@ -126,12 +124,10 @@ class ProgramathorSource(JobSource):
 
     def _get_page_html(self, url: str, params: dict) -> str | None:
         """Obtem o HTML da pagina tentando Playwright, curl_cffi ou PoliteSession."""
-        # 1. Tentar Playwright (Chromium real com bypass de JS challenge em nuvem)
         html = self._fetch_with_playwright(url, params)
         if html:
             return html
 
-        # 2. Tentar curl_cffi (impersonate TLS)
         if _HAS_CURL_CFFI:
             try:
                 with cffi_requests.Session(impersonate="chrome124") as s:
@@ -142,7 +138,6 @@ class ProgramathorSource(JobSource):
             except Exception as e:
                 logger.warning("[%s] Erro com curl_cffi: %s, tentando fallback", self.name, e)
 
-        # 3. Fallback para PoliteSession padrao
         if self.session:
             response = self.session.get(url, params=params)
             return response.text if response is not None else None
@@ -169,7 +164,7 @@ class ProgramathorSource(JobSource):
             soup = BeautifulSoup(html, "html.parser")
             raw_cards = soup.select('.wrapper-jobs-list a[href^="/jobs/"], .cell-list')
             if not raw_cards:
-                break  # Fim real da listagem (nenhum card na pagina)
+                break
 
             batch = self._parse_page(html, term)
             for job in batch:
@@ -226,7 +221,7 @@ class ProgramathorSource(JobSource):
             description=self._descricao(campos, tecnologias),
             location=location,
             workplace_type=workplace,
-            published_date="",  # o card da listagem nao informa a data
+            published_date="",
             search_term=term,
             # O portal declara o nivel; e mais confiavel que adivinhar pelo
             # titulo ("Programador(a) PHP" nao tem marca de senioridade).

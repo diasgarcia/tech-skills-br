@@ -55,7 +55,6 @@ TRAMPOS_API_URL = "https://trampos.co/api/v2/opportunities/{slug}"
 
 GUPY_API_URL = "https://employability-portal.gupy.io/api/v1/jobs/{job_id}"
 
-# Descricao do card/API e um trecho curto; abaixo disso, vale buscar o detalhe.
 MIN_DESCRICAO_VAGAS_COM = 300
 MIN_DESCRICAO_TRAMPOS = 100
 

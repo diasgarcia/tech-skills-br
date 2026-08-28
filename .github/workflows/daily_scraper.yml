@@ -40,32 +40,22 @@ jobs:
 
     - name: 4. Executar rodada comum gratuita (Gupy, LinkedIn, Vagas, ProgramaThor, Trampos)
       run: |
-        # Sem enriquecimento de descricoes aqui: ele roda no passo 5,
-        # apenas na primeira coleta do dia, so para vagas pendentes.
         python main.py --max-pages 10 --delay 2 --no-enrich
       env:
         PYTHONPATH: .
 
     - name: 5. Carregar historico, consolidar novas vagas e atualizar snapshot
       run: |
-        # 1. Carrega o snapshot historico versionado no banco SQLite do runner:
         python scripts/import_csv.py --csv seed/vagas.csv
-        # 2. Faz o UPSERT incremental das novas vagas mineradas na rodada:
         python scripts/import_csv.py
-        # 3. Busca descricoes das vagas ainda pendentes (novas da rodada).
-        #    Outras fontes primeiro (ProgramaThor tem Cloudflare sensivel a
-        #    rajada; rodar cedo pega o IP com menos requests acumulados),
-        #    depois o LinkedIn.
+        # Outras fontes primeiro (ProgramaThor tem Cloudflare sensivel a
+        # rajada; rodar cedo pega o IP com menos requests acumulados),
+        # depois o LinkedIn.
         python scripts/enrich_outras_fontes.py
         python scripts/enrich_descriptions.py
-        # 4. Com as descricoes em maos, reclassifica a area das vagas que
-        #    ainda estao em Outros/invalida -- so quem tem descricao, sem
-        #    loop inutil sobre o que ja esta bem classificado.
         python scripts/reclassify_areas.py
-        # 4. Exporta a base acumulada e regenera os relatorios e graficos:
         python scripts/export_seed.py
         python scripts/report_db.py
-        # 5. Exporta os endpoints JSON da API estatica para .github/pages/api:
         python scripts/export_pages_data.py
 
     - name: 6. Comitar e enviar dados atualizados para o GitHub

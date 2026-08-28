@@ -28,7 +28,7 @@ def _compile_keyword(keyword: str) -> re.Pattern:
     """Casa a keyword como palavra/frase inteira no texto normalizado."""
     kw = normalize(keyword)
     if not kw:
-        return re.compile(r"(?!x)x")  # nunca casa
+        return re.compile(r"(?!x)x")
     return re.compile(rf"(?<![a-z0-9]){re.escape(kw)}(?![a-z0-9])")
 
 
@@ -57,10 +57,8 @@ class AreaClassifier:
             _compile_keyword(kw) for kw in (gate.get("excluir") or [])
         ]
 
-        # Peso a partir do qual uma keyword conta como sinal "forte" no portao.
         self.strong_weight: float = self.tiers.get("peso_alto", 4.0)
 
-        # area -> lista de (pattern, peso, keyword original)
         self.areas: dict[str, list[tuple[re.Pattern, float, str]]] = {}
         for area, tiers in (rules.get("areas") or {}).items():
             compiled: list[tuple[re.Pattern, float, str]] = []

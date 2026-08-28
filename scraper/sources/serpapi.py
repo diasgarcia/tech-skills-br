@@ -79,7 +79,6 @@ class SerpApiSource(JobSource):
                 if not resp_data or not isinstance(resp_data, dict):
                     break
 
-                # Se a API retornou erro (ex: Invalid API key ou Account out of searches)
                 if "error" in resp_data:
                     err_msg = f"SerpApi erro ({loc}): {resp_data.get('error')}"
                     logger.warning(err_msg)
@@ -116,7 +115,6 @@ class SerpApiSource(JobSource):
         company = (raw.get("company_name") or "").strip()
         location = (raw.get("location") or "").strip()
 
-        # URL: preferencialmente o link de candidatura direta em apply_options
         url = ""
         apply_options = raw.get("apply_options") or []
         if apply_options and isinstance(apply_options, list):
@@ -139,7 +137,6 @@ class SerpApiSource(JobSource):
 
         description = raw.get("description") or ""
 
-        # Highlights adicionais (requisitos/qualificacoes) enriquecem a descricao para extracao de skills
         highlights = raw.get("job_highlights") or []
         extra_texts: list[str] = []
         for hl in highlights:
