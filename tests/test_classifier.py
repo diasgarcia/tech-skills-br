@@ -32,7 +32,6 @@ def test_classifica_pelo_titulo(clf, title, expected):
 
 
 def test_titulo_vale_mais_que_descricao(clf):
-    # Descricao cita AWS/Kubernetes, mas o titulo e claramente frontend.
     result = clf.classify(
         "Desenvolvedor Front-End Júnior",
         "Nosso ambiente roda em AWS com Kubernetes e Docker.",
@@ -49,7 +48,6 @@ def test_descricao_decide_quando_titulo_e_generico(clf):
 
 
 def test_titulo_dominante_vence_ruido_da_descricao(clf):
-    # Descricao longa citando "dados" de passagem nao pode sequestrar a vaga.
     result = clf.classify(
         "Estágio em Governança de TI",
         "Apoiar a governanca, tratar dados cadastrais e zelar pela protecao "
@@ -78,7 +76,6 @@ def test_titulo_sem_sinal_cai_no_fallback(clf):
 
 
 def test_keyword_nao_casa_parcialmente(clf):
-    # "goiania" nao pode disparar a keyword "go"; "java" nao pode vir de "javascript"
     scores = {s.area: s.score for s in clf.score_all("Vaga em Goiania")}
     assert scores.get("DevOps", 0) == 0
     assert scores.get("Backend", 0) == 0
@@ -124,8 +121,6 @@ def test_tech_gate_exclui_contextos_nao_tech(clf, title):
 
 
 def test_tech_gate_ignora_palavra_generica_na_descricao(clf):
-    # Snippet de vaga administrativa citando "sistemas"/"dados" no meio do texto
-    # nao pode transformar a vaga em vaga de tecnologia.
     assert clf.is_tech(
         "Analista Administrativo Junior",
         "Alimentar os sistemas da empresa e organizar os dados dos contratos.",
@@ -159,7 +154,6 @@ def test_suporte_tecnico_vai_para_area_propria(clf):
 
 
 def test_seguranca_nao_dispara_com_a_palavra_solta(clf):
-    # Boilerplate de "normas de seguranca" nao pode virar vaga de Seguranca.
     result = clf.classify(
         "Analista de Suporte Técnico Júnior",
         "Seguir as normas de seguranca da empresa e atender chamados de suporte.",
@@ -205,7 +199,7 @@ def test_titulo_backend_com_suporte_nao_vira_suporte(clf):
 def test_ocorrencias_separadas_ainda_pontuam(clf):
     """A regra só ignora trecho sobreposto, não repetição em lugares diferentes."""
     scores = {s.area: s.score for s in clf.score_all("Suporte", "Precisa de SQL e ETL.")}
-    assert scores["Data"] > 0  # sql e etl contam, são trechos distintos
+    assert scores["Data"] > 0
 
 
 def test_score_all_ordena_por_pontuacao(clf):

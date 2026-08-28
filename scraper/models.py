@@ -42,7 +42,6 @@ NAO_INFORMADO = "Não informado"
 
 WORKPLACE_ORDER = [REMOTO, HIBRIDO, PRESENCIAL, NAO_INFORMADO]
 
-# Como cada portal nomeia a modalidade de trabalho.
 _WORKPLACE_MAP = {
     "remote": REMOTO,
     "remoto": REMOTO,
@@ -91,15 +90,13 @@ def infer_workplace(
     source: str | None = None,
 ) -> str:
     """Infere a modalidade combinando rotulo explicito, localizacao, titulo, descricao e fonte."""
-    # 1. Rotulo explicito normalizado
     norm = normalize_workplace(explicit)
     if norm != NAO_INFORMADO:
         return norm
 
-    # 2. Analise textual no titulo e descricao
     full_text = normalize(f"{title or ''} {description or ''}")
     if full_text:
-        # Hibrido tem prioridade se mencionado (pois muitas vagas hibridas tambem citam dias presenciais)
+        # Hibrido tem prioridade: muitas vagas hibridas citam dias presenciais.
         if _HIBRIDO_RE.search(full_text):
             return HIBRIDO
         if _REMOTO_RE.search(full_text):
@@ -107,7 +104,6 @@ def infer_workplace(
         if _PRESENCIAL_RE.search(full_text):
             return PRESENCIAL
 
-    # 3. Localizacao informada
     loc_norm = normalize(location)
     if loc_norm:
         if "remoto" in loc_norm or "home office" in loc_norm:
@@ -120,7 +116,6 @@ def infer_workplace(
             if source == "linkedin":
                 return REMOTO
             return NAO_INFORMADO
-        # Cidade fisica identificada
         return PRESENCIAL
 
     return NAO_INFORMADO
@@ -142,7 +137,6 @@ class Job:
     workplace_type: str = ""
     published_date: str = ""
     search_term: str = ""
-    # Preenchidos pelo pipeline:
     area: str = ""
     area_score: float = 0.0
     area_matches: str = ""
