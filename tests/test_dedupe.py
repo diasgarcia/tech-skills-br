@@ -63,7 +63,6 @@ def test_funde_mesma_vaga_com_nome_de_empresa_diferente():
     ]
     unique, removed = deduplicate(jobs)
     assert len(unique) == 1 and removed == 1
-    # Fica a versão com mais informação.
     assert unique[0].description == "descricao longa"
 
 

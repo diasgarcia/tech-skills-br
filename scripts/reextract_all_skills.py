@@ -17,7 +17,6 @@ extractor = SkillExtractor(rules)
 conn = sqlite3.connect(PROJECT_ROOT / "data" / "vagas.db")
 c = conn.cursor()
 
-# Garante que todas as tecnologias de skills.yml existam na tabela
 c.execute("SELECT nome FROM tecnologias")
 existentes = {nome.lower() for (nome,) in c.fetchall()}
 for group, entries in rules.items():
