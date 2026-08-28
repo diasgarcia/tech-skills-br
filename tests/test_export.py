@@ -41,7 +41,6 @@ def test_export_all_sem_graficos(tmp_path):
 
 def test_export_all_com_graficos(tmp_path):
     files = export_all(_jobs(), tmp_path, meta={"sources": ["Gupy"], "terms_count": 1})
-    # O grafico de areas sempre sai; o de skills depende de volume por area.
     assert "chart_areas" in files
     assert files["chart_areas"].suffix == ".png"
     assert files["chart_areas"].stat().st_size > 0

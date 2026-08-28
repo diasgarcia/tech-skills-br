@@ -78,7 +78,6 @@ def test_beneficio_de_hardware_nao_conta_como_skill(ext):
 
 
 def test_requisitos_depois_de_beneficios_seguem_valendo_antes(ext):
-    # O que vem ANTES da secao de beneficios continua sendo extraido.
     desc = "Conhecimento em Git e AWS. Informações adicionais: vale refeição."
     assert {"Git", "AWS"} <= set(ext.extract("Dev", desc))
 

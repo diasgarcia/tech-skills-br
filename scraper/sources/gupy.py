@@ -98,7 +98,6 @@ class GupySource(JobSource):
             url=url,
             description=raw.get("description") or "",
             location=location,
-            # A Gupy informa a modalidade explicitamente: remote / hybrid / on-site.
             workplace_type=normalize_workplace(
                 raw.get("workplaceType")
                 or ("remote" if raw.get("isRemoteWork") else "")

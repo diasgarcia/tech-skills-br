@@ -51,7 +51,7 @@ def fetch_one_description(session: PoliteSession, lock: Lock, job_id: str) -> tu
             response = session.get(url)
             status = session.last_status_code
         if response is None:
-            return job_id, "", status  # falha ja registrada pelo PoliteSession
+            return job_id, "", status
         soup = BeautifulSoup(response.text, "html.parser")
         el = soup.select_one(".show-more-less-html__markup, .description__text")
         if el:
@@ -98,7 +98,6 @@ def enrich_linkedin_jobs(
         logger.info("Nenhuma vaga pendente de enriquecimento.")
         return
 
-    # Buscar todas as tecnologias do banco para mapear id por nome
     c.execute("SELECT id, nome FROM tecnologias")
     tech_map = {nome.lower(): tid for tid, nome in c.fetchall()}
     enriched_count = 0
@@ -122,11 +121,10 @@ def enrich_linkedin_jobs(
                 try:
                     _, desc, status = future.result()
                     if desc:
-                        # 1. Atualiza descricao no banco
                         c.execute("UPDATE vagas SET description = ? WHERE id = ?", (desc, db_id))
 
-                        # 2. Re-infere modalidade: a descricao completa e mais
-                        # confiavel que o palpite feito no card da busca.
+                        # A descricao completa e mais confiavel que o palpite
+                        # de modalidade feito no card da busca.
                         modalidade = infer_workplace(
                             None, location=location, title=title, description=desc
                         )
@@ -141,11 +139,9 @@ def enrich_linkedin_jobs(
                                 (modalidade, polo, regiao, db_id),
                             )
 
-                        # 3. Extrai novas habilidades
                         full_text = f"{title} {desc}"
                         extracted_skills = extractor.extract(full_text)
 
-                        # 4. Atualiza relacionamentos em vaga_tecnologia
                         for s in extracted_skills:
                             tid = tech_map.get(s.lower())
                             if tid:

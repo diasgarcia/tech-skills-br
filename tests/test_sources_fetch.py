@@ -45,25 +45,20 @@ def _settings(**kw):
     return Settings(**base)
 
 
-# --------------------------------------------------------------------------- #
-# Gupy: paginacao por offset com limit, parando em pagina vazia ou repetida.
-# --------------------------------------------------------------------------- #
-
-
 def test_gupy_pagina_deduplica_e_para_em_repeticao():
     outro = dict(GUPY_JOB, id=999, name="Analista de Suporte Junior")
     session = FakeSession(
         [
-            {"data": [GUPY_JOB, GUPY_JOB, outro]},  # repeticao na mesma pagina
-            {"data": [outro]},                      # repeticao entre paginas
-            {"data": [dict(GUPY_JOB, id=777)]},     # nunca deve ser buscada
+            {"data": [GUPY_JOB, GUPY_JOB, outro]},
+            {"data": [outro]},
+            {"data": [dict(GUPY_JOB, id=777)]},  # nunca deve ser buscada
         ]
     )
     source = GupySource(session=session, settings=_settings(page_size=1))
     jobs = source.fetch_term("desenvolvedor junior")
 
     assert {j.external_id for j in jobs} == {"11617525", "999"}
-    assert session.request_count == 2  # parou antes da terceira pagina
+    assert session.request_count == 2
     offsets = [p["offset"] for p in session.chamadas]
     assert offsets == [0, 1]
 
@@ -75,16 +70,11 @@ def test_gupy_para_quando_api_falha():
     assert session.request_count == 1
 
 
-# --------------------------------------------------------------------------- #
-# LinkedIn: paginas de 10 cards, parando em vazio ou repeticao.
-# --------------------------------------------------------------------------- #
-
-
 def test_linkedin_pagina_deduplica_e_para_em_repeticao():
     session = FakeSession(
         [
             FakeHtmlResponse(LINKEDIN_HTML),
-            FakeHtmlResponse(LINKEDIN_HTML),  # mesma vaga em duas paginas
+            FakeHtmlResponse(LINKEDIN_HTML),
             FakeHtmlResponse(LINKEDIN_HTML),  # nunca deve ser buscada
         ]
     )
@@ -120,11 +110,6 @@ def test_linkedin_para_quando_api_falha():
     assert source.fetch_term("x") == []
 
 
-# --------------------------------------------------------------------------- #
-# Vagas.com: paginacao 1-indexada, parando em pagina vazia.
-# --------------------------------------------------------------------------- #
-
-
 def test_vagas_com_pagina_e_deduplica():
     session = FakeSession(
         [
@@ -156,11 +141,6 @@ def test_vagas_com_para_em_repeticao():
     assert session.request_count == 2
 
 
-# --------------------------------------------------------------------------- #
-# Trampos: respeita pagination.total_pages da propria API.
-# --------------------------------------------------------------------------- #
-
-
 def test_trampos_para_no_total_pages():
     payload = {"opportunities": [{"id": 1, "name": "Dev .Net C#"}],
                "pagination": {"total_pages": 2}}
@@ -169,18 +149,13 @@ def test_trampos_para_no_total_pages():
     jobs = source.fetch_term("desenvolvedor")
 
     assert [j.external_id for j in jobs] == ["1"]
-    assert session.request_count == 2  # nao pediu a pagina 3
+    assert session.request_count == 2
 
 
 def test_trampos_para_quando_api_falha():
     session = FakeSession([None])
     source = TramposSource(session=session, settings=_settings())
     assert source.fetch_term("x") == []
-
-
-# --------------------------------------------------------------------------- #
-# base.JobSource.fetch: isola a falha de um termo dos demais.
-# --------------------------------------------------------------------------- #
 
 
 class _FonteDeTeste(JobSource):
@@ -201,11 +176,6 @@ def test_fetch_isola_falha_de_um_termo():
     assert any("explode" in e for e in source.stats.errors)
 
 
-# --------------------------------------------------------------------------- #
-# ProgramaThor: paginacao sobre _get_page_html, com browser real abstraido.
-# --------------------------------------------------------------------------- #
-
-
 def test_programathor_fetch_pagina_e_para_em_pagina_vazia(monkeypatch):
     respostas = [PROGRAMATHOR_HTML, PROGRAMATHOR_HTML, "<html></html>"]
     chamadas = []
@@ -218,7 +188,7 @@ def test_programathor_fetch_pagina_e_para_em_pagina_vazia(monkeypatch):
     source = ProgramathorSource(session=FakeSession([]), settings=_settings())
     jobs = source.fetch_term("Júnior")
 
-    assert [j.external_id for j in jobs] == ["33692"]  # dedupe entre paginas
+    assert [j.external_id for j in jobs] == ["33692"]
     assert [p["page"] for p in chamadas] == [1, 2, 3]
 
 

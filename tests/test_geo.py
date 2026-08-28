@@ -36,21 +36,17 @@ def classifier():
         ("Goiânia, GO", "Presencial", "Goiânia", "Centro-Oeste"),
         ("Manaus, AM", "Presencial", "Manaus", "Norte"),
         ("Belém, PA", "Presencial", "Belém", "Norte"),
-        # Capitais e polos expandidos
 
         ("Vitória, ES", "Presencial", "Vitória", "Sudeste"),
         ("Natal, RN", "Presencial", "Natal", "Nordeste"),
         ("Cuiabá, MT", "Presencial", "Cuiabá", "Centro-Oeste"),
-        # UFs quando a vaga informa apenas o estado sem cidade mapeada
         ("ES", "Presencial", "Estado/ES", "Sudeste"),
         ("RN", "Presencial", "Estado/RN", "Nordeste"),
         ("MT", "Presencial", "Estado/MT", "Centro-Oeste"),
 
-        # Vagas remotas
         ("", "Remoto", "Remoto", "Remoto Nacional"),
         ("Brasil", "Remoto", "Remoto", "Remoto Nacional"),
         ("Remoto", "Remoto", "Remoto", "Remoto Nacional"),
-        # Nao informado
         ("", "Presencial", "Não informado", "Não informado"),
     ],
 )

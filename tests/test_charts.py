@@ -38,7 +38,6 @@ def test_chart_regions_sem_vagas_levanta_erro(tmp_path):
 
 
 def test_chart_skills_devolve_none_quando_nenhuma_area_informa_tecnologia(tmp_path):
-    # Base insuficiente: retorna None sem tentar plotar.
     assert chart_skills([_vaga()], tmp_path / "skills.png") is None
     assert chart_skills([], tmp_path / "skills.png") is None
 

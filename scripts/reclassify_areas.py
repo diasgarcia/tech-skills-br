@@ -62,7 +62,6 @@ def reclassificar(db_path: Path, todas: bool = False) -> dict:
         if not todas and not pendente:
             continue
         resultado = clf.classify(title, desc)
-        # So grava quando muda de verdade: evita UPDATE inutil.
         if resultado.area == (area or ""):
             continue
         c.execute(
