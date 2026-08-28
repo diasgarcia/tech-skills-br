@@ -1,12 +1,15 @@
 # Mapeamento de Skills em Tecnologia no Brasil (PIBIC)
 
-[![CI](https://github.com/diasgarcia/tech-skills-br/actions/workflows/ci.yml/badge.svg)](https://github.com/diasgarcia/tech-skills-br/actions/workflows/ci.yml)
-[![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/)
-[![SQLite / PostgreSQL](<https://img.shields.io/badge/Database-SQLAlchemy%202.0-red.svg>)](api/database.py)
-[![Manual de Uso](<https://img.shields.io/badge/Docs-Manual%20de%20Uso-orange.svg>)](docs/manual_de_uso.md)
-[![Arquitetura Técnica](<https://img.shields.io/badge/Docs-Arquitetura%20T%C3%A9cnica-blueviolet.svg>)](docs/arquitetura_tecnica.md)
+## Resumo
 
 Projeto de pesquisa científica (PIBIC / Iniciação Científica) que coleta, extrai e analisa as habilidades técnicas pedidas em vagas de tecnologia no Brasil. Os dados coletados são comparados com os referenciais curriculares do MEC (Diretrizes Curriculares Nacionais) e da Sociedade Brasileira de Computação (SBC).
+
+| Item | Descrição |
+| :--- | :--- |
+| **Linguagem** | Python 3.11+ |
+| **Banco de dados** | SQLite / PostgreSQL (SQLAlchemy 2.0) |
+| **Documentação** | [Manual de Uso](docs/manual_de_uso.md) · [Arquitetura Técnica](docs/arquitetura_tecnica.md) |
+| **Integração contínua** | [GitHub Actions](https://github.com/diasgarcia/tech-skills-br/actions/workflows/ci.yml) |
 
 ## Problema de Pesquisa
 
