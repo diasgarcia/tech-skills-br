@@ -40,6 +40,7 @@ COLUNAS_EXPORTACAO = [
     "description",
     "regiao",
     "polo",
+    "enrich_encerrada",
 ]
 
 
@@ -92,6 +93,7 @@ def exportar_seed(
                         "description": v.description or "",
                         "regiao": v.regiao or "",
                         "polo": v.polo or "",
+                        "enrich_encerrada": str(v.enrich_encerrada or 0),
                     }
                     writer.writerow(row)
     finally:
