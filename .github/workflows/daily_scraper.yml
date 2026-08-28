@@ -58,6 +58,10 @@ jobs:
         #    depois o LinkedIn.
         python scripts/enrich_outras_fontes.py
         python scripts/enrich_descriptions.py
+        # 4. Com as descricoes em maos, reclassifica a area das vagas que
+        #    ainda estao em Outros/invalida -- so quem tem descricao, sem
+        #    loop inutil sobre o que ja esta bem classificado.
+        python scripts/reclassify_areas.py
         # 4. Exporta a base acumulada e regenera os relatorios e graficos:
         python scripts/export_seed.py
         python scripts/report_db.py
