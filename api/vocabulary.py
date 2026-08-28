@@ -1,13 +1,12 @@
-"""Vocabulario controlado da API, lido dos mesmos YAMLs que o scraper usa.
+"""Vocabulario controlado, lido dos mesmos YAMLs que o scraper usa.
 
 As areas e as tecnologias validas nao sao redigitadas aqui: vem de
-`scraper/rules/areas.yml` e `scraper/rules/skills.yml`. Editar o YAML muda o
-scraper e a API juntos, que e a premissa do projeto.
+`scraper/rules/areas.yml` e `scraper/rules/skills.yml`. Editar o YAML muda
+tudo junto, que e a premissa do projeto.
 """
 
 from __future__ import annotations
 
-from enum import Enum
 from functools import lru_cache
 
 import yaml
@@ -50,18 +49,3 @@ def sources() -> list[str]:
     from scraper.sources import AVAILABLE_SOURCES
 
     return list(AVAILABLE_SOURCES)
-
-
-def _enum(name: str, values: list[str]) -> type[Enum]:
-    """Enum de strings para o FastAPI validar (422) e documentar sozinho.
-
-    Os nomes dos membros sao irrelevantes -- o que vai para a query string e
-    para o /docs sao os valores.
-    """
-    members = {f"V{i}": value for i, value in enumerate(values)}
-    return Enum(name, members, type=str)  # type: ignore[return-value]
-
-
-AreaEnum = _enum("AreaEnum", areas())
-ModalidadeEnum = _enum("ModalidadeEnum", workplace_types())
-FonteEnum = _enum("FonteEnum", sources())
