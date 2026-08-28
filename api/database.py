@@ -4,23 +4,22 @@ Funciona com SQLite e com PostgreSQL sem mudar o resto do codigo. A escolha e
 so de configuracao, nesta ordem de precedencia:
 
     1. o destino passado no argumento (usado pelo importador e pelos testes)
-    2. a variavel de ambiente DATABASE_URL  -- e o que o docker-compose usa
+    2. a variavel de ambiente DATABASE_URL
     3. a variavel de ambiente VAGAS_DB      -- caminho de arquivo SQLite
     4. o padrao: data/vagas.db
 
 Sem nenhuma variavel definida, o comportamento e exatamente o de antes: SQLite
-em `data/vagas.db`. E o que o deploy no Render continua usando.
+em `data/vagas.db`.
 """
 
 from __future__ import annotations
 
 import os
-from collections.abc import Iterator
 from pathlib import Path
 
 from sqlalchemy import create_engine
 from sqlalchemy.engine import make_url
-from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
+from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
 from scraper.config import PROJECT_ROOT
 
@@ -75,14 +74,13 @@ def make_engine(destino: str | Path | None = None):
     opcoes: dict = {"future": True}
 
     if url.startswith("sqlite"):
-        # check_same_thread: o uvicorn atende requisicoes em threads diferentes.
+        # check_same_thread: threads diferentes podem compartilhar a conexao.
         opcoes["connect_args"] = {"check_same_thread": False}
         caminho = url.replace("sqlite:///", "")
         if caminho and caminho != ":memory:":
             Path(caminho).parent.mkdir(parents=True, exist_ok=True)
     else:
-        # pool_pre_ping: no compose a API sobe junto com o banco, e a conexao
-        # pode ter morrido enquanto o container do Postgres reiniciava.
+        # pool_pre_ping: se o Postgres reiniciar, a proxima sessao reconecta.
         opcoes["pool_pre_ping"] = True
 
     return create_engine(url, **opcoes)
@@ -94,12 +92,3 @@ SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False
 
 def init_db(bind=None) -> None:
     Base.metadata.create_all(bind=bind or engine)
-
-
-def get_db() -> Iterator[Session]:
-    """Dependencia do FastAPI: uma sessao por requisicao."""
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()

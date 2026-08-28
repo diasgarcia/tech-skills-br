@@ -1,1 +1,1 @@
-"""API REST somente leitura sobre os dados coletados pelo scraper."""
+"""Banco, modelos e utilitarios compartilhados pelos scripts de consolidacao."""
