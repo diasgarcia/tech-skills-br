@@ -27,6 +27,19 @@ _BOUNDARY = r"[a-z0-9#+]"
 # Mesma coisa para o casamento case-sensitive, que roda no texto original.
 _CASE_BOUNDARY = r"[A-Za-z0-9#+]"
 
+ARQUIVO_SECOES_DESCARTE = RULES_DIR / "secoes_descarte.yml"
+
+
+def _carregar_secoes_descarte() -> tuple[str, ...]:
+    """Secoes finais (beneficios/termos) que o extrator deve ignorar."""
+    try:
+        with open(ARQUIVO_SECOES_DESCARTE, encoding="utf-8") as fh:
+            dados = yaml.safe_load(fh) or {}
+    except OSError:
+        return ()
+    secoes = dados.get("secoes_descarte") or []
+    return tuple(s.strip() for s in secoes if isinstance(s, str) and s.strip())
+
 
 def normalize_tech(text: str | None) -> str:
     """Minusculas, sem acento, mantendo '#' e '+'. Pontuacao vira espaco."""
@@ -56,11 +69,20 @@ def _compile_case_alias(alias: str) -> re.Pattern:
 class SkillExtractor:
     """Encontra tecnologias no texto da vaga, a partir de `skills.yml`."""
 
-    def __init__(self, rules: dict) -> None:
+    def __init__(
+        self,
+        rules: dict,
+        secoes_descarte: list[str] | None = None,
+    ) -> None:
         # nome canonico -> lista de padroes; guarda tambem o grupo (linguagens...)
         self.skills: dict[str, list[re.Pattern]] = {}
         self.case_sensitive: dict[str, list[re.Pattern]] = {}
         self.groups: dict[str, str] = {}
+        self.secoes_descarte = (
+            tuple(s.strip() for s in secoes_descarte if s.strip())
+            if secoes_descarte is not None
+            else _carregar_secoes_descarte()
+        )
         for group, entries in (rules or {}).items():
             for canonical, aliases in (entries or {}).items():
                 patterns = []
@@ -89,10 +111,23 @@ class SkillExtractor:
         with open(path, encoding="utf-8") as fh:
             return cls(yaml.safe_load(fh) or {})
 
+    def _recortar_secoes_finais(self, texto_normalizado: str) -> str:
+        """Corta o texto no inicio da primeira secao de beneficios/termos."""
+        fim = len(texto_normalizado)
+        for secao in self.secoes_descarte:
+            posicao = texto_normalizado.find(secao)
+            if posicao != -1 and posicao < fim:
+                fim = posicao
+        return texto_normalizado[:fim].strip()
+
     def extract(self, *texts: str) -> list[str]:
         """Tecnologias citadas nos textos, sem repetir, em ordem alfabetica."""
         raw = " ".join(t for t in texts if t)
         haystack = normalize_tech(raw)
+        if not haystack:
+            return []
+        # Ignora secoes finais de beneficios/termos: nao sao requisito.
+        haystack = self._recortar_secoes_finais(haystack)
         if not haystack:
             return []
         found = [
