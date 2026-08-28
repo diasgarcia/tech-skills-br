@@ -788,8 +788,6 @@ areas:
       - clp
 
 
-
-# Peso numerico de cada faixa.
 weights:
   peso_alto: 4.0
   peso_medio: 1.0

@@ -53,7 +53,6 @@ class TheirStackSource(JobSource):
             "Content-Type": "application/json",
         }
 
-        # Resolve se há filtros de polo específicos
         hubs = resolve_hubs(self.settings.locations)
         is_filtered = bool(
             self.settings.locations

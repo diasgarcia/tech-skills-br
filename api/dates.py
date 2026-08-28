@@ -18,7 +18,6 @@ import re
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
-# vagas_20260731_174407.csv -> 2026-07-31
 _STAMP_RE = re.compile(r"(\d{8})_(\d{6})")
 _ISO_RE = re.compile(r"^(\d{4})-(\d{2})-(\d{2})")
 _BR_RE = re.compile(r"^(\d{2})/(\d{2})/(\d{4})$")

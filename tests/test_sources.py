@@ -84,7 +84,7 @@ def test_gupy_parse_mapeia_campos():
 def test_gupy_parse_limpa_html_da_descricao():
     job = _source(GupySource)._parse(GUPY_JOB, "x")
     assert "<p>" not in job.description
-    assert "Júnior" in job.description  # entidade &uacute; decodificada
+    assert "Júnior" in job.description
 
 
 def test_gupy_parse_ignora_registro_incompleto():
@@ -175,7 +175,7 @@ PROGRAMATHOR_HTML = """
 
 def test_programathor_parse_mapeia_campos_pelo_icone():
     jobs = _source(ProgramathorSource)._parse_page(PROGRAMATHOR_HTML, "Júnior")
-    assert len(jobs) == 1  # a vaga "Vencida" foi descartada
+    assert len(jobs) == 1
     job = jobs[0]
     assert job.source == "programathor"
     assert job.external_id == "33692"
@@ -402,12 +402,9 @@ def test_linkedin_ignora_card_sem_urn_ou_titulo():
 
 
 def test_linkedin_titulo_com_remoto_vence_cidade_do_card():
-    # O card lista uma cidade, mas o titulo anuncia "Trabalho Remoto"
-    # (padrao comum em empresas 100% remotas). O titulo e o sinal mais forte.
     assert LinkedInSource._modalidade(
         "Goiânia, GO", title="Desenvolvedor Python Junior - Trabalho Remoto"
     ) == "Remoto"
-    # Sem mencao no titulo, a cidade segue indicando presencial.
     assert LinkedInSource._modalidade(
         "Goiânia, GO", title="Desenvolvedor Python Junior"
     ) == "Presencial"
@@ -423,7 +420,6 @@ def test_linkedin_sem_descricao_no_card():
 
 
 def test_programathor_filtros_de_nivel_de_entrada():
-    # O portal não tem busca textual, então a fonte usa os filtros nativos.
     assert set(FILTROS_NIVEL_ENTRADA) == {"Júnior", "Estágio"}
     assert FILTROS_NIVEL_ENTRADA["Júnior"] == {"expertise": "Júnior"}
     assert FILTROS_NIVEL_ENTRADA["Estágio"] == {"contract_type": "Estágio"}

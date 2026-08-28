@@ -35,7 +35,6 @@ class GeoClassifier:
         self.regioes = self.rules.get("regioes") or {}
         self.ufs_map = self.rules.get("ufs_para_regioes") or {}
 
-        # Mapeamento compilado de alias -> (nome_polo, nome_regiao)
         self.polo_patterns: list[tuple[re.Pattern, str, str]] = []
         for regiao_nome, polos in self.regioes.items():
             for polo in polos:
@@ -46,11 +45,10 @@ class GeoClassifier:
                     norm_alias = _norm(alias)
                     if not norm_alias:
                         continue
-                    # Regex para casamento por palavra inteira
                     pat = re.compile(rf"\b{re.escape(norm_alias)}\b")
                     self.polo_patterns.append((pat, nome_polo, regiao_nome))
 
-        # Ordena padroes mais longos primeiro para priorizar nomes compostos
+        # Padroes mais longos primeiro: prioriza nomes compostos.
         self.polo_patterns.sort(key=lambda item: len(item[0].pattern), reverse=True)
 
 
@@ -67,23 +65,19 @@ class GeoClassifier:
         norm_loc = _norm(location_text)
         is_remoto = (workplace_type or "").strip().lower() == REMOTO.lower()
 
-        # 1. Se informou um polo conhecido na string de localizacao
         if norm_loc:
             for pat, polo_nome, regiao_nome in self.polo_patterns:
                 if pat.search(norm_loc):
                     return polo_nome, regiao_nome
 
-            # 2. Se nao casou um polo direto, tenta identificar pela UF
             for uf, regiao_nome in self.ufs_map.items():
                 uf_pat = re.compile(rf"\b{re.escape(uf.lower())}\b")
                 if uf_pat.search(norm_loc):
                     return f"Estado/{uf}", regiao_nome
 
-        # 3. Se for remoto puro sem cidade especifica
         if is_remoto:
             return "Remoto", "Remoto Nacional"
 
-        # 4. Localizacao generica "Brasil"
         if "brasil" in norm_loc or "brazil" in norm_loc:
             return "Nacional", "Nacional"
 
