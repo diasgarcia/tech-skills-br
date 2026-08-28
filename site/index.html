@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Skills Brasil — Mapeamento de Skills & API Pública</title>
+
+  
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card-bg: #161b22;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --text-muted: #8b949e;
+      --text-bright: #f0f6fc;
+      --accent: #58a6ff;
+      --green: #3fb950;
+      --amber: #d29922;
+      --purple: #bc8cff;
+      --code-bg: #0a0c10;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      overflow-y: auto;
+      scrollbar-gutter: stable;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      padding: 16px;
+    }
+
+    /* Scrollbar discreta integrada ao tema escuro */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-muted);
+    }
+
+
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+    
+    header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+    
+    .title-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h1 { font-size: 16px; font-weight: 700; color: var(--text-bright); }
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      font-size: 11px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--card-bg);
+    }
+    .badge-green { color: var(--green); border-color: rgba(63, 185, 80, 0.4); }
+    .badge-accent { color: var(--accent); border-color: rgba(88, 166, 255, 0.4); }
+
+    .nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 16px 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+
+    .nav-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      font-family: inherit;
+      font-size: 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: 0.1s;
+    }
+    .nav-btn:hover { color: var(--text-bright); border-color: var(--text-muted); }
+    .nav-btn.active {
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      border-color: var(--accent);
+    }
+
+    .grid-kpi {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+    }
+
+    .card-title { font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+    .card-value { font-size: 20px; font-weight: 700; color: var(--text-bright); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+
+    th, td {
+      padding: 6px 10px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th { color: var(--text-muted); font-weight: 600; background: rgba(255,255,255,0.02); }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .bar-wrap { width: 100%; background: #21262d; height: 10px; border-radius: 2px; overflow: hidden; display: flex; }
+    .bar-fill { background: var(--accent); height: 100%; }
+
+    .search-input {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      color: var(--text-bright);
+      padding: 6px 10px;
+      font-family: inherit;
+      font-size: 12px;
+      border-radius: 4px;
+      width: 100%;
+      max-width: 320px;
+      margin-bottom: 12px;
+    }
+    .search-input:focus { outline: none; border-color: var(--accent); }
+
+    pre code {
+      display: block;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      color: var(--text-bright);
+      overflow-x: auto;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 2px 6px;
+      margin: 2px;
+      font-size: 11px;
+      border-radius: 3px;
+      background: #21262d;
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+    .pill.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+
+    .tab-section { display: none; }
+    .tab-section.active { display: block; }
+
+    /* Listas longas rolam dentro do card, sem esticar a pagina */
+    .scroll-table {
+      max-height: calc(100vh - 330px);
+      overflow-y: auto;
+      scrollbar-gutter: stable;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+    .scroll-table table { margin-top: 0; }
+    .scroll-table thead th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: var(--card-bg);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      margin-top: 28px;
+      color: var(--text-muted);
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .show-mobile { display: none; }
+
+    /* RESPONSIVIDADE MOBILE ROOTS (ENCAIXA SEM ROLAGEM) */
+    @media (max-width: 768px) {
+      body { padding: 10px; font-size: 12px; }
+      h1 { font-size: 14px; }
+      .grid-kpi { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .card { padding: 10px; }
+      .card-value { font-size: 17px; }
+      .nav-tabs { gap: 4px; margin: 12px 0; }
+      .nav-btn { font-size: 11px; padding: 5px 8px; }
+      table { font-size: 11px; }
+      th, td { padding: 5px 6px; }
+      .search-input { max-width: 100%; }
+
+      /* Oculta colunas secundárias para caber 100% na largura do celular */
+      .hide-mobile { display: none !important; }
+      .show-mobile { display: block !important; }
+    }
+
+
+    @media (max-width: 420px) {
+      .grid-kpi { grid-template-columns: 1fr; }
+      .nav-btn { width: 100%; text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- HEADER -->
+  <header>
+    <div class="title-row">
+      <div>
+        <h1>tech-skills-br</h1>
+        <p style="color: var(--text-muted); font-size: 11px; margin-top: 2px;">
+
+          Mineração de dados e mapeamento contínuo das habilidades demandadas pelo mercado brasileiro
+        </p>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="nav-tabs">
+      <button class="nav-btn active" onclick="setTab('resumo')">[1] Visão Geral</button>
+      <button class="nav-btn" onclick="setTab('skills')">[2] Ranking de Habilidades</button>
+      <button class="nav-btn" onclick="setTab('areas')">[3] Explorador por Área</button>
+      <button class="nav-btn" onclick="setTab('vagas')">[4] Explorador de Vagas</button>
+      <button class="nav-btn" onclick="setTab('api')">[5] Endpoints da API JSON</button>
+    </div>
+  </header>
+
+  <!-- TAB 1: VISÃO GERAL -->
+  <div id="tab-resumo" class="tab-section active">
+    <div class="grid-kpi">
+      <div class="card">
+        <div class="card-title">Amostra Total de Vagas</div>
+        <div class="card-value" id="kpi-total">--</div>
+        <p style="color: var(--text-muted); font-size: 11px; margin-top: 4px;" id="kpi-periodo">--</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Empresas Contratantes</div>
+        <div class="card-value" id="kpi-empresas">--</div>
+        <p style="color: var(--text-muted); font-size: 11px; margin-top: 4px;">Empresas únicas catalogadas</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Tecnologia Mais Demandada</div>
+        <div class="card-value" style="color: var(--green);" id="kpi-top-skill">--</div>
+        <p style="color: var(--text-muted); font-size: 11px; margin-top: 4px;" id="kpi-top-skill-count">--</p>
+      </div>
+      <div class="card">
+        <div class="card-title" id="kpi-top-mod-title">Modalidade Dominante</div>
+        <div class="card-value" id="kpi-top-mod-value">--</div>
+        <p style="color: var(--text-muted); font-size: 11px; margin-top: 4px;" id="kpi-top-mod-sub">--</p>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+      <!-- Áreas -->
+      <div class="card">
+        <div class="card-title" style="font-weight: 700;">Distribuição por Área Técnica</div>
+        <table id="table-areas-summary">
+          <thead><tr><th>Área</th><th style="text-align: center;">Vagas</th><th style="text-align: right;">%</th><th class="hide-mobile" style="width: 35%;">Distribuição</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <!-- Regiões e Modalidade -->
+      <div class="card">
+        <div class="card-title" style="font-weight: 700;">Macrorregiões do Brasil</div>
+        <table id="table-regioes-summary">
+          <thead><tr><th>Região</th><th style="text-align: center;">Vagas</th><th style="text-align: right;">%</th><th class="hide-mobile" style="width: 35%;">Distribuição</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        
+        <div class="card-title" style="font-weight: 700; margin-top: 16px;">Modalidade de Trabalho</div>
+        <table id="table-modalidades-summary">
+          <thead><tr><th>Modalidade</th><th style="text-align: center;">Vagas</th><th style="text-align: right;">%</th><th class="hide-mobile" style="width: 35%;">Distribuição</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: RANKING DE HABILIDADES -->
+  <div id="tab-skills" class="tab-section">
+    <div class="card">
+      <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 8px;">
+        <div>
+          <div class="card-title" style="font-weight: 700;">Ranking Geral de Tecnologias Demandadas</div>
+          <p style="color: var(--text-muted); font-size: 11px;">Percentual calculado sobre as vagas que informam requisitos técnicos.</p>
+        </div>
+        <input type="text" class="search-input" id="search-skills" placeholder="Filtrar tecnologia..." oninput="renderSkillsTable()">
+      </div>
+
+      <div class="scroll-table">
+        <table id="table-skills">
+          <thead><tr><th>#</th><th>Tecnologia</th><th class="hide-mobile">Categoria</th><th style="text-align: center;">Vagas</th><th style="text-align: right;">Demanda %</th><th class="hide-mobile" style="width: 35%;">Proporção</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB 3: EXPLORADOR POR ÁREA -->
+  <div id="tab-areas" class="tab-section">
+    <div class="card" style="margin-bottom: 12px;">
+      <div class="card-title" style="margin-bottom: 8px;">Selecione a Especialidade:</div>
+      <div id="area-pills-container"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="font-weight: 700;" id="area-detail-title">Habilidades em Destaque</div>
+      <p style="color: var(--text-muted); font-size: 11px; margin-bottom: 10px;" id="area-detail-subtitle"></p>
+
+      <div class="scroll-table">
+        <table id="table-area-skills">
+          <thead><tr><th>Tecnologia</th><th class="hide-mobile">Categoria</th><th style="text-align: center;">Vagas na Área</th><th style="text-align: right;">Demanda %</th><th class="hide-mobile" style="width: 35%;">Proporção</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: EXPLORADOR DE VAGAS -->
+  <div id="tab-vagas" class="tab-section">
+    <div class="card">
+      <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px;">
+        <div>
+          <div class="card-title" style="font-weight: 700;">Navegador de Vagas Recentes</div>
+          <p style="color: var(--text-muted); font-size: 11px;">Consulte anúncios dos últimos 30 dias, modalidade, localidade e links originais.</p>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; width: 100%; max-width: 520px;">
+          <input type="text" class="search-input" id="search-vagas" placeholder="Buscar por título, empresa ou área..." oninput="renderVagasTable()" style="margin-bottom: 0; flex: 1; min-width: 180px;">
+          <select id="filter-modalidade" class="search-input" style="margin-bottom: 0; width: auto; min-width: 140px; cursor: pointer;" onchange="renderVagasTable()">
+            <option value="">Todas modalidades</option>
+            <option value="Presencial">Presencial</option>
+            <option value="Remoto">Remoto</option>
+            <option value="Híbrido">Híbrido</option>
+          </select>
+        </div>
+      </div>
+
+
+      <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;" id="vagas-count-info"></p>
+
+      <div class="scroll-table">
+        <table id="table-vagas">
+          <thead><tr><th>Título da Vaga</th><th class="hide-mobile">Empresa</th><th class="hide-mobile" style="text-align: center;">Área</th><th>Local / Mod.</th><th class="hide-mobile" style="text-align: center; width: 45px;">Link</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+
+    </div>
+  </div>
+
+
+  <!-- TAB 5: API JSON -->
+  <div id="tab-api" class="tab-section">
+    <div class="card space-y-4">
+      <div class="card-title" style="font-weight: 700; color: var(--text-bright);">Endpoints da API JSON Estática (CORS Aberto)</div>
+      <p style="color: var(--text-muted); font-size: 11px; margin-top: 4px;">
+        Os dados consolidados da pesquisa estão disponíveis publicamente em formato JSON para consumo direto no Postman, Python, JavaScript, R ou Power BI:
+      </p>
+
+      <table style="margin: 14px 0;">
+        <thead><tr><th>Endpoint</th><th class="hide-mobile">Descrição</th><th style="text-align: center; width: 45px;">Link</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>GET /api/resumo.json</code></td>
+            <td class="hide-mobile">Metadados gerais, KPIs e distribuições de áreas e regiões</td>
+            <td style="text-align: center;"><a href="api/resumo.json" target="_blank" rel="noopener noreferrer" title="Abrir JSON" style="font-size: 14px; text-decoration: none;">↗</a></td>
+          </tr>
+          <tr>
+            <td><code>GET /api/areas.json</code></td>
+            <td class="hide-mobile">Ranking consolidado de todas as áreas técnicas com contagens e percentuais</td>
+            <td style="text-align: center;"><a href="api/areas.json" target="_blank" rel="noopener noreferrer" title="Abrir JSON" style="font-size: 14px; text-decoration: none;">↗</a></td>
+          </tr>
+          <tr>
+            <td><code>GET /api/tecnologias.json</code></td>
+            <td class="hide-mobile">Ranking completo de todas as tecnologias e habilidades demandadas</td>
+            <td style="text-align: center;"><a href="api/tecnologias.json" target="_blank" rel="noopener noreferrer" title="Abrir JSON" style="font-size: 14px; text-decoration: none;">↗</a></td>
+          </tr>
+          <tr>
+            <td><code>GET /api/vagas.json</code></td>
+            <td class="hide-mobile">Base completa e estruturada com todas as vagas ativas catalogadas</td>
+            <td style="text-align: center;"><a href="api/vagas.json" target="_blank" rel="noopener noreferrer" title="Abrir JSON" style="font-size: 14px; text-decoration: none;">↗</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="card-title" style="font-weight: 700; margin-top: 16px;">Terminal:</div>
+      <pre><code>curl -s https://diasgarcia.github.io/tech-skills-br/api/tecnologias.json | jq .[0:5]</code></pre>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>Tech Skills Brasil &middot; Pesquisa PIBIC &middot; 2026</div>
+    <div>
+      <a href="https://github.com/diasgarcia/tech-skills-br" target="_blank">github.com/diasgarcia/tech-skills-br</a>
+    </div>
+  </footer>
+</div>
+
+<!-- JAVASCRIPT ROOTS -->
+<script>
+let resumoData = null;
+let tecnologiasData = [];
+let areasData = [];
+let vagasData = [];
+let currentArea = null;
+
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const [resResumo, resTech, resAreas, resVagas] = await Promise.all([
+      fetch("api/resumo.json").then(r => r.json()),
+      fetch("api/tecnologias.json").then(r => r.json()),
+      fetch("api/areas.json").then(r => r.json()),
+      fetch("api/vagas.json").then(r => r.json())
+    ]);
+
+    resumoData = resResumo;
+    tecnologiasData = resTech;
+    areasData = resAreas;
+    vagasData = resVagas;
+
+    if (areasData && areasData.length > 0) {
+      currentArea = areasData[0].area;
+    }
+
+    initKPIs();
+    renderSummaryTables();
+    renderSkillsTable();
+    initAreaPills();
+    renderVagasTable();
+    ajustaAlturaScrollTables();
+  } catch (err) {
+    console.error("Erro ao carregar dados da API estática:", err);
+  }
+});
+
+
+function setTab(tabId) {
+  document.querySelectorAll(".tab-section").forEach(el => el.classList.remove("active"));
+  document.querySelectorAll(".nav-btn").forEach(btn => btn.classList.remove("active"));
+
+  const target = document.getElementById("tab-" + tabId);
+  if (target) target.classList.add("active");
+
+  const btnIndex = { resumo: 0, skills: 1, areas: 2, vagas: 3, api: 4 }[tabId];
+  const btns = document.querySelectorAll(".nav-btn");
+  if (btns[btnIndex]) btns[btnIndex].classList.add("active");
+
+  ajustaAlturaScrollTables();
+}
+
+function ajustaAlturaScrollTables() {
+  const footer = document.querySelector("footer");
+  const folgaFooter = (footer ? footer.offsetHeight : 60) + 68;
+  document.querySelectorAll(".scroll-table").forEach(el => {
+    if (!el.offsetParent) return; // aba escondida
+    const topo = el.getBoundingClientRect().top;
+    const altura = window.innerHeight - topo - folgaFooter;
+    el.style.maxHeight = Math.max(200, altura) + "px";
+  });
+}
+window.addEventListener("resize", ajustaAlturaScrollTables);
+
+function initKPIs() {
+  const meta = resumoData.metadados || {};
+  const total = meta.total_vagas || 0;
+
+  document.getElementById("kpi-total").innerText = total.toLocaleString("pt-BR");
+  document.getElementById("kpi-periodo").innerText = meta.periodo ? `Período: ${meta.periodo}` : "";
+  document.getElementById("kpi-empresas").innerText = (meta.total_empresas || 0).toLocaleString("pt-BR");
+
+  // Top 1 Tecnologia Dinâmica (ordenação vinda da base)
+  const topTech = (tecnologiasData && tecnologiasData.length > 0) ? tecnologiasData[0] : null;
+  if (topTech) {
+    document.getElementById("kpi-top-skill").innerText = topTech.nome;
+    document.getElementById("kpi-top-skill-count").innerText = `${topTech.vagas} citações (${topTech.percentual_total}% da base)`;
+  } else {
+    document.getElementById("kpi-top-skill").innerText = "--";
+    document.getElementById("kpi-top-skill-count").innerText = "--";
+  }
+
+  // Modalidade Dominante Dinâmica (pega a maior da lista)
+  const modalidades = resumoData.modalidades || [];
+  if (modalidades.length > 0) {
+    const topMod = modalidades[0];
+    document.getElementById("kpi-top-mod-title").innerText = `Modalidade: ${topMod.modalidade}`;
+    document.getElementById("kpi-top-mod-value").innerText = `${topMod.percentual}%`;
+    document.getElementById("kpi-top-mod-sub").innerText = `${topMod.vagas.toLocaleString("pt-BR")} vagas nesta modalidade`;
+  }
+}
+
+function renderSummaryTables() {
+  // Áreas
+  const tbodyAreas = document.querySelector("#table-areas-summary tbody");
+  tbodyAreas.innerHTML = "";
+  (areasData || []).slice(0, 10).forEach(a => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><strong>${a.area}</strong></td>
+      <td style="text-align: center;">${a.vagas}</td>
+      <td style="text-align: right;">${a.percentual}%</td>
+      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${a.percentual}%;"></div></div></td>
+    `;
+    tbodyAreas.appendChild(tr);
+  });
+
+  // Regiões
+  const tbodyReg = document.querySelector("#table-regioes-summary tbody");
+  tbodyReg.innerHTML = "";
+  (resumoData.regioes || []).forEach(r => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${r.regiao}</td>
+      <td style="text-align: center;">${r.vagas}</td>
+      <td style="text-align: right;">${r.percentual}%</td>
+      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${r.percentual}%; background: var(--green);"></div></div></td>
+    `;
+    tbodyReg.appendChild(tr);
+  });
+
+  // Modalidades
+  const tbodyMod = document.querySelector("#table-modalidades-summary tbody");
+  tbodyMod.innerHTML = "";
+  (resumoData.modalidades || []).forEach(m => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${m.modalidade}</td>
+      <td style="text-align: center;">${m.vagas}</td>
+      <td style="text-align: right;">${m.percentual}%</td>
+      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${m.percentual}%; background: var(--amber);"></div></div></td>
+    `;
+    tbodyMod.appendChild(tr);
+  });
+}
+
+function renderSkillsTable() {
+  const query = (document.getElementById("search-skills").value || "").toLowerCase().trim();
+  const tbody = document.querySelector("#table-skills tbody");
+  tbody.innerHTML = "";
+
+  let items = tecnologiasData || [];
+  if (query) {
+    items = items.filter(t => t.nome.toLowerCase().includes(query) || t.grupo.toLowerCase().includes(query));
+  }
+
+  items.forEach(t => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td style="color: var(--text-muted);">${t.posicao}</td>
+      <td><strong style="color: var(--text-bright);">${t.nome}</strong></td>
+      <td class="hide-mobile"><span class="badge">${t.grupo}</span></td>
+      <td style="text-align: center;">${t.vagas}</td>
+      <td style="text-align: right;"><strong>${t.percentual_total}%</strong></td>
+      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${t.percentual_total}%;"></div></div></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function initAreaPills() {
+  if (!currentArea && areasData && areasData.length > 0) {
+    currentArea = areasData[0].area;
+  }
+  const container = document.getElementById("area-pills-container");
+
+  container.innerHTML = "";
+
+  areasData.forEach(a => {
+    const span = document.createElement("span");
+    span.className = `pill ${a.area === currentArea ? 'active' : ''}`;
+    span.innerText = `${a.area} (${a.vagas})`;
+    span.onclick = () => selectArea(a.area);
+    container.appendChild(span);
+  });
+
+  renderAreaDetail();
+}
+
+function selectArea(areaName) {
+  currentArea = areaName;
+  initAreaPills();
+}
+
+function renderAreaDetail() {
+  const areaInfo = (resumoData.skills_by_area && resumoData.skills_by_area[currentArea]) || { total_vagas: 0, skills: [] };
+  document.getElementById("area-detail-title").innerText = `Habilidades mais exigidas em ${currentArea}`;
+  document.getElementById("area-detail-subtitle").innerText = `Base: ${areaInfo.total_vagas} vagas na área. Todas as tecnologias com ao menos 1 registro:`;
+
+  const tbody = document.querySelector("#table-area-skills tbody");
+  tbody.innerHTML = "";
+
+  if (!areaInfo.skills || areaInfo.skills.length === 0) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td colspan="5" style="text-align: center; color: var(--text-muted); padding: 18px;">As vagas desta especialidade focam em atribuições funcionais de cargo (ex: montagem, bancada, circuitos, firmware) sem stacks padronizadas de software listadas no corpo do anúncio.</td>`;
+    tbody.appendChild(tr);
+    return;
+  }
+
+  (areaInfo.skills || []).forEach(s => {
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><strong style="color: var(--text-bright);">${s.nome}</strong></td>
+      <td class="hide-mobile"><span class="badge">${s.grupo}</span></td>
+      <td style="text-align: center;">${s.vagas}</td>
+      <td style="text-align: right;"><strong>${s.percentual}%</strong></td>
+      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${s.percentual}%; background: var(--purple);"></div></div></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function parsePtBrDate(str) {
+  if (!str) return null;
+  const parts = str.split("/");
+  if (parts.length !== 3) return null;
+  return new Date(parseInt(parts[2], 10), parseInt(parts[1], 10) - 1, parseInt(parts[0], 10));
+}
+
+function getDaysAgo(dateStr) {
+  const d = parsePtBrDate(dateStr);
+  if (!d) return 999;
+  const now = new Date();
+  const diffTime = now - d;
+  return Math.max(0, Math.floor(diffTime / (1000 * 60 * 60 * 24)));
+}
+
+function renderVagasTable() {
+  const query = (document.getElementById("search-vagas").value || "").toLowerCase().trim();
+  const modFilter = (document.getElementById("filter-modalidade").value || "").trim();
+  const tbody = document.querySelector("#table-vagas tbody");
+  tbody.innerHTML = "";
+
+  // Exibe apenas vagas recentes publicadas nos últimos 30 dias
+  let items = (vagasData || []).filter(v => getDaysAgo(v.data_publicacao) <= 30);
+
+  if (modFilter) {
+    items = items.filter(v => v.modalidade === modFilter);
+  }
+  if (query) {
+    items = items.filter(v => 
+      (v.titulo || "").toLowerCase().includes(query) || 
+      (v.empresa || "").toLowerCase().includes(query) ||
+      (v.area || "").toLowerCase().includes(query) ||
+      (v.tecnologias || []).some(t => t.toLowerCase().includes(query))
+    );
+  }
+
+  document.getElementById("vagas-count-info").innerText = `Exibindo ${items.length} vagas recentes encontradas`;
+
+
+  items.forEach(v => {
+    const tr = document.createElement("tr");
+    const linkHtml = v.url 
+      ? `<a href="${v.url}" target="_blank" rel="noopener noreferrer" title="Abrir vaga" style="font-size: 14px; text-decoration: none;">↗</a>` 
+      : "-";
+
+    const mobileTitleLink = v.url 
+      ? `<a href="${v.url}" target="_blank" rel="noopener noreferrer" style="color: var(--accent); font-weight: 700; text-decoration: none;">${v.titulo} <span style="font-size: 11px; opacity: 0.8;">↗</span></a>`
+      : `<strong>${v.titulo}</strong>`;
+
+    const polo = v.polo || v.localidade || "";
+    const modalidade = v.modalidade || "";
+    const emModalidade = `<em style="color: var(--text-muted);">${modalidade}</em>`;
+    let celulaLocal;
+    if (polo.toLowerCase() === modalidade.toLowerCase() && polo) {
+      celulaLocal = emModalidade;
+    } else if (polo && modalidade) {
+      celulaLocal = `${polo} &middot; ${emModalidade}`;
+    } else {
+      celulaLocal = polo || emModalidade;
+    }
+
+    tr.innerHTML = `
+      <td>
+        <div class="show-mobile">
+          ${mobileTitleLink}
+          <div style="color: var(--text-muted); font-size: 11px; margin-top: 2px;">${v.empresa}</div>
+        </div>
+        <div class="hide-mobile">
+          <strong>${v.titulo}</strong>
+        </div>
+      </td>
+      <td class="hide-mobile">${v.empresa}</td>
+      <td class="hide-mobile" style="text-align: center;"><span class="badge">${v.area}</span></td>
+      <td>${celulaLocal}</td>
+      <td class="hide-mobile" style="text-align: center;">${linkHtml}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+
+
+
+</script>
+
+</body>
+</html>
