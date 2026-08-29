@@ -15,57 +15,11 @@ Projeto de pesquisa científica (PIBIC / Iniciação Científica) que coleta e e
 
 > **"Em que medida as diretrizes curriculares do MEC (DCNs) e os referenciais da SBC preparam os egressos de Computação para as tecnologias e habilidades exigidas pelo mercado de trabalho brasileiro?"**
 
-Para responder a essa pergunta com evidências quantitativas e reprodutíveis, o projeto executa um pipeline de coleta multi-fonte, extração de tecnologias por taxonomia curada, deduplicação e análise estatística.
-
-## Metodologia e Pipeline de Dados
-
-```mermaid
-flowchart LR
-    A["Portais Públicos<br>(Gupy, LinkedIn, Vagas.com, ProgramaThor, Trampos)"] --> B["Portão de Relevância<br>e Nível de Entrada<br>(Filtro Tech + Jr/Estágio)"]
-    B --> C["Deduplicação<br>(Fingerprint Título + Empresa)"]
-    C --> D["Extração de Habilidades<br>e Classificação por Área<br>(Taxonomia Curada)"]
-    D --> E["Estratificação Geográfica<br>(62 Polos / 5 Regiões + Remoto)"]
-    E --> F["Banco de Dados Relacional<br>(SQLite / PostgreSQL)"]
-    F --> G["Relatórios Estatísticos<br>e Gráficos Analíticos"]
-```
-
-### 1. Coleta Multi-fonte
-
-- **Fontes públicas:** Gupy, LinkedIn Jobs, Vagas.com.br, ProgramaThor e Trampos.co.
-
-### 2. Amostragem Estratificada por Polos e Macrorregiões
-
-Os coletores cobrem as 5 macrorregiões do país e 62 polos tecnológicos, para evitar a concentração da amostra no Sudeste. Vagas 100% remotas de abrangência nacional formam uma categoria própria.
-
-### 3. Extração e Normalização de Skills
-
-O extrator usa um vocabulário controlado em `scraper/rules/skills.yml`, com mais de 200 tecnologias canônicas e centenas de sinônimos. Exemplo: `"React"`, `"React.js"`, `"ReactJS"` e `"react js"` viram `React`.
-
-### 4. Portão de Relevância e Senioridade
-
-- **Senioridade:** foco em nível de entrada (Júnior, Estágio, Trainee, Aprendiz).
-- **Portão de relevância:** descarta vagas fora do escopo de TI (ex: *Analista Contábil Jr*, *Analista Fiscal Jr*) que as buscas genéricas dos portais devolvem.
+Para responder a essa pergunta com evidências quantitativas e reprodutíveis, o projeto executa um pipeline de coleta multi-fonte, extração de tecnologias por taxonomia curada, deduplicação e análise estatística. A metodologia completa está documentada na [wiki](https://github.com/diasgarcia/tech-skills-br/wiki).
 
 ## Execução Rápida
 
-O [Manual de Uso](https://github.com/diasgarcia/tech-skills-br/wiki/Manual-de-Uso) na wiki documenta todos os parâmetros e opções.
-
-```powershell
-# 0. Primeira execução: carrega o histórico versionado no SQLite local.
-python scripts/import_csv.py --csv seed/vagas.csv
-
-# 1. Coleta (Gupy, LinkedIn, Vagas.com, ProgramaThor, Trampos):
-python main.py
-
-# 2. Consolida as coletas no SQLite:
-python scripts/import_csv.py
-
-# 3. Atualiza o snapshot versionado (seed/vagas.csv):
-python scripts/export_seed.py
-
-# 4. Gera o relatório estatístico consolidado:
-python scripts/report_db.py
-```
+Os comandos essenciais estão em [docs/execucao-rapida.md](docs/execucao-rapida.md).
 
 ## Site Público e API JSON Estática (GitHub Pages)
 
