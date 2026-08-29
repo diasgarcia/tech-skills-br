@@ -115,6 +115,7 @@ class Settings:
             "programathor",
             "trampos",
             "linkedin",
+            "solides",
         ]
     )
 

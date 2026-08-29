@@ -6,7 +6,7 @@ O [Manual de Uso](https://github.com/diasgarcia/tech-skills-br/wiki/Manual-de-Us
 # 0. Primeira execução: carrega o histórico versionado no SQLite local.
 python scripts/import_csv.py --csv seed/vagas.csv
 
-# 1. Coleta (Gupy, LinkedIn, Vagas.com, ProgramaThor, Trampos):
+# 1. Coleta (Gupy, LinkedIn, Vagas.com, ProgramaThor, Trampos, Solides):
 python main.py
 
 # 2. Consolida as coletas no SQLite:
