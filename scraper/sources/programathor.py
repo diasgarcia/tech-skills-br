@@ -116,23 +116,23 @@ class ProgramathorSource(JobSource):
                     locale="pt-BR",
                 )
                 page = context.new_page()
-                page.goto(full_url, wait_until="domcontentloaded", timeout=25000)
+                page.goto(full_url, wait_until="domcontentloaded", timeout=15000)
                 try:
                     page.wait_for_selector(
                         ".wrapper-jobs-list, .wrapper-content-job-show, h3",
-                        timeout=30000,
+                        timeout=8000,
                     )
                 except Exception:
                     pass
                 content = page.content()
                 if self._e_desafio_cloudflare(content):
                     # Desafio JS do Cloudflare: espera ele resolver e recarrega.
-                    page.wait_for_timeout(15000)
-                    page.goto(full_url, wait_until="domcontentloaded", timeout=25000)
+                    page.wait_for_timeout(5000)
+                    page.goto(full_url, wait_until="domcontentloaded", timeout=15000)
                     try:
                         page.wait_for_selector(
                             ".wrapper-jobs-list, .wrapper-content-job-show, h3",
-                            timeout=30000,
+                            timeout=8000,
                         )
                     except Exception:
                         pass
