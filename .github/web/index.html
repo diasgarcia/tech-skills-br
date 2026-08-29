@@ -383,7 +383,7 @@
           <p style="color: var(--text-muted); font-size: 11px;">Consulte anúncios dos últimos 30 dias, modalidade, localidade e links originais.</p>
         </div>
         <div style="display: flex; gap: 8px; flex-wrap: wrap; width: 100%; max-width: 520px;">
-          <input type="text" class="search-input" id="search-vagas" placeholder="Buscar por título, empresa ou área..." oninput="renderVagasTable()" style="margin-bottom: 0; flex: 1; min-width: 180px;">
+          <input type="text" class="search-input" id="search-vagas" placeholder="Buscar por título, empresa, área ou tecnologia..." oninput="renderVagasTable()" style="margin-bottom: 0; flex: 1; min-width: 180px;">
           <select id="filter-modalidade" class="search-input" style="margin-bottom: 0; width: auto; min-width: 140px; cursor: pointer;" onchange="renderVagasTable()">
             <option value="">Todas modalidades</option>
             <option value="Presencial">Presencial</option>
@@ -685,8 +685,15 @@ function getDaysAgo(dateStr) {
   return Math.max(0, Math.floor(diffTime / (1000 * 60 * 60 * 24)));
 }
 
+function normalizeSearchText(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
 function renderVagasTable() {
-  const query = (document.getElementById("search-vagas").value || "").toLowerCase().trim();
+  const query = normalizeSearchText(document.getElementById("search-vagas").value).trim();
   const modFilter = (document.getElementById("filter-modalidade").value || "").trim();
   const tbody = document.querySelector("#table-vagas tbody");
   tbody.innerHTML = "";
@@ -698,12 +705,11 @@ function renderVagasTable() {
     items = items.filter(v => v.modalidade === modFilter);
   }
   if (query) {
-    items = items.filter(v => 
-      (v.titulo || "").toLowerCase().includes(query) || 
-      (v.empresa || "").toLowerCase().includes(query) ||
-      (v.area || "").toLowerCase().includes(query) ||
-      (v.tecnologias || []).some(t => t.toLowerCase().includes(query))
-    );
+    items = items.filter(v => {
+      const tecnologias = Array.isArray(v.tecnologias) ? v.tecnologias : [v.tecnologias];
+      const searchableFields = [v.titulo, v.empresa, v.area, ...tecnologias];
+      return searchableFields.some(value => normalizeSearchText(value).includes(query));
+    });
   }
 
   document.getElementById("vagas-count-info").innerText = `Exibindo ${items.length} vagas recentes encontradas`;
