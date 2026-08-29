@@ -22,10 +22,20 @@ class JobSource(ABC):
     name: str = "base"
     label: str = "Base"
 
+    # Teto natural de paginas por termo nesta fonte, descoberto por
+    # sondagem (ex.: Solides tem 115 paginas no filtro junior; GeekHunter
+    # tem 81). O --max-pages da CLI continua valendo como teto MENOR
+    # (pilotos locais), mas nunca deixa a fonte passar deste limite.
+    MAX_PAGES_PER_TERM: int = 10
+
     def __init__(self, session: PoliteSession, settings: Settings) -> None:
         self.session = session
         self.settings = settings
         self.stats = SourceStats(source=self.name)
+
+    def page_limit(self) -> int:
+        """Teto efetivo de paginacao: o menor entre CLI e o natural da fonte."""
+        return min(self.settings.max_pages_per_term, self.MAX_PAGES_PER_TERM)
 
     @abstractmethod
     def fetch_term(self, term: str) -> list[Job]:
