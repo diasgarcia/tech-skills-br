@@ -238,7 +238,10 @@
 
     /* RESPONSIVIDADE MOBILE ROOTS (ENCAIXA SEM ROLAGEM) */
     @media (max-width: 768px) {
-      body { padding: 10px; font-size: 12px; }
+      body {
+        padding: 10px 10px calc(54px + env(safe-area-inset-bottom));
+        font-size: 12px;
+      }
       header { padding-bottom: 8px; margin-bottom: 12px; }
       h1 { font-size: 14px; }
       .title-row p { max-width: 350px; }
@@ -309,7 +312,20 @@
       #table-vagas th:first-child, #table-vagas td:first-child { width: 66%; }
       #table-vagas th, #table-vagas td { vertical-align: top; }
 
-      footer { margin-top: 18px; }
+      footer {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 20;
+        align-items: center;
+        flex-wrap: nowrap;
+        margin: 0;
+        padding: 9px max(10px, env(safe-area-inset-right)) calc(9px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
+        background: var(--bg);
+        box-shadow: 0 -8px 18px rgba(13, 17, 23, 0.9);
+      }
+      footer > div { white-space: nowrap; }
 
       /* Oculta colunas secundárias para caber 100% na largura do celular */
       .hide-mobile { display: none !important; }
@@ -319,7 +335,7 @@
 
 
     @media (max-width: 420px) {
-      body { padding: 8px; }
+      body { padding: 8px 8px calc(52px + env(safe-area-inset-bottom)); }
       .grid-kpi { gap: 6px; }
       .card { padding: 9px; }
       .card-title { font-size: 10px; }
@@ -519,9 +535,15 @@
 
   <!-- FOOTER -->
   <footer>
-    <div>Tech Skills Brasil &middot; Pesquisa PIBIC &middot; 2026</div>
     <div>
-      <a href="https://github.com/diasgarcia/tech-skills-br" target="_blank">github.com/diasgarcia/tech-skills-br</a>
+      <span class="hide-mobile">Tech Skills Brasil &middot; Pesquisa PIBIC &middot; 2026</span>
+      <span class="show-mobile">Tech Skills Brasil &middot; 2026</span>
+    </div>
+    <div>
+      <a href="https://github.com/diasgarcia/tech-skills-br" target="_blank">
+        <span class="hide-mobile">github.com/diasgarcia/tech-skills-br</span>
+        <span class="show-mobile">GitHub ↗</span>
+      </a>
     </div>
   </footer>
 </div>
