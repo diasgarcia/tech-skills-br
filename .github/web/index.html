@@ -236,6 +236,10 @@
       /* Oculta colunas secundárias para caber 100% na largura do celular */
       .hide-mobile { display: none !important; }
       .show-mobile { display: block !important; }
+
+      /* Sem larguras fixas: cada coluna fica do tamanho do conteúdo */
+      #table-skills, #table-area-skills { table-layout: auto; }
+      #table-skills th:first-child, #table-area-skills th:first-child { width: 26px; }
     }
 
 
