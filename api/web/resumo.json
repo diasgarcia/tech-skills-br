@@ -347,6 +347,12 @@
           "percentual": 8.3
         },
         {
+          "nome": "Word",
+          "grupo": "dados",
+          "vagas": 28,
+          "percentual": 5.8
+        },
+        {
           "nome": "Antivírus",
           "grupo": "suporte_infra",
           "vagas": 26,
@@ -1511,6 +1517,12 @@
           "percentual": 1.1
         },
         {
+          "nome": "Word",
+          "grupo": "dados",
+          "vagas": 3,
+          "percentual": 1.1
+        },
+        {
           "nome": "Visual Basic/VBA",
           "grupo": "linguagens",
           "vagas": 2,
@@ -2469,6 +2481,12 @@
           "grupo": "hardware_eletronica",
           "vagas": 1,
           "percentual": 0.7
+        },
+        {
+          "nome": "Word",
+          "grupo": "dados",
+          "vagas": 1,
+          "percentual": 0.7
         }
       ]
     },
@@ -3315,6 +3333,12 @@
           "grupo": "engenharia_praticas",
           "vagas": 1,
           "percentual": 0.8
+        },
+        {
+          "nome": "Word",
+          "grupo": "dados",
+          "vagas": 1,
+          "percentual": 0.8
         }
       ]
     },
@@ -3511,6 +3535,12 @@
         {
           "nome": "TOTVS",
           "grupo": "engenharia_praticas",
+          "vagas": 3,
+          "percentual": 3.0
+        },
+        {
+          "nome": "Word",
+          "grupo": "dados",
           "vagas": 3,
           "percentual": 3.0
         },
@@ -4243,6 +4273,12 @@
         {
           "nome": "Automação Industrial",
           "grupo": "hardware_eletronica",
+          "vagas": 1,
+          "percentual": 1.5
+        },
+        {
+          "nome": "Word",
+          "grupo": "dados",
           "vagas": 1,
           "percentual": 1.5
         }
@@ -5099,6 +5135,12 @@
           "percentual": 5.7
         },
         {
+          "nome": "Word",
+          "grupo": "dados",
+          "vagas": 2,
+          "percentual": 5.7
+        },
+        {
           "nome": "Visual Basic/VBA",
           "grupo": "linguagens",
           "vagas": 1,
@@ -5413,6 +5455,12 @@
         {
           "nome": "SAP",
           "grupo": "engenharia_praticas",
+          "vagas": 2,
+          "percentual": 3.0
+        },
+        {
+          "nome": "Word",
+          "grupo": "dados",
           "vagas": 2,
           "percentual": 3.0
         },
@@ -6173,6 +6221,12 @@
           "percentual": 4.7
         },
         {
+          "nome": "Word",
+          "grupo": "dados",
+          "vagas": 2,
+          "percentual": 4.7
+        },
+        {
           "nome": "Visual Basic/VBA",
           "grupo": "linguagens",
           "vagas": 1,
@@ -6397,6 +6451,12 @@
         {
           "nome": "Antivírus",
           "grupo": "suporte_infra",
+          "vagas": 2,
+          "percentual": 4.8
+        },
+        {
+          "nome": "Word",
+          "grupo": "dados",
           "vagas": 2,
           "percentual": 4.8
         },
@@ -7275,6 +7335,12 @@
           "grupo": "engenharia_praticas",
           "vagas": 1,
           "percentual": 4.5
+        },
+        {
+          "nome": "Word",
+          "grupo": "dados",
+          "vagas": 1,
+          "percentual": 4.5
         }
       ]
     },
@@ -7483,6 +7549,12 @@
         {
           "nome": "IoT",
           "grupo": "hardware_eletronica",
+          "vagas": 1,
+          "percentual": 4.3
+        },
+        {
+          "nome": "Word",
+          "grupo": "dados",
           "vagas": 1,
           "percentual": 4.3
         }
