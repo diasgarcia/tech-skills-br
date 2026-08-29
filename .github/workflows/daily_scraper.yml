@@ -44,9 +44,10 @@ jobs:
       env:
         PYTHONPATH: .
 
-    - name: 5. Coleta Solides (limite completo da paginacao)
+    - name: 5. Coleta Solides e GeekHunter (limite completo da paginacao)
       run: |
         python main.py --sources solides --max-pages 200 --delay 2 --no-enrich
+        python main.py --sources geekhunter --max-pages 90 --delay 2 --no-enrich
       env:
         PYTHONPATH: .
 
