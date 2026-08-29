@@ -1,92 +1,92 @@
 [
   {
     "area": "Suporte Técnico",
-    "vagas": 670,
-    "percentual": 32.8
+    "vagas": 750,
+    "percentual": 33.3
   },
   {
     "area": "Engenharia de Software",
-    "vagas": 342,
+    "vagas": 376,
     "percentual": 16.7
   },
   {
     "area": "Data",
-    "vagas": 164,
-    "percentual": 8.0
-  },
-  {
-    "area": "Backend",
-    "vagas": 135,
-    "percentual": 6.6
+    "vagas": 178,
+    "percentual": 7.9
   },
   {
     "area": "Infraestrutura / Redes",
-    "vagas": 123,
-    "percentual": 6.0
+    "vagas": 151,
+    "percentual": 6.7
+  },
+  {
+    "area": "Backend",
+    "vagas": 140,
+    "percentual": 6.2
   },
   {
     "area": "QA",
-    "vagas": 90,
-    "percentual": 4.4
+    "vagas": 93,
+    "percentual": 4.1
+  },
+  {
+    "area": "Outros/TI Geral",
+    "vagas": 83,
+    "percentual": 3.7
   },
   {
     "area": "Fullstack",
     "vagas": 77,
-    "percentual": 3.8
-  },
-  {
-    "area": "Outros/TI Geral",
-    "vagas": 75,
-    "percentual": 3.7
+    "percentual": 3.4
   },
   {
     "area": "Segurança",
-    "vagas": 71,
-    "percentual": 3.5
+    "vagas": 77,
+    "percentual": 3.4
+  },
+  {
+    "area": "Sistemas / ERP",
+    "vagas": 64,
+    "percentual": 2.8
   },
   {
     "area": "Field Service / Hardware",
     "vagas": 54,
-    "percentual": 2.6
-  },
-  {
-    "area": "Sistemas / ERP",
-    "vagas": 54,
-    "percentual": 2.6
+    "percentual": 2.4
   },
   {
     "area": "Service Desk / Help Desk",
-    "vagas": 46,
-    "percentual": 2.3
+    "vagas": 50,
+    "percentual": 2.2
   },
   {
     "area": "DevOps",
-    "vagas": 35,
-    "percentual": 1.7
-  },
-  {
-    "area": "Frontend",
-    "vagas": 27,
-    "percentual": 1.3
+    "vagas": 40,
+    "percentual": 1.8
   },
   {
     "area": "Hardware / Eletrônica",
-    "vagas": 25,
+    "vagas": 30,
+    "percentual": 1.3
+  },
+  {
+    "area": "Frontend",
+    "vagas": 28,
     "percentual": 1.2
   },
   {
     "area": "Mobile",
-    "vagas": 24,
+    "vagas": 26,
     "percentual": 1.2
   },
   {
     "area": "Inteligência Artificial",
-    "vagas": 23,
+    "vagas": 25,
     "percentual": 1.1
   },
   {
     "area": "Design / UI / UX",
-    "vagas": 8,
+    "vagas": 10,
     "percentual": 0.4
   }
 ]
