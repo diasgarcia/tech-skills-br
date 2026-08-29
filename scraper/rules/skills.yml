@@ -208,13 +208,16 @@ qa_testes:
   Qualidade de Software: [qualidade de software, praticas de qualidade de software]
 
 suporte_infra:
-  Windows Server: [windows server]
-  Active Directory: [active directory, ad, ldap]
+  Windows Server: [windows server, servidores windows]
+  Active Directory: [active directory, ad, ldap, gpo]
   Windows: [windows, windows 10, windows 11]
   Redes de Computadores: [tcp ip, redes de computadores, redes corporativas, redes locais, switches, roteadores, routing, switching, dhcp, dns, lan, wan, vlan, cabeamento estruturado, mikrotik]
 
   VPN: [vpn]
-  Firewall: [firewall, pfSense, fortinet]
+  Firewall: [firewall, pfSense, fortinet, fortigate]
+  Antivírus: [antivirus, antivirus corporativo]
+  Bitdefender: [bitdefender]
+  Ubiquiti: [ubiquiti, unifi]
   ITIL: [itil, itil v3, itil v4]
   Service Desk: [service desk, central de servicos, servicedesk]
   Help Desk: [help desk, helpdesk]
@@ -223,12 +226,14 @@ suporte_infra:
 
   GLPI: [glpi]
   Zabbix: [zabbix]
+  Backup: [backup, rotinas de backup, becape]
   VoIP: [voip, telefonia ip]
   Office 365: [office 365, o365, microsoft 365, m365]
   Hardware: [hardware, equipamentos de ti]
   Montagem e Manutenção de PCs: [montagem de computadores, manutencao de computadores, montagem e manutencao, formatacao de computadores]
   Manutenção Preventiva: [manutencao preventiva, manutencao corretiva]
-  VMware: [vmware, virtualizacao, hyper v, proxmox]
+  VMware: [vmware, virtualizacao, proxmox]
+  Hyper-V: [hyper-v, hyper v]
 
   Cisco: [cisco]
 
