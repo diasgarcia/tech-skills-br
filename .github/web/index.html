@@ -149,6 +149,16 @@
     .bar-wrap.half { width: 50%; }
     .bar-fill { background: var(--accent); height: 100%; }
 
+    /* As duas tabelas de habilidades dimensionam as colunas pelo conteudo. */
+    .skills-table { table-layout: auto; }
+    .skills-table .rank-col {
+      width: 1%;
+      padding-right: 6px;
+      white-space: nowrap;
+    }
+    .skills-table .technology-col { padding-left: 0; }
+    .skills-table .proportion-col { width: 20%; }
+
     .search-input {
       background: var(--code-bg);
       border: 1px solid var(--border);
@@ -237,9 +247,6 @@
       .hide-mobile { display: none !important; }
       .show-mobile { display: block !important; }
 
-      /* Sem larguras fixas: cada coluna fica do tamanho do conteúdo */
-      #table-skills, #table-area-skills { table-layout: auto; }
-      #table-skills th:first-child, #table-area-skills th:first-child { width: 26px; }
     }
 
 
@@ -338,8 +345,8 @@
       </div>
 
       <div class="scroll-table">
-        <table id="table-skills" style="table-layout: fixed;">
-          <thead><tr><th style="width: 13px; padding-right: 0;">#</th><th style="width: 22%; padding-left: 0;">Tecnologia</th><th class="hide-mobile" style="width: 16%;">Categoria</th><th style="text-align: center; width: 8%;">Vagas</th><th style="text-align: right; width: 10%;">Demanda %</th><th class="hide-mobile" style="width: 90px;">Proporção</th></tr></thead>
+        <table id="table-skills" class="skills-table">
+          <thead><tr><th class="rank-col">#</th><th class="technology-col">Tecnologia</th><th class="hide-mobile" style="width: 16%;">Categoria</th><th style="text-align: center; width: 8%;">Vagas</th><th style="text-align: right; width: 10%;">Demanda %</th><th class="hide-mobile proportion-col">Proporção</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -359,8 +366,8 @@
       <p style="color: var(--text-muted); font-size: 11px; margin-bottom: 10px;" id="area-detail-subtitle"></p>
 
       <div class="scroll-table">
-        <table id="table-area-skills" style="table-layout: fixed;">
-          <thead><tr><th style="width: 13px; padding-right: 0;">#</th><th style="width: 22%; padding-left: 0;">Tecnologia</th><th class="hide-mobile" style="width: 16%;">Categoria</th><th style="text-align: center; width: 8%;">Vagas na Área</th><th style="text-align: right; width: 10%;">Demanda %</th><th class="hide-mobile" style="width: 90px;">Proporção</th></tr></thead>
+        <table id="table-area-skills" class="skills-table">
+          <thead><tr><th class="rank-col">#</th><th class="technology-col">Tecnologia</th><th class="hide-mobile" style="width: 16%;">Categoria</th><th style="text-align: center; width: 8%;">Vagas na Área</th><th style="text-align: right; width: 10%;">Demanda %</th><th class="hide-mobile proportion-col">Proporção</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -598,12 +605,12 @@ function renderSkillsTable() {
   items.forEach(t => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td style="color: var(--text-muted); padding-right: 0;">${t.posicao}</td>
-      <td style="padding-left: 0;"><strong style="color: var(--text-bright);">${t.nome}</strong></td>
+      <td class="rank-col" style="color: var(--text-muted);">${t.posicao}</td>
+      <td class="technology-col"><strong style="color: var(--text-bright);">${t.nome}</strong></td>
       <td class="hide-mobile"><span class="badge">${t.grupo}</span></td>
       <td style="text-align: center;">${t.vagas}</td>
       <td style="text-align: right;"><strong>${t.percentual_total}%</strong></td>
-      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${t.percentual_total}%;"></div></div></td>
+      <td class="hide-mobile proportion-col"><div class="bar-wrap"><div class="bar-fill" style="width: ${t.percentual_total}%;"></div></div></td>
     `;
     tbody.appendChild(tr);
   });
@@ -652,12 +659,12 @@ function renderAreaDetail() {
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td style="color: var(--text-muted); padding-right: 0;">${idx + 1}</td>
-      <td style="padding-left: 0;"><strong style="color: var(--text-bright);">${s.nome}</strong></td>
+      <td class="rank-col" style="color: var(--text-muted);">${idx + 1}</td>
+      <td class="technology-col"><strong style="color: var(--text-bright);">${s.nome}</strong></td>
       <td class="hide-mobile"><span class="badge">${s.grupo}</span></td>
       <td style="text-align: center;">${s.vagas}</td>
       <td style="text-align: right;"><strong>${s.percentual}%</strong></td>
-      <td class="hide-mobile"><div class="bar-wrap"><div class="bar-fill" style="width: ${s.percentual}%; background: var(--purple);"></div></div></td>
+      <td class="hide-mobile proportion-col"><div class="bar-wrap"><div class="bar-fill" style="width: ${s.percentual}%; background: var(--purple);"></div></div></td>
     `;
     tbody.appendChild(tr);
   });
