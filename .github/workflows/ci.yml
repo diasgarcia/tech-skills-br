@@ -8,19 +8,16 @@ on:
 
 jobs:
   test:
-    name: Testes Automatizados (Python ${{ matrix.python-version }})
+    name: Testes Automatizados (Python 3.12)
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.11", "3.12"]
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Configurar Python ${{ matrix.python-version }}
+    - name: Configurar Python 3.12
       uses: actions/setup-python@v5
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: "3.12"
         cache: 'pip'
 
     - name: Instalar dependencias
