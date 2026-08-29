@@ -31,13 +31,14 @@ MAX_LIMIT = 100
 class GupySource(JobSource):
     name = "gupy"
     label = "Gupy (portal.gupy.io)"
+    MAX_PAGES_PER_TERM = 20
 
     def fetch_term(self, term: str) -> list[Job]:
         jobs: list[Job] = []
         seen_ids: set[str] = set()
         limit = min(self.settings.page_size, MAX_LIMIT)
         start_page = max(0, self.settings.start_page - 1)
-        end_page = max(start_page + 1, self.settings.max_pages_per_term)
+        end_page = max(start_page + 1, self.page_limit())
 
         for page in range(start_page, end_page):
 

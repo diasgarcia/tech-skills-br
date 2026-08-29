@@ -39,6 +39,7 @@ def slugify_term(term: str) -> str:
 class VagasComSource(JobSource):
     name = "vagas"
     label = "Vagas.com.br"
+    MAX_PAGES_PER_TERM = 20
 
     def fetch_term(self, term: str) -> list[Job]:
         jobs: list[Job] = []
@@ -46,7 +47,7 @@ class VagasComSource(JobSource):
         url = f"{BASE_URL}/vagas-de-{slugify_term(term)}"
 
         start_page = max(1, self.settings.start_page)
-        end_page = max(start_page, self.settings.max_pages_per_term)
+        end_page = max(start_page, self.page_limit())
 
         for page in range(start_page, end_page + 1):
             response = self.session.get(url, params={"pagina": page})
