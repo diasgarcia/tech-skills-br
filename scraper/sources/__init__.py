@@ -6,6 +6,7 @@ from .base import JobSource
 from .gupy import GupySource
 from .linkedin import LinkedInSource
 from .programathor import ProgramathorSource
+from .solides import SolidesSource
 from .trampos import TramposSource
 from .vagas_com import VagasComSource
 
@@ -15,6 +16,7 @@ SOURCE_REGISTRY: dict[str, type[JobSource]] = {
     ProgramathorSource.name: ProgramathorSource,
     TramposSource.name: TramposSource,
     LinkedInSource.name: LinkedInSource,
+    SolidesSource.name: SolidesSource,
 }
 
 AVAILABLE_SOURCES = list(SOURCE_REGISTRY)
@@ -34,6 +36,7 @@ __all__ = [
     "ProgramathorSource",
     "TramposSource",
     "LinkedInSource",
+    "SolidesSource",
     "SOURCE_REGISTRY",
     "AVAILABLE_SOURCES",
     "DEFAULT_SOURCES",
