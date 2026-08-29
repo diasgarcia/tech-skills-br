@@ -132,7 +132,7 @@
       gap: 16px;
     }
 
-    .about-copy { max-width: 820px; }
+    .about-copy { width: 100%; }
     .about-copy p { margin-top: 12px; line-height: 1.8; }
     .about-copy p:first-child {
       margin-top: 0;
@@ -356,6 +356,7 @@
       #table-areas-summary th:nth-child(3),
       #table-regioes-summary th:nth-child(3),
       #table-modalidades-summary th:nth-child(3) { width: 16%; }
+      #table-areas-summary tbody tr:nth-child(n + 11) { display: none; }
 
       #table-vagas { table-layout: fixed; }
       #table-vagas th:first-child, #table-vagas td:first-child { width: 66%; }
@@ -732,7 +733,7 @@ function renderSummaryTables() {
   // Áreas
   const tbodyAreas = document.querySelector("#table-areas-summary tbody");
   tbodyAreas.innerHTML = "";
-  (areasData || []).slice(0, 10).forEach(a => {
+  (areasData || []).slice(0, 13).forEach(a => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td><strong>${a.area}</strong></td>
