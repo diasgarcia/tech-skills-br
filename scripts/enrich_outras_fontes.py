@@ -118,6 +118,24 @@ def fetch_gupy(session: PoliteSession, lock: Lock, job_id: str) -> tuple[str, in
     return strip_html(desc), status
 
 
+def fetch_geekhunter(session: PoliteSession, lock: Lock, url: str) -> tuple[str, int | None]:
+    """Busca a descricao completa no detalhe da vaga (SSR, sem auth).
+
+    O card da listagem so tem um snippet; o detalhe traz Tarefas,
+    Requisitos e Beneficios completos.
+    """
+    with lock:
+        response = session.get(url)
+        status = session.last_status_code
+    if response is None:
+        return "", status
+    soup = BeautifulSoup(response.text, "html.parser")
+    main = soup.select_one("main")
+    if main is None:
+        return "", status
+    return " ".join(main.get_text(" ", strip=True).split()), status
+
+
 def _enriquecer(
     c: sqlite3.Cursor,
     session: PoliteSession,
@@ -216,6 +234,17 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
     """
     args_gupy = list(janela)
 
+    # GeekHunter: o card so traz um snippet; o detalhe tem a descricao
+    # completa (Tarefas, Requisitos, Beneficios). Marca pendente a
+    # descricao curta (< 300 chars) que veio do card.
+    query_geekhunter = """
+        SELECT id, url, title FROM vagas
+        WHERE source = 'geekhunter'
+          AND COALESCE(enrich_encerrada, 0) = 0
+          AND (description IS NULL OR LENGTH(description) < 300)
+    """
+    args_geekhunter: list = []
+
     if limit:
         query_vagas += " LIMIT ?"
         args_vagas.append(limit)
@@ -225,6 +254,8 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
         args_programathor.append(limit)
         query_gupy += " LIMIT ?"
         args_gupy.append(limit)
+        query_geekhunter += " LIMIT ?"
+        args_geekhunter.append(limit)
 
     with PoliteSession(
         user_agent=USER_AGENT,
@@ -277,11 +308,21 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
             lambda sess, lk, job_id: fetch_gupy(sess, lk, job_id),
         )
 
+        c.execute(query_geekhunter, args_geekhunter)
+        logger.info("GeekHunter pendentes: %d", len(c.fetchall()))
+        total_geekhunter = _enriquecer(
+            c, session, lock, extractor, tech_map,
+            query_geekhunter, args_geekhunter,
+            lambda sess, lk, url: fetch_geekhunter(sess, lk, url),
+        )
+
     conn.commit()
     conn.close()
     logger.info(
-        "Enriquecimento concluido: %d vagas.com, %d trampos, %d programathor e %d gupy.",
+        "Enriquecimento concluido: %d vagas.com, %d trampos, %d programathor, "
+        "%d gupy e %d geekhunter.",
         total_vagas, total_trampos, total_programathor, total_gupy,
+        total_geekhunter,
     )
 
 

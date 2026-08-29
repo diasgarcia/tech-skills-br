@@ -23,6 +23,7 @@ _ISO_RE = re.compile(r"^(\d{4})-(\d{2})-(\d{2})")
 _BR_RE = re.compile(r"^(\d{2})/(\d{2})/(\d{4})$")
 _DAYS_AGO_RE = re.compile(r"h[aá]\s+(?:mais\s+de\s+)?(\d+)\s+dias?")
 _MONTHS_AGO_RE = re.compile(r"h[aá]\s+(?:mais\s+de\s+)?(\d+)\s+m[eê]s(?:es)?")
+_HOURS_AGO_RE = re.compile(r"h[aá]\s+(?:mais\s+de\s+)?(\d+)\s+horas?")
 
 # A ordem importa e o limite de palavra tambem: "anteontem" contem "ontem",
 # entao a forma mais especifica precisa ser testada primeiro.
@@ -88,5 +89,11 @@ def parse_published_date(raw: str | None, reference: date) -> date | None:
     months_ago = _MONTHS_AGO_RE.search(lowered)
     if months_ago:
         return reference - timedelta(days=30 * int(months_ago.group(1)))
+
+    # "Publicada há 20 horas" (GeekHunter): menos de um dia, resolve no
+    # dia da referencia (nao tem como saber se cruzou a meia-noite).
+    hours_ago = _HOURS_AGO_RE.search(lowered)
+    if hours_ago:
+        return reference
 
     return None
