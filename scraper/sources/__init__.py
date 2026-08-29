@@ -6,8 +6,6 @@ from .base import JobSource
 from .gupy import GupySource
 from .linkedin import LinkedInSource
 from .programathor import ProgramathorSource
-from .serpapi import SerpApiSource
-from .theirstack import TheirStackSource
 from .trampos import TramposSource
 from .vagas_com import VagasComSource
 
@@ -17,8 +15,6 @@ SOURCE_REGISTRY: dict[str, type[JobSource]] = {
     ProgramathorSource.name: ProgramathorSource,
     TramposSource.name: TramposSource,
     LinkedInSource.name: LinkedInSource,
-    TheirStackSource.name: TheirStackSource,
-    SerpApiSource.name: SerpApiSource,
 }
 
 AVAILABLE_SOURCES = list(SOURCE_REGISTRY)
@@ -38,8 +34,6 @@ __all__ = [
     "ProgramathorSource",
     "TramposSource",
     "LinkedInSource",
-    "TheirStackSource",
-    "SerpApiSource",
     "SOURCE_REGISTRY",
     "AVAILABLE_SOURCES",
     "DEFAULT_SOURCES",

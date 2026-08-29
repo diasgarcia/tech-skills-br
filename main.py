@@ -2,8 +2,7 @@
 
 Exemplos:
     python main.py                          # coleta padrao gratuita (Gupy, LinkedIn, etc.)
-    python main.py --sources serpapi        # coleta isolada Google Jobs
-    python main.py --sources theirstack     # coleta isolada TheirStack
+    python main.py --sources gupy           # coleta isolada so na Gupy
     python main.py --terms "estagio ti" "engenheiro de dados junior"
     python main.py --max-pages 2 --delay 2  # coleta menor e mais lenta
     python main.py --strict                 # descarta titulos "Junior/Pleno"
@@ -35,10 +34,6 @@ def build_parser() -> argparse.ArgumentParser:
         help=f"Portais a consultar (padrão: {' '.join(DEFAULT_SOURCES)}).",
     )
 
-    parser.add_argument(
-        "--locations", nargs="+", default=["todos"],
-        help="Polos ou regioes a consultar (ex: todos, sudeste, sul, nordeste, 'São Paulo', 'Recife').",
-    )
     parser.add_argument(
         "--terms", nargs="+", default=None,
         help=f"Termos de busca (padrao: {len(SEARCH_TERMS)} termos de config.py).",
@@ -106,7 +101,6 @@ def main(argv: list[str] | None = None) -> int:
     settings = Settings(
         search_terms=args.terms or list(SEARCH_TERMS),
         sources=args.sources,
-        locations=args.locations,
         delay_seconds=args.delay,
         page_size=min(args.page_size, 100),
         start_page=max(1, args.start_page),
