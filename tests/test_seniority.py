@@ -47,9 +47,9 @@ def test_nao_casa_junior_dentro_de_outra_palavra():
 def test_senioridade_declarada_pela_fonte_vence_o_titulo():
     """Título sem marca de nível não descarta a vaga se a fonte já sabe o nível."""
     jobs = [
-        Job(source="programathor", external_id="1",
+        Job(source="solides", external_id="1",
             title="Programador(a) PHP", seniority="Júnior"),
-        Job(source="programathor", external_id="2",
+        Job(source="solides", external_id="2",
             title="Analista de Sistemas", seniority="Estágio"),
     ]
     kept = filter_entry_level(jobs)

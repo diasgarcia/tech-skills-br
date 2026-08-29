@@ -4,7 +4,7 @@ on:
   # Roda so quando o pesquisador dispara pelo botao "Run workflow".
   # Usado para testar/limpar pendentes de descricao sem esperar a coleta
   # diaria: busca descricoes vazias, sinteticas ou truncadas (500 chars)
-  # e re-extrai skills e areas, comecando pelo ProgramaThor.
+  # e re-extrai skills e areas.
   workflow_dispatch:
 
 concurrency:
@@ -35,7 +35,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        playwright install --with-deps chromium
 
     - name: 4. Carregar historico no SQLite
       run: |
@@ -43,9 +42,6 @@ jobs:
 
     - name: 5. Enriquecer descricoes pendentes
       run: |
-        # Outras fontes primeiro (ProgramaThor tem Cloudflare sensivel a
-        # rajada; rodar cedo pega o IP com menos requests acumulados),
-        # depois o LinkedIn.
         python scripts/enrich_outras_fontes.py
         python scripts/enrich_descriptions.py
       env:

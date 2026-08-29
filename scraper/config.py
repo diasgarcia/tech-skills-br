@@ -75,7 +75,6 @@ class Settings:
         default_factory=lambda: [
             "gupy",
             "vagas",
-            "programathor",
             "trampos",
             "linkedin",
             "solides",

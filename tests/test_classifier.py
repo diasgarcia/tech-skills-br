@@ -188,7 +188,7 @@ def test_frases_que_so_se_sobrepoem_em_parte_ainda_somam(clf):
 
 
 def test_titulo_backend_com_suporte_nao_vira_suporte(clf):
-    """Caso real da ProgramaThor: a soma em dobro fazia Suporte vencer Backend."""
+    """Caso real de portal com tags: a soma em dobro fazia Suporte vencer Backend."""
     resultado = clf.classify(
         "DESENVOLVEDOR BACKEND JÚNIOR - SUSTENTAÇÃO E SUPORTE TÉCNICO",
         "Tecnologias: API, Node.js, SQL, PostgreSQL.",
