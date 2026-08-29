@@ -75,6 +75,7 @@ _WS_RE = re.compile(r"\s+")
 class ProgramathorSource(JobSource):
     name = "programathor"
     label = "ProgramaThor"
+    MAX_PAGES_PER_TERM = 5
 
     def fetch(self, terms: list[str]) -> list[Job]:
         """Ignora os termos do projeto e usa os filtros nativos do portal.
@@ -183,7 +184,7 @@ class ProgramathorSource(JobSource):
         anterior: set[str] = set()
 
         start_page = max(1, self.settings.start_page)
-        end_page = max(start_page, self.settings.max_pages_per_term)
+        end_page = max(start_page, self.page_limit())
 
         for page in range(start_page, end_page + 1):
             html = self._get_page_html(JOBS_URL, params={**params, "page": page})

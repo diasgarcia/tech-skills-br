@@ -42,6 +42,7 @@ _HORA_RE = re.compile(r"há \d+ (horas|dias)", re.I)
 class GeekHunterSource(JobSource):
     name = "geekhunter"
     label = "GeekHunter"
+    MAX_PAGES_PER_TERM = 81
 
     def fetch(self, terms: list[str]) -> list[Job]:
         """Ignora os termos do projeto: o portal nao tem busca por termo.
@@ -63,7 +64,7 @@ class GeekHunterSource(JobSource):
         seen: set[str] = set()
 
         start_page = max(1, self.settings.start_page)
-        end_page = max(start_page, self.settings.max_pages_per_term)
+        end_page = max(start_page, self.page_limit())
 
         for page in range(start_page, end_page + 1):
             response = self.session.get(JOBS_URL, params={"page": page})

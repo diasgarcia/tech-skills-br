@@ -51,6 +51,7 @@ PAGE_SIZE = 10  # o endpoint ignora `size`; pagina fixa de 10 vagas
 class SolidesSource(JobSource):
     name = "solides"
     label = "Solides"
+    MAX_PAGES_PER_TERM = 200
 
     def fetch(self, terms: list[str]) -> list[Job]:
         """Ignora os termos do projeto e usa os filtros nativos do portal.
@@ -75,7 +76,7 @@ class SolidesSource(JobSource):
         seen: set[str] = set()
 
         start_page = max(1, self.settings.start_page)
-        end_page = max(start_page, self.settings.max_pages_per_term)
+        end_page = max(start_page, self.page_limit())
 
         for page in range(start_page, end_page + 1):
             payload = self.session.get_json(
