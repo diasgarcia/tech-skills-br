@@ -202,6 +202,9 @@
     }
     .pill.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
 
+    .job-place, .job-mode { display: inline; }
+    .job-mode { color: var(--text-muted); }
+
     .tab-section { display: none; }
     .tab-section.active { display: block; }
 
@@ -311,6 +314,10 @@
       #table-vagas { table-layout: fixed; }
       #table-vagas th:first-child, #table-vagas td:first-child { width: 66%; }
       #table-vagas th, #table-vagas td { vertical-align: top; }
+      #table-vagas .job-place,
+      #table-vagas .job-mode { display: block; }
+      #table-vagas .job-location-separator { display: none; }
+      #table-vagas .job-mode { margin-top: 2px; }
 
       footer {
         position: fixed;
@@ -824,15 +831,11 @@ function renderVagasTable() {
 
     const polo = v.polo || v.localidade || "";
     const modalidade = v.modalidade || "";
-    const emModalidade = `<em style="color: var(--text-muted);">${modalidade}</em>`;
-    let celulaLocal;
-    if (polo.toLowerCase() === modalidade.toLowerCase() && polo) {
-      celulaLocal = emModalidade;
-    } else if (polo && modalidade) {
-      celulaLocal = `${polo} &middot; ${emModalidade}`;
-    } else {
-      celulaLocal = polo || emModalidade;
-    }
+    const exibePolo = polo && polo.toLowerCase() !== modalidade.toLowerCase();
+    const localHtml = exibePolo ? `<span class="job-place">${polo}</span>` : "";
+    const separadorHtml = exibePolo && modalidade ? `<span class="job-location-separator"> &middot; </span>` : "";
+    const modalidadeHtml = modalidade ? `<em class="job-mode">${modalidade}</em>` : "";
+    const celulaLocal = localHtml + separadorHtml + modalidadeHtml || "-";
 
     tr.innerHTML = `
       <td>
@@ -846,7 +849,7 @@ function renderVagasTable() {
       </td>
       <td class="hide-mobile">${v.empresa}</td>
       <td class="hide-mobile" style="text-align: center;"><span class="badge">${v.area}</span></td>
-      <td>${celulaLocal}</td>
+      <td class="job-location-cell">${celulaLocal}</td>
       <td class="hide-mobile" style="text-align: center;">${linkHtml}</td>
     `;
     tbody.appendChild(tr);
