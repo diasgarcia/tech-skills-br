@@ -6,8 +6,6 @@ from scraper.config import Settings
 from scraper.sources.gupy import GupySource
 from scraper.sources.linkedin import GEO_ID_BRASIL, LinkedInSource
 from scraper.sources.programathor import FILTROS_NIVEL_ENTRADA, ProgramathorSource
-from scraper.sources.serpapi import SerpApiSource
-from scraper.sources.theirstack import TheirStackSource
 from scraper.sources.trampos import TramposSource
 from scraper.sources.vagas_com import VagasComSource, slugify_term
 
@@ -424,99 +422,4 @@ def test_programathor_filtros_de_nivel_de_entrada():
     assert FILTROS_NIVEL_ENTRADA["Júnior"] == {"expertise": "Júnior"}
     assert FILTROS_NIVEL_ENTRADA["Estágio"] == {"contract_type": "Estágio"}
 
-
-THEIRSTACK_JOB = {
-    "id": 987654,
-    "job_title": "Desenvolvedor Python Júnior",
-    "company_object": {"name": "Empresa Tech BR"},
-    "company": "Empresa Tech BR",
-    "url": "https://theirstack.com/job/987654",
-    "final_url": "https://empresa.com/vagas/123",
-    "description": "Vaga júnior para atuar com Python, Django e PostgreSQL.",
-    "location": "São Paulo, SP",
-    "country_code": "BR",
-    "remote": True,
-    "date_posted": "2026-08-10T15:30:00Z",
-}
-
-
-def test_theirstack_parse_mapeia_campos():
-    src = _source(TheirStackSource)
-    job = src._parse(THEIRSTACK_JOB, "desenvolvedor junior")
-    assert job is not None
-    assert job.source == "theirstack"
-    assert job.external_id == "987654"
-    assert job.title == "Desenvolvedor Python Júnior"
-    assert job.company == "Empresa Tech BR"
-    assert job.url == "https://empresa.com/vagas/123"
-    assert "Python, Django e PostgreSQL" in job.description
-    assert job.location == "São Paulo, SP"
-    assert job.workplace_type == "Remoto"
-    assert job.published_date == "2026-08-10"
-    assert job.search_term == "desenvolvedor junior"
-
-
-def test_theirstack_parse_invalido():
-    src = _source(TheirStackSource)
-    assert src._parse({"id": None, "job_title": ""}, "x") is None
-    assert src._parse({"id": 123}, "x") is None
-
-
-def test_theirstack_sem_chave_retorna_vazio_e_registra_aviso():
-    settings = Settings(theirstack_api_key="")
-    src = TheirStackSource(session=None, settings=settings)
-    res = src.fetch_term("python")
-    assert res == []
-    assert any("THEIRSTACK_API_KEY" in err for err in src.stats.errors)
-
-
-SERPAPI_JOB = {
-    "job_id": "serp_job_12345",
-    "title": "Analista de Dados Júnior",
-    "company_name": "Data Analytics S/A",
-    "location": "Curitiba, PR",
-    "description": "Buscamos profissional para dashboards e modelagem.",
-    "share_link": "https://google.com/search?jobs=12345",
-    "related_links": [{"link": "https://google.com/search?other=1"}],
-    "apply_options": [{"title": "Candidatar-se no Gupy", "link": "https://vagas.empresa.com/view"}],
-    "detected_extensions": {
-
-        "posted_at": "há 2 dias",
-        "schedule_type": "Tempo integral",
-        "work_from_home": True,
-    },
-    "job_highlights": [
-        {"title": "Qualificações", "items": ["SQL avançado", "Power BI", "Python"]}
-    ],
-}
-
-
-def test_serpapi_parse_mapeia_campos_e_enriquece_descricao():
-    src = _source(SerpApiSource)
-    job = src._parse(SERPAPI_JOB, "analista de dados junior")
-    assert job is not None
-    assert job.source == "serpapi"
-    assert job.external_id == "serp_job_12345"
-    assert job.title == "Analista de Dados Júnior"
-    assert job.company == "Data Analytics S/A"
-    assert job.url == "https://vagas.empresa.com/view"
-    assert "SQL avançado" in job.description
-    assert job.location == "Curitiba, PR"
-    assert job.workplace_type == "Remoto"
-    assert job.published_date == "há 2 dias"
-    assert job.search_term == "analista de dados junior"
-
-
-def test_serpapi_parse_invalido():
-    src = _source(SerpApiSource)
-    assert src._parse({"job_id": "", "title": ""}, "x") is None
-    assert src._parse({"job_id": "123"}, "x") is None
-
-
-def test_serpapi_sem_chave_retorna_vazio_e_registra_aviso():
-    settings = Settings(serpapi_api_key="")
-    src = SerpApiSource(session=None, settings=settings)
-    res = src.fetch_term("python")
-    assert res == []
-    assert any("SERPAPI_API_KEY" in err for err in src.stats.errors)
 

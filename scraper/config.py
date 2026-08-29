@@ -118,15 +118,7 @@ class Settings:
         ]
     )
 
-    locations: list[str] = field(default_factory=lambda: ["todos"])
     output_dir: Path = DEFAULT_OUTPUT_DIR
-
-    theirstack_api_key: str = field(
-        default_factory=lambda: os.getenv("THEIRSTACK_API_KEY", "")
-    )
-    serpapi_api_key: str = field(
-        default_factory=lambda: os.getenv("SERPAPI_API_KEY", "")
-    )
 
     delay_seconds: float = 1.5
     timeout_seconds: float = 30.0

@@ -6,8 +6,6 @@ from scraper.geo import (
     GeoClassifier,
     attach_geo_info,
     default_geo_classifier,
-    get_all_hubs,
-    resolve_hubs,
 )
 from scraper.models import Job
 
@@ -89,32 +87,3 @@ def test_attach_geo_info(classifier):
     assert jobs[1].regiao == "Sul"
     assert jobs[2].polo == "Remoto"
     assert jobs[2].regiao == "Remoto Nacional"
-
-
-def test_get_all_hubs():
-    hubs = get_all_hubs()
-    assert len(hubs) >= 14
-    nomes = [h["nome"] for h in hubs]
-    assert "São Paulo" in nomes
-    assert "Recife" in nomes
-    assert "Florianópolis" in nomes
-    assert "Manaus" in nomes
-    assert "Brasília" in nomes
-
-
-def test_resolve_hubs_todos():
-    hubs = resolve_hubs(["todos"])
-    assert len(hubs) == len(get_all_hubs())
-
-
-def test_resolve_hubs_por_regiao():
-    nordeste_hubs = resolve_hubs(["nordeste"])
-    assert len(nordeste_hubs) >= 3
-    for h in nordeste_hubs:
-        assert h["regiao"] == "Nordeste"
-
-
-def test_resolve_hubs_por_cidade():
-    recife = resolve_hubs(["Recife"])
-    assert len(recife) == 1
-    assert recife[0]["nome"] == "Recife"
