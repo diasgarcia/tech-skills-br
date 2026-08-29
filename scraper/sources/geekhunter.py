@@ -124,6 +124,7 @@ class GeekHunterSource(JobSource):
         modalidade = ""
         location = ""
         descricao = ""
+        publicada = ""
         for texto in textos:
             if texto in {"Júnior", "Pleno", "Sênior", "Estágio", "Trainee"}:
                 # So confia no rotulo do portal quando ele declara nivel de
@@ -132,6 +133,8 @@ class GeekHunterSource(JobSource):
                 # candidatos juniores e deve permanecer).
                 if texto in {"Júnior", "Estágio", "Trainee"}:
                     senioridade = texto
+            elif re.search(r"(?:publicada|atualizada)\s+h[aá]\s+\d+\s+horas?", texto, re.I):
+                publicada = texto
             elif len(texto) <= 30 and normalize_workplace(texto) != "Não informado":
                 modalidade = texto
             elif len(texto) <= 30 and texto.endswith("Brasil"):
@@ -150,7 +153,7 @@ class GeekHunterSource(JobSource):
             description=descricao,
             location=location,
             workplace_type=normalize_workplace(modalidade),
-            published_date="",
+            published_date=publicada,
             search_term=term,
             seniority=senioridade,
         )
