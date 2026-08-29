@@ -279,9 +279,6 @@ def importar(
                     title=v.title,
                     description=v.description,
                 )
-                if (not v.workplace_type or v.workplace_type == "Não informado") and v.source == "theirstack":
-                    if v.location and "remoto" not in v.location.lower() and v.location.lower() != "brasil":
-                        v.workplace_type = "Presencial"
 
             if not v.regiao or v.regiao == "Não informado":
                 polo, regiao = geo.classify(v.location, v.workplace_type)

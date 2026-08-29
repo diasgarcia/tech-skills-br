@@ -21,7 +21,7 @@ Para responder a essa pergunta com evidências quantitativas e reprodutíveis, o
 
 ```mermaid
 flowchart LR
-    A["Portais Públicos e APIs<br>(Gupy, LinkedIn, SerpApi, TheirStack, Vagas.com, ProgramaThor, Trampos)"] --> B["Portão de Relevância<br>e Nível de Entrada<br>(Filtro Tech + Jr/Estágio)"]
+    A["Portais Públicos<br>(Gupy, LinkedIn, Vagas.com, ProgramaThor, Trampos)"] --> B["Portão de Relevância<br>e Nível de Entrada<br>(Filtro Tech + Jr/Estágio)"]
     B --> C["Deduplicação<br>(Fingerprint Título + Empresa)"]
     C --> D["Extração de Habilidades<br>e Classificação por Área<br>(Taxonomia Curada)"]
     D --> E["Estratificação Geográfica<br>(62 Polos / 5 Regiões + Remoto)"]
@@ -31,8 +31,7 @@ flowchart LR
 
 ### 1. Coleta Multi-fonte
 
-- **Fontes gratuitas:** Gupy, LinkedIn Jobs, Vagas.com.br, ProgramaThor e Trampos.co.
-- **APIs especializadas:** SerpApi (Google Jobs) e TheirStack API.
+- **Fontes públicas:** Gupy, LinkedIn Jobs, Vagas.com.br, ProgramaThor e Trampos.co.
 
 ### 2. Amostragem Estratificada por Polos e Macrorregiões
 
@@ -55,22 +54,16 @@ O [Manual de Uso](https://github.com/diasgarcia/tech-skills-br/wiki/Manual-de-Us
 # 0. Primeira execução: carrega o histórico versionado no SQLite local.
 python scripts/import_csv.py --csv seed/vagas.csv
 
-# 1. Coleta gratuita (Gupy, LinkedIn, Vagas.com, ProgramaThor, Trampos):
+# 1. Coleta (Gupy, LinkedIn, Vagas.com, ProgramaThor, Trampos):
 python main.py
 
-# 2. Coleta complementar SerpApi (Google Jobs):
-python main.py --sources serpapi --max-pages 1
-
-# 3. Coleta complementar TheirStack:
-python main.py --sources theirstack --max-pages 1 --page-size 8
-
-# 4. Consolida as coletas no SQLite:
+# 2. Consolida as coletas no SQLite:
 python scripts/import_csv.py
 
-# 5. Atualiza o snapshot versionado (seed/vagas.csv):
+# 3. Atualiza o snapshot versionado (seed/vagas.csv):
 python scripts/export_seed.py
 
-# 6. Gera o relatório estatístico consolidado:
+# 4. Gera o relatório estatístico consolidado:
 python scripts/report_db.py
 ```
 
