@@ -1,14 +1,14 @@
-requests>=2.31,<3
-curl_cffi>=0.7.0
-playwright>=1.40.0
-beautifulsoup4>=4.12,<5
-PyYAML>=6.0,<7
-matplotlib>=3.7
+requests==2.34.2
+curl_cffi==0.16.2
+playwright==1.62.0
+beautifulsoup4==4.15.0
+PyYAML==6.0.3
+matplotlib==3.11.1
 
-SQLAlchemy>=2.0,<3
-psycopg[binary]>=3.1,<4
+SQLAlchemy==2.0.52
+psycopg[binary]==3.3.4
 
 
 # Testes (opcional em producao):
-pytest>=8.0
-httpx>=0.27
+pytest==9.1.1
+httpx==0.28.1
