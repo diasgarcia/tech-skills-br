@@ -334,8 +334,8 @@
       </div>
 
       <div class="scroll-table">
-        <table id="table-skills">
-          <thead><tr><th>#</th><th>Tecnologia</th><th class="hide-mobile">Categoria</th><th style="text-align: center;">Vagas</th><th style="text-align: right;">Demanda %</th><th class="hide-mobile" style="width: 18%;">Proporção</th></tr></thead>
+        <table id="table-skills" style="table-layout: fixed;">
+          <thead><tr><th style="width: 36px;">#</th><th style="width: 22%;">Tecnologia</th><th class="hide-mobile" style="width: 16%;">Categoria</th><th style="text-align: center; width: 8%;">Vagas</th><th style="text-align: right; width: 10%;">Demanda %</th><th class="hide-mobile">Proporção</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -355,8 +355,8 @@
       <p style="color: var(--text-muted); font-size: 11px; margin-bottom: 10px;" id="area-detail-subtitle"></p>
 
       <div class="scroll-table">
-        <table id="table-area-skills">
-          <thead><tr><th>Tecnologia</th><th class="hide-mobile">Categoria</th><th style="text-align: center;">Vagas na Área</th><th style="text-align: right;">Demanda %</th><th class="hide-mobile" style="width: 18%;">Proporção</th></tr></thead>
+        <table id="table-area-skills" style="table-layout: fixed;">
+          <thead><tr><th style="width: 30px;">#</th><th style="width: 26%;">Tecnologia</th><th class="hide-mobile" style="width: 16%;">Categoria</th><th style="text-align: center; width: 12%;">Vagas na Área</th><th style="text-align: right; width: 10%;">Demanda %</th><th class="hide-mobile">Proporção</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -639,15 +639,16 @@ function renderAreaDetail() {
 
   if (!areaInfo.skills || areaInfo.skills.length === 0) {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td colspan="5" style="text-align: center; color: var(--text-muted); padding: 18px;">As vagas desta especialidade focam em atribuições funcionais de cargo (ex: montagem, bancada, circuitos, firmware) sem stacks padronizadas de software listadas no corpo do anúncio.</td>`;
+    tr.innerHTML = `<td colspan="6" style="text-align: center; color: var(--text-muted); padding: 18px;">As vagas desta especialidade focam em atribuições funcionais de cargo (ex: montagem, bancada, circuitos, firmware) sem stacks padronizadas de software listadas no corpo do anúncio.</td>`;
     tbody.appendChild(tr);
     return;
   }
 
-  (areaInfo.skills || []).forEach(s => {
+  (areaInfo.skills || []).forEach((s, idx) => {
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
+      <td style="color: var(--text-muted);">${idx + 1}</td>
       <td><strong style="color: var(--text-bright);">${s.nome}</strong></td>
       <td class="hide-mobile"><span class="badge">${s.grupo}</span></td>
       <td style="text-align: center;">${s.vagas}</td>
