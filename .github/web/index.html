@@ -35,6 +35,13 @@
       padding: 16px;
     }
 
+    html.table-tab-active,
+    body.table-tab-active {
+      height: 100%;
+      overflow: hidden;
+    }
+    body.table-tab-active { padding-bottom: 0; }
+
     /* Scrollbar discreta integrada ao tema escuro */
     ::-webkit-scrollbar {
       width: 8px;
@@ -653,6 +660,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 function setTab(tabId) {
+  const isTableTab = ["skills", "areas", "vagas"].includes(tabId);
+  document.documentElement.classList.toggle("table-tab-active", isTableTab);
+  document.body.classList.toggle("table-tab-active", isTableTab);
+  if (isTableTab) window.scrollTo(0, 0);
+
   document.querySelectorAll(".tab-section").forEach(el => el.classList.remove("active"));
   document.querySelectorAll(".nav-btn").forEach(btn => btn.classList.remove("active"));
 
@@ -677,7 +689,12 @@ function ajustaAlturaScrollTables() {
   document.querySelectorAll(".scroll-table").forEach(el => {
     if (!el.offsetParent) return; // aba escondida
     const topo = el.getBoundingClientRect().top;
-    const altura = limiteInferior - topo;
+    const card = el.closest(".card");
+    const estiloCard = card ? getComputedStyle(card) : null;
+    const espacoInferior = estiloCard
+      ? parseFloat(estiloCard.paddingBottom) + parseFloat(estiloCard.borderBottomWidth)
+      : 0;
+    const altura = limiteInferior - topo - espacoInferior;
     el.style.maxHeight = Math.max(200, altura) + "px";
   });
 }
