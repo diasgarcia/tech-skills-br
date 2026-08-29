@@ -119,6 +119,12 @@
       margin-bottom: 20px;
     }
 
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+    }
+
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -233,15 +239,77 @@
     /* RESPONSIVIDADE MOBILE ROOTS (ENCAIXA SEM ROLAGEM) */
     @media (max-width: 768px) {
       body { padding: 10px; font-size: 12px; }
+      header { padding-bottom: 8px; margin-bottom: 12px; }
       h1 { font-size: 14px; }
-      .grid-kpi { grid-template-columns: 1fr 1fr; gap: 8px; }
-      .card { padding: 10px; }
+      .title-row p { max-width: 350px; }
+
+      .nav-tabs {
+        flex-wrap: nowrap;
+        gap: 6px;
+        margin: 12px 0 4px;
+        padding-bottom: 8px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        scroll-snap-type: x proximity;
+      }
+      .nav-tabs::-webkit-scrollbar { display: none; }
+      .nav-btn {
+        flex: 0 0 auto;
+        width: auto;
+        padding: 6px 10px;
+        white-space: nowrap;
+        scroll-snap-align: start;
+      }
+
+      .grid-kpi {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      .summary-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+      .card { min-width: 0; padding: 10px; }
       .card-value { font-size: 17px; }
-      .nav-tabs { gap: 4px; margin: 12px 0; }
-      .nav-btn { font-size: 11px; padding: 5px 8px; }
       table { font-size: 11px; }
       th, td { padding: 5px 6px; }
       .search-input { max-width: 100%; }
+
+      #area-pills-container {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 6px;
+        padding-bottom: 4px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      #area-pills-container::-webkit-scrollbar { display: none; }
+      #area-pills-container .pill {
+        flex: 0 0 auto;
+        margin: 0;
+        white-space: nowrap;
+      }
+
+      #filter-modalidade { width: 100% !important; }
+
+      .skills-table th:nth-child(4),
+      .skills-table td:nth-child(4) {
+        width: 52px;
+        padding-left: 4px;
+        padding-right: 4px;
+        white-space: nowrap;
+      }
+      .skills-table th:nth-child(5),
+      .skills-table td:nth-child(5) {
+        width: 68px;
+        padding-left: 4px;
+        padding-right: 4px;
+        white-space: nowrap;
+      }
+
+      #table-vagas { table-layout: fixed; }
+      #table-vagas th:first-child, #table-vagas td:first-child { width: 66%; }
+      #table-vagas th, #table-vagas td { vertical-align: top; }
+
+      footer { margin-top: 18px; }
 
       /* Oculta colunas secundárias para caber 100% na largura do celular */
       .hide-mobile { display: none !important; }
@@ -251,8 +319,10 @@
 
 
     @media (max-width: 420px) {
-      .grid-kpi { grid-template-columns: 1fr; }
-      .nav-btn { width: 100%; text-align: left; }
+      body { padding: 8px; }
+      .grid-kpi { gap: 6px; }
+      .card { padding: 9px; }
+      .card-title { font-size: 10px; }
     }
   </style>
 </head>
@@ -306,7 +376,7 @@
       </div>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+    <div class="summary-grid">
       <!-- Áreas -->
       <div class="card">
         <div class="card-title" style="font-weight: 700;">Distribuição por Área Técnica</div>
@@ -367,7 +437,7 @@
 
       <div class="scroll-table">
         <table id="table-area-skills" class="skills-table">
-          <thead><tr><th class="rank-col">#</th><th class="technology-col">Tecnologia</th><th class="hide-mobile" style="text-align: center; width: 22%;">Categoria</th><th style="text-align: center; width: 14%;">Vagas na Área</th><th style="text-align: right; width: 10%;">Demanda %</th><th class="hide-mobile proportion-col">Proporção</th></tr></thead>
+          <thead><tr><th class="rank-col">#</th><th class="technology-col">Tecnologia</th><th class="hide-mobile" style="text-align: center; width: 22%;">Categoria</th><th style="text-align: center; width: 14%;"><span class="hide-mobile">Vagas na Área</span><span class="show-mobile">Vagas</span></th><th style="text-align: right; width: 10%;">Demanda %</th><th class="hide-mobile proportion-col">Proporção</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -503,7 +573,12 @@ function setTab(tabId) {
 
   const btnIndex = { resumo: 0, skills: 1, areas: 2, vagas: 3, api: 4 }[tabId];
   const btns = document.querySelectorAll(".nav-btn");
-  if (btns[btnIndex]) btns[btnIndex].classList.add("active");
+  if (btns[btnIndex]) {
+    btns[btnIndex].classList.add("active");
+    if (window.innerWidth <= 768) {
+      btns[btnIndex].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }
+  }
 
   ajustaAlturaScrollTables();
 }
