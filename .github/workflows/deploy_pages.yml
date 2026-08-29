@@ -5,7 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'site/**'
+      - 'api/web/**'
+      - '.github/web/**'
   workflow_dispatch:
 
 permissions:
@@ -30,11 +31,17 @@ jobs:
       - name: 2. Configurar GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: 3. Preparar artefato do Pages (site)
+      - name: 3. Montar artefato do Pages
+        run: |
+          mkdir -p _site/api
+          cp .github/web/index.html _site/
+          cp api/web/*.json _site/api/
+
+      - name: 4. Preparar artefato do Pages (_site)
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'site'
+          path: '_site'
 
-      - name: 4. Publicar no GitHub Pages
+      - name: 5. Publicar no GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

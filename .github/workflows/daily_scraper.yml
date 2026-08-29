@@ -63,16 +63,16 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-        git add seed/vagas.csv docs/relatorios/ site/
+        git add seed/vagas.csv docs/relatorios/ api/web/ .github/web/
 
         
         DATA_HOJE=$(date +'%d/%m/%Y')
         git diff --quiet && git diff --staged --quiet && exit 0
-        # Sem [skip ci]: o push em site/** precisa disparar o
+        # Sem [skip ci]: o push em api/web/** precisa disparar o
         # deploy_pages.yml (o marcador suprimiria todos os workflows do push).
         git commit -m "chore(data): coleta automatizada de vagas [${DATA_HOJE}]"
         # Em caso de corrida com outro push, rebaseia e tenta de novo.
-        # Se o rebase conflitar em arquivos de dados (seed, docs, site),
+        # Se o rebase conflitar em arquivos de dados (seed, docs, api/web),
         # a versao do bot e a mais nova - vem do banco da propria run.
         # Refaz entao o commit por cima da main atual, com os dados do bot.
         for tentativa in 1 2 3; do
@@ -83,17 +83,23 @@ jobs:
           else
             git rebase --abort 2>/dev/null || true
             git reset --soft origin/main
-            git add seed/vagas.csv docs/relatorios/ site/
+            git add seed/vagas.csv docs/relatorios/ api/web/ .github/web/
             git commit -m "chore(data): coleta automatizada de vagas [${DATA_HOJE}]"
           fi
           sleep 10
         done
         exit 1
 
-    - name: 7. Preparar artefato do GitHub Pages
+    - name: 7. Montar artefato do GitHub Pages
+      run: |
+        mkdir -p _site/api
+        cp .github/web/index.html _site/
+        cp api/web/*.json _site/api/
+
+    - name: 8. Preparar artefato do GitHub Pages
       uses: actions/upload-pages-artifact@v3
       with:
-        path: 'site'
+        path: '_site'
 
   deploy-pages:
     # Deploy interno: o push do bot usa GITHUB_TOKEN e NAO dispara o
