@@ -116,6 +116,7 @@ class Settings:
             "trampos",
             "linkedin",
             "solides",
+            "geekhunter",
         ]
     )
 
