@@ -3,6 +3,7 @@
 import pytest
 
 from scraper.config import Settings
+from scraper.sources.geekhunter import GeekHunterSource
 from scraper.sources.gupy import GupySource
 from scraper.sources.linkedin import GEO_ID_BRASIL, LinkedInSource
 from scraper.sources.programathor import FILTROS_NIVEL_ENTRADA, ProgramathorSource
@@ -371,6 +372,64 @@ def test_solides_filtros_nativos_por_nivel():
     assert set(FILTROS_SOLIDES) == {"Júnior", "Estágio", "Trainee"}
     assert FILTROS_SOLIDES["Júnior"]["seniorities"] == "junior"
     assert FILTROS_SOLIDES["Estágio"]["title"] == "estagio"
+
+
+# Recorte real da listagem publica de https://www.geekhunter.com.br/pt/vagas
+# (o card de "Desenvolvedor(a) Fullstack Java Júnior").
+GEEKHUNTER_CARD = """
+<li class="css-1oxv7b7" id="job-desenvolvedor-a--fullstack-java-junior-1"><article>
+<div role="group">
+  <div><p class="chakra-text">Atualizada há 19 horas</p></div>
+  <div>
+    <h3 class="chakra-text"><a href="https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/desenvolvedor-a--fullstack-java-junior-1">Desenvolvedor(a) Fullstack Java Júnior</a></h3>
+  </div>
+  <div>
+    <div><p class="chakra-text">Júnior</p></div>
+    <div><p class="chakra-text">Híbrido</p></div>
+    <div><p class="chakra-text">São Paulo, SP, Brasil</p></div>
+  </div>
+</div>
+<div>
+  <p class="chakra-text">Tarefas e Responsabilidades</p>
+  <p class="chakra-text">Desenvolvedor(a) Fullstack Java Júnior Modelo de trabalho: Híbrido — 3 dias presenciais e 2 dias em Home Office Local: Santo Amaro e/ou Interlagos — São Paulo/SP Contratação: CLT + pacote de benefícios Sobre a Nava: Na Nava, atuamos no core de empresas líderes em seus segmentos, conectando tecnologia</p>
+</div>
+<div>
+  <p class="chakra-text">Requisitos</p>
+  <div><p class="chakra-text">Angular 8+</p></div>
+  <div><p class="chakra-text">Apis Rest</p></div>
+</div>
+</article></li>
+"""
+
+
+def test_geekhunter_parse_mapeia_campos():
+    src = _source(GeekHunterSource)
+    jobs = src._parse_page(GEEKHUNTER_CARD, "todas")
+    assert len(jobs) == 1
+    job = jobs[0]
+    assert job.source == "geekhunter"
+    assert job.external_id == "desenvolvedor-a--fullstack-java-junior-1"
+    assert job.title == "Desenvolvedor(a) Fullstack Java Júnior"
+    assert job.company == "nava-technology-for-business-1"
+    assert job.workplace_type == "Híbrido"
+    assert job.location == "São Paulo, SP, Brasil"
+    assert job.seniority == "Júnior"
+    assert "Fullstack Java Júnior" in job.description
+    assert job.url.startswith("https://www.geekhunter.com/pt/")
+
+
+def test_geekhunter_ignora_card_sem_link():
+    src = _source(GeekHunterSource)
+    assert src._parse_page("<li id='job-x'><article><p>sem link</p></article></li>", "todas") == []
+
+
+def test_geekhunter_nao_confia_em_nivel_alto_do_portal():
+    """Card que declara 'Pleno' deixa senioridade vazia: o filtro de
+    senioridade decide pelo titulo (titulos mistos 'Júnior/Pleno' seguem
+    aceitando candidatos juniores)."""
+    card = GEEKHUNTER_CARD.replace(">Júnior<", ">Pleno<")
+    job = _source(GeekHunterSource)._parse_page(card, "todas")[0]
+    assert job.seniority == ""
 
 
 def test_trampos_usa_custom_company_name_quando_existe():
