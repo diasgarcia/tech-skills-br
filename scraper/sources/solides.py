@@ -39,9 +39,15 @@ logger = logging.getLogger(__name__)
 API_URL = "https://apigw.solides.com.br/jobs/v3/portal-vacancies-new"
 
 # "termo" -> filtros nativos do portal para nivel de entrada.
+#
+# O filtro `title=` do portal casa por palavra: "estagio" NAO cobre
+# "estagiario" (medido: 222 vs 159 vagas, com 45 exclusivas de
+# "estagiario"). Por isso as duas variacoes viram filtros separados; a
+# deduplicacao do pipeline junta as sobrepostas.
 FILTROS_NIVEL_ENTRADA: dict[str, dict[str, str]] = {
     "Júnior": {"occupationAreas": "tecnologia", "seniorities": "junior"},
     "Estágio": {"occupationAreas": "tecnologia", "title": "estagio"},
+    "Estagiário": {"occupationAreas": "tecnologia", "title": "estagiario"},
     "Trainee": {"occupationAreas": "tecnologia", "title": "trainee"},
     # O portal nao tem filtro nativo de aprendiz; title=aprendiz retorna
     # um conjunto frouxo (nao filtra de verdade). Coletamos mesmo assim e
