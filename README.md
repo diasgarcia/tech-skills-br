@@ -8,7 +8,7 @@ Projeto de pesquisa científica (PIBIC / Iniciação Científica) que coleta, ex
 | :--- | :--- |
 | **Linguagem** | Python 3.11+ |
 | **Banco de dados** | SQLite / PostgreSQL (SQLAlchemy 2.0) |
-| **Documentação** | [Manual de Uso](docs/manual_de_uso.md) · [Arquitetura Técnica](docs/arquitetura_tecnica.md) |
+| **Documentação** | [Wiki](https://github.com/diasgarcia/tech-skills-br/wiki) — Manual de Uso, Arquitetura, Pipeline, Modelo de Dados, Classificação e Automação |
 | **Integração contínua** | [GitHub Actions](https://github.com/diasgarcia/tech-skills-br/actions/workflows/ci.yml) |
 
 ## Problema de Pesquisa
@@ -49,7 +49,7 @@ O extrator usa um vocabulário controlado em `scraper/rules/skills.yml`, com mai
 
 ## Execução Rápida
 
-O [Manual de Uso](docs/manual_de_uso.md) documenta todos os parâmetros e opções.
+O [Manual de Uso](https://github.com/diasgarcia/tech-skills-br/wiki/Manual-de-Uso) na wiki documenta todos os parâmetros e opções.
 
 ```powershell
 # 0. Primeira execução: carrega o histórico versionado no SQLite local.
