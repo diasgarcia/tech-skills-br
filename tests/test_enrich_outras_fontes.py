@@ -4,28 +4,9 @@ from threading import Lock
 
 from scripts.enrich_outras_fontes import (
     fetch_gupy,
-    fetch_programathor,
     fetch_trampos,
     fetch_vagas_com,
 )
-
-PROGRAMATHOR_HTML = """
-<html><body>
-  <div class="wrapper-content-job-show">
-    Descrição da vaga: atuacao com Java, Spring Boot e Vue.js em equipe
-    ageis, com testes automatizados e deploy em AWS.
-  </div>
-</body></html>
-"""
-
-
-class FonteFake:
-    def __init__(self, html):
-        self._html = html
-        self.session = None
-
-    def _get_page_html(self, url, params):
-        return self._html
 
 VAGAS_HTML = """
 <html><body>
@@ -110,20 +91,6 @@ def test_fetch_trampos_suporta_listas_nos_campos():
 def test_fetch_trampos_resposta_invalida_devolve_vazio():
     session = FakeSession([FakeResponse(text="<html>nao json</html>")])
     assert fetch_trampos(session, Lock(), "1-x")[0] == ""
-
-
-def test_fetch_programathor_extrai_da_pagina_de_detalhe(monkeypatch):
-    monkeypatch.setattr("scripts.enrich_outras_fontes.time.sleep", lambda s: None)
-    fonte = FonteFake(PROGRAMATHOR_HTML)
-    desc, _ = fetch_programathor(fonte, Lock(), "https://programathor.com.br/jobs/1-x")
-    assert "Spring Boot" in desc
-    assert "AWS" in desc
-
-
-def test_fetch_programathor_sem_pagina_devolve_vazio(monkeypatch):
-    monkeypatch.setattr("scripts.enrich_outras_fontes.time.sleep", lambda s: None)
-    fonte = FonteFake(None)
-    assert fetch_programathor(fonte, Lock(), "https://programathor.com.br/jobs/1-x") == ("", None)
 
 
 def test_fetch_gupy_extrai_e_limpa_html_da_descricao():

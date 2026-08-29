@@ -35,7 +35,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        playwright install --with-deps chromium
 
 
     - name: 4. Coletar todas as fontes (limite natural de paginacao de cada uma)
@@ -49,9 +48,6 @@ jobs:
         python scripts/import_csv.py --csv seed/vagas.csv
         # Importa todos os CSVs da rodada, do mais antigo para o mais novo.
         for csv in $(ls -tr output/vagas_*.csv); do python scripts/import_csv.py --csv "$csv"; done
-        # Outras fontes primeiro (ProgramaThor tem Cloudflare sensivel a
-        # rajada; rodar cedo pega o IP com menos requests acumulados),
-        # depois o LinkedIn.
         python scripts/enrich_outras_fontes.py
         python scripts/enrich_descriptions.py
         python scripts/reclassify_areas.py
