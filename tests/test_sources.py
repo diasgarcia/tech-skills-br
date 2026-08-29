@@ -369,9 +369,10 @@ def test_solides_ignora_registro_incompleto_e_antigo():
 
 
 def test_solides_filtros_nativos_por_nivel():
-    assert set(FILTROS_SOLIDES) == {"Júnior", "Estágio", "Trainee"}
+    assert set(FILTROS_SOLIDES) == {"Júnior", "Estágio", "Trainee", "Aprendiz"}
     assert FILTROS_SOLIDES["Júnior"]["seniorities"] == "junior"
     assert FILTROS_SOLIDES["Estágio"]["title"] == "estagio"
+    assert FILTROS_SOLIDES["Aprendiz"]["title"] == "aprendiz"
 
 
 # Recorte real da listagem publica de https://www.geekhunter.com.br/pt/vagas

@@ -43,6 +43,10 @@ FILTROS_NIVEL_ENTRADA: dict[str, dict[str, str]] = {
     "Júnior": {"occupationAreas": "tecnologia", "seniorities": "junior"},
     "Estágio": {"occupationAreas": "tecnologia", "title": "estagio"},
     "Trainee": {"occupationAreas": "tecnologia", "title": "trainee"},
+    # O portal nao tem filtro nativo de aprendiz; title=aprendiz retorna
+    # um conjunto frouxo (nao filtra de verdade). Coletamos mesmo assim e
+    # o filtro de senioridade do pipeline corta o ruido.
+    "Aprendiz": {"occupationAreas": "tecnologia", "title": "aprendiz"},
 }
 
 PAGE_SIZE = 10  # o endpoint ignora `size`; pagina fixa de 10 vagas
@@ -133,5 +137,10 @@ class SolidesSource(JobSource):
             workplace_type=workplace,
             published_date=created,
             search_term=term,
-            seniority=term if term in FILTROS_NIVEL_ENTRADA else "",
+            # So confia no filtro nativo de junior (seniorities=junior).
+            # Estagio/Trainee/Aprendiz vem de busca por titulo, que o
+            # portal aplica de forma frouxa ("title=aprendiz" devolve
+            # pleno e tech lead); o filtro de senioridade do pipeline
+            # decide pelo titulo nesses casos.
+            seniority=term if term == "Júnior" else "",
         )
