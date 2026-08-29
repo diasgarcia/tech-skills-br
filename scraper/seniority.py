@@ -70,10 +70,11 @@ def filter_entry_level(jobs: list[Job], flt: SeniorityFilter | None = None) -> l
     """Mantem apenas vagas de entrada, preenchendo `job.seniority`.
 
     Se a fonte ja informou o nivel, ele e respeitado e o titulo nao e
-    consultado. Portais como a ProgramaThor declaram a senioridade num campo
-    proprio, que e mais confiavel do que adivinhar pelo titulo -- "Programador(a)
-    PHP" nao tem marca nenhuma de nivel, mas o portal a classifica como Junior.
-    Coletores que nao sabem o nivel deixam o campo vazio e caem no regex.
+    consultado. Portais como a Solides (filtro nativo de junior) declaram
+    a senioridade num campo proprio, que e mais confiavel do que adivinhar
+    pelo titulo -- "Programador(a) PHP" nao tem marca nenhuma de nivel,
+    mas o portal a classifica como Junior. Coletores que nao sabem o
+    nivel deixam o campo vazio e caem no regex.
     """
     flt = flt or default_filter()
     kept = []

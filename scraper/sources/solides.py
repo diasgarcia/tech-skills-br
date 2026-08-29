@@ -24,7 +24,7 @@ Detalhes praticos descobertos testando o endpoint ao vivo:
 
 Como o projeto so quer nivel de entrada, esta fonte usa os filtros nativos
 de tecnologia + junior/estagio/trainee em vez de repetir os 40 termos de
-busca do projeto -- mesmo padrao do ProgramaThor.
+busca do projeto.
 """
 
 from __future__ import annotations

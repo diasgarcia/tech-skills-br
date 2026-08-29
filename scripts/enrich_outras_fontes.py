@@ -9,10 +9,6 @@ banco e re-extrai as tecnologias com o skills.yml atual.
 - Trampos: GET em https://trampos.co/api/v2/opportunities/{slug}, onde o
   slug e o ultimo segmento da URL da vaga; junta description,
   prerequisite, desirable e other_info.
-- ProgramaThor: reusa a cadeia do proprio coletor (Playwright -> curl_cffi
-  -> PoliteSession) na pagina de detalhe da vaga e parse de
-  `div.wrapper-content-job-show`. A descricao do card e sintetica
-  (comeca com "Tecnologias:"), e e isso que marca a vaga como pendente.
 - Gupy: apenas as descricoes TRUNCADAS (exatamente 500 caracteres, legado
   do corte antigo do CSV). GET no endpoint publico de detalhe
   employability-portal.gupy.io/api/v1/jobs/{id}; vagas ja removidas
@@ -45,11 +41,10 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from scraper.config import RULES_DIR, USER_AGENT, Settings  # noqa: E402
+from scraper.config import RULES_DIR, USER_AGENT  # noqa: E402
 from scraper.http_client import PoliteSession  # noqa: E402
 from scraper.models import strip_html  # noqa: E402
 from scraper.skills import SkillExtractor  # noqa: E402
-from scraper.sources.programathor import ProgramathorSource  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)-7s %(message)s")
 logger = logging.getLogger("enrich_outras")
@@ -95,19 +90,6 @@ def fetch_trampos(session: PoliteSession, lock: Lock, slug: str) -> tuple[str, i
             if texto:
                 partes.append(texto)
     return " ".join(partes), status
-
-
-def fetch_programathor(source: ProgramathorSource, lock: Lock, url: str) -> tuple[str, int | None]:
-    with lock:
-        # O Cloudflare do portal e sensivel a rajadas; espaca os requests.
-        time.sleep(4)
-        html = source._get_page_html(url, {})
-        status = source.session.last_status_code if source.session else None
-    if not html:
-        return "", status
-    soup = BeautifulSoup(html, "html.parser")
-    el = soup.select_one("div.wrapper-content-job-show, div[class*=content]")
-    return (el.get_text(" ", strip=True) if el else ""), status
 
 
 def fetch_gupy(session: PoliteSession, lock: Lock, job_id: str) -> tuple[str, int | None]:
@@ -250,17 +232,6 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
     """
     args_trampos = [MIN_DESCRICAO_TRAMPOS, *janela]
 
-    # A descricao sintetica do card comeca com "Tecnologias:"; a completa,
-    # vinda da pagina de detalhe, nao.
-    query_programathor = """
-        SELECT id, url, title FROM vagas
-        WHERE source = 'programathor'
-          AND COALESCE(enrich_encerrada, 0) = 0
-          AND (description IS NULL OR description LIKE 'Tecnologias:%')
-          AND (published_date IS NULL OR published_date >= date('now', ?))
-    """
-    args_programathor = list(janela)
-
     # Gupy: so as truncadas legadas (exatamente 500 caracteres). As vagas
     # atuais ja chegam com a descricao completa na listagem.
     query_gupy = """
@@ -294,8 +265,6 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
         args_vagas.append(limit)
         query_trampos += " LIMIT ?"
         args_trampos.append(limit)
-        query_programathor += " LIMIT ?"
-        args_programathor.append(limit)
         query_gupy += " LIMIT ?"
         args_gupy.append(limit)
         query_geekhunter += " LIMIT ?"
@@ -308,27 +277,6 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
         max_retries=2,
         backoff_factor=1.5,
     ) as session:
-        # O ProgramaThor roda PRIMEIRO, com sessao propria e mais lenta:
-        # o Cloudflare do portal e sensivel a rajadas, e rodar antes das
-        # outras fontes pega o IP com menos requests acumulados.
-        with PoliteSession(
-            user_agent=USER_AGENT,
-            delay_seconds=5.0,
-            timeout_seconds=25,
-            max_retries=2,
-            backoff_factor=1.5,
-        ) as session_programathor:
-            fonte = ProgramathorSource(
-                session=session_programathor, settings=Settings()
-            )
-            c.execute(query_programathor, args_programathor)
-            logger.info("ProgramaThor pendentes: %d", len(c.fetchall()))
-            total_programathor = _enriquecer(
-                c, session_programathor, lock, extractor, tech_map,
-                query_programathor, args_programathor,
-                lambda sess, lk, url: fetch_programathor(fonte, lk, url),
-            )
-
         c.execute(query_vagas, args_vagas)
         logger.info("Vagas.com pendentes: %d", len(c.fetchall()))
         total_vagas = _enriquecer(
@@ -363,10 +311,8 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
     conn.commit()
     conn.close()
     logger.info(
-        "Enriquecimento concluido: %d vagas.com, %d trampos, %d programathor, "
-        "%d gupy e %d geekhunter.",
-        total_vagas, total_trampos, total_programathor, total_gupy,
-        total_geekhunter,
+        "Enriquecimento concluido: %d vagas.com, %d trampos, %d gupy e %d geekhunter.",
+        total_vagas, total_trampos, total_gupy, total_geekhunter,
     )
 
 
@@ -374,7 +320,7 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="Enriquece descricoes de Vagas.com, Trampos e ProgramaThor."
+        description="Enriquece descricoes de Vagas.com, Trampos, Gupy e GeekHunter."
     )
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--janela", type=int, default=JANELA_TENTATIVA_DIAS,
