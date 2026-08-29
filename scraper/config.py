@@ -10,6 +10,8 @@ import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
+import yaml
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 RULES_DIR = Path(__file__).resolve().parent / "rules"
 DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "output"
@@ -52,54 +54,15 @@ USER_AGENT = (
 
 
 
-SEARCH_TERMS: list[str] = [
-    "desenvolvedor junior",
-    "desenvolvedor jr",
-    "programador junior",
-    "analista de sistemas junior",
-    "frontend junior",
-    "backend junior",
-    "fullstack junior",
-    "desenvolvedor mobile junior",
+def load_search_terms() -> list[str]:
+    """Termos de busca do projeto, declarados em coletores.yml."""
+    with open(RULES_DIR / "coletores.yml", encoding="utf-8") as fh:
+        dados = yaml.safe_load(fh) or {}
+    termos = dados.get("termos") or []
+    return [str(t).strip() for t in termos if str(t).strip()]
 
-    "engenheiro de dados junior",
-    "analista de dados junior",
-    "analista de bi junior",
-    "cientista de dados junior",
-    "desenvolvedor ia junior",
-    "engenheiro de ia junior",
-    "inteligencia artificial junior",
 
-    "qa junior",
-    "analista de testes junior",
-    "devops junior",
-    "cloud junior",
-
-    "analista de infraestrutura junior",
-    "analista de redes junior",
-    "analista de seguranca junior",
-    "seguranca da informacao junior",
-    "cybersecurity junior",
-
-    "suporte tecnico junior",
-    "analista de suporte junior",
-    "assistente de ti",
-    "auxiliar de ti",
-    "tecnico de informatica",
-
-    "estagio desenvolvimento",
-    "estagio ti",
-    "estagio tecnologia",
-    "estagio dados",
-    "estagio ia",
-    "estagio inteligencia artificial",
-    "estagio suporte",
-    "estagio redes",
-    "estagio seguranca",
-
-    "trainee tecnologia",
-    "trainee ti",
-]
+SEARCH_TERMS: list[str] = load_search_terms()
 
 
 
