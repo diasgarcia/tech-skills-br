@@ -2,7 +2,7 @@
 
 ## Resumo
 
-Projeto de dados que coleta, extrai e analisa as habilidades técnicas citadas em vagas de tecnologia no Brasil.
+Projeto de dados (projeto de dados) que coleta e extrai as habilidades técnicas demandadas pelo mercado de tecnologia no Brasil. Esses dados serão posteriormente confrontados com as referências públicas e os referências técnicas.
 
 | Item | Descrição |
 | :--- | :--- |
