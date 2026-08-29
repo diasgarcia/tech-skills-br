@@ -146,7 +146,7 @@
     tr:hover td { background: rgba(255,255,255,0.02); }
 
     .bar-wrap { width: 100%; background: #21262d; height: 10px; border-radius: 2px; overflow: hidden; display: flex; }
-    .bar-wrap.sm { height: 5px; }
+    .bar-wrap.half { width: 50%; }
     .bar-fill { background: var(--accent); height: 100%; }
 
     .search-input {
@@ -599,7 +599,7 @@ function renderSkillsTable() {
       <td class="hide-mobile"><span class="badge">${t.grupo}</span></td>
       <td style="text-align: center;">${t.vagas}</td>
       <td style="text-align: right;"><strong>${t.percentual_total}%</strong></td>
-      <td class="hide-mobile"><div class="bar-wrap sm"><div class="bar-fill" style="width: ${t.percentual_total}%;"></div></div></td>
+      <td class="hide-mobile"><div class="bar-wrap half"><div class="bar-fill" style="width: ${t.percentual_total}%;"></div></div></td>
     `;
     tbody.appendChild(tr);
   });
@@ -652,7 +652,7 @@ function renderAreaDetail() {
       <td class="hide-mobile"><span class="badge">${s.grupo}</span></td>
       <td style="text-align: center;">${s.vagas}</td>
       <td style="text-align: right;"><strong>${s.percentual}%</strong></td>
-      <td class="hide-mobile"><div class="bar-wrap sm"><div class="bar-fill" style="width: ${s.percentual}%; background: var(--purple);"></div></div></td>
+      <td class="hide-mobile"><div class="bar-wrap half"><div class="bar-fill" style="width: ${s.percentual}%; background: var(--purple);"></div></div></td>
     `;
     tbody.appendChild(tr);
   });
