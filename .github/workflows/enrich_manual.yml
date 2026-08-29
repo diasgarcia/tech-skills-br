@@ -1,0 +1,126 @@
+name: Enriquecimento Manual de Vagas (PIBIC)
+
+on:
+  # Roda so quando o pesquisador dispara pelo botao "Run workflow".
+  # Usado para testar/limpar pendentes de descricao sem esperar a coleta
+  # diaria: busca descricoes vazias, sinteticas ou truncadas (500 chars)
+  # e re-extrai skills e areas, comecando pelo ProgramaThor.
+  workflow_dispatch:
+
+concurrency:
+  group: enriquecimento-manual
+  cancel-in-progress: false
+
+jobs:
+  enrich:
+    name: Enriquecimento de Descricoes
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # Permite que o bot do GitHub commite as vagas atualizadas
+      pages: write     # Necessario para o artefato do Pages
+      id-token: write
+
+    steps:
+    - name: 1. Baixar repositorio
+      uses: actions/checkout@v4
+
+    - name: 2. Configurar Python 3.12
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+        cache: 'pip'
+
+    - name: 3. Instalar dependencias
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        playwright install --with-deps chromium
+
+    - name: 4. Carregar historico no SQLite
+      run: |
+        python scripts/import_csv.py --csv seed/vagas.csv
+
+    - name: 5. Enriquecer descricoes pendentes
+      run: |
+        # Outras fontes primeiro (ProgramaThor tem Cloudflare sensivel a
+        # rajada; rodar cedo pega o IP com menos requests acumulados),
+        # depois o LinkedIn.
+        python scripts/enrich_outras_fontes.py
+        python scripts/enrich_descriptions.py
+      env:
+        PYTHONPATH: .
+
+    - name: 6. Reclassificar areas pendentes
+      run: |
+        python scripts/reclassify_areas.py
+      env:
+        PYTHONPATH: .
+
+    - name: 7. Exportar snapshot, relatorios e JSON do Pages
+      run: |
+        python scripts/export_seed.py
+        python scripts/report_db.py
+        python scripts/export_pages_data.py
+      env:
+        PYTHONPATH: .
+
+    - name: 8. Comitar e enviar dados atualizados para o GitHub
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+        git add seed/vagas.csv docs/relatorios/ api/web/ .github/web/
+
+        DATA_HOJE=$(date +'%d/%m/%Y')
+        git diff --quiet && git diff --staged --quiet && exit 0
+        # Sem [skip ci]: o push em api/web/** precisa disparar o
+        # deploy_pages.yml (o marcador suprimiria todos os workflows do push).
+        git commit -m "chore(data): enriquecimento manual de vagas [${DATA_HOJE}]"
+        # Em caso de corrida com outro push, rebaseia e tenta de novo.
+        # Se o rebase conflitar em arquivos de dados (seed, docs, api/web),
+        # a versao do bot e a mais nova - vem do banco da propria run.
+        # Refaz entao o commit por cima da main atual, com os dados do bot.
+        for tentativa in 1 2 3; do
+          if git pull --rebase origin main; then
+            if git push; then
+              exit 0
+            fi
+          else
+            git rebase --abort 2>/dev/null || true
+            git reset --soft origin/main
+            git add seed/vagas.csv docs/relatorios/ api/web/ .github/web/
+            git commit -m "chore(data): enriquecimento manual de vagas [${DATA_HOJE}]"
+          fi
+          sleep 10
+        done
+        exit 1
+
+    - name: 9. Montar artefato do GitHub Pages
+      run: |
+        mkdir -p _site/api
+        cp .github/web/index.html _site/
+        cp api/web/*.json _site/api/
+
+    - name: 10. Preparar artefato do GitHub Pages
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: '_site'
+
+  deploy-pages:
+    # Deploy interno: o push do bot usa GITHUB_TOKEN e NAO dispara o
+    # deploy_pages.yml (eventos do GITHUB_TOKEN nao criam novos workflows),
+    # entao a publicacao precisa acontecer aqui, no mesmo run.
+    name: Publicar Dashboard no GitHub Pages
+    needs: enrich
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
