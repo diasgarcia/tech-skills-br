@@ -12,11 +12,15 @@ Parametros (nomes nada obvios, mapeados por tentativa contra a API):
   `lc`   localizacao (texto).
   `page` paginacao; o envelope traz `pagination.total_pages`.
 
+Estrategia: como a busca `tr=` e literal demais (nossos 40 termos achavam
+quase nada), a coleta varre a listagem completa SEM termo (~270 vagas,
+23 paginas) e deixa o portao de relevancia + filtro de senioridade do
+projeto fazerem o corte. O portal e misto (Comunicacao + TI), entao a
+categoria nativa (`category_name`) entra na descricao para o portao
+poder decidir.
+
 Particularidades que o codigo trata:
 
-- O portal e **misto**: publica vagas de Comunicacao e de TI no mesmo lugar.
-  A categoria nativa (`category_name`) entra na descricao para o portao de
-  relevancia do projeto poder decidir.
 - `hybrid` vem sempre; `home_office` as vezes vem nulo.
 - A listagem **nao traz a descricao da vaga nem a cidade**. Existe uma
   `company.description`, mas ela descreve a EMPRESA -- usa-la para classificar
@@ -44,6 +48,23 @@ class TramposSource(JobSource):
     label = "Trampos.co"
     MAX_PAGES_PER_TERM = 30
 
+    def fetch(self, terms: list[str]) -> list[Job]:
+        """Varre a listagem completa sem termo.
+
+        A busca `tr=` do portal e literal demais para os termos do
+        projeto (ex.: "pessoa desenvolvedora" nao casa com
+        "desenvolvedor junior"). Varrendo tudo (~270 vagas), o portao de
+        relevancia e o filtro de senioridade do pipeline cortam o que nao
+        interessa -- mesmo padrao do GeekHunter.
+        """
+        if terms:
+            logger.debug(
+                "[%s] termos ignorados (busca textual e literal demais); "
+                "varrendo a listagem completa",
+                self.name,
+            )
+        return super().fetch(["todas"])
+
     def fetch_term(self, term: str) -> list[Job]:
         jobs: list[Job] = []
         seen: set[str] = set()
@@ -52,7 +73,10 @@ class TramposSource(JobSource):
         end_page = max(start_page, self.page_limit())
 
         for page in range(start_page, end_page + 1):
-            payload = self.session.get_json(API_URL, params={"tr": term, "page": page})
+            params: dict = {"page": page}
+            if term != "todas":
+                params["tr"] = term
+            payload = self.session.get_json(API_URL, params=params)
 
             if not payload:
                 break
