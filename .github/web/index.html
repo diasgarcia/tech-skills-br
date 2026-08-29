@@ -346,7 +346,7 @@
 
       <div class="scroll-table">
         <table id="table-skills" class="skills-table">
-          <thead><tr><th class="rank-col">#</th><th class="technology-col">Tecnologia</th><th class="hide-mobile" style="width: 22%;">Categoria</th><th style="text-align: center; width: 14%;">Vagas</th><th style="text-align: right; width: 10%;">Demanda %</th><th class="hide-mobile proportion-col">Proporção</th></tr></thead>
+          <thead><tr><th class="rank-col">#</th><th class="technology-col">Tecnologia</th><th class="hide-mobile" style="text-align: center; width: 22%;">Categoria</th><th style="text-align: center; width: 14%;">Vagas</th><th style="text-align: right; width: 10%;">Demanda %</th><th class="hide-mobile proportion-col">Proporção</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -367,7 +367,7 @@
 
       <div class="scroll-table">
         <table id="table-area-skills" class="skills-table">
-          <thead><tr><th class="rank-col">#</th><th class="technology-col">Tecnologia</th><th class="hide-mobile" style="width: 22%;">Categoria</th><th style="text-align: center; width: 14%;">Vagas na Área</th><th style="text-align: right; width: 10%;">Demanda %</th><th class="hide-mobile proportion-col">Proporção</th></tr></thead>
+          <thead><tr><th class="rank-col">#</th><th class="technology-col">Tecnologia</th><th class="hide-mobile" style="text-align: center; width: 22%;">Categoria</th><th style="text-align: center; width: 14%;">Vagas na Área</th><th style="text-align: right; width: 10%;">Demanda %</th><th class="hide-mobile proportion-col">Proporção</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -607,7 +607,7 @@ function renderSkillsTable() {
     tr.innerHTML = `
       <td class="rank-col" style="color: var(--text-muted);">${t.posicao}</td>
       <td class="technology-col"><strong style="color: var(--text-bright);">${t.nome}</strong></td>
-      <td class="hide-mobile"><span class="badge">${t.grupo}</span></td>
+      <td class="hide-mobile" style="text-align: center;"><span class="badge">${t.grupo}</span></td>
       <td style="text-align: center;">${t.vagas}</td>
       <td style="text-align: right;"><strong>${t.percentual_total}%</strong></td>
       <td class="hide-mobile proportion-col"><div class="bar-wrap"><div class="bar-fill" style="width: ${t.percentual_total}%;"></div></div></td>
@@ -661,7 +661,7 @@ function renderAreaDetail() {
     tr.innerHTML = `
       <td class="rank-col" style="color: var(--text-muted);">${idx + 1}</td>
       <td class="technology-col"><strong style="color: var(--text-bright);">${s.nome}</strong></td>
-      <td class="hide-mobile"><span class="badge">${s.grupo}</span></td>
+      <td class="hide-mobile" style="text-align: center;"><span class="badge">${s.grupo}</span></td>
       <td style="text-align: center;">${s.vagas}</td>
       <td style="text-align: right;"><strong>${s.percentual}%</strong></td>
       <td class="hide-mobile proportion-col"><div class="bar-wrap"><div class="bar-fill" style="width: ${s.percentual}%; background: var(--purple);"></div></div></td>
