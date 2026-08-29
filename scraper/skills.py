@@ -26,6 +26,7 @@ _BOUNDARY = r"[a-z0-9#+]"
 _CASE_BOUNDARY = r"[A-Za-z0-9#+]"
 
 ARQUIVO_SECOES_DESCARTE = RULES_DIR / "secoes_descarte.yml"
+ARQUIVO_CONTEXTOS_DESCARTE = RULES_DIR / "contextos_descarte.yml"
 
 
 def _carregar_secoes_descarte() -> tuple[str, ...]:
@@ -37,6 +38,30 @@ def _carregar_secoes_descarte() -> tuple[str, ...]:
         return ()
     secoes = dados.get("secoes_descarte") or []
     return tuple(s.strip() for s in secoes if isinstance(s, str) and s.strip())
+
+
+def _carregar_contextos_descarte() -> dict[str, list[re.Pattern]]:
+    """Regex que removem mencoes a EMPRESA (nao a skill), por tecnologia.
+
+    Ex.: "uma gigante brasileira de hardware e servicos" fala da empresa
+    contratante; "hardware" ali nao e uma habilidade pedida.
+    """
+    try:
+        with open(ARQUIVO_CONTEXTOS_DESCARTE, encoding="utf-8") as fh:
+            dados = yaml.safe_load(fh) or {}
+    except OSError:
+        return {}
+    regras = dados.get("descartar") or {}
+    compiladas: dict[str, list[re.Pattern]] = {}
+    for tecnologia, padroes in regras.items():
+        lista = []
+        for p in padroes or []:
+            token = normalize_tech(p)
+            if token:
+                lista.append(re.compile(rf"(?<!{_BOUNDARY}){re.escape(token)}(?!{_BOUNDARY})"))
+        if lista:
+            compiladas[tecnologia] = lista
+    return compiladas
 
 
 def normalize_tech(text: str | None) -> str:
@@ -71,6 +96,7 @@ class SkillExtractor:
         self,
         rules: dict,
         secoes_descarte: list[str] | None = None,
+        contextos_descarte: dict[str, list[re.Pattern]] | None = None,
     ) -> None:
         self.skills: dict[str, list[re.Pattern]] = {}
         self.case_sensitive: dict[str, list[re.Pattern]] = {}
@@ -79,6 +105,11 @@ class SkillExtractor:
             tuple(s.strip() for s in secoes_descarte if s.strip())
             if secoes_descarte is not None
             else _carregar_secoes_descarte()
+        )
+        self.contextos_descarte = (
+            contextos_descarte
+            if contextos_descarte is not None
+            else _carregar_contextos_descarte()
         )
         for group, entries in (rules or {}).items():
             for canonical, aliases in (entries or {}).items():
@@ -117,6 +148,13 @@ class SkillExtractor:
                 fim = posicao
         return texto_normalizado[:fim].strip()
 
+    def _recortar_contextos_descarte(self, texto_normalizado: str) -> str:
+        """Remove mencoes a empresa/setor que nao sao a skill (falsos positivos)."""
+        for padroes in self.contextos_descarte.values():
+            for padrao in padroes:
+                texto_normalizado = padrao.sub(" ", texto_normalizado)
+        return texto_normalizado
+
     def extract(self, *texts: str) -> list[str]:
         """Tecnologias citadas nos textos, sem repetir, em ordem alfabetica."""
         raw = " ".join(t for t in texts if t)
@@ -124,6 +162,9 @@ class SkillExtractor:
         if not haystack:
             return []
         haystack = self._recortar_secoes_finais(haystack)
+        if not haystack:
+            return []
+        haystack = self._recortar_contextos_descarte(haystack)
         if not haystack:
             return []
         found = [
