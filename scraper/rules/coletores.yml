@@ -1,0 +1,87 @@
+# Filtros de coleta por portal.
+#
+# Mesmo principio dos outros YAMLs em rules/: edite as regras aqui, nao o
+# codigo. Cada coletor carrega sua secao e usa os filtros como parametros
+# nativos do portal (nomes de campos exatamente como a API/site espera).
+
+termos:
+  - desenvolvedor junior
+  - desenvolvedor jr
+  - programador junior
+  - analista de sistemas junior
+  - frontend junior
+  - backend junior
+  - fullstack junior
+  - desenvolvedor mobile junior
+  - engenheiro de dados junior
+  - analista de dados junior
+  - analista de bi junior
+  - cientista de dados junior
+  - desenvolvedor ia junior
+  - engenheiro de ia junior
+  - inteligencia artificial junior
+  - qa junior
+  - analista de testes junior
+  - devops junior
+  - cloud junior
+  - analista de infraestrutura junior
+  - analista de redes junior
+  - analista de seguranca junior
+  - seguranca da informacao junior
+  - cybersecurity junior
+  - suporte tecnico junior
+  - analista de suporte junior
+  - assistente de ti
+  - auxiliar de ti
+  - tecnico de informatica
+  - estagio desenvolvimento
+  - estagio ti
+  - estagio tecnologia
+  - estagio dados
+  - estagio ia
+  - estagio inteligencia artificial
+  - estagio suporte
+  - estagio redes
+  - estagio seguranca
+  - trainee tecnologia
+  - trainee ti
+
+solides:
+  # Cada entrada vira um "termo" de coleta: a chave rotula a senioridade
+  # declarada pelo portal e o valor sao os params nativos do endpoint.
+  filtros:
+    Júnior:
+      occupationAreas: tecnologia
+      seniorities: junior
+    Estágio:
+      occupationAreas: tecnologia
+      title: estagio
+    Estagiário:
+      occupationAreas: tecnologia
+      title: estagiario
+    Trainee:
+      occupationAreas: tecnologia
+      title: trainee
+    Aprendiz:
+      occupationAreas: tecnologia
+      title: aprendiz
+  # O filtro `title=` do portal casa por palavra: "estagio" nao cobre
+  # "estagiario" (medido: 222 vs 159 vagas, 45 exclusivas de
+  # "estagiario"). Por isso as duas variacoes sao filtros separados; a
+  # deduplicacao do pipeline junta as sobrepostas.
+  #
+  # `seniorities` so funciona com "junior" (estagio/trainee/aprendiz nao
+  # filtram de fato); os demais niveis usam busca por titulo, que o
+  # portal aplica de forma frouxa -- nesses casos o coletor NAO rotula
+  # senioridade e o filtro do pipeline decide pelo titulo.
+
+programathor:
+  filtros:
+    Júnior:
+      expertise: Júnior
+    Estágio:
+      contract_type: Estágio
+
+trampos:
+  tipos_de_entrada:
+    estagio: Estágio

@@ -26,6 +26,8 @@ from __future__ import annotations
 
 import logging
 import re
+
+import yaml
 from bs4 import BeautifulSoup
 
 
@@ -41,6 +43,7 @@ try:
 except ImportError:
     _HAS_PLAYWRIGHT = False
 
+from ..config import RULES_DIR
 from ..models import REMOTO, Job, normalize_workplace
 
 from .base import JobSource
@@ -51,10 +54,15 @@ BASE_URL = "https://programathor.com.br"
 JOBS_URL = f"{BASE_URL}/jobs"
 
 
-FILTROS_NIVEL_ENTRADA: dict[str, dict[str, str]] = {
-    "Júnior": {"expertise": "Júnior"},
-    "Estágio": {"contract_type": "Estágio"},
-}
+def _carregar_filtros() -> dict[str, dict[str, str]]:
+    """Filtros nativos de nivel de entrada declarados em coletores.yml."""
+    with open(RULES_DIR / "coletores.yml", encoding="utf-8") as fh:
+        dados = yaml.safe_load(fh) or {}
+    filtros = (dados.get("programathor") or {}).get("filtros") or {}
+    return {str(k): {str(p): str(v) for p, v in (val or {}).items()} for k, val in filtros.items()}
+
+
+FILTROS_NIVEL_ENTRADA = _carregar_filtros()
 
 # Cada campo do card e identificado pelo icone, e nao pela posicao: vagas sem
 # salario ou sem aviso de mudanca deslocam a ordem dos spans.

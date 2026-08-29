@@ -31,6 +31,9 @@ from __future__ import annotations
 
 import logging
 
+import yaml
+
+from ..config import RULES_DIR
 from ..models import Job, normalize_workplace
 from .base import JobSource
 
@@ -38,22 +41,21 @@ logger = logging.getLogger(__name__)
 
 API_URL = "https://apigw.solides.com.br/jobs/v3/portal-vacancies-new"
 
-# "termo" -> filtros nativos do portal para nivel de entrada.
-#
-# O filtro `title=` do portal casa por palavra: "estagio" NAO cobre
-# "estagiario" (medido: 222 vs 159 vagas, com 45 exclusivas de
-# "estagiario"). Por isso as duas variacoes viram filtros separados; a
-# deduplicacao do pipeline junta as sobrepostas.
-FILTROS_NIVEL_ENTRADA: dict[str, dict[str, str]] = {
-    "Júnior": {"occupationAreas": "tecnologia", "seniorities": "junior"},
-    "Estágio": {"occupationAreas": "tecnologia", "title": "estagio"},
-    "Estagiário": {"occupationAreas": "tecnologia", "title": "estagiario"},
-    "Trainee": {"occupationAreas": "tecnologia", "title": "trainee"},
-    # O portal nao tem filtro nativo de aprendiz; title=aprendiz retorna
-    # um conjunto frouxo (nao filtra de verdade). Coletamos mesmo assim e
-    # o filtro de senioridade do pipeline corta o ruido.
-    "Aprendiz": {"occupationAreas": "tecnologia", "title": "aprendiz"},
-}
+def _carregar_filtros() -> dict[str, dict[str, str]]:
+    """Filtros nativos de nivel de entrada declarados em coletores.yml.
+
+    O filtro `title=` do portal casa por palavra: "estagio" NAO cobre
+    "estagiario" (medido: 222 vs 159 vagas, com 45 exclusivas de
+    "estagiario"). Por isso as duas variacoes viram filtros separados; a
+    deduplicacao do pipeline junta as sobrepostas.
+    """
+    with open(RULES_DIR / "coletores.yml", encoding="utf-8") as fh:
+        dados = yaml.safe_load(fh) or {}
+    filtros = (dados.get("solides") or {}).get("filtros") or {}
+    return {str(k): {str(p): str(v) for p, v in (val or {}).items()} for k, val in filtros.items()}
+
+
+FILTROS_NIVEL_ENTRADA = _carregar_filtros()
 
 PAGE_SIZE = 10  # o endpoint ignora `size`; pagina fixa de 10 vagas
 
