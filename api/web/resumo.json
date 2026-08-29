@@ -941,6 +941,12 @@
           "percentual": 15.1
         },
         {
+          "nome": "Automação",
+          "grupo": "dados",
+          "vagas": 38,
+          "percentual": 13.3
+        },
+        {
           "nome": "HTML",
           "grupo": "linguagens",
           "vagas": 37,
@@ -973,12 +979,6 @@
         {
           "nome": ".NET",
           "grupo": "frameworks",
-          "vagas": 33,
-          "percentual": 11.6
-        },
-        {
-          "nome": "Automação",
-          "grupo": "dados",
           "vagas": 33,
           "percentual": 11.6
         },
@@ -1991,6 +1991,12 @@
           "percentual": 15.9
         },
         {
+          "nome": "Automação",
+          "grupo": "dados",
+          "vagas": 23,
+          "percentual": 15.2
+        },
+        {
           "nome": "Databricks",
           "grupo": "dados",
           "vagas": 22,
@@ -2007,12 +2013,6 @@
           "grupo": "cloud_devops",
           "vagas": 22,
           "percentual": 14.6
-        },
-        {
-          "nome": "Automação",
-          "grupo": "dados",
-          "vagas": 20,
-          "percentual": 13.2
         },
         {
           "nome": "GCP",
@@ -2651,6 +2651,12 @@
           "percentual": 10.7
         },
         {
+          "nome": "Automação",
+          "grupo": "dados",
+          "vagas": 13,
+          "percentual": 10.7
+        },
+        {
           "nome": "Lógica de Programação",
           "grupo": "engenharia_praticas",
           "vagas": 13,
@@ -2676,12 +2682,6 @@
         },
         {
           "nome": "Kafka",
-          "grupo": "dados",
-          "vagas": 10,
-          "percentual": 8.3
-        },
-        {
-          "nome": "Automação",
           "grupo": "dados",
           "vagas": 10,
           "percentual": 8.3
@@ -3533,6 +3533,12 @@
           "percentual": 2.0
         },
         {
+          "nome": "Automação",
+          "grupo": "dados",
+          "vagas": 2,
+          "percentual": 2.0
+        },
+        {
           "nome": "Análise de Dados",
           "grupo": "dados",
           "vagas": 2,
@@ -3636,12 +3642,6 @@
         },
         {
           "nome": "Kafka",
-          "grupo": "dados",
-          "vagas": 1,
-          "percentual": 1.0
-        },
-        {
-          "nome": "Automação",
           "grupo": "dados",
           "vagas": 1,
           "percentual": 1.0
@@ -4559,6 +4559,12 @@
           "percentual": 7.6
         },
         {
+          "nome": "Automação",
+          "grupo": "dados",
+          "vagas": 5,
+          "percentual": 7.6
+        },
+        {
           "nome": "UX/UI",
           "grupo": "engenharia_praticas",
           "vagas": 5,
@@ -4585,12 +4591,6 @@
         {
           "nome": "Hibernate",
           "grupo": "frameworks",
-          "vagas": 4,
-          "percentual": 6.1
-        },
-        {
-          "nome": "Automação",
-          "grupo": "dados",
           "vagas": 4,
           "percentual": 6.1
         },

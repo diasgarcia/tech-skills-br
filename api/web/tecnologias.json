@@ -217,6 +217,14 @@
   },
   {
     "posicao": 28,
+    "nome": "Automação",
+    "grupo": "dados",
+    "vagas": 104,
+    "percentual_total": 5.3,
+    "percentual_base_tech": 6.4
+  },
+  {
+    "posicao": 29,
     "nome": "HTML",
     "grupo": "linguagens",
     "vagas": 102,
@@ -224,7 +232,7 @@
     "percentual_base_tech": 6.3
   },
   {
-    "posicao": 29,
+    "posicao": 30,
     "nome": "C#",
     "grupo": "linguagens",
     "vagas": 99,
@@ -232,7 +240,7 @@
     "percentual_base_tech": 6.1
   },
   {
-    "posicao": 30,
+    "posicao": 31,
     "nome": "CSS",
     "grupo": "linguagens",
     "vagas": 99,
@@ -240,7 +248,7 @@
     "percentual_base_tech": 6.1
   },
   {
-    "posicao": 31,
+    "posicao": 32,
     "nome": "Service Desk",
     "grupo": "suporte_infra",
     "vagas": 99,
@@ -248,7 +256,7 @@
     "percentual_base_tech": 6.1
   },
   {
-    "posicao": 32,
+    "posicao": 33,
     "nome": "Docker",
     "grupo": "cloud_devops",
     "vagas": 98,
@@ -256,7 +264,7 @@
     "percentual_base_tech": 6.0
   },
   {
-    "posicao": 33,
+    "posicao": 34,
     "nome": "Scrum",
     "grupo": "engenharia_praticas",
     "vagas": 97,
@@ -264,7 +272,7 @@
     "percentual_base_tech": 6.0
   },
   {
-    "posicao": 34,
+    "posicao": 35,
     "nome": "CI/CD",
     "grupo": "cloud_devops",
     "vagas": 96,
@@ -272,7 +280,7 @@
     "percentual_base_tech": 5.9
   },
   {
-    "posicao": 35,
+    "posicao": 36,
     "nome": "ITIL",
     "grupo": "suporte_infra",
     "vagas": 94,
@@ -280,7 +288,7 @@
     "percentual_base_tech": 5.8
   },
   {
-    "posicao": 36,
+    "posicao": 37,
     "nome": "Help Desk",
     "grupo": "suporte_infra",
     "vagas": 92,
@@ -288,20 +296,12 @@
     "percentual_base_tech": 5.7
   },
   {
-    "posicao": 37,
+    "posicao": 38,
     "nome": "React",
     "grupo": "frameworks",
     "vagas": 92,
     "percentual_total": 4.7,
     "percentual_base_tech": 5.7
-  },
-  {
-    "posicao": 38,
-    "nome": "Automação",
-    "grupo": "dados",
-    "vagas": 91,
-    "percentual_total": 4.6,
-    "percentual_base_tech": 5.6
   },
   {
     "posicao": 39,
