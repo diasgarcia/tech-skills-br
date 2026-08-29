@@ -17,6 +17,10 @@ banco e re-extrai as tecnologias com o skills.yml atual.
   do corte antigo do CSV). GET no endpoint publico de detalhe
   employability-portal.gupy.io/api/v1/jobs/{id}; vagas ja removidas
   respondem 404 e ficam como estao.
+- GeekHunter: o card da listagem so traz snippet; o detalhe (SSR, sem
+  auth) tem um bloco JSON-LD JobPosting com description completa,
+  hiringOrganization (nome real da empresa) e datePosted. Alem da
+  descricao, corrige o `company` (o coletor so tinha o slug da URL).
 
 Vagas publicadas ha mais de 30 dias nao sao tentadas (anuncio quase
 certamente expirado). PoliteSession com delay/retry; o lock serializa os
@@ -25,6 +29,7 @@ GETs para o delay valer de verdade.
 
 from __future__ import annotations
 
+import json
 import logging
 import sqlite3
 import sys
@@ -118,22 +123,40 @@ def fetch_gupy(session: PoliteSession, lock: Lock, job_id: str) -> tuple[str, in
     return strip_html(desc), status
 
 
-def fetch_geekhunter(session: PoliteSession, lock: Lock, url: str) -> tuple[str, int | None]:
-    """Busca a descricao completa no detalhe da vaga (SSR, sem auth).
+def fetch_geekhunter(session: PoliteSession, lock: Lock, url: str) -> tuple[dict, int | None]:
+    """Busca o detalhe da vaga e extrai do JSON-LD JobPosting.
 
-    O card da listagem so tem um snippet; o detalhe traz Tarefas,
-    Requisitos e Beneficios completos.
+    O card da listagem so tem snippet; o detalhe (SSR, sem auth) traz um
+    bloco application/ld+json com description completa, hiringOrganization
+    (nome real da empresa) e datePosted (data ISO real).
     """
     with lock:
         response = session.get(url)
         status = session.last_status_code
     if response is None:
-        return "", status
+        return {}, status
     soup = BeautifulSoup(response.text, "html.parser")
-    main = soup.select_one("main")
-    if main is None:
-        return "", status
-    return " ".join(main.get_text(" ", strip=True).split()), status
+    dados: dict[str, str] = {}
+    for script in soup.find_all("script", type="application/ld+json"):
+        try:
+            data = json.loads(script.string or "")
+        except (ValueError, TypeError):
+            continue
+        if data.get("@type") != "JobPosting":
+            continue
+        descricao = strip_html(data.get("description") or "")
+        # O JSON-LD tambem declara a lista curada de skills do portal
+        # ("Angular 8+, AWS, Spring Boot..."); anexa ao texto para o
+        # extrator nao perder nenhuma tecnologia.
+        skills = (data.get("skills") or "").strip()
+        if skills:
+            descricao = f"{descricao} Skills: {skills}."
+        dados["description"] = descricao
+        org = data.get("hiringOrganization") or {}
+        dados["company"] = (org.get("name") or "").strip()
+        dados["published_date"] = (data.get("datePosted") or "")[:10]
+        break
+    return dados, status
 
 
 def _enriquecer(
@@ -158,7 +181,11 @@ def _enriquecer(
         for future in as_completed(futures):
             vid, title = futures[future]
             try:
-                desc, status = future.result()
+                resultado, status = future.result()
+                if isinstance(resultado, str):
+                    # Fontes antigas devolvem (descricao, status).
+                    resultado = {"description": resultado}
+                desc = resultado.get("description", "")
                 if not desc:
                     # 404 = anuncio encerrado na fonte: nunca mais buscar.
                     if status == 404:
@@ -168,6 +195,17 @@ def _enriquecer(
                         )
                     continue
                 c.execute("UPDATE vagas SET description = ? WHERE id = ?", (desc, vid))
+                company = resultado.get("company", "")
+                if company:
+                    c.execute(
+                        "UPDATE vagas SET company = ? WHERE id = ?", (company, vid)
+                    )
+                pub = resultado.get("published_date", "")
+                if pub:
+                    c.execute(
+                        "UPDATE vagas SET published_date = ? WHERE id = ?",
+                        (pub, vid),
+                    )
                 for s in extractor.extract(title, desc):
                     tid = tech_map.get(s.lower())
                     if tid:
@@ -235,13 +273,19 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
     args_gupy = list(janela)
 
     # GeekHunter: o card so traz um snippet; o detalhe tem a descricao
-    # completa (Tarefas, Requisitos, Beneficios). Marca pendente a
-    # descricao curta (< 300 chars) que veio do card.
+    # completa (Tarefas, Requisitos, Beneficios), o nome real da empresa
+    # (o coletor grava o slug da URL) e a data de publicacao. Marca
+    # pendente descricao curta, company ainda em formato de slug ou
+    # published_date vazia.
     query_geekhunter = """
         SELECT id, url, title FROM vagas
         WHERE source = 'geekhunter'
           AND COALESCE(enrich_encerrada, 0) = 0
-          AND (description IS NULL OR LENGTH(description) < 300)
+          AND (
+              description IS NULL OR LENGTH(description) < 300
+              OR company LIKE '%-%'
+              OR published_date IS NULL
+          )
     """
     args_geekhunter: list = []
 
