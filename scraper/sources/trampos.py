@@ -32,6 +32,9 @@ from __future__ import annotations
 
 import logging
 
+import yaml
+
+from ..config import RULES_DIR
 from ..models import HIBRIDO, PRESENCIAL, REMOTO, Job
 from .base import JobSource
 
@@ -40,7 +43,16 @@ logger = logging.getLogger(__name__)
 API_URL = "https://trampos.co/api/v2/opportunities"
 SITE_URL = "https://trampos.co"
 
-TIPOS_DE_ENTRADA = {"estagio": "Estágio"}
+
+def _carregar_tipos() -> dict[str, str]:
+    """Tipos de vaga de nivel de entrada declarados em coletores.yml."""
+    with open(RULES_DIR / "coletores.yml", encoding="utf-8") as fh:
+        dados = yaml.safe_load(fh) or {}
+    tipos = (dados.get("trampos") or {}).get("tipos_de_entrada") or {}
+    return {str(k): str(v) for k, v in tipos.items()}
+
+
+TIPOS_DE_ENTRADA = _carregar_tipos()
 
 
 class TramposSource(JobSource):
