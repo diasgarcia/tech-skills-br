@@ -38,16 +38,24 @@ jobs:
         playwright install --with-deps chromium
 
 
-    - name: 4. Executar rodada comum gratuita (Gupy, LinkedIn, Vagas, ProgramaThor, Trampos)
+    - name: 4. Coleta comum (Gupy, LinkedIn, Vagas, ProgramaThor, Trampos)
       run: |
-        python main.py --max-pages 10 --delay 2 --no-enrich
+        python main.py --sources gupy vagas programathor trampos linkedin --max-pages 10 --delay 2 --no-enrich
       env:
         PYTHONPATH: .
 
-    - name: 5. Carregar historico, consolidar novas vagas e atualizar snapshot
+    - name: 5. Coleta Solides (limite completo da paginacao)
+      run: |
+        python main.py --sources solides --max-pages 200 --delay 2 --no-enrich
+      env:
+        PYTHONPATH: .
+
+    - name: 6. Carregar historico, consolidar novas vagas e atualizar snapshot
       run: |
         python scripts/import_csv.py --csv seed/vagas.csv
-        python scripts/import_csv.py
+        # Importa todos os CSVs da rodada (coleta comum + Solides),
+        # do mais antigo para o mais novo.
+        for csv in $(ls -tr output/vagas_*.csv); do python scripts/import_csv.py --csv "$csv"; done
         # Outras fontes primeiro (ProgramaThor tem Cloudflare sensivel a
         # rajada; rodar cedo pega o IP com menos requests acumulados),
         # depois o LinkedIn.
@@ -58,7 +66,7 @@ jobs:
         python scripts/report_db.py
         python scripts/export_pages_data.py
 
-    - name: 6. Comitar e enviar dados atualizados para o GitHub
+    - name: 7. Comitar e enviar dados atualizados para o GitHub
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -90,13 +98,13 @@ jobs:
         done
         exit 1
 
-    - name: 7. Montar artefato do GitHub Pages
+    - name: 8. Montar artefato do GitHub Pages
       run: |
         mkdir -p _site/api
         cp .github/web/index.html _site/
         cp api/web/*.json _site/api/
 
-    - name: 8. Preparar artefato do GitHub Pages
+    - name: 9. Preparar artefato do GitHub Pages
       uses: actions/upload-pages-artifact@v3
       with:
         path: '_site'

@@ -26,6 +26,7 @@ DEFAULT_SOURCES = [
     "programathor",
     "trampos",
     "linkedin",
+    "solides",
 ]
 
 
