@@ -337,6 +337,19 @@
         white-space: nowrap;
       }
 
+      #table-areas-summary,
+      #table-regioes-summary,
+      #table-modalidades-summary { table-layout: fixed; }
+      #table-areas-summary th:first-child,
+      #table-regioes-summary th:first-child,
+      #table-modalidades-summary th:first-child { width: 64%; }
+      #table-areas-summary th:nth-child(2),
+      #table-regioes-summary th:nth-child(2),
+      #table-modalidades-summary th:nth-child(2) { width: 20%; }
+      #table-areas-summary th:nth-child(3),
+      #table-regioes-summary th:nth-child(3),
+      #table-modalidades-summary th:nth-child(3) { width: 16%; }
+
       #table-vagas { table-layout: fixed; }
       #table-vagas th:first-child, #table-vagas td:first-child { width: 66%; }
       #table-vagas th, #table-vagas td { vertical-align: top; }
@@ -660,11 +673,11 @@ function setTab(tabId) {
 
 function ajustaAlturaScrollTables() {
   const footer = document.querySelector("footer");
-  const folgaFooter = (footer ? footer.offsetHeight : 60) + 68;
+  const limiteInferior = footer ? footer.getBoundingClientRect().top : window.innerHeight;
   document.querySelectorAll(".scroll-table").forEach(el => {
     if (!el.offsetParent) return; // aba escondida
     const topo = el.getBoundingClientRect().top;
-    const altura = window.innerHeight - topo - folgaFooter;
+    const altura = limiteInferior - topo;
     el.style.maxHeight = Math.max(200, altura) + "px";
   });
 }
