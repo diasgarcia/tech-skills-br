@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (2689 vagas)
 
-- **Data de geração:** 29/08/2026 15:33
+- **Data de geração:** 29/08/2026 16:12
 - **Período coberto:** 05/01/2026 até 29/08/2026
 - **Total de vagas consolidadas:** 2689
 
@@ -87,26 +87,26 @@
 
 | Posição | Tecnologia | Vagas Citadas |
 |---|---|---|
-| 1 | Hardware | 310 |
-| 2 | Redes de Computadores | 295 |
-| 3 | Banco de Dados | 290 |
-| 4 | Windows | 275 |
-| 5 | SQL | 271 |
-| 6 | Inglês | 219 |
-| 7 | Git | 206 |
-| 8 | Python | 204 |
-| 9 | Inteligência Artificial | 195 |
-| 10 | JavaScript | 166 |
-| 11 | Linux | 159 |
-| 12 | Excel | 157 |
-| 13 | Engenharia de Software | 149 |
-| 14 | Análise de Dados | 141 |
-| 15 | ERP | 128 |
-| 16 | API REST | 124 |
-| 17 | Montagem e Manutenção de PCs | 122 |
-| 18 | Metodologias Ágeis | 117 |
-| 19 | Java | 114 |
-| 20 | Manutenção Preventiva | 111 |
+| 1 | Hardware | 490 |
+| 2 | Redes de Computadores | 457 |
+| 3 | Banco de Dados | 455 |
+| 4 | SQL | 452 |
+| 5 | Windows | 447 |
+| 6 | Inglês | 420 |
+| 7 | Python | 356 |
+| 8 | Git | 352 |
+| 9 | Inteligência Artificial | 314 |
+| 10 | JavaScript | 278 |
+| 11 | Excel | 272 |
+| 12 | Linux | 252 |
+| 13 | Análise de Dados | 225 |
+| 14 | Engenharia de Software | 224 |
+| 15 | API REST | 211 |
+| 16 | ERP | 197 |
+| 17 | Metodologias Ágeis | 188 |
+| 18 | Montagem e Manutenção de PCs | 175 |
+| 19 | Manutenção Preventiva | 173 |
+| 20 | Lógica de Programação | 171 |
 
 ## Top 10 Empresas com Mais Vagas
 
