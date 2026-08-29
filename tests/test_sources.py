@@ -6,6 +6,7 @@ from scraper.config import Settings
 from scraper.sources.gupy import GupySource
 from scraper.sources.linkedin import GEO_ID_BRASIL, LinkedInSource
 from scraper.sources.programathor import FILTROS_NIVEL_ENTRADA, ProgramathorSource
+from scraper.sources.solides import FILTROS_NIVEL_ENTRADA as FILTROS_SOLIDES, SolidesSource
 from scraper.sources.trampos import TramposSource
 from scraper.sources.vagas_com import VagasComSource, slugify_term
 
@@ -316,6 +317,60 @@ def test_trampos_ignora_registro_incompleto():
     src = _source(TramposSource)
     assert src._parse({"id": None, "name": "x"}, "t") is None
     assert src._parse({"id": 1, "name": ""}, "t") is None
+
+
+# Recorte real da resposta de
+# GET https://apigw.solides.com.br/jobs/v3/portal-vacancies-new
+SOLIDES_JOB = {
+    "id": 911953,
+    "title": "Desenvolvedor(a) Júnior | Prestação de Serviços (PJ)  em Franca/SP",
+    "description": "<p>Estamos buscando uma pessoa <strong>Desenvolvedora Júnior</strong> "
+                   "para atuar com APIs REST e Python.</p>",
+    "companyName": "Empresa Tech S.A.",
+    "state": {"name": "São Paulo", "code": "SP"},
+    "city": {"name": "FRANCA", "state_id": 0},
+    "redirectLink": "https://empresa.solides.jobs/vacancies/911953?origem=portal",
+    "homeOffice": False,
+    "jobType": "presencial",
+    "createdAt": "2026-08-29",
+}
+
+
+def test_solides_parse_mapeia_campos():
+    src = _source(SolidesSource)
+    job = src._parse(SOLIDES_JOB, "Júnior")
+    assert job is not None
+    assert job.source == "solides"
+    assert job.external_id == "911953"
+    assert job.title.startswith("Desenvolvedor(a) Júnior")
+    assert job.company == "Empresa Tech S.A."
+    assert job.location == "FRANCA, São Paulo"
+    assert job.workplace_type == "Presencial"
+    assert job.published_date == "2026-08-29"
+    assert job.seniority == "Júnior"
+    assert job.url == "https://empresa.solides.jobs/vacancies/911953?origem=portal"
+    assert "Desenvolvedora Júnior" in job.description
+
+
+def test_solides_home_office_vira_remoto():
+    job = _source(SolidesSource)._parse(
+        dict(SOLIDES_JOB, homeOffice=True, jobType="presencial"), "Júnior"
+    )
+    assert job.workplace_type == "Remoto"
+
+
+def test_solides_ignora_registro_incompleto_e_antigo():
+    src = _source(SolidesSource)
+    assert src._parse({"id": None, "title": "x"}, "Júnior") is None
+    assert src._parse({"id": 1, "title": ""}, "Júnior") is None
+    antiga = dict(SOLIDES_JOB, createdAt="2025-12-31")
+    assert src._parse(antiga, "Júnior") is None
+
+
+def test_solides_filtros_nativos_por_nivel():
+    assert set(FILTROS_SOLIDES) == {"Júnior", "Estágio", "Trainee"}
+    assert FILTROS_SOLIDES["Júnior"]["seniorities"] == "junior"
+    assert FILTROS_SOLIDES["Estágio"]["title"] == "estagio"
 
 
 def test_trampos_usa_custom_company_name_quando_existe():
