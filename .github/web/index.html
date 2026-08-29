@@ -335,7 +335,7 @@
 
       <div class="scroll-table">
         <table id="table-skills" style="table-layout: fixed;">
-          <thead><tr><th style="width: 36px;">#</th><th style="width: 22%;">Tecnologia</th><th class="hide-mobile" style="width: 16%;">Categoria</th><th style="text-align: center; width: 8%;">Vagas</th><th style="text-align: right; width: 10%;">Demanda %</th><th style="width: 90px;">Proporção</th></tr></thead>
+          <thead><tr><th style="width: 26px; padding-right: 0;">#</th><th style="width: 22%; padding-left: 0;">Tecnologia</th><th class="hide-mobile" style="width: 16%;">Categoria</th><th style="text-align: center; width: 8%;">Vagas</th><th style="text-align: right; width: 10%;">Demanda %</th><th style="width: 90px;">Proporção</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -356,7 +356,7 @@
 
       <div class="scroll-table">
         <table id="table-area-skills" style="table-layout: fixed;">
-          <thead><tr><th style="width: 36px;">#</th><th style="width: 22%;">Tecnologia</th><th class="hide-mobile" style="width: 16%;">Categoria</th><th style="text-align: center; width: 8%;">Vagas na Área</th><th style="text-align: right; width: 10%;">Demanda %</th><th style="width: 90px;">Proporção</th></tr></thead>
+          <thead><tr><th style="width: 26px; padding-right: 0;">#</th><th style="width: 22%; padding-left: 0;">Tecnologia</th><th class="hide-mobile" style="width: 16%;">Categoria</th><th style="text-align: center; width: 8%;">Vagas na Área</th><th style="text-align: right; width: 10%;">Demanda %</th><th style="width: 90px;">Proporção</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -594,8 +594,8 @@ function renderSkillsTable() {
   items.forEach(t => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td style="color: var(--text-muted);">${t.posicao}</td>
-      <td><strong style="color: var(--text-bright);">${t.nome}</strong></td>
+      <td style="color: var(--text-muted); padding-right: 0;">${t.posicao}</td>
+      <td style="padding-left: 0;"><strong style="color: var(--text-bright);">${t.nome}</strong></td>
       <td class="hide-mobile"><span class="badge">${t.grupo}</span></td>
       <td style="text-align: center;">${t.vagas}</td>
       <td style="text-align: right;"><strong>${t.percentual_total}%</strong></td>
@@ -648,8 +648,8 @@ function renderAreaDetail() {
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td style="color: var(--text-muted);">${idx + 1}</td>
-      <td><strong style="color: var(--text-bright);">${s.nome}</strong></td>
+      <td style="color: var(--text-muted); padding-right: 0;">${idx + 1}</td>
+      <td style="padding-left: 0;"><strong style="color: var(--text-bright);">${s.nome}</strong></td>
       <td class="hide-mobile"><span class="badge">${s.grupo}</span></td>
       <td style="text-align: center;">${s.vagas}</td>
       <td style="text-align: right;"><strong>${s.percentual}%</strong></td>
