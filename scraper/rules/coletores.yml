@@ -75,13 +75,6 @@ solides:
   # portal aplica de forma frouxa -- nesses casos o coletor NAO rotula
   # senioridade e o filtro do pipeline decide pelo titulo.
 
-programathor:
-  filtros:
-    Júnior:
-      expertise: Júnior
-    Estágio:
-      contract_type: Estágio
-
 trampos:
   tipos_de_entrada:
     estagio: Estágio

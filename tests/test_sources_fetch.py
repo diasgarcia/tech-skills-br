@@ -5,11 +5,10 @@ from scraper.models import Job
 from scraper.sources.base import JobSource
 from scraper.sources.gupy import GupySource
 from scraper.sources.linkedin import LinkedInSource
-from scraper.sources.programathor import ProgramathorSource
 from scraper.sources.trampos import TramposSource
 from scraper.sources.vagas_com import VagasComSource
 
-from test_sources import GUPY_JOB, LINKEDIN_HTML, PROGRAMATHOR_HTML
+from test_sources import GUPY_JOB, LINKEDIN_HTML
 
 
 class FakeSession:
@@ -174,45 +173,3 @@ def test_fetch_isola_falha_de_um_termo():
     assert [j.title for j in jobs] == ["ok1", "ok2"]
     assert source.stats.raw_jobs == 2
     assert any("explode" in e for e in source.stats.errors)
-
-
-def test_programathor_fetch_pagina_e_para_em_pagina_vazia(monkeypatch):
-    respostas = [PROGRAMATHOR_HTML, PROGRAMATHOR_HTML, "<html></html>"]
-    chamadas = []
-
-    def html_fake(self, url, params):
-        chamadas.append(dict(params))
-        return respostas.pop(0) if respostas else None
-
-    monkeypatch.setattr(ProgramathorSource, "_get_page_html", html_fake)
-    source = ProgramathorSource(session=FakeSession([]), settings=_settings())
-    jobs = source.fetch_term("Júnior")
-
-    assert [j.external_id for j in jobs] == ["33692"]
-    assert [p["page"] for p in chamadas] == [1, 2, 3]
-
-
-def test_programathor_fetch_para_quando_pagina_falha(monkeypatch):
-    monkeypatch.setattr(
-        ProgramathorSource, "_get_page_html", lambda self, url, params: None
-    )
-    source = ProgramathorSource(session=FakeSession([]), settings=_settings())
-    assert source.fetch_term("Júnior") == []
-
-
-def test_programathor_card_sem_h3_ou_titulo_vazio_e_ignorado():
-    source = ProgramathorSource(session=FakeSession([]), settings=_settings())
-    sem_h3 = '<div class="wrapper-jobs-list"><a href="/jobs/1"><div></div></a></div>'
-    assert source._parse_page(sem_h3, "x") == []
-    titulo_vazio = (
-        '<div class="wrapper-jobs-list"><a href="/jobs/1"><h3>   </h3></a></div>'
-    )
-    assert source._parse_page(titulo_vazio, "x") == []
-
-
-def test_programathor_local_sem_modalidade_explicita():
-    assert ProgramathorSource._local_e_modalidade("São Paulo") == ("São Paulo", "")
-
-
-def test_programathor_texto_de_no_vazio():
-    assert ProgramathorSource._text(None) == ""

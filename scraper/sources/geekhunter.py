@@ -15,8 +15,7 @@ Detalhes praticos descobertos testando ao vivo:
   filtro de senioridade do projeto (esperar taxa alta de descarte).
 - O card traz: titulo, link do detalhe, senioridade, modalidade,
   localizacao e um snippet da descricao. A descricao completa esta no
-  detalhe (`/pt/<empresa>/jobs/<slug>-<n>`) -- enriquecimento possivel,
-  mesmo modelo do ProgramaThor.
+  detalhe (`/pt/<empresa>/jobs/<slug>-<n>`) -- enriquecimento possivel.
 """
 
 from __future__ import annotations

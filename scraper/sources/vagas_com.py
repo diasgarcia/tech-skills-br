@@ -1,7 +1,7 @@
 """Coletor do Vagas.com.br.
 
 Diferente do que se costuma supor, a listagem de busca do Vagas.com e renderizada
-no servidor -- os cards ja vem no HTML. Nao e preciso Selenium/Playwright aqui;
+no servidor -- os cards ja vem no HTML. Nao e preciso browser headless aqui;
 `requests` + BeautifulSoup bastam (verificado ao vivo).
 
 URL de busca:  https://www.vagas.com.br/vagas-de-<termo-com-hifen>?pagina=<n>
