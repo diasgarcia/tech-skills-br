@@ -1,0 +1,22 @@
+# Contextos em que a mencao da tecnologia NAO deve contar como skill.
+#
+# Diferente de secoes_descarte.yml (que corta secoes inteiras como
+# "Beneficios"), este arquivo remove ocorrencias pontuais que falam da
+# EMPRESA ou do setor dela, nao da habilidade pedida na vaga. Exemplos
+# reais encontrados no corpus:
+#
+#   "uma gigante brasileira de hardware e servicos"  -> fala da empresa
+#   "Instituto Hardware BR"                          -> nome proprio
+#   "comecaram no mundo do hardware"                 -> historia da empresa
+#
+# As regex casam no texto normalizado (minusculo, sem acento, pontuacao
+# virando espaco). O trecho casado e substituido por espacos antes da
+# extracao de skills.
+
+descartar:
+  Hardware:
+    - "instituto hardware"
+    - "gigante brasileira de hardware"
+    - "mundo do hardware"
+    - "hardware e servicos"
+    - "segmentos de hardware"

@@ -185,3 +185,18 @@ def test_overall_skill_counts():
 def test_skills_vao_para_o_csv_como_texto():
     job = Job(source="t", external_id="1", title="a", skills=["SQL", "Python"])
     assert job.to_row()["skills"] == "SQL, Python"
+
+def test_contextos_descarte_ignora_mencao_a_empresa(ext):
+    # 'Hardware' nao deve contar quando fala da empresa contratante.
+    texto = ('Vaga de suporte. Uma gigante brasileira de hardware e servicos, '
+             'referencia em inovacao. Requisitos: conhecimento em redes.')
+    assert 'Hardware' not in ext.extract('Vaga', texto)
+
+
+def test_contextos_descarte_ignora_nome_proprio(ext):
+    assert 'Hardware' not in ext.extract('Estagio', 'Vaga no Instituto Hardware BR.')
+
+
+def test_contextos_descarte_mantem_menção_legitima(ext):
+    texto = 'Tecnico: realizar manutencao de hardware e software. Instalar equipamentos.'
+    assert 'Hardware' in ext.extract('Tecnico', texto)
