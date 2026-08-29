@@ -27,6 +27,8 @@ REFERENCIA = date(2026, 7, 31)
         ("Anteontem", date(2026, 7, 29)),
         ("Há 3 dias", date(2026, 7, 28)),
         ("há 1 dia", date(2026, 7, 30)),
+        ("Publicada há 20 horas", REFERENCIA),
+        ("Atualizada há 16 horas", REFERENCIA),
         ("Há mais de 30 dias", date(2026, 7, 1)),
         ("Há 2 meses", date(2026, 6, 1)),
         ("", None),

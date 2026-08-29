@@ -416,6 +416,7 @@ def test_geekhunter_parse_mapeia_campos():
     assert job.seniority == "Júnior"
     assert "Fullstack Java Júnior" in job.description
     assert job.url.startswith("https://www.geekhunter.com/pt/")
+    assert job.published_date == "Atualizada há 19 horas"
 
 
 def test_geekhunter_ignora_card_sem_link():
