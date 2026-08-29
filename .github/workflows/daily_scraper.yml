@@ -38,7 +38,7 @@ jobs:
         playwright install --with-deps chromium
 
 
-    - name: 4. Coletar todas as fontes (paginacao completa de cada uma)
+    - name: 4. Coletar todas as fontes (limite natural de paginacao de cada uma)
       run: |
         python main.py --max-pages 200 --delay 2 --no-enrich
       env:

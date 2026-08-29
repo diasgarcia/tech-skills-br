@@ -42,13 +42,14 @@ TIPOS_DE_ENTRADA = {"estagio": "Estágio"}
 class TramposSource(JobSource):
     name = "trampos"
     label = "Trampos.co"
+    MAX_PAGES_PER_TERM = 30
 
     def fetch_term(self, term: str) -> list[Job]:
         jobs: list[Job] = []
         seen: set[str] = set()
 
         start_page = max(1, self.settings.start_page)
-        end_page = max(start_page, self.settings.max_pages_per_term)
+        end_page = max(start_page, self.page_limit())
 
         for page in range(start_page, end_page + 1):
             payload = self.session.get_json(API_URL, params={"tr": term, "page": page})
