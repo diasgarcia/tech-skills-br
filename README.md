@@ -2,7 +2,7 @@
 
 ## Resumo
 
-Projeto de pesquisa científica (PIBIC / Iniciação Científica) que coleta, extrai e analisa as habilidades técnicas pedidas em vagas de tecnologia no Brasil. Os dados coletados são comparados com os referenciais curriculares do MEC (Diretrizes Curriculares Nacionais) e da Sociedade Brasileira de Computação (SBC).
+Projeto de pesquisa científica (PIBIC / Iniciação Científica) que coleta e extrai as habilidades técnicas demandadas pelo mercado de tecnologia no Brasil. Esses dados serão posteriormente confrontados com as Diretrizes Curriculares Nacionais do MEC e os referenciais da Sociedade Brasileira de Computação (SBC).
 
 | Item | Descrição |
 | :--- | :--- |
