@@ -92,7 +92,14 @@ class ProgramathorSource(JobSource):
         return super().fetch(list(FILTROS_NIVEL_ENTRADA))
 
     def _fetch_with_playwright(self, url: str, params: dict) -> str | None:
-        """Carrega a pagina com Chromium headless resolvendo desafios JS da Cloudflare."""
+        """Carrega a pagina com Chromium headless resolvendo desafios JS da Cloudflare.
+
+        O Cloudflare interpoe uma pagina "Just a moment..." antes do conteudo
+        real; ela pode levar de 5 a 15s para resolver. Por isso, apos o
+        domcontentloaded, esperamos pelo conteudo do portal (listagem ou
+        detalhe) por ate 30s e, se ainda estivermos no desafio, aguardamos
+        mais 15s e recarregamos uma vez.
+        """
         if not _HAS_PLAYWRIGHT:
             return None
         from urllib.parse import urlencode
@@ -111,16 +118,39 @@ class ProgramathorSource(JobSource):
                 page = context.new_page()
                 page.goto(full_url, wait_until="domcontentloaded", timeout=25000)
                 try:
-                    page.wait_for_selector(".wrapper-jobs-list, h3", timeout=6000)
+                    page.wait_for_selector(
+                        ".wrapper-jobs-list, .wrapper-content-job-show, h3",
+                        timeout=30000,
+                    )
                 except Exception:
                     pass
                 content = page.content()
+                if self._e_desafio_cloudflare(content):
+                    # Desafio JS do Cloudflare: espera ele resolver e recarrega.
+                    page.wait_for_timeout(15000)
+                    page.goto(full_url, wait_until="domcontentloaded", timeout=25000)
+                    try:
+                        page.wait_for_selector(
+                            ".wrapper-jobs-list, .wrapper-content-job-show, h3",
+                            timeout=30000,
+                        )
+                    except Exception:
+                        pass
+                    content = page.content()
                 browser.close()
-                if "wrapper-jobs-list" in content or "job-item" in content:
+                if self._e_desafio_cloudflare(content):
+                    logger.warning("[%s] Cloudflare nao resolveu o desafio em %s", self.name, url)
+                    return None
+                if "wrapper-jobs-list" in content or "job-item" in content or "wrapper-content-job-show" in content:
                     return content
         except Exception as e:
             logger.debug("[%s] Playwright indisponivel ou falhou: %s", self.name, e)
         return None
+
+    @staticmethod
+    def _e_desafio_cloudflare(html: str) -> bool:
+        """A pagina e o desafio JS do Cloudflare, e nao o conteudo do portal?"""
+        return "Just a moment" in html or "cf-chl" in html or "challenge-platform" in html
 
     def _get_page_html(self, url: str, params: dict) -> str | None:
         """Obtem o HTML da pagina tentando Playwright, curl_cffi ou PoliteSession."""
