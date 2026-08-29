@@ -204,8 +204,8 @@ def importar(
 
                 # Marcacao de anúncio encerrado so liga, nunca desliga:
                 # o CSV da rodada nao traz o campo, e um 404 nao reabre.
-                if linha.get("enrich_encerrada"):
-                    vaga.enrich_encerrada = 1
+                if (linha.get("enrich_encerrada") or "").strip() in ("1", "true", "True"):
+                    vaga.enrich_encerrada = True
 
                 vaga.title = (linha.get("title") or "").strip()
 
