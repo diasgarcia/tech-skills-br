@@ -1,8 +1,11 @@
 """Testes do enriquecedor de Vagas.com e Trampos, com sessao falsa."""
 
+import sqlite3
 from threading import Lock
 
+from scraper.skills import SkillExtractor
 from scripts.enrich_outras_fontes import (
+    _enriquecer,
     fetch_gupy,
     fetch_trampos,
     fetch_vagas_com,
@@ -107,3 +110,44 @@ def test_fetch_gupy_extrai_e_limpa_html_da_descricao():
 def test_fetch_gupy_job_removido_devolve_vazio():
     session = FakeSession([None])  # PoliteSession devolve None em 404
     assert fetch_gupy(session, Lock(), "123") == ("", None)
+
+
+def test_data_anterior_ao_corte_remove_a_vaga_em_vez_de_atualizar():
+    # A GeekHunter traz data antiga no JSON-LD sem passar pelo corte do
+    # import_csv: a vaga precisa sair da base, nao ganhar data de 2025.
+    conn = sqlite3.connect(":memory:")
+    c = conn.cursor()
+    c.execute(
+        """CREATE TABLE vagas (
+            id INTEGER PRIMARY KEY, url TEXT, title TEXT, description TEXT,
+            company TEXT, published_date TEXT, enrich_encerrada INTEGER DEFAULT 0)"""
+    )
+    c.execute(
+        "CREATE TABLE vaga_tecnologia (vaga_id INTEGER, tecnologia_id INTEGER)"
+    )
+    c.execute("INSERT INTO vagas (id, url, title) VALUES (1, 'http://velha', 'QA')")
+    c.execute("INSERT INTO vagas (id, url, title) VALUES (2, 'http://nova', 'Dev Python')")
+    conn.commit()
+
+    extractor = SkillExtractor(
+        {"dev": {"Python": ["python"]}},
+        secoes_descarte=[],
+        secoes_conteudo=[],
+        contextos_descarte={},
+    )
+    tech_map = {"python": 1}
+    respostas = {
+        "http://velha": ({"description": "Vaga de 2025", "published_date": "2025-07-21", "company": "X"}, None),
+        "http://nova": ({"description": "Vaga com Python", "published_date": "2026-08-01", "company": "Y"}, None),
+    }
+
+    def fake_fetch(session, lock, url):
+        return respostas[url]
+
+    total = _enriquecer(
+        c, None, Lock(), extractor, tech_map,
+        "SELECT id, url, title FROM vagas", [], fake_fetch,
+    )
+    assert total == 1
+    sobreviventes = c.execute("SELECT id, published_date FROM vagas").fetchall()
+    assert sobreviventes == [(2, "2026-08-01")]
