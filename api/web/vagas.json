@@ -1,6 +1,82 @@
 [
   {
-    "id": 2763,
+    "id": 2767,
+    "titulo": "Assistente de suporte de TI",
+    "empresa": "ItSolut Consultoria & Projetos",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Itajaí, SC",
+    "polo": "Blumenau",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "30/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-de-ti-at-itsolut-consultoria-projetos-4458861006",
+    "tecnologias": [
+      "Windows",
+      "Help Desk",
+      "Montagem e Manutenção de PCs"
+    ]
+  },
+  {
+    "id": 2765,
+    "titulo": "Técnico de Atendimento N1",
+    "empresa": "Radartec",
+    "area": "Service Desk / Help Desk",
+    "senioridade": "Júnior",
+    "localidade": "Belo Horizonte e Região",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "30/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-atendimento-n1-at-radartec-4461006453",
+    "tecnologias": [
+      "Active Directory",
+      "ITIL",
+      "Hardware"
+    ]
+  },
+  {
+    "id": 2760,
+    "titulo": "Junior Software Engineer (Remote)",
+    "empresa": "Hire Feed",
+    "area": "Engenharia de Software",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "30/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/junior-software-engineer-remote-at-hire-feed-4461000480",
+    "tecnologias": [
+      "Python",
+      "Java",
+      "Go",
+      "Git"
+    ]
+  },
+  {
+    "id": 2759,
+    "titulo": "Estagio em Desenvolvimento Web",
+    "empresa": "juscalculos",
+    "area": "Engenharia de Software",
+    "senioridade": "Estágio",
+    "localidade": "Salvador, BA",
+    "polo": "Salvador",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "30/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagio-em-desenvolvimento-web-at-juscalculos-4458863101",
+    "tecnologias": [
+      "Banco de Dados",
+      "Git"
+    ]
+  },
+  {
+    "id": 2755,
     "titulo": "Estágiario de Suporte - SC",
     "empresa": "Eagle Soluções",
     "area": "Suporte Técnico",
@@ -12,17 +88,10 @@
     "data_publicacao": "30/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1giario-de-suporte-sc-at-eagle-solu%C3%A7%C3%B5es-4458814722",
-    "tecnologias": [
-      "Banco de Dados",
-      "Windows",
-      "Hardware",
-      "Inglês",
-      "Eletrônica",
-      "CFTV"
-    ]
+    "tecnologias": []
   },
   {
-    "id": 2762,
+    "id": 2754,
     "titulo": "Estagiário de TI - ES",
     "empresa": "GRUPO FARMES",
     "area": "Suporte Técnico",
@@ -34,12 +103,10 @@
     "data_publicacao": "30/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-de-ti-es-at-grupo-farmes-4458819534",
-    "tecnologias": [
-      "Montagem e Manutenção de PCs"
-    ]
+    "tecnologias": []
   },
   {
-    "id": 2760,
+    "id": 2752,
     "titulo": "Auxiliar de T.I. - GO",
     "empresa": "Grupo Navesa",
     "area": "Suporte Técnico",
@@ -54,7 +121,7 @@
     "tecnologias": []
   },
   {
-    "id": 2759,
+    "id": 2751,
     "titulo": "Auxiliar De TI - SP",
     "empresa": "CAMISARIA FMW",
     "area": "Suporte Técnico",
@@ -69,7 +136,7 @@
     "tecnologias": []
   },
   {
-    "id": 2758,
+    "id": 2750,
     "titulo": "Assistente de Tecnologia da Informação - MG",
     "empresa": "Real Guindastes",
     "area": "Suporte Técnico",
@@ -81,12 +148,10 @@
     "data_publicacao": "30/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-tecnologia-da-informa%C3%A7%C3%A3o-mg-at-real-guindastes-4458813780",
-    "tecnologias": [
-      "Redes de Computadores"
-    ]
+    "tecnologias": []
   },
   {
-    "id": 2757,
+    "id": 2749,
     "titulo": "Assistente de TI – Infraestrutura - PE",
     "empresa": "Ibacem Agricola Comercio E Exportacao",
     "area": "Suporte Técnico",
@@ -101,7 +166,7 @@
     "tecnologias": []
   },
   {
-    "id": 2756,
+    "id": 2748,
     "titulo": "Assistente de TI Indústria Distrito Industrial - MT",
     "empresa": "RDANILLO",
     "area": "Suporte Técnico",
@@ -113,16 +178,10 @@
     "data_publicacao": "30/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-ti-ind%C3%BAstria-distrito-industrial-mt-at-rdanillo-4458817553",
-    "tecnologias": [
-      "Firewall",
-      "Antivírus",
-      "Backup",
-      "Hardware",
-      "ERP"
-    ]
+    "tecnologias": []
   },
   {
-    "id": 2755,
+    "id": 2747,
     "titulo": "Analista de Suporte Jr Qcertifica - SC",
     "empresa": "Quick Soft Tecnologia",
     "area": "Suporte Técnico",
@@ -137,7 +196,7 @@
     "tecnologias": []
   },
   {
-    "id": 2754,
+    "id": 2746,
     "titulo": "ASSISTENTE DE TI - CE",
     "empresa": "Grupo Cultivar",
     "area": "Suporte Técnico",
@@ -159,7 +218,7 @@
     ]
   },
   {
-    "id": 2753,
+    "id": 2745,
     "titulo": "ANALISTA DE SUPORTE SISTEMAS JR - SC",
     "empresa": "PAMPLONA ALIMENTOS S.A",
     "area": "Suporte Técnico",
@@ -171,12 +230,10 @@
     "data_publicacao": "30/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-sistemas-jr-sc-at-pamplona-alimentos-s-a-4458820486",
-    "tecnologias": [
-      "Backup"
-    ]
+    "tecnologias": []
   },
   {
-    "id": 2752,
+    "id": 2744,
     "titulo": "ESTÁGIO EM TECNOLOGIA DA INFORMAÇÃO ANÁLISE DE PROCESSOS E SISTEMAS HOME OFFICE - MG",
     "empresa": "Alpha Estágio",
     "area": "Sistemas / ERP",
@@ -188,12 +245,10 @@
     "data_publicacao": "30/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-da-informa%C3%A7%C3%A3o-an%C3%A1lise-de-processos-e-sistemas-home-office-mg-at-alpha-est%C3%A1gio-4458824736",
-    "tecnologias": [
-      "Automação"
-    ]
+    "tecnologias": []
   },
   {
-    "id": 2749,
+    "id": 2743,
     "titulo": "Analista de Testes QA Júnior - ES",
     "empresa": "webPosto",
     "area": "QA",
@@ -205,21 +260,10 @@
     "data_publicacao": "30/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-testes-qa-j%C3%BAnior-es-at-webposto-4458812677",
-    "tecnologias": [
-      "SQL",
-      "Banco de Dados",
-      "Postman",
-      "Testes Funcionais",
-      "Qualidade de Software",
-      "Scrum",
-      "Metodologias Ágeis",
-      "Lógica de Programação",
-      "Engenharia de Software",
-      "Jira"
-    ]
+    "tecnologias": []
   },
   {
-    "id": 2747,
+    "id": 2742,
     "titulo": "Analista de Qualidade Júnior - Quadro de Vagas",
     "empresa": "ABF Developments",
     "area": "QA",
@@ -234,7 +278,7 @@
     "tecnologias": []
   },
   {
-    "id": 2746,
+    "id": 2741,
     "titulo": "Estágio em TI - SC",
     "empresa": "Fundatec (Fundação Universidade Empresa de Tecnologia e Ciências)",
     "area": "Outros/TI Geral",
@@ -249,7 +293,7 @@
     "tecnologias": []
   },
   {
-    "id": 2745,
+    "id": 2740,
     "titulo": "Estágio em TI - PA",
     "empresa": "Olinda Fine Art",
     "area": "Suporte Técnico",
@@ -264,7 +308,7 @@
     "tecnologias": []
   },
   {
-    "id": 2744,
+    "id": 2739,
     "titulo": "ESTÁGIO EM TECNOLOGIA DA INFORMAÇÃO TI VGASGR - SP",
     "empresa": "Alpha Estágio",
     "area": "Suporte Técnico",
@@ -276,12 +320,10 @@
     "data_publicacao": "30/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-da-informa%C3%A7%C3%A3o-ti-vgasgr-sp-at-alpha-est%C3%A1gio-4458807879",
-    "tecnologias": [
-      "Inteligência Artificial"
-    ]
+    "tecnologias": []
   },
   {
-    "id": 2740,
+    "id": 2737,
     "titulo": "ESTAGIO TECNICO DE CAMPO - POUSO ALEGRE - MG",
     "empresa": "Dankia | Automação Hospitalar e Dispensários Eletrônicos",
     "area": "Field Service / Hardware",
@@ -293,13 +335,10 @@
     "data_publicacao": "30/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagio-tecnico-de-campo-pouso-alegre-mg-at-dankia-automa%C3%A7%C3%A3o-hospitalar-e-dispens%C3%A1rios-eletr%C3%B4nicos-4458808661",
-    "tecnologias": [
-      "Windows",
-      "Eletrônica"
-    ]
+    "tecnologias": []
   },
   {
-    "id": 2739,
+    "id": 2736,
     "titulo": "Auxiliar Técnico de Informática - SP",
     "empresa": "HBL Soluções em Impressões e Cópias de Documentos Ltda",
     "area": "Field Service / Hardware",
@@ -314,7 +353,7 @@
     "tecnologias": []
   },
   {
-    "id": 2738,
+    "id": 2735,
     "titulo": "ESTÁGIO EM CIÊNCIA DA COMPUTAÇÃO, ENGENHARIA DE SOFTWARE, ENGENHARIA DA COMPUTAÇÃO OU DE CONTROLE E AUTOMAÇÃO VGALGM223 - SP",
     "empresa": "Alpha Estágio",
     "area": "Engenharia de Software",
@@ -327,12 +366,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-ci%C3%AAncia-da-computa%C3%A7%C3%A3o-engenharia-de-software-engenharia-da-computa%C3%A7%C3%A3o-ou-de-controle-e-automa%C3%A7%C3%A3o-vgalgm223-sp-at-alpha-est%C3%A1gio-4458820890",
     "tecnologias": [
-      "Engenharia de Software",
-      "Automação Industrial"
+      "Engenharia de Software"
     ]
   },
   {
-    "id": 2736,
+    "id": 2734,
     "titulo": "Analista Programador Jr. - MG",
     "empresa": "Talent Hunter",
     "area": "Engenharia de Software",
@@ -360,11 +398,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-no-desenvolvimento-delphi-sp-at-intersolid-software-4458804698",
     "tecnologias": [
-      "JavaScript",
-      "Delphi",
-      "HTML",
-      "CSS",
-      "Engenharia de Software"
+      "Delphi"
     ]
   },
   {
@@ -417,7 +451,7 @@
     ]
   },
   {
-    "id": 2761,
+    "id": 2753,
     "titulo": "Estagiário de TI",
     "empresa": "Aplica - Soluções em TI",
     "area": "Suporte Técnico",
@@ -429,11 +463,7 @@
     "data_publicacao": "29/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-de-ti-at-aplica-solu%C3%A7%C3%B5es-em-ti-4458813250",
-    "tecnologias": [
-      "Windows",
-      "Redes de Computadores",
-      "Hardware"
-    ]
+    "tecnologias": []
   },
   {
     "id": 2713,
@@ -4544,7 +4574,7 @@
     ]
   },
   {
-    "id": 2734,
+    "id": 2733,
     "titulo": "PROGRAMA DE ESTÁGIO ADP | UX, CIÊNCIA DE DADOS E DESENVOLVIMENTO",
     "empresa": "Auth21",
     "area": "Data",
@@ -18572,7 +18602,7 @@
     "tecnologias": []
   },
   {
-    "id": 2743,
+    "id": 2738,
     "titulo": "Analista de Controles Sox Jr. (Tecnologia)",
     "empresa": "PagBank",
     "area": "Outros/TI Geral",
@@ -35428,8 +35458,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-ciberseguran%C3%A7a-at-wl-tech-4441984743",
     "tecnologias": [
-      "Linux",
-      "Windows",
       "Cibersegurança"
     ]
   },
@@ -51239,7 +51267,7 @@
     ]
   },
   {
-    "id": 2751,
+    "id": 2766,
     "titulo": "Analista de ServiceNow – Resposta a Vulnerabilidades (VR para Aplicativos)",
     "empresa": "EY",
     "area": "Sistemas / ERP",
@@ -51261,7 +51289,7 @@
     ]
   },
   {
-    "id": 2741,
+    "id": 2761,
     "titulo": "Técnico de Informática Jr. I",
     "empresa": "Randstad",
     "area": "Field Service / Hardware",
@@ -51281,7 +51309,7 @@
     ]
   },
   {
-    "id": 2733,
+    "id": 2756,
     "titulo": "Analista de Dados",
     "empresa": "Randstad",
     "area": "Data",
@@ -51299,7 +51327,7 @@
     ]
   },
   {
-    "id": 2750,
+    "id": 2764,
     "titulo": "QA",
     "empresa": "Randstad",
     "area": "QA",
@@ -51329,7 +51357,7 @@
     ]
   },
   {
-    "id": 2748,
+    "id": 2763,
     "titulo": "Analista de Qualidade de Software Jr. Presencial Curitiba/PR PJ",
     "empresa": "Berry Consultoria Empresaria",
     "area": "QA",
@@ -51358,7 +51386,7 @@
     ]
   },
   {
-    "id": 2735,
+    "id": 2757,
     "titulo": "Analista de UX Junior",
     "empresa": "Randstad",
     "area": "Design / UI / UX",
@@ -51376,7 +51404,7 @@
     ]
   },
   {
-    "id": 2737,
+    "id": 2758,
     "titulo": "Analista de Sistemas",
     "empresa": "Randstad",
     "area": "Engenharia de Software",
@@ -51395,7 +51423,7 @@
     ]
   },
   {
-    "id": 2742,
+    "id": 2762,
     "titulo": "Desenvolvedor Full Stack N1",
     "empresa": "Nex Loyalty",
     "area": "Fullstack",
