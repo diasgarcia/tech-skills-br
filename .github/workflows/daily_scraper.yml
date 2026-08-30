@@ -65,9 +65,24 @@ jobs:
         
         DATA_HOJE=$(date +'%d/%m/%Y')
         git diff --quiet && git diff --staged --quiet && exit 0
+
+        # Sufixo pela rodada (BRT): 09h16 -> - 1, 14h16 -> - 2, 19h16 -> - 3.
+        # Tolerancia de +5 min depois de cada horario (o cron-job.org
+        # nunca dispara antes); fora disso vira "- manual N".
+        MINUTOS_BRT=$((10#$(TZ=America/Sao_Paulo date +'%H%M')))
+        if [ "${MINUTOS_BRT}" -ge 916 ] && [ "${MINUTOS_BRT}" -le 921 ]; then
+          MENSAGEM="chore(data): coleta automatizada de vagas [${DATA_HOJE}] - 1"
+        elif [ "${MINUTOS_BRT}" -ge 1416 ] && [ "${MINUTOS_BRT}" -le 1421 ]; then
+          MENSAGEM="chore(data): coleta automatizada de vagas [${DATA_HOJE}] - 2"
+        elif [ "${MINUTOS_BRT}" -ge 1916 ] && [ "${MINUTOS_BRT}" -le 1921 ]; then
+          MENSAGEM="chore(data): coleta automatizada de vagas [${DATA_HOJE}] - 3"
+        else
+          N=$(git log --format='%s' | grep -c "coleta automatizada de vagas \[${DATA_HOJE}\] - manual" || true)
+          MENSAGEM="chore(data): coleta automatizada de vagas [${DATA_HOJE}] - manual $((N + 1))"
+        fi
         # Sem [skip ci]: o push em api/web/** precisa disparar o
         # deploy_pages.yml (o marcador suprimiria todos os workflows do push).
-        git commit -m "chore(data): coleta automatizada de vagas [${DATA_HOJE}]"
+        git commit -m "${MENSAGEM}"
         # Em caso de corrida com outro push, rebaseia e tenta de novo.
         # Se o rebase conflitar em arquivos de dados (seed, docs, api/web),
         # a versao do bot e a mais nova - vem do banco da propria run.
@@ -81,7 +96,7 @@ jobs:
             git rebase --abort 2>/dev/null || true
             git reset --soft origin/main
             git add seed/vagas.csv docs/relatorios/ api/web/ .github/web/
-            git commit -m "chore(data): coleta automatizada de vagas [${DATA_HOJE}]"
+            git commit -m "${MENSAGEM}"
           fi
           sleep 10
         done
