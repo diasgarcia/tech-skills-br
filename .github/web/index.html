@@ -516,7 +516,7 @@
       <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px;">
         <div>
           <div class="card-title" style="font-weight: 700;">Navegador de Vagas Recentes</div>
-          <p style="color: var(--text-muted); font-size: 11px;">Consulte anúncios dos últimos 30 dias, modalidade, localidade e links originais. Combine cidade e termos (ex.: qa ourinhos playwright).</p>
+          <p style="color: var(--text-muted); font-size: 11px;">Consulte anúncios dos últimos 30 dias, modalidade, localidade e links originais.<br>Combine cidade e termos (ex.: qa ourinhos playwright).</p>
         </div>
         <div style="display: flex; gap: 8px; flex-wrap: wrap; width: 100%; max-width: 520px;">
           <input type="text" class="search-input" id="search-vagas" placeholder="Buscar por título, empresa, área, tecnologia ou cidade..." oninput="renderVagasTable()" style="margin-bottom: 0; flex: 1; min-width: 180px;" title="Combine termos (E lógico) e use o nome da cidade, ex.: qa ourinhos playwright">
@@ -910,6 +910,19 @@ function matchWithBoundary(haystack, needle) {
   return !/[a-z0-9]/.test(before) && !/[a-z0-9]/.test(after);
 }
 
+// Prefixo no inicio de palavra: "suport" acha "suporte", "playw"
+// acha "playwright" etc. Permite buscar enquanto se digita.
+function matchWithBoundaryPrefix(haystack, needle) {
+  if (!needle) return false;
+  let idx = haystack.indexOf(needle);
+  while (idx !== -1) {
+    const before = idx === 0 ? "" : haystack[idx - 1];
+    if (!/[a-z0-9]/.test(before)) return true;
+    idx = haystack.indexOf(needle, idx + 1);
+  }
+  return false;
+}
+
 function renderVagasTable() {
   const rawQuery = normalizeSearchText(document.getElementById("search-vagas").value).trim();
   const modFilter = (document.getElementById("filter-modalidade").value || "").trim();
@@ -923,29 +936,54 @@ function renderVagasTable() {
     items = items.filter(v => v.modalidade === modFilter);
   }
   if (rawQuery) {
-    // Separa lugares (cidade, polo, regiao) do resto da busca: cada termo
-    // de lugar casado e removido da query, e o que sobra vira palavras-chave
-    // que precisam casar TODAS (E logico) com titulo/empresa/area/tecnologias.
-    let rest = rawQuery;
-    const locTerms = [];
-    getLocVocab().forEach(phrase => {
-      if (matchWithBoundary(rest, phrase)) {
-        locTerms.push(phrase);
-        rest = rest.replace(phrase, " ");
+    // Separa lugares (cidade, polo, regiao) do resto da busca. Funciona
+    // enquanto se digita: "sao p" ja entende como prefixo de "sao paulo".
+    // Tokens que nao formam prefixo de lugar viram palavras-chave que
+    // precisam casar TODAS (E logico) com titulo/empresa/area/tecnologias.
+    const vocab = getLocVocab();
+    const rawTokens = rawQuery.split(/\s+/).filter(Boolean);
+    const locPrefixes = [];
+    const keywords = [];
+    let i = 0;
+    while (i < rawTokens.length) {
+      let best = null;
+      let prefix = rawTokens[i];
+      let j = i;
+      if (prefix.length >= 3 && vocab.some(p => p.startsWith(prefix))) {
+        best = prefix;
+        while (j + 1 < rawTokens.length) {
+          const longer = prefix + " " + rawTokens[j + 1];
+          if (vocab.some(p => p.startsWith(longer))) {
+            j++;
+            prefix = longer;
+            best = longer;
+          } else {
+            break;
+          }
+        }
       }
-    });
-    const keywords = rest.split(/\s+/).filter(w => w && !SEARCH_STOPWORDS.has(w));
+      if (best) {
+        locPrefixes.push(best);
+        i = j + 1;
+      } else {
+        if (!SEARCH_STOPWORDS.has(rawTokens[i])) keywords.push(rawTokens[i]);
+        i++;
+      }
+    }
 
     items = items.filter(v => {
-      if (locTerms.length) {
+      if (locPrefixes.length) {
         const locText = normalizeSearchText([v.localidade, v.polo, v.regiao].filter(Boolean).join(" "));
-        if (!locTerms.every(t => matchWithBoundary(locText, t))) return false;
+        for (const lp of locPrefixes) {
+          const hit = vocab.some(p => p.startsWith(lp) && matchWithBoundary(locText, p));
+          if (!hit) return false;
+        }
       }
       if (keywords.length) {
         const tecnologias = Array.isArray(v.tecnologias) ? v.tecnologias : [v.tecnologias];
         const searchableFields = [v.titulo, v.empresa, v.area, ...tecnologias];
         return keywords.every(kw =>
-          searchableFields.some(value => matchWithBoundary(normalizeSearchText(value), kw))
+          searchableFields.some(value => matchWithBoundaryPrefix(normalizeSearchText(value), kw))
         );
       }
       return true;
