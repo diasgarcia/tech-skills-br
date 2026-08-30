@@ -25,25 +25,33 @@ jobs:
     - name: 1. Baixar repositorio
       uses: actions/checkout@v4
 
-    - name: 2. Configurar Python 3.12
+    - name: 2. Registrar horario de inicio da rodada
+      run: |
+        # Cada run leva ~50 min: o commit do passo 7 roda bem depois do
+        # disparo do cron-job.org. O sufixo precisa refletir o horario em
+        # que a rodada COMECOU (09h16/14h16/19h16 BRT), nao o de conclusao.
+        echo "MINUTOS_BRT=$((10#$(TZ=America/Sao_Paulo date +'%H%M')))" >> "$GITHUB_ENV"
+        echo "DATA_HOJE=$(date +'%d/%m/%Y')" >> "$GITHUB_ENV"
+
+    - name: 3. Configurar Python 3.12
       uses: actions/setup-python@v5
       with:
         python-version: "3.12"
         cache: 'pip'
 
-    - name: 3. Instalar dependencias
+    - name: 4. Instalar dependencias
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
 
-    - name: 4. Coletar todas as fontes (limite natural de paginacao de cada uma)
+    - name: 5. Coletar todas as fontes (limite natural de paginacao de cada uma)
       run: |
         python main.py --max-pages 200 --delay 2 --no-enrich
       env:
         PYTHONPATH: .
 
-    - name: 5. Carregar historico, consolidar novas vagas e atualizar snapshot
+    - name: 6. Carregar historico, consolidar novas vagas e atualizar snapshot
       run: |
         python scripts/import_csv.py --csv seed/vagas.csv
         # Importa todos os CSVs da rodada, do mais antigo para o mais novo.
@@ -55,7 +63,7 @@ jobs:
         python scripts/report_db.py
         python scripts/export_pages_data.py
 
-    - name: 6. Comitar e enviar dados atualizados para o GitHub
+    - name: 7. Comitar e enviar dados atualizados para o GitHub
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -63,13 +71,12 @@ jobs:
         git add seed/vagas.csv docs/relatorios/ api/web/ .github/web/
 
         
-        DATA_HOJE=$(date +'%d/%m/%Y')
         git diff --quiet && git diff --staged --quiet && exit 0
 
         # Sufixo pela rodada (BRT): 09h16 -> - 1, 14h16 -> - 2, 19h16 -> - 3.
-        # Tolerancia de +5 min depois de cada horario (o cron-job.org
-        # nunca dispara antes); fora disso vira "- manual N".
-        MINUTOS_BRT=$((10#$(TZ=America/Sao_Paulo date +'%H%M')))
+        # MINUTOS_BRT e o horario de INICIO (registrado no passo 2), com
+        # tolerancia de +5 min apos o disparo do cron-job.org; fora disso
+        # vira "- manual N", com N contando os manuais ja feitos no dia.
         if [ "${MINUTOS_BRT}" -ge 916 ] && [ "${MINUTOS_BRT}" -le 921 ]; then
           MENSAGEM="chore(data): coleta automatizada de vagas [${DATA_HOJE}] - 1"
         elif [ "${MINUTOS_BRT}" -ge 1416 ] && [ "${MINUTOS_BRT}" -le 1421 ]; then
@@ -102,13 +109,13 @@ jobs:
         done
         exit 1
 
-    - name: 7. Montar artefato do GitHub Pages
+    - name: 8. Montar artefato do GitHub Pages
       run: |
         mkdir -p _site/api
         cp .github/web/index.html _site/
         cp api/web/*.json _site/api/
 
-    - name: 8. Preparar artefato do GitHub Pages
+    - name: 9. Preparar artefato do GitHub Pages
       uses: actions/upload-pages-artifact@v3
       with:
         path: '_site'
