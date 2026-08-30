@@ -31,6 +31,7 @@ import sqlite3
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import date
 from pathlib import Path
 from threading import Lock
 
@@ -45,6 +46,7 @@ from scraper.config import RULES_DIR, USER_AGENT  # noqa: E402
 from scraper.http_client import PoliteSession  # noqa: E402
 from scraper.models import strip_html  # noqa: E402
 from scraper.skills import SkillExtractor  # noqa: E402
+from scripts.import_csv import MIN_DATA_CORTE  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)-7s %(message)s")
 logger = logging.getLogger("enrich_outras")
@@ -176,13 +178,26 @@ def _enriquecer(
                             (vid,),
                         )
                     continue
+                pub = resultado.get("published_date", "")
+                if pub:
+                    # A data do JSON-LD (GeekHunter) chega aqui sem passar
+                    # pelo corte do import_csv. Vaga mais antiga que a
+                    # janela do projeto entra sem data no card e o detalhe
+                    # revela a data real: nesse caso ela nao deveria estar
+                    # na base. Remove antes de atualizar qualquer campo.
+                    try:
+                        pub_iso = date.fromisoformat(pub[:10])
+                    except ValueError:
+                        pub_iso = None
+                    if pub_iso is not None and pub_iso < MIN_DATA_CORTE:
+                        c.execute("DELETE FROM vagas WHERE id = ?", (vid,))
+                        continue
                 c.execute("UPDATE vagas SET description = ? WHERE id = ?", (desc, vid))
                 company = resultado.get("company", "")
                 if company:
                     c.execute(
                         "UPDATE vagas SET company = ? WHERE id = ?", (company, vid)
                     )
-                pub = resultado.get("published_date", "")
                 if pub:
                     c.execute(
                         "UPDATE vagas SET published_date = ? WHERE id = ?",
