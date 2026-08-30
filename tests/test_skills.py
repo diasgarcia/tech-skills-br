@@ -82,6 +82,28 @@ def test_requisitos_depois_de_beneficios_seguem_valendo_antes(ext):
     assert {"Git", "AWS"} <= set(ext.extract("Dev", desc))
 
 
+def test_beneficios_no_meio_nao_corta_requisitos(ext):
+    # Padrao LinkedIn (Camisaria FMW): "Beneficios" vem ANTES de
+    # "Principais atividades" e "Requisitos" -- o corte ali descartaria
+    # os proprios requisitos.
+    desc = (
+        "Sobre a vaga: auxiliar de ti. Salario: R$ 2.100,00. "
+        "Beneficios: vale transporte e vale refeicao. "
+        "Principais atividades: suporte em hardware, Windows e Pacote Office. "
+        "Requisitos: conhecimento em Hardware, Windows e Pacote Office."
+    )
+    found = ext.extract("Auxiliar de TI", desc)
+    assert {"Hardware", "Windows"} <= set(found)
+
+
+def test_beneficios_no_fim_continuam_sendo_cortados(ext):
+    # Sem marcador de conteudo depois, o corte segue valendo normalmente.
+    desc = "Requisitos: conhecimento em hardware e software. Beneficios: plano de saude."
+    found = ext.extract("Analista de Suporte", desc)
+    assert "Hardware" in found
+    assert "Inglês" not in found
+
+
 def test_extrai_tecnologias_recentemente_adicionadas(ext):
     desc = (
         "Noções de Kubernetes e Argo CD, Temporal.io, Camunda, Retool e WireMock. "

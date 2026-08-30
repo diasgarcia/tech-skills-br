@@ -5,13 +5,20 @@
 # positivo ("Open English" em parcerias, "hardware para trabalhar em casa"
 # em beneficios, clausulas de privacidade).
 #
+# O corte so acontece se a secao vier DEPOIS do ultimo marcador de
+# conteudo listado em `secoes_conteudo`: o LinkedIn costuma meter
+# "Beneficios" no meio do texto, antes de "Requisitos" -- nesse caso o
+# texto nao e cortado ali e os requisitos continuam valendo.
+#
 # O corte vale SO para o extrator: a descricao completa continua sendo
 # salva no banco/CSV. As strings sao comparadas no texto normalizado
 # (minusculas, sem acento).
 secoes_descarte:
   - beneficios
+  - benefits
   - informacoes adicionais
   - o que oferecemos
+  - what we offer
   - o que voce pode esperar
   - what to expect from us
   - como tornamos seu trabalho
@@ -20,3 +27,22 @@ secoes_descarte:
   - remuneracao e beneficios
   - etapas do processo
   - sobre o processo seletivo
+
+# Secoes de conteudo (requisitos/atividades). Usadas so para decidir se
+# uma secao de descarte pode ou nao cortar o texto: se houver marcador de
+# conteudo DEPOIS da secao de descarte, o corte e adiado (nao acontece).
+secoes_conteudo:
+  - requisitos
+  - qualificacoes
+  - responsabilidades
+  - principais atividades
+  - atividades
+  - o que voce vai fazer
+  - o que voce fara
+  - o que esperamos de voce
+  - what you will do
+  - what you ll do
+  - what we are looking for
+  - responsibilities
+  - requirements
+  - qualifications

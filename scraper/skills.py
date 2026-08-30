@@ -40,6 +40,17 @@ def _carregar_secoes_descarte() -> tuple[str, ...]:
     return tuple(s.strip() for s in secoes if isinstance(s, str) and s.strip())
 
 
+def _carregar_secoes_conteudo() -> tuple[str, ...]:
+    """Marcadores de conteudo (requisitos/atividades) que adiam o corte."""
+    try:
+        with open(ARQUIVO_SECOES_DESCARTE, encoding="utf-8") as fh:
+            dados = yaml.safe_load(fh) or {}
+    except OSError:
+        return ()
+    secoes = dados.get("secoes_conteudo") or []
+    return tuple(s.strip() for s in secoes if isinstance(s, str) and s.strip())
+
+
 def _carregar_contextos_descarte() -> dict[str, list[re.Pattern]]:
     """Regex que removem mencoes a EMPRESA (nao a skill), por tecnologia.
 
@@ -96,6 +107,7 @@ class SkillExtractor:
         self,
         rules: dict,
         secoes_descarte: list[str] | None = None,
+        secoes_conteudo: list[str] | None = None,
         contextos_descarte: dict[str, list[re.Pattern]] | None = None,
     ) -> None:
         self.skills: dict[str, list[re.Pattern]] = {}
@@ -105,6 +117,11 @@ class SkillExtractor:
             tuple(s.strip() for s in secoes_descarte if s.strip())
             if secoes_descarte is not None
             else _carregar_secoes_descarte()
+        )
+        self.secoes_conteudo = (
+            tuple(s.strip() for s in secoes_conteudo if s.strip())
+            if secoes_conteudo is not None
+            else _carregar_secoes_conteudo()
         )
         self.contextos_descarte = (
             contextos_descarte
@@ -140,11 +157,23 @@ class SkillExtractor:
             return cls(yaml.safe_load(fh) or {})
 
     def _recortar_secoes_finais(self, texto_normalizado: str) -> str:
-        """Corta o texto no inicio da primeira secao de beneficios/termos."""
+        """Corta na primeira secao de beneficios/termos que vier DEPOIS do
+        ultimo marcador de conteudo (requisitos/atividades).
+
+        O LinkedIn as vezes coloca "Beneficios" no meio do texto, antes de
+        "Requisitos": cortar ali descartaria os proprios requisitos. Entao o
+        corte so acontece quando a secao de descarte aparece apos todo o
+        conteudo.
+        """
+        limite = -1
+        for secao in self.secoes_conteudo:
+            posicao = texto_normalizado.rfind(secao)
+            if posicao > limite:
+                limite = posicao
         fim = len(texto_normalizado)
         for secao in self.secoes_descarte:
             posicao = texto_normalizado.find(secao)
-            if posicao != -1 and posicao < fim:
+            if posicao != -1 and posicao < fim and posicao > limite:
                 fim = posicao
         return texto_normalizado[:fim].strip()
 
