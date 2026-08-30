@@ -19,15 +19,19 @@ Para responder a essa pergunta com evidências quantitativas e reprodutíveis, o
 
 ## Execução Rápida
 
-Os comandos essenciais estão em [docs/execucao-rapida.md](docs/execucao-rapida.md).
+Os comandos essenciais estão em [docs/execucao-rapida](docs/execucao-rapida.md).
 
 ## Site Público e API JSON Estática (GitHub Pages)
 
 O projeto publica um painel web minimalista e uma API JSON estática com CORS liberado no GitHub Pages:
 
-- **Dashboard:** [https://diasgarcia.github.io/tech-skills-br/](https://diasgarcia.github.io/tech-skills-br/)
-- **Endpoints:**
-  - `GET https://diasgarcia.github.io/tech-skills-br/api/resumo.json` -> metadados, KPIs e distribuições
-  - `GET https://diasgarcia.github.io/tech-skills-br/api/areas.json` -> ranking das áreas técnicas
-  - `GET https://diasgarcia.github.io/tech-skills-br/api/tecnologias.json` -> ranking de tecnologias demandadas
-  - `GET https://diasgarcia.github.io/tech-skills-br/api/vagas.json` -> base completa de vagas estruturadas
+**Base URL:** [diasgarcia.github.io/tech-skills-br](https://diasgarcia.github.io/tech-skills-br/)
+```http
+GET /api/resumo.json HTTP/1.1
+
+GET /api/areas.json HTTP/1.1
+
+GET /api/tecnologias.json HTTP/1.1
+
+GET /api/vagas.json HTTP/1.1
+```
