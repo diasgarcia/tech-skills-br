@@ -167,20 +167,23 @@ def _vagas_com_fixture():
 
 
 def test_query_vagas_seleciona_snippet_truncado_do_portal():
-    # O card do Vagas.com traz snippet com "...": nao batia no corte de
-    # LENGTH < 300 e nunca recebia a descricao completa.
+    # O card do Vagas.com traz snippet do portal (ate ~400 chars, as vezes
+    # com "...") que nao batia no corte de LENGTH < 300 e nunca recebia a
+    # descricao completa. Sem janela de dias: vaga antiga ainda e tentada.
     _, c = _vagas_com_fixture()
     truncada = "x" * 380 + "..."
-    completa = "descricao completa " * 80
+    sem_reticencias = "x" * 342
+    completa = "descricao completa " * 200
     c.executemany(
         "INSERT INTO vagas (id, url, title, description, enrich_encerrada, published_date) VALUES (?, ?, ?, ?, ?, ?)",
         [
-            (1, "u1", "t", truncada, 0, "2026-08-01"),   # snippet truncado -> pendente
-            (2, "u2", "t", completa, 0, "2026-08-01"),   # completa -> nao pendente
-            (3, "u3", "t", None, 0, "2026-08-01"),       # sem desc -> pendente
-            (4, "u4", "t", truncada, 1, "2026-08-01"),   # encerrada -> fora
-            (5, "u5", "t", "curta", 0, "2026-08-01"),    # < 300 -> pendente
+            (1, "u1", "t", truncada, 0, "2026-08-01"),     # snippet truncado -> pendente
+            (2, "u2", "t", completa, 0, "2026-08-01"),     # completa -> nao pendente
+            (3, "u3", "t", None, 0, "2026-08-01"),         # sem desc -> pendente
+            (4, "u4", "t", truncada, 1, "2026-08-01"),     # encerrada -> fora
+            (5, "u5", "t", "curta", 0, "2026-08-01"),      # < 500 -> pendente
+            (6, "u6", "t", sem_reticencias, 0, "2026-07-01"),  # 342 chars, antiga -> pendente
         ],
     )
-    ids = {r[0] for r in c.execute(QUERY_VAGAS_PENDENTES, (300, "-30 days"))}
-    assert ids == {1, 3, 5}
+    ids = {r[0] for r in c.execute(QUERY_VAGAS_PENDENTES, (500,))}
+    assert ids == {1, 3, 5, 6}
