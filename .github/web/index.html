@@ -949,16 +949,21 @@ function renderVagasTable() {
     // cidade continua achavel com o nome mais completo ('presidente...').
     const isModalidadePrefix = t =>
       ["presencial", "remoto", "hibrido"].some(m => m.startsWith(t));
+    // Prefixo de lugar so a partir de 4 letras: 'bet' e prefixo de
+    // 'betim' mas tambem quer dizer a empresa Start Bet. Excecoes:
+    // token exato de uma regiao curta ('sul', 'norte'), ou token de 3
+    // letras que se completa com a proxima palavra ('sao pa', 'rio de').
+    const eLugar = (t, idx) =>
+      t.length >= 4 && vocab.some(p => p.startsWith(t)) ||
+      t.length >= 3 && vocab.includes(t) ||
+      t.length >= 3 && idx + 1 < rawTokens.length &&
+        vocab.some(p => p.startsWith(t + " " + rawTokens[idx + 1]));
     let i = 0;
     while (i < rawTokens.length) {
       let best = null;
       let prefix = rawTokens[i];
       let j = i;
-      if (
-        prefix.length >= 3 &&
-        !isModalidadePrefix(prefix) &&
-        vocab.some(p => p.startsWith(prefix))
-      ) {
+      if (eLugar(prefix, i) && !isModalidadePrefix(prefix)) {
         best = prefix;
         while (j + 1 < rawTokens.length) {
           const longer = prefix + " " + rawTokens[j + 1];
