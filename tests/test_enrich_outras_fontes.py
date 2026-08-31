@@ -1,12 +1,14 @@
 """Testes do enriquecedor de Vagas.com e Trampos, com sessao falsa."""
 
 import sqlite3
+import threading
 from threading import Lock
 
 from scraper.skills import SkillExtractor
 from scripts.enrich_outras_fontes import (
     QUERY_VAGAS_PENDENTES,
     _enriquecer,
+    _fetch_parando,
     fetch_gupy,
     fetch_trampos,
     fetch_vagas_com,
@@ -191,6 +193,23 @@ def test_parar_em_429_interrompe_o_lote_sem_marcar_encerrada():
     assert c.execute("SELECT description FROM vagas WHERE id = 1").fetchone()[0] == "Rotina com Python"
     # 429 nao pode marcar como encerrada: fica pendente para a proxima rodada.
     assert c.execute("SELECT enrich_encerrada FROM vagas WHERE id = 2").fetchone()[0] == 0
+
+
+def test_fetch_parando_nao_chama_a_fonte_depois_do_429():
+    # Depois do primeiro 429 o lote para de fazer requests de verdade:
+    # as futures restantes devolvem 429 falso sem tocar na fonte.
+    parou = threading.Event()
+    chamadas = []
+
+    def fake_fetch(sess, lk, alvo):
+        chamadas.append(alvo)
+        return {"description": ""}, 429
+
+    wrapper = _fetch_parando(parou, True, fake_fetch)
+    assert wrapper(None, None, "http://um") == ({"description": ""}, 429)
+    assert wrapper(None, None, "http://dois") == ({"description": ""}, 429)
+    assert wrapper(None, None, "http://tres") == ({"description": ""}, 429)
+    assert chamadas == ["http://um"]  # os demais nem chamaram a fonte
 
 
 def _vagas_com_fixture():

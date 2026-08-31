@@ -29,6 +29,7 @@ import json
 import logging
 import sqlite3
 import sys
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date
@@ -190,6 +191,25 @@ def fetch_geekhunter(session: PoliteSession, lock: Lock, url: str) -> tuple[dict
     return dados, status
 
 
+def _fetch_parando(parou: threading.Event, parar_em_429: bool, fetch):
+    """Envolve o fetch para parar o lote no primeiro 429.
+
+    O ThreadPoolExecutor enfileira todas as futures de uma vez: sem esta
+    checagem, um 429 no meio do lote nao impediria as demais de continuar
+    martelando o IP banido (o Cloudflare do Vagas.com bane por ~23h).
+    """
+
+    def wrapper(sess, lk, alvo):
+        if parou.is_set():
+            return {"description": ""}, 429
+        resultado, status = fetch(sess, lk, alvo)
+        if status == 429 and parar_em_429:
+            parou.set()
+        return resultado, status
+
+    return wrapper
+
+
 def _enriquecer(
     c: sqlite3.Cursor,
     session: PoliteSession,
@@ -204,16 +224,15 @@ def _enriquecer(
     c.execute(query, args)
     rows = c.fetchall()
     total = 0
-    parou = False
+    parou = threading.Event()
+    fetch_com_parada = _fetch_parando(parou, parar_em_429, fetch)
 
     with ThreadPoolExecutor(max_workers=3) as pool:
         futures = {
-            pool.submit(fetch, session, lock, alvo): (vid, title)
+            pool.submit(fetch_com_parada, session, lock, alvo): (vid, title)
             for vid, alvo, title in rows
         }
         for future in as_completed(futures):
-            if parou:
-                continue
             vid, title = futures[future]
             try:
                 resultado, status = future.result()
@@ -228,11 +247,6 @@ def _enriquecer(
                             "UPDATE vagas SET enrich_encerrada = 1 WHERE id = ?",
                             (vid,),
                         )
-                    elif status == 429 and parar_em_429:
-                        # Fonte em rate limit: para o lote e deixa as demais
-                        # para a proxima rodada, em vez de martelar um IP ja
-                        # bloqueado (o Cloudflare do Vagas.com bane por 23h).
-                        parou = True
                     continue
                 pub = resultado.get("published_date", "")
                 if pub:
