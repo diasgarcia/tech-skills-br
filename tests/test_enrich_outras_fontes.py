@@ -154,6 +154,45 @@ def test_data_anterior_ao_corte_remove_a_vaga_em_vez_de_atualizar():
     assert sobreviventes == [(2, "2026-08-01")]
 
 
+def test_parar_em_429_interrompe_o_lote_sem_marcar_encerrada():
+    conn = sqlite3.connect(":memory:")
+    c = conn.cursor()
+    c.execute(
+        """CREATE TABLE vagas (
+            id INTEGER PRIMARY KEY, url TEXT, title TEXT, description TEXT,
+            company TEXT, published_date TEXT, enrich_encerrada INTEGER DEFAULT 0)"""
+    )
+    c.execute(
+        "CREATE TABLE vaga_tecnologia (vaga_id INTEGER, tecnologia_id INTEGER)"
+    )
+    c.executemany(
+        "INSERT INTO vagas (id, url, title) VALUES (?, ?, ?)",
+        [(1, "http://um", "Vaga um"), (2, "http://dois", "Vaga dois")],
+    )
+    conn.commit()
+
+    extractor = SkillExtractor(
+        {}, secoes_descarte=[], secoes_conteudo=[], contextos_descarte={}
+    )
+    tech_map = {}
+
+    def fake_fetch(session, lock, url):
+        # Primeiro pedido OK, segundo estoura rate limit.
+        if url == "http://um":
+            return {"description": "Rotina com Python"}, None
+        return {"description": ""}, 429
+
+    total = _enriquecer(
+        c, None, Lock(), extractor, tech_map,
+        "SELECT id, url, title FROM vagas", [], fake_fetch,
+        parar_em_429=True,
+    )
+    assert total == 1
+    assert c.execute("SELECT description FROM vagas WHERE id = 1").fetchone()[0] == "Rotina com Python"
+    # 429 nao pode marcar como encerrada: fica pendente para a proxima rodada.
+    assert c.execute("SELECT enrich_encerrada FROM vagas WHERE id = 2").fetchone()[0] == 0
+
+
 def _vagas_com_fixture():
     conn = sqlite3.connect(":memory:")
     c = conn.cursor()
