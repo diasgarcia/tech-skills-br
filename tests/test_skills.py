@@ -136,6 +136,15 @@ def test_storyboard_de_ux_nao_conta_como_ferramenta_ios(ext):
     assert "Storyboard" not in found
 
 
+def test_llama_cpp_nao_conta_como_cpp(ext):
+    # "llama.cpp" vira "llama cpp" na normalizacao e casava com o alias
+    # "cpp" da linguagem C++.
+    desc = "Execucao local de modelos abertos (ollama, vllm ou llama.cpp)."
+    found = ext.extract("Desenvolvedor FullStack", desc)
+    assert "C++" not in found
+    assert "C++" in ext.extract("Dev", "Conhecimento de C++.")
+
+
 def test_extrai_requisitos_genericos_de_engenharia(ext):
     desc = (
         "Requisitos: lógica de programação, qualidade de software, "
