@@ -68,7 +68,7 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-        git add seed/vagas.csv docs/relatorios/ api/web/ .github/web/
+        git add seed/vagas.csv docs/relatorios/ api/web/
 
         
         git diff --quiet && git diff --staged --quiet && exit 0
@@ -90,10 +90,14 @@ jobs:
         # Sem [skip ci]: o push em api/web/** precisa disparar o
         # deploy_pages.yml (o marcador suprimiria todos os workflows do push).
         git commit -m "${MENSAGEM}"
+        COMMIT_BOT=$(git rev-parse HEAD)
         # Em caso de corrida com outro push, rebaseia e tenta de novo.
         # Se o rebase conflitar em arquivos de dados (seed, docs, api/web),
         # a versao do bot e a mais nova - vem do banco da propria run.
-        # Refaz entao o commit por cima da main atual, com os dados do bot.
+        # Refaz entao o commit por cima da main atual, reaplicando SOMENTE
+        # os dados do bot: reset --soft do checkout antigo levaria junto o
+        # codigo defasado do clone inicial e reverteria commits que
+        # entraram no main durante a coleta (ja aconteceu na rodada - 2).
         for tentativa in 1 2 3; do
           if git pull --rebase origin main; then
             if git push; then
@@ -101,8 +105,9 @@ jobs:
             fi
           else
             git rebase --abort 2>/dev/null || true
-            git reset --soft origin/main
-            git add seed/vagas.csv docs/relatorios/ api/web/ .github/web/
+            git reset --hard origin/main
+            git checkout "${COMMIT_BOT}" -- seed/vagas.csv docs/relatorios/ api/web/
+            git add seed/vagas.csv docs/relatorios/ api/web/
             git commit -m "${MENSAGEM}"
           fi
           sleep 10
