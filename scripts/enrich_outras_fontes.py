@@ -60,6 +60,51 @@ GUPY_API_URL = "https://employability-portal.gupy.io/api/v1/jobs/{job_id}"
 MIN_DESCRICAO_VAGAS_COM = 300
 MIN_DESCRICAO_TRAMPOS = 100
 
+# O card do Vagas.com traz um snippet do proprio portal que termina com
+# "...": nao passa no corte de LENGTH < 300 e ficava sem descricao completa.
+QUERY_VAGAS_PENDENTES = """
+    SELECT id, url, title FROM vagas
+    WHERE source = 'vagas'
+      AND COALESCE(enrich_encerrada, 0) = 0
+      AND (description IS NULL OR LENGTH(description) < ?
+           OR description LIKE '%...')
+      AND (published_date IS NULL OR published_date >= date('now', ?))
+"""
+
+QUERY_TRAMPOS_PENDENTES = """
+    SELECT id, url, title FROM vagas
+    WHERE source = 'trampos'
+      AND COALESCE(enrich_encerrada, 0) = 0
+      AND (description IS NULL OR LENGTH(description) < ?)
+      AND (published_date IS NULL OR published_date >= date('now', ?))
+"""
+
+# Gupy: so as truncadas legadas (exatamente 500 caracteres). As vagas
+# atuais ja chegam com a descricao completa na listagem.
+QUERY_GUPY_PENDENTES = """
+    SELECT id, external_id, title FROM vagas
+    WHERE source = 'gupy'
+      AND COALESCE(enrich_encerrada, 0) = 0
+      AND LENGTH(description) = 500
+      AND (published_date IS NULL OR published_date >= date('now', ?))
+"""
+
+# GeekHunter: o card so traz um snippet; o detalhe tem a descricao
+# completa (Tarefas, Requisitos, Beneficios), o nome real da empresa
+# (o coletor grava o slug da URL) e a data de publicacao. Marca
+# pendente descricao curta, company ainda em formato de slug ou
+# published_date vazia.
+QUERY_GEEKHUNTER_PENDENTES = """
+    SELECT id, url, title FROM vagas
+    WHERE source = 'geekhunter'
+      AND COALESCE(enrich_encerrada, 0) = 0
+      AND (
+          description IS NULL OR LENGTH(description) < 300
+          OR company LIKE '%-%'
+          OR published_date IS NULL
+      )
+"""
+
 
 def fetch_vagas_com(session: PoliteSession, lock: Lock, url: str) -> tuple[str, int | None]:
     with lock:
@@ -229,50 +274,16 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
     janela = [f"-{janela_dias} days"]
     lock = Lock()
 
-    query_vagas = """
-        SELECT id, url, title FROM vagas
-        WHERE source = 'vagas'
-          AND COALESCE(enrich_encerrada, 0) = 0
-          AND (description IS NULL OR LENGTH(description) < ?)
-          AND (published_date IS NULL OR published_date >= date('now', ?))
-    """
+    query_vagas = QUERY_VAGAS_PENDENTES
     args_vagas = [MIN_DESCRICAO_VAGAS_COM, *janela]
 
-    query_trampos = """
-        SELECT id, url, title FROM vagas
-        WHERE source = 'trampos'
-          AND COALESCE(enrich_encerrada, 0) = 0
-          AND (description IS NULL OR LENGTH(description) < ?)
-          AND (published_date IS NULL OR published_date >= date('now', ?))
-    """
+    query_trampos = QUERY_TRAMPOS_PENDENTES
     args_trampos = [MIN_DESCRICAO_TRAMPOS, *janela]
 
-    # Gupy: so as truncadas legadas (exatamente 500 caracteres). As vagas
-    # atuais ja chegam com a descricao completa na listagem.
-    query_gupy = """
-        SELECT id, external_id, title FROM vagas
-        WHERE source = 'gupy'
-          AND COALESCE(enrich_encerrada, 0) = 0
-          AND LENGTH(description) = 500
-          AND (published_date IS NULL OR published_date >= date('now', ?))
-    """
+    query_gupy = QUERY_GUPY_PENDENTES
     args_gupy = list(janela)
 
-    # GeekHunter: o card so traz um snippet; o detalhe tem a descricao
-    # completa (Tarefas, Requisitos, Beneficios), o nome real da empresa
-    # (o coletor grava o slug da URL) e a data de publicacao. Marca
-    # pendente descricao curta, company ainda em formato de slug ou
-    # published_date vazia.
-    query_geekhunter = """
-        SELECT id, url, title FROM vagas
-        WHERE source = 'geekhunter'
-          AND COALESCE(enrich_encerrada, 0) = 0
-          AND (
-              description IS NULL OR LENGTH(description) < 300
-              OR company LIKE '%-%'
-              OR published_date IS NULL
-          )
-    """
+    query_geekhunter = QUERY_GEEKHUNTER_PENDENTES
     args_geekhunter: list = []
 
     if limit:
