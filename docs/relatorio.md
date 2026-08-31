@@ -64,6 +64,22 @@ Também fiz correções e melhorias na interface web do projeto.
 
 ---
 
+### 30/08/2026
+
+Melhorei a busca do explorador de vagas: detecção automática de cidade/polo/região na query, termos combinados com E lógico e casamento por prefixo enquanto se digita (ex.: "sao p" já filtra São Paulo). Numerei os commits do bot por rodada (09h16 - 1, 14h16 - 2, 19h16 - 3, fora disso - manual N) usando a hora de início do job.
+
+Descobri e corrigi três bugs ao re-verificar 50% da base (1355 vagas ao vivo + 44 lidas na mão): seções de "Benefícios" no meio do texto cortavam os requisitos (vaga da Camisaria FMW perdia Hardware/Windows); a janela de 30 dias deixava 35 vagas do LinkedIn órfãs de descrição para sempre; o snippet do Vagas.com (313-400 chars, com "...") ficava fora do gate de enriquecimento. Ainda: o enrich da GeekHunter gravava data antiga do JSON-LD furando o corte de 2026, e o cliente HTTP respeitava Retry-After sem teto — o Cloudflare mandou 429 com 23h e a coleta dormiria tudo.
+
+Adicionei o modo navegador ao PoliteSession via curl_cffi (impersonate do Chrome), que passou no bot-check do Cloudflare onde o requests puro tomava ban. O enriquecimento do Vagas.com passou a parar no primeiro 429 e a persistir o progresso a cada 10 preenchimentos. A base caiu de 2795 para 2787 vagas ao cortar 8 zumbis de 2025 que o enriquecimento re-injetava.
+
+### 31/08/2026
+
+Achei mais um bug sério na importação: linha sem skills sobrescrevia as tecnologias do banco com lista vazia — o CSV da coleta roda com --no-enrich e o LinkedIn re-coletado chegava sem skills, apagando a cada rodada o que o enriquecimento tinha acumulado (os vínculos caíram de 14896 para 9603). Corrigi para preservar quando a linha vem vazia e re-extraí a base inteira (14833 vínculos, 2387 vagas com skills).
+
+Corrigi o stop do primeiro 429 para parar de verdade (as futures já enfileiradas martelavam o IP banido). Rodei uma coleta manual do GitHub para validar. Criei o board Tech Skills BR no GitHub Projects com as pendências em issues. Restam 58 descrições truncadas do Vagas.com, que as rodadas noturnas preenchem em lotes por causa do rate limit do Cloudflare.
+
+---
+
 ### Pendências para o artigo
 
 - Medir a contribuição marginal de cada fonte com o avaliador.
