@@ -145,6 +145,16 @@ def test_llama_cpp_nao_conta_como_cpp(ext):
     assert "C++" in ext.extract("Dev", "Conhecimento de C++.")
 
 
+def test_extrai_certificacoes_sla_e_oci_da_mv(ext):
+    # Vaga da MV Saude Digital: CSM/PSM, governanca de SLA e OCI ficavam de fora.
+    desc = (
+        "Governança de SLA. Metodologias ágeis (Scrum, Kanban). CSM. PSM. "
+        "Cloud (AWS, OCI ou GCP). Integrações via APIs REST. Jira."
+    )
+    found = ext.extract("Coordenador Sistemas Junior", desc)
+    assert {"Certificações Ágeis", "SLA", "OCI", "AWS", "GCP", "API REST", "Jira"} <= set(found)
+
+
 def test_extrai_requisitos_genericos_de_engenharia(ext):
     desc = (
         "Requisitos: lógica de programação, qualidade de software, "
