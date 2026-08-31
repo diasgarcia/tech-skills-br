@@ -1569,14 +1569,6 @@
   },
   {
     "posicao": 197,
-    "nome": "Storyboard",
-    "grupo": "mobile",
-    "vagas": 4,
-    "percentual_total": 0.1,
-    "percentual_base_tech": 0.2
-  },
-  {
-    "posicao": 198,
     "nome": "TensorFlow",
     "grupo": "inteligencia_artificial",
     "vagas": 4,
@@ -1584,7 +1576,7 @@
     "percentual_base_tech": 0.2
   },
   {
-    "posicao": 199,
+    "posicao": 198,
     "nome": "WebSockets",
     "grupo": "engenharia_praticas",
     "vagas": 4,
@@ -1592,7 +1584,7 @@
     "percentual_base_tech": 0.2
   },
   {
-    "posicao": 200,
+    "posicao": 199,
     "nome": "Nginx",
     "grupo": "cloud_devops",
     "vagas": 3,
@@ -1600,7 +1592,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 201,
+    "posicao": 200,
     "nome": "Pytest",
     "grupo": "qa_testes",
     "vagas": 3,
@@ -1608,7 +1600,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 202,
+    "posicao": 201,
     "nome": "Redshift",
     "grupo": "dados",
     "vagas": 3,
@@ -1616,7 +1608,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 203,
+    "posicao": 202,
     "nome": "Retool",
     "grupo": "cloud_devops",
     "vagas": 3,
@@ -1624,7 +1616,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 204,
+    "posicao": 203,
     "nome": "Scala",
     "grupo": "linguagens",
     "vagas": 3,
@@ -1632,7 +1624,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 205,
+    "posicao": 204,
     "nome": "Snowflake",
     "grupo": "dados",
     "vagas": 3,
@@ -1640,7 +1632,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 206,
+    "posicao": 205,
     "nome": "Supabase",
     "grupo": "bancos",
     "vagas": 3,
@@ -1648,7 +1640,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 207,
+    "posicao": 206,
     "nome": "dbt",
     "grupo": "dados",
     "vagas": 3,
@@ -1656,7 +1648,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 208,
+    "posicao": 207,
     "nome": "Camunda",
     "grupo": "cloud_devops",
     "vagas": 2,
@@ -1664,7 +1656,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 209,
+    "posicao": 208,
     "nome": "Cloudflare",
     "grupo": "cloud_devops",
     "vagas": 2,
@@ -1672,7 +1664,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 210,
+    "posicao": 209,
     "nome": "Groovy",
     "grupo": "linguagens",
     "vagas": 2,
@@ -1680,7 +1672,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 211,
+    "posicao": 210,
     "nome": "Keras",
     "grupo": "inteligencia_artificial",
     "vagas": 2,
@@ -1688,7 +1680,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 212,
+    "posicao": 211,
     "nome": "Perl",
     "grupo": "linguagens",
     "vagas": 2,
@@ -1696,7 +1688,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 213,
+    "posicao": 212,
     "nome": "Quarkus",
     "grupo": "frameworks",
     "vagas": 2,
@@ -1704,7 +1696,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 214,
+    "posicao": 213,
     "nome": "SQLite",
     "grupo": "bancos",
     "vagas": 2,
@@ -1712,7 +1704,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 215,
+    "posicao": 214,
     "nome": "Svelte",
     "grupo": "frameworks",
     "vagas": 2,
@@ -1720,7 +1712,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 216,
+    "posicao": 215,
     "nome": "Temporal.io",
     "grupo": "cloud_devops",
     "vagas": 2,
@@ -1728,7 +1720,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 217,
+    "posicao": 216,
     "nome": "TypeORM",
     "grupo": "frameworks",
     "vagas": 2,
@@ -1736,7 +1728,7 @@
     "percentual_base_tech": 0.1
   },
   {
-    "posicao": 218,
+    "posicao": 217,
     "nome": "Alamofire",
     "grupo": "mobile",
     "vagas": 1,
@@ -1744,7 +1736,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 219,
+    "posicao": 218,
     "nome": "Assembly",
     "grupo": "linguagens",
     "vagas": 1,
@@ -1752,7 +1744,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 220,
+    "posicao": 219,
     "nome": "C",
     "grupo": "linguagens",
     "vagas": 1,
@@ -1760,7 +1752,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 221,
+    "posicao": 220,
     "nome": "Clojure",
     "grupo": "linguagens",
     "vagas": 1,
@@ -1768,7 +1760,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 222,
+    "posicao": 221,
     "nome": "Elixir",
     "grupo": "linguagens",
     "vagas": 1,
@@ -1776,7 +1768,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 223,
+    "posicao": 222,
     "nome": "Expo",
     "grupo": "mobile",
     "vagas": 1,
@@ -1784,7 +1776,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 224,
+    "posicao": 223,
     "nome": "Haskell",
     "grupo": "linguagens",
     "vagas": 1,
@@ -1792,7 +1784,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 225,
+    "posicao": 224,
     "nome": "MATLAB",
     "grupo": "linguagens",
     "vagas": 1,
@@ -1800,7 +1792,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 226,
+    "posicao": 225,
     "nome": "MariaDB",
     "grupo": "bancos",
     "vagas": 1,
@@ -1808,7 +1800,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 227,
+    "posicao": 226,
     "nome": "Micronaut",
     "grupo": "frameworks",
     "vagas": 1,
@@ -1816,7 +1808,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 228,
+    "posicao": 227,
     "nome": "Nuxt.js",
     "grupo": "frameworks",
     "vagas": 1,
@@ -1824,7 +1816,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 229,
+    "posicao": 228,
     "nome": "Progress 4GL",
     "grupo": "linguagens",
     "vagas": 1,
@@ -1832,7 +1824,7 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 230,
+    "posicao": 229,
     "nome": "ReactiveSwift",
     "grupo": "mobile",
     "vagas": 1,
@@ -1840,9 +1832,17 @@
     "percentual_base_tech": 0.0
   },
   {
-    "posicao": 231,
+    "posicao": 230,
     "nome": "Sentry",
     "grupo": "cloud_devops",
+    "vagas": 1,
+    "percentual_total": 0.0,
+    "percentual_base_tech": 0.0
+  },
+  {
+    "posicao": 231,
+    "nome": "Storyboard",
+    "grupo": "mobile",
     "vagas": 1,
     "percentual_total": 0.0,
     "percentual_base_tech": 0.0
