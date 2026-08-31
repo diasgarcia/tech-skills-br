@@ -114,6 +114,18 @@ def test_extrai_tecnologias_recentemente_adicionadas(ext):
             "Retool", "WireMock", "Inglês", "Espanhol"} <= set(found)
 
 
+def test_extrai_stack_ios_da_evoluservices(ext):
+    # Vaga da Evoluservices: iOS nativo com Swift, libs e MVVM.
+    desc = (
+        "Aplicações em iOS nativo escritas em Swift, utilizando Storyboard, "
+        "Alamofire, ReactiveSwift e Firebase. Criação e manutenção de testes "
+        "unitários. Padrões de arquitetura (MVVM). TDD e BDD."
+    )
+    found = ext.extract("Desenvolvedora iOS", desc)
+    assert {"Swift", "iOS", "Storyboard", "Alamofire", "ReactiveSwift",
+            "Firebase", "Testes Automatizados", "MVVM", "TDD", "BDD"} <= set(found)
+
+
 def test_extrai_requisitos_genericos_de_engenharia(ext):
     desc = (
         "Requisitos: lógica de programação, qualidade de software, "
