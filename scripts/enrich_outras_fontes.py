@@ -199,10 +199,12 @@ def _enriquecer(
     query: str,
     args: list,
     fetch,
+    parar_em_429: bool = False,
 ) -> int:
     c.execute(query, args)
     rows = c.fetchall()
     total = 0
+    parou = False
 
     with ThreadPoolExecutor(max_workers=3) as pool:
         futures = {
@@ -210,6 +212,8 @@ def _enriquecer(
             for vid, alvo, title in rows
         }
         for future in as_completed(futures):
+            if parou:
+                continue
             vid, title = futures[future]
             try:
                 resultado, status = future.result()
@@ -224,6 +228,11 @@ def _enriquecer(
                             "UPDATE vagas SET enrich_encerrada = 1 WHERE id = ?",
                             (vid,),
                         )
+                    elif status == 429 and parar_em_429:
+                        # Fonte em rate limit: para o lote e deixa as demais
+                        # para a proxima rodada, em vez de martelar um IP ja
+                        # bloqueado (o Cloudflare do Vagas.com bane por 23h).
+                        parou = True
                     continue
                 pub = resultado.get("published_date", "")
                 if pub:
@@ -258,6 +267,10 @@ def _enriquecer(
                             (vid, tid),
                         )
                 total += 1
+                if total % 10 == 0:
+                    # Persiste o progresso em lote: abortar por rate limit
+                    # nao perde o que ja foi preenchido.
+                    c.connection.commit()
             except Exception as exc:
                 logger.warning("Falha ao processar vaga %s: %s", vid, exc)
     return total
@@ -320,6 +333,7 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
         total_vagas = _enriquecer(
             c, session_vagas, lock, extractor, tech_map, query_vagas, args_vagas,
             lambda sess, lk, url: fetch_vagas_com(sess, lk, url),
+            parar_em_429=True,
         )
 
         c.execute(query_trampos, args_trampos)
