@@ -49,6 +49,28 @@ def test_retry_nao_respeita_retry_after_sem_teto(polite):
     assert adapter.max_retries.respect_retry_after_header is False
 
 
+def test_get_com_impersonate_usa_sessao_cffi():
+    sessao = PoliteSession(user_agent="t", delay_seconds=0.0, impersonate="chrome")
+    assert sessao._cffi is True
+    resposta = MagicMock()
+    resposta.status_code = 200
+    sessao.session.get = MagicMock(return_value=resposta)
+    assert sessao.get("https://exemplo.com/vaga") is resposta
+    assert sessao.last_status_code == 200
+
+
+def test_get_cffi_tenta_de_novo_em_429(monkeypatch):
+    sessao = PoliteSession(
+        user_agent="t", delay_seconds=0.0, max_retries=2,
+        backoff_factor=0.0, impersonate="chrome",
+    )
+    monkeypatch.setattr(time, "sleep", lambda _: None)
+    respostas = iter([MagicMock(status_code=429, text="x"), MagicMock(status_code=200)])
+    sessao.session.get = MagicMock(side_effect=lambda *a, **k: next(respostas))
+    assert sessao.get("https://exemplo.com/vaga").status_code == 200
+    assert sessao.session.get.call_count == 2
+
+
 def test_get_devolve_none_em_falha_de_rede(polite):
     polite.session.get = MagicMock(
         side_effect=requests.RequestException("conexao recusada")

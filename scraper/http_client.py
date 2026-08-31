@@ -28,22 +28,36 @@ class PoliteSession:
         timeout_seconds: float = 30.0,
         max_retries: int = 3,
         backoff_factor: float = 1.5,
+        impersonate: str | None = None,
     ) -> None:
         self.delay_seconds = delay_seconds
         self.timeout_seconds = timeout_seconds
+        self.max_retries = max_retries
+        self.backoff_factor = backoff_factor
         self._last_request_at = 0.0
         self.request_count = 0
         self.last_status_code: int | None = None
 
+        cabecalhos = {
+            "User-Agent": user_agent,
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8,application/json;q=0.5",
+            "Accept-Language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+            "Connection": "keep-alive",
+        }
+
+        self._cffi = impersonate is not None
+        if self._cffi:
+            # Modo navegador: curl_cffi imita o fingerprint TLS do Chrome,
+            # o que derruba o bot-check do Cloudflare em sites como o
+            # Vagas.com (o requests puro era flagado e tomava 429/403).
+            from curl_cffi import requests as cffi_requests
+
+            self.session = cffi_requests.Session(impersonate=impersonate)
+            self.session.headers.update(cabecalhos)
+            return
+
         self.session = requests.Session()
-        self.session.headers.update(
-            {
-                "User-Agent": user_agent,
-                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8,application/json;q=0.5",
-                "Accept-Language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-                "Connection": "keep-alive",
-            }
-        )
+        self.session.headers.update(cabecalhos)
 
         retry = Retry(
             total=max_retries,
@@ -76,6 +90,31 @@ class PoliteSession:
         kwargs.setdefault("timeout", self.timeout_seconds)
         self.request_count += 1
         self.last_status_code = None
+
+        if self._cffi:
+            # curl_cffi nao tem o Retry do urllib3: repete aqui em 429/5xx
+            # com backoff exponencial (sem respeitar Retry-After gigantes).
+            for tentativa in range(self.max_retries + 1):
+                try:
+                    response = self.session.get(url, **kwargs)
+                except Exception as exc:
+                    logger.warning("Falha de rede (cffi) em %s: %s", url, exc)
+                    return None
+                self.last_status_code = response.status_code
+                if response.status_code < 400 or tentativa >= self.max_retries:
+                    break
+                time.sleep(self.backoff_factor * (2**tentativa))
+            if response.status_code >= 400:
+                logger.warning(
+                    "HTTP %s em %s (params=%s, resp=%s)",
+                    response.status_code,
+                    url,
+                    kwargs.get("params"),
+                    response.text[:200],
+                )
+                return None
+            return response
+
         try:
             response = self.session.get(url, **kwargs)
         except requests.RequestException as exc:
