@@ -42,6 +42,13 @@ def test_get_repassa_timeout_padrao(polite):
     )
 
 
+def test_retry_nao_respeita_retry_after_sem_teto(polite):
+    # Cloudflare ja respondeu 429 com Retry-After de 23h: dormir tudo isso
+    # travaria a coleta inteira. O backoff exponencial proprio ja espaca.
+    adapter = polite.session.adapters["https://"]
+    assert adapter.max_retries.respect_retry_after_header is False
+
+
 def test_get_devolve_none_em_falha_de_rede(polite):
     polite.session.get = MagicMock(
         side_effect=requests.RequestException("conexao recusada")
