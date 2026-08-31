@@ -1,12 +1,14 @@
 """Enriquecedor de descricoes e tecnologias para vagas do LinkedIn.
 
-Busca a descricao apenas de vagas PENDENTES (sem descricao no banco), com
+Busca a descricao apenas de vagas PENDENTES (sem descricao no banco, com
+descricao muito curta ou truncada em 500 caracteres legada), com
 PoliteSession (delay + retry em 429/5xx). O lock serializa os GETs para o
 delay valer; o parse roda em paralelo.
 
-Vagas publicadas ha mais de 30 dias nao sao tentadas: se ainda estao sem
-descricao a essa altura, o anuncio quase certamente expirou (o LinkedIn
-responde 404) e retentar para sempre so geraria requests e warnings inuteis.
+Nao ha janela de dias: vaga pendente e tentada em toda rodada ate dar
+certo (descricao salva) ou 404 (marcada como encerrada e nunca mais
+buscada). Vagas antigas continuam vivas no LinkedIn por meses; cortar por
+data deixava descricao e skills perdidas para sempre.
 
 Descricoes com exatamente 500 caracteres tambem entram na fila: sao as que o
 CSV de coleta truncava antes de o projeto passar a salvar o texto completo.
@@ -39,8 +41,14 @@ logger = logging.getLogger("enrich")
 
 DETAIL_API_URL = "https://www.linkedin.com/jobs-guest/jobs/api/jobPosting/{job_id}"
 
-# Janela em que uma vaga sem descricao ainda vale a pena tentar buscar.
-JANELA_TENTATIVA_DIAS = 30
+QUERY_PENDENTES = """
+    SELECT id, external_id, title, url, location, workplace_type
+    FROM vagas
+    WHERE source = 'linkedin'
+      AND COALESCE(enrich_encerrada, 0) = 0
+      AND (description IS NULL OR LENGTH(description) < 30
+           OR LENGTH(description) = 500)
+"""
 
 
 def fetch_one_description(session: PoliteSession, lock: Lock, job_id: str) -> tuple[str, str, int | None]:
@@ -65,8 +73,10 @@ def fetch_one_description(session: PoliteSession, lock: Lock, job_id: str) -> tu
 def enrich_linkedin_jobs(
     limit: int | None = None,
     max_workers: int = 3,
-    janela_dias: int = JANELA_TENTATIVA_DIAS,
+    janela_dias: int | None = None,
 ):
+    del janela_dias  # mantido por compatibilidade; a janela foi removida
+
     init_db()
     with open(RULES_DIR / "skills.yml", encoding="utf-8") as fh:
         rules = yaml.safe_load(fh) or {}
@@ -76,17 +86,8 @@ def enrich_linkedin_jobs(
     conn = sqlite3.connect(PROJECT_ROOT / "data" / "vagas.db")
     c = conn.cursor()
 
-    query = """
-        SELECT id, external_id, title, url, location, workplace_type
-        FROM vagas
-        WHERE source = 'linkedin'
-          AND COALESCE(enrich_encerrada, 0) = 0
-          AND (description IS NULL OR LENGTH(description) < 30
-               OR LENGTH(description) = 500)
-          AND (published_date IS NULL
-               OR published_date >= date('now', ?))
-    """
-    args = [f"-{janela_dias} days"]
+    query = QUERY_PENDENTES
+    args: list = []
     if limit:
         query += f" LIMIT {limit}"
 
@@ -175,7 +176,5 @@ if __name__ == "__main__":
         description="Enriquece descricoes de vagas do LinkedIn pendentes."
     )
     parser.add_argument("--limit", type=int, default=None)
-    parser.add_argument("--janela", type=int, default=JANELA_TENTATIVA_DIAS,
-                        help="Dias de janela de publicacao (padrao: 30).")
     args = parser.parse_args()
-    enrich_linkedin_jobs(limit=args.limit, janela_dias=args.janela)
+    enrich_linkedin_jobs(limit=args.limit)
