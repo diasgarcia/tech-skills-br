@@ -54,7 +54,10 @@ class PoliteSession:
             status_forcelist=(429, 500, 502, 503, 504),
             allowed_methods=frozenset(["GET", "POST"]),
             raise_on_status=False,
-            respect_retry_after_header=True,
+            # Sem teto, um Retry-After grande travaria a coleta: o Cloudflare
+            # ja respondeu 429 com Retry-After de 23h. O backoff exponencial
+            # proprio (acima) ja espaca os retries de forma segura.
+            respect_retry_after_header=False,
         )
         adapter = HTTPAdapter(max_retries=retry, pool_maxsize=4)
         self.session.mount("https://", adapter)
