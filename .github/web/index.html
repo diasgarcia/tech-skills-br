@@ -991,8 +991,16 @@ function renderVagasTable() {
       if (keywords.length) {
         const tecnologias = Array.isArray(v.tecnologias) ? v.tecnologias : [v.tecnologias];
         const searchableFields = [v.titulo, v.empresa, v.area, v.modalidade, ...tecnologias];
+        // Alem do prefixo de palavra, tenta casar ignorando espacos:
+        // "startbet" encontra "Start Bet", "javascript" encontra
+        // "Java Script".
+        const semEspacos = s => s.replace(/\s+/g, "");
         return keywords.every(kw =>
-          searchableFields.some(value => matchWithBoundaryPrefix(normalizeSearchText(value), kw))
+          searchableFields.some(value => {
+            const norm = normalizeSearchText(value);
+            return matchWithBoundaryPrefix(norm, kw) ||
+              matchWithBoundaryPrefix(semEspacos(norm), semEspacos(kw));
+          })
         );
       }
       return true;
