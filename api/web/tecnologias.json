@@ -801,19 +801,19 @@
   },
   {
     "posicao": 101,
-    "nome": "C++",
-    "grupo": "linguagens",
-    "vagas": 32,
-    "percentual_total": 1.1,
-    "percentual_base_tech": 1.3
-  },
-  {
-    "posicao": 102,
     "nome": "Spark",
     "grupo": "dados",
     "vagas": 31,
     "percentual_total": 1.1,
     "percentual_base_tech": 1.3
+  },
+  {
+    "posicao": 102,
+    "nome": "C++",
+    "grupo": "linguagens",
+    "vagas": 30,
+    "percentual_total": 1.1,
+    "percentual_base_tech": 1.2
   },
   {
     "posicao": 103,
