@@ -249,9 +249,14 @@ def importar(
                 nomes = [
                     n.strip() for n in (linha.get("skills") or "").split(",") if n.strip()
                 ]
-                vaga.tecnologias = [
-                    conhecidas[n.lower()] for n in nomes if n.lower() in conhecidas
-                ]
+                if nomes:
+                    # Linha COM skills substitui as do banco. Linha SEM skills
+                    # (ex.: LinkedIn re-coletado com --no-enrich, em que o card
+                    # nao traz descricao) nao pode apagar as tecnologias ja
+                    # acumuladas no banco pelo enriquecimento.
+                    vaga.tecnologias = [
+                        conhecidas[n.lower()] for n in nomes if n.lower() in conhecidas
+                    ]
 
         if limite_data:
             from sqlalchemy import delete

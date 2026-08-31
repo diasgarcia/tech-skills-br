@@ -178,6 +178,18 @@ def test_campos_vazios_viram_null(tmp_path):
         assert vaga.tecnologias == []
 
 
+def test_linha_sem_skills_nao_apaga_skills_do_banco(tmp_path):
+    # O CSV da coleta roda com --no-enrich: vagas do LinkedIn re-coletadas
+    # chegam SEM skills e nao podem sobrescrever o que o banco acumulou.
+    db_path = tmp_path / "t.db"
+    importar(_escrever_csv(tmp_path, [_linha(skills="Python, SQL")]), db_path)
+    importar(_escrever_csv(tmp_path, [_linha(skills="")]), db_path)
+
+    with Session(make_engine(db_path)) as db:
+        vaga = db.scalar(select(Vaga))
+        assert sorted(t.nome for t in vaga.tecnologias) == ["Python", "SQL"]
+
+
 def test_referencia_explicita_vence_o_nome_do_arquivo(tmp_path):
     """O snapshot versionado depende disso: no deploy o mtime é a data do clone."""
     csv_path = _escrever_csv(tmp_path, [_linha(published_date="Ontem")])
