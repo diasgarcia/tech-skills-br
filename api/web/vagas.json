@@ -35461,7 +35461,10 @@
     "data_publicacao": "29/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/executivo-de-tecnologia-jr-pr%C3%A9-vendas-df-at-brasoftware-4446434068",
-    "tecnologias": []
+    "tecnologias": [
+      "Azure",
+      "Cibersegurança"
+    ]
   },
   {
     "id": 2948,
@@ -37932,7 +37935,11 @@
     "data_publicacao": "25/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-qualidade-jr-qu%C3%ADmico-at-condor-non-lethal-technologies-4445279352",
-    "tecnologias": []
+    "tecnologias": [
+      "Power BI",
+      "Excel",
+      "Inglês"
+    ]
   },
   {
     "id": 1831,
@@ -39850,11 +39857,13 @@
     "localidade": "São Paulo, SP",
     "polo": "São Paulo",
     "regiao": "Sudeste",
-    "modalidade": "Presencial",
+    "modalidade": "Híbrido",
     "data_publicacao": "22/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-qualidade-j%C3%BAnior-at-tem-sa%C3%BAde-4441097036",
-    "tecnologias": []
+    "tecnologias": [
+      "LGPD"
+    ]
   },
   {
     "id": 2869,
@@ -42913,7 +42922,9 @@
     "data_publicacao": "15/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-t%C3%A9cnico-em-inform%C3%A1tica-at-maxxi-solutions-informatica-4440883554",
-    "tecnologias": []
+    "tecnologias": [
+      "Manutenção Preventiva"
+    ]
   },
   {
     "id": 3165,
@@ -42928,7 +42939,14 @@
     "data_publicacao": "15/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-t-i-at-casa-dos-frios-4438419826",
-    "tecnologias": []
+    "tecnologias": [
+      "ITIL",
+      "Hardware",
+      "Manutenção Preventiva",
+      "VMware",
+      "Backup",
+      "Hyper-V"
+    ]
   },
   {
     "id": 3116,
@@ -43619,7 +43637,7 @@
     "localidade": "Rio de Janeiro e Região",
     "polo": "Rio de Janeiro",
     "regiao": "Sudeste",
-    "modalidade": "Presencial",
+    "modalidade": "Remoto",
     "data_publicacao": "14/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-inform%C3%A1tica-at-cpet-centro-de-profissionaliza%C3%A7%C3%A3o-e-educa%C3%A7%C3%A3o-t%C3%A9cnica-4441230088",
@@ -45475,7 +45493,9 @@
     "data_publicacao": "08/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/atendente-de-suporte-t%C3%A9cnico-nivel-i-engenharia-civil-arquitetura-tecnologia-%E2%80%93-experi%C3%AAncia-do-cliente-at-or%C3%A7afascio-4438125131",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel"
+    ]
   },
   {
     "id": 2984,
@@ -45505,7 +45525,9 @@
     "data_publicacao": "08/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-qualidade-j%C3%BAnior-at-empresa-confidencial-4438166890",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel"
+    ]
   },
   {
     "id": 2851,
@@ -47559,7 +47581,7 @@
     "localidade": "São Paulo e Região",
     "polo": "São Paulo",
     "regiao": "Sudeste",
-    "modalidade": "Presencial",
+    "modalidade": "Remoto",
     "data_publicacao": "01/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-e-desenvolvimento-vibra-digital-at-band-grupo-bandeirantes-de-comunica%C3%A7%C3%A3o-4435828478",
@@ -47578,7 +47600,9 @@
     "data_publicacao": "01/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-qualidade-junior-at-hospital-de-olhos-leiria-de-andrade-4435546734",
-    "tecnologias": []
+    "tecnologias": [
+      "Análise de Dados"
+    ]
   },
   {
     "id": 1780,
@@ -48590,11 +48614,16 @@
     "localidade": "São Paulo, SP",
     "polo": "São Paulo",
     "regiao": "Sudeste",
-    "modalidade": "Presencial",
+    "modalidade": "Híbrido",
     "data_publicacao": "26/06/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-desktop-n1-n2-at-pantheon-inc-4433271271",
-    "tecnologias": []
+    "tecnologias": [
+      "Windows",
+      "Office 365",
+      "Hardware",
+      "Inglês"
+    ]
   },
   {
     "id": 3162,
@@ -48605,11 +48634,17 @@
     "localidade": "Juiz de Fora, MG",
     "polo": "Juiz de Fora",
     "regiao": "Sudeste",
-    "modalidade": "Presencial",
+    "modalidade": "Híbrido",
     "data_publicacao": "26/06/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-trainee-at-levty-4433559175",
-    "tecnologias": []
+    "tecnologias": [
+      "JavaScript",
+      "Inteligência Artificial",
+      "MongoDB",
+      "Elasticsearch",
+      "Lógica de Programação"
+    ]
   },
   {
     "id": 3063,
@@ -49186,6 +49221,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-automa%C3%A7%C3%A3o-industrial-engenharia-el%C3%A9trica-automation-at-sidia-instituto-de-ci%C3%AAncia-e-tecnologia-4432130297",
     "tecnologias": [
+      "Estrutura de Dados",
+      "Inglês",
+      "Sistemas Embarcados",
+      "Microcontroladores",
+      "Eletrônica",
       "Automação Industrial"
     ]
   },
@@ -49490,11 +49530,15 @@
     "localidade": "Ribeirão Preto, SP",
     "polo": "Ribeirão Preto",
     "regiao": "Sudeste",
-    "modalidade": "Presencial",
+    "modalidade": "Remoto",
     "data_publicacao": "23/06/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-engenharias-ou-sistemas-de-informa%C3%A7%C3%A3o-vgalgm222-at-alpha-est%C3%A1gio-4432256417",
-    "tecnologias": []
+    "tecnologias": [
+      "Power BI",
+      "Inglês",
+      "SAP"
+    ]
   },
   {
     "id": 2848,
@@ -51300,7 +51344,15 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-flutter-at-assessoria-gass-4427524657",
     "tecnologias": [
-      "Flutter"
+      "Dart",
+      "Android",
+      "Flutter",
+      "Firebase",
+      "Git",
+      "API REST",
+      "POO",
+      "Lógica de Programação",
+      "Inglês"
     ]
   },
   {
@@ -55306,11 +55358,15 @@
     "localidade": "São Paulo, SP",
     "polo": "São Paulo",
     "regiao": "Sudeste",
-    "modalidade": "Presencial",
+    "modalidade": "Híbrido",
     "data_publicacao": "23/04/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-sistema-engenharia-jr-at-egb-systems-4405477612",
-    "tecnologias": []
+    "tecnologias": [
+      "Git",
+      "Linux",
+      "Eletrônica"
+    ]
   },
   {
     "id": 2001,
@@ -57992,7 +58048,9 @@
     "data_publicacao": "08/02/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-t%C3%A9cnico-em-certifica%C3%A7%C3%A3o-digital-at-save-co-4370356008",
-    "tecnologias": []
+    "tecnologias": [
+      "Java"
+    ]
   },
   {
     "id": 2832,
