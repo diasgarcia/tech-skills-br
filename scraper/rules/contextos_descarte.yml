@@ -25,7 +25,3 @@ descartar:
     # aqui so conta a ferramenta do iOS.
     - "ideias de design por meio de storyboard"
     - "ideias de design por meio de storyboards"
-  "C++":
-    # "llama.cpp" vira "llama cpp" na normalizacao e casava com o alias
-    # "cpp": falso positivo de C++ em vagas de IA.
-    - "llama cpp"
