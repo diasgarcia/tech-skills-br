@@ -5,6 +5,7 @@ from threading import Lock
 
 from scraper.skills import SkillExtractor
 from scripts.enrich_outras_fontes import (
+    QUERY_VAGAS_PENDENTES,
     _enriquecer,
     fetch_gupy,
     fetch_trampos,
@@ -151,3 +152,35 @@ def test_data_anterior_ao_corte_remove_a_vaga_em_vez_de_atualizar():
     assert total == 1
     sobreviventes = c.execute("SELECT id, published_date FROM vagas").fetchall()
     assert sobreviventes == [(2, "2026-08-01")]
+
+
+def _vagas_com_fixture():
+    conn = sqlite3.connect(":memory:")
+    c = conn.cursor()
+    c.execute(
+        """CREATE TABLE vagas (
+            id INTEGER PRIMARY KEY, url TEXT, title TEXT, description TEXT,
+            source TEXT DEFAULT 'vagas',
+            enrich_encerrada INTEGER DEFAULT 0, published_date TEXT)"""
+    )
+    return conn, c
+
+
+def test_query_vagas_seleciona_snippet_truncado_do_portal():
+    # O card do Vagas.com traz snippet com "...": nao batia no corte de
+    # LENGTH < 300 e nunca recebia a descricao completa.
+    _, c = _vagas_com_fixture()
+    truncada = "x" * 380 + "..."
+    completa = "descricao completa " * 80
+    c.executemany(
+        "INSERT INTO vagas (id, url, title, description, enrich_encerrada, published_date) VALUES (?, ?, ?, ?, ?, ?)",
+        [
+            (1, "u1", "t", truncada, 0, "2026-08-01"),   # snippet truncado -> pendente
+            (2, "u2", "t", completa, 0, "2026-08-01"),   # completa -> nao pendente
+            (3, "u3", "t", None, 0, "2026-08-01"),       # sem desc -> pendente
+            (4, "u4", "t", truncada, 1, "2026-08-01"),   # encerrada -> fora
+            (5, "u5", "t", "curta", 0, "2026-08-01"),    # < 300 -> pendente
+        ],
+    )
+    ids = {r[0] for r in c.execute(QUERY_VAGAS_PENDENTES, (300, "-30 days"))}
+    assert ids == {1, 3, 5}
