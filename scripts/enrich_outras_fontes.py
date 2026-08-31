@@ -57,18 +57,20 @@ TRAMPOS_API_URL = "https://trampos.co/api/v2/opportunities/{slug}"
 
 GUPY_API_URL = "https://employability-portal.gupy.io/api/v1/jobs/{job_id}"
 
-MIN_DESCRICAO_VAGAS_COM = 300
+# O card do Vagas.com traz um snippet do portal (ate ~400 chars, as vezes
+# terminando com "..."), longe da descricao completa (1825+ chars quando
+# enriquecida). O corte precisa cobrir esses snippets: abaixo de 500 ou
+# terminando com "...". Sem janela de dias: pendente e tentada em toda
+# rodada ate dar certo ou 404 (encerrada), como no LinkedIn.
+MIN_DESCRICAO_VAGAS_COM = 500
 MIN_DESCRICAO_TRAMPOS = 100
 
-# O card do Vagas.com traz um snippet do proprio portal que termina com
-# "...": nao passa no corte de LENGTH < 300 e ficava sem descricao completa.
 QUERY_VAGAS_PENDENTES = """
     SELECT id, url, title FROM vagas
     WHERE source = 'vagas'
       AND COALESCE(enrich_encerrada, 0) = 0
       AND (description IS NULL OR LENGTH(description) < ?
            OR description LIKE '%...')
-      AND (published_date IS NULL OR published_date >= date('now', ?))
 """
 
 QUERY_TRAMPOS_PENDENTES = """
@@ -275,7 +277,7 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
     lock = Lock()
 
     query_vagas = QUERY_VAGAS_PENDENTES
-    args_vagas = [MIN_DESCRICAO_VAGAS_COM, *janela]
+    args_vagas = [MIN_DESCRICAO_VAGAS_COM]
 
     query_trampos = QUERY_TRAMPOS_PENDENTES
     args_trampos = [MIN_DESCRICAO_TRAMPOS, *janela]
