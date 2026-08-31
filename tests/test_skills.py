@@ -126,6 +126,16 @@ def test_extrai_stack_ios_da_evoluservices(ext):
             "Firebase", "Testes Automatizados", "MVVM", "TDD", "BDD"} <= set(found)
 
 
+def test_storyboard_de_ux_nao_conta_como_ferramenta_ios(ext):
+    # "Ilustrar ideias de design por meio de storyboards" e tecnica de UX.
+    desc = (
+        "Ilustrar ideias de design por meio de storyboards, fluxos de "
+        "processo e mapas de sites. Desenvolver em React e JavaScript."
+    )
+    found = ext.extract("Desenvolvedor Front-end JR", desc)
+    assert "Storyboard" not in found
+
+
 def test_extrai_requisitos_genericos_de_engenharia(ext):
     desc = (
         "Requisitos: lógica de programação, qualidade de software, "
