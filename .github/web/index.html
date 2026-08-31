@@ -944,21 +944,12 @@ function renderVagasTable() {
     const rawTokens = rawQuery.split(/\s+/).filter(Boolean);
     const locPrefixes = [];
     const keywords = [];
-    // 'pres' e prefixo de 'presencial' (modalidade) e de 'presidente
-    // prudente' (cidade): a modalidade vence para prefixos curtos, e a
-    // cidade continua achavel com o nome mais completo ('presidente...').
-    const isModalidadePrefix = t =>
-      ["presencial", "remoto", "hibrido"].some(m => m.startsWith(t));
     let i = 0;
     while (i < rawTokens.length) {
       let best = null;
       let prefix = rawTokens[i];
       let j = i;
-      if (
-        prefix.length >= 3 &&
-        !isModalidadePrefix(prefix) &&
-        vocab.some(p => p.startsWith(prefix))
-      ) {
+      if (prefix.length >= 3 && vocab.some(p => p.startsWith(prefix))) {
         best = prefix;
         while (j + 1 < rawTokens.length) {
           const longer = prefix + " " + rawTokens[j + 1];
@@ -990,7 +981,7 @@ function renderVagasTable() {
       }
       if (keywords.length) {
         const tecnologias = Array.isArray(v.tecnologias) ? v.tecnologias : [v.tecnologias];
-        const searchableFields = [v.titulo, v.empresa, v.area, v.modalidade, ...tecnologias];
+        const searchableFields = [v.titulo, v.empresa, v.area, ...tecnologias];
         return keywords.every(kw =>
           searchableFields.some(value => matchWithBoundaryPrefix(normalizeSearchText(value), kw))
         );
