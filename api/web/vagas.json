@@ -7974,8 +7974,15 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2832334/cientista-de-dados-junior-e-pleno",
     "tecnologias": [
+      "Python",
+      "SQL",
       "ETL",
-      "Agentes de IA & RAG"
+      "Estatística",
+      "Análise de Dados",
+      "Inteligência Artificial",
+      "LLMs & IA Generativa",
+      "Agentes de IA & RAG",
+      "Inglês"
     ]
   },
   {
@@ -10067,11 +10074,20 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2832024/cientista-de-dados-junior-hibrido-jundiai-ou-mogi-guacu-sp",
     "tecnologias": [
+      "Python",
+      "SQL",
       "Spark",
+      "Databricks",
+      "Estatística",
       "Inteligência Artificial",
+      "LLMs & IA Generativa",
+      "Agentes de IA & RAG",
+      "Machine Learning",
       "AWS",
       "Azure",
-      "GCP"
+      "GCP",
+      "Inglês",
+      "SAP"
     ]
   },
   {
@@ -15098,7 +15114,17 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831663/trainee-ti-desenvolvimento",
     "tecnologias": [
-      "UML"
+      "Python",
+      "Java",
+      "RPA",
+      "Automação",
+      "Inteligência Artificial",
+      "Azure",
+      "Scrum",
+      "Metodologias Ágeis",
+      "UML",
+      "Inglês",
+      "Jira"
     ]
   },
   {
@@ -16788,7 +16814,10 @@
     "data_publicacao": "20/08/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831411/analista-de-suporte-junior",
-    "tecnologias": []
+    "tecnologias": [
+      "ITIL",
+      "Service Desk"
+    ]
   },
   {
     "id": 353,
@@ -16894,7 +16923,13 @@
     "data_publicacao": "20/08/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831365/estagio-em-desenvolvimento-de-novos-negocios",
-    "tecnologias": []
+    "tecnologias": [
+      "Power BI",
+      "Excel",
+      "Análise de Dados",
+      "Inglês",
+      "SAP"
+    ]
   },
   {
     "id": 220,
@@ -20101,7 +20136,9 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831050/tecnico-de-informatica-n1-lins-sp",
     "tecnologias": [
-      "Help Desk"
+      "Help Desk",
+      "Hardware",
+      "Backup"
     ]
   },
   {
@@ -20888,7 +20925,11 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831010/estagio-em-ti-tecnologia-cotacao-de-seguro",
     "tecnologias": [
-      "Engenharia de Software"
+      "Análise de Dados",
+      "Inteligência Artificial",
+      "Copilots & Assistentes de IA",
+      "Engenharia de Software",
+      "Inglês"
     ]
   },
   {
@@ -20904,7 +20945,12 @@
     "data_publicacao": "18/08/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830998/estagio-em-planejamento-orcamentario-ti",
-    "tecnologias": []
+    "tecnologias": [
+      "Visual Basic/VBA",
+      "Excel",
+      "Inteligência Artificial",
+      "Inglês"
+    ]
   },
   {
     "id": 241,
@@ -20944,8 +20990,15 @@
     "tecnologias": [
       "Python",
       "Visual Basic/VBA",
+      "SQL",
+      "Power BI",
+      "Excel",
       "Pandas",
-      "Selenium"
+      "Automação",
+      "Análise de Dados",
+      "Selenium",
+      "Engenharia de Software",
+      "Inglês"
     ]
   },
   {
@@ -22380,7 +22433,8 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830763/analista-de-pos-vendas-junior-suporte-ao-produto",
     "tecnologias": [
-      "Inglês"
+      "Inglês",
+      "Espanhol"
     ]
   },
   {
@@ -23669,8 +23723,17 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830534/assistente-de-infraestrutura-de-ti",
     "tecnologias": [
+      "Grafana",
       "Windows Server",
-      "Windows"
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Firewall",
+      "Help Desk",
+      "GLPI",
+      "Zabbix",
+      "Office 365",
+      "Backup"
     ]
   },
   {
@@ -25046,7 +25109,18 @@
     "data_publicacao": "13/08/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830362/analista-de-redes-junior-datasus-rio-de-janeiro",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "Shell/Bash",
+      "Linux",
+      "Windows Server",
+      "Windows",
+      "Redes de Computadores",
+      "ITIL",
+      "VMware",
+      "Cisco",
+      "ISO 27001"
+    ]
   },
   {
     "id": 351,
@@ -26629,7 +26703,15 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2820154/estagiario-a-tecnologia-e-desenvolvimento",
     "tecnologias": [
-      "Excel"
+      "Python",
+      "JavaScript",
+      "Visual Basic/VBA",
+      "HTML",
+      "CSS",
+      "Excel",
+      "Banco de Dados",
+      "Lógica de Programação",
+      "IoT"
     ]
   },
   {
@@ -27468,7 +27550,21 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2824782/desenvolvedor-de-software-jr",
     "tecnologias": [
-      "Git"
+      "Python",
+      "Java",
+      "JavaScript",
+      "C#",
+      "React",
+      "Node.js",
+      ".NET",
+      "Spring",
+      "Flutter",
+      "Automação",
+      "Inteligência Artificial",
+      "Git",
+      "Scrum",
+      "Metodologias Ágeis",
+      "Inglês"
     ]
   },
   {
@@ -27539,7 +27635,14 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2820791/analista-planejamento-de-vendas-jr",
     "tecnologias": [
-      "Databricks"
+      "Python",
+      "SQL",
+      "Power BI",
+      "Excel",
+      "Databricks",
+      "BI",
+      "Active Directory",
+      "Word"
     ]
   },
   {
@@ -28120,7 +28223,11 @@
     "data_publicacao": "10/08/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2829707/analista-de-qualidade-jr",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel",
+      "Governança e Riscos (GRC)",
+      "ERP"
+    ]
   },
   {
     "id": 1260,
@@ -31364,7 +31471,15 @@
     "data_publicacao": "05/08/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2828957/analista-de-produto-jr-integracao-de-software-cosi",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "C++",
+      "Git",
+      "Hardware",
+      "Metodologias Ágeis",
+      "Engenharia de Software",
+      "Inglês"
+    ]
   },
   {
     "id": 132,
@@ -33373,9 +33488,12 @@
     "tecnologias": [
       "Python",
       "SQL",
+      "Excel",
       "Estatística",
       "Análise de Dados",
-      "Banco de Dados"
+      "Machine Learning",
+      "Banco de Dados",
+      "Inglês"
     ]
   },
   {
@@ -33565,7 +33683,12 @@
     "data_publicacao": "02/08/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2823615/estagiario-a-em-controle-e-back-office-de-fundos-de-investimentos",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "Excel",
+      "Inglês"
+    ]
   },
   {
     "id": 108,
@@ -34571,7 +34694,24 @@
     "data_publicacao": "31/07/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2828256/estagiario-desenvolvedor-itsm",
-    "tecnologias": []
+    "tecnologias": [
+      "JavaScript",
+      "SQL",
+      "HTML",
+      "CSS",
+      "Automação",
+      "Inteligência Artificial",
+      "Banco de Dados",
+      "Git",
+      "Testes Funcionais",
+      "ITIL",
+      "GLPI",
+      "API REST",
+      "Lógica de Programação",
+      "Engenharia de Software",
+      "UX/UI",
+      "Jira"
+    ]
   },
   {
     "id": 70,
@@ -35350,8 +35490,12 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2828070/analista-de-ciberseguranca-junior",
     "tecnologias": [
+      "Firewall",
       "Cibersegurança",
-      "Governança e Riscos (GRC)"
+      "Governança e Riscos (GRC)",
+      "LGPD",
+      "ISO 27001",
+      "SIEM/SOC"
     ]
   },
   {
@@ -35608,6 +35752,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2828012/estagiario-inside-sales",
     "tecnologias": [
+      "Oracle",
       "Inglês",
       "Espanhol",
       "Salesforce"
@@ -36156,7 +36301,19 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2827854/analista-de-seguranca-da-informacao-jr",
     "tecnologias": [
-      "LGPD"
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Firewall",
+      "ITIL",
+      "LGPD",
+      "ISO 27001",
+      "Gestão de Vulnerabilidades",
+      "IAM",
+      "SIEM/SOC",
+      "Inglês",
+      "SAP",
+      "Antivírus"
     ]
   },
   {
@@ -36949,7 +37106,9 @@
     "data_publicacao": "28/07/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2827785/estagio-em-laboratorio",
-    "tecnologias": []
+    "tecnologias": [
+      "Inglês"
+    ]
   },
   {
     "id": 263,
@@ -37708,7 +37867,13 @@
     "data_publicacao": "27/07/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2827461/trainee",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "Power BI",
+      "Excel",
+      "Inglês"
+    ]
   },
   {
     "id": 192,
@@ -38832,7 +38997,15 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2827356/analista-infraestrutura-ti-jr-sao-paulo-sp",
     "tecnologias": [
-      "Redes de Computadores"
+      "Excel",
+      "Redes de Computadores",
+      "VPN",
+      "Firewall",
+      "ITIL",
+      "Zabbix",
+      "Office 365",
+      "Cisco",
+      "Inglês"
     ]
   },
   {
@@ -39786,11 +39959,20 @@
     "url": "https://www.vagas.com.br/vagas/v2827052/desenvolvedor-java-angular-jr",
     "tecnologias": [
       "Java",
+      "TypeScript",
+      "SQL",
       "Angular",
       "Spring",
+      "Banco de Dados",
       "GCP",
+      "Git",
+      "JUnit",
+      "API REST",
+      "OpenAPI/Swagger",
       "Scrum",
-      "Metodologias Ágeis"
+      "Metodologias Ágeis",
+      "Inglês",
+      "Jira"
     ]
   },
   {
@@ -44739,8 +44921,11 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2825182/estagio-ict-ti",
     "tecnologias": [
+      "SQL",
       "Banco de Dados",
-      "ERP"
+      "Windows",
+      "ERP",
+      "TOTVS"
     ]
   },
   {
@@ -44963,11 +45148,17 @@
     "url": "https://www.vagas.com.br/vagas/v2824894/estagio-em-ciencia-de-dados-e-gen-ai-nucleo-de-ia-hstern",
     "tecnologias": [
       "Python",
+      "Pandas",
+      "Automação",
+      "Estatística",
       "Análise de Dados",
       "Inteligência Artificial",
       "Copilots & Assistentes de IA",
       "LLMs & IA Generativa",
-      "Machine Learning"
+      "Machine Learning",
+      "Scikit-Learn",
+      "Git",
+      "Inglês"
     ]
   },
   {
@@ -45120,7 +45311,22 @@
     "data_publicacao": "10/07/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2824880/estagio-em-desenvolvimento-de-software",
-    "tecnologias": []
+    "tecnologias": [
+      "Python",
+      "Java",
+      "JavaScript",
+      "C#",
+      "React",
+      "Node.js",
+      ".NET",
+      "Flutter",
+      "Automação",
+      "Inteligência Artificial",
+      "Git",
+      "Scrum",
+      "Metodologias Ágeis",
+      "Inglês"
+    ]
   },
   {
     "id": 196,
@@ -47142,7 +47348,8 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2823911/estagio-em-consultoria-ti",
     "tecnologias": [
-      "Excel"
+      "Excel",
+      "Inglês"
     ]
   },
   {
@@ -47231,7 +47438,18 @@
     "data_publicacao": "03/07/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2823902/estagiario-a-de-ti-infraestrutura",
-    "tecnologias": []
+    "tecnologias": [
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Service Desk",
+      "Office 365",
+      "Hardware",
+      "Montagem e Manutenção de PCs",
+      "Manutenção Preventiva",
+      "VMware",
+      "Hyper-V"
+    ]
   },
   {
     "id": 90,
@@ -51666,7 +51884,10 @@
     "data_publicacao": "10/06/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2819459/trainee-ti",
-    "tecnologias": []
+    "tecnologias": [
+      "Excel",
+      "Inglês"
+    ]
   },
   {
     "id": 2782,
@@ -58601,7 +58822,15 @@
     "data_publicacao": "15/01/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2785114/programa-de-entry-level-ey-tecnologia",
-    "tecnologias": []
+    "tecnologias": [
+      "RPA",
+      "Estatística",
+      "Inteligência Artificial",
+      "Oracle",
+      "Inglês",
+      "SAP",
+      "Salesforce"
+    ]
   },
   {
     "id": 2423,
@@ -58765,7 +58994,15 @@
     "data_publicacao": "06/01/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2785123/programa-de-entry-level-ey-tecnologia-exclusivo-pcd",
-    "tecnologias": []
+    "tecnologias": [
+      "RPA",
+      "Estatística",
+      "Inteligência Artificial",
+      "Oracle",
+      "Inglês",
+      "SAP",
+      "Salesforce"
+    ]
   },
   {
     "id": 2923,
