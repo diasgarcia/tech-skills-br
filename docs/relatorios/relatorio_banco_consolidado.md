@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (3001 vagas)
 
-- **Data de geração:** 01/09/2026 23:14
+- **Data de geração:** 01/09/2026 23:42
 - **Período coberto:** 05/01/2026 até 01/09/2026
 - **Total de vagas consolidadas:** 3001
 
@@ -91,11 +91,11 @@
 | 2 | Redes de Computadores | 526 |
 | 3 | Windows | 516 |
 | 4 | SQL | 507 |
-| 5 | Banco de Dados | 504 |
-| 6 | Inglês | 477 |
-| 7 | Python | 380 |
+| 5 | Banco de Dados | 505 |
+| 6 | Inglês | 479 |
+| 7 | Python | 381 |
 | 8 | Git | 371 |
-| 9 | Inteligência Artificial | 359 |
+| 9 | Inteligência Artificial | 360 |
 | 10 | JavaScript | 312 |
 | 11 | Excel | 306 |
 | 12 | Linux | 295 |
@@ -103,7 +103,7 @@
 | 14 | Engenharia de Software | 246 |
 | 15 | ERP | 218 |
 | 16 | API REST | 212 |
-| 17 | Metodologias Ágeis | 210 |
+| 17 | Metodologias Ágeis | 211 |
 | 18 | Manutenção Preventiva | 210 |
 | 19 | Montagem e Manutenção de PCs | 201 |
 | 20 | Office 365 | 197 |
