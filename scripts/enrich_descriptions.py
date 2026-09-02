@@ -10,8 +10,10 @@ certo (descricao salva) ou 404 (marcada como encerrada e nunca mais
 buscada). Vagas antigas continuam vivas no LinkedIn por meses; cortar por
 data deixava descricao e skills perdidas para sempre.
 
-Descricoes com exatamente 500 caracteres tambem entram na fila: sao as que o
-CSV de coleta truncava antes de o projeto passar a salvar o texto completo.
+O criterio "exatamente 500 caracteres" (truncamento legado do CSV antigo)
+foi REMOVIDO: descricoes reais com 500 chars entravam na fila para
+sempre (o fetch devolvia o mesmo texto de 500 e a vaga nunca saia do
+estado pendente -- loop observado na vaga 4446807020).
 """
 
 import logging
@@ -47,8 +49,7 @@ QUERY_PENDENTES = """
     FROM vagas
     WHERE source = 'linkedin'
       AND COALESCE(enrich_encerrada, 0) = 0
-      AND (description IS NULL OR LENGTH(description) < 30
-           OR LENGTH(description) = 500)
+      AND (description IS NULL OR LENGTH(description) < 30)
 """
 
 

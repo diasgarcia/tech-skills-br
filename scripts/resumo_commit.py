@@ -43,8 +43,7 @@ PENDENTES_POR_FONTE = {
         "OR company LIKE '%-%' OR published_date IS NULL)"
     ),
     "linkedin": (
-        "source='linkedin' AND (description IS NULL OR LENGTH(description) < 30 "
-        "OR LENGTH(description) = 500)"
+        "source='linkedin' AND (description IS NULL OR LENGTH(description) < 30)"
     ),
 }
 
