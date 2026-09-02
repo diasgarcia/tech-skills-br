@@ -7,7 +7,7 @@ Projeto de dados (projeto de dados) que coleta e extrai as habilidades técnicas
 | Item | Descrição |
 | :--- | :--- |
 | **Linguagem** | Python 3.11+ |
-| **Banco de dados** | SQLite / PostgreSQL (SQLAlchemy 2.0) |
+| **Banco de dados** | SQLite (SQLAlchemy 2.0) |
 | **Documentação** | [Wiki](https://github.com/diasgarcia/tech-skills-br/wiki) — Manual de Uso, Arquitetura, Pipeline, Modelo de Dados, Classificação e Automação |
 | **Integração contínua** | [GitHub Actions](https://github.com/diasgarcia/tech-skills-br/actions/workflows/ci.yml) |
 

@@ -1,4 +1,4 @@
-"""Gera um relatorio consolidado completo da base de dados (SQLite/PostgreSQL).
+"""Gera um relatorio consolidado completo da base de dados (SQLite).
 
 Exemplos de uso:
     python scripts/report_db.py                  # exibe resumo no terminal e salva relatorio MD
@@ -283,7 +283,7 @@ def main(argv: list[str] | None = None) -> int:
         description="Gera relatorio estatistico consolidado do banco de dados de vagas."
     )
     parser.add_argument(
-        "--db", default=None, help="Caminho do SQLite ou URL PostgreSQL."
+        "--db", default=None, help="Caminho do SQLite."
     )
     parser.add_argument(
         "--no-export", action="store_true", help="Nao grava o arquivo Markdown em output/."
