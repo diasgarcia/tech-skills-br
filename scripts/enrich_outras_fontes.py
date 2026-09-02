@@ -204,7 +204,12 @@ def _fetch_parando(parou: threading.Event, parar_em_429: bool, fetch):
             return {"description": ""}, 429
         resultado, status = fetch(sess, lk, alvo)
         if status == 429 and parar_em_429:
-            parou.set()
+            if not parou.is_set():
+                parou.set()
+                logger.warning(
+                    "429 detectado: interrompendo o lote desta fonte "
+                    "(a fila continua na proxima rodada)"
+                )
         return resultado, status
 
     return wrapper
@@ -357,6 +362,7 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
             lambda sess, lk, url: fetch_trampos(
                 sess, lk, url.rstrip("/").split("/")[-1]
             ),
+            parar_em_429=True,
         )
 
         c.execute(query_gupy, args_gupy)
@@ -364,6 +370,7 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
         total_gupy = _enriquecer(
             c, session, lock, extractor, tech_map, query_gupy, args_gupy,
             lambda sess, lk, job_id: fetch_gupy(sess, lk, job_id),
+            parar_em_429=True,
         )
 
         c.execute(query_geekhunter, args_geekhunter)
@@ -372,6 +379,7 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
             c, session, lock, extractor, tech_map,
             query_geekhunter, args_geekhunter,
             lambda sess, lk, url: fetch_geekhunter(sess, lk, url),
+            parar_em_429=True,
         )
 
     conn.commit()
