@@ -203,7 +203,7 @@ def export_all_pages_data(
 
         vagas_payload = []
         for v in vagas_db:
-            techs = [t.nome for t in v.tecnologias]
+            techs = sorted(t.nome for t in v.tecnologias)
             vagas_payload.append({
                 "id": v.id,
                 "titulo": v.title,

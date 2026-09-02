@@ -114,6 +114,44 @@ def test_importacao_e_idempotente(tmp_path):
     assert segunda["total"] == 2
 
 
+def test_db_id_do_seed_sobrevive_ao_banco_recriado(tmp_path):
+    """O id do banco persiste via coluna db_id do seed, como o CI precisa.
+
+    O runner do CI recria o banco do zero a cada run; sem o db_id, os ids
+    mudariam para quase todas as vagas a cada coleta.
+    """
+    colunas = COLUNAS + ["db_id"]
+    caminho = tmp_path / "vagas_20260731_174407.csv"
+    with open(caminho, "w", encoding="utf-8-sig", newline="") as fh:
+        escritor = csv.DictWriter(fh, fieldnames=colunas)
+        escritor.writeheader()
+        escritor.writerow(_linha(external_id="1", db_id="42"))
+        escritor.writerow(
+            _linha(external_id="2", title="Dev Backend Jr", db_id="7")
+        )
+
+    db1 = tmp_path / "a.db"
+    db2 = tmp_path / "b.db"
+    importar(caminho, db1)
+    importar(caminho, db2)
+
+    for db in (db1, db2):
+        with Session(make_engine(db)) as s:
+            ids = {v.external_id: v.id for v in s.scalars(select(Vaga))}
+        assert ids == {"1": 42, "2": 7}
+
+    # Vaga nova (CSV da rodada, sem db_id) continua ganhando autoincrement
+    # depois do maior id importado.
+    csv_novo = _escrever_csv(
+        tmp_path, [_linha(external_id="3", title="QA Jr")],
+        nome="vagas_20260731_180000.csv",
+    )
+    importar(csv_novo, db1)
+    with Session(make_engine(db1)) as s:
+        v3 = s.scalar(select(Vaga).where(Vaga.external_id == "3"))
+        assert v3.id > 42
+
+
 def test_reimportacao_atualiza_campos_alterados(tmp_path):
     db_path = tmp_path / "t.db"
     importar(_escrever_csv(tmp_path, [_linha(title="Analista de Dados Pleno")]), db_path)
