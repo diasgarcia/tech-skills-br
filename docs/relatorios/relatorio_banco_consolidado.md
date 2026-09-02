@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (3104 vagas)
 
-- **Data de geração:** 02/09/2026 19:48
+- **Data de geração:** 02/09/2026 19:58
 - **Período coberto:** 05/01/2026 até 02/09/2026
 - **Total de vagas consolidadas:** 3104
 
@@ -11,10 +11,10 @@
 | 1 | Suporte Técnico | 1061 | 34.2% | #######............. |
 | 2 | Engenharia de Software | 443 | 14.3% | ###................. |
 | 3 | Infraestrutura / Redes | 273 | 8.8% | ##.................. |
-| 4 | Data | 213 | 6.9% | #................... |
+| 4 | Data | 214 | 6.9% | #................... |
 | 5 | Backend | 176 | 5.7% | #................... |
 | 6 | QA | 134 | 4.3% | #................... |
-| 7 | Outros/TI Geral | 114 | 3.7% | #................... |
+| 7 | Outros/TI Geral | 113 | 3.6% | #................... |
 | 8 | Sistemas / ERP | 105 | 3.4% | #................... |
 | 9 | Segurança | 100 | 3.2% | #................... |
 | 10 | Fullstack | 91 | 2.9% | #................... |
@@ -87,16 +87,16 @@
 
 | Posição | Tecnologia | Vagas Citadas |
 |---|---|---|
-| 1 | Hardware | 575 |
-| 2 | Redes de Computadores | 539 |
-| 3 | Windows | 535 |
+| 1 | Hardware | 577 |
+| 2 | Redes de Computadores | 540 |
+| 3 | Windows | 537 |
 | 4 | SQL | 528 |
 | 5 | Banco de Dados | 524 |
-| 6 | Inglês | 495 |
+| 6 | Inglês | 496 |
 | 7 | Python | 392 |
-| 8 | Git | 381 |
+| 8 | Git | 382 |
 | 9 | Inteligência Artificial | 367 |
-| 10 | Excel | 320 |
+| 10 | Excel | 321 |
 | 11 | JavaScript | 318 |
 | 12 | Linux | 303 |
 | 13 | Engenharia de Software | 260 |
@@ -104,8 +104,8 @@
 | 15 | ERP | 223 |
 | 16 | API REST | 217 |
 | 17 | Metodologias Ágeis | 214 |
-| 18 | Manutenção Preventiva | 213 |
-| 19 | Montagem e Manutenção de PCs | 209 |
+| 18 | Manutenção Preventiva | 214 |
+| 19 | Montagem e Manutenção de PCs | 210 |
 | 20 | Office 365 | 205 |
 
 ## Top 10 Empresas com Mais Vagas
