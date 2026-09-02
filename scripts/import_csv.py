@@ -187,6 +187,16 @@ def importar(
 
                 if vaga is None:
                     vaga = Vaga(source=source, external_id=external_id)
+                    # Restaura o id persistido no seed (coluna db_id): sem
+                    # isso, o banco recriado do zero a cada run atribuiria
+                    # ids novos e instaveis para quase todas as vagas. O id
+                    # so vale na CRIACAO -- atualizacao nunca troca id. Se o
+                    # id ja estiver ocupado (banco local com historico
+                    # proprio), cai no autoincrement normal.
+                    db_id = (linha.get("db_id") or "").strip()
+                    if db_id.isdigit() and int(db_id) > 0:
+                        if db.get(Vaga, int(db_id)) is None:
+                            vaga.id = int(db_id)
                     db.add(vaga)
                     criadas += 1
                 else:
