@@ -242,25 +242,25 @@
   "skills_by_area": {
     "Suporte Técnico": {
       "total_vagas": 1061,
-      "vagas_com_tech": 874,
+      "vagas_com_tech": 876,
       "skills": [
         {
           "nome": "Hardware",
           "grupo": "suporte_infra",
-          "vagas": 401,
+          "vagas": 402,
           "percentual": 45.9
         },
         {
           "nome": "Windows",
           "grupo": "suporte_infra",
-          "vagas": 350,
-          "percentual": 40.0
+          "vagas": 351,
+          "percentual": 40.1
         },
         {
           "nome": "Redes de Computadores",
           "grupo": "suporte_infra",
           "vagas": 277,
-          "percentual": 31.7
+          "percentual": 31.6
         },
         {
           "nome": "Montagem e Manutenção de PCs",
@@ -272,7 +272,7 @@
           "nome": "Manutenção Preventiva",
           "grupo": "suporte_infra",
           "vagas": 137,
-          "percentual": 15.7
+          "percentual": 15.6
         },
         {
           "nome": "Linux",
@@ -284,13 +284,13 @@
           "nome": "Office 365",
           "grupo": "suporte_infra",
           "vagas": 130,
-          "percentual": 14.9
+          "percentual": 14.8
         },
         {
           "nome": "Inglês",
           "grupo": "engenharia_praticas",
-          "vagas": 113,
-          "percentual": 12.9
+          "vagas": 114,
+          "percentual": 13.0
         },
         {
           "nome": "Banco de Dados",
@@ -302,7 +302,7 @@
           "nome": "Excel",
           "grupo": "dados",
           "vagas": 101,
-          "percentual": 11.6
+          "percentual": 11.5
         },
         {
           "nome": "Help Desk",
@@ -320,7 +320,7 @@
           "nome": "Active Directory",
           "grupo": "suporte_infra",
           "vagas": 95,
-          "percentual": 10.9
+          "percentual": 10.8
         },
         {
           "nome": "ITIL",
@@ -332,7 +332,7 @@
           "nome": "Service Desk",
           "grupo": "suporte_infra",
           "vagas": 80,
-          "percentual": 9.2
+          "percentual": 9.1
         },
         {
           "nome": "SQL",
@@ -461,6 +461,12 @@
           "percentual": 2.9
         },
         {
+          "nome": "Espanhol",
+          "grupo": "engenharia_praticas",
+          "vagas": 23,
+          "percentual": 2.6
+        },
+        {
           "nome": "Python",
           "grupo": "linguagens",
           "vagas": 22,
@@ -468,12 +474,6 @@
         },
         {
           "nome": "Estrutura de Dados",
-          "grupo": "engenharia_praticas",
-          "vagas": 22,
-          "percentual": 2.5
-        },
-        {
-          "nome": "Espanhol",
           "grupo": "engenharia_praticas",
           "vagas": 22,
           "percentual": 2.5
@@ -4765,8 +4765,8 @@
         {
           "nome": "Excel",
           "grupo": "dados",
-          "vagas": 17,
-          "percentual": 27.9
+          "vagas": 18,
+          "percentual": 29.5
         },
         {
           "nome": "Inteligência Artificial",

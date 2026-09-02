@@ -1940,7 +1940,10 @@
     "data_publicacao": "01/09/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2833071/auxiliar-de-ti-aruja-sp",
-    "tecnologias": []
+    "tecnologias": [
+      "Hardware",
+      "Windows"
+    ]
   },
   {
     "id": 2994,
@@ -2007,7 +2010,10 @@
     "data_publicacao": "01/09/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2833133/assistente-de-atendimento-ao-cliente-area-de-saude",
-    "tecnologias": []
+    "tecnologias": [
+      "Espanhol",
+      "Inglês"
+    ]
   },
   {
     "id": 2989,
@@ -48547,7 +48553,8 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2825733/analista-de-orcamentos-junior",
     "tecnologias": [
-      "Banco de Dados"
+      "Banco de Dados",
+      "Excel"
     ]
   },
   {
