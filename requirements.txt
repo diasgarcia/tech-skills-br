@@ -5,9 +5,7 @@ PyYAML==6.0.3
 matplotlib==3.11.1
 
 SQLAlchemy==2.0.52
-psycopg[binary]==3.3.4
 
 
 # Testes (opcional em producao):
 pytest==9.1.1
-httpx==0.28.1
