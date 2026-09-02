@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (3104 vagas)
 
-- **Data de geração:** 02/09/2026 18:08
+- **Data de geração:** 02/09/2026 19:45
 - **Período coberto:** 05/01/2026 até 02/09/2026
 - **Total de vagas consolidadas:** 3104
 
@@ -9,12 +9,12 @@
 | Posição | Área | Vagas | % | Gráfico |
 |---|---|---|---|---|
 | 1 | Suporte Técnico | 1061 | 34.2% | #######............. |
-| 2 | Engenharia de Software | 442 | 14.2% | ###................. |
+| 2 | Engenharia de Software | 443 | 14.3% | ###................. |
 | 3 | Infraestrutura / Redes | 273 | 8.8% | ##.................. |
 | 4 | Data | 213 | 6.9% | #................... |
 | 5 | Backend | 176 | 5.7% | #................... |
 | 6 | QA | 133 | 4.3% | #................... |
-| 7 | Outros/TI Geral | 116 | 3.7% | #................... |
+| 7 | Outros/TI Geral | 115 | 3.7% | #................... |
 | 8 | Sistemas / ERP | 105 | 3.4% | #................... |
 | 9 | Segurança | 100 | 3.2% | #................... |
 | 10 | Fullstack | 91 | 2.9% | #................... |
@@ -88,23 +88,23 @@
 | Posição | Tecnologia | Vagas Citadas |
 |---|---|---|
 | 1 | Hardware | 573 |
-| 2 | Redes de Computadores | 537 |
-| 3 | Windows | 534 |
-| 4 | SQL | 526 |
-| 5 | Banco de Dados | 522 |
-| 6 | Inglês | 489 |
-| 7 | Python | 388 |
+| 2 | Redes de Computadores | 538 |
+| 3 | Windows | 535 |
+| 4 | SQL | 527 |
+| 5 | Banco de Dados | 524 |
+| 6 | Inglês | 493 |
+| 7 | Python | 391 |
 | 8 | Git | 381 |
-| 9 | Inteligência Artificial | 366 |
-| 10 | JavaScript | 318 |
-| 11 | Excel | 316 |
-| 12 | Linux | 302 |
+| 9 | Inteligência Artificial | 367 |
+| 10 | Excel | 320 |
+| 11 | JavaScript | 318 |
+| 12 | Linux | 303 |
 | 13 | Engenharia de Software | 260 |
-| 14 | Análise de Dados | 258 |
-| 15 | ERP | 222 |
+| 14 | Análise de Dados | 259 |
+| 15 | ERP | 223 |
 | 16 | API REST | 217 |
-| 17 | Metodologias Ágeis | 213 |
-| 18 | Manutenção Preventiva | 211 |
+| 17 | Metodologias Ágeis | 214 |
+| 18 | Manutenção Preventiva | 212 |
 | 19 | Montagem e Manutenção de PCs | 209 |
 | 20 | Office 365 | 204 |
 
