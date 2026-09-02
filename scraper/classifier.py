@@ -22,6 +22,12 @@ class AreaScore:
     score: float
     matches: list[str]
     title_score: float = 0.0
+    # True quando um keyword de peso alto casou no TITULO -- o sinal mais
+    # especifico e confiavel que existe. Usado para a area especifica
+    # vencer o generico ("Desenvolvedor de Software Fullstack" nao deve
+    # cair em Engenharia de Software so porque a descricao repete o
+    # boilerplate de "engenharia de software").
+    title_strong: bool = False
 
 
 def _compile_keyword(keyword: str) -> re.Pattern:
@@ -113,6 +119,7 @@ class AreaClassifier:
         for area, keywords in self.areas.items():
             total = 0.0
             title_total = 0.0
+            title_strong = False
             matches: list[str] = []
             # Trechos ja pontuados nesta area, para nao contar o mesmo texto
             # duas vezes: "suporte tecnico" (peso alto) contem "suporte"
@@ -127,6 +134,8 @@ class AreaClassifier:
                     total += weight * self.title_boost
                     title_total += weight * self.title_boost
                     matches.append(f"{raw_kw}(t)")
+                    if weight >= self.strong_weight:
+                        title_strong = True
                     continue
 
                 no_corpo = self._primeiro_livre(pattern, body_text, usados_corpo)
@@ -136,7 +145,13 @@ class AreaClassifier:
                     matches.append(raw_kw)
             if total > 0:
                 results.append(
-                    AreaScore(area, round(total, 2), matches, round(title_total, 2))
+                    AreaScore(
+                        area,
+                        round(total, 2),
+                        matches,
+                        round(title_total, 2),
+                        title_strong,
+                    )
                 )
 
         # Empate de pontuacao: vence a area com evidencias mais especificas
@@ -176,6 +191,54 @@ class AreaClassifier:
             return True
         return any(p.search(body_text) for p in self._strong_patterns())
 
+    # Areas de desenvolvimento generico: nao contam como "especificas" na
+    # precedencia de titulo abaixo. Um titulo "Desenvolvedor de Software
+    # Fullstack" tem os dois sinais; sem esta lista, a generica e a
+    # especifica empatariam e o desempate por tamanho de keyword faria a
+    # generica vencer.
+    GENERIC_DEV_AREAS = ("Engenharia de Software",)
+
+    # Titulos que so rotulam o papel, sem stack: "Analista de Sistemas
+    # Junior" cuja descricao inteira e atendimento/chamados e suporte,
+    # nao desenvolvimento. So estes titulos podem cair na regra de
+    # suporte disfarcado abaixo -- um "Desenvolvedor de Software" com
+    # mencao a suporte na descricao NAO vira suporte.
+    _SUPORTE_TITULOS_GENERICOS = frozenset(
+        {
+            "analista de sistemas",
+            "analise de sistemas",
+            "analista de desenvolvimento",
+            "analista desenvolvedor",
+        }
+    )
+
+    # Sinais de sustentacao no TITULO: "Analista de Sustentacao de
+    # Sistemas" e suporte/manutencao, nao desenvolvimento novo. Ficam
+    # fora do YAML de proposito: como peso alto no corpo do texto,
+    # derrubavam vaga de dev cuja descricao cita sustentacao de passagem
+    # ("DESENVOLVEDOR(A) DE SOFTWARE JUNIOR" em empresa de cobranca).
+    _SUPORTE_TITULO_SUSTENTACAO = (
+        "sustentacao de sistemas",
+        "analista de sustentacao",
+        "sustentacao de aplicacoes",
+    )
+
+    # Areas de stack: se a descricao tiver duas ou mais keywords destas
+    # areas, a vaga NAO e suporte disfarcado -- fica para o generico (ou
+    # para uma regra futura de stack por descricao).
+    _SUPORTE_STACKS_GUARD = frozenset(
+        {
+            "Backend",
+            "Frontend",
+            "Fullstack",
+            "Mobile",
+            "Data",
+            "Inteligência Artificial",
+            "DevOps",
+            "QA",
+        }
+    )
+
     def classify(self, title: str, description: str = "") -> AreaScore:
         """Escolhe a area da vaga.
 
@@ -187,17 +250,99 @@ class AreaClassifier:
 
         Titulo exatamente no piso (como "Desenvolvedor Júnior") nao domina:
         ai a descricao ainda pode decidir ("...pipelines de ETL e SQL" -> Data).
+
+        Precedencia do titulo especifico: entre as areas sinalizadas pelo
+        titulo, a que casou keyword de peso alto no titulo vence as genericas
+        ("Estagio em Desenvolvimento de Software - Android" vai para Mobile,
+        nao para Engenharia de Software so porque a descricao repete o
+        boilerplate de "engenharia de software").
         """
         ranked = self.score_all(title, description)
         if not ranked:
             return AreaScore(self.fallback_area, 0.0, [])
 
         titled = [r for r in ranked if r.title_score > self.min_score]
-        best = (titled or ranked)[0]  # `ranked` ja vem ordenado por pontuacao
+        candidates = titled or ranked  # `ranked` ja vem ordenado por pontuacao
+
+        if len(candidates) > 1:
+            especificos = [
+                r
+                for r in candidates
+                if r.title_strong and r.area not in self.GENERIC_DEV_AREAS
+            ]
+            best = (especificos or candidates)[0]
+        else:
+            best = candidates[0]
 
         if best.score < self.min_score:
             return AreaScore(self.fallback_area, 0.0, [])
+
+        if best.area in self.GENERIC_DEV_AREAS:
+            suporte = self._suporte_disjarcado(ranked, title)
+            if suporte is not None:
+                return suporte
+
         return best
+
+    def _suporte_disjarcado(
+        self, ranked: list[AreaScore], title: str
+    ) -> AreaScore | None:
+        """Detecta vaga de suporte com titulo de papel generico.
+
+        Casos reais: "Analista de Sistemas Junior" cuja descricao fala
+        apenas de atendimento, chamados e suporte tecnico; e "Analista de
+        Sustentacao de Sistemas" (manutencao/suporte, nao desenvolvimento).
+
+        Caminho do papel generico: o titulo rotula o papel generico (que
+        pontua alto) e a area de Suporte nunca disputa. So aplica quando:
+          - todas as keywords de titulo da area generica sao do conjunto
+            de papeis genericos (analista de sistemas etc.);
+          - a descricao tem 3+ sinais de suporte;
+          - a descricao NAO tem stack de desenvolvimento (2+ keywords de
+            Backend/Frontend/etc.), para nao roubar vaga de dev que cita
+            suporte de passagem.
+
+        Caminho da sustentacao: o proprio titulo entrega ("sustentacao de
+        sistemas"); dispensa os sinais da descricao.
+        """
+        eng = next((r for r in ranked if r.area in self.GENERIC_DEV_AREAS), None)
+        if eng is None:
+            return None
+
+        titulo_eng = {m[:-3] for m in eng.matches if m.endswith("(t)")}
+        titulo_norm = normalize(title)
+
+        caminho_generico = bool(titulo_eng) and titulo_eng <= self._SUPORTE_TITULOS_GENERICOS
+        caminho_sustentacao = any(
+            sinal in titulo_norm for sinal in self._SUPORTE_TITULO_SUSTENTACAO
+        )
+        if not caminho_generico and not caminho_sustentacao:
+            return None
+
+        # Guard so para o papel generico: "Analista de Sustentacao de
+        # Sistemas" cita banco de dados/mysql na descricao com naturalidade
+        # (sustenta esses sistemas), sem deixar de ser suporte.
+        if caminho_generico:
+            for r in ranked:
+                if r.area in self._SUPORTE_STACKS_GUARD:
+                    corpo = [m for m in r.matches if not m.endswith("(t)")]
+                    if len(corpo) >= 2:
+                        return None
+
+        sinais: list[str] = []
+        for r in ranked:
+            if r.area in ("Suporte Técnico", "Service Desk / Help Desk"):
+                sinais.extend(m for m in r.matches if not m.endswith("(t)"))
+        unicos = sorted(set(sinais))
+        if not caminho_sustentacao and len(unicos) < 3:
+            return None
+
+        score = sum(
+            r.score
+            for r in ranked
+            if r.area in ("Suporte Técnico", "Service Desk / Help Desk")
+        )
+        return AreaScore("Suporte Técnico", round(score, 2), unicos)
 
 
 @lru_cache(maxsize=1)
