@@ -195,6 +195,32 @@ def test_parar_em_429_interrompe_o_lote_sem_marcar_encerrada():
     assert c.execute("SELECT enrich_encerrada FROM vagas WHERE id = 2").fetchone()[0] == 0
 
 
+def test_sucesso_marca_a_vaga_como_resolvida():
+    # Busca com sucesso tira a vaga da fila para sempre, mesmo que a
+    # descricao do portal seja curta (< 500): sem o flag, vaga com
+    # postagem curta era rebuscada toda rodada.
+    conn, c = _vagas_com_fixture()
+    c.execute(
+        "INSERT INTO vagas (id, url, title, description, enrich_encerrada) "
+        "VALUES (1, 'u1', 't', 'curta', 0)"
+    )
+    extractor = SkillExtractor(
+        {}, secoes_descarte=[], secoes_conteudo=[], contextos_descarte={}
+    )
+
+    def fake_fetch(session, lock, url):
+        return {"description": "descricao curta do portal"}, 200
+
+    total = _enriquecer(
+        c, None, Lock(), extractor, {},
+        "SELECT id, url, title FROM vagas", [], fake_fetch,
+    )
+    assert total == 1
+    assert c.execute(
+        "SELECT enrich_encerrada FROM vagas WHERE id = 1"
+    ).fetchone()[0] == 1
+
+
 def test_fetch_parando_nao_chama_a_fonte_depois_do_429():
     # Depois do primeiro 429 o lote para de fazer requests de verdade:
     # as futures restantes devolvem 429 falso sem tocar na fonte.

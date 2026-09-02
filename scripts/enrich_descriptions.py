@@ -5,6 +5,12 @@ descricao muito curta ou truncada em 500 caracteres legada), com
 PoliteSession (delay + retry em 429/5xx). O lock serializa os GETs para o
 delay valer; o parse roda em paralelo.
 
+`enrich_encerrada` marca o caso RESOLVIDO: busca com sucesso (descricao
+salvada) ou 404 (anuncio encerrado na fonte). 429 nao marca -- a vaga
+fica pendente para a proxima rodada. Descricoes reais podem ser curtas:
+sem a marcacao de sucesso, vaga com postagem curta ficaria na fila para
+sempre.
+
 Nao ha janela de dias: vaga pendente e tentada em toda rodada ate dar
 certo (descricao salva) ou 404 (marcada como encerrada e nunca mais
 buscada). Vagas antigas continuam vivas no LinkedIn por meses; cortar por
@@ -173,6 +179,13 @@ def enrich_linkedin_jobs(
                                 )
 
                         enriched_count += 1
+                        # Busca concluida com sucesso: marca como
+                        # resolvida para sair da fila de vez (descricao
+                        # real pode ser curta; 429 nao chega aqui).
+                        c.execute(
+                            "UPDATE vagas SET enrich_encerrada = 1 WHERE id = ?",
+                            (db_id,),
+                        )
                         if enriched_count % 25 == 0:
                             conn.commit()
                             logger.info("Enriquecidas %d / %d vagas...", enriched_count, len(jobs_to_enrich))
