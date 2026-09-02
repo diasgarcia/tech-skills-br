@@ -5,7 +5,26 @@ on:
   # (30min -> 5h -> drop). O gatilho agora e externo (cron-job.org chama a
   # API de dispatch nos horarios 09:16, 14:16 e 19:16 BRT), e o botao
   # manual continua disponivel.
+  #
+  # `origem` e `rodada` sao informados pelo cron-job.org no corpo do
+  # dispatch e tornam a rotulagem do commit infalivel (relogio do runner
+  # atrasa na fila). O botao manual usa o default (manual). Sem inputs
+  # (config antiga), vale a heuristica do relogio como fallback.
   workflow_dispatch:
+    inputs:
+      origem:
+        description: 'Origem do disparo'
+        required: false
+        default: 'manual'
+        type: choice
+        options:
+          - manual
+          - cron
+      rodada:
+        description: 'Rodada automatica do dia (1=09:16, 2=14:16, 3=19:16 BRT)'
+        required: false
+        default: ''
+        type: string
 
 concurrency:
   group: coleta-diaria
@@ -27,9 +46,10 @@ jobs:
 
     - name: 2. Registrar horario de inicio da rodada
       run: |
-        # Cada run leva ~50 min: o commit do passo 7 roda bem depois do
-        # disparo do cron-job.org. O sufixo precisa refletir o horario em
-        # que a rodada COMECOU (09h16/14h16/19h16 BRT), nao o de conclusao.
+        # O horario de inicio e o fallback do rotulo do commit: a fonte da
+        # verdade sao os inputs origem/rodada do dispatch (passo 7), e o
+        # MINUTOS_BRT cobre dispatches antigos sem inputs. O horario e o
+        # de INICIO da run (09h16/14h16/19h16 BRT), nao o de conclusao.
         echo "MINUTOS_BRT=$((10#$(TZ=America/Sao_Paulo date +'%H%M')))" >> "$GITHUB_ENV"
         echo "DATA_HOJE=$(date +'%d/%m/%Y')" >> "$GITHUB_ENV"
 
@@ -88,11 +108,18 @@ jobs:
         
         git diff --quiet && git diff --staged --quiet && exit 0
 
-        # Sufixo pela rodada (BRT): 09h16 -> - 1, 14h16 -> - 2, 19h16 -> - 3.
-        # MINUTOS_BRT e o horario de INICIO (registrado no passo 2), com
-        # tolerancia de +5 min apos o disparo do cron-job.org; fora disso
-        # vira "- manual N", com N contando os manuais ja feitos no dia.
-        if [ "${MINUTOS_BRT}" -ge 916 ] && [ "${MINUTOS_BRT}" -le 921 ]; then
+        # Rotulo do commit. A fonte da verdade sao os inputs do dispatch
+        # (origem/rodada), enviados pelo cron-job.org. O horario de inicio
+        # (MINUTOS_BRT, registrado no passo 2) fica como fallback para
+        # dispatches antigos sem inputs.
+        ORIGEM="${{ github.event.inputs.origem }}"
+        RODADA="${{ github.event.inputs.rodada }}"
+        if [ "$ORIGEM" = "cron" ] && { [ "$RODADA" = "1" ] || [ "$RODADA" = "2" ] || [ "$RODADA" = "3" ]; }; then
+          MENSAGEM="chore(data): coleta automatizada de vagas [${DATA_HOJE}] - ${RODADA}"
+        elif [ "$ORIGEM" = "manual" ]; then
+          N=$(git log --format='%s' | grep -c "coleta automatizada de vagas \[${DATA_HOJE}\] - manual" || true)
+          MENSAGEM="chore(data): coleta automatizada de vagas [${DATA_HOJE}] - manual $((N + 1))"
+        elif [ "${MINUTOS_BRT}" -ge 916 ] && [ "${MINUTOS_BRT}" -le 921 ]; then
           MENSAGEM="chore(data): coleta automatizada de vagas [${DATA_HOJE}] - 1"
         elif [ "${MINUTOS_BRT}" -ge 1416 ] && [ "${MINUTOS_BRT}" -le 1421 ]; then
           MENSAGEM="chore(data): coleta automatizada de vagas [${DATA_HOJE}] - 2"
