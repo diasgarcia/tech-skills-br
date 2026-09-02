@@ -986,61 +986,61 @@
     },
     "Engenharia de Software": {
       "total_vagas": 443,
-      "vagas_com_tech": 404,
+      "vagas_com_tech": 405,
       "skills": [
         {
           "nome": "Banco de Dados",
           "grupo": "bancos",
           "vagas": 158,
-          "percentual": 39.1
+          "percentual": 39.0
         },
         {
           "nome": "Git",
           "grupo": "cloud_devops",
           "vagas": 139,
-          "percentual": 34.4
+          "percentual": 34.3
         },
         {
           "nome": "SQL",
           "grupo": "linguagens",
           "vagas": 138,
-          "percentual": 34.2
+          "percentual": 34.1
         },
         {
           "nome": "Engenharia de Software",
           "grupo": "engenharia_praticas",
           "vagas": 135,
-          "percentual": 33.4
+          "percentual": 33.3
         },
         {
           "nome": "JavaScript",
           "grupo": "linguagens",
           "vagas": 124,
-          "percentual": 30.7
+          "percentual": 30.6
         },
         {
           "nome": "Python",
           "grupo": "linguagens",
           "vagas": 115,
-          "percentual": 28.5
+          "percentual": 28.4
         },
         {
           "nome": "Inglês",
           "grupo": "engenharia_praticas",
           "vagas": 103,
-          "percentual": 25.5
+          "percentual": 25.4
         },
         {
           "nome": "Inteligência Artificial",
           "grupo": "inteligencia_artificial",
           "vagas": 94,
-          "percentual": 23.3
+          "percentual": 23.2
         },
         {
           "nome": "Lógica de Programação",
           "grupo": "engenharia_praticas",
           "vagas": 82,
-          "percentual": 20.3
+          "percentual": 20.2
         },
         {
           "nome": "Java",
@@ -1058,13 +1058,13 @@
           "nome": "C#",
           "grupo": "linguagens",
           "vagas": 60,
-          "percentual": 14.9
+          "percentual": 14.8
         },
         {
           "nome": "Metodologias Ágeis",
           "grupo": "engenharia_praticas",
           "vagas": 60,
-          "percentual": 14.9
+          "percentual": 14.8
         },
         {
           "nome": "Automação",
@@ -1094,7 +1094,7 @@
           "nome": ".NET",
           "grupo": "frameworks",
           "vagas": 50,
-          "percentual": 12.4
+          "percentual": 12.3
         },
         {
           "nome": "ERP",
@@ -1117,14 +1117,14 @@
         {
           "nome": "Excel",
           "grupo": "dados",
-          "vagas": 37,
-          "percentual": 9.2
+          "vagas": 38,
+          "percentual": 9.4
         },
         {
           "nome": "AWS",
           "grupo": "cloud_devops",
           "vagas": 37,
-          "percentual": 9.2
+          "percentual": 9.1
         },
         {
           "nome": "Node.js",
@@ -1136,13 +1136,13 @@
           "nome": "LLMs & IA Generativa",
           "grupo": "inteligencia_artificial",
           "vagas": 33,
-          "percentual": 8.2
+          "percentual": 8.1
         },
         {
           "nome": "Testes Automatizados",
           "grupo": "qa_testes",
           "vagas": 33,
-          "percentual": 8.2
+          "percentual": 8.1
         },
         {
           "nome": "SQL Server",
@@ -1223,6 +1223,12 @@
           "percentual": 5.4
         },
         {
+          "nome": "Power BI",
+          "grupo": "dados",
+          "vagas": 21,
+          "percentual": 5.2
+        },
+        {
           "nome": "Hardware",
           "grupo": "suporte_infra",
           "vagas": 21,
@@ -1233,12 +1239,6 @@
           "grupo": "engenharia_praticas",
           "vagas": 21,
           "percentual": 5.2
-        },
-        {
-          "nome": "Power BI",
-          "grupo": "dados",
-          "vagas": 20,
-          "percentual": 5.0
         },
         {
           "nome": "Go",
@@ -1379,6 +1379,12 @@
           "percentual": 2.5
         },
         {
+          "nome": "Word",
+          "grupo": "dados",
+          "vagas": 9,
+          "percentual": 2.2
+        },
+        {
           "nome": "Machine Learning",
           "grupo": "inteligencia_artificial",
           "vagas": 9,
@@ -1405,12 +1411,6 @@
         {
           "nome": "Delphi",
           "grupo": "linguagens",
-          "vagas": 8,
-          "percentual": 2.0
-        },
-        {
-          "nome": "Word",
-          "grupo": "dados",
           "vagas": 8,
           "percentual": 2.0
         },
