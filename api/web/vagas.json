@@ -15318,9 +15318,18 @@
     "url": "https://www.vagas.com.br/vagas/v2832024/cientista-de-dados-junior-hibrido-jundiai-ou-mogi-guacu-sp",
     "tecnologias": [
       "AWS",
+      "Agentes de IA & RAG",
       "Azure",
+      "Databricks",
+      "Estatística",
       "GCP",
+      "Inglês",
       "Inteligência Artificial",
+      "LLMs & IA Generativa",
+      "Machine Learning",
+      "Python",
+      "SAP",
+      "SQL",
       "Spark"
     ]
   },
@@ -15783,7 +15792,7 @@
     "id": 1216,
     "titulo": "Analista de TI Jr",
     "empresa": "J&T Express",
-    "area": "Outros/TI Geral",
+    "area": "QA",
     "senioridade": "Júnior",
     "localidade": "Serra / ES A empresa aceita candidaturas de Serra e cidades próximas",
     "polo": "Vitória",
@@ -15792,7 +15801,10 @@
     "data_publicacao": "25/08/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2832012/analista-de-ti-jr",
-    "tecnologias": []
+    "tecnologias": [
+      "Lógica de Programação",
+      "Postman"
+    ]
   },
   {
     "id": 1215,
@@ -25551,6 +25563,8 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831050/tecnico-de-informatica-n1-lins-sp",
     "tecnologias": [
+      "Backup",
+      "Hardware",
       "Help Desk"
     ]
   },
@@ -29074,8 +29088,17 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830534/assistente-de-infraestrutura-de-ti",
     "tecnologias": [
+      "Active Directory",
+      "Backup",
+      "Firewall",
+      "GLPI",
+      "Grafana",
+      "Help Desk",
+      "Office 365",
+      "Redes de Computadores",
       "Windows",
-      "Windows Server"
+      "Windows Server",
+      "Zabbix"
     ]
   },
   {
@@ -33386,8 +33409,12 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2826092/estagio-tecnico-em-eletronica",
     "tecnologias": [
+      "Automação Industrial",
       "Banco de Dados",
-      "Eletrônica"
+      "Eletrônica",
+      "Estrutura de Dados",
+      "Inglês",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -34581,6 +34608,9 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2829498/tecnico-de-informatica-n1-cajamar",
     "tecnologias": [
+      "Automação Industrial",
+      "Backup",
+      "Hardware",
       "Help Desk"
     ]
   },
@@ -44007,7 +44037,10 @@
     "data_publicacao": "24/07/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2827332/designer-grafico-analista-de-marketing-i",
-    "tecnologias": []
+    "tecnologias": [
+      "CSS",
+      "HTML"
+    ]
   },
   {
     "id": 1274,
