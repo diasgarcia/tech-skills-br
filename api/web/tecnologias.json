@@ -27,7 +27,7 @@
     "posicao": 4,
     "nome": "SQL",
     "grupo": "linguagens",
-    "vagas": 528,
+    "vagas": 529,
     "percentual_total": 17.0,
     "percentual_base_tech": 19.6
   },
@@ -35,9 +35,9 @@
     "posicao": 5,
     "nome": "Banco de Dados",
     "grupo": "bancos",
-    "vagas": 524,
+    "vagas": 525,
     "percentual_total": 16.9,
-    "percentual_base_tech": 19.4
+    "percentual_base_tech": 19.5
   },
   {
     "posicao": 6,
@@ -51,15 +51,15 @@
     "posicao": 7,
     "nome": "Python",
     "grupo": "linguagens",
-    "vagas": 392,
-    "percentual_total": 12.6,
-    "percentual_base_tech": 14.5
+    "vagas": 393,
+    "percentual_total": 12.7,
+    "percentual_base_tech": 14.6
   },
   {
     "posicao": 8,
     "nome": "Git",
     "grupo": "cloud_devops",
-    "vagas": 382,
+    "vagas": 383,
     "percentual_total": 12.3,
     "percentual_base_tech": 14.2
   },
@@ -115,7 +115,7 @@
     "posicao": 15,
     "nome": "ERP",
     "grupo": "engenharia_praticas",
-    "vagas": 223,
+    "vagas": 224,
     "percentual_total": 7.2,
     "percentual_base_tech": 8.3
   },
@@ -203,8 +203,8 @@
     "posicao": 26,
     "nome": "SLA",
     "grupo": "suporte_infra",
-    "vagas": 159,
-    "percentual_total": 5.1,
+    "vagas": 160,
+    "percentual_total": 5.2,
     "percentual_base_tech": 5.9
   },
   {
@@ -235,7 +235,7 @@
     "posicao": 30,
     "nome": "Service Desk",
     "grupo": "suporte_infra",
-    "vagas": 148,
+    "vagas": 149,
     "percentual_total": 4.8,
     "percentual_base_tech": 5.5
   },
@@ -243,9 +243,9 @@
     "posicao": 31,
     "nome": "ITIL",
     "grupo": "suporte_infra",
-    "vagas": 144,
-    "percentual_total": 4.6,
-    "percentual_base_tech": 5.3
+    "vagas": 145,
+    "percentual_total": 4.7,
+    "percentual_base_tech": 5.4
   },
   {
     "posicao": 32,
@@ -305,16 +305,16 @@
   },
   {
     "posicao": 39,
-    "nome": "C#",
-    "grupo": "linguagens",
-    "vagas": 122,
-    "percentual_total": 3.9,
-    "percentual_base_tech": 4.5
+    "nome": "React",
+    "grupo": "frameworks",
+    "vagas": 123,
+    "percentual_total": 4.0,
+    "percentual_base_tech": 4.6
   },
   {
     "posicao": 40,
-    "nome": "React",
-    "grupo": "frameworks",
+    "nome": "C#",
+    "grupo": "linguagens",
     "vagas": 122,
     "percentual_total": 3.9,
     "percentual_base_tech": 4.5
@@ -363,17 +363,17 @@
     "posicao": 46,
     "nome": ".NET",
     "grupo": "frameworks",
-    "vagas": 95,
+    "vagas": 96,
     "percentual_total": 3.1,
-    "percentual_base_tech": 3.5
+    "percentual_base_tech": 3.6
   },
   {
     "posicao": 47,
     "nome": "Node.js",
     "grupo": "frameworks",
-    "vagas": 95,
+    "vagas": 96,
     "percentual_total": 3.1,
-    "percentual_base_tech": 3.5
+    "percentual_base_tech": 3.6
   },
   {
     "posicao": 48,

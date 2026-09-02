@@ -991,18 +991,18 @@
         {
           "nome": "Banco de Dados",
           "grupo": "bancos",
-          "vagas": 157,
-          "percentual": 38.9
-        },
-        {
-          "nome": "SQL",
-          "grupo": "linguagens",
-          "vagas": 138,
-          "percentual": 34.2
+          "vagas": 158,
+          "percentual": 39.1
         },
         {
           "nome": "Git",
           "grupo": "cloud_devops",
+          "vagas": 139,
+          "percentual": 34.4
+        },
+        {
+          "nome": "SQL",
+          "grupo": "linguagens",
           "vagas": 138,
           "percentual": 34.2
         },
@@ -1021,8 +1021,8 @@
         {
           "nome": "Python",
           "grupo": "linguagens",
-          "vagas": 114,
-          "percentual": 28.2
+          "vagas": 115,
+          "percentual": 28.5
         },
         {
           "nome": "Inglês",
@@ -1093,8 +1093,8 @@
         {
           "nome": ".NET",
           "grupo": "frameworks",
-          "vagas": 49,
-          "percentual": 12.1
+          "vagas": 50,
+          "percentual": 12.4
         },
         {
           "nome": "ERP",
@@ -1111,8 +1111,8 @@
         {
           "nome": "React",
           "grupo": "frameworks",
-          "vagas": 40,
-          "percentual": 9.9
+          "vagas": 41,
+          "percentual": 10.1
         },
         {
           "nome": "Excel",
@@ -1129,8 +1129,8 @@
         {
           "nome": "Node.js",
           "grupo": "frameworks",
-          "vagas": 33,
-          "percentual": 8.2
+          "vagas": 34,
+          "percentual": 8.4
         },
         {
           "nome": "LLMs & IA Generativa",
@@ -6679,8 +6679,8 @@
         {
           "nome": "Service Desk",
           "grupo": "suporte_infra",
-          "vagas": 34,
-          "percentual": 41.5
+          "vagas": 35,
+          "percentual": 42.7
         },
         {
           "nome": "Help Desk",
@@ -6709,8 +6709,8 @@
         {
           "nome": "SLA",
           "grupo": "suporte_infra",
-          "vagas": 15,
-          "percentual": 18.3
+          "vagas": 16,
+          "percentual": 19.5
         },
         {
           "nome": "Redes de Computadores",
@@ -6727,8 +6727,14 @@
         {
           "nome": "SQL",
           "grupo": "linguagens",
-          "vagas": 8,
-          "percentual": 9.8
+          "vagas": 9,
+          "percentual": 11.0
+        },
+        {
+          "nome": "ITIL",
+          "grupo": "suporte_infra",
+          "vagas": 9,
+          "percentual": 11.0
         },
         {
           "nome": "Linux",
@@ -6738,12 +6744,6 @@
         },
         {
           "nome": "Active Directory",
-          "grupo": "suporte_infra",
-          "vagas": 8,
-          "percentual": 9.8
-        },
-        {
-          "nome": "ITIL",
           "grupo": "suporte_infra",
           "vagas": 8,
           "percentual": 9.8
@@ -6761,14 +6761,14 @@
           "percentual": 8.5
         },
         {
-          "nome": "Banco de Dados",
-          "grupo": "bancos",
-          "vagas": 6,
-          "percentual": 7.3
-        },
-        {
           "nome": "ERP",
           "grupo": "engenharia_praticas",
+          "vagas": 7,
+          "percentual": 8.5
+        },
+        {
+          "nome": "Banco de Dados",
+          "grupo": "bancos",
           "vagas": 6,
           "percentual": 7.3
         },
