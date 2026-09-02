@@ -22,7 +22,7 @@ def test_query_pendentes_ignora_a_janela_de_dias():
         "INSERT INTO vagas (id, source, external_id, title, description, enrich_encerrada, published_date) VALUES (?, ?, ?, ?, ?, ?, ?)",
         [
             (1, "linkedin", "e1", "t", None, 0, "2026-04-23"),   # antiga, sem desc -> pendente
-            (2, "linkedin", "e2", "t", "x" * 500, 0, "2026-04-23"),  # antiga, truncada 500 -> pendente
+            (2, "linkedin", "e2", "t", "x" * 500, 0, "2026-04-23"),  # 500 chars reais -> completa, fora
             (3, "linkedin", "e3", "t", "x" * 20, 0, "2026-04-23"),   # antiga, curta -> pendente
             (4, "linkedin", "e4", "t", "x" * 800, 0, "2026-08-01"),  # completa -> fora
             (5, "linkedin", "e5", "t", None, 1, "2026-04-23"),       # encerrada -> fora
@@ -30,4 +30,4 @@ def test_query_pendentes_ignora_a_janela_de_dias():
         ],
     )
     ids = {r[0] for r in c.execute(QUERY_PENDENTES)}
-    assert ids == {1, 2, 3}
+    assert ids == {1, 3}
