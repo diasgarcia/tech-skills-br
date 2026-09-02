@@ -17,6 +17,7 @@ CSV de coleta truncava antes de o projeto passar a salvar o texto completo.
 import logging
 import sqlite3
 import sys
+import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from threading import Lock
@@ -51,13 +52,29 @@ QUERY_PENDENTES = """
 """
 
 
-def fetch_one_description(session: PoliteSession, lock: Lock, job_id: str) -> tuple[str, str, int | None]:
+def fetch_one_description(
+    session: PoliteSession,
+    lock: Lock,
+    job_id: str,
+    parou: threading.Event,
+) -> tuple[str, str, int | None]:
+    # Um 429 no meio do lote significa ban/rate limit: as futures
+    # enfileiradas nao devem continuar martelando a fonte.
+    if parou.is_set():
+        return job_id, "", 429
     url = DETAIL_API_URL.format(job_id=job_id)
     status = None
     try:
         with lock:
             response = session.get(url)
             status = session.last_status_code
+        if status == 429:
+            if not parou.is_set():
+                parou.set()
+                logger.warning(
+                    "429 detectado: interrompendo o lote do LinkedIn "
+                    "(a fila continua na proxima rodada)"
+                )
         if response is None:
             return job_id, "", status
         soup = BeautifulSoup(response.text, "html.parser")
@@ -103,6 +120,7 @@ def enrich_linkedin_jobs(
     tech_map = {nome.lower(): tid for tid, nome in c.fetchall()}
     enriched_count = 0
     lock = Lock()
+    parou = threading.Event()
 
     with PoliteSession(
         user_agent=USER_AGENT,
@@ -113,7 +131,9 @@ def enrich_linkedin_jobs(
     ) as session:
         with ThreadPoolExecutor(max_workers=max_workers) as pool:
             futures = {
-                pool.submit(fetch_one_description, session, lock, ext_id): (db_id, ext_id, title, location, workplace)
+                pool.submit(
+                    fetch_one_description, session, lock, ext_id, parou
+                ): (db_id, ext_id, title, location, workplace)
                 for db_id, ext_id, title, url, location, workplace in jobs_to_enrich
             }
 
