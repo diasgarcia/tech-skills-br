@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (3104 vagas)
 
-- **Data de geração:** 02/09/2026 19:45
+- **Data de geração:** 02/09/2026 19:48
 - **Período coberto:** 05/01/2026 até 02/09/2026
 - **Total de vagas consolidadas:** 3104
 
@@ -13,8 +13,8 @@
 | 3 | Infraestrutura / Redes | 273 | 8.8% | ##.................. |
 | 4 | Data | 213 | 6.9% | #................... |
 | 5 | Backend | 176 | 5.7% | #................... |
-| 6 | QA | 133 | 4.3% | #................... |
-| 7 | Outros/TI Geral | 115 | 3.7% | #................... |
+| 6 | QA | 134 | 4.3% | #................... |
+| 7 | Outros/TI Geral | 114 | 3.7% | #................... |
 | 8 | Sistemas / ERP | 105 | 3.4% | #................... |
 | 9 | Segurança | 100 | 3.2% | #................... |
 | 10 | Fullstack | 91 | 2.9% | #................... |
@@ -87,13 +87,13 @@
 
 | Posição | Tecnologia | Vagas Citadas |
 |---|---|---|
-| 1 | Hardware | 573 |
-| 2 | Redes de Computadores | 538 |
+| 1 | Hardware | 575 |
+| 2 | Redes de Computadores | 539 |
 | 3 | Windows | 535 |
-| 4 | SQL | 527 |
+| 4 | SQL | 528 |
 | 5 | Banco de Dados | 524 |
-| 6 | Inglês | 493 |
-| 7 | Python | 391 |
+| 6 | Inglês | 495 |
+| 7 | Python | 392 |
 | 8 | Git | 381 |
 | 9 | Inteligência Artificial | 367 |
 | 10 | Excel | 320 |
@@ -104,9 +104,9 @@
 | 15 | ERP | 223 |
 | 16 | API REST | 217 |
 | 17 | Metodologias Ágeis | 214 |
-| 18 | Manutenção Preventiva | 212 |
+| 18 | Manutenção Preventiva | 213 |
 | 19 | Montagem e Manutenção de PCs | 209 |
-| 20 | Office 365 | 204 |
+| 20 | Office 365 | 205 |
 
 ## Top 10 Empresas com Mais Vagas
 
