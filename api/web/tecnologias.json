@@ -147,7 +147,7 @@
     "posicao": 19,
     "nome": "Montagem e Manutenção de PCs",
     "grupo": "suporte_infra",
-    "vagas": 210,
+    "vagas": 211,
     "percentual_total": 6.8,
     "percentual_base_tech": 7.8
   },
@@ -817,6 +817,14 @@
   },
   {
     "posicao": 103,
+    "nome": "VoIP",
+    "grupo": "suporte_infra",
+    "vagas": 31,
+    "percentual_total": 1.0,
+    "percentual_base_tech": 1.1
+  },
+  {
+    "posicao": 104,
     "nome": "Databricks",
     "grupo": "dados",
     "vagas": 30,
@@ -824,17 +832,9 @@
     "percentual_base_tech": 1.1
   },
   {
-    "posicao": 104,
+    "posicao": 105,
     "nome": "Salesforce",
     "grupo": "engenharia_praticas",
-    "vagas": 30,
-    "percentual_total": 1.0,
-    "percentual_base_tech": 1.1
-  },
-  {
-    "posicao": 105,
-    "nome": "VoIP",
-    "grupo": "suporte_infra",
     "vagas": 30,
     "percentual_total": 1.0,
     "percentual_base_tech": 1.1

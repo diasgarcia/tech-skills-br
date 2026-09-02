@@ -242,19 +242,19 @@
   "skills_by_area": {
     "Suporte Técnico": {
       "total_vagas": 1061,
-      "vagas_com_tech": 876,
+      "vagas_com_tech": 877,
       "skills": [
         {
           "nome": "Hardware",
           "grupo": "suporte_infra",
           "vagas": 402,
-          "percentual": 45.9
+          "percentual": 45.8
         },
         {
           "nome": "Windows",
           "grupo": "suporte_infra",
           "vagas": 351,
-          "percentual": 40.1
+          "percentual": 40.0
         },
         {
           "nome": "Redes de Computadores",
@@ -265,7 +265,7 @@
         {
           "nome": "Montagem e Manutenção de PCs",
           "grupo": "suporte_infra",
-          "vagas": 145,
+          "vagas": 146,
           "percentual": 16.6
         },
         {
@@ -278,7 +278,7 @@
           "nome": "Linux",
           "grupo": "cloud_devops",
           "vagas": 131,
-          "percentual": 15.0
+          "percentual": 14.9
         },
         {
           "nome": "Office 365",
@@ -356,7 +356,7 @@
           "nome": "Eletrônica",
           "grupo": "hardware_eletronica",
           "vagas": 46,
-          "percentual": 5.3
+          "percentual": 5.2
         },
         {
           "nome": "Inteligência Artificial",
@@ -380,7 +380,7 @@
           "nome": "Word",
           "grupo": "dados",
           "vagas": 39,
-          "percentual": 4.5
+          "percentual": 4.4
         },
         {
           "nome": "Análise de Dados",
@@ -398,13 +398,13 @@
           "nome": "GLPI",
           "grupo": "suporte_infra",
           "vagas": 32,
-          "percentual": 3.7
+          "percentual": 3.6
         },
         {
           "nome": "VMware",
           "grupo": "suporte_infra",
           "vagas": 32,
-          "percentual": 3.7
+          "percentual": 3.6
         },
         {
           "nome": "Windows Server",
@@ -509,13 +509,13 @@
           "percentual": 2.1
         },
         {
-          "nome": "Zabbix",
+          "nome": "VoIP",
           "grupo": "suporte_infra",
-          "vagas": 17,
-          "percentual": 1.9
+          "vagas": 18,
+          "percentual": 2.1
         },
         {
-          "nome": "VoIP",
+          "nome": "Zabbix",
           "grupo": "suporte_infra",
           "vagas": 17,
           "percentual": 1.9
