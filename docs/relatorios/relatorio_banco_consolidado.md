@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (3104 vagas)
 
-- **Data de geração:** 02/09/2026 20:32
+- **Data de geração:** 02/09/2026 20:34
 - **Período coberto:** 05/01/2026 até 02/09/2026
 - **Total de vagas consolidadas:** 3104
 
@@ -105,7 +105,7 @@
 | 16 | API REST | 217 |
 | 17 | Metodologias Ágeis | 214 |
 | 18 | Manutenção Preventiva | 214 |
-| 19 | Montagem e Manutenção de PCs | 210 |
+| 19 | Montagem e Manutenção de PCs | 211 |
 | 20 | Office 365 | 205 |
 
 ## Top 10 Empresas com Mais Vagas
