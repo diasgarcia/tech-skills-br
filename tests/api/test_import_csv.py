@@ -161,6 +161,17 @@ def test_reimportacao_atualiza_campos_alterados(tmp_path):
         assert db.scalar(select(Vaga)).title == "Cientista de Dados Pleno"
 
 
+def test_snippet_nao_regride_descricao_enriquecida(tmp_path):
+    """O card do Vagas.com traz snippet; a descricao completa ja salva fica."""
+    db_path = tmp_path / "t.db"
+    desc_cheia = "x" * 1200
+    importar(_escrever_csv(tmp_path, [_linha(description=desc_cheia)]), db_path)
+    importar(_escrever_csv(tmp_path, [_linha(description="trecho curto...")]), db_path)
+    with Session(make_engine(db_path)) as s:
+        vaga = s.scalar(select(Vaga))
+        assert vaga.description == desc_cheia
+
+
 def test_vaga_fora_do_escopo_tech_nao_entra(tmp_path):
     db_path = tmp_path / "t.db"
     resultado = importar(
