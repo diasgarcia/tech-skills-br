@@ -209,6 +209,21 @@ def importar(
                     novo = (linha.get(campo) or "").strip() or None
                     if campo == "description" and not novo and vaga.description:
                         continue
+                    # Snippet novo nao regride descricao enriquecida: o
+                    # card do Vagas.com traz ~400 chars (com ou sem
+                    # "..."). Sem esta regra, cada coleta apagaria
+                    # descricoes completas ja buscadas e a fila de
+                    # enriquecimento nunca esvaziaria.
+                    if campo == "description" and novo and vaga.description:
+                        velha_cheia = (
+                            len(vaga.description) >= 500
+                            and not vaga.description.endswith("...")
+                        )
+                        nova_snippet = (
+                            len(novo) < 500 or novo.endswith("...")
+                        )
+                        if velha_cheia and nova_snippet:
+                            continue
                     setattr(vaga, campo, novo)
 
                 # Marcacao de anúncio encerrado so liga, nunca desliga:
