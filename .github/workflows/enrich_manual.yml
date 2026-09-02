@@ -42,8 +42,8 @@ jobs:
 
     - name: 5. Enriquecer descricoes pendentes
       run: |
-        python scripts/enrich_outras_fontes.py
-        python scripts/enrich_descriptions.py
+        python scripts/enrich_outras_fontes.py 2>&1 | tee /tmp/enrich.log
+        python scripts/enrich_descriptions.py 2>&1 | tee -a /tmp/enrich.log
       env:
         PYTHONPATH: .
 
@@ -58,6 +58,7 @@ jobs:
         python scripts/export_seed.py
         python scripts/report_db.py
         python scripts/export_pages_data.py
+        python scripts/resumo_commit.py --log /tmp/enrich.log > /tmp/corpo_commit.txt
       env:
         PYTHONPATH: .
 
@@ -70,9 +71,12 @@ jobs:
 
         DATA_HOJE=$(date +'%d/%m/%Y')
         git diff --quiet && git diff --staged --quiet && exit 0
+        # O corpo do commit traz o resumo do enriquecimento (enriquecidas
+        # e pendentes por fonte), gerado no passo 7.
+        { echo "chore(data): enriquecimento manual de vagas [${DATA_HOJE}]"; echo; cat /tmp/corpo_commit.txt; } > /tmp/commit_msg.txt
         # Sem [skip ci]: o push em api/web/** precisa disparar o
         # deploy_pages.yml (o marcador suprimiria todos os workflows do push).
-        git commit -m "chore(data): enriquecimento manual de vagas [${DATA_HOJE}]"
+        git commit -F /tmp/commit_msg.txt
         # Em caso de corrida com outro push, rebaseia e tenta de novo.
         # Se o rebase conflitar em arquivos de dados (seed, docs, api/web),
         # a versao do bot e a mais nova - vem do banco da propria run.
@@ -86,7 +90,7 @@ jobs:
             git rebase --abort 2>/dev/null || true
             git reset --soft origin/main
             git add seed/vagas.csv docs/relatorios/ api/web/ .github/web/
-            git commit -m "chore(data): enriquecimento manual de vagas [${DATA_HOJE}]"
+            git commit -F /tmp/commit_msg.txt
           fi
           sleep 10
         done
