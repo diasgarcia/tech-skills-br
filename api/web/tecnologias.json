@@ -11,7 +11,7 @@
     "posicao": 2,
     "nome": "Redes de Computadores",
     "grupo": "suporte_infra",
-    "vagas": 537,
+    "vagas": 538,
     "percentual_total": 17.3,
     "percentual_base_tech": 20.0
   },
@@ -19,7 +19,7 @@
     "posicao": 3,
     "nome": "Windows",
     "grupo": "suporte_infra",
-    "vagas": 534,
+    "vagas": 535,
     "percentual_total": 17.2,
     "percentual_base_tech": 19.9
   },
@@ -27,33 +27,33 @@
     "posicao": 4,
     "nome": "SQL",
     "grupo": "linguagens",
-    "vagas": 526,
-    "percentual_total": 16.9,
+    "vagas": 527,
+    "percentual_total": 17.0,
     "percentual_base_tech": 19.6
   },
   {
     "posicao": 5,
     "nome": "Banco de Dados",
     "grupo": "bancos",
-    "vagas": 522,
-    "percentual_total": 16.8,
-    "percentual_base_tech": 19.4
+    "vagas": 524,
+    "percentual_total": 16.9,
+    "percentual_base_tech": 19.5
   },
   {
     "posicao": 6,
     "nome": "Inglês",
     "grupo": "engenharia_praticas",
-    "vagas": 489,
-    "percentual_total": 15.8,
-    "percentual_base_tech": 18.2
+    "vagas": 493,
+    "percentual_total": 15.9,
+    "percentual_base_tech": 18.3
   },
   {
     "posicao": 7,
     "nome": "Python",
     "grupo": "linguagens",
-    "vagas": 388,
-    "percentual_total": 12.5,
-    "percentual_base_tech": 14.4
+    "vagas": 391,
+    "percentual_total": 12.6,
+    "percentual_base_tech": 14.5
   },
   {
     "posicao": 8,
@@ -67,12 +67,20 @@
     "posicao": 9,
     "nome": "Inteligência Artificial",
     "grupo": "inteligencia_artificial",
-    "vagas": 366,
+    "vagas": 367,
     "percentual_total": 11.8,
     "percentual_base_tech": 13.6
   },
   {
     "posicao": 10,
+    "nome": "Excel",
+    "grupo": "dados",
+    "vagas": 320,
+    "percentual_total": 10.3,
+    "percentual_base_tech": 11.9
+  },
+  {
+    "posicao": 11,
     "nome": "JavaScript",
     "grupo": "linguagens",
     "vagas": 318,
@@ -80,20 +88,12 @@
     "percentual_base_tech": 11.8
   },
   {
-    "posicao": 11,
-    "nome": "Excel",
-    "grupo": "dados",
-    "vagas": 316,
-    "percentual_total": 10.2,
-    "percentual_base_tech": 11.7
-  },
-  {
     "posicao": 12,
     "nome": "Linux",
     "grupo": "cloud_devops",
-    "vagas": 302,
-    "percentual_total": 9.7,
-    "percentual_base_tech": 11.2
+    "vagas": 303,
+    "percentual_total": 9.8,
+    "percentual_base_tech": 11.3
   },
   {
     "posicao": 13,
@@ -107,7 +107,7 @@
     "posicao": 14,
     "nome": "Análise de Dados",
     "grupo": "dados",
-    "vagas": 258,
+    "vagas": 259,
     "percentual_total": 8.3,
     "percentual_base_tech": 9.6
   },
@@ -115,7 +115,7 @@
     "posicao": 15,
     "nome": "ERP",
     "grupo": "engenharia_praticas",
-    "vagas": 222,
+    "vagas": 223,
     "percentual_total": 7.2,
     "percentual_base_tech": 8.3
   },
@@ -131,17 +131,17 @@
     "posicao": 17,
     "nome": "Metodologias Ágeis",
     "grupo": "engenharia_praticas",
-    "vagas": 213,
+    "vagas": 214,
     "percentual_total": 6.9,
-    "percentual_base_tech": 7.9
+    "percentual_base_tech": 8.0
   },
   {
     "posicao": 18,
     "nome": "Manutenção Preventiva",
     "grupo": "suporte_infra",
-    "vagas": 211,
+    "vagas": 212,
     "percentual_total": 6.8,
-    "percentual_base_tech": 7.8
+    "percentual_base_tech": 7.9
   },
   {
     "posicao": 19,
@@ -163,7 +163,7 @@
     "posicao": 21,
     "nome": "Lógica de Programação",
     "grupo": "engenharia_praticas",
-    "vagas": 202,
+    "vagas": 203,
     "percentual_total": 6.5,
     "percentual_base_tech": 7.5
   },
@@ -171,9 +171,9 @@
     "posicao": 22,
     "nome": "Java",
     "grupo": "linguagens",
-    "vagas": 188,
+    "vagas": 190,
     "percentual_total": 6.1,
-    "percentual_base_tech": 7.0
+    "percentual_base_tech": 7.1
   },
   {
     "posicao": 23,
@@ -187,23 +187,23 @@
     "posicao": 24,
     "nome": "Automação",
     "grupo": "dados",
-    "vagas": 165,
+    "vagas": 166,
     "percentual_total": 5.3,
-    "percentual_base_tech": 6.1
+    "percentual_base_tech": 6.2
   },
   {
     "posicao": 25,
-    "nome": "SLA",
-    "grupo": "suporte_infra",
-    "vagas": 159,
-    "percentual_total": 5.1,
+    "nome": "Power BI",
+    "grupo": "dados",
+    "vagas": 160,
+    "percentual_total": 5.2,
     "percentual_base_tech": 5.9
   },
   {
     "posicao": 26,
-    "nome": "Power BI",
-    "grupo": "dados",
-    "vagas": 158,
+    "nome": "SLA",
+    "grupo": "suporte_infra",
+    "vagas": 159,
     "percentual_total": 5.1,
     "percentual_base_tech": 5.9
   },
@@ -251,7 +251,7 @@
     "posicao": 32,
     "nome": "Azure",
     "grupo": "cloud_devops",
-    "vagas": 142,
+    "vagas": 143,
     "percentual_total": 4.6,
     "percentual_base_tech": 5.3
   },
@@ -275,7 +275,7 @@
     "posicao": 35,
     "nome": "Scrum",
     "grupo": "engenharia_praticas",
-    "vagas": 137,
+    "vagas": 138,
     "percentual_total": 4.4,
     "percentual_base_tech": 5.1
   },
@@ -283,9 +283,9 @@
     "posicao": 36,
     "nome": "Eletrônica",
     "grupo": "hardware_eletronica",
-    "vagas": 127,
-    "percentual_total": 4.1,
-    "percentual_base_tech": 4.7
+    "vagas": 129,
+    "percentual_total": 4.2,
+    "percentual_base_tech": 4.8
   },
   {
     "posicao": 37,
@@ -299,7 +299,7 @@
     "posicao": 38,
     "nome": "Docker",
     "grupo": "cloud_devops",
-    "vagas": 123,
+    "vagas": 124,
     "percentual_total": 4.0,
     "percentual_base_tech": 4.6
   },
@@ -385,19 +385,19 @@
   },
   {
     "posicao": 49,
-    "nome": "LGPD",
-    "grupo": "seguranca",
+    "nome": "Jira",
+    "grupo": "engenharia_praticas",
     "vagas": 93,
     "percentual_total": 3.0,
     "percentual_base_tech": 3.5
   },
   {
     "posicao": 50,
-    "nome": "Jira",
-    "grupo": "engenharia_praticas",
-    "vagas": 92,
+    "nome": "LGPD",
+    "grupo": "seguranca",
+    "vagas": 93,
     "percentual_total": 3.0,
-    "percentual_base_tech": 3.4
+    "percentual_base_tech": 3.5
   },
   {
     "posicao": 51,
@@ -443,9 +443,9 @@
     "posicao": 56,
     "nome": "Modelagem de Dados",
     "grupo": "engenharia_praticas",
-    "vagas": 82,
-    "percentual_total": 2.6,
-    "percentual_base_tech": 3.0
+    "vagas": 83,
+    "percentual_total": 2.7,
+    "percentual_base_tech": 3.1
   },
   {
     "posicao": 57,
@@ -465,16 +465,16 @@
   },
   {
     "posicao": 59,
-    "nome": "Cibersegurança",
-    "grupo": "seguranca",
-    "vagas": 77,
-    "percentual_total": 2.5,
-    "percentual_base_tech": 2.9
+    "nome": "Angular",
+    "grupo": "frameworks",
+    "vagas": 76,
+    "percentual_total": 2.4,
+    "percentual_base_tech": 2.8
   },
   {
     "posicao": 60,
-    "nome": "Angular",
-    "grupo": "frameworks",
+    "nome": "Cibersegurança",
+    "grupo": "seguranca",
     "vagas": 76,
     "percentual_total": 2.4,
     "percentual_base_tech": 2.8
@@ -513,6 +513,14 @@
   },
   {
     "posicao": 65,
+    "nome": "BI",
+    "grupo": "dados",
+    "vagas": 70,
+    "percentual_total": 2.3,
+    "percentual_base_tech": 2.6
+  },
+  {
+    "posicao": 66,
     "nome": "SAP",
     "grupo": "engenharia_praticas",
     "vagas": 70,
@@ -520,17 +528,9 @@
     "percentual_base_tech": 2.6
   },
   {
-    "posicao": 66,
+    "posicao": 67,
     "nome": "UX/UI",
     "grupo": "engenharia_praticas",
-    "vagas": 69,
-    "percentual_total": 2.2,
-    "percentual_base_tech": 2.6
-  },
-  {
-    "posicao": 67,
-    "nome": "BI",
-    "grupo": "dados",
     "vagas": 68,
     "percentual_total": 2.2,
     "percentual_base_tech": 2.5
@@ -617,16 +617,16 @@
   },
   {
     "posicao": 78,
-    "nome": "Shell/Bash",
-    "grupo": "linguagens",
-    "vagas": 57,
-    "percentual_total": 1.8,
-    "percentual_base_tech": 2.1
+    "nome": "VMware",
+    "grupo": "suporte_infra",
+    "vagas": 58,
+    "percentual_total": 1.9,
+    "percentual_base_tech": 2.2
   },
   {
     "posicao": 79,
-    "nome": "VMware",
-    "grupo": "suporte_infra",
+    "nome": "Shell/Bash",
+    "grupo": "linguagens",
     "vagas": 57,
     "percentual_total": 1.8,
     "percentual_base_tech": 2.1
@@ -635,8 +635,8 @@
     "posicao": 80,
     "nome": "Kubernetes",
     "grupo": "cloud_devops",
-    "vagas": 54,
-    "percentual_total": 1.7,
+    "vagas": 55,
+    "percentual_total": 1.8,
     "percentual_base_tech": 2.0
   },
   {
@@ -657,6 +657,14 @@
   },
   {
     "posicao": 83,
+    "nome": "Espanhol",
+    "grupo": "engenharia_praticas",
+    "vagas": 52,
+    "percentual_total": 1.7,
+    "percentual_base_tech": 1.9
+  },
+  {
+    "posicao": 84,
     "nome": "Android",
     "grupo": "mobile",
     "vagas": 51,
@@ -664,18 +672,10 @@
     "percentual_base_tech": 1.9
   },
   {
-    "posicao": 84,
-    "nome": "Espanhol",
-    "grupo": "engenharia_praticas",
-    "vagas": 50,
-    "percentual_total": 1.6,
-    "percentual_base_tech": 1.9
-  },
-  {
     "posicao": 85,
     "nome": "Governança e Riscos (GRC)",
     "grupo": "seguranca",
-    "vagas": 50,
+    "vagas": 51,
     "percentual_total": 1.6,
     "percentual_base_tech": 1.9
   },
@@ -699,9 +699,9 @@
     "posicao": 88,
     "nome": "Zabbix",
     "grupo": "suporte_infra",
-    "vagas": 44,
+    "vagas": 45,
     "percentual_total": 1.4,
-    "percentual_base_tech": 1.6
+    "percentual_base_tech": 1.7
   },
   {
     "posicao": 89,
@@ -713,14 +713,6 @@
   },
   {
     "posicao": 90,
-    "nome": "Qualidade de Software",
-    "grupo": "qa_testes",
-    "vagas": 42,
-    "percentual_total": 1.4,
-    "percentual_base_tech": 1.6
-  },
-  {
-    "posicao": 91,
     "nome": "Algoritmos",
     "grupo": "engenharia_praticas",
     "vagas": 41,
@@ -728,9 +720,17 @@
     "percentual_base_tech": 1.5
   },
   {
-    "posicao": 92,
+    "posicao": 91,
     "nome": "Grafana",
     "grupo": "cloud_devops",
+    "vagas": 41,
+    "percentual_total": 1.3,
+    "percentual_base_tech": 1.5
+  },
+  {
+    "posicao": 92,
+    "nome": "Qualidade de Software",
+    "grupo": "qa_testes",
     "vagas": 41,
     "percentual_total": 1.3,
     "percentual_base_tech": 1.5
@@ -771,8 +771,8 @@
     "posicao": 97,
     "nome": "RPA",
     "grupo": "dados",
-    "vagas": 35,
-    "percentual_total": 1.1,
+    "vagas": 36,
+    "percentual_total": 1.2,
     "percentual_base_tech": 1.3
   },
   {
@@ -825,14 +825,6 @@
   },
   {
     "posicao": 104,
-    "nome": "Testes Manuais",
-    "grupo": "qa_testes",
-    "vagas": 30,
-    "percentual_total": 1.0,
-    "percentual_base_tech": 1.1
-  },
-  {
-    "posicao": 105,
     "nome": "Databricks",
     "grupo": "dados",
     "vagas": 29,
@@ -840,9 +832,17 @@
     "percentual_base_tech": 1.1
   },
   {
-    "posicao": 106,
+    "posicao": 105,
     "nome": "SOLID",
     "grupo": "engenharia_praticas",
+    "vagas": 29,
+    "percentual_total": 0.9,
+    "percentual_base_tech": 1.1
+  },
+  {
+    "posicao": 106,
+    "nome": "Testes Manuais",
+    "grupo": "qa_testes",
     "vagas": 29,
     "percentual_total": 0.9,
     "percentual_base_tech": 1.1
@@ -969,6 +969,14 @@
   },
   {
     "posicao": 122,
+    "nome": "Tableau",
+    "grupo": "dados",
+    "vagas": 21,
+    "percentual_total": 0.7,
+    "percentual_base_tech": 0.8
+  },
+  {
+    "posicao": 123,
     "nome": "Airflow",
     "grupo": "dados",
     "vagas": 20,
@@ -976,17 +984,9 @@
     "percentual_base_tech": 0.7
   },
   {
-    "posicao": 123,
+    "posicao": 124,
     "nome": "Selenium",
     "grupo": "qa_testes",
-    "vagas": 20,
-    "percentual_total": 0.6,
-    "percentual_base_tech": 0.7
-  },
-  {
-    "posicao": 124,
-    "nome": "Tableau",
-    "grupo": "dados",
     "vagas": 20,
     "percentual_total": 0.6,
     "percentual_base_tech": 0.7
@@ -1001,19 +1001,19 @@
   },
   {
     "posicao": 126,
-    "nome": "Figma",
-    "grupo": "engenharia_praticas",
+    "nome": "Serverless",
+    "grupo": "cloud_devops",
     "vagas": 18,
     "percentual_total": 0.6,
     "percentual_base_tech": 0.7
   },
   {
     "posicao": 127,
-    "nome": "Serverless",
-    "grupo": "cloud_devops",
-    "vagas": 18,
-    "percentual_total": 0.6,
-    "percentual_base_tech": 0.7
+    "nome": "Figma",
+    "grupo": "engenharia_praticas",
+    "vagas": 17,
+    "percentual_total": 0.5,
+    "percentual_base_tech": 0.6
   },
   {
     "posicao": 128,
@@ -1153,6 +1153,14 @@
   },
   {
     "posicao": 145,
+    "nome": "Visual Basic/VBA",
+    "grupo": "linguagens",
+    "vagas": 14,
+    "percentual_total": 0.5,
+    "percentual_base_tech": 0.5
+  },
+  {
+    "posicao": 146,
     "nome": "FastAPI",
     "grupo": "frameworks",
     "vagas": 13,
@@ -1160,7 +1168,7 @@
     "percentual_base_tech": 0.5
   },
   {
-    "posicao": 146,
+    "posicao": 147,
     "nome": "Hibernate",
     "grupo": "frameworks",
     "vagas": 13,
@@ -1168,7 +1176,7 @@
     "percentual_base_tech": 0.5
   },
   {
-    "posicao": 147,
+    "posicao": 148,
     "nome": "Microcontroladores",
     "grupo": "hardware_eletronica",
     "vagas": 13,
@@ -1176,16 +1184,8 @@
     "percentual_base_tech": 0.5
   },
   {
-    "posicao": 148,
-    "nome": "PL/SQL",
-    "grupo": "linguagens",
-    "vagas": 13,
-    "percentual_total": 0.4,
-    "percentual_base_tech": 0.5
-  },
-  {
     "posicao": 149,
-    "nome": "Visual Basic/VBA",
+    "nome": "PL/SQL",
     "grupo": "linguagens",
     "vagas": 13,
     "percentual_total": 0.4,
