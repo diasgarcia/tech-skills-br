@@ -1,5 +1,1180 @@
 [
   {
+    "id": 3075,
+    "titulo": "Estágio TI",
+    "empresa": "OESL-Automotive",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Ponta Grossa, PR",
+    "polo": "Ponta Grossa",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-ti-at-oesl-automotive-4459940256",
+    "tecnologias": [
+      "Redes de Computadores",
+      "Hardware",
+      "Montagem e Manutenção de PCs",
+      "Inglês"
+    ]
+  },
+  {
+    "id": 3074,
+    "titulo": "Estágiario de Suporte",
+    "empresa": "Eagle Soluções",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Blumenau, SC",
+    "polo": "Blumenau",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1giario-de-suporte-at-eagle-solu%C3%A7%C3%B5es-4460909864",
+    "tecnologias": [
+      "Banco de Dados",
+      "Windows",
+      "Hardware",
+      "Inglês",
+      "Eletrônica",
+      "CFTV"
+    ]
+  },
+  {
+    "id": 3072,
+    "titulo": "Auxiliar de T.I.",
+    "empresa": "Grupo Navesa",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Goiânia, GO",
+    "polo": "Goiânia",
+    "regiao": "Centro-Oeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/auxiliar-de-t-i-at-grupo-navesa-4460913644",
+    "tecnologias": []
+  },
+  {
+    "id": 3071,
+    "titulo": "Auxiliar De TI",
+    "empresa": "CAMISARIA FMW",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo e Região",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/auxiliar-de-ti-at-camisaria-fmw-4460909591",
+    "tecnologias": [
+      "Windows",
+      "Hardware",
+      "Manutenção Preventiva"
+    ]
+  },
+  {
+    "id": 3070,
+    "titulo": "Assistente de Tecnologia da Informação",
+    "empresa": "Clínicas Inteligentes",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "São José dos Campos, SP",
+    "polo": "São José dos Campos",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/assistente-de-tecnologia-da-informa%C3%A7%C3%A3o-at-cl%C3%ADnicas-inteligentes-4460694781",
+    "tecnologias": [
+      "Hardware",
+      "TOTVS"
+    ]
+  },
+  {
+    "id": 3069,
+    "titulo": "Assistente de Tecnologia da Informação",
+    "empresa": "Real Guindastes",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Nova Lima, MG",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/assistente-de-tecnologia-da-informa%C3%A7%C3%A3o-at-real-guindastes-4460904710",
+    "tecnologias": [
+      "Redes de Computadores"
+    ]
+  },
+  {
+    "id": 3068,
+    "titulo": "Assistente de TI – Infraestrutura",
+    "empresa": "Ibacem Agricola Comercio E Exportacao",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Petrolina, PE",
+    "polo": "Caruaru",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/assistente-de-ti-%E2%80%93-infraestrutura-at-ibacem-agricola-comercio-e-exportacao-4460904898",
+    "tecnologias": []
+  },
+  {
+    "id": 3066,
+    "titulo": "Assistente de TI Indústria Distrito Industrial",
+    "empresa": "RDANILLO",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Cuiabá, MT",
+    "polo": "Cuiabá",
+    "regiao": "Centro-Oeste",
+    "modalidade": "Remoto",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/assistente-de-ti-ind%C3%BAstria-distrito-industrial-at-rdanillo-4460906579",
+    "tecnologias": [
+      "Firewall",
+      "Antivírus",
+      "Backup",
+      "Hardware",
+      "ERP"
+    ]
+  },
+  {
+    "id": 3065,
+    "titulo": "Assistente de Suporte Técnico de Service Desk - Campo Grande - MS",
+    "empresa": "Unisys",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Campo Grande, MS",
+    "polo": "Campo Grande",
+    "regiao": "Centro-Oeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-t%C3%A9cnico-de-service-desk-campo-grande-ms-at-unisys-4462178559",
+    "tecnologias": [
+      "Express",
+      "Excel",
+      "Word",
+      "SLA",
+      "Service Desk",
+      "Hardware",
+      "Inglês"
+    ]
+  },
+  {
+    "id": 3062,
+    "titulo": "Analista de Suporte Jr Qcertifica",
+    "empresa": "Quick Soft Tecnologia",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Blumenau, SC",
+    "polo": "Blumenau",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-jr-qcertifica-at-quick-soft-tecnologia-4460903474",
+    "tecnologias": []
+  },
+  {
+    "id": 3061,
+    "titulo": "ASSISTENTE DE TI",
+    "empresa": "Mecari",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Campo Grande, MS",
+    "polo": "Campo Grande",
+    "regiao": "Centro-Oeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/assistente-de-ti-at-mecari-4462132886",
+    "tecnologias": [
+      "Banco de Dados",
+      "Hardware"
+    ]
+  },
+  {
+    "id": 3060,
+    "titulo": "ANALISTA DE SUPORTE SISTEMAS JR",
+    "empresa": "PAMPLONA ALIMENTOS S.A",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Rio Grande, RS",
+    "polo": "Pelotas",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-sistemas-jr-at-pamplona-alimentos-s-a-4460902687",
+    "tecnologias": [
+      "Backup"
+    ]
+  },
+  {
+    "id": 3057,
+    "titulo": "ESTÁGIO EM TECNOLOGIA DA INFORMAÇÃO ANÁLISE DE PROCESSOS E SISTEMAS HOME OFFICE",
+    "empresa": "Alpha Estágio",
+    "area": "Sistemas / ERP",
+    "senioridade": "Estágio",
+    "localidade": "Belo Horizonte e Região",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Remoto",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-da-informa%C3%A7%C3%A3o-an%C3%A1lise-de-processos-e-sistemas-home-office-at-alpha-est%C3%A1gio-4460914734",
+    "tecnologias": [
+      "JavaScript",
+      "SQL",
+      "Automação",
+      "Análise de Dados",
+      "Testes Funcionais",
+      "Lógica de Programação",
+      "Engenharia de Software"
+    ]
+  },
+  {
+    "id": 3053,
+    "titulo": "21918-Analista de Suporte de Segurança da Informação JR",
+    "empresa": "Hitss Brasil",
+    "area": "Segurança",
+    "senioridade": "Júnior",
+    "localidade": "Brasília, DF",
+    "polo": "Brasília",
+    "regiao": "Centro-Oeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/21918-analista-de-suporte-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-jr-at-hitss-brasil-4459925854",
+    "tecnologias": [
+      "Cibersegurança"
+    ]
+  },
+  {
+    "id": 3046,
+    "titulo": "Analista de Qualidade Júnior",
+    "empresa": "TEM Saúde",
+    "area": "QA",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-qualidade-j%C3%BAnior-at-tem-sa%C3%BAde-4459932640",
+    "tecnologias": [
+      "Power BI",
+      "Excel",
+      "BI",
+      "Estatística",
+      "Análise de Dados"
+    ]
+  },
+  {
+    "id": 3044,
+    "titulo": "Estágio em Tecnologia",
+    "empresa": "VML Enterprise Solutions",
+    "area": "Sistemas / ERP",
+    "senioridade": "Estágio",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-at-vml-enterprise-solutions-4459908919",
+    "tecnologias": [
+      "Excel",
+      "Word",
+      "AWS",
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Service Desk",
+      "Help Desk",
+      "Zendesk",
+      "Backup",
+      "Office 365",
+      "Hardware",
+      "Montagem e Manutenção de PCs",
+      "Engenharia de Software",
+      "CRM",
+      "Salesforce",
+      "Jira"
+    ]
+  },
+  {
+    "id": 3043,
+    "titulo": "Estágio em Tecnologia",
+    "empresa": "WPP Enterprise Solutions",
+    "area": "Sistemas / ERP",
+    "senioridade": "Estágio",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-at-wpp-enterprise-solutions-4460931971",
+    "tecnologias": [
+      "Excel",
+      "Word",
+      "AWS",
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Service Desk",
+      "Help Desk",
+      "Zendesk",
+      "Backup",
+      "Office 365",
+      "Hardware",
+      "Montagem e Manutenção de PCs",
+      "Engenharia de Software",
+      "CRM",
+      "Salesforce",
+      "Jira"
+    ]
+  },
+  {
+    "id": 3041,
+    "titulo": "Estágio em TI",
+    "empresa": "FL Brokers",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Estágio",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Remoto",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-ti-at-fl-brokers-4459590873",
+    "tecnologias": [
+      "Excel",
+      "Word",
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "Firewall",
+      "Ubiquiti",
+      "Hardware",
+      "Manutenção Preventiva"
+    ]
+  },
+  {
+    "id": 3040,
+    "titulo": "Estágio em TI",
+    "empresa": "Olinda Fine Art",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Benevides, PA",
+    "polo": "Belém",
+    "regiao": "Norte",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-ti-at-olinda-fine-art-4460915915",
+    "tecnologias": []
+  },
+  {
+    "id": 3039,
+    "titulo": "Estágio em TI",
+    "empresa": "Fundatec (Fundação Universidade Empresa de Tecnologia e Ciências)",
+    "area": "Outros/TI Geral",
+    "senioridade": "Estágio",
+    "localidade": "Florianópolis, SC",
+    "polo": "Florianópolis",
+    "regiao": "Sul",
+    "modalidade": "Remoto",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-ti-at-fundatec-funda%C3%A7%C3%A3o-universidade-empresa-de-tecnologia-e-ci%C3%AAncias-4460695559",
+    "tecnologias": []
+  },
+  {
+    "id": 3035,
+    "titulo": "ESTÁGIO EM TECNOLOGIA DA INFORMAÇÃO TI VGASGR",
+    "empresa": "Alpha Estágio",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Ribeirão Preto e Região",
+    "polo": "Ribeirão Preto",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-da-informa%C3%A7%C3%A3o-ti-vgasgr-at-alpha-est%C3%A1gio-4460904677",
+    "tecnologias": [
+      "Inteligência Artificial",
+      "Inglês"
+    ]
+  },
+  {
+    "id": 3034,
+    "titulo": "Aprendiz Tecnologia e Inovação",
+    "empresa": "My Corp",
+    "area": "Outros/TI Geral",
+    "senioridade": "Aprendiz",
+    "localidade": "Foz do Iguaçu, PR",
+    "polo": "Cascavel",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/aprendiz-tecnologia-e-inova%C3%A7%C3%A3o-at-my-corp-4460696505",
+    "tecnologias": []
+  },
+  {
+    "id": 3032,
+    "titulo": "APRENDIZ (ÁREA DE TECNOLOGIA DA INFORMAÇÃO)",
+    "empresa": "RMS Advogados - Rocha, Marinho E Sales",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Aprendiz",
+    "localidade": "Fortaleza, CE",
+    "polo": "Fortaleza",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/aprendiz-%C3%A1rea-de-tecnologia-da-informa%C3%A7%C3%A3o-at-rms-advogados-rocha-marinho-e-sales-4459934643",
+    "tecnologias": [
+      "Windows",
+      "Redes de Computadores",
+      "VPN",
+      "GLPI",
+      "Office 365",
+      "Hardware",
+      "Montagem e Manutenção de PCs"
+    ]
+  },
+  {
+    "id": 3031,
+    "titulo": "Analista de Infraestrutura Predial Júnior",
+    "empresa": "Selbetti Tecnologia",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Júnior",
+    "localidade": "Joinville, SC",
+    "polo": "Joinville",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-infraestrutura-predial-j%C3%BAnior-at-selbetti-tecnologia-4460687614",
+    "tecnologias": [
+      "SLA"
+    ]
+  },
+  {
+    "id": 3030,
+    "titulo": "Analista de Infraestrutura - Júnior",
+    "empresa": "Quality Digital",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Júnior",
+    "localidade": "São Gonçalo do Amarante, Ceará",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "gupy",
+    "url": "https://qualitydigital.gupy.io/job/eyJqb2JJZCI6MTIyOTc3NDQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": [
+      "Shell/Bash",
+      "Linux",
+      "Windows Server",
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "VPN",
+      "Firewall",
+      "Zabbix",
+      "Backup",
+      "Office 365",
+      "VMware"
+    ]
+  },
+  {
+    "id": 3025,
+    "titulo": "Técnico(a) de Informática JR - Matriz (Joinville/SC)",
+    "empresa": "CLAMED Farmácias",
+    "area": "Field Service / Hardware",
+    "senioridade": "Júnior",
+    "localidade": "Joinville, SC",
+    "polo": "Joinville",
+    "regiao": "Sul",
+    "modalidade": "Remoto",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-a-de-inform%C3%A1tica-jr-matriz-joinville-sc-at-clamed-cia-latino-americana-de-medicamentos-4459938556",
+    "tecnologias": [
+      "Linux",
+      "Windows",
+      "Redes de Computadores",
+      "Antivírus",
+      "Hardware",
+      "Montagem e Manutenção de PCs"
+    ]
+  },
+  {
+    "id": 3023,
+    "titulo": "ESTAGIÁRIO TÉCNICO DE INFORMÁTICA",
+    "empresa": "Santa Casa Montes Claros",
+    "area": "Field Service / Hardware",
+    "senioridade": "Estágio",
+    "localidade": "Montes Claros, MG",
+    "polo": "Montes Claros",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-t%C3%A9cnico-de-inform%C3%A1tica-at-santa-casa-montes-claros-4459948647",
+    "tecnologias": []
+  },
+  {
+    "id": 3022,
+    "titulo": "ESTAGIO TECNICO DE CAMPO - POUSO ALEGRE",
+    "empresa": "Dankia | Automação Hospitalar e Dispensários Eletrônicos",
+    "area": "Field Service / Hardware",
+    "senioridade": "Estágio",
+    "localidade": "Pouso Alegre, MG",
+    "polo": "Santa Rita do Sapucaí",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagio-tecnico-de-campo-pouso-alegre-at-dankia-automa%C3%A7%C3%A3o-hospitalar-e-dispens%C3%A1rios-eletr%C3%B4nicos-4460698900",
+    "tecnologias": [
+      "Windows",
+      "Eletrônica"
+    ]
+  },
+  {
+    "id": 3021,
+    "titulo": "Estagiário na Área de Engenharia de Software",
+    "empresa": "Jobbol",
+    "area": "Engenharia de Software",
+    "senioridade": "Estágio",
+    "localidade": "Sorocaba, SP",
+    "polo": "Sorocaba",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-na-%C3%A1rea-de-engenharia-de-software-at-jobbol-4459579566",
+    "tecnologias": [
+      "Engenharia de Software",
+      "Automação Industrial"
+    ]
+  },
+  {
+    "id": 3020,
+    "titulo": "Estagiário de Desenvolvimento",
+    "empresa": "IT-ONE",
+    "area": "Engenharia de Software",
+    "senioridade": "Estágio",
+    "localidade": "Belo Horizonte e Região",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-de-desenvolvimento-at-it-one-information-technology-4462115217",
+    "tecnologias": [
+      "Python",
+      "JavaScript",
+      "SQL",
+      "Shell/Bash",
+      "Banco de Dados",
+      "Git",
+      "Grafana",
+      "Lógica de Programação"
+    ]
+  },
+  {
+    "id": 3019,
+    "titulo": "ESTÁGIO EM CIÊNCIA DA COMPUTAÇÃO, ENGENHARIA DE SOFTWARE, ENGENHARIA DA COMPUTAÇÃO OU DE CONTROLE E AUTOMAÇÃO VGALGM223",
+    "empresa": "Alpha Estágio",
+    "area": "Engenharia de Software",
+    "senioridade": "Estágio",
+    "localidade": "Ribeirão Preto e Região",
+    "polo": "Ribeirão Preto",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-ci%C3%AAncia-da-computa%C3%A7%C3%A3o-engenharia-de-software-engenharia-da-computa%C3%A7%C3%A3o-ou-de-controle-e-automa%C3%A7%C3%A3o-vgalgm223-at-alpha-est%C3%A1gio-4460909823",
+    "tecnologias": [
+      "Python",
+      "Power BI",
+      "Excel",
+      "Automação",
+      "Análise de Dados",
+      "Inteligência Artificial",
+      "Cibersegurança",
+      "Engenharia de Software",
+      "Inglês",
+      "SAP",
+      "Automação Industrial"
+    ]
+  },
+  {
+    "id": 3017,
+    "titulo": "DINAMO - ESTAGIÁRIO ANALISTA DESENVOLVEDOR",
+    "empresa": "DINAMO Cyber Security Company",
+    "area": "Engenharia de Software",
+    "senioridade": "Estágio",
+    "localidade": "Brasília, DF",
+    "polo": "Brasília",
+    "regiao": "Centro-Oeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/dinamo-estagi%C3%A1rio-analista-desenvolvedor-at-dinamo-cyber-security-company-4459932631",
+    "tecnologias": [
+      "Java",
+      "JavaScript",
+      "C#",
+      "C++",
+      "SQL",
+      "Automação",
+      "Git",
+      "CI/CD",
+      "Testes Automatizados",
+      "Manutenção Preventiva",
+      "API REST",
+      "Metodologias Ágeis",
+      "Design Patterns",
+      "Estrutura de Dados",
+      "Algoritmos"
+    ]
+  },
+  {
+    "id": 3016,
+    "titulo": "Assistente de Desenvolvimento de Sistemas - Sede Administrativa - São João/PR",
+    "empresa": "Sicredi",
+    "area": "Engenharia de Software",
+    "senioridade": "Júnior",
+    "localidade": "São João, PR",
+    "polo": "Estado/PR",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/assistente-de-desenvolvimento-de-sistemas-sede-administrativa-s%C3%A3o-jo%C3%A3o-pr-at-sicredi-4462103510",
+    "tecnologias": [
+      "Python",
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "RPA",
+      "Automação",
+      "Inteligência Artificial",
+      "Agentes de IA & RAG",
+      "Banco de Dados",
+      "Kubernetes",
+      "Git",
+      "OAuth/JWT",
+      "API REST"
+    ]
+  },
+  {
+    "id": 3012,
+    "titulo": "Estagiário (a) de Infraestrutura de Tecnologia | Trabalho Híbrido | Vaga afirmativa também para Pessoas Pretas e Pardas, LGBTIA+, PCD e Gerações",
+    "empresa": "Câmara de Comercialização de Energia Elétrica - CCEE",
+    "area": "DevOps",
+    "senioridade": "Estágio",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-de-infraestrutura-de-tecnologia-trabalho-h%C3%ADbrido-vaga-afirmativa-tamb%C3%A9m-para-pessoas-pretas-e-pardas-lgbtia%2B-pcd-e-gera%C3%A7%C3%B5es-at-c%C3%A2mara-de-comercializa%C3%A7%C3%A3o-de-energia-el%C3%A9trica-ccee-chamber-of-electric-energy-commercialization-4459593157",
+    "tecnologias": [
+      "Python",
+      "Shell/Bash",
+      "Automação",
+      "Active Directory",
+      "Windows",
+      "VPN",
+      "Office 365",
+      "Hardware",
+      "IAM",
+      "Engenharia de Software"
+    ]
+  },
+  {
+    "id": 3009,
+    "titulo": "Engenheiro de Dados JR",
+    "empresa": "WTorre Entretenimento",
+    "area": "Data",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/engenheiro-de-dados-jr-at-wtorre-entretenimento-4459930637",
+    "tecnologias": [
+      "Python",
+      "SQL",
+      "Excel",
+      "Pandas",
+      "ETL",
+      "Estatística",
+      "Banco de Dados",
+      "SQL Server",
+      "Docker",
+      "API REST"
+    ]
+  },
+  {
+    "id": 3008,
+    "titulo": "ESTAGIÁRIO(A) ANALISTA DE DADOS - FORTALEZA",
+    "empresa": "Corretora SL91",
+    "area": "Data",
+    "senioridade": "Estágio",
+    "localidade": "Fortaleza, CE",
+    "polo": "Fortaleza",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-analista-de-dados-fortaleza-at-corretora-sl91-4462102542",
+    "tecnologias": [
+      "Análise de Dados"
+    ]
+  },
+  {
+    "id": 3007,
+    "titulo": "Analista de Dados Jr - Centro,RJ / Morumbi,SP / Curitiba,PR",
+    "empresa": "Grupo Amil",
+    "area": "Data",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-dados-jr-centro-rj-morumbi-sp-curitiba-pr-at-grupo-amil-4459920774",
+    "tecnologias": [
+      "SQL",
+      "Power BI",
+      "Excel",
+      "Estatística",
+      "Análise de Dados"
+    ]
+  },
+  {
+    "id": 3005,
+    "titulo": "Estágio no Desenvolvimento Delphi",
+    "empresa": "Intersolid Software",
+    "area": "Backend",
+    "senioridade": "Estágio",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-no-desenvolvimento-delphi-at-intersolid-software-4460909720",
+    "tecnologias": [
+      "JavaScript",
+      "Delphi",
+      "HTML",
+      "CSS",
+      "Engenharia de Software"
+    ]
+  },
+  {
+    "id": 1518,
+    "titulo": "Analista de Suporte JR",
+    "empresa": "Accenture Brasil",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Recife e Região",
+    "polo": "Recife",
+    "regiao": "Nordeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-jr-at-accenture-brasil-4453050324",
+    "tecnologias": [
+      "Inteligência Artificial",
+      "Backup",
+      "VMware",
+      "Cibersegurança",
+      "LGPD"
+    ]
+  },
+  {
+    "id": 1508,
+    "titulo": "Salesforce Marketing Cloud Developer Junior",
+    "empresa": "Valtech",
+    "area": "Sistemas / ERP",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/salesforce-marketing-cloud-developer-junior-at-valtech-4427612317",
+    "tecnologias": [
+      "Salesforce"
+    ]
+  },
+  {
+    "id": 1233,
+    "titulo": "Estagiário - Engenharia Eletrônica",
+    "empresa": "KOSTAL Group",
+    "area": "Hardware / Eletrônica",
+    "senioridade": "Estágio",
+    "localidade": "São Bernardo do Campo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-engenharia-eletr%C3%B4nica-at-kostal-group-4443727647",
+    "tecnologias": [
+      "Eletrônica"
+    ]
+  },
+  {
+    "id": 3076,
+    "titulo": "Estágio em Suporte ao Cliente",
+    "empresa": "ABRH Estágio",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Porto Alegre e Região",
+    "polo": "Porto Alegre",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-suporte-ao-cliente-at-abrh-est%C3%A1gio-4460692150",
+    "tecnologias": [
+      "Excel",
+      "Word",
+      "Windows",
+      "Suporte N1/N2",
+      "Hardware"
+    ]
+  },
+  {
+    "id": 3073,
+    "titulo": "Auxiliar de TI (Vaga exclusiva para PCD)",
+    "empresa": "TPF Engenharia",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/auxiliar-de-ti-vaga-exclusiva-para-pcd-at-tpf-engenharia-4459264828",
+    "tecnologias": [
+      "Lógica de Programação"
+    ]
+  },
+  {
+    "id": 3064,
+    "titulo": "Analista de Suporte Técnico Júnior (N1)",
+    "empresa": "Carbigdata",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-t%C3%A9cnico-j%C3%BAnior-n1-at-carbigdata-4460684439",
+    "tecnologias": [
+      "Linux",
+      "Windows",
+      "Redes de Computadores",
+      "Eletrônica",
+      "CFTV"
+    ]
+  },
+  {
+    "id": 3063,
+    "titulo": "Analista de Suporte Técnico Júnior (CFTV)",
+    "empresa": "Carbigdata",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-t%C3%A9cnico-j%C3%BAnior-cftv-at-carbigdata-4460679418",
+    "tecnologias": [
+      "Linux",
+      "Windows",
+      "Redes de Computadores",
+      "Firmware",
+      "Eletrônica",
+      "CFTV"
+    ]
+  },
+  {
+    "id": 3059,
+    "titulo": "ANALISTA DE SUPORTE OPERACIONAL ADMNISTRATIVO JR.",
+    "empresa": "FlyLink Viagens",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-operacional-admnistrativo-jr-at-flylink-viagens-4459242694",
+    "tecnologias": [
+      "Excel"
+    ]
+  },
+  {
+    "id": 3055,
+    "titulo": "Analista de Service Desk Bilingue JR",
+    "empresa": "Engemon IT",
+    "area": "Service Desk / Help Desk",
+    "senioridade": "Júnior",
+    "localidade": "Barueri, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Remoto",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-service-desk-bilingue-jr-at-engemon-it-4462049816",
+    "tecnologias": [
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "ITIL",
+      "SLA",
+      "Service Desk",
+      "Suporte N1/N2",
+      "Office 365",
+      "Hardware",
+      "IAM",
+      "Espanhol"
+    ]
+  },
+  {
+    "id": 3050,
+    "titulo": "Assistente QA",
+    "empresa": "OVERLABS",
+    "area": "QA",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Remoto",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/assistente-qa-at-overlabs-4459590682",
+    "tecnologias": [
+      "SQL",
+      "Postman",
+      "Testes Automatizados",
+      "Testes Manuais",
+      "Qualidade de Software",
+      "Scrum",
+      "Metodologias Ágeis",
+      "Engenharia de Software",
+      "Jira"
+    ]
+  },
+  {
+    "id": 3047,
+    "titulo": "Analista de Qualidade Júnior - Rodoanel",
+    "empresa": "Via Appia Concessões",
+    "area": "QA",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-qualidade-j%C3%BAnior-rodoanel-at-via-appia-concess%C3%B5es-4459515140",
+    "tecnologias": []
+  },
+  {
+    "id": 3045,
+    "titulo": "Analista de Qualidade Jr",
+    "empresa": "Braspress Transportes Urgentes",
+    "area": "QA",
+    "senioridade": "Júnior",
+    "localidade": "Guarulhos, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-qualidade-jr-at-braspress-transportes-urgentes-4460017772",
+    "tecnologias": []
+  },
+  {
+    "id": 3042,
+    "titulo": "Estágio em TI | Originação de Crédito",
+    "empresa": "Domo Inovação",
+    "area": "Outros/TI Geral",
+    "senioridade": "Estágio",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-ti-origina%C3%A7%C3%A3o-de-cr%C3%A9dito-at-domo-inova%C3%A7%C3%A3o-4459585025",
+    "tecnologias": [
+      "C#",
+      "SQL",
+      "Lógica de Programação",
+      "Modelagem de Dados"
+    ]
+  },
+  {
+    "id": 3038,
+    "titulo": "Estagiário(a) de T.I.",
+    "empresa": "Fattu do Brasil",
+    "area": "Field Service / Hardware",
+    "senioridade": "Júnior",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-de-t-i-at-fattu-do-brasil-4460691307",
+    "tecnologias": [
+      "Windows",
+      "Hardware",
+      "Montagem e Manutenção de PCs",
+      "Manutenção Preventiva"
+    ]
+  },
+  {
+    "id": 3026,
+    "titulo": "Estagiário Técnico em Eletrônica",
+    "empresa": "Multidrive Nordeste",
+    "area": "Hardware / Eletrônica",
+    "senioridade": "Estágio",
+    "localidade": "Fortaleza, CE",
+    "polo": "Fortaleza",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-t%C3%A9cnico-em-eletr%C3%B4nica-at-multidrive-nordeste-4459534955",
+    "tecnologias": [
+      "Eletrônica"
+    ]
+  },
+  {
+    "id": 3018,
+    "titulo": "Desenvolvedor Junior .NET - Remote Work",
+    "empresa": "BairesDev",
+    "area": "Engenharia de Software",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-junior-net-remote-work-at-bairesdev-4460644391",
+    "tecnologias": [
+      "C#",
+      ".NET",
+      "Banco de Dados",
+      "Git",
+      "Hardware",
+      "Clean Code",
+      "Estrutura de Dados",
+      "Algoritmos",
+      "Inglês"
+    ]
+  },
+  {
+    "id": 3015,
+    "titulo": "Analista de Sistemas Jr - Sênior HCM",
+    "empresa": "MedSênior",
+    "area": "Engenharia de Software",
+    "senioridade": "Júnior",
+    "localidade": "Vitória, ES",
+    "polo": "Vitória",
+    "regiao": "Sudeste",
+    "modalidade": "Remoto",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-sistemas-jr-s%C3%AAnior-hcm-at-meds%C3%AAnior-4459567871",
+    "tecnologias": [
+      "SQL",
+      "Service Desk"
+    ]
+  },
+  {
+    "id": 3013,
+    "titulo": "Técnico em infraestrutura de T.I",
+    "empresa": "Globalpress Inovação e Tecnologia",
+    "area": "DevOps",
+    "senioridade": "Júnior",
+    "localidade": "Telêmaco Borba, PR",
+    "polo": "Ponta Grossa",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-em-infraestrutura-de-t-i-at-globalpress-inova%C3%A7%C3%A3o-e-tecnologia-4459520507",
+    "tecnologias": [
+      "Redes de Computadores",
+      "Hardware",
+      "Montagem e Manutenção de PCs",
+      "CFTV"
+    ]
+  },
+  {
+    "id": 3010,
+    "titulo": "Engenheiro/Engenheira de Dados Júnior",
+    "empresa": "Capgemini",
+    "area": "Data",
+    "senioridade": "Júnior",
+    "localidade": "Recife, PE",
+    "polo": "Recife",
+    "regiao": "Nordeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/engenheiro-engenheira-de-dados-j%C3%BAnior-at-capgemini-4462084063",
+    "tecnologias": [
+      "SQL",
+      "Power BI",
+      "ETL",
+      "Qualidade de Dados",
+      "Banco de Dados",
+      "Oracle"
+    ]
+  },
+  {
     "id": 3001,
     "titulo": "Estágio Suporte Técnico",
     "empresa": "SKA AUTOMACAO DE ENGENHARIAS LTDA",
@@ -135,24 +1310,6 @@
     "tecnologias": []
   },
   {
-    "id": 2992,
-    "titulo": "Analista de Suporte JR - Noturno",
-    "empresa": "MAXTRACK TECNOLOGIA E SERVICOS LTDA.",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Nova Lima, Minas Gerais",
-    "polo": "Belo Horizonte",
-    "regiao": "Sudeste",
-    "modalidade": "Remoto",
-    "data_publicacao": "01/09/2026",
-    "fonte": "solides",
-    "url": "https://maxtrack.solides.jobs/vacancies/914012?origem=portal",
-    "tecnologias": [
-      "Zendesk",
-      "IoT"
-    ]
-  },
-  {
     "id": 2991,
     "titulo": "Analista de Suporte JR",
     "empresa": "Cacau Show",
@@ -286,12 +1443,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-at-adentro-4459562112",
     "tecnologias": [
-      "Redes de Computadores",
-      "Suporte N1/N2",
-      "Hardware",
-      "Manutenção Preventiva",
-      "Cisco",
-      "Eletrônica"
+      "Suporte N1/N2"
     ]
   },
   {
@@ -503,11 +1655,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/junior-react-frontend-engineer-remote-work-at-bairesdev-4460639770",
     "tecnologias": [
-      "JavaScript",
-      "React",
-      "Git",
-      "Hardware",
-      "Inglês"
+      "React"
     ]
   },
   {
@@ -589,12 +1737,7 @@
     "url": "https://br.linkedin.com/jobs/view/engenheiro-de-software-node-js-j%C3%BAnior-remote-work-at-bairesdev-4460661131",
     "tecnologias": [
       "JavaScript",
-      "Node.js",
-      "Banco de Dados",
-      "Hardware",
-      "API REST",
-      "Clean Code",
-      "Inglês"
+      "Node.js"
     ]
   },
   {
@@ -703,22 +1846,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-backend-java-j%C3%BAnior-at-nava-tech-for-business-4461787817",
     "tecnologias": [
-      "Java",
-      "SQL",
-      "Spring",
-      "Kafka",
-      "Análise de Dados",
-      "Docker",
-      "Kubernetes",
-      "Git",
-      "CI/CD",
-      "RabbitMQ",
-      "Datadog",
-      "Testes Automatizados",
-      "API REST",
-      "Metodologias Ágeis",
-      "Microserviços",
-      "Jira"
+      "Java"
     ]
   },
   {
@@ -735,10 +1863,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-java-junior-remote-work-at-bairesdev-4460651400",
     "tecnologias": [
-      "Java",
-      "Git",
-      "Hardware",
-      "Inglês"
+      "Java"
     ]
   },
   {
@@ -1544,6 +2669,171 @@
     ]
   },
   {
+    "id": 2442,
+    "titulo": "Junior iOS Developer (Swift) - Remote Work | REF#284274",
+    "empresa": "BairesDev",
+    "area": "Mobile",
+    "senioridade": "Júnior",
+    "localidade": "Natal, RN",
+    "polo": "Natal",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/junior-ios-developer-swift-remote-work-ref%23284274-at-bairesdev-4258063381",
+    "tecnologias": [
+      "Swift",
+      "iOS"
+    ]
+  },
+  {
+    "id": 2255,
+    "titulo": "Python Junior Developer - Remote Work | REF#283517",
+    "empresa": "BairesDev",
+    "area": "Backend",
+    "senioridade": "Júnior",
+    "localidade": "Joinville, SC",
+    "polo": "Joinville",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/python-junior-developer-remote-work-ref%23283517-at-bairesdev-4192502474",
+    "tecnologias": [
+      "Python"
+    ]
+  },
+  {
+    "id": 2254,
+    "titulo": "Junior Java Developer - Remote Work | REF#283522",
+    "empresa": "BairesDev",
+    "area": "Backend",
+    "senioridade": "Júnior",
+    "localidade": "Salvador, BA",
+    "polo": "Salvador",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/junior-java-developer-remote-work-ref%23283522-at-bairesdev-4192197820",
+    "tecnologias": [
+      "Java"
+    ]
+  },
+  {
+    "id": 1522,
+    "titulo": "Analista de Suporte Jr | Hospital São Carlos",
+    "empresa": "Rede D'Or",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Fortaleza, CE",
+    "polo": "Fortaleza",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-jr-hospital-s%C3%A3o-carlos-at-rede-d-or-4451891957",
+    "tecnologias": [
+      "Active Directory",
+      "SLA",
+      "Help Desk"
+    ]
+  },
+  {
+    "id": 995,
+    "titulo": "Vaga de Estágio - Engenharia de Software - MG2026001418",
+    "empresa": "Universia Brasil",
+    "area": "Engenharia de Software",
+    "senioridade": "Estágio",
+    "localidade": "Belo Horizonte e Região",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/vaga-de-est%C3%A1gio-engenharia-de-software-mg2026001418-at-universia-brasil-4458230889",
+    "tecnologias": [
+      "Engenharia de Software"
+    ]
+  },
+  {
+    "id": 878,
+    "titulo": "Estagiário(a) Nível Superior PET - Sistemas/Negócios - Campinas/SP",
+    "empresa": "MBRF",
+    "area": "Outros/TI Geral",
+    "senioridade": "Estágio",
+    "localidade": "Campinas, SP",
+    "polo": "Campinas",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-n%C3%ADvel-superior-pet-sistemas-neg%C3%B3cios-campinas-sp-at-mbrf-4452169201",
+    "tecnologias": []
+  },
+  {
+    "id": 3029,
+    "titulo": "AUXILIAR TÉCNICO DE REDES I",
+    "empresa": "ITS Brasil",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Júnior",
+    "localidade": "Ilhéus, BA",
+    "polo": "Interior Baiano",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "31/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/auxiliar-t%C3%A9cnico-de-redes-i-at-its-brasil-4459271454",
+    "tecnologias": []
+  },
+  {
+    "id": 3002,
+    "titulo": "Arquiteto Back-End JR",
+    "empresa": "Grupo JCA",
+    "area": "Backend",
+    "senioridade": "Júnior",
+    "localidade": "Barueri, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": "31/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/arquiteto-back-end-jr-at-grupo-jca-4459238934",
+    "tecnologias": [
+      "C#",
+      "SQL",
+      ".NET",
+      "Inteligência Artificial",
+      "Copilots & Assistentes de IA",
+      "Banco de Dados",
+      "Redis",
+      "RabbitMQ",
+      "OAuth/JWT",
+      "API REST",
+      "SOLID",
+      "Clean Code",
+      "Design Patterns"
+    ]
+  },
+  {
+    "id": 2992,
+    "titulo": "Analista de Suporte JR - Noturno",
+    "empresa": "MAXTRACK TECNOLOGIA E SERVICOS LTDA.",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Nova Lima, Minas Gerais",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Remoto",
+    "data_publicacao": "31/08/2026",
+    "fonte": "solides",
+    "url": "https://maxtrack.solides.jobs/vacancies/914012?origem=portal",
+    "tecnologias": [
+      "Zendesk",
+      "IoT"
+    ]
+  },
+  {
     "id": 2942,
     "titulo": "Jovem Aprendiz TI - São Paulo/SP",
     "empresa": "Blue Cycle Distribuidora S/A",
@@ -1678,37 +2968,6 @@
       "React",
       "Node.js",
       "Engenharia de Software"
-    ]
-  },
-  {
-    "id": 2915,
-    "titulo": "Estágiário na Contego Security",
-    "empresa": "CONTEGO CONSULTORIA LTDA",
-    "area": "Engenharia de Software",
-    "senioridade": "Estágio",
-    "localidade": "Curitiba, Paraná",
-    "polo": "Curitiba",
-    "regiao": "Sul",
-    "modalidade": "Presencial",
-    "data_publicacao": "31/08/2026",
-    "fonte": "solides",
-    "url": "https://contegosecurity.solides.jobs/vacancies/913191?origem=portal",
-    "tecnologias": [
-      "Python",
-      "JavaScript",
-      "TypeScript",
-      "SQL",
-      "Power BI",
-      "Excel",
-      "Análise de Dados",
-      "Banco de Dados",
-      "Git",
-      "Redes de Computadores",
-      "Hardware",
-      "Cibersegurança",
-      "API REST",
-      "Engenharia de Software",
-      "CRM"
     ]
   },
   {
@@ -2100,15 +3359,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-garantia-de-qualidade-de-software-qa-jr-at-devvo-tecnologia-4459243513",
     "tecnologias": [
-      "JavaScript",
-      "TypeScript",
-      "Automação",
-      "Selenium",
-      "Cypress",
-      "Playwright",
-      "Testes Automatizados",
-      "Qualidade de Software",
-      "Metodologias Ágeis"
+      "Qualidade de Software"
     ]
   },
   {
@@ -2497,17 +3748,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/pessoa-estagi%C3%A1ria-superior-business-intelligence-bi-at-arcelormittal-4460055858",
     "tecnologias": [
-      "Python",
-      "SQL",
-      "Power BI",
-      "Excel",
-      "Tableau",
-      "BI",
-      "Estatística",
-      "Análise de Dados",
-      "Modelagem de Dados",
-      "Inglês",
-      "SAP"
+      "BI"
     ]
   },
   {
@@ -3346,23 +4587,6 @@
     ]
   },
   {
-    "id": 1508,
-    "titulo": "Salesforce Marketing Cloud Developer Junior",
-    "empresa": "Valtech",
-    "area": "Sistemas / ERP",
-    "senioridade": "Júnior",
-    "localidade": "Brasil",
-    "polo": "Remoto",
-    "regiao": "Remoto Nacional",
-    "modalidade": "Remoto",
-    "data_publicacao": "31/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/salesforce-marketing-cloud-developer-junior-at-valtech-4427612317",
-    "tecnologias": [
-      "Salesforce"
-    ]
-  },
-  {
     "id": 967,
     "titulo": "Jovem Aprendiz | Service Desk - Suporte de TI (Manaus)",
     "empresa": "EQI INVESTIMENTOS",
@@ -3520,6 +4744,37 @@
     "fonte": "solides",
     "url": "https://portosecosuldeminas.solides.jobs/vacancies/913155?origem=portal",
     "tecnologias": []
+  },
+  {
+    "id": 2915,
+    "titulo": "Estágiário na Contego Security",
+    "empresa": "CONTEGO CONSULTORIA LTDA",
+    "area": "Engenharia de Software",
+    "senioridade": "Estágio",
+    "localidade": "Curitiba, Paraná",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "30/08/2026",
+    "fonte": "solides",
+    "url": "https://contegosecurity.solides.jobs/vacancies/913191?origem=portal",
+    "tecnologias": [
+      "Python",
+      "JavaScript",
+      "TypeScript",
+      "SQL",
+      "Power BI",
+      "Excel",
+      "Análise de Dados",
+      "Banco de Dados",
+      "Git",
+      "Redes de Computadores",
+      "Hardware",
+      "Cibersegurança",
+      "API REST",
+      "Engenharia de Software",
+      "CRM"
+    ]
   },
   {
     "id": 2785,
@@ -4574,6 +5829,21 @@
     "tecnologias": [
       "Swift"
     ]
+  },
+  {
+    "id": 3049,
+    "titulo": "Analista de Qualidade e Processos Júnior",
+    "empresa": "Jobbol",
+    "area": "QA",
+    "senioridade": "Júnior",
+    "localidade": "Guarulhos, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "28/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-qualidade-e-processos-j%C3%BAnior-at-jobbol-4458050373",
+    "tecnologias": []
   },
   {
     "id": 2810,
@@ -6733,6 +8003,39 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-implanta%C3%A7%C3%A3o-de-sistemas-onboarding-at-fagron-brasil-4450275169",
     "tecnologias": []
+  },
+  {
+    "id": 3003,
+    "titulo": "Desenvolvedor Java Júnior | S&OP",
+    "empresa": "americanas s.a.",
+    "area": "Backend",
+    "senioridade": "Júnior",
+    "localidade": "Rio de Janeiro e Região",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "27/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-java-j%C3%BAnior-s-op-at-americanas-s-a-4458029098",
+    "tecnologias": [
+      "Java",
+      "SQL",
+      "React",
+      "Spring",
+      "Inteligência Artificial",
+      "Banco de Dados",
+      "MySQL",
+      "Oracle",
+      "Azure",
+      "Git",
+      "RabbitMQ",
+      "Grafana",
+      "Datadog",
+      "API REST",
+      "Scrum",
+      "Metodologias Ágeis",
+      "Design Patterns"
+    ]
   },
   {
     "id": 2948,
@@ -11606,6 +12909,24 @@
     ]
   },
   {
+    "id": 3028,
+    "titulo": "Estágio em Desenvolvimento de Hardware",
+    "empresa": "Gabriel",
+    "area": "Hardware / Eletrônica",
+    "senioridade": "Estágio",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "25/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-desenvolvimento-de-hardware-at-gabriel-4457607815",
+    "tecnologias": [
+      "Inteligência Artificial",
+      "Hardware"
+    ]
+  },
+  {
     "id": 2934,
     "titulo": "Analista de Suporte Técnico - Híbrido - Bauru/SP",
     "empresa": "TAGAT FOODTECH LTDA",
@@ -11799,24 +13120,6 @@
     ]
   },
   {
-    "id": 2442,
-    "titulo": "Junior iOS Developer (Swift) - Remote Work | REF#284274",
-    "empresa": "BairesDev",
-    "area": "Mobile",
-    "senioridade": "Júnior",
-    "localidade": "Natal, RN",
-    "polo": "Natal",
-    "regiao": "Nordeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "25/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/junior-ios-developer-swift-remote-work-ref%23284274-at-bairesdev-4258063381",
-    "tecnologias": [
-      "Swift",
-      "iOS"
-    ]
-  },
-  {
     "id": 2324,
     "titulo": "Junior React Frontend Engineer - Remote Work",
     "empresa": "BairesDev",
@@ -11854,40 +13157,6 @@
       "Git",
       "Clean Code",
       "Inglês"
-    ]
-  },
-  {
-    "id": 2255,
-    "titulo": "Python Junior Developer - Remote Work | REF#283517",
-    "empresa": "BairesDev",
-    "area": "Backend",
-    "senioridade": "Júnior",
-    "localidade": "Joinville, SC",
-    "polo": "Joinville",
-    "regiao": "Sul",
-    "modalidade": "Presencial",
-    "data_publicacao": "25/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/python-junior-developer-remote-work-ref%23283517-at-bairesdev-4192502474",
-    "tecnologias": [
-      "Python"
-    ]
-  },
-  {
-    "id": 2254,
-    "titulo": "Junior Java Developer - Remote Work | REF#283522",
-    "empresa": "BairesDev",
-    "area": "Backend",
-    "senioridade": "Júnior",
-    "localidade": "Salvador, BA",
-    "polo": "Salvador",
-    "regiao": "Nordeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "25/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/junior-java-developer-remote-work-ref%23283522-at-bairesdev-4192197820",
-    "tecnologias": [
-      "Java"
     ]
   },
   {
@@ -14032,9 +15301,9 @@
   },
   {
     "id": 1127,
-    "titulo": "JR Fullstack Engineer - Indaiatuba/SP",
+    "titulo": "Desenvolvedor de Software JR",
     "empresa": "John Deere",
-    "area": "Fullstack",
+    "area": "Engenharia de Software",
     "senioridade": "Júnior",
     "localidade": "Indaiatuba, SP",
     "polo": "Campinas",
@@ -14042,7 +15311,7 @@
     "modalidade": "Presencial",
     "data_publicacao": "25/08/2026",
     "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/jr-fullstack-engineer-indaiatuba-sp-at-john-deere-4448212102",
+    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-de-software-jr-at-john-deere-4448212102",
     "tecnologias": [
       "Java",
       "JavaScript",
@@ -14569,7 +15838,7 @@
     "titulo": "Estágio em TI",
     "empresa": "Mediphacos",
     "area": "Suporte Técnico",
-    "senioridade": "Estágio",
+    "senioridade": "Júnior",
     "localidade": "Belo Horizonte, Minas Gerais",
     "polo": "Belo Horizonte",
     "regiao": "Sudeste",
@@ -15499,23 +16768,6 @@
     ]
   },
   {
-    "id": 995,
-    "titulo": "Vaga de Estágio - Engenharia de Software - MG2026001418",
-    "empresa": "Universia Brasil",
-    "area": "Engenharia de Software",
-    "senioridade": "Estágio",
-    "localidade": "Belo Horizonte e Região",
-    "polo": "Belo Horizonte",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "24/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/vaga-de-est%C3%A1gio-engenharia-de-software-mg2026001418-at-universia-brasil-4458230889",
-    "tecnologias": [
-      "Engenharia de Software"
-    ]
-  },
-  {
     "id": 994,
     "titulo": "Software Engineer Jr",
     "empresa": "Celcoin",
@@ -16085,7 +17337,7 @@
   },
   {
     "id": 2503,
-    "titulo": "Analista de Service Desk Bilingue JR",
+    "titulo": "Analista de Service Desk JR Bilingue",
     "empresa": "Engemon IT",
     "area": "Service Desk / Help Desk",
     "senioridade": "Júnior",
@@ -16095,7 +17347,7 @@
     "modalidade": "Presencial",
     "data_publicacao": "23/08/2026",
     "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/analista-de-service-desk-bilingue-jr-at-engemon-it-4457884121",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-service-desk-jr-bilingue-at-engemon-it-4457884121",
     "tecnologias": [
       "Service Desk"
     ]
@@ -18470,17 +19722,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831663/trainee-ti-desenvolvimento",
     "tecnologias": [
-      "Python",
-      "Java",
-      "RPA",
-      "Automação",
-      "Inteligência Artificial",
-      "Azure",
-      "Scrum",
-      "Metodologias Ágeis",
-      "UML",
-      "Inglês",
-      "Jira"
+      "UML"
     ]
   },
   {
@@ -20745,18 +21987,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-presencial-em-juatuba-mg-at-fcamara-4456191600",
     "tecnologias": [
-      "Windows",
-      "Redes de Computadores",
-      "Antivírus",
-      "ITIL",
-      "SLA",
-      "Service Desk",
-      "Help Desk",
-      "Suporte N1/N2",
-      "Office 365",
-      "Hardware",
-      "Manutenção Preventiva",
-      "Inglês"
+      "Suporte N1/N2"
     ]
   },
   {
@@ -22824,6 +24055,73 @@
     ]
   },
   {
+    "id": 3052,
+    "titulo": "QA Júnior",
+    "empresa": "Azify",
+    "area": "QA",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "18/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/qa-j%C3%BAnior-at-azify-4459597393",
+    "tecnologias": [
+      "SQL",
+      "Automação",
+      "Azure",
+      "Selenium",
+      "Cypress",
+      "Playwright",
+      "Postman",
+      "Testes Automatizados",
+      "Testes Manuais",
+      "Testes Funcionais",
+      "Qualidade de Software",
+      "Scrum",
+      "Metodologias Ágeis",
+      "Engenharia de Software",
+      "Inglês",
+      "Jira"
+    ]
+  },
+  {
+    "id": 3036,
+    "titulo": "ESTÁGIO EM TI",
+    "empresa": "Grupo CEV",
+    "area": "Field Service / Hardware",
+    "senioridade": "Estágio",
+    "localidade": "Teresina, PI",
+    "polo": "Teresina",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "18/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-ti-at-grupo-cev-4454757930",
+    "tecnologias": [
+      "Android",
+      "Montagem e Manutenção de PCs"
+    ]
+  },
+  {
+    "id": 3027,
+    "titulo": "Estágio - Técnico em Eletrônica",
+    "empresa": "IEL VAGAS PE",
+    "area": "Hardware / Eletrônica",
+    "senioridade": "Estágio",
+    "localidade": "Recife, PE",
+    "polo": "Recife",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "18/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-t%C3%A9cnico-em-eletr%C3%B4nica-at-iel-vagas-pe-4454770873",
+    "tecnologias": [
+      "Eletrônica"
+    ]
+  },
+  {
     "id": 2922,
     "titulo": "Assistente de Sistemas PL - TI",
     "empresa": "TPC Logística Inteligente",
@@ -24291,11 +25589,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831010/estagio-em-ti-tecnologia-cotacao-de-seguro",
     "tecnologias": [
-      "Análise de Dados",
-      "Inteligência Artificial",
-      "Copilots & Assistentes de IA",
-      "Engenharia de Software",
-      "Inglês"
+      "Engenharia de Software"
     ]
   },
   {
@@ -24565,6 +25859,30 @@
       "Scrum",
       "Metodologias Ágeis",
       "Design Patterns"
+    ]
+  },
+  {
+    "id": 3004,
+    "titulo": "Engenheiro Software Embarcado Jr",
+    "empresa": "Stoneridge Brasil",
+    "area": "Backend",
+    "senioridade": "Júnior",
+    "localidade": "Campinas e Região",
+    "polo": "Campinas",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "17/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/engenheiro-software-embarcado-jr-at-stoneridge-brasil-4455286915",
+    "tecnologias": [
+      "Python",
+      "C++",
+      "C",
+      "Shell/Bash",
+      "Linux",
+      "Testes Automatizados",
+      "Testes Funcionais",
+      "Inglês"
     ]
   },
   {
@@ -25726,8 +27044,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830763/analista-de-pos-vendas-junior-suporte-ao-produto",
     "tecnologias": [
-      "Inglês",
-      "Espanhol"
+      "Inglês"
     ]
   },
   {
@@ -29114,7 +30431,7 @@
     "titulo": "Trainee de Desenvolvimento - Progress 4GL — TOTVS Datasul",
     "empresa": "BJ & L COMERCIO E SERVICOS DE INFORMATICA LTDA",
     "area": "Sistemas / ERP",
-    "senioridade": "Trainee",
+    "senioridade": "Júnior",
     "localidade": "Toledo, Paraná",
     "polo": "Cascavel",
     "regiao": "Sul",
@@ -29296,27 +30613,6 @@
     ]
   },
   {
-    "id": 1518,
-    "titulo": "Analista de Suporte JR",
-    "empresa": "Accenture Brasil",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Recife e Região",
-    "polo": "Recife",
-    "regiao": "Nordeste",
-    "modalidade": "Híbrido",
-    "data_publicacao": "12/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-jr-at-accenture-brasil-4453050324",
-    "tecnologias": [
-      "Inteligência Artificial",
-      "Backup",
-      "VMware",
-      "Cibersegurança",
-      "LGPD"
-    ]
-  },
-  {
     "id": 1486,
     "titulo": "Analista de Suporte Júnior - Help Desk",
     "empresa": "Vagas 3S Checkout",
@@ -29445,23 +30741,6 @@
       "Office 365",
       "Hardware",
       "Inglês"
-    ]
-  },
-  {
-    "id": 1233,
-    "titulo": "Estagiário - Engenharia Eletrônica",
-    "empresa": "KOSTAL Group",
-    "area": "Hardware / Eletrônica",
-    "senioridade": "Estágio",
-    "localidade": "São Bernardo do Campo, SP",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Híbrido",
-    "data_publicacao": "12/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-engenharia-eletr%C3%B4nica-at-kostal-group-4443727647",
-    "tecnologias": [
-      "Eletrônica"
     ]
   },
   {
@@ -29934,6 +31213,21 @@
       "Lógica de Programação",
       "IoT"
     ]
+  },
+  {
+    "id": 3037,
+    "titulo": "Estagiário de T.I",
+    "empresa": "Colégio SER",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "Taboão da Serra, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "11/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-de-t-i-at-col%C3%A9gio-ser-4451953645",
+    "tecnologias": []
   },
   {
     "id": 2805,
@@ -30498,21 +31792,6 @@
       "Redes de Computadores",
       "Montagem e Manutenção de PCs"
     ]
-  },
-  {
-    "id": 878,
-    "titulo": "Estagiário(a) Nível Superior PET - Sistemas/Negócios - Campinas/SP",
-    "empresa": "MBRF",
-    "area": "Outros/TI Geral",
-    "senioridade": "Estágio",
-    "localidade": "Campinas, SP",
-    "polo": "Campinas",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "11/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-n%C3%ADvel-superior-pet-sistemas-neg%C3%B3cios-campinas-sp-at-mbrf-4452169201",
-    "tecnologias": []
   },
   {
     "id": 848,
@@ -31267,25 +32546,6 @@
     ]
   },
   {
-    "id": 1522,
-    "titulo": "Analista de Suporte Jr | Hospital São Carlos",
-    "empresa": "Rede D'Or",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Fortaleza, CE",
-    "polo": "Fortaleza",
-    "regiao": "Nordeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "10/08/2026",
-    "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-jr-hospital-s%C3%A3o-carlos-at-rede-d-or-4451891957",
-    "tecnologias": [
-      "Active Directory",
-      "SLA",
-      "Help Desk"
-    ]
-  },
-  {
     "id": 1468,
     "titulo": "Assistente de Segurança da Informação",
     "empresa": "Patrus Transportes",
@@ -31901,6 +33161,26 @@
       "IoT",
       "Eletrônica",
       "CFTV"
+    ]
+  },
+  {
+    "id": 3054,
+    "titulo": "Analista de Governança em Cybersecurity Jr",
+    "empresa": "Celcoin",
+    "area": "Segurança",
+    "senioridade": "Júnior",
+    "localidade": "Barueri, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": "08/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-governan%C3%A7a-em-cybersecurity-jr-at-celcoin-4460686424",
+    "tecnologias": [
+      "Cibersegurança",
+      "Governança e Riscos (GRC)",
+      "LGPD",
+      "ISO 27001"
     ]
   },
   {
@@ -32858,7 +34138,7 @@
     "id": 290,
     "titulo": "Técnico de Automação Júnior | Shopping Cidade Jardim",
     "empresa": "JHSF",
-    "area": "Engenharia de Software",
+    "area": "Outros/TI Geral",
     "senioridade": "Júnior",
     "localidade": "São Paulo / SP A empresa aceita candidaturas de São Paulo e cidades próximas",
     "polo": "São Paulo",
@@ -32868,8 +34148,6 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2829382/tecnico-de-automacao-junior-shopping-cidade-jardim",
     "tecnologias": [
-      "Manutenção Preventiva",
-      "Eletrônica",
       "CFTV"
     ]
   },
@@ -33088,7 +34366,7 @@
   },
   {
     "id": 2834,
-    "titulo": "ASSISTENTE DESENVOLVEDOR BPMN I",
+    "titulo": "ASSISTENTE DESENVOLVIMENTO BPMN I",
     "empresa": "Grupo Unimed Santa Catarina",
     "area": "Engenharia de Software",
     "senioridade": "Júnior",
@@ -33098,7 +34376,7 @@
     "modalidade": "Presencial",
     "data_publicacao": "06/08/2026",
     "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/assistente-desenvolvedor-bpmn-i-at-grupo-unimed-santa-catarina-4450008154",
+    "url": "https://br.linkedin.com/jobs/view/assistente-desenvolvimento-bpmn-i-at-grupo-unimed-santa-catarina-4450008154",
     "tecnologias": [
       "JavaScript",
       "SQL",
@@ -33936,6 +35214,36 @@
       "Automação",
       "Análise de Dados",
       "Qualidade de Dados"
+    ]
+  },
+  {
+    "id": 3033,
+    "titulo": "Analista de Operações Cloud Júnior | Segunda a Sexta – 14h às 23h",
+    "empresa": "Dedalus",
+    "area": "DevOps",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": "05/08/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-opera%C3%A7%C3%B5es-cloud-j%C3%BAnior-segunda-a-sexta-%E2%80%93-14h-%C3%A0s-23h-at-dedalus-4447383770",
+    "tecnologias": [
+      "Inteligência Artificial",
+      "Banco de Dados",
+      "AWS",
+      "Azure",
+      "GCP",
+      "OCI",
+      "Kubernetes",
+      "Linux",
+      "Windows",
+      "ITIL",
+      "Zabbix",
+      "Certificações Ágeis",
+      "Inglês",
+      "Espanhol"
     ]
   },
   {
@@ -35627,7 +36935,6 @@
     "url": "https://www.vagas.com.br/vagas/v2828792/estagiario-a-de-engenharia-barra-da-tijuca-rj",
     "tecnologias": [
       "Excel",
-      "Banco de Dados",
       "Inglês"
     ]
   },
@@ -35922,7 +37229,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-superior-e-t%C3%A9cnico-em-el%C3%A9trica-telecomunica%C3%A7%C3%B5es-eletr%C3%B4nica-at-iel-vagas-pe-4448208455",
     "tecnologias": [
-      "Manutenção Preventiva",
       "Eletrônica"
     ]
   },
@@ -36924,9 +38230,9 @@
   },
   {
     "id": 1803,
-    "titulo": "Analista de BI Júnior | Automação e IA para Operações",
+    "titulo": "Desenvolvedor Júnior | Automação e IA para Operações",
     "empresa": "True",
-    "area": "Data",
+    "area": "Engenharia de Software",
     "senioridade": "Júnior",
     "localidade": "Vitória, ES",
     "polo": "Vitória",
@@ -36934,7 +38240,7 @@
     "modalidade": "Presencial",
     "data_publicacao": "02/08/2026",
     "fonte": "linkedin",
-    "url": "https://br.linkedin.com/jobs/view/analista-de-bi-j%C3%BAnior-automa%C3%A7%C3%A3o-e-ia-para-opera%C3%A7%C3%B5es-at-true-4458021646",
+    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-j%C3%BAnior-automa%C3%A7%C3%A3o-e-ia-para-opera%C3%A7%C3%B5es-at-true-4458021646",
     "tecnologias": [
       "Inteligência Artificial"
     ]
@@ -38983,31 +40289,6 @@
     ]
   },
   {
-    "id": 2223,
-    "titulo": "Estágio em Suporte Técnico [Curitiba]",
-    "empresa": "CONTEGO CONSULTORIA LTDA",
-    "area": "Suporte Técnico",
-    "senioridade": "Estágio",
-    "localidade": "Curitiba, Paraná",
-    "polo": "Curitiba",
-    "regiao": "Sul",
-    "modalidade": "Presencial",
-    "data_publicacao": "29/07/2026",
-    "fonte": "solides",
-    "url": "https://contegosecurity.solides.jobs/vacancies/894048?origem=portal",
-    "tecnologias": [
-      "Linux",
-      "Active Directory",
-      "Windows",
-      "Redes de Computadores",
-      "VPN",
-      "Office 365",
-      "Hardware",
-      "Montagem e Manutenção de PCs",
-      "Cibersegurança"
-    ]
-  },
-  {
     "id": 2214,
     "titulo": "Estágio 3DX",
     "empresa": "SKA AUTOMACAO DE ENGENHARIAS LTDA",
@@ -39464,7 +40745,7 @@
     "area": "QA",
     "senioridade": "Júnior",
     "localidade": "Vila Velha, ES",
-    "polo": "Estado/ES",
+    "polo": "Vitória",
     "regiao": "Sudeste",
     "modalidade": "Presencial",
     "data_publicacao": "29/07/2026",
@@ -39765,6 +41046,31 @@
     "url": "https://meettecnologia.solides.jobs/vacancies/893826?origem=portal",
     "tecnologias": [
       "Redes de Computadores"
+    ]
+  },
+  {
+    "id": 2223,
+    "titulo": "Estágio em Suporte Técnico [Curitiba]",
+    "empresa": "CONTEGO CONSULTORIA LTDA",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Curitiba, Paraná",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "28/07/2026",
+    "fonte": "solides",
+    "url": "https://contegosecurity.solides.jobs/vacancies/894048?origem=portal",
+    "tecnologias": [
+      "Linux",
+      "Active Directory",
+      "Windows",
+      "Redes de Computadores",
+      "VPN",
+      "Office 365",
+      "Hardware",
+      "Montagem e Manutenção de PCs",
+      "Cibersegurança"
     ]
   },
   {
@@ -41390,7 +42696,7 @@
   {
     "id": 1454,
     "titulo": "Analista de Segurança da Informação Jr",
-    "empresa": "Finnet",
+    "empresa": "finnet",
     "area": "Segurança",
     "senioridade": "Júnior",
     "localidade": "São Paulo, SP",
@@ -48290,6 +49596,24 @@
     ]
   },
   {
+    "id": 3058,
+    "titulo": "28259 - Pessoa Analista de Suporte Técnico Jr | Vaga para Pessoas com Deficiência (PCD)",
+    "empresa": "Intelbras",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "São José, SC",
+    "polo": "Florianópolis",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "12/07/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/28259-pessoa-analista-de-suporte-t%C3%A9cnico-jr-vaga-para-pessoas-com-defici%C3%AAncia-pcd-at-intelbras-4438996146",
+    "tecnologias": [
+      "Eletrônica",
+      "CFTV"
+    ]
+  },
+  {
     "id": 2625,
     "titulo": "Engenheiro de Soluções (Suporte Técnico) - Presencial - Joinville/SC",
     "empresa": "Ultra LIMS",
@@ -52839,21 +54163,6 @@
     ]
   },
   {
-    "id": 2672,
-    "titulo": "Técnica de Suporte em Telecom",
-    "empresa": "VMX DIGITAL DO BRASIL LTDA",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Itatiba, São Paulo",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "24/06/2026",
-    "fonte": "solides",
-    "url": "https://vmaxtelecom.solides.jobs/vacancies/873510?origem=portal",
-    "tecnologias": []
-  },
-  {
     "id": 2382,
     "titulo": "Assistente de Delivery",
     "empresa": "Vonex Telecom",
@@ -53196,6 +54505,21 @@
       "Qualidade de Dados",
       "Banco de Dados"
     ]
+  },
+  {
+    "id": 2672,
+    "titulo": "Técnica de Suporte em Telecom",
+    "empresa": "VMX DIGITAL DO BRASIL LTDA",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Itatiba, São Paulo",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "23/06/2026",
+    "fonte": "solides",
+    "url": "https://vmaxtelecom.solides.jobs/vacancies/873510?origem=portal",
+    "tecnologias": []
   },
   {
     "id": 2458,
@@ -60317,6 +61641,30 @@
     ]
   },
   {
+    "id": 3067,
+    "titulo": "Assistente de TI Pleno | Presencial - bairro Mossunguê, Curitiba PR",
+    "empresa": "YARO PNEUS",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Nacional",
+    "regiao": "Nacional",
+    "modalidade": "Presencial",
+    "data_publicacao": "31/03/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/assistente-de-ti-pleno-presencial-bairro-mossungu%C3%AA-curitiba-pr-at-yaro-pneus-4393246559",
+    "tecnologias": [
+      "Windows",
+      "Redes de Computadores",
+      "Firewall",
+      "Service Desk",
+      "GLPI",
+      "Office 365",
+      "ERP",
+      "CFTV"
+    ]
+  },
+  {
     "id": 2623,
     "titulo": "ESTÁGIO SUPORTE AUTOMOTIVO",
     "empresa": "Doutor-IE | Inteligência Automotiva",
@@ -62362,7 +63710,7 @@
     "id": 279,
     "titulo": "Programa de Entry-level EY Tecnologia",
     "empresa": "EY",
-    "area": "Sistemas / ERP",
+    "area": "Outros/TI Geral",
     "senioridade": "Júnior",
     "localidade": "Brasil A empresa aceita candidaturas de qualquer cidade do Brasil",
     "polo": "Nacional",
@@ -62536,7 +63884,7 @@
     "id": 280,
     "titulo": "Programa de Entry-level EY Tecnologia- Exclusivo PcD",
     "empresa": "EY",
-    "area": "Sistemas / ERP",
+    "area": "Outros/TI Geral",
     "senioridade": "Júnior",
     "localidade": "Brasil A empresa aceita candidaturas de qualquer cidade do Brasil",
     "polo": "Nacional",
