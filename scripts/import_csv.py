@@ -3,7 +3,6 @@
     python scripts/import_csv.py                  # pega o CSV mais recente
     python scripts/import_csv.py --csv caminho.csv
     python scripts/import_csv.py --db data/outro.db --recriar
-    python scripts/import_csv.py --db postgresql://vagas:vagas@localhost/vagas
 
 O CSV nao e alterado: o pipeline de raspagem continua sendo a fonte dos dados, e
 este script so espelha o ultimo resultado no banco.
@@ -325,8 +324,8 @@ def main(argv: list[str] | None = None) -> int:
                         help="CSV a importar (padrão: o mais recente em output/).")
     parser.add_argument(
         "--db", default=None, metavar="DESTINO",
-        help="Banco de destino: caminho de arquivo SQLite ou URL completa "
-             "(postgresql://...). Padrão: DATABASE_URL, ou data/vagas.db.",
+        help="Banco de destino: caminho de arquivo SQLite. "
+             "Padrão: DATABASE_URL, ou data/vagas.db.",
     )
     parser.add_argument("--recriar", action="store_true",
                         help="Apaga e recria as tabelas antes de importar.")

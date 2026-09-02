@@ -121,7 +121,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--db", default=None,
-        help="Caminho do banco SQLite ou URL de conexao PostgreSQL.",
+        help="Caminho do banco SQLite.",
     )
     parser.add_argument(
         "--output", default=None,
