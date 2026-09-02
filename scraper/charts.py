@@ -22,6 +22,10 @@ from pathlib import Path
 import matplotlib
 
 matplotlib.use("Agg")
+# A DejaVu Sans (padrao no runner) nao tem peso 600, e o font_manager
+# tambem reclama do NotoColorEmoji a cada scan. Sao avisos sem efeito
+# visual: o 600 cai para 700 (bold) e o emoji nao e usado nos graficos.
+logging.getLogger("matplotlib.font_manager").setLevel(logging.ERROR)
 import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.patches import FancyBboxPatch, Rectangle  # noqa: E402
 
@@ -158,7 +162,7 @@ def chart_areas(jobs: list[Job], output_path: Path, subtitle: str = "") -> Path:
     # espaco certo e nao sobra faixa vazia entre o subtitulo e a primeira barra.
     ax.set_title(
         "Vagas júnior de tecnologia por área",
-        loc="left", fontsize=15, fontweight="600", color=INK_PRIMARY,
+        loc="left", fontsize=15, fontweight="bold", color=INK_PRIMARY,
         pad=34 if subtitle else 16,
     )
     if subtitle:
@@ -202,7 +206,7 @@ def chart_workplace(jobs: list[Job], output_path: Path, subtitle: str = "") -> P
 
     ax.set_title(
         "Vagas júnior de tecnologia por modalidade de trabalho",
-        loc="left", fontsize=15, fontweight="600", color=INK_PRIMARY,
+        loc="left", fontsize=15, fontweight="bold", color=INK_PRIMARY,
         pad=34 if subtitle else 16,
     )
     if subtitle:
@@ -290,13 +294,13 @@ def chart_skills(
         _bare_axes(ax)
         ax.set_title(
             f"{area}",
-            loc="left", fontsize=11, fontweight="600",
+            loc="left", fontsize=11, fontweight="bold",
             color=INK_PRIMARY, pad=10,
         )
 
     fig.suptitle(
         "Tecnologias mais pedidas em vagas júnior, por área",
-        x=0.02, y=0.985, ha="left", fontsize=15, fontweight="600",
+        x=0.02, y=0.985, ha="left", fontsize=15, fontweight="bold",
         color=INK_PRIMARY,
     )
     if subtitle:
@@ -346,7 +350,7 @@ def chart_regions(jobs: list[Job], output_path: Path, subtitle: str = "") -> Pat
         "Vagas júnior de tecnologia por macrorregião",
         loc="left",
         fontsize=15,
-        fontweight="600",
+        fontweight="bold",
         color=INK_PRIMARY,
         pad=34 if subtitle else 16,
     )
