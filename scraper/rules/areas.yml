@@ -135,6 +135,14 @@ tech_gate:
     - sistemas de engenharia
     - estagiario a administrativo
     - odontologia
+    # "Programador de Corte a laser" e usinagem CNC: "programador" aqui
+    # significa quem escreve programas de corte de chapa, nao software.
+    - corte a laser
+    - corte laser
+    - programador de corte
+    # "Estagiario para Area de Processos e Qualidade": "analise de sistemas"
+    # aparece so como nome de curso nos requisitos.
+    - area de processos
 
 
   descricao: # sinais estritos -- precisam sobreviver ao boilerplate das descricoes
@@ -444,6 +452,9 @@ areas:
       - testes automatizados
       - automacao de testes
       - qualidade de software
+      - testes de software
+      - estagio em testes
+      - estagio de testes
     peso_medio:
       - teste
       - testes
@@ -571,6 +582,12 @@ areas:
       - governanca de ti
       - gestao de ti
       - pmo de ti
+      # Produtos SAP citados pelo nome no titulo: "Analista de Sistemas
+      # Junior (SAP / MES)" e "SAP Business One" sao vagas de ERP, nao de
+      # desenvolvimento generico.
+      - sap mes
+      - sap business one
+      - business one
       # Titulos sem preposicao ("analista sistemas" nao casa "analista de sistemas")
       - analista sistemas
       - assistente sistemas
