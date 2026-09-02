@@ -29,7 +29,7 @@
     },
     {
       "area": "Data",
-      "vagas": 213,
+      "vagas": 214,
       "percentual": 6.9
     },
     {
@@ -44,8 +44,8 @@
     },
     {
       "area": "Outros/TI Geral",
-      "vagas": 114,
-      "percentual": 3.7
+      "vagas": 113,
+      "percentual": 3.6
     },
     {
       "area": "Sistemas / ERP",
@@ -242,37 +242,37 @@
   "skills_by_area": {
     "Suporte Técnico": {
       "total_vagas": 1061,
-      "vagas_com_tech": 872,
+      "vagas_com_tech": 874,
       "skills": [
         {
           "nome": "Hardware",
           "grupo": "suporte_infra",
-          "vagas": 399,
-          "percentual": 45.8
+          "vagas": 401,
+          "percentual": 45.9
         },
         {
           "nome": "Windows",
           "grupo": "suporte_infra",
-          "vagas": 348,
-          "percentual": 39.9
+          "vagas": 350,
+          "percentual": 40.0
         },
         {
           "nome": "Redes de Computadores",
           "grupo": "suporte_infra",
-          "vagas": 276,
+          "vagas": 277,
           "percentual": 31.7
         },
         {
           "nome": "Montagem e Manutenção de PCs",
           "grupo": "suporte_infra",
-          "vagas": 144,
-          "percentual": 16.5
+          "vagas": 145,
+          "percentual": 16.6
         },
         {
           "nome": "Manutenção Preventiva",
           "grupo": "suporte_infra",
-          "vagas": 136,
-          "percentual": 15.6
+          "vagas": 137,
+          "percentual": 15.7
         },
         {
           "nome": "Linux",
@@ -290,13 +290,13 @@
           "nome": "Inglês",
           "grupo": "engenharia_praticas",
           "vagas": 113,
-          "percentual": 13.0
+          "percentual": 12.9
         },
         {
           "nome": "Banco de Dados",
           "grupo": "bancos",
           "vagas": 107,
-          "percentual": 12.3
+          "percentual": 12.2
         },
         {
           "nome": "Excel",
@@ -308,13 +308,13 @@
           "nome": "Help Desk",
           "grupo": "suporte_infra",
           "vagas": 100,
-          "percentual": 11.5
+          "percentual": 11.4
         },
         {
           "nome": "ERP",
           "grupo": "engenharia_praticas",
           "vagas": 100,
-          "percentual": 11.5
+          "percentual": 11.4
         },
         {
           "nome": "Active Directory",
@@ -410,7 +410,7 @@
           "nome": "Windows Server",
           "grupo": "suporte_infra",
           "vagas": 31,
-          "percentual": 3.6
+          "percentual": 3.5
         },
         {
           "nome": "CRM",
@@ -467,16 +467,16 @@
           "percentual": 2.5
         },
         {
-          "nome": "Espanhol",
+          "nome": "Estrutura de Dados",
           "grupo": "engenharia_praticas",
           "vagas": 22,
           "percentual": 2.5
         },
         {
-          "nome": "Estrutura de Dados",
+          "nome": "Espanhol",
           "grupo": "engenharia_praticas",
-          "vagas": 21,
-          "percentual": 2.4
+          "vagas": 22,
+          "percentual": 2.5
         },
         {
           "nome": "JavaScript",
@@ -517,8 +517,8 @@
         {
           "nome": "VoIP",
           "grupo": "suporte_infra",
-          "vagas": 16,
-          "percentual": 1.8
+          "vagas": 17,
+          "percentual": 1.9
         },
         {
           "nome": "Cibersegurança",
@@ -2617,92 +2617,92 @@
       ]
     },
     "Data": {
-      "total_vagas": 213,
-      "vagas_com_tech": 208,
+      "total_vagas": 214,
+      "vagas_com_tech": 209,
       "skills": [
         {
           "nome": "SQL",
           "grupo": "linguagens",
           "vagas": 130,
-          "percentual": 62.5
+          "percentual": 62.2
         },
         {
           "nome": "Python",
           "grupo": "linguagens",
           "vagas": 109,
-          "percentual": 52.4
+          "percentual": 52.2
         },
         {
           "nome": "Análise de Dados",
           "grupo": "dados",
           "vagas": 103,
-          "percentual": 49.5
+          "percentual": 49.3
         },
         {
           "nome": "Power BI",
           "grupo": "dados",
-          "vagas": 83,
-          "percentual": 39.9
+          "vagas": 84,
+          "percentual": 40.2
         },
         {
           "nome": "ETL",
           "grupo": "dados",
           "vagas": 70,
-          "percentual": 33.7
+          "percentual": 33.5
         },
         {
           "nome": "Estatística",
           "grupo": "dados",
           "vagas": 69,
-          "percentual": 33.2
+          "percentual": 33.0
         },
         {
           "nome": "Excel",
           "grupo": "dados",
-          "vagas": 64,
-          "percentual": 30.8
+          "vagas": 65,
+          "percentual": 31.1
         },
         {
           "nome": "Banco de Dados",
           "grupo": "bancos",
           "vagas": 64,
-          "percentual": 30.8
+          "percentual": 30.6
         },
         {
           "nome": "Inteligência Artificial",
           "grupo": "inteligencia_artificial",
           "vagas": 52,
-          "percentual": 25.0
+          "percentual": 24.9
         },
         {
           "nome": "Modelagem de Dados",
           "grupo": "engenharia_praticas",
           "vagas": 48,
-          "percentual": 23.1
+          "percentual": 23.0
         },
         {
           "nome": "Inglês",
           "grupo": "engenharia_praticas",
           "vagas": 48,
-          "percentual": 23.1
+          "percentual": 23.0
         },
         {
           "nome": "BI",
           "grupo": "dados",
-          "vagas": 46,
-          "percentual": 22.1
+          "vagas": 47,
+          "percentual": 22.5
         },
         {
           "nome": "Machine Learning",
           "grupo": "inteligencia_artificial",
           "vagas": 40,
-          "percentual": 19.2
+          "percentual": 19.1
         },
         {
           "nome": "Git",
           "grupo": "cloud_devops",
           "vagas": 32,
-          "percentual": 15.4
+          "percentual": 15.3
         },
         {
           "nome": "Qualidade de Dados",
@@ -2732,19 +2732,19 @@
           "nome": "Spark",
           "grupo": "dados",
           "vagas": 28,
-          "percentual": 13.5
+          "percentual": 13.4
         },
         {
           "nome": "Databricks",
           "grupo": "dados",
           "vagas": 27,
-          "percentual": 13.0
+          "percentual": 12.9
         },
         {
           "nome": "Pandas",
           "grupo": "dados",
           "vagas": 26,
-          "percentual": 12.5
+          "percentual": 12.4
         },
         {
           "nome": "LLMs & IA Generativa",
@@ -2756,13 +2756,13 @@
           "nome": "GCP",
           "grupo": "cloud_devops",
           "vagas": 23,
-          "percentual": 11.1
+          "percentual": 11.0
         },
         {
           "nome": "Airflow",
           "grupo": "dados",
           "vagas": 17,
-          "percentual": 8.2
+          "percentual": 8.1
         },
         {
           "nome": "Data Lake",
@@ -2864,13 +2864,13 @@
           "nome": "PostgreSQL",
           "grupo": "bancos",
           "vagas": 7,
-          "percentual": 3.4
+          "percentual": 3.3
         },
         {
           "nome": "MySQL",
           "grupo": "bancos",
           "vagas": 7,
-          "percentual": 3.4
+          "percentual": 3.3
         },
         {
           "nome": "Scikit-Learn",
@@ -2880,6 +2880,12 @@
         },
         {
           "nome": "ERP",
+          "grupo": "engenharia_praticas",
+          "vagas": 6,
+          "percentual": 2.9
+        },
+        {
+          "nome": "CRM",
           "grupo": "engenharia_praticas",
           "vagas": 6,
           "percentual": 2.9
@@ -2922,12 +2928,6 @@
         },
         {
           "nome": "Scrum",
-          "grupo": "engenharia_praticas",
-          "vagas": 5,
-          "percentual": 2.4
-        },
-        {
-          "nome": "CRM",
           "grupo": "engenharia_praticas",
           "vagas": 5,
           "percentual": 2.4
@@ -4753,7 +4753,7 @@
       ]
     },
     "Outros/TI Geral": {
-      "total_vagas": 114,
+      "total_vagas": 113,
       "vagas_com_tech": 61,
       "skills": [
         {
@@ -8443,14 +8443,14 @@
         {
           "nome": "Git",
           "grupo": "cloud_devops",
-          "vagas": 9,
-          "percentual": 25.0
+          "vagas": 10,
+          "percentual": 27.8
         },
         {
           "nome": "Inglês",
           "grupo": "engenharia_praticas",
-          "vagas": 9,
-          "percentual": 25.0
+          "vagas": 10,
+          "percentual": 27.8
         },
         {
           "nome": "Copilots & Assistentes de IA",
@@ -8477,19 +8477,25 @@
           "percentual": 16.7
         },
         {
+          "nome": "Automação",
+          "grupo": "dados",
+          "vagas": 5,
+          "percentual": 13.9
+        },
+        {
+          "nome": "Estatística",
+          "grupo": "dados",
+          "vagas": 5,
+          "percentual": 13.9
+        },
+        {
           "nome": "Banco de Dados",
           "grupo": "bancos",
           "vagas": 5,
           "percentual": 13.9
         },
         {
-          "nome": "Automação",
-          "grupo": "dados",
-          "vagas": 4,
-          "percentual": 11.1
-        },
-        {
-          "nome": "Estatística",
+          "nome": "Pandas",
           "grupo": "dados",
           "vagas": 4,
           "percentual": 11.1
@@ -8513,12 +8519,6 @@
           "percentual": 8.3
         },
         {
-          "nome": "Pandas",
-          "grupo": "dados",
-          "vagas": 3,
-          "percentual": 8.3
-        },
-        {
           "nome": "PyTorch",
           "grupo": "inteligencia_artificial",
           "vagas": 3,
@@ -8526,6 +8526,12 @@
         },
         {
           "nome": "TensorFlow",
+          "grupo": "inteligencia_artificial",
+          "vagas": 3,
+          "percentual": 8.3
+        },
+        {
+          "nome": "Scikit-Learn",
           "grupo": "inteligencia_artificial",
           "vagas": 3,
           "percentual": 8.3
@@ -8574,12 +8580,6 @@
         },
         {
           "nome": "Bancos Vetoriais",
-          "grupo": "inteligencia_artificial",
-          "vagas": 2,
-          "percentual": 5.6
-        },
-        {
-          "nome": "Scikit-Learn",
           "grupo": "inteligencia_artificial",
           "vagas": 2,
           "percentual": 5.6

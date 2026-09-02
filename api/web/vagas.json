@@ -15157,7 +15157,9 @@
     "data_publicacao": "25/08/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2832090/assistente-de-ti-belo-horizonte",
-    "tecnologias": []
+    "tecnologias": [
+      "Hardware"
+    ]
   },
   {
     "id": 1409,
@@ -27057,7 +27059,12 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830852/analista-de-suporte-i",
     "tecnologias": [
-      "Hardware"
+      "Estrutura de Dados",
+      "Hardware",
+      "Manutenção Preventiva",
+      "Redes de Computadores",
+      "VoIP",
+      "Windows"
     ]
   },
   {
@@ -27156,7 +27163,7 @@
     "id": 1394,
     "titulo": "Assistente de Operações I (Exclusiva para Pessoas com Deficiência)",
     "empresa": "Ticket",
-    "area": "Outros/TI Geral",
+    "area": "Data",
     "senioridade": "Júnior",
     "localidade": "São Paulo / SP A empresa aceita candidaturas de São Paulo e cidades próximas",
     "polo": "São Paulo",
@@ -27165,7 +27172,12 @@
     "data_publicacao": "17/08/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830770/assistente-de-operacoes-i-exclusiva-para-pessoas-com-deficiencia",
-    "tecnologias": []
+    "tecnologias": [
+      "BI",
+      "CRM",
+      "Excel",
+      "Power BI"
+    ]
   },
   {
     "id": 1383,
@@ -50679,11 +50691,17 @@
     "url": "https://www.vagas.com.br/vagas/v2824894/estagio-em-ciencia-de-dados-e-gen-ai-nucleo-de-ia-hstern",
     "tecnologias": [
       "Análise de Dados",
+      "Automação",
       "Copilots & Assistentes de IA",
+      "Estatística",
+      "Git",
+      "Inglês",
       "Inteligência Artificial",
       "LLMs & IA Generativa",
       "Machine Learning",
-      "Python"
+      "Pandas",
+      "Python",
+      "Scikit-Learn"
     ]
   },
   {
@@ -58116,7 +58134,11 @@
     "data_publicacao": "02/06/2026",
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2818390/assistente-de-suporte-tecnico",
-    "tecnologias": []
+    "tecnologias": [
+      "Hardware",
+      "Montagem e Manutenção de PCs",
+      "Windows"
+    ]
   },
   {
     "id": 1233,

@@ -3,15 +3,15 @@
     "posicao": 1,
     "nome": "Hardware",
     "grupo": "suporte_infra",
-    "vagas": 575,
-    "percentual_total": 18.5,
+    "vagas": 577,
+    "percentual_total": 18.6,
     "percentual_base_tech": 21.4
   },
   {
     "posicao": 2,
     "nome": "Redes de Computadores",
     "grupo": "suporte_infra",
-    "vagas": 539,
+    "vagas": 540,
     "percentual_total": 17.4,
     "percentual_base_tech": 20.0
   },
@@ -19,8 +19,8 @@
     "posicao": 3,
     "nome": "Windows",
     "grupo": "suporte_infra",
-    "vagas": 535,
-    "percentual_total": 17.2,
+    "vagas": 537,
+    "percentual_total": 17.3,
     "percentual_base_tech": 19.9
   },
   {
@@ -37,14 +37,14 @@
     "grupo": "bancos",
     "vagas": 524,
     "percentual_total": 16.9,
-    "percentual_base_tech": 19.5
+    "percentual_base_tech": 19.4
   },
   {
     "posicao": 6,
     "nome": "Inglês",
     "grupo": "engenharia_praticas",
-    "vagas": 495,
-    "percentual_total": 15.9,
+    "vagas": 496,
+    "percentual_total": 16.0,
     "percentual_base_tech": 18.4
   },
   {
@@ -53,13 +53,13 @@
     "grupo": "linguagens",
     "vagas": 392,
     "percentual_total": 12.6,
-    "percentual_base_tech": 14.6
+    "percentual_base_tech": 14.5
   },
   {
     "posicao": 8,
     "nome": "Git",
     "grupo": "cloud_devops",
-    "vagas": 381,
+    "vagas": 382,
     "percentual_total": 12.3,
     "percentual_base_tech": 14.2
   },
@@ -75,7 +75,7 @@
     "posicao": 10,
     "nome": "Excel",
     "grupo": "dados",
-    "vagas": 320,
+    "vagas": 321,
     "percentual_total": 10.3,
     "percentual_base_tech": 11.9
   },
@@ -93,7 +93,7 @@
     "grupo": "cloud_devops",
     "vagas": 303,
     "percentual_total": 9.8,
-    "percentual_base_tech": 11.3
+    "percentual_base_tech": 11.2
   },
   {
     "posicao": 13,
@@ -101,7 +101,7 @@
     "grupo": "engenharia_praticas",
     "vagas": 260,
     "percentual_total": 8.4,
-    "percentual_base_tech": 9.7
+    "percentual_base_tech": 9.6
   },
   {
     "posicao": 14,
@@ -129,6 +129,14 @@
   },
   {
     "posicao": 17,
+    "nome": "Manutenção Preventiva",
+    "grupo": "suporte_infra",
+    "vagas": 214,
+    "percentual_total": 6.9,
+    "percentual_base_tech": 7.9
+  },
+  {
+    "posicao": 18,
     "nome": "Metodologias Ágeis",
     "grupo": "engenharia_praticas",
     "vagas": 214,
@@ -136,19 +144,11 @@
     "percentual_base_tech": 7.9
   },
   {
-    "posicao": 18,
-    "nome": "Manutenção Preventiva",
-    "grupo": "suporte_infra",
-    "vagas": 213,
-    "percentual_total": 6.9,
-    "percentual_base_tech": 7.9
-  },
-  {
     "posicao": 19,
     "nome": "Montagem e Manutenção de PCs",
     "grupo": "suporte_infra",
-    "vagas": 209,
-    "percentual_total": 6.7,
+    "vagas": 210,
+    "percentual_total": 6.8,
     "percentual_base_tech": 7.8
   },
   {
@@ -187,17 +187,17 @@
     "posicao": 24,
     "nome": "Automação",
     "grupo": "dados",
-    "vagas": 166,
-    "percentual_total": 5.3,
+    "vagas": 167,
+    "percentual_total": 5.4,
     "percentual_base_tech": 6.2
   },
   {
     "posicao": 25,
     "nome": "Power BI",
     "grupo": "dados",
-    "vagas": 160,
+    "vagas": 161,
     "percentual_total": 5.2,
-    "percentual_base_tech": 5.9
+    "percentual_base_tech": 6.0
   },
   {
     "posicao": 26,
@@ -347,7 +347,7 @@
     "posicao": 44,
     "nome": "Estrutura de Dados",
     "grupo": "engenharia_praticas",
-    "vagas": 101,
+    "vagas": 102,
     "percentual_total": 3.3,
     "percentual_base_tech": 3.8
   },
@@ -419,8 +419,8 @@
     "posicao": 53,
     "nome": "Estatística",
     "grupo": "dados",
-    "vagas": 85,
-    "percentual_total": 2.7,
+    "vagas": 86,
+    "percentual_total": 2.8,
     "percentual_base_tech": 3.2
   },
   {
@@ -451,7 +451,7 @@
     "posicao": 57,
     "nome": "CRM",
     "grupo": "engenharia_praticas",
-    "vagas": 81,
+    "vagas": 82,
     "percentual_total": 2.6,
     "percentual_base_tech": 3.0
   },
@@ -513,17 +513,17 @@
   },
   {
     "posicao": 65,
-    "nome": "SAP",
-    "grupo": "engenharia_praticas",
+    "nome": "BI",
+    "grupo": "dados",
     "vagas": 71,
     "percentual_total": 2.3,
     "percentual_base_tech": 2.6
   },
   {
     "posicao": 66,
-    "nome": "BI",
-    "grupo": "dados",
-    "vagas": 70,
+    "nome": "SAP",
+    "grupo": "engenharia_praticas",
+    "vagas": 71,
     "percentual_total": 2.3,
     "percentual_base_tech": 2.6
   },
@@ -787,7 +787,7 @@
     "posicao": 99,
     "nome": "Pandas",
     "grupo": "dados",
-    "vagas": 34,
+    "vagas": 35,
     "percentual_total": 1.1,
     "percentual_base_tech": 1.3
   },
@@ -833,6 +833,14 @@
   },
   {
     "posicao": 105,
+    "nome": "VoIP",
+    "grupo": "suporte_infra",
+    "vagas": 30,
+    "percentual_total": 1.0,
+    "percentual_base_tech": 1.1
+  },
+  {
+    "posicao": 106,
     "nome": "SOLID",
     "grupo": "engenharia_praticas",
     "vagas": 29,
@@ -840,17 +848,9 @@
     "percentual_base_tech": 1.1
   },
   {
-    "posicao": 106,
+    "posicao": 107,
     "nome": "Testes Manuais",
     "grupo": "qa_testes",
-    "vagas": 29,
-    "percentual_total": 0.9,
-    "percentual_base_tech": 1.1
-  },
-  {
-    "posicao": 107,
-    "nome": "VoIP",
-    "grupo": "suporte_infra",
     "vagas": 29,
     "percentual_total": 0.9,
     "percentual_base_tech": 1.1
@@ -1353,6 +1353,14 @@
   },
   {
     "posicao": 170,
+    "nome": "Scikit-Learn",
+    "grupo": "inteligencia_artificial",
+    "vagas": 9,
+    "percentual_total": 0.3,
+    "percentual_base_tech": 0.3
+  },
+  {
+    "posicao": 171,
     "nome": "Tailwind",
     "grupo": "frameworks",
     "vagas": 9,
@@ -1360,7 +1368,7 @@
     "percentual_base_tech": 0.3
   },
   {
-    "posicao": 171,
+    "posicao": 172,
     "nome": "Apex",
     "grupo": "linguagens",
     "vagas": 8,
@@ -1368,7 +1376,7 @@
     "percentual_base_tech": 0.3
   },
   {
-    "posicao": 172,
+    "posicao": 173,
     "nome": "DDD",
     "grupo": "engenharia_praticas",
     "vagas": 8,
@@ -1376,17 +1384,9 @@
     "percentual_base_tech": 0.3
   },
   {
-    "posicao": 173,
+    "posicao": 174,
     "nome": "MVVM",
     "grupo": "engenharia_praticas",
-    "vagas": 8,
-    "percentual_total": 0.3,
-    "percentual_base_tech": 0.3
-  },
-  {
-    "posicao": 174,
-    "nome": "Scikit-Learn",
-    "grupo": "inteligencia_artificial",
     "vagas": 8,
     "percentual_total": 0.3,
     "percentual_base_tech": 0.3
