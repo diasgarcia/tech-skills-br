@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (3104 vagas)
 
-- **Data de geração:** 02/09/2026 20:19
+- **Data de geração:** 02/09/2026 20:32
 - **Período coberto:** 05/01/2026 até 02/09/2026
 - **Total de vagas consolidadas:** 3104
 
@@ -87,16 +87,16 @@
 
 | Posição | Tecnologia | Vagas Citadas |
 |---|---|---|
-| 1 | Hardware | 577 |
+| 1 | Hardware | 578 |
 | 2 | Redes de Computadores | 540 |
-| 3 | Windows | 537 |
+| 3 | Windows | 538 |
 | 4 | SQL | 529 |
 | 5 | Banco de Dados | 525 |
-| 6 | Inglês | 496 |
+| 6 | Inglês | 497 |
 | 7 | Python | 393 |
 | 8 | Git | 383 |
 | 9 | Inteligência Artificial | 367 |
-| 10 | Excel | 322 |
+| 10 | Excel | 323 |
 | 11 | JavaScript | 318 |
 | 12 | Linux | 303 |
 | 13 | Engenharia de Software | 260 |
