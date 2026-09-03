@@ -22,11 +22,7 @@ class AreaScore:
     score: float
     matches: list[str]
     title_score: float = 0.0
-    # True quando um keyword de peso alto casou no TITULO -- o sinal mais
-    # especifico e confiavel que existe. Usado para a area especifica
-    # vencer o generico ("Desenvolvedor de Software Fullstack" nao deve
-    # cair em Engenharia de Software so porque a descricao repete o
-    # boilerplate de "engenharia de software").
+    # True quando um keyword de peso alto casou no TITULO.
     title_strong: bool = False
 
 
@@ -191,18 +187,10 @@ class AreaClassifier:
             return True
         return any(p.search(body_text) for p in self._strong_patterns())
 
-    # Areas de desenvolvimento generico: nao contam como "especificas" na
-    # precedencia de titulo abaixo. Um titulo "Desenvolvedor de Software
-    # Fullstack" tem os dois sinais; sem esta lista, a generica e a
-    # especifica empatariam e o desempate por tamanho de keyword faria a
-    # generica vencer.
+    # Areas de desenvolvimento generico: nao contam como "especificas"
+    # na precedencia de titulo abaixo.
     GENERIC_DEV_AREAS = ("Engenharia de Software",)
 
-    # Titulos que so rotulam o papel, sem stack: "Analista de Sistemas
-    # Junior" cuja descricao inteira e atendimento/chamados e suporte,
-    # nao desenvolvimento. So estes titulos podem cair na regra de
-    # suporte disfarcado abaixo -- um "Desenvolvedor de Software" com
-    # mencao a suporte na descricao NAO vira suporte.
     _SUPORTE_TITULOS_GENERICOS = frozenset(
         {
             "analista de sistemas",
@@ -212,20 +200,14 @@ class AreaClassifier:
         }
     )
 
-    # Sinais de sustentacao no TITULO: "Analista de Sustentacao de
-    # Sistemas" e suporte/manutencao, nao desenvolvimento novo. Ficam
-    # fora do YAML de proposito: como peso alto no corpo do texto,
-    # derrubavam vaga de dev cuja descricao cita sustentacao de passagem
-    # ("DESENVOLVEDOR(A) DE SOFTWARE JUNIOR" em empresa de cobranca).
+    # Ficam fora do YAML de proposito: como peso alto no corpo do texto,
+    # derrubavam vaga de dev cuja descricao cita sustentacao de passagem.
     _SUPORTE_TITULO_SUSTENTACAO = (
         "sustentacao de sistemas",
         "analista de sustentacao",
         "sustentacao de aplicacoes",
     )
 
-    # Areas de stack: se a descricao tiver duas ou mais keywords destas
-    # areas, a vaga NAO e suporte disfarcado -- fica para o generico (ou
-    # para uma regra futura de stack por descricao).
     _SUPORTE_STACKS_GUARD = frozenset(
         {
             "Backend",
@@ -251,11 +233,9 @@ class AreaClassifier:
         Titulo exatamente no piso (como "Desenvolvedor Júnior") nao domina:
         ai a descricao ainda pode decidir ("...pipelines de ETL e SQL" -> Data).
 
-        Precedencia do titulo especifico: entre as areas sinalizadas pelo
-        titulo, a que casou keyword de peso alto no titulo vence as genericas
-        ("Estagio em Desenvolvimento de Software - Android" vai para Mobile,
-        nao para Engenharia de Software so porque a descricao repete o
-        boilerplate de "engenharia de software").
+        Entre as areas sinalizadas pelo titulo, a que casou keyword de peso
+        alto no titulo vence as genericas ("Estagio em Desenvolvimento de
+        Software - Android" vai para Mobile, nao para Engenharia de Software).
         """
         ranked = self.score_all(title, description)
         if not ranked:
@@ -287,24 +267,9 @@ class AreaClassifier:
     def _suporte_disjarcado(
         self, ranked: list[AreaScore], title: str
     ) -> AreaScore | None:
-        """Detecta vaga de suporte com titulo de papel generico.
-
-        Casos reais: "Analista de Sistemas Junior" cuja descricao fala
-        apenas de atendimento, chamados e suporte tecnico; e "Analista de
-        Sustentacao de Sistemas" (manutencao/suporte, nao desenvolvimento).
-
-        Caminho do papel generico: o titulo rotula o papel generico (que
-        pontua alto) e a area de Suporte nunca disputa. So aplica quando:
-          - todas as keywords de titulo da area generica sao do conjunto
-            de papeis genericos (analista de sistemas etc.);
-          - a descricao tem 3+ sinais de suporte;
-          - a descricao NAO tem stack de desenvolvimento (2+ keywords de
-            Backend/Frontend/etc.), para nao roubar vaga de dev que cita
-            suporte de passagem.
-
-        Caminho da sustentacao: o proprio titulo entrega ("sustentacao de
-        sistemas"); dispensa os sinais da descricao.
-        """
+        """Vaga de suporte com titulo de papel generico ("Analista de
+        Sistemas" cuja descricao e so atendimento/chamados) ou de
+        sustentacao."""
         eng = next((r for r in ranked if r.area in self.GENERIC_DEV_AREAS), None)
         if eng is None:
             return None
@@ -319,9 +284,6 @@ class AreaClassifier:
         if not caminho_generico and not caminho_sustentacao:
             return None
 
-        # Guard so para o papel generico: "Analista de Sustentacao de
-        # Sistemas" cita banco de dados/mysql na descricao com naturalidade
-        # (sustenta esses sistemas), sem deixar de ser suporte.
         if caminho_generico:
             for r in ranked:
                 if r.area in self._SUPORTE_STACKS_GUARD:

@@ -246,8 +246,7 @@ def _enriquecer(
                     resultado = {"description": resultado}
                 desc = resultado.get("description", "")
                 if not desc:
-                    # 404 = anuncio encerrado na fonte: nada a fazer, marca
-                    # para nunca mais buscar (a descricao atual fica como esta).
+                    # 404 = anuncio encerrado na fonte: nada a fazer.
                     if status == 404:
                         c.execute(
                             "UPDATE vagas SET enrich_encerrada = 1 WHERE id = ?",
@@ -287,11 +286,7 @@ def _enriquecer(
                             (vid, tid),
                         )
                 total += 1
-                # Busca concluida com sucesso: marca como resolvida para
-                # sair da fila de vez. Uma descricao REAL pode ter menos
-                # de 500 caracteres; sem este flag, vaga com postagem
-                # curta no portal era rebuscada toda rodada para sempre.
-                # 429 NAO chega aqui (nao salvou nada): tenta na proxima.
+                # Resolvida (descricao salva, mesmo curta): sai da fila.
                 c.execute(
                     "UPDATE vagas SET enrich_encerrada = 1 WHERE id = ?",
                     (vid,),

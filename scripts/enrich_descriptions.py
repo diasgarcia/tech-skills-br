@@ -6,10 +6,7 @@ PoliteSession (delay + retry em 429/5xx). O lock serializa os GETs para o
 delay valer; o parse roda em paralelo.
 
 `enrich_encerrada` marca o caso RESOLVIDO: busca com sucesso (descricao
-salvada) ou 404 (anuncio encerrado na fonte). 429 nao marca -- a vaga
-fica pendente para a proxima rodada. Descricoes reais podem ser curtas:
-sem a marcacao de sucesso, vaga com postagem curta ficaria na fila para
-sempre.
+salvada) ou 404 (anuncio encerrado na fonte). 429 nao marca.
 
 Nao ha janela de dias: vaga pendente e tentada em toda rodada ate dar
 certo (descricao salva) ou 404 (marcada como encerrada e nunca mais
@@ -17,9 +14,8 @@ buscada). Vagas antigas continuam vivas no LinkedIn por meses; cortar por
 data deixava descricao e skills perdidas para sempre.
 
 O criterio "exatamente 500 caracteres" (truncamento legado do CSV antigo)
-foi REMOVIDO: descricoes reais com 500 chars entravam na fila para
-sempre (o fetch devolvia o mesmo texto de 500 e a vaga nunca saia do
-estado pendente -- loop observado na vaga 4446807020).
+foi removido: descricoes reais com 500 chars ficavam na fila para sempre
+(loop observado na vaga 4446807020).
 """
 
 import logging
@@ -65,8 +61,6 @@ def fetch_one_description(
     job_id: str,
     parou: threading.Event,
 ) -> tuple[str, str, int | None]:
-    # Um 429 no meio do lote significa ban/rate limit: as futures
-    # enfileiradas nao devem continuar martelando a fonte.
     if parou.is_set():
         return job_id, "", 429
     url = DETAIL_API_URL.format(job_id=job_id)
@@ -179,9 +173,7 @@ def enrich_linkedin_jobs(
                                 )
 
                         enriched_count += 1
-                        # Busca concluida com sucesso: marca como
-                        # resolvida para sair da fila de vez (descricao
-                        # real pode ser curta; 429 nao chega aqui).
+                        # Resolvida: sai da fila (429 nao chega aqui).
                         c.execute(
                             "UPDATE vagas SET enrich_encerrada = 1 WHERE id = ?",
                             (db_id,),

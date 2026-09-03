@@ -44,13 +44,8 @@ API_URL = "https://apigw.solides.com.br/jobs/v3/portal-vacancies-new"
 
 
 def _url_publica(raw: dict) -> str:
-    """URL canonica da vaga no portal publico.
-
-    O `redirectLink` da API aponta para `<empresa>.solides.jobs`, um
-    padrao de subdominios que a Solides desativou (os hosts nem resolvem
-    mais). O front do portal usa `/vaga/{id}/{titulo-slug}`; o slug e o
-    titulo normalizado com hifens (mesmo algoritmo do Vagas.com).
-    """
+    """URL canonica do portal (/vaga/{id}/{titulo-slug}); o redirectLink
+    antigo aponta para subdominios que a Solides desativou."""
     vid = raw.get("id")
     titulo = (raw.get("title") or "").strip()
     if vid is not None and titulo:
