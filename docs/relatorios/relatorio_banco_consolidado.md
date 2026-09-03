@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (3138 vagas)
 
-- **Data de geração:** 03/09/2026 13:36
+- **Data de geração:** 03/09/2026 13:49
 - **Período coberto:** 05/01/2026 até 03/09/2026
 - **Total de vagas consolidadas:** 3138
 
