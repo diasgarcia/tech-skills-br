@@ -1,7 +1,8 @@
 # Regras para decidir se uma vaga e de nivel de entrada (junior/estagio/trainee).
 #
 # A checagem roda sobre o TITULO normalizado (minusculo, sem acento, pontuacao
-# virando espaco). Ex.: "Desenvolvedor Jr." -> "desenvolvedor jr"
+# virando espaco -- o PONTO e preservado para distinguir "N1" de "N1.5").
+# Ex.: "Desenvolvedor Jr." -> "desenvolvedor jr"
 #
 # Logica:
 #   1. Se casar algum padrao em `include`, a vaga entra com o rotulo daquele grupo.
@@ -18,9 +19,9 @@ include:
     - \bjunior\b
     - \bjr\b
     - \bjunior?es\b
-    - \bnivel 1\b
+    - \bnivel 1\b(?!\.\d)
     - \bnivel i\b
-    - \bn1\b
+    - \bn1\b(?!\.\d)
     - \btier 1\b
     - \bentry level\b
     - \biniciante\b
