@@ -232,6 +232,12 @@ suporte_infra:
 
   GLPI: [glpi]
   Zabbix: [zabbix]
+  Suporte Remoto: [suporte remoto, teamviewer, anydesk, vnc, acesso remoto]
+  Clonezilla: [clonezilla, clonagem de sistemas operacionais]
+  VirtualBox: [virtualbox, virtual box, xp mode, virtual pc]
+  SharePoint: [sharepoint]
+  Microsoft Teams: [microsoft teams, ms teams]
+  ITSM: [itsm, ferramentas de itsm]
   Backup: [backup, rotinas de backup, becape]
   VoIP: [voip, telefonia ip]
   Office 365: [office 365, o365, microsoft 365, m365]
