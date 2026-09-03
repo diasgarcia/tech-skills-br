@@ -353,7 +353,15 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
         impersonate="chrome",
     ) as session_vagas:
         c.execute(query_vagas, args_vagas)
-        logger.info("Vagas.com pendentes: %d", len(c.fetchall()))
+        pendentes_vagas = c.fetchall()
+        logger.info("Vagas.com pendentes: %d", len(pendentes_vagas))
+        # Experimento: visita uma listagem antes dos detalhes, na mesma
+        # sessao. O Cloudflare pode liberar detalhes para sessoes que
+        # "navegaram" o site (cookies de visitante/cf_clearance).
+        if pendentes_vagas:
+            session_vagas.get(
+                "https://www.vagas.com.br/vagas-de-desenvolvedor-junior"
+            )
         total_vagas = _enriquecer(
             c, session_vagas, lock, extractor, tech_map, query_vagas, args_vagas,
             lambda sess, lk, url: fetch_vagas_com(sess, lk, url),
