@@ -21,7 +21,7 @@ import logging
 import re
 from urllib.parse import urlparse
 
-from ..models import Job, normalize_workplace
+from ..models import Job, normalize, normalize_workplace
 from .base import JobSource
 
 logger = logging.getLogger(__name__)
@@ -50,7 +50,7 @@ _PAGINAS_GENERICAS = {
 
 def _nome_empresa(raw: dict) -> str:
     nome = (raw.get("careerPageName") or "").strip()
-    if nome.lower() in _PAGINAS_GENERICAS:
+    if normalize(nome) in _PAGINAS_GENERICAS:
         slug = urlparse(raw.get("careerPageUrl") or "").hostname or ""
         slug = slug.split(".")[0]
         palavras = [p.capitalize() for p in re.split(r"[-_ ]+", slug) if p]
