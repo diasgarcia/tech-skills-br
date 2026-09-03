@@ -30,16 +30,34 @@ busca do projeto.
 from __future__ import annotations
 
 import logging
+import re
 
 import yaml
 
 from ..config import RULES_DIR
-from ..models import Job, normalize_workplace
+from ..models import Job, normalize, normalize_workplace
 from .base import JobSource
 
 logger = logging.getLogger(__name__)
 
 API_URL = "https://apigw.solides.com.br/jobs/v3/portal-vacancies-new"
+
+
+def _url_publica(raw: dict) -> str:
+    """URL canonica da vaga no portal publico.
+
+    O `redirectLink` da API aponta para `<empresa>.solides.jobs`, um
+    padrao de subdominios que a Solides desativou (os hosts nem resolvem
+    mais). O front do portal usa `/vaga/{id}/{titulo-slug}`; o slug e o
+    titulo normalizado com hifens (mesmo algoritmo do Vagas.com).
+    """
+    vid = raw.get("id")
+    titulo = (raw.get("title") or "").strip()
+    if vid is not None and titulo:
+        slug = re.sub(r"\s+", "-", normalize(titulo)).strip("-")
+        if slug:
+            return f"https://vagas.solides.com.br/vaga/{vid}/{slug}"
+    return raw.get("redirectLink") or ""
 
 def _carregar_filtros() -> dict[str, dict[str, str]]:
     """Filtros nativos de nivel de entrada declarados em coletores.yml.
@@ -139,7 +157,7 @@ class SolidesSource(JobSource):
             external_id=str(job_id),
             title=title,
             company=raw.get("companyName") or "",
-            url=raw.get("redirectLink") or "",
+            url=_url_publica(raw),
             description=raw.get("description") or "",
             location=location,
             workplace_type=workplace,
