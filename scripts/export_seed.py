@@ -41,10 +41,7 @@ COLUNAS_EXPORTACAO = [
     "regiao",
     "polo",
     "enrich_encerrada",
-    # O id interno do banco, persistido para que a identidade numerica
-    # sobreviva entre as runs: o runner do CI recria o banco do zero a
-    # cada rodada, e sem esta coluna os ids mudariam para quase todas as
-    # vagas a cada coleta.
+    # Id interno do banco, persistido para os ids sobreviverem entre runs.
     "db_id",
 ]
 

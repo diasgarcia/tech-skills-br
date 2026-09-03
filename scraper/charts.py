@@ -22,9 +22,8 @@ from pathlib import Path
 import matplotlib
 
 matplotlib.use("Agg")
-# A DejaVu Sans (padrao no runner) nao tem peso 600, e o font_manager
-# tambem reclama do NotoColorEmoji a cada scan. Sao avisos sem efeito
-# visual: o 600 cai para 700 (bold) e o emoji nao e usado nos graficos.
+# A DejaVu Sans nao tem peso 600 e o NotoColorEmoji reclama no scan:
+# avisos sem efeito visual, silenciados.
 logging.getLogger("matplotlib.font_manager").setLevel(logging.ERROR)
 import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.patches import FancyBboxPatch, Rectangle  # noqa: E402
