@@ -166,6 +166,10 @@ tech_gate:
     - teleatendimento
     - assistente de loja
     - atendente de loja
+    - atendimento aos estudantes
+    - gestao de saude
+    - atendente de sac
+    - cobranca retencao
 
 
   descricao: # sinais estritos -- precisam sobreviver ao boilerplate das descricoes
@@ -653,6 +657,10 @@ areas:
       - suporte nivel 2
       - atendimento n1
       - atendimento n2
+      - n1
+      - n2
+      - nivel 1
+      - nivel 2
       - operador de service desk
       - operador de helpdesk
       - analista de suporte n1
@@ -686,6 +694,9 @@ areas:
       - suporte a hardware
       - suporte presencial
       - tecnico de campo
+      - volante
+      - field dedicado
+      - field service interno
     peso_medio:
       - hardware
       - impressora
