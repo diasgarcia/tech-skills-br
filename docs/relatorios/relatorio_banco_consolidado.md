@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (3138 vagas)
 
-- **Data de geração:** 03/09/2026 13:01
+- **Data de geração:** 03/09/2026 13:36
 - **Período coberto:** 05/01/2026 até 03/09/2026
 - **Total de vagas consolidadas:** 3138
 
@@ -8,15 +8,15 @@
 
 | Posição | Área | Vagas | % | Gráfico |
 |---|---|---|---|---|
-| 1 | Suporte Técnico | 946 | 30.1% | ######.............. |
-| 2 | Engenharia de Software | 449 | 14.3% | ###................. |
-| 3 | Infraestrutura / Redes | 269 | 8.6% | ##.................. |
+| 1 | Suporte Técnico | 951 | 30.3% | ######.............. |
+| 2 | Engenharia de Software | 453 | 14.4% | ###................. |
+| 3 | Infraestrutura / Redes | 270 | 8.6% | ##.................. |
 | 4 | Data | 223 | 7.1% | #................... |
-| 5 | Backend | 180 | 5.7% | #................... |
+| 5 | Backend | 182 | 5.8% | #................... |
 | 6 | Service Desk / Help Desk | 161 | 5.1% | #................... |
 | 7 | QA | 143 | 4.6% | #................... |
-| 8 | Outros/TI Geral | 123 | 3.9% | #................... |
-| 9 | Field Service / Hardware | 106 | 3.4% | #................... |
+| 8 | Outros/TI Geral | 110 | 3.5% | #................... |
+| 9 | Field Service / Hardware | 107 | 3.4% | #................... |
 | 10 | Sistemas / ERP | 106 | 3.4% | #................... |
 | 11 | Segurança | 101 | 3.2% | #................... |
 | 12 | Fullstack | 95 | 3.0% | #................... |
@@ -59,9 +59,9 @@
 
 | Modalidade | Vagas | % | Gráfico |
 |---|---|---|---|
-| Presencial | 2154 | 68.6% | ##############...... |
-| Remoto | 558 | 17.8% | ####................ |
-| Híbrido | 426 | 13.6% | ###................. |
+| Presencial | 2147 | 68.4% | ##############...... |
+| Remoto | 562 | 17.9% | ####................ |
+| Híbrido | 429 | 13.7% | ###................. |
 
 ## Distribuição por Nível de Entrada
 
@@ -87,26 +87,26 @@
 
 | Posição | Tecnologia | Vagas Citadas |
 |---|---|---|
-| 1 | Hardware | 578 |
-| 2 | Windows | 535 |
-| 3 | Redes de Computadores | 533 |
-| 4 | SQL | 531 |
-| 5 | Banco de Dados | 517 |
-| 6 | Inglês | 486 |
-| 7 | Python | 398 |
-| 8 | Git | 379 |
-| 9 | Inteligência Artificial | 369 |
-| 10 | Excel | 322 |
-| 11 | JavaScript | 321 |
-| 12 | Linux | 296 |
-| 13 | Análise de Dados | 262 |
-| 14 | Engenharia de Software | 257 |
-| 15 | ERP | 220 |
-| 16 | API REST | 215 |
-| 17 | Montagem e Manutenção de PCs | 213 |
-| 18 | Manutenção Preventiva | 209 |
-| 19 | Metodologias Ágeis | 208 |
-| 20 | Office 365 | 205 |
+| 1 | Hardware | 587 |
+| 2 | Windows | 547 |
+| 3 | Redes de Computadores | 547 |
+| 4 | SQL | 535 |
+| 5 | Banco de Dados | 522 |
+| 6 | Inglês | 497 |
+| 7 | Python | 403 |
+| 8 | Git | 383 |
+| 9 | Inteligência Artificial | 372 |
+| 10 | Excel | 328 |
+| 11 | JavaScript | 325 |
+| 12 | Linux | 305 |
+| 13 | Análise de Dados | 263 |
+| 14 | Engenharia de Software | 261 |
+| 15 | ERP | 223 |
+| 16 | API REST | 216 |
+| 17 | Montagem e Manutenção de PCs | 215 |
+| 18 | Manutenção Preventiva | 212 |
+| 19 | Metodologias Ágeis | 211 |
+| 20 | Office 365 | 209 |
 
 ## Top 10 Empresas com Mais Vagas
 
