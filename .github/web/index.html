@@ -1025,7 +1025,11 @@ function renderVagasTable() {
       ? `<a href="${v.url}" target="_blank" rel="noopener noreferrer" style="color: var(--accent); font-weight: 700; text-decoration: none;">${v.titulo} <span style="font-size: 11px; opacity: 0.8;">↗</span></a>`
       : `<strong>${v.titulo}</strong>`;
 
-    const polo = v.polo || v.localidade || "";
+    // Mostra a cidade quando a localidade traz uma de verdade; o polo
+    // regional ("Interior Paulista Ocidental") vira fallback.
+    const locNorm = normalizeSearchText(v.localidade || "");
+    const cidade = locNorm && !["brasil", "nao informado"].includes(locNorm) ? v.localidade : "";
+    const polo = cidade || v.polo || "";
     const modalidade = v.modalidade || "";
     const exibePolo = polo && polo.toLowerCase() !== modalidade.toLowerCase();
     const localHtml = exibePolo ? `<span class="job-place">${polo}</span>` : "";
