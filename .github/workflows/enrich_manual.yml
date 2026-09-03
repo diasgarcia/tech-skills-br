@@ -42,8 +42,8 @@ jobs:
 
     - name: 5. Enriquecer descricoes pendentes
       run: |
-        python scripts/enrich_outras_fontes.py 2>&1 | tee /tmp/enrich.log
-        python scripts/enrich_descriptions.py 2>&1 | tee -a /tmp/enrich.log
+        python -u scripts/enrich_outras_fontes.py 2>&1 | tee /tmp/enrich.log
+        python -u scripts/enrich_descriptions.py 2>&1 | tee -a /tmp/enrich.log
       env:
         PYTHONPATH: .
 
