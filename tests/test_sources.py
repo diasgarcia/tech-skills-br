@@ -247,7 +247,12 @@ def test_solides_parse_mapeia_campos():
     assert job.workplace_type == "Presencial"
     assert job.published_date == "2026-08-29"
     assert job.seniority == "Júnior"
-    assert job.url == "https://empresa.solides.jobs/vacancies/911953?origem=portal"
+    # O redirectLink (`empresa.solides.jobs`) foi desativado pela Solides:
+    # a URL salva e a canonica do portal (/vaga/{id}/{titulo-slug}).
+    assert job.url == (
+        "https://vagas.solides.com.br/vaga/911953/"
+        "desenvolvedor-a-junior-prestacao-de-servicos-pj-em-franca-sp"
+    )
     assert "Desenvolvedora Júnior" in job.description
 
 
