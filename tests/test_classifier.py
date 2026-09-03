@@ -153,6 +153,35 @@ def test_suporte_tecnico_vai_para_area_propria(clf):
     assert clf.classify("Técnico de Suporte Júnior").area == "Suporte Técnico"
 
 
+@pytest.mark.parametrize(
+    "title,expected",
+    [
+        ("Analista de Suporte N1 Junior", "Service Desk / Help Desk"),
+        ("Técnico de Suporte Júnior Nível 1", "Service Desk / Help Desk"),
+        ("Jovem Aprendiz | Service Desk - Suporte de TI", "Service Desk / Help Desk"),
+        ("Estagiário de TI – Infraestrutura", "Infraestrutura / Redes"),
+        ("Estagiário de suporte técnico TI (Infraestrutura e Redes)", "Infraestrutura / Redes"),
+        ("Técnico de Suporte Júnior VOLANTE", "Field Service / Hardware"),
+        ("Técnico Suporte Júnior - Field Dedicado", "Field Service / Hardware"),
+    ],
+)
+def test_titulo_especifico_vence_suporte_generico(clf, title, expected):
+    assert clf.classify(title).area == expected
+
+
+@pytest.mark.parametrize(
+    "title",
+    [
+        "Estagiário(a) Atendimento Aos Estudantes",
+        "Analista de Gestão de Saúde Jr",
+        "Atendente de SAC",
+        "Suporte Técnico - Cobrança/Retenção",
+    ],
+)
+def test_tech_gate_descarta_nao_tech_do_suporte(clf, title):
+    assert clf.is_tech(title) is False
+
+
 def test_seguranca_nao_dispara_com_a_palavra_solta(clf):
     result = clf.classify(
         "Analista de Suporte Técnico Júnior",

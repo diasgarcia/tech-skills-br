@@ -187,8 +187,12 @@ class AreaClassifier:
             return True
         return any(p.search(body_text) for p in self._strong_patterns())
 
-    # Areas de desenvolvimento generico: nao contam como "especificas"
-    # na precedencia de titulo abaixo.
+    # Areas "genericas" na precedencia de titulo: quando outra area casa
+    # keyword de peso alto no titulo, ela vence estas ("Analista de
+    # Suporte N1" vai para Service Desk, nao para Suporte Tecnico).
+    GENERIC_TITULO_AREAS = ("Engenharia de Software", "Suporte Técnico")
+
+    # So estes papeis genericos podem cair na regra de suporte disfarcado.
     GENERIC_DEV_AREAS = ("Engenharia de Software",)
 
     _SUPORTE_TITULOS_GENERICOS = frozenset(
@@ -248,7 +252,7 @@ class AreaClassifier:
             especificos = [
                 r
                 for r in candidates
-                if r.title_strong and r.area not in self.GENERIC_DEV_AREAS
+                if r.title_strong and r.area not in self.GENERIC_TITULO_AREAS
             ]
             best = (especificos or candidates)[0]
         else:
@@ -256,6 +260,14 @@ class AreaClassifier:
 
         if best.score < self.min_score:
             return AreaScore(self.fallback_area, 0.0, [])
+
+        if best.area == "Suporte Técnico" and "infraestrutura" in normalize(title):
+            infra = next(
+                (r for r in ranked if r.area == "Infraestrutura / Redes"), None
+            )
+            if infra is not None:
+                return infra
+            return AreaScore("Infraestrutura / Redes", 4.0, ["infraestrutura"])
 
         if best.area in self.GENERIC_DEV_AREAS:
             suporte = self._suporte_disjarcado(ranked, title)
