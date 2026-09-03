@@ -18,6 +18,8 @@ Detalhes praticos descobertos testando o endpoint ao vivo:
 from __future__ import annotations
 
 import logging
+import re
+from urllib.parse import urlparse
 
 from ..models import Job, normalize_workplace
 from .base import JobSource
@@ -26,6 +28,36 @@ logger = logging.getLogger(__name__)
 
 API_URL = "https://employability-portal.gupy.io/api/v1/jobs"
 MAX_LIMIT = 100
+
+# Paginas de carreiras COMPARTILHADAS (holdings): o careerPageName rotula
+# a pagina, nao a empresa. Ex.: Grupo Fertipar -> "Agronegocio". Nesses
+# casos a empresa vem do subdominio da URL (grupofertipar.gupy.io).
+_PAGINAS_GENERICAS = {
+    "agronegocio",
+    "banco de talentos",
+    "banco talentos",
+    "carreiras",
+    "vagas",
+    "portal de vagas",
+    "trabalhe conosco",
+    "talentos",
+    "gente e gestao",
+    "rh",
+    "empregos",
+    "carreiras e talentos",
+}
+
+
+def _nome_empresa(raw: dict) -> str:
+    nome = (raw.get("careerPageName") or "").strip()
+    if nome.lower() in _PAGINAS_GENERICAS:
+        slug = urlparse(raw.get("careerPageUrl") or "").hostname or ""
+        slug = slug.split(".")[0]
+        palavras = [p.capitalize() for p in re.split(r"[-_ ]+", slug) if p]
+        derivado = " ".join(palavras)
+        if derivado:
+            return derivado
+    return nome
 
 
 class GupySource(JobSource):
@@ -95,7 +127,7 @@ class GupySource(JobSource):
             source=self.name,
             external_id=str(job_id),
             title=title,
-            company=raw.get("careerPageName") or "",
+            company=_nome_empresa(raw),
             url=url,
             description=raw.get("description") or "",
             location=location,
