@@ -143,6 +143,29 @@ tech_gate:
     # "Estagiario para Area de Processos e Qualidade": "analise de sistemas"
     # aparece so como nome de curso nos requisitos.
     - area de processos
+    # Recorte da pesquisa: so vagas de TECNOLOGIA. Titulos de campo,
+    # vendas, call center e loja saem; suporte de TI continua entrando.
+    - instalador
+    - reparador
+    - fibra optica
+    - fibra otica
+    - promotor de vendas
+    - promotora de vendas
+    - promotor a de vendas
+    - pre vendas
+    - vendas b2b
+    - consultor de vendas
+    - executivo de vendas
+    - planejamento de vendas
+    - vendedor
+    - vendedora
+    - sdr
+    - call center
+    - callcenter
+    - telemarketing
+    - teleatendimento
+    - assistente de loja
+    - atendente de loja
 
 
   descricao: # sinais estritos -- precisam sobreviver ao boilerplate das descricoes
