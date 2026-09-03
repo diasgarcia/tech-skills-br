@@ -343,15 +343,14 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
         backoff_factor=1.5,
     ) as session, PoliteSession(
         # Vagas.com e protegido por Cloudflare com bot-check: o fingerprint
-        # de navegador (curl_cffi) e necessario, delay maior para nao
-        # estourar o rate limit por IP, e safari testa uma identidade
-        # diferente do chrome (o limite parece valer por IP+fingerprint).
+        # de navegador (curl_cffi) e necessario; delay maior para nao
+        # estourar o rate limit por IP.
         user_agent=USER_AGENT,
-        delay_seconds=3.0,
+        delay_seconds=2.0,
         timeout_seconds=12,
         max_retries=2,
         backoff_factor=1.5,
-        impersonate="safari17_0",
+        impersonate="chrome",
     ) as session_vagas:
         c.execute(query_vagas, args_vagas)
         logger.info("Vagas.com pendentes: %d", len(c.fetchall()))
