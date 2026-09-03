@@ -1,5 +1,768 @@
 [
   {
+    "id": 3299,
+    "titulo": "TÉCNICO DE SUPORTE JÚNIOR",
+    "empresa": "Quality Digital",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Camaçari, Bahia",
+    "polo": "Salvador",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "gupy",
+    "url": "https://qualitydigital.gupy.io/job/eyJqb2JJZCI6MTIzMjM4NDYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": [
+      "Hardware",
+      "Manutenção Preventiva",
+      "Service Desk"
+    ]
+  },
+  {
+    "id": 3298,
+    "titulo": "Estágio TI",
+    "empresa": "Grupo Fertipar",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Curitiba, PR",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-ti-at-grupo-fertipar-4463123848",
+    "tecnologias": [
+      "Automação",
+      "Excel"
+    ]
+  },
+  {
+    "id": 3297,
+    "titulo": "Estagiário de TI - Lokamig",
+    "empresa": "TORA",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Belo Horizonte, MG",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Remoto",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-de-ti-lokamig-at-tora-4463123609",
+    "tecnologias": [
+      "Redes de Computadores",
+      "Suporte Remoto"
+    ]
+  },
+  {
+    "id": 3296,
+    "titulo": "Estagiário de TI",
+    "empresa": "LiuGong Latin America",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Mogi Guaçu, SP",
+    "polo": "Estado/SP",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-de-ti-at-liugong-latin-america-4460754262",
+    "tecnologias": [
+      "Hardware",
+      "ITIL",
+      "Inglês"
+    ]
+  },
+  {
+    "id": 3295,
+    "titulo": "Auxiliar de Suporte de TI",
+    "empresa": "Viação União Santa Cruz",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Santa Cruz do Sul, RS",
+    "polo": "Santa Maria",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/auxiliar-de-suporte-de-ti-at-via%C3%A7%C3%A3o-uni%C3%A3o-santa-cruz-4460759178",
+    "tecnologias": []
+  },
+  {
+    "id": 3294,
+    "titulo": "Assistente de Suporte em TI",
+    "empresa": "Salux Technology",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Manaus, AM",
+    "polo": "Manaus",
+    "regiao": "Norte",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-em-ti-at-salux-technology-4461910013",
+    "tecnologias": [
+      "ERP",
+      "Hardware",
+      "Redes de Computadores",
+      "Windows"
+    ]
+  },
+  {
+    "id": 3293,
+    "titulo": "Analista de Suporte de TI Júnior | São Paulo - Pinheiros",
+    "empresa": "Klabin",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-de-ti-j%C3%BAnior-s%C3%A3o-paulo-pinheiros-at-klabin-4463102314",
+    "tecnologias": [
+      "Antivírus",
+      "Excel",
+      "Hardware",
+      "ITIL",
+      "Office 365",
+      "SAP",
+      "SLA",
+      "Windows"
+    ]
+  },
+  {
+    "id": 3292,
+    "titulo": "Analista de Suporte de TI Júnior | ARGENTA",
+    "empresa": "Ecossistema ARGENTA",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Flores da Cunha, Rio Grande do Sul",
+    "polo": "Caxias do Sul",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "gupy",
+    "url": "https://argenta.gupy.io/job/eyJqb2JJZCI6MTI0MTY3NDAsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": [
+      "IAM",
+      "Suporte N1/N2"
+    ]
+  },
+  {
+    "id": 3291,
+    "titulo": "Analista de Suporte Técnico Júnior",
+    "empresa": "Audaces",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Florianópolis, SC",
+    "polo": "Florianópolis",
+    "regiao": "Sul",
+    "modalidade": "Híbrido",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-t%C3%A9cnico-j%C3%BAnior-at-audaces-4461695347",
+    "tecnologias": [
+      "CRM",
+      "ERP",
+      "Suporte Remoto"
+    ]
+  },
+  {
+    "id": 3290,
+    "titulo": "Analista de Suporte Júnior",
+    "empresa": "Agrotools",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "São José dos Campos, SP",
+    "polo": "São José dos Campos",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-j%C3%BAnior-at-agrotools-4461907122",
+    "tecnologias": [
+      "Excel",
+      "GLPI",
+      "Grafana",
+      "Help Desk",
+      "ITIL",
+      "Inglês",
+      "Jira",
+      "Postman",
+      "Python",
+      "SQL",
+      "Word",
+      "Zendesk"
+    ]
+  },
+  {
+    "id": 3289,
+    "titulo": "Analista de Suporte Junior - São Joao da Boa Vista",
+    "empresa": "CTC",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "São João da Boa Vista, SP",
+    "polo": "Boa Vista",
+    "regiao": "Norte",
+    "modalidade": "Remoto",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-junior-s%C3%A3o-joao-da-boa-vista-at-ctc-4461691619",
+    "tecnologias": [
+      "Active Directory",
+      "Antivírus",
+      "Backup",
+      "Hardware",
+      "ITSM",
+      "LGPD",
+      "Montagem e Manutenção de PCs",
+      "Office 365",
+      "Redes de Computadores",
+      "Windows"
+    ]
+  },
+  {
+    "id": 3288,
+    "titulo": "Desenvolvedor(a) ServiceNow Junior| Brasil",
+    "empresa": "Deloitte",
+    "area": "Sistemas / ERP",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Remoto",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-servicenow-junior-brasil-at-deloitte-4462882835",
+    "tecnologias": []
+  },
+  {
+    "id": 3285,
+    "titulo": "Analista de testes Junior",
+    "empresa": "Atlantic Solutions Brasil",
+    "area": "QA",
+    "senioridade": "Júnior",
+    "localidade": "Barueri, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-testes-junior-at-atlantic-solutions-brazil-4463113733",
+    "tecnologias": [
+      "Engenharia de Software",
+      "ITIL",
+      "Metodologias Ágeis",
+      "Scrum",
+      "Testes Funcionais",
+      "Testes Manuais"
+    ]
+  },
+  {
+    "id": 3283,
+    "titulo": "Técnico em T.I JR",
+    "empresa": "Karsten S.A.",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Blumenau, SC",
+    "polo": "Blumenau",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-em-t-i-jr-at-karsten-s-a-4460745936",
+    "tecnologias": []
+  },
+  {
+    "id": 3282,
+    "titulo": "Trainee Tecnologia",
+    "empresa": "Grupo Nacional Controladoria",
+    "area": "Engenharia de Software",
+    "senioridade": "Trainee",
+    "localidade": "Uberlândia, MG",
+    "polo": "Uberlândia",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/trainee-tecnologia-at-grupo-nacional-controladoria-4460759411",
+    "tecnologias": [
+      "Automação",
+      "Engenharia de Software"
+    ]
+  },
+  {
+    "id": 3281,
+    "titulo": "Pessoa Estagiária de Sistemas Belo Horizonte - MG and Hybrid Internship",
+    "empresa": "Atlantic Nickel",
+    "area": "Engenharia de Software",
+    "senioridade": "Estágio",
+    "localidade": "Belo Horizonte e Região",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/pessoa-estagi%C3%A1ria-de-sistemas%0Abelo-horizonte-mg-and-hybrid%0Ainternship-at-atlantic-nickel-4462898800",
+    "tecnologias": [
+      "Análise de Dados",
+      "Automação",
+      "Banco de Dados",
+      "C#",
+      "Engenharia de Software",
+      "Java",
+      "LGPD",
+      "Metodologias Ágeis",
+      "Python",
+      "SQL",
+      "Scrum"
+    ]
+  },
+  {
+    "id": 3280,
+    "titulo": "Pessoa Estagiária de Sistemas",
+    "empresa": "Atlantic Nickel",
+    "area": "Engenharia de Software",
+    "senioridade": "Estágio",
+    "localidade": "Belo Horizonte, MG",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/pessoa-estagi%C3%A1ria-de-sistemas-at-atlantic-nickel-4461902313",
+    "tecnologias": [
+      "Análise de Dados",
+      "Automação",
+      "Banco de Dados",
+      "C#",
+      "Engenharia de Software",
+      "Java",
+      "LGPD",
+      "Metodologias Ágeis",
+      "Python",
+      "SQL",
+      "Scrum"
+    ]
+  },
+  {
+    "id": 3279,
+    "titulo": "Pessoa Estagiária de Desenvolvimento em IA Belo Horizonte - MG and Hybrid Internship",
+    "empresa": "Atlantic Nickel",
+    "area": "Engenharia de Software",
+    "senioridade": "Estágio",
+    "localidade": "Belo Horizonte e Região",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/pessoa-estagi%C3%A1ria-de-desenvolvimento-em-ia%0Abelo-horizonte-mg-and-hybrid%0Ainternship-at-atlantic-nickel-4463102720",
+    "tecnologias": [
+      "Análise de Dados",
+      "Automação",
+      "Banco de Dados",
+      "C#",
+      "Engenharia de Software",
+      "Inteligência Artificial",
+      "Java",
+      "LGPD",
+      "Metodologias Ágeis",
+      "Python",
+      "SQL",
+      "Scrum"
+    ]
+  },
+  {
+    "id": 3278,
+    "titulo": "Estágio em TI",
+    "empresa": "METALSIDER LTDA",
+    "area": "Outros/TI Geral",
+    "senioridade": "Estágio",
+    "localidade": "Betim, Minas Gerais",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "gupy",
+    "url": "https://metalsider.gupy.io/job/eyJqb2JJZCI6MTIxNjUzNzUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": [
+      "Hardware",
+      "Manutenção Preventiva"
+    ]
+  },
+  {
+    "id": 3277,
+    "titulo": "Estágio em Automação de Processos e Tecnologia",
+    "empresa": "Grupo Superbid",
+    "area": "Engenharia de Software",
+    "senioridade": "Estágio",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-automa%C3%A7%C3%A3o-de-processos-e-tecnologia-at-grupo-superbid-4463147156",
+    "tecnologias": [
+      "Automação",
+      "Engenharia de Software"
+    ]
+  },
+  {
+    "id": 3276,
+    "titulo": "Assistente de Negócios em TI",
+    "empresa": "Cognizant",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo / SP A empresa aceita candidaturas de São Paulo e cidades próximas",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "vagas",
+    "url": "https://www.vagas.com.br/vagas/v2833598/assistente-de-negocios-em-ti",
+    "tecnologias": [
+      "Inglês"
+    ]
+  },
+  {
+    "id": 3275,
+    "titulo": "Assistente Administrativo (TI) | Cresol Excelência | Sede Administrativa (São Joaquim/SC)",
+    "empresa": "Cresol Oficial",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "São Joaquim, Santa Catarina",
+    "polo": "Não informado",
+    "regiao": "Não informado",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "gupy",
+    "url": "https://cresolcarreiras.gupy.io/job/eyJqb2JJZCI6MTI0MTgyMDksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": []
+  },
+  {
+    "id": 3274,
+    "titulo": "Estágio em Inteligência Artificial Generativa",
+    "empresa": "SLC Agrícola",
+    "area": "Inteligência Artificial",
+    "senioridade": "Estágio",
+    "localidade": "Porto Alegre, Rio Grande do Sul",
+    "polo": "Porto Alegre",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "gupy",
+    "url": "https://slcagricola.gupy.io/job/eyJqb2JJZCI6MTE5ODM5NDQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": [
+      "Análise de Dados",
+      "Automação",
+      "Copilots & Assistentes de IA",
+      "Inteligência Artificial",
+      "LLMs & IA Generativa",
+      "Python"
+    ]
+  },
+  {
+    "id": 3273,
+    "titulo": "Estágiario(a) Techtudo",
+    "empresa": "EDITORA GLOBO",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Estágio",
+    "localidade": "Rio de Janeiro / RJ A empresa aceita candidaturas de Rio de Janeiro e cidades próximas",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "vagas",
+    "url": "https://www.vagas.com.br/vagas/v2833575/estagiario-a-techtudo",
+    "tecnologias": [
+      "Análise de Dados",
+      "Banco de Dados",
+      "Inglês"
+    ]
+  },
+  {
+    "id": 3272,
+    "titulo": "ESTÁGIO DE TECNOLOGIA DA INFORMAÇÃO",
+    "empresa": "Bauducco",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Estágio",
+    "localidade": "Guarulhos, São Paulo",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "gupy",
+    "url": "https://bauducco.gupy.io/job/eyJqb2JJZCI6MTI0MTgyODYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": [
+      "Inteligência Artificial"
+    ]
+  },
+  {
+    "id": 3271,
+    "titulo": "Analista de Infraestrutura Júnior | Esteio/RS",
+    "empresa": "Ecossistema ARGENTA",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Júnior",
+    "localidade": "Esteio, Rio Grande do Sul",
+    "polo": "Pelotas",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "gupy",
+    "url": "https://argenta.gupy.io/job/eyJqb2JJZCI6MTI0MTk4ODUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": [
+      "Active Directory",
+      "Hardware",
+      "Linux",
+      "Redes de Computadores",
+      "Shell/Bash",
+      "Windows"
+    ]
+  },
+  {
+    "id": 3270,
+    "titulo": "Engenheiro(a) de Software Junior(Full stack) | IT Accounting Clients & Finance Report",
+    "empresa": "BTG Pactual",
+    "area": "Fullstack",
+    "senioridade": "Júnior",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/engenheiro-a-de-software-junior-full-stack-it-accounting-clients-finance-report-at-btg-pactual-4462892770",
+    "tecnologias": [
+      ".NET",
+      "AWS",
+      "Algoritmos",
+      "Banco de Dados",
+      "C#",
+      "Design Patterns",
+      "Docker",
+      "Metodologias Ágeis",
+      "POO"
+    ]
+  },
+  {
+    "id": 3269,
+    "titulo": "Estágio em Desenvolvimento Front-End",
+    "empresa": "juscalculos",
+    "area": "Frontend",
+    "senioridade": "Estágio",
+    "localidade": "Salvador, BA",
+    "polo": "Salvador",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-desenvolvimento-front-end-at-juscalculos-4460764556",
+    "tecnologias": [
+      "Git",
+      "JavaScript",
+      "UX/UI",
+      "Vue.js"
+    ]
+  },
+  {
+    "id": 3267,
+    "titulo": "Pessoa Estagiária de Desenvolvimento em IA",
+    "empresa": "Atlantic Nickel",
+    "area": "Engenharia de Software",
+    "senioridade": "Estágio",
+    "localidade": "Belo Horizonte, Minas Gerais",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": "03/09/2026",
+    "fonte": "gupy",
+    "url": "https://atlanticnickel.gupy.io/job/eyJqb2JJZCI6MTIwMjg3NjUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": [
+      "Análise de Dados",
+      "Automação",
+      "Banco de Dados",
+      "C#",
+      "Engenharia de Software",
+      "Inteligência Artificial",
+      "Java",
+      "LGPD",
+      "Metodologias Ágeis",
+      "Python",
+      "SQL",
+      "Scrum"
+    ]
+  },
+  {
+    "id": 3266,
+    "titulo": "Analista de Sistemas Júnior",
+    "empresa": "Construtora Tenda",
+    "area": "Engenharia de Software",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, São Paulo",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": "03/09/2026",
+    "fonte": "gupy",
+    "url": "https://tenda.gupy.io/job/eyJqb2JJZCI6MTIzODQ3MDIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": [
+      "Banco de Dados",
+      "ERP",
+      "SAP",
+      "Testes Funcionais"
+    ]
+  },
+  {
+    "id": 3263,
+    "titulo": "Estágio Business Intelligence",
+    "empresa": "Centro de Integração Empresa Escola",
+    "area": "Data",
+    "senioridade": "Estágio",
+    "localidade": "Localização não informada",
+    "polo": "Não informado",
+    "regiao": "Não informado",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "vagas",
+    "url": "https://www.vagas.com.br/vagas/v2833525/estagio-business-intelligence",
+    "tecnologias": [
+      "Análise de Dados",
+      "BI",
+      "Excel",
+      "Inglês",
+      "Power BI",
+      "Qualidade de Dados"
+    ]
+  },
+  {
+    "id": 3262,
+    "titulo": "Estagiário(a) em Tecnologia da Informação | Dados, Automação e Projetos",
+    "empresa": "Louis Dreyfus Company",
+    "area": "Data",
+    "senioridade": "Estágio",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-em-tecnologia-da-informa%C3%A7%C3%A3o-dados-automa%C3%A7%C3%A3o-e-projetos-at-louis-dreyfus-company-4460757757",
+    "tecnologias": [
+      "Análise de Dados",
+      "Automação",
+      "Engenharia de Software",
+      "Excel",
+      "Inglês",
+      "Power BI"
+    ]
+  },
+  {
+    "id": 3261,
+    "titulo": "Analista de Dados - Júnior",
+    "empresa": "Valora Gestão de Investimentos - VGI",
+    "area": "Data",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-dados-j%C3%BAnior-at-valora-gest%C3%A3o-de-investimentos-vgi-4460752147",
+    "tecnologias": [
+      "Banco de Dados",
+      "CRM",
+      "Data Warehouse",
+      "ERP",
+      "ETL",
+      "Modelagem de Dados",
+      "NumPy",
+      "Oracle",
+      "Pandas",
+      "PostgreSQL",
+      "Power BI",
+      "Python",
+      "SQL",
+      "SQL Server"
+    ]
+  },
+  {
+    "id": 3259,
+    "titulo": "Analista de Business Intelligence Junior",
+    "empresa": "SLC Agrícola S/A",
+    "area": "Data",
+    "senioridade": "Júnior",
+    "localidade": "Porto Alegre e Região",
+    "polo": "Porto Alegre",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-business-intelligence-junior-at-slc-agr%C3%ADcola-4461697768",
+    "tecnologias": [
+      "BI",
+      "Data Lake",
+      "Databricks",
+      "Estatística",
+      "Power BI",
+      "SQL",
+      "Spark"
+    ]
+  },
+  {
+    "id": 3258,
+    "titulo": "Estágio em Software Embarcado",
+    "empresa": "Nidec Global Appliance",
+    "area": "Backend",
+    "senioridade": "Estágio",
+    "localidade": "Joinville, SC",
+    "polo": "Joinville",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-software-embarcado-at-nidec-global-appliance-4460748873",
+    "tecnologias": [
+      "C",
+      "Eletrônica",
+      "Hardware",
+      "Inglês",
+      "MATLAB",
+      "Python",
+      "Sistemas Embarcados"
+    ]
+  },
+  {
+    "id": 3257,
+    "titulo": "Analista Desenvolvedor Java Júnior",
+    "empresa": "Anbima",
+    "area": "Backend",
+    "senioridade": "Júnior",
+    "localidade": "Rio de Janeiro, Rio de Janeiro",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": "03/09/2026",
+    "fonte": "gupy",
+    "url": "https://anbima.gupy.io/job/eyJqb2JJZCI6MTIzNzg2MjksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    "tecnologias": [
+      "Angular",
+      "Banco de Dados",
+      "Engenharia de Software",
+      "Java",
+      "JavaEE",
+      "Metodologias Ágeis",
+      "Modelagem de Dados",
+      "Oracle",
+      "SQL",
+      "Scrum"
+    ]
+  },
+  {
     "id": 3255,
     "titulo": "Estágio TI",
     "empresa": "Grupofertipar",
@@ -74,26 +837,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2833444/analista-de-suporte-tecnico-jr",
     "tecnologias": [
-      "Android",
-      "Backup",
-      "Banco de Dados",
-      "Clonezilla",
-      "Hardware",
-      "ITIL",
-      "ITSM",
-      "Inglês",
-      "Linux",
-      "Manutenção Preventiva",
-      "Microsoft Teams",
-      "Oracle",
-      "Service Desk",
-      "SharePoint",
-      "Shell/Bash",
-      "Suporte Remoto",
-      "VMware",
-      "VirtualBox",
-      "Windows",
-      "iOS"
+      "Linux"
     ]
   },
   {
@@ -300,7 +1044,7 @@
   {
     "id": 3241,
     "titulo": "Analista de Redes (N1.5)",
-    "empresa": "Nava Technology for Business",
+    "empresa": "nava-technology-for-business-1",
     "area": "Infraestrutura / Redes",
     "senioridade": "Júnior",
     "localidade": "Campinas, SP, Brasil",
@@ -311,11 +1055,7 @@
     "fonte": "geekhunter",
     "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-redes--n1-5--1",
     "tecnologias": [
-      "Cisco",
-      "Firewall",
-      "Redes de Computadores",
-      "VPN",
-      "Zabbix"
+      "Redes de Computadores"
     ]
   },
   {
@@ -332,11 +1072,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/programador-junior-php-at-olimpio-de-azevedo-advogados-4460730086",
     "tecnologias": [
-      "CSS",
-      "HTML",
-      "JavaScript",
-      "PHP",
-      "SQL"
+      "PHP"
     ]
   },
   {
@@ -369,7 +1105,7 @@
   {
     "id": 3237,
     "titulo": "Analista de Sistemas Operacionais",
-    "empresa": "Nava Technology for Business",
+    "empresa": "nava-technology-for-business-1",
     "area": "Engenharia de Software",
     "senioridade": "Júnior",
     "localidade": "Campinas, SP, Brasil",
@@ -413,7 +1149,6 @@
       "Banco de Dados",
       "Copilots & Assistentes de IA",
       "ERP",
-      "Inglês",
       "Inteligência Artificial",
       "TOTVS"
     ]
@@ -501,11 +1236,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-dados-e-crm-jr-at-selpe-vagas-4460717832",
     "tecnologias": [
-      "Análise de Dados",
-      "CRM",
-      "Copilots & Assistentes de IA",
-      "Inteligência Artificial",
-      "SQL"
+      "CRM"
     ]
   },
   {
@@ -540,7 +1271,7 @@
   {
     "id": 3227,
     "titulo": "Analista de Banco de Dados",
-    "empresa": "Nava Technology for Business",
+    "empresa": "nava-technology-for-business-1",
     "area": "Backend",
     "senioridade": "Júnior",
     "localidade": "Campinas, SP, Brasil",
@@ -551,16 +1282,7 @@
     "fonte": "geekhunter",
     "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-banco-de-dados--10",
     "tecnologias": [
-      "Assembly",
-      "Backup",
-      "Banco de Dados",
-      "Modelagem de Dados",
-      "MySQL",
-      "Oracle",
-      "SAP",
-      "SQL",
-      "SQL Server",
-      "Zabbix"
+      "Banco de Dados"
     ]
   },
   {
@@ -1073,47 +1795,6 @@
     ]
   },
   {
-    "id": 3130,
-    "titulo": "Pessoa Desenvolvedora Full-Stack (Foco em Front-end) JR",
-    "empresa": "consultoria-karina-matheus",
-    "area": "Fullstack",
-    "senioridade": "Júnior",
-    "localidade": "Florianópolis, SC, Brasil",
-    "polo": "Florianópolis",
-    "regiao": "Sul",
-    "modalidade": "Híbrido",
-    "data_publicacao": "03/09/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/consultoria-karina-matheus/jobs/pessoa-desenvolvedora-full-stack--foco-em-front-end--jr-1",
-    "tecnologias": [
-      "API REST",
-      "Análise de Dados",
-      "Automação Industrial",
-      "Banco de Dados",
-      "C#",
-      "CI/CD",
-      "CSS",
-      "Expo",
-      "Figma",
-      "Git",
-      "Go",
-      "Grafana",
-      "HTML",
-      "JavaScript",
-      "Node.js",
-      "PostgreSQL",
-      "React",
-      "React Native",
-      "SQL",
-      "Svelte",
-      "Testes Automatizados",
-      "TypeScript",
-      "UX/UI",
-      "Vue.js",
-      "WebSockets"
-    ]
-  },
-  {
     "id": 1699,
     "titulo": "2026-041 ANALISTA DE SISTEMAS JR/PL",
     "empresa": "ATECH – NEGÓCIOS EM TECNOLOGIAS S/A",
@@ -1217,6 +1898,34 @@
       "Serverless",
       "Terraform",
       "TypeScript"
+    ]
+  },
+  {
+    "id": 3286,
+    "titulo": "Analista de Cibersegurança Júnior - RJ",
+    "empresa": "Asper",
+    "area": "Segurança",
+    "senioridade": "Júnior",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "linkedin",
+    "url": "https://br.linkedin.com/jobs/view/analista-de-ciberseguran%C3%A7a-j%C3%BAnior-rj-at-asper-4461671908",
+    "tecnologias": [
+      "Cibersegurança",
+      "Espanhol",
+      "Estrutura de Dados",
+      "Firewall",
+      "IAM",
+      "ITIL",
+      "ITSM",
+      "Inglês",
+      "Jira",
+      "SIEM/SOC",
+      "SLA",
+      "Service Desk"
     ]
   },
   {
@@ -1393,14 +2102,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-de-suporte-de-ti-%E2%80%93-help-desk-at-grupo-viggo-4460909790",
     "tecnologias": [
-      "Excel",
-      "Hardware",
-      "Help Desk",
-      "Manutenção Preventiva",
-      "Office 365",
-      "Redes de Computadores",
-      "Windows",
-      "Word"
+      "Help Desk"
     ]
   },
   {
@@ -1440,20 +2142,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagiario-ciberseguran%C3%A7a-at-stefanini-brasil-4462472363",
     "tecnologias": [
-      "Active Directory",
-      "Antivírus",
-      "Azure",
-      "Cibersegurança",
-      "Excel",
-      "IAM",
-      "Inteligência Artificial",
-      "LGPD",
-      "Office 365",
-      "Redes de Computadores",
-      "SIEM/SOC",
-      "SharePoint",
-      "Shell/Bash",
-      "Windows"
+      "Cibersegurança"
     ]
   },
   {
@@ -1646,11 +2335,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/junior-react-developer-remote-work-at-indi-staffing-services-4462198615",
     "tecnologias": [
-      "Angular",
-      "CSS",
-      "HTML",
-      "Inglês",
-      "JavaScript",
       "React"
     ]
   },
@@ -1805,29 +2489,6 @@
     "fonte": "solides",
     "url": "https://vagas.solides.com.br/vaga/914928/assistente-tecnico-copia",
     "tecnologias": []
-  },
-  {
-    "id": 3155,
-    "titulo": "Analista de Suporte Técnico N1.5 Júnior",
-    "empresa": "Nava Technology for Business",
-    "area": "Service Desk / Help Desk",
-    "senioridade": "Júnior",
-    "localidade": "Campinas, SP, Brasil",
-    "polo": "Campinas",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "02/09/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-suporte-tecnico-n1-5-junior-1",
-    "tecnologias": [
-      "GLPI",
-      "ITIL",
-      "ITSM",
-      "Jira",
-      "Redes de Computadores",
-      "SIEM/SOC",
-      "Zabbix"
-    ]
   },
   {
     "id": 3154,
@@ -2363,16 +3024,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-da-informa%C3%A7%C3%A3o-an%C3%A1lise-de-dados-at-odebrecht-engenharia-constru%C3%A7%C3%A3o-4459997656",
     "tecnologias": [
-      "Análise de Dados",
-      "Automação",
-      "Banco de Dados",
-      "Excel",
-      "Inglês",
-      "Inteligência Artificial",
-      "Lógica de Programação",
-      "Montagem e Manutenção de PCs",
-      "Python",
-      "SQL"
+      "Análise de Dados"
     ]
   },
   {
@@ -2496,17 +3148,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/programador-de-sistemas-embarcados-jr-i-curitiba-%E2%80%93-pr-at-spacecom-monitoramento-4459987944",
     "tecnologias": [
-      "C++",
-      "Eletrônica",
-      "Estrutura de Dados",
-      "Firmware",
-      "Git",
-      "Hardware",
-      "IoT",
-      "Microcontroladores",
-      "Python",
-      "Sistemas Embarcados",
-      "Testes Automatizados"
+      "Sistemas Embarcados"
     ]
   },
   {
@@ -2690,15 +3332,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/tecnico-service-desk-jr-at-movida-aluguel-de-carros-4459979226",
     "tecnologias": [
-      "GLPI",
-      "Hardware",
-      "Linux",
-      "Office 365",
-      "Redes de Computadores",
-      "SLA",
-      "Service Desk",
-      "Windows",
-      "Zendesk"
+      "Service Desk"
     ]
   },
   {
@@ -2927,18 +3561,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/junior-ubuntu-software-engineer-at-jobgether-4460989373",
     "tecnologias": [
-      "C++",
-      "CI/CD",
-      "Firmware",
-      "Flutter",
-      "Go",
-      "Inglês",
-      "Inteligência Artificial",
-      "IoT",
-      "Linux",
-      "Next.js",
-      "Python",
-      "Rust"
+      "Linux"
     ]
   },
   {
@@ -3151,8 +3774,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/node-js-junior-developer-remote-work-at-indi-staffing-services-4462417064",
     "tecnologias": [
-      "Git",
-      "Inglês",
       "JavaScript",
       "Node.js"
     ]
@@ -3171,7 +3792,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/junior-node-developer-remote-work-at-indi-staffing-services-4462406378",
     "tecnologias": [
-      "Inglês",
       "Node.js"
     ]
   },
@@ -3189,7 +3809,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/junior-java-developer-remote-work-at-indi-staffing-services-4462199506",
     "tecnologias": [
-      "Inglês",
       "Java"
     ]
   },
@@ -3993,11 +4612,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-no-desenvolvimento-delphi-at-intersolid-software-4460909720",
     "tecnologias": [
-      "CSS",
-      "Delphi",
-      "Engenharia de Software",
-      "HTML",
-      "JavaScript"
+      "Delphi"
     ]
   },
   {
@@ -4249,16 +4864,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-automa%C3%A7%C3%A3o-de-testes-j%C3%BAnior-at-primeup-4459961059",
     "tecnologias": [
-      "Banco de Dados",
-      "CI/CD",
-      "Cypress",
-      "Engenharia de Software",
-      "JMeter",
-      "Java",
-      "Jenkins",
-      "Jira",
-      "K6",
-      "Qualidade de Software",
       "Testes Automatizados"
     ]
   },
@@ -4336,13 +4941,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-t%C3%A9cnico-j%C3%BAnior-cftv-at-carbigdata-4460679418",
     "tecnologias": [
-      "CFTV",
-      "Eletrônica",
-      "Firmware",
-      "Linux",
-      "Redes de Computadores",
-      "Suporte Remoto",
-      "Windows"
+      "CFTV"
     ]
   },
   {
@@ -4934,33 +5533,6 @@
     ]
   },
   {
-    "id": 2978,
-    "titulo": "Analista de Projetos de Tecnologia Júnior",
-    "empresa": "Fundação Itaú",
-    "area": "Backend",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP, Brasil",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "01/09/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/fundacao-itau/jobs/analista-de-projetos-de-tecnologia-junior-1",
-    "tecnologias": [
-      "Banco de Dados",
-      "Inglês",
-      "JavaScript",
-      "MySQL",
-      "Node.js",
-      "PHP",
-      "Python",
-      "React",
-      "Ruby",
-      "Ruby on Rails",
-      "SQL"
-    ]
-  },
-  {
     "id": 2977,
     "titulo": "Estágio em Inteligência Artificial e Automação",
     "empresa": "Stefanini Cyber",
@@ -5067,10 +5639,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/junior-react-frontend-engineer-remote-work-at-bairesdev-4460639770",
     "tecnologias": [
-      "Git",
-      "Hardware",
-      "Inglês",
-      "JavaScript",
       "React"
     ]
   },
@@ -5154,11 +5722,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/engenheiro-de-software-node-js-j%C3%BAnior-remote-work-at-bairesdev-4460661131",
     "tecnologias": [
-      "API REST",
-      "Banco de Dados",
-      "Clean Code",
-      "Hardware",
-      "Inglês",
       "JavaScript",
       "Node.js"
     ]
@@ -5269,22 +5832,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-backend-java-j%C3%BAnior-at-nava-tech-for-business-4461787817",
     "tecnologias": [
-      "API REST",
-      "Análise de Dados",
-      "CI/CD",
-      "Datadog",
-      "Docker",
-      "Git",
-      "Java",
-      "Jira",
-      "Kafka",
-      "Kubernetes",
-      "Metodologias Ágeis",
-      "Microserviços",
-      "RabbitMQ",
-      "SQL",
-      "Spring",
-      "Testes Automatizados"
+      "Java"
     ]
   },
   {
@@ -5301,9 +5849,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-java-junior-remote-work-at-bairesdev-4460651400",
     "tecnologias": [
-      "Git",
-      "Hardware",
-      "Inglês",
       "Java"
     ]
   },
@@ -5364,26 +5909,6 @@
     "tecnologias": []
   },
   {
-    "id": 2956,
-    "titulo": "Helpdesk Analyst",
-    "empresa": "Randstad",
-    "area": "Service Desk / Help Desk",
-    "senioridade": "Júnior",
-    "localidade": "Brasil",
-    "polo": "Remoto",
-    "regiao": "Remoto Nacional",
-    "modalidade": "Remoto",
-    "data_publicacao": "01/09/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/helpdesk-analyst-1",
-    "tecnologias": [
-      "Banco de Dados",
-      "Help Desk",
-      "Inglês",
-      "Zendesk"
-    ]
-  },
-  {
     "id": 2955,
     "titulo": "Estágio atendimento de suporte a postos (service desk) - vespertino",
     "empresa": "Soutag",
@@ -5397,7 +5922,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-atendimento-de-suporte-a-postos-service-desk-vespertino-at-soutag-4459534464",
     "tecnologias": [
-      "CRM",
       "Service Desk"
     ]
   },
@@ -5584,12 +6108,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-react-junior-remote-work-at-bairesdev-4460293849",
     "tecnologias": [
-      "Algoritmos",
-      "Estrutura de Dados",
-      "Git",
-      "Hardware",
-      "Inglês",
-      "JavaScript",
       "React"
     ]
   },
@@ -5628,57 +6146,6 @@
     "url": "https://vagas.solides.com.br/vaga/913862/estagiario-a-analista-de-dados-fortaleza",
     "tecnologias": [
       "Análise de Dados"
-    ]
-  },
-  {
-    "id": 2942,
-    "titulo": "Desenvolvedor(a) Backend Java – Sustentação",
-    "empresa": "Nava Technology for Business",
-    "area": "Backend",
-    "senioridade": "Júnior",
-    "localidade": "Brasil",
-    "polo": "Remoto",
-    "regiao": "Remoto Nacional",
-    "modalidade": "Remoto",
-    "data_publicacao": "01/09/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/desenvolvedor-a--backend-java---sustentacao-1",
-    "tecnologias": [
-      "Banco de Dados",
-      "Datadog",
-      "Java"
-    ]
-  },
-  {
-    "id": 2941,
-    "titulo": "Desenvolvedor(a) Backend Java Júnior",
-    "empresa": "Nava Technology for Business",
-    "area": "Backend",
-    "senioridade": "Júnior",
-    "localidade": "Brasil",
-    "polo": "Remoto",
-    "regiao": "Remoto Nacional",
-    "modalidade": "Remoto",
-    "data_publicacao": "01/09/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/desenvolvedor-a--backend-java-junior-4",
-    "tecnologias": [
-      "API REST",
-      "Análise de Dados",
-      "CI/CD",
-      "Datadog",
-      "Docker",
-      "Git",
-      "Java",
-      "Jira",
-      "Kafka",
-      "Kubernetes",
-      "Metodologias Ágeis",
-      "Microserviços",
-      "RabbitMQ",
-      "SQL",
-      "Spring",
-      "Testes Automatizados"
     ]
   },
   {
@@ -6013,13 +6480,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-cloud-aws-junior-pleno-h%C3%ADbrido-at-sioux-digital-1-1-4460208057",
     "tecnologias": [
-      "AWS",
-      "Automação",
-      "CI/CD",
-      "IAM",
-      "Python",
-      "Serverless",
-      "Shell/Bash"
+      "AWS"
     ]
   },
   {
@@ -6135,18 +6596,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-node-junior-midlevel-trabalho-remoto-ref%23263959-at-bairesdev-4140199328",
     "tecnologias": [
-      "Algoritmos",
-      "Banco de Dados",
-      "CI/CD",
-      "Clean Code",
-      "Design Patterns",
-      "Inglês",
-      "Metodologias Ágeis",
-      "Microserviços",
-      "Node.js",
-      "SOLID",
-      "SQL",
-      "Testes Automatizados"
+      "Node.js"
     ]
   },
   {
@@ -6163,9 +6613,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/junior-ios-developer-swift-remote-work-ref%23284274-at-bairesdev-4258063381",
     "tecnologias": [
-      "Git",
-      "Hardware",
-      "Inglês",
       "Swift",
       "iOS"
     ]
@@ -6184,10 +6631,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/python-junior-developer-remote-work-ref%23283517-at-bairesdev-4192502474",
     "tecnologias": [
-      "Excel",
-      "Git",
-      "Hardware",
-      "Inglês",
       "Python"
     ]
   },
@@ -6205,9 +6648,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/junior-java-developer-remote-work-ref%23283522-at-bairesdev-4192197820",
     "tecnologias": [
-      "Git",
-      "Hardware",
-      "Inglês",
       "Java"
     ]
   },
@@ -6508,24 +6948,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/tech-engenharia-de-software-fullstack-j%C3%BAnior-node-js-typescript-react-at-totvs-4459247769",
     "tecnologias": [
-      "API REST",
-      "AWS",
-      "Banco de Dados",
-      "Copilots & Assistentes de IA",
       "Engenharia de Software",
-      "Estrutura de Dados",
-      "Express",
-      "Git",
-      "Inteligência Artificial",
       "JavaScript",
-      "Metodologias Ágeis",
-      "NestJS",
       "Node.js",
-      "OAuth/JWT",
       "React",
-      "SQL",
-      "Serverless",
-      "Testes Automatizados",
       "TypeScript"
     ]
   },
@@ -6572,13 +6998,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-python-junior-trabalho-remoto-at-bairesdev-4460075427",
     "tecnologias": [
-      "Algoritmos",
-      "Clean Code",
-      "Estrutura de Dados",
-      "Git",
-      "Inglês",
-      "Python",
-      "Qualidade de Software"
+      "Python"
     ]
   },
   {
@@ -6804,18 +7224,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-help-desk-at-engineering-brasil-4459231633",
     "tecnologias": [
-      "Active Directory",
-      "Azure",
-      "GLPI",
-      "Hardware",
-      "Help Desk",
-      "ITIL",
-      "Inteligência Artificial",
-      "Jira",
-      "Montagem e Manutenção de PCs",
-      "Office 365",
-      "VPN",
-      "Windows"
+      "Help Desk"
     ]
   },
   {
@@ -6872,8 +7281,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-at-4b-digital-cloud-premium-4459231305",
     "tecnologias": [
-      "LGPD",
-      "SLA",
       "Suporte N1/N2"
     ]
   },
@@ -7198,26 +7605,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/tech-engenharia-de-desenvolvimento-de-software-j%C3%BAnior-nodejs-at-totvs-4459236316",
     "tecnologias": [
-      "API REST",
-      "AWS",
-      "Banco de Dados",
-      "CI/CD",
-      "Copilots & Assistentes de IA",
-      "Estrutura de Dados",
-      "Express",
-      "Git",
-      "Inteligência Artificial",
-      "JavaScript",
-      "Metodologias Ágeis",
-      "NestJS",
-      "Node.js",
-      "OAuth/JWT",
-      "React",
-      "SQL",
-      "Scrum",
-      "Serverless",
-      "Testes Automatizados",
-      "TypeScript"
+      "Node.js"
     ]
   },
   {
@@ -7311,11 +7699,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-junior-node-js-remote-work-at-bairesdev-4460074276",
     "tecnologias": [
-      "Algoritmos",
-      "Estrutura de Dados",
-      "Git",
-      "Hardware",
-      "Inglês",
       "JavaScript",
       "Node.js"
     ]
@@ -7506,19 +7889,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-sap-business-one-j%C3%BAnior-s%C3%A3o-jos%C3%A9-dos-campos-at-sps-group-4460038659",
     "tecnologias": [
-      "API REST",
-      "Análise de Dados",
-      "C#",
-      "Engenharia de Software",
-      "Git",
-      "JavaScript",
-      "Lógica de Programação",
-      "Node.js",
-      "Postman",
-      "SAP",
-      "SQL",
-      "SQL Server",
-      "UX/UI"
+      "SAP"
     ]
   },
   {
@@ -7748,36 +8119,6 @@
     ]
   },
   {
-    "id": 2833,
-    "titulo": "COORDENADOR SISTEMAS JUNIOR",
-    "empresa": "MV Saúde Digital",
-    "area": "Engenharia de Software",
-    "senioridade": "Júnior",
-    "localidade": "Recife, PE, Brasil",
-    "polo": "Recife",
-    "regiao": "Nordeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "31/08/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/mv-saude-digital/jobs/coordenador-sistemas-junior-1",
-    "tecnologias": [
-      "API REST",
-      "AWS",
-      "Azure",
-      "Banco de Dados",
-      "Certificações Ágeis",
-      "Engenharia de Software",
-      "GCP",
-      "Jira",
-      "Metodologias Ágeis",
-      "OCI",
-      "SLA",
-      "SQL",
-      "SQL Server",
-      "Scrum"
-    ]
-  },
-  {
     "id": 2831,
     "titulo": "Desenvolvedor Júnior",
     "empresa": "Grupo Universal Soluções Automotivas",
@@ -8001,19 +8342,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/tech-engenharia-de-software-backend-j%C3%BAnior-java-afirmativa-para-pessoas-com-defici%C3%AAncia-at-totvs-4459221847",
     "tecnologias": [
-      "API REST",
-      "Angular",
-      "ERP",
       "Engenharia de Software",
-      "Git",
-      "Hibernate",
-      "Java",
-      "Jira",
-      "Oracle",
-      "SQL",
-      "Spring",
-      "TOTVS",
-      "Testes Automatizados"
+      "Java"
     ]
   },
   {
@@ -8149,23 +8479,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-desenvolvimento-mobile-flutter-jr-vaga-afirmativa-pcd-at-jobgether-4459758743",
     "tecnologias": [
-      "BDD",
-      "CI/CD",
-      "Clean Architecture",
-      "Design Patterns",
-      "Firebase",
-      "Flutter",
-      "Git",
-      "Inteligência Artificial",
-      "Jenkins",
-      "Jira",
-      "Metodologias Ágeis",
-      "Microserviços",
-      "Next.js",
-      "Scrum",
-      "SonarQube",
-      "TDD",
-      "UX/UI"
+      "Flutter"
     ]
   },
   {
@@ -8211,9 +8525,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-sap-%E2%80%93-desenvolvimento-at-t-systems-do-brasil-4460025069",
     "tecnologias": [
-      "ABAP",
-      "Inglês",
-      "Lógica de Programação",
       "SAP"
     ]
   },
@@ -8292,18 +8603,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/jovem-aprendiz-service-desk-suporte-de-ti-manaus-at-eqi-investimentos-4450247179",
     "tecnologias": [
-      "Android",
-      "Excel",
-      "Hardware",
-      "Jira",
-      "Linux",
-      "Manutenção Preventiva",
-      "Office 365",
-      "Redes de Computadores",
-      "Service Desk",
-      "Windows",
-      "Word",
-      "iOS"
+      "Service Desk"
     ]
   },
   {
@@ -8320,18 +8620,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/jovem-aprendiz-service-desk-suporte-de-ti-macei%C3%B3-at-eqi-investimentos-4450235771",
     "tecnologias": [
-      "Android",
-      "Excel",
-      "Hardware",
-      "Jira",
-      "Linux",
-      "Manutenção Preventiva",
-      "Office 365",
-      "Redes de Computadores",
-      "Service Desk",
-      "Windows",
-      "Word",
-      "iOS"
+      "Service Desk"
     ]
   },
   {
@@ -9234,14 +9523,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-j%C3%BAnior-%E2%80%94-pl-sql-javascript-brl-4-500-clt-%2B-benef%C3%ADcios-at-nous-latam-4459485878",
     "tecnologias": [
-      "Git",
       "JavaScript",
-      "Metodologias Ágeis",
       "PL/SQL",
-      "SQL",
-      "Scrum",
-      "Spring",
-      "Testes Automatizados"
+      "SQL"
     ]
   },
   {
@@ -9576,12 +9860,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-ti-junior-swift-corporativo-at-swift-4441981886",
     "tecnologias": [
-      "Inglês",
-      "Metodologias Ágeis",
-      "SAP",
-      "Scrum",
-      "Swift",
-      "Testes Automatizados"
+      "Swift"
     ]
   },
   {
@@ -9753,11 +10032,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-i-at-gobrax-4459446481",
     "tecnologias": [
-      "Análise de Dados",
-      "Hardware",
-      "Service Desk",
-      "Suporte N1/N2",
-      "Testes Funcionais"
+      "Suporte N1/N2"
     ]
   },
   {
@@ -10014,44 +10289,6 @@
     ]
   },
   {
-    "id": 1985,
-    "titulo": "Analista de Testes QA Automação Júnior/Pleno – Java + SQL",
-    "empresa": "Code Group",
-    "area": "QA",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP, Brasil",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Híbrido",
-    "data_publicacao": "28/08/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/code-group/jobs/analista-de-testes-qa-automacao-junior-pleno---java---sql-1",
-    "tecnologias": [
-      "API REST",
-      "AWS",
-      "BDD",
-      "Banco de Dados",
-      "CI/CD",
-      "Git",
-      "Grafana",
-      "JMeter",
-      "JUnit",
-      "Java",
-      "Jira",
-      "Linux",
-      "Metodologias Ágeis",
-      "PostgreSQL",
-      "SQL",
-      "Scrum",
-      "Selenium",
-      "SonarQube",
-      "Testes Automatizados",
-      "Testes Funcionais",
-      "Testes Manuais",
-      "Testes de Regressão"
-    ]
-  },
-  {
     "id": 1979,
     "titulo": "Desenvolvedor(a) Fullstack Java Júnior",
     "empresa": "Nava Technology for Business",
@@ -10080,27 +10317,6 @@
       "PostgreSQL",
       "Python",
       "Spring"
-    ]
-  },
-  {
-    "id": 1966,
-    "titulo": "Desenvolvedor(a) .NET Júnior",
-    "empresa": "Agenda Digital Ltda.",
-    "area": "Backend",
-    "senioridade": "Júnior",
-    "localidade": "Brasil",
-    "polo": "Não informado",
-    "regiao": "Não informado",
-    "modalidade": "Híbrido",
-    "data_publicacao": "28/08/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/agenda-digital-ltda/jobs/desenvolvedor-a---net-junior--3",
-    "tecnologias": [
-      ".NET",
-      "API REST",
-      "C#",
-      "Git",
-      "SQL"
     ]
   },
   {
@@ -10548,27 +10764,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-testes-qa-automa%C3%A7%C3%A3o-j%C3%BAnior-pleno-%E2%80%93-java-%2B-sql-at-4df-connect-4460539672",
     "tecnologias": [
-      "API REST",
-      "AWS",
-      "BDD",
-      "Banco de Dados",
-      "CI/CD",
-      "Git",
-      "Grafana",
-      "JMeter",
       "Java",
-      "Jira",
-      "Linux",
-      "Metodologias Ágeis",
-      "PostgreSQL",
-      "SQL",
-      "Scrum",
-      "Selenium",
-      "SonarQube",
-      "Testes Automatizados",
-      "Testes Funcionais",
-      "Testes Manuais",
-      "Testes de Regressão"
+      "SQL"
     ]
   },
   {
@@ -10657,21 +10854,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-desenvolvimento-mobile-flutter-jr-vaga-afirmativa-pcd-copy-at-banco-bv-4460528201",
     "tecnologias": [
-      "BDD",
-      "CI/CD",
-      "Clean Architecture",
-      "Firebase",
-      "Flutter",
-      "Git",
-      "Inteligência Artificial",
-      "Jenkins",
-      "Jira",
-      "Metodologias Ágeis",
-      "Microserviços",
-      "Scrum",
-      "SonarQube",
-      "TDD",
-      "Testes Automatizados"
+      "Flutter"
     ]
   },
   {
@@ -10845,27 +11028,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-j%C3%BAnior-front-end-angular-at-capgemini-4458097461",
     "tecnologias": [
-      "API REST",
-      "Angular",
-      "BDD",
-      "CSS",
-      "Clean Code",
-      "Copilots & Assistentes de IA",
-      "Docker",
-      "Engenharia de Software",
-      "Git",
-      "HTML",
-      "JavaScript",
-      "Jest",
-      "Kubernetes",
-      "Metodologias Ágeis",
-      "OpenAPI/Swagger",
-      "SOLID",
-      "SonarQube",
-      "TDD",
-      "Testes Automatizados",
-      "TypeScript",
-      "UX/UI"
+      "Angular"
     ]
   },
   {
@@ -11434,14 +11597,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvimento-de-aplica%C3%A7%C3%B5es-%E2%80%93-ti-j%C3%BAnior-ingles-fluente-at-ahoy-by-belago-4460337603",
     "tecnologias": [
-      ".NET",
-      "Azure",
-      "C#",
-      "Inglês",
-      "Java",
-      "JavaScript",
-      "Node.js",
-      "Testes de Regressão"
+      "Inglês"
     ]
   },
   {
@@ -11835,16 +11991,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/engenheiro-de-software-jr-node-js-react-js-at-uol-edtech-4440272651",
     "tecnologias": [
-      "API REST",
-      "Banco de Dados",
-      "Clean Code",
-      "Git",
       "JavaScript",
-      "NestJS",
-      "Next.js",
       "Node.js",
-      "React",
-      "TypeScript"
+      "React"
     ]
   },
   {
@@ -11897,23 +12046,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-java-j%C3%BAnior-s-op-at-americanas-s-a-4458029098",
     "tecnologias": [
-      "API REST",
-      "Azure",
-      "Banco de Dados",
-      "Datadog",
-      "Design Patterns",
-      "Git",
-      "Grafana",
-      "Inteligência Artificial",
-      "Java",
-      "Metodologias Ágeis",
-      "MySQL",
-      "Oracle",
-      "RabbitMQ",
-      "React",
-      "SQL",
-      "Scrum",
-      "Spring"
+      "Java"
     ]
   },
   {
@@ -12041,40 +12174,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-java-jr-at-auth21-4459662086",
     "tecnologias": [
-      "API REST",
-      "Angular",
-      "Banco de Dados",
-      "CI/CD",
-      "CSS",
-      "Clean Code",
-      "Design Patterns",
-      "Docker",
-      "Engenharia de Software",
-      "Flutter",
-      "Git",
-      "HTML",
-      "JUnit",
-      "Java",
-      "JavaScript",
-      "Jira",
-      "Kafka",
-      "Microserviços",
-      "Modelagem de Dados",
-      "Node.js",
-      "OAuth/JWT",
-      "Oracle",
-      "PHP",
-      "Python",
-      "RPA",
-      "RabbitMQ",
-      "SOLID",
-      "SQL",
-      "SonarQube",
-      "Spring",
-      "TDD",
-      "Testes Automatizados",
-      "TypeScript",
-      "UX/UI"
+      "Java"
     ]
   },
   {
@@ -12120,14 +12220,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-java-junior-at-sis-innov-tech-4460101142",
     "tecnologias": [
-      ".NET",
-      "Azure",
-      "C#",
-      "Inglês",
-      "Java",
-      "JavaScript",
-      "Node.js",
-      "Testes de Regressão"
+      "Java"
     ]
   },
   {
@@ -12177,7 +12270,7 @@
     "id": 2640,
     "titulo": "Grupo RPN | Estágio em TI (Suporte), Americana/SP",
     "empresa": "Auth21",
-    "area": "Infraestrutura / Redes",
+    "area": "Suporte Técnico",
     "senioridade": "Estágio",
     "localidade": "Americana, SP",
     "polo": "Campinas",
@@ -13131,15 +13224,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/mobile-search-desenvolvedor-android-jr-at-auth21-4459656924",
     "tecnologias": [
-      "Android",
-      "Banco de Dados",
-      "Design Patterns",
-      "Inglês",
-      "Java",
-      "Kotlin",
-      "MVVM",
-      "SQL",
-      "Testes Automatizados"
+      "Android"
     ]
   },
   {
@@ -13508,18 +13593,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/jr-full-stack-java-developer-%E2%80%93-azure-cloud-at-ibm-4458687164",
     "tecnologias": [
-      "API REST",
-      "Angular",
       "Azure",
-      "CI/CD",
-      "Docker",
-      "Git",
-      "GraphQL",
-      "Java",
-      "Kafka",
-      "Kubernetes",
-      "Microserviços",
-      "Spring"
+      "Java"
     ]
   },
   {
@@ -14048,11 +14123,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-automa%C3%A7%C3%A3o-ia-desenvolvimento-at-auth21-4459663198",
     "tecnologias": [
-      "Banco de Dados",
-      "Engenharia de Software",
-      "Inteligência Artificial",
-      "Lógica de Programação",
-      "SQL"
+      "Inteligência Artificial"
     ]
   },
   {
@@ -14421,18 +14492,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-bi-business-intelligence-at-equifax-4458648766",
     "tecnologias": [
-      "Análise de Dados",
-      "BI",
-      "Banco de Dados",
-      "BigQuery",
-      "Confluence",
-      "GCP",
-      "Inglês",
-      "Inteligência Artificial",
-      "LLMs & IA Generativa",
-      "Looker",
-      "SQL",
-      "Salesforce"
+      "BI"
     ]
   },
   {
@@ -14551,13 +14611,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/business-intelligence-i-at-banco-bradesco-4459861865",
     "tecnologias": [
-      "Automação",
-      "BI",
-      "Databricks",
-      "Estatística",
-      "Excel",
-      "Power BI",
-      "Python"
+      "BI"
     ]
   },
   {
@@ -14733,18 +14787,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-automa%C3%A7%C3%A3o-de-testes-j%C3%BAnior-vaga-afirmativa-at-dbc-company-4439951528",
     "tecnologias": [
-      "API REST",
-      "Banco de Dados",
-      "CI/CD",
-      "JMeter",
-      "Java",
-      "Jenkins",
-      "Metodologias Ágeis",
-      "Selenium",
-      "SonarQube",
-      "TDD",
-      "Testes Automatizados",
-      "UX/UI"
+      "Testes Automatizados"
     ]
   },
   {
@@ -14834,8 +14877,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-at-emitea%C3%AD-4459095237",
     "tecnologias": [
-      "SLA",
-      "Service Desk",
       "Suporte N1/N2"
     ]
   },
@@ -16549,11 +16590,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-opera%C3%A7%C3%B5es-ci%C3%AAncia-de-dados-sistemas-de-informa%C3%A7%C3%A3o-engenharia-de-software-an%C3%A1lise-e-desenvolvimento-de-sistemas-ticket-servi%C3%A7os-at-instituto-via-de-acesso-4457259003",
     "tecnologias": [
-      "Engenharia de Software",
-      "Excel",
-      "Inglês",
-      "Power BI",
-      "Python"
+      "Engenharia de Software"
     ]
   },
   {
@@ -16960,21 +16997,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvimento-python-twilio-junior-pleno-remoto-s%C3%A3o-paulo-sp-135458-at-gft-technologies-4453457815",
     "tecnologias": [
-      "API REST",
-      "AWS",
-      "Banco de Dados",
-      "CI/CD",
-      "Datadog",
-      "Docker",
-      "Git",
-      "JavaScript",
-      "Kafka",
-      "Kubernetes",
-      "Metodologias Ágeis",
-      "Microserviços",
-      "Python",
-      "Redis",
-      "SQL"
+      "Python"
     ]
   },
   {
@@ -17704,11 +17727,6 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2832150/analista-de-sistemas-suporte-n1-tasy",
     "tecnologias": [
-      "ERP",
-      "ITIL",
-      "SLA",
-      "SQL",
-      "Service Desk",
       "Suporte N1/N2"
     ]
   },
@@ -17996,23 +18014,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-de-ti-sistemas-automa%C3%A7%C3%A3o-e-integra%C3%A7%C3%A3o-sap-at-fortlev-4456980108",
     "tecnologias": [
-      "Análise de Dados",
-      "Automação Industrial",
-      "Backup",
-      "Banco de Dados",
-      "C#",
-      "ERP",
-      "Eletrônica",
-      "Engenharia de Software",
-      "Excel",
-      "Git",
-      "Inglês",
-      "Java",
-      "JavaScript",
-      "Lógica de Programação",
-      "Python",
-      "SAP",
-      "SQL"
+      "SAP"
     ]
   },
   {
@@ -18048,11 +18050,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-vis%C3%A3o-computacional-at-sidi-4456907458",
     "tecnologias": [
-      "C++",
-      "Inglês",
-      "Inteligência Artificial",
-      "Machine Learning",
-      "Python"
+      "Machine Learning"
     ]
   },
   {
@@ -18141,16 +18139,10 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2832092/estagiario-em-desenvolvimento-de-sistemas",
     "tecnologias": [
-      ".NET",
-      "Banco de Dados",
       "CSS",
-      "Git",
       "HTML",
       "JavaScript",
-      "Lógica de Programação",
-      "Node.js",
-      "Python",
-      "React"
+      "Lógica de Programação"
     ]
   },
   {
@@ -18505,11 +18497,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-t%C3%A9cnico-de-service-desk-l1-at-unisys-4456938931",
     "tecnologias": [
-      "Excel",
-      "Hardware",
-      "Inglês",
-      "Service Desk",
-      "Word"
+      "Service Desk"
     ]
   },
   {
@@ -18792,18 +18780,9 @@
     "url": "https://www.vagas.com.br/vagas/v2832024/cientista-de-dados-junior-hibrido-jundiai-ou-mogi-guacu-sp",
     "tecnologias": [
       "AWS",
-      "Agentes de IA & RAG",
       "Azure",
-      "Databricks",
-      "Estatística",
       "GCP",
-      "Inglês",
       "Inteligência Artificial",
-      "LLMs & IA Generativa",
-      "Machine Learning",
-      "Python",
-      "SAP",
-      "SQL",
       "Spark"
     ]
   },
@@ -19629,17 +19608,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-fullstack-java-angular-j%C3%BAnior-at-ibm-4456561371",
     "tecnologias": [
-      "API REST",
       "Angular",
-      "CI/CD",
-      "Docker",
-      "Git",
-      "GraphQL",
-      "Java",
-      "Kafka",
-      "Kubernetes",
-      "Microserviços",
-      "Spring"
+      "Java"
     ]
   },
   {
@@ -20361,10 +20331,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-help-desk-jr-hs-cons%C3%B3rcios-at-grupo-herval-4456540067",
     "tecnologias": [
-      "ERP",
-      "Help Desk",
-      "SQL",
-      "SQL Server"
+      "Help Desk"
     ]
   },
   {
@@ -21216,10 +21183,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-qualidade-de-software-junior-at-fcamara-4458238125",
     "tecnologias": [
-      "Jira",
-      "Qualidade de Software",
-      "Testes Automatizados",
-      "Testes Funcionais"
+      "Qualidade de Software"
     ]
   },
   {
@@ -22685,12 +22649,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-j%C3%BAnior-de-soc-n1-brl-4k-m%C3%AAs-pj-at-nous-latam-4456254840",
     "tecnologias": [
-      "Firewall",
-      "ITSM",
-      "Linux",
-      "Redes de Computadores",
-      "SIEM/SOC",
-      "Windows"
+      "SIEM/SOC"
     ]
   },
   {
@@ -23119,7 +23078,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-suporte-n2-jr-indaiatuba-at-topaz-4456277129",
     "tecnologias": [
-      "SLA",
       "Suporte N1/N2"
     ]
   },
@@ -23287,10 +23245,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-erp-j%C3%BAnior-matriz-at-grupo-bamaq-4454685018",
     "tecnologias": [
-      "ERP",
-      "Service Desk",
-      "Suporte Remoto",
-      "TOTVS"
+      "ERP"
     ]
   },
   {
@@ -23392,12 +23347,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831734/estagiario-de-projetos-de-telecomunicacoes-pmo",
     "tecnologias": [
-      "Análise de Dados",
-      "Excel",
-      "Inglês",
-      "Power BI",
-      "Python",
-      "Visual Basic/VBA"
+      "Análise de Dados"
     ]
   },
   {
@@ -24022,16 +23972,6 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831663/trainee-ti-desenvolvimento",
     "tecnologias": [
-      "Automação",
-      "Azure",
-      "Inglês",
-      "Inteligência Artificial",
-      "Java",
-      "Jira",
-      "Metodologias Ágeis",
-      "Python",
-      "RPA",
-      "Scrum",
       "UML"
     ]
   },
@@ -24441,27 +24381,6 @@
     ]
   },
   {
-    "id": 2991,
-    "titulo": "Analista de Suporte Técnico/Biomédico Junior",
-    "empresa": "Nava Technology for Business",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP, Brasil",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "20/08/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-suporte-tecnico-biomedico-1",
-    "tecnologias": [
-      "Inglês",
-      "LGPD",
-      "SLA",
-      "Suporte N1/N2",
-      "Windows"
-    ]
-  },
-  {
     "id": 2936,
     "titulo": "Auxiliar de Suporte Técnico",
     "empresa": "Jobbol",
@@ -24514,9 +24433,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-suporte-n1-at-jobbol-4457003665",
     "tecnologias": [
-      "Help Desk",
-      "Manutenção Preventiva",
-      "Redes de Computadores",
       "Suporte N1/N2"
     ]
   },
@@ -24774,17 +24690,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-de-automa%C3%A7%C3%A3o-ia-%E2%80%93-j%C3%BAnior-pleno-at-via-importer-comercio-exterior-s-a-4456416952",
     "tecnologias": [
-      "API REST",
-      "Agentes de IA & RAG",
-      "Automação",
-      "Copilots & Assistentes de IA",
-      "Git",
-      "Inteligência Artificial",
-      "JavaScript",
-      "LLMs & IA Generativa",
-      "OAuth/JWT",
-      "Python",
-      "SQL"
+      "Inteligência Artificial"
     ]
   },
   {
@@ -25141,8 +25047,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/ri-estagi%C3%A1rio-a-em-ti-an%C3%A1lise-de-dados-e-suporte-t%C3%A9cnico-at-machado-pereira-advogados-4456427809",
     "tecnologias": [
-      "Análise de Dados",
-      "ERP"
+      "Análise de Dados"
     ]
   },
   {
@@ -25450,20 +25355,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-desenvolvimento-de-software-ia-e-automa%C3%A7%C3%A3o-at-beumer-group-4456003145",
     "tecnologias": [
-      "Agentes de IA & RAG",
-      "Análise de Dados",
-      "Automação",
-      "C#",
-      "Copilots & Assistentes de IA",
-      "Engenharia de Software",
-      "Git",
-      "Inglês",
-      "Inteligência Artificial",
-      "Java",
-      "LLMs & IA Generativa",
-      "Lógica de Programação",
-      "Python",
-      "SQL"
+      "Inteligência Artificial"
     ]
   },
   {
@@ -25609,10 +25501,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-qualidade-de-software-jr-at-grupo-apisul-4457015168",
     "tecnologias": [
-      "Postman",
-      "Qualidade de Software",
-      "SQL",
-      "Testes Funcionais"
+      "Qualidade de Software"
     ]
   },
   {
@@ -26554,15 +26443,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/pessoa-estagi%C3%A1ria-em-banco-de-dados-at-arcelormittal-4455422362",
     "tecnologias": [
-      "AWS",
-      "Azure",
-      "Backup",
-      "Banco de Dados",
-      "Inglês",
-      "Linux",
-      "Modelagem de Dados",
-      "SQL",
-      "Windows"
+      "Banco de Dados"
     ]
   },
   {
@@ -26720,11 +26601,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/consultor-a-j%C3%BAnior-em-auditoria-de-ti-para-institui%C3%A7%C3%B5es-financeiras-s%C3%A3o-paulo-at-ey-4454970003",
     "tecnologias": [
-      "Agentes de IA & RAG",
-      "Espanhol",
-      "Governança e Riscos (GRC)",
-      "Inglês",
-      "Inteligência Artificial"
+      "Governança e Riscos (GRC)"
     ]
   },
   {
@@ -26880,11 +26757,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/business-intelligence-intern-amazon-university-talent-acquisition-at-amazon-4455795329",
     "tecnologias": [
-      "BI",
-      "Estatística",
-      "Excel",
-      "Inglês",
-      "SQL"
+      "BI"
     ]
   },
   {
@@ -26901,11 +26774,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/business-intelligence-intern-cajamar-amazon-university-talent-acquisition-at-amazon-4455915180",
     "tecnologias": [
-      "BI",
-      "Estatística",
-      "Excel",
-      "Inglês",
-      "SQL"
+      "BI"
     ]
   },
   {
@@ -27206,13 +27075,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-t%C3%A9cnico-de-testes-manuais-qa-recife-at-deloitte-4456106077",
     "tecnologias": [
-      "Excel",
-      "Inglês",
-      "Jira",
-      "Metodologias Ágeis",
-      "Qualidade de Software",
-      "Scrum",
-      "Testes Automatizados",
       "Testes Manuais"
     ]
   },
@@ -27559,23 +27421,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/aws-tech-intern-vaga-afirmativa-para-pessoas-com-defici%C3%AAncia-amazon-university-talent-acquisition-at-amazon-web-services-aws-4455908236",
     "tecnologias": [
-      "AWS",
-      "Banco de Dados",
-      "C#",
-      "C++",
-      "Inglês",
-      "IoT",
-      "Java",
-      "JavaScript",
-      "Linux",
-      "Machine Learning",
-      "Node.js",
-      "PHP",
-      "Python",
-      "Redes de Computadores",
-      "Ruby",
-      "VPN",
-      "Windows"
+      "AWS"
     ]
   },
   {
@@ -27640,21 +27486,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-python-j%C3%BAnior-captura-e-sustenta%C3%A7%C3%A3o-web-crawling-apis-vaga-afirmativa-para-pessoas-pretas-e-pardas-at-serasa-experian-4446384239",
     "tecnologias": [
-      "API REST",
-      "AWS",
-      "AWS SQS",
-      "Airflow",
-      "Banco de Dados",
-      "Docker",
-      "Estrutura de Dados",
-      "Git",
-      "Linux",
-      "MySQL",
-      "PostgreSQL",
-      "Python",
-      "Selenium",
-      "Serverless",
-      "Terraform"
+      "Python"
     ]
   },
   {
@@ -27882,23 +27714,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/aws-tech-intern-amazon-university-talent-acquisition-at-amazon-web-services-aws-4455795032",
     "tecnologias": [
-      "AWS",
-      "Banco de Dados",
-      "C#",
-      "C++",
-      "Inglês",
-      "IoT",
-      "Java",
-      "JavaScript",
-      "Linux",
-      "Machine Learning",
-      "Node.js",
-      "PHP",
-      "Python",
-      "Redes de Computadores",
-      "Ruby",
-      "VPN",
-      "Windows"
+      "AWS"
     ]
   },
   {
@@ -27915,14 +27731,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-business-intelligence-junior-ouvidoria-campinas-sp-at-agibank-4456358752",
     "tecnologias": [
-      "Automação",
-      "BI",
-      "Copilots & Assistentes de IA",
-      "Inteligência Artificial",
-      "LLMs & IA Generativa",
-      "Power BI",
-      "Python",
-      "SQL"
+      "BI"
     ]
   },
   {
@@ -29096,13 +28905,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-jr-soc-at-pagbank-4454909503",
     "tecnologias": [
-      "AWS",
-      "Banco de Dados",
-      "Cibersegurança",
-      "Firewall",
-      "Redes de Computadores",
-      "SIEM/SOC",
-      "SLA"
+      "SIEM/SOC"
     ]
   },
   {
@@ -29180,7 +28983,7 @@
     "id": 1312,
     "titulo": "Técnico de Informatica N1 - Lins - SP",
     "empresa": "Penso Tecnologia",
-    "area": "Service Desk / Help Desk",
+    "area": "Field Service / Hardware",
     "senioridade": "Júnior",
     "localidade": "Lins / SP A empresa aceita candidaturas de Lins e cidades próximas",
     "polo": "Interior Paulista Ocidental",
@@ -29612,15 +29415,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-desenvolvedor-salesforce-jr-at-ai-r-everymind-4454900061",
     "tecnologias": [
-      "API REST",
-      "Apex",
-      "Azure",
-      "Git",
-      "Inteligência Artificial",
-      "Jira",
-      "Modelagem de Dados",
-      "Salesforce",
-      "Scrum"
+      "Salesforce"
     ]
   },
   {
@@ -29705,23 +29500,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/engenheiro-de-software-junior-ou-pleno-java-investment-products-at-btg-pactual-4455558143",
     "tecnologias": [
-      "API REST",
-      "AWS",
-      "AWS SQS",
-      "Banco de Dados",
-      "CI/CD",
-      "Design Patterns",
-      "Docker",
-      "DynamoDB",
-      "Git",
-      "Java",
-      "Jenkins",
-      "Kubernetes",
-      "Microserviços",
-      "Node.js",
-      "Oracle",
-      "RabbitMQ",
-      "Spring"
+      "Java"
     ]
   },
   {
@@ -29876,19 +29655,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-sistemas-j%C3%BAnior-foco-em-java-at-copel-companhia-paranaense-de-energia-4452851276",
     "tecnologias": [
-      "API REST",
-      "Azure",
-      "Banco de Dados",
-      "Engenharia de Software",
-      "Git",
-      "Hibernate",
-      "Inglês",
-      "Java",
-      "JavaEE",
-      "Jira",
-      "Metodologias Ágeis",
-      "Oracle",
-      "Scrum"
+      "Java"
     ]
   },
   {
@@ -29989,11 +29756,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831010/estagio-em-ti-tecnologia-cotacao-de-seguro",
     "tecnologias": [
-      "Análise de Dados",
-      "Copilots & Assistentes de IA",
-      "Engenharia de Software",
-      "Inglês",
-      "Inteligência Artificial"
+      "Engenharia de Software"
     ]
   },
   {
@@ -30052,15 +29815,8 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831066/estagio-de-engenharia-em-ti",
     "tecnologias": [
-      "Análise de Dados",
-      "Automação",
-      "Engenharia de Software",
-      "Excel",
-      "Inglês",
       "Pandas",
-      "Power BI",
       "Python",
-      "SQL",
       "Selenium",
       "Visual Basic/VBA"
     ]
@@ -30245,22 +30001,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-t%C3%A9cnico-jr-sap-business-one-s%C3%A3o-jos%C3%A9-dos-campos-sp-at-sps-group-4454295718",
     "tecnologias": [
-      ".NET",
-      "API REST",
-      "Banco de Dados",
-      "C#",
-      "ERP",
-      "Engenharia de Software",
-      "GLPI",
-      "Git",
-      "ITSM",
-      "Jira",
-      "Lógica de Programação",
-      "SAP",
-      "SLA",
-      "SQL",
-      "SQL Server",
-      "Zendesk"
+      "SAP"
     ]
   },
   {
@@ -30561,39 +30302,6 @@
     ]
   },
   {
-    "id": 1983,
-    "titulo": "Desenvolvedor Júnior de Inteligência Artificial e Automação",
-    "empresa": "Randstad",
-    "area": "Inteligência Artificial",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP, Brasil",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "17/08/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/desenvolvedor-junior-de-inteligencia-artificial-e-automacao-1",
-    "tecnologias": [
-      "API REST",
-      "Agentes de IA & RAG",
-      "Análise de Dados",
-      "Banco de Dados",
-      "Bancos Vetoriais",
-      "Copilots & Assistentes de IA",
-      "Docker",
-      "Engenharia de Software",
-      "Excel",
-      "FastAPI",
-      "Git",
-      "Inteligência Artificial",
-      "LLMs & IA Generativa",
-      "Lógica de Programação",
-      "Pandas",
-      "Python",
-      "SQL"
-    ]
-  },
-  {
     "id": 1733,
     "titulo": "Analista de Suporte Júnior",
     "empresa": "Jobbol",
@@ -30693,12 +30401,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830852/analista-de-suporte-i",
     "tecnologias": [
-      "Estrutura de Dados",
-      "Hardware",
-      "Manutenção Preventiva",
-      "Redes de Computadores",
-      "VoIP",
-      "Windows"
+      "Hardware"
     ]
   },
   {
@@ -30834,13 +30537,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/flutter-developer-j%C3%BAnior-h%C3%ADbrido-poa-at-kobe-apps-4454407654",
     "tecnologias": [
-      "Dart",
-      "Design Patterns",
-      "Engenharia de Software",
-      "Flutter",
-      "Metodologias Ágeis",
-      "Scrum",
-      "Testes Automatizados"
+      "Flutter"
     ]
   },
   {
@@ -31054,15 +30751,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-infraestrutura-jr-azure-at-stefanini-brasil-4455368644",
     "tecnologias": [
-      "Active Directory",
-      "Azure",
-      "Backup",
-      "ITIL",
-      "Inteligência Artificial",
-      "Redes de Computadores",
-      "VPN",
-      "Windows",
-      "Windows Server"
+      "Azure"
     ]
   },
   {
@@ -31128,19 +30817,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/pessoa-desenvolvedora-de-agentes-de-ia-j%C3%BAnior-at-share-people-hub-vagas-4454404675",
     "tecnologias": [
-      "API REST",
       "Agentes de IA & RAG",
-      "Banco de Dados",
-      "Docker",
-      "Estrutura de Dados",
-      "Git",
-      "Inteligência Artificial",
-      "Jira",
-      "LLMs & IA Generativa",
-      "Lógica de Programação",
-      "Metodologias Ágeis",
-      "Python",
-      "SQL"
+      "Inteligência Artificial"
     ]
   },
   {
@@ -31180,8 +30858,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-salesforce-j%C3%BAnior-recife-at-deloitte-4409112622",
     "tecnologias": [
-      "Apex",
-      "Git",
       "Salesforce"
     ]
   },
@@ -31199,17 +30875,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-de-firmware-junior-at-diel-energia-4455343347",
     "tecnologias": [
-      "C++",
-      "Eletrônica",
-      "Firmware",
-      "Git",
-      "Hardware",
-      "Inteligência Artificial",
-      "IoT",
-      "Metodologias Ágeis",
-      "Microcontroladores",
-      "Scrum",
-      "Sistemas Embarcados"
+      "Firmware"
     ]
   },
   {
@@ -31517,7 +31183,6 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830763/analista-de-pos-vendas-junior-suporte-ao-produto",
     "tecnologias": [
-      "Espanhol",
       "Inglês"
     ]
   },
@@ -32117,9 +31782,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-porto-alegre-e-regi%C3%A3o-at-seprol-computadores-e-sistemas-4454836310",
     "tecnologias": [
-      "Hardware",
-      "ITIL",
-      "Redes de Computadores",
       "Suporte N1/N2"
     ]
   },
@@ -32180,29 +31842,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-salesforce-jr-at-brq-digital-solutions-4440360078",
     "tecnologias": [
-      "API REST",
-      "Apex",
-      "Azure",
-      "C#",
-      "CI/CD",
-      "Clean Code",
-      "Design Patterns",
-      "Engenharia de Software",
-      "Git",
-      "Inteligência Artificial",
-      "Java",
-      "JavaScript",
-      "Jenkins",
-      "LLMs & IA Generativa",
-      "Lógica de Programação",
-      "Microserviços",
-      "Node.js",
-      "POO",
-      "Python",
-      "SOLID",
-      "Salesforce",
-      "Testes Automatizados",
-      "TypeScript"
+      "Salesforce"
     ]
   },
   {
@@ -32787,26 +32427,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvimento-java-aws-junior-pleno-h%C3%ADbrido-s%C3%A3o-paulo-133713-at-gft-technologies-4451261799",
     "tecnologias": [
-      "API REST",
       "AWS",
-      "AWS SQS",
-      "Banco de Dados",
-      "CI/CD",
-      "Datadog",
-      "Docker",
-      "Git",
-      "Java",
-      "Kafka",
-      "Kotlin",
-      "Kubernetes",
-      "Metodologias Ágeis",
-      "Microserviços",
-      "Oracle",
-      "PostgreSQL",
-      "RabbitMQ",
-      "Scrum",
-      "SonarQube",
-      "Spring"
+      "Java"
     ]
   },
   {
@@ -32890,17 +32512,8 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830534/assistente-de-infraestrutura-de-ti",
     "tecnologias": [
-      "Active Directory",
-      "Backup",
-      "Firewall",
-      "GLPI",
-      "Grafana",
-      "Help Desk",
-      "Office 365",
-      "Redes de Computadores",
       "Windows",
-      "Windows Server",
-      "Zabbix"
+      "Windows Server"
     ]
   },
   {
@@ -33334,21 +32947,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-engenharia-de-software-e-ia-at-sanar-4453757283",
     "tecnologias": [
-      "AWS",
-      "Airflow",
-      "Copilots & Assistentes de IA",
-      "Data Lake",
       "Engenharia de Software",
-      "Git",
-      "Inteligência Artificial",
-      "JavaScript",
-      "LLMs & IA Generativa",
-      "Lógica de Programação",
-      "Node.js",
-      "Python",
-      "React",
-      "SQL",
-      "TypeScript"
+      "Inteligência Artificial"
     ]
   },
   {
@@ -33365,15 +32965,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830594/estagiario-em-desenvolvimento-de-software",
     "tecnologias": [
-      "Banco de Dados",
-      "Confluence",
-      "ERP",
-      "Inglês",
-      "Jira",
-      "Lógica de Programação",
-      "Metodologias Ágeis",
-      "Oracle",
-      "SQL"
+      "ERP"
     ]
   },
   {
@@ -33682,26 +33274,6 @@
     ]
   },
   {
-    "id": 1981,
-    "titulo": "Analista de Redes Júnior",
-    "empresa": "Nava Technology for Business",
-    "area": "Infraestrutura / Redes",
-    "senioridade": "Júnior",
-    "localidade": "Curitiba, PR, Brasil",
-    "polo": "Curitiba",
-    "regiao": "Sul",
-    "modalidade": "Presencial",
-    "data_publicacao": "13/08/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-redes-junior-1",
-    "tecnologias": [
-      "Linux",
-      "Redes de Computadores",
-      "VPN",
-      "Windows"
-    ]
-  },
-  {
     "id": 1579,
     "titulo": "Estágio de Suporte Acadêmico",
     "empresa": "Instituto Infnet - Venha ser estagiário ou trainee!",
@@ -33832,17 +33404,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-business-intelligence-at-metlife-4450012766",
     "tecnologias": [
-      "Análise de Dados",
-      "Automação",
-      "BI",
-      "Estatística",
-      "Excel",
-      "Inglês",
-      "Inteligência Artificial",
-      "Power BI",
-      "Python",
-      "RPA",
-      "SQL"
+      "BI"
     ]
   },
   {
@@ -34570,10 +34132,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-desenvolvedor-jr-flutter-at-evo-systems-4454044477",
     "tecnologias": [
-      "Banco de Dados",
-      "Flutter",
-      "Git",
-      "PostgreSQL"
+      "Flutter"
     ]
   },
   {
@@ -35750,16 +35309,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-de-desenvolvimento-full-stack-java-%2B-angular-at-framework-digital-4453147427",
     "tecnologias": [
-      "API REST",
       "Angular",
-      "Banco de Dados",
-      "Engenharia de Software",
-      "Git",
-      "Java",
-      "Lógica de Programação",
-      "POO",
-      "SQL",
-      "Spring"
+      "Java"
     ]
   },
   {
@@ -35793,7 +35344,6 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830028/programa-de-estagio-2026-ti-sap-administracao-ciencias-da-computacao",
     "tecnologias": [
-      "Estrutura de Dados",
       "SAP"
     ]
   },
@@ -36092,21 +35642,6 @@
     ]
   },
   {
-    "id": 1998,
-    "titulo": "Analista de Suporte Junior - Presencial em Biguaçu/ SC",
-    "empresa": "Koerich Lab",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Biguaçu, SC, Brasil",
-    "polo": "Florianópolis",
-    "regiao": "Sul",
-    "modalidade": "Presencial",
-    "data_publicacao": "11/08/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/koerich-lab/jobs/analista-de-suporte-junior---presencial-em-biguacu--sc-2",
-    "tecnologias": []
-  },
-  {
     "id": 1554,
     "titulo": "Assistente de Suporte TI l PCD - (Vaga afirmativa para pessoas com deficiência)",
     "empresa": "credsystem",
@@ -36202,9 +35737,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-seguran%C3%A7a-soc-j%C3%BAnior-at-ctc-4451977355",
     "tecnologias": [
-      "Cibersegurança",
-      "SIEM/SOC",
-      "Windows"
+      "SIEM/SOC"
     ]
   },
   {
@@ -36292,12 +35825,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-business-intelligence-sp-at-cescon-barrieu-flesch-barreto-advogados-4451981077",
     "tecnologias": [
-      "Análise de Dados",
-      "BI",
-      "Estatística",
-      "Excel",
-      "Power BI",
-      "SQL"
+      "BI"
     ]
   },
   {
@@ -36437,15 +35965,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-desenvolvedor-jr-net-at-evo-systems-4452683442",
     "tecnologias": [
-      ".NET",
-      "AWS",
-      "Angular",
-      "Azure",
-      "Banco de Dados",
-      "Git",
-      "Metodologias Ágeis",
-      "Scrum",
-      "Testes Automatizados"
+      ".NET"
     ]
   },
   {
@@ -36462,13 +35982,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-em-ti-foco-service-desk-at-tp-group-4451961697",
     "tecnologias": [
-      "Hardware",
-      "LGPD",
-      "Office 365",
-      "Redes de Computadores",
-      "Service Desk",
-      "Suporte Remoto",
-      "Windows"
+      "Service Desk"
     ]
   },
   {
@@ -36656,21 +36170,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2824782/desenvolvedor-de-software-jr",
     "tecnologias": [
-      ".NET",
-      "Automação",
-      "C#",
-      "Flutter",
-      "Git",
-      "Inglês",
-      "Inteligência Artificial",
-      "Java",
-      "JavaScript",
-      "Metodologias Ágeis",
-      "Node.js",
-      "Python",
-      "React",
-      "Scrum",
-      "Spring"
+      "Git"
     ]
   },
   {
@@ -36978,23 +36478,6 @@
     ]
   },
   {
-    "id": 1996,
-    "titulo": "Analista de Suporte Ao Cliente",
-    "empresa": "Hope Solution",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Brasil",
-    "polo": "Remoto",
-    "regiao": "Remoto Nacional",
-    "modalidade": "Remoto",
-    "data_publicacao": "10/08/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/hope-solution/jobs/analista-de-suporte-ao-cliente-1",
-    "tecnologias": [
-      "ERP"
-    ]
-  },
-  {
     "id": 1647,
     "titulo": "28418 | Pessoa Estagiária em Suporte Técnico | Segurança Eletrônica",
     "empresa": "Intelbras",
@@ -37009,8 +36492,7 @@
     "url": "https://br.linkedin.com/jobs/view/28418-pessoa-estagi%C3%A1ria-em-suporte-t%C3%A9cnico-seguran%C3%A7a-eletr%C3%B4nica-at-intelbras-4451464487",
     "tecnologias": [
       "CFTV",
-      "Eletrônica",
-      "Redes de Computadores"
+      "Eletrônica"
     ]
   },
   {
@@ -37213,12 +36695,8 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2826092/estagio-tecnico-em-eletronica",
     "tecnologias": [
-      "Automação Industrial",
       "Banco de Dados",
-      "Eletrônica",
-      "Estrutura de Dados",
-      "Inglês",
-      "Manutenção Preventiva"
+      "Eletrônica"
     ]
   },
   {
@@ -37548,15 +37026,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2829673/desenvolvedor-de-solucoes-jr-rpa",
     "tecnologias": [
-      "API REST",
-      "Análise de Dados",
-      "Automação",
-      "Banco de Dados",
-      "Oracle",
-      "PostgreSQL",
-      "RPA",
-      "SQL",
-      "SQL Server"
+      "RPA"
     ]
   },
   {
@@ -37782,10 +37252,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-governan%C3%A7a-em-cybersecurity-jr-at-celcoin-4460686424",
     "tecnologias": [
-      "Cibersegurança",
-      "Governança e Riscos (GRC)",
-      "ISO 27001",
-      "LGPD"
+      "Cibersegurança"
     ]
   },
   {
@@ -38229,64 +37696,6 @@
     ]
   },
   {
-    "id": 1982,
-    "titulo": "Estágio em Tecnologia (Infra, Cybersegurança e Digital)",
-    "empresa": "Randstad",
-    "area": "Infraestrutura / Redes",
-    "senioridade": "Estágio",
-    "localidade": "Guarulhos, SP, Brasil",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "07/08/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/estagio-em-tecnologia--infra--cyberseguranca-e-digital--1",
-    "tecnologias": [
-      "Automação",
-      "Azure",
-      "Cisco",
-      "Espanhol",
-      "Office 365",
-      "Power BI",
-      "Python",
-      "SIEM/SOC",
-      "Service Desk"
-    ]
-  },
-  {
-    "id": 1968,
-    "titulo": "Analista de Dados e Automação",
-    "empresa": "ddCom IT Systems",
-    "area": "Data",
-    "senioridade": "Júnior",
-    "localidade": "Barueri, SP, Brasil",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "07/08/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/ddcom-it-systems/jobs/analista-de-dados-e-automacao-1",
-    "tecnologias": [
-      "Agentes de IA & RAG",
-      "Análise de Dados",
-      "Automação",
-      "Banco de Dados",
-      "Estatística",
-      "Excel",
-      "Inglês",
-      "Inteligência Artificial",
-      "LLMs & IA Generativa",
-      "Machine Learning",
-      "Modelagem de Dados",
-      "NumPy",
-      "Pandas",
-      "Power BI",
-      "Python",
-      "SQL",
-      "Scikit-Learn"
-    ]
-  },
-  {
     "id": 1671,
     "titulo": "ANALISTA DE INTELIGÊNCIA ARTIFICIAL JUNIOR",
     "empresa": "Lojas Torra",
@@ -38365,16 +37774,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/tech-analista-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-j%C3%BAnior-siem-elastic-search-at-totvs-4449216063",
     "tecnologias": [
-      "Cibersegurança",
       "Elasticsearch",
-      "Gestão de Vulnerabilidades",
-      "Linux",
-      "Python",
-      "Redes de Computadores",
-      "SIEM/SOC",
-      "Shell/Bash",
-      "TOTVS",
-      "UML"
+      "SIEM/SOC"
     ]
   },
   {
@@ -38419,7 +37820,7 @@
     "id": 1313,
     "titulo": "Técnico de Informatica N1- Cajamar",
     "empresa": "Penso Tecnologia",
-    "area": "Service Desk / Help Desk",
+    "area": "Field Service / Hardware",
     "senioridade": "Júnior",
     "localidade": "Localização não informada",
     "polo": "Não informado",
@@ -38711,10 +38112,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/rocha-neto-consultoria-em-tecnologia-analista-de-suporte-n1-j%C3%BAnior-at-cdl-uberl%C3%A2ndia-4450783865",
     "tecnologias": [
-      "Hardware",
-      "Montagem e Manutenção de PCs",
-      "Suporte N1/N2",
-      "Windows"
+      "Suporte N1/N2"
     ]
   },
   {
@@ -38781,9 +38179,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2829382/tecnico-de-automacao-junior-shopping-cidade-jardim",
     "tecnologias": [
-      "CFTV",
-      "Eletrônica",
-      "Manutenção Preventiva"
+      "CFTV"
     ]
   },
   {
@@ -39268,31 +38664,6 @@
       "Python",
       "SQL",
       "Windows"
-    ]
-  },
-  {
-    "id": 1964,
-    "titulo": "Desenvolvedor Backend Java Júnior",
-    "empresa": "NTT DATA",
-    "area": "Backend",
-    "senioridade": "Júnior",
-    "localidade": "Brasil",
-    "polo": "Remoto",
-    "regiao": "Remoto Nacional",
-    "modalidade": "Remoto",
-    "data_publicacao": "06/08/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/ntt-data/jobs/desenvolvedor-backend-java-junior-3",
-    "tecnologias": [
-      "Azure",
-      "Docker",
-      "Engenharia de Software",
-      "Java",
-      "Kafka",
-      "Kubernetes",
-      "Microserviços",
-      "Qualidade de Software",
-      "Spring"
     ]
   },
   {
@@ -39788,23 +39159,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-sistemas-j%C3%BAnior-com-ia-at-metrofile-brasil-gest%C3%A3o-da-informa%C3%A7%C3%A3o-4449979473",
     "tecnologias": [
-      ".NET",
-      "API REST",
-      "Banco de Dados",
-      "Copilots & Assistentes de IA",
-      "Engenharia de Software",
-      "GLPI",
-      "Git",
-      "Inteligência Artificial",
-      "LLMs & IA Generativa",
-      "Manutenção Preventiva",
-      "Oracle",
-      "PL/SQL",
-      "Python",
-      "SQL",
-      "Shell/Bash",
-      "T-SQL",
-      "Visual Basic/VBA"
+      "Inteligência Artificial"
     ]
   },
   {
@@ -40201,109 +39556,6 @@
     ]
   },
   {
-    "id": 1991,
-    "titulo": "Analista de Service Desk Junior (Noturno)",
-    "empresa": "Nava Technology for Business",
-    "area": "Service Desk / Help Desk",
-    "senioridade": "Júnior",
-    "localidade": "Barueri, SP, Brasil",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "05/08/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-service-desk-junior--noturno--1",
-    "tecnologias": [
-      "Active Directory",
-      "Azure",
-      "Hardware",
-      "ITIL",
-      "ITSM",
-      "Linux",
-      "Office 365",
-      "SLA",
-      "Service Desk",
-      "Suporte Remoto",
-      "VPN",
-      "Windows"
-    ]
-  },
-  {
-    "id": 1990,
-    "titulo": "Analista de Service Desk Junior (Diurno)",
-    "empresa": "Nava Technology for Business",
-    "area": "Service Desk / Help Desk",
-    "senioridade": "Júnior",
-    "localidade": "Barueri, SP, Brasil",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "05/08/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-service-desk-junior-1",
-    "tecnologias": [
-      "Active Directory",
-      "Azure",
-      "Hardware",
-      "ITIL",
-      "ITSM",
-      "Linux",
-      "Office 365",
-      "SLA",
-      "Service Desk",
-      "Suporte Remoto",
-      "VPN",
-      "Windows"
-    ]
-  },
-  {
-    "id": 1988,
-    "titulo": "Analista de Cibersegurança Júnior",
-    "empresa": "Nava Technology for Business",
-    "area": "Segurança",
-    "senioridade": "Júnior",
-    "localidade": "Brasil",
-    "polo": "Remoto",
-    "regiao": "Remoto Nacional",
-    "modalidade": "Remoto",
-    "data_publicacao": "05/08/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-ciberseguranca-junior-2",
-    "tecnologias": [
-      "Cibersegurança",
-      "Governança e Riscos (GRC)",
-      "ISO 27001",
-      "Inglês",
-      "LGPD",
-      "SIEM/SOC"
-    ]
-  },
-  {
-    "id": 1987,
-    "titulo": "Administrador de Segurança da Informação Junior",
-    "empresa": "Nava Technology for Business",
-    "area": "Segurança",
-    "senioridade": "Júnior",
-    "localidade": "Curitiba, PR, Brasil",
-    "polo": "Curitiba",
-    "regiao": "Sul",
-    "modalidade": "Presencial",
-    "data_publicacao": "05/08/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/administrador-de-seguranca-da-informacao-junior-1",
-    "tecnologias": [
-      "Gestão de Vulnerabilidades",
-      "ISO 27001",
-      "ITIL",
-      "Linux",
-      "Redes de Computadores",
-      "SIEM/SOC",
-      "SLA",
-      "VPN",
-      "Windows"
-    ]
-  },
-  {
     "id": 1604,
     "titulo": "ESTÁGIO - THEMA INFORMÁTICA - ANÁLISE/RELATÓRIOS SQL",
     "empresa": "PUCRS Carreiras",
@@ -40317,7 +39569,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-thema-inform%C3%A1tica-an%C3%A1lise-relat%C3%B3rios-sql-at-pucrs-carreiras-4449136399",
     "tecnologias": [
-      "Engenharia de Software",
       "SQL"
     ]
   },
@@ -40607,13 +39858,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/service-desk-junior-analyst-at-lenovo-4449130978",
     "tecnologias": [
-      "Hardware",
-      "Help Desk",
-      "ITIL",
-      "ITSM",
-      "Next.js",
-      "Service Desk",
-      "Windows"
+      "Service Desk"
     ]
   },
   {
@@ -40741,17 +39986,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-full-stack-java-j%C3%BAnior-at-elotech-gest%C3%A3o-p%C3%BAblica-4448038315",
     "tecnologias": [
-      "Banco de Dados",
-      "Git",
-      "HTML",
-      "Hibernate",
-      "Java",
-      "JavaScript",
-      "Metodologias Ágeis",
-      "PostgreSQL",
-      "Spring",
-      "Testes Automatizados",
-      "TypeScript"
+      "Java"
     ]
   },
   {
@@ -40884,8 +40119,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-automa%C3%A7%C3%A3o-industrial-ci%C3%AAncia-da-computa%C3%A7%C3%A3o-ci%C3%AAncia-da-informa%C3%A7%C3%A3o-at-iel-sc-4448534547",
     "tecnologias": [
-      "Automação Industrial",
-      "Node.js"
+      "Automação Industrial"
     ]
   },
   {
@@ -41086,29 +40320,6 @@
     "url": "https://vagas.solides.com.br/vaga/896805/auxiliar-de-laboratorio-de-telecom",
     "tecnologias": [
       "Redes de Computadores"
-    ]
-  },
-  {
-    "id": 1995,
-    "titulo": "Analista de Suporte Acadêmico Júnior | Sistemas / Help Desk",
-    "empresa": "Code Group",
-    "area": "Service Desk / Help Desk",
-    "senioridade": "Júnior",
-    "localidade": "Brasil",
-    "polo": "Não informado",
-    "regiao": "Não informado",
-    "modalidade": "Presencial",
-    "data_publicacao": "04/08/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/code-group/jobs/analista-de-suporte-academico-junior--1",
-    "tecnologias": [
-      "Banco de Dados",
-      "Excel",
-      "Help Desk",
-      "Metodologias Ágeis",
-      "SQL",
-      "SQL Server",
-      "Scrum"
     ]
   },
   {
@@ -41648,7 +40859,6 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2828792/estagiario-a-de-engenharia-barra-da-tijuca-rj",
     "tecnologias": [
-      "Banco de Dados",
       "Excel",
       "Inglês"
     ]
@@ -42120,27 +41330,6 @@
     ]
   },
   {
-    "id": 1989,
-    "titulo": "Analista Suporte Acadêmico Junior",
-    "empresa": "Code Group",
-    "area": "Service Desk / Help Desk",
-    "senioridade": "Júnior",
-    "localidade": "Brasil",
-    "polo": "Não informado",
-    "regiao": "Não informado",
-    "modalidade": "Presencial",
-    "data_publicacao": "03/08/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/code-group/jobs/analista-suporte-academico-junior-1",
-    "tecnologias": [
-      "Excel",
-      "Help Desk",
-      "Metodologias Ágeis",
-      "SQL",
-      "Scrum"
-    ]
-  },
-  {
     "id": 1900,
     "titulo": "Estagiário(a) TI - Infraestrutura",
     "empresa": "Cooperflora",
@@ -42240,11 +41429,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1giario-a-de-service-desk-at-sgi-4446269065",
     "tecnologias": [
-      "ERP",
-      "ITIL",
-      "Inteligência Artificial",
-      "Service Desk",
-      "Suporte N1/N2"
+      "Service Desk"
     ]
   },
   {
@@ -42823,9 +42008,6 @@
       "Análise de Dados",
       "Banco de Dados",
       "Estatística",
-      "Excel",
-      "Inglês",
-      "Machine Learning",
       "Python",
       "SQL"
     ]
@@ -43240,9 +42422,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/jovem-aprendiz-service-desk-at-funcional-health-tech-4445590573",
     "tecnologias": [
-      "Hardware",
-      "ITSM",
-      "Redes de Computadores",
       "Service Desk"
     ]
   },
@@ -43396,43 +42575,6 @@
     "tecnologias": []
   },
   {
-    "id": 1978,
-    "titulo": "Desenvolvedor Full Stack",
-    "empresa": "Randstad",
-    "area": "Fullstack",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP, Brasil",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Remoto",
-    "data_publicacao": "31/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/desenvolvedor-full-stack-877",
-    "tecnologias": [
-      "API REST",
-      "CI/CD",
-      "CSS",
-      "Clean Architecture",
-      "Copilots & Assistentes de IA",
-      "Datadog",
-      "Design Patterns",
-      "Engenharia de Software",
-      "Espanhol",
-      "Figma",
-      "HTML",
-      "Inteligência Artificial",
-      "Java",
-      "JavaScript",
-      "Node.js",
-      "React",
-      "SAP",
-      "SOLID",
-      "Testes Automatizados",
-      "TypeScript",
-      "UX/UI"
-    ]
-  },
-  {
     "id": 1788,
     "titulo": "Estágio Sistemas (Service Desk TI) | Catalão/GO",
     "empresa": "HPE Automotores do Brasil Ltda.",
@@ -43480,17 +42622,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/software-engineer-j%C3%BAnior-ia-integra%C3%A7%C3%B5es-at-planetaexo-4457617513",
     "tecnologias": [
-      "API REST",
-      "Banco de Dados",
-      "Copilots & Assistentes de IA",
-      "Git",
-      "Inglês",
-      "Inteligência Artificial",
-      "JavaScript",
-      "LLMs & IA Generativa",
-      "Lógica de Programação",
-      "Python",
-      "TypeScript"
+      "Inteligência Artificial"
     ]
   },
   {
@@ -44265,26 +43397,6 @@
     "tecnologias": []
   },
   {
-    "id": 2004,
-    "titulo": "Técnico de Suporte Jr. l",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Brasil",
-    "polo": "Não informado",
-    "regiao": "Não informado",
-    "modalidade": "Presencial",
-    "data_publicacao": "30/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-de-suporte-jr--l--5",
-    "tecnologias": [
-      "Hardware",
-      "Jira",
-      "Montagem e Manutenção de PCs",
-      "Windows"
-    ]
-  },
-  {
     "id": 1685,
     "titulo": "ANALISTA DE SUPORTE (TI) JUNIOR- P/C3 TJMG (MG-BELO HORIZONTE)",
     "empresa": "Wyntech Serviços em Informática",
@@ -44817,12 +43929,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-desenvolvimento-foco-em-intelig%C3%AAncia-artificial-at-servfaz-servi%C3%A7os-de-mao-de-obra-ltda-4446936049",
     "tecnologias": [
-      "Agentes de IA & RAG",
-      "Copilots & Assistentes de IA",
-      "Engenharia de Software",
-      "Inteligência Artificial",
-      "LLMs & IA Generativa",
-      "UML"
+      "Inteligência Artificial"
     ]
   },
   {
@@ -45337,13 +44444,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-dados-e-intelig%C3%AAncia-artificial-aplicada-ao-jur%C3%ADdico-at-aryst%C3%B3bulo-freitas-advogados-4446824455",
     "tecnologias": [
-      "Agentes de IA & RAG",
-      "Excel",
-      "Inteligência Artificial",
-      "LGPD",
-      "Python",
-      "Qualidade de Dados",
-      "SQL"
+      "Inteligência Artificial"
     ]
   },
   {
@@ -45637,17 +44738,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-business-intelligence-j%C3%BAnior-at-qualificar-ti-4446524240",
     "tecnologias": [
-      "Automação",
-      "BI",
-      "Banco de Dados",
-      "Figma",
-      "PostgreSQL",
-      "Power BI",
-      "Python",
-      "SQL",
-      "SQL Server",
-      "SharePoint",
-      "UX/UI"
+      "BI"
     ]
   },
   {
@@ -46069,8 +45160,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2820709/analista-de-qualidade-jr",
     "tecnologias": [
-      "Análise de Dados",
-      "Excel"
+      "Análise de Dados"
     ]
   },
   {
@@ -46104,15 +45194,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagio-an%C3%A1lise-e-desenvolvimento-de-sistemas-ci%C3%AAncia-da-computa%C3%A7%C3%A3o-redes-de-computadores-at-iel-sc-4445787500",
     "tecnologias": [
-      "Active Directory",
-      "Eletrônica",
-      "Hardware",
-      "Help Desk",
-      "Manutenção Preventiva",
-      "Montagem e Manutenção de PCs",
-      "Redes de Computadores",
-      "Windows",
-      "Windows Server"
+      "Redes de Computadores"
     ]
   },
   {
@@ -48817,13 +47899,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-an%C3%A1lise-de-dados-programa%C3%A7%C3%A3o-desenvolvimento-at-evosolar-cabo-frio-4444291692",
     "tecnologias": [
-      "Análise de Dados",
-      "Banco de Dados",
-      "CRM",
-      "Estatística",
-      "Estrutura de Dados",
-      "Python",
-      "SQL"
+      "Análise de Dados"
     ]
   },
   {
@@ -49243,12 +48319,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-business-intelligence-jr-at-simpress-4441578229",
     "tecnologias": [
-      "Automação",
-      "BI",
-      "Modelagem de Dados",
-      "Power BI",
-      "Python",
-      "SQL"
+      "BI"
     ]
   },
   {
@@ -49265,8 +48336,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-php-vue-j%C3%BAnior-at-jobbol-4444726131",
     "tecnologias": [
-      "API REST",
-      "MySQL",
       "PHP",
       "Vue.js"
     ]
@@ -49433,33 +48502,6 @@
     "tecnologias": [
       "Cibersegurança",
       "Excel"
-    ]
-  },
-  {
-    "id": 1965,
-    "titulo": "Desenvolvedor Java Junior",
-    "empresa": "Code Group",
-    "area": "Backend",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP, Brasil",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Híbrido",
-    "data_publicacao": "22/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/code-group/jobs/desenvolvedor-java-jr--5",
-    "tecnologias": [
-      "API REST",
-      "AWS",
-      "AWS SQS",
-      "Banco de Dados",
-      "Docker",
-      "Git",
-      "Java",
-      "Kafka",
-      "Linux",
-      "RabbitMQ",
-      "Testes Automatizados"
     ]
   },
   {
@@ -50207,31 +49249,6 @@
     ]
   },
   {
-    "id": 1975,
-    "titulo": "Analista de Field Service I",
-    "empresa": "Nava Technology for Business",
-    "area": "Field Service / Hardware",
-    "senioridade": "Júnior",
-    "localidade": "Indaiatuba, SP, Brasil",
-    "polo": "Campinas",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "21/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-field-service-i-1",
-    "tecnologias": [
-      "Eletrônica",
-      "Excel",
-      "Hardware",
-      "ITIL",
-      "Montagem e Manutenção de PCs",
-      "VPN",
-      "Windows",
-      "Windows Server",
-      "Word"
-    ]
-  },
-  {
     "id": 1674,
     "titulo": "Visagio Talentos - Estágio: Data Science e IA Generativa SP",
     "empresa": "Visagio",
@@ -50695,26 +49712,6 @@
     ]
   },
   {
-    "id": 1992,
-    "titulo": "Assistente de Help Desk | Suporte ao Cliente (Software)",
-    "empresa": "Logycware Sistemas",
-    "area": "Service Desk / Help Desk",
-    "senioridade": "Júnior",
-    "localidade": "Brasil",
-    "polo": "Remoto",
-    "regiao": "Remoto Nacional",
-    "modalidade": "Remoto",
-    "data_publicacao": "20/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/logycware-sistemas/jobs/assistente-de-help-desk---suporte-ao-cliente--software---1",
-    "tecnologias": [
-      "ERP",
-      "Help Desk",
-      "SLA",
-      "Suporte Remoto"
-    ]
-  },
-  {
     "id": 1146,
     "titulo": "Assistente de Ti",
     "empresa": "Grupo Upper",
@@ -50985,24 +49982,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-de-desenvolvimento-de-firmware-at-instituto-hardware-br-hbr-4442412190",
     "tecnologias": [
-      "Algoritmos",
-      "Automação Industrial",
-      "Banco de Dados",
-      "C++",
-      "CSS",
-      "Eletrônica",
-      "Firmware",
-      "Git",
-      "HTML",
-      "Inteligência Artificial",
-      "JavaScript",
-      "Linux",
-      "Microcontroladores",
-      "PostgreSQL",
-      "Python",
-      "SQLite",
-      "Sistemas Embarcados",
-      "Testes Automatizados"
+      "Firmware"
     ]
   },
   {
@@ -51204,24 +50184,6 @@
     ]
   },
   {
-    "id": 1986,
-    "titulo": "Estágio em Testes de Software",
-    "empresa": "Instituto Recôncavo de Tecnologia",
-    "area": "QA",
-    "senioridade": "Estágio",
-    "localidade": "Salvador, BA, Brasil",
-    "polo": "Salvador",
-    "regiao": "Nordeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "17/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/instituto-reconcavo-de-tecnologia/jobs/estagio-em-testes-de-software-1",
-    "tecnologias": [
-      "Metodologias Ágeis",
-      "Scrum"
-    ]
-  },
-  {
     "id": 1873,
     "titulo": "Estágio em Cibersegurança",
     "empresa": "WL Tech",
@@ -51235,9 +50197,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-ciberseguran%C3%A7a-at-wl-tech-4441984743",
     "tecnologias": [
-      "Cibersegurança",
-      "Linux",
-      "Windows"
+      "Cibersegurança"
     ]
   },
   {
@@ -52431,8 +51391,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2825733/analista-de-orcamentos-junior",
     "tecnologias": [
-      "Banco de Dados",
-      "Excel"
+      "Banco de Dados"
     ]
   },
   {
@@ -52727,11 +51686,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-infraestrutura-linux-jr-at-redix-4438423722",
     "tecnologias": [
-      "Linux",
-      "Redes de Computadores",
-      "Service Desk",
-      "Windows",
-      "Windows Server"
+      "Linux"
     ]
   },
   {
@@ -53068,21 +52023,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-j%C3%BAnior-automa%C3%A7%C3%A3o-ia-e-dados-at-growdev-4440254413",
     "tecnologias": [
-      "API REST",
-      "AWS",
-      "Agentes de IA & RAG",
-      "Análise de Dados",
-      "Automação",
-      "Azure",
-      "ETL",
-      "GCP",
-      "Git",
-      "Inteligência Artificial",
-      "JavaScript",
-      "LLMs & IA Generativa",
-      "Lógica de Programação",
-      "Python",
-      "SQL"
+      "Inteligência Artificial"
     ]
   },
   {
@@ -54624,17 +53565,11 @@
     "url": "https://www.vagas.com.br/vagas/v2824894/estagio-em-ciencia-de-dados-e-gen-ai-nucleo-de-ia-hstern",
     "tecnologias": [
       "Análise de Dados",
-      "Automação",
       "Copilots & Assistentes de IA",
-      "Estatística",
-      "Git",
-      "Inglês",
       "Inteligência Artificial",
       "LLMs & IA Generativa",
       "Machine Learning",
-      "Pandas",
-      "Python",
-      "Scikit-Learn"
+      "Python"
     ]
   },
   {
@@ -55951,338 +54886,6 @@
       "Python",
       "React",
       "SQL"
-    ]
-  },
-  {
-    "id": 2019,
-    "titulo": "Técnico em Informática (Campo) - Uberlândia/MG",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Uberlândia, MG, Brasil",
-    "polo": "Uberlândia",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "07/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----uberlandia-mg-1",
-    "tecnologias": [
-      "Eletrônica",
-      "Hardware",
-      "ITIL",
-      "Linux",
-      "Windows"
-    ]
-  },
-  {
-    "id": 2018,
-    "titulo": "Técnico em Informática (Campo) - São Paulo/SP",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP, Brasil",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "07/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----sao-paulo-sp-1",
-    "tecnologias": [
-      "Eletrônica",
-      "Hardware",
-      "ITIL",
-      "Linux",
-      "Windows"
-    ]
-  },
-  {
-    "id": 2017,
-    "titulo": "Técnico em Informática (Campo) - Sinop-MT",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Sinop - MT, Brasil",
-    "polo": "Cuiabá",
-    "regiao": "Centro-Oeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "07/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----sinop-mt-1",
-    "tecnologias": [
-      "Eletrônica",
-      "Hardware",
-      "ITIL",
-      "Linux",
-      "Windows"
-    ]
-  },
-  {
-    "id": 2016,
-    "titulo": "Técnico em Informática (Campo) - Ponta Grossa/PR",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Ponta Grossa, PR, Brasil",
-    "polo": "Ponta Grossa",
-    "regiao": "Sul",
-    "modalidade": "Presencial",
-    "data_publicacao": "07/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----ponta-grossa-pr-1",
-    "tecnologias": [
-      "Eletrônica",
-      "Hardware",
-      "ITIL",
-      "Linux",
-      "Windows"
-    ]
-  },
-  {
-    "id": 2015,
-    "titulo": "Técnico em Informática (Campo) - Piracicaba",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Piracicaba - SP, Brasil",
-    "polo": "Interior Paulista Ocidental",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "07/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----piracicaba-1",
-    "tecnologias": [
-      "Eletrônica",
-      "Hardware",
-      "ITIL",
-      "Linux",
-      "Windows"
-    ]
-  },
-  {
-    "id": 2014,
-    "titulo": "Técnico em Informática (Campo) - Pato Branco/PR",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Pato Branco, PR, Brasil",
-    "polo": "Pato Branco",
-    "regiao": "Sul",
-    "modalidade": "Presencial",
-    "data_publicacao": "07/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----pato-branco-pr-1",
-    "tecnologias": [
-      "Eletrônica",
-      "Hardware",
-      "ITIL",
-      "Linux",
-      "Windows"
-    ]
-  },
-  {
-    "id": 2013,
-    "titulo": "Técnico em Informática (Campo) - Marília/SP",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Marília, SP, Brasil",
-    "polo": "Interior Paulista Ocidental",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "07/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----marilia-sp-1",
-    "tecnologias": [
-      "Eletrônica",
-      "Hardware",
-      "ITIL",
-      "Linux",
-      "Windows"
-    ]
-  },
-  {
-    "id": 2012,
-    "titulo": "Técnico em Informática (Campo) - Maringá/PR",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Maringá, PR, Brasil",
-    "polo": "Maringá",
-    "regiao": "Sul",
-    "modalidade": "Presencial",
-    "data_publicacao": "07/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----maringa-pr-1",
-    "tecnologias": [
-      "Eletrônica",
-      "Hardware",
-      "ITIL",
-      "Linux",
-      "Windows"
-    ]
-  },
-  {
-    "id": 2011,
-    "titulo": "Técnico em Informática (Campo) - Itajaí/SC",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Itajaí, SC, Brasil",
-    "polo": "Blumenau",
-    "regiao": "Sul",
-    "modalidade": "Presencial",
-    "data_publicacao": "07/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----itajai-sc-1",
-    "tecnologias": [
-      "Eletrônica",
-      "Hardware",
-      "ITIL",
-      "Linux",
-      "Windows"
-    ]
-  },
-  {
-    "id": 2010,
-    "titulo": "Técnico em Informática (Campo) - Cascavel/PR",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Cascavel, PR, Brasil",
-    "polo": "Cascavel",
-    "regiao": "Sul",
-    "modalidade": "Presencial",
-    "data_publicacao": "07/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----cascavel-pr-1",
-    "tecnologias": [
-      "Eletrônica",
-      "Hardware",
-      "ITIL",
-      "Linux",
-      "Windows"
-    ]
-  },
-  {
-    "id": 2009,
-    "titulo": "Técnico em Informática (Campo) - Campinas/SP",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Campinas, SP, Brasil",
-    "polo": "Campinas",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "07/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----campinas-sp-1",
-    "tecnologias": [
-      "Eletrônica",
-      "Hardware",
-      "ITIL",
-      "Linux",
-      "Windows"
-    ]
-  },
-  {
-    "id": 2008,
-    "titulo": "Técnico em Informática (Campo) - Belo Horizonte/MG",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Belo Horizonte, MG, Brasil",
-    "polo": "Belo Horizonte",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "07/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----belo-horizonte-mg-1",
-    "tecnologias": [
-      "Eletrônica",
-      "Hardware",
-      "ITIL",
-      "Linux",
-      "Windows"
-    ]
-  },
-  {
-    "id": 2006,
-    "titulo": "Técnico de Suporte júnior l - Araçariguama",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Araçariguama, SP, Brasil",
-    "polo": "Estado/SP",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "07/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-de-suporte-jr--l---aracariguama-1",
-    "tecnologias": [
-      "Hardware",
-      "Jira",
-      "Montagem e Manutenção de PCs",
-      "Windows"
-    ]
-  },
-  {
-    "id": 2005,
-    "titulo": "Técnico de Suporte Jr. l - DF02",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Brasília, DF, Brasil",
-    "polo": "Brasília",
-    "regiao": "Centro-Oeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "07/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-de-suporte-jr--l----df02-1",
-    "tecnologias": [
-      "Hardware",
-      "Jira",
-      "Montagem e Manutenção de PCs",
-      "Windows"
-    ]
-  },
-  {
-    "id": 2003,
-    "titulo": "Técnico de Suporte Jr. - MG01",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Extrema, MG, Brasil",
-    "polo": "Estado/MG",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "07/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-de-suporte-jr-----mg01-1",
-    "tecnologias": [
-      "Hardware",
-      "Jira",
-      "Montagem e Manutenção de PCs",
-      "Windows"
-    ]
-  },
-  {
-    "id": 2002,
-    "titulo": "Técnico de Suporte Jr.",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Cajamar, SP, Brasil",
-    "polo": "Jundiaí",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "07/07/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-de-suporte-jr--l--2",
-    "tecnologias": [
-      "Hardware",
-      "Jira",
-      "Montagem e Manutenção de PCs",
-      "Windows"
     ]
   },
   {
@@ -57721,8 +56324,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-foco-em-secops-at-cooperativa-central-ailos-4431978546",
     "tecnologias": [
-      "Cibersegurança",
-      "ITIL"
+      "Cibersegurança"
     ]
   },
   {
@@ -58912,63 +57514,6 @@
     ]
   },
   {
-    "id": 2020,
-    "titulo": "Técnico em Informática de Campo",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Marília, SP, Brasil",
-    "polo": "Interior Paulista Ocidental",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "24/06/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica-campo-1",
-    "tecnologias": [
-      "Eletrônica",
-      "Hardware",
-      "ITIL",
-      "Linux",
-      "Windows"
-    ]
-  },
-  {
-    "id": 2007,
-    "titulo": "Técnico de TI de Campo",
-    "empresa": "Randstad",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Florianópolis, SC, Brasil",
-    "polo": "Florianópolis",
-    "regiao": "Sul",
-    "modalidade": "Presencial",
-    "data_publicacao": "24/06/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-de-informatica-campo-4",
-    "tecnologias": [
-      "Eletrônica",
-      "Hardware",
-      "ITIL",
-      "Linux",
-      "Windows"
-    ]
-  },
-  {
-    "id": 1999,
-    "titulo": "Analista de Suporte Júnior",
-    "empresa": "Nava Technology for Business",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "Campinas, SP, Brasil",
-    "polo": "Campinas",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "24/06/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-suporte-junior-11",
-    "tecnologias": []
-  },
-  {
     "id": 1635,
     "titulo": "Auxiliar de T.I (Belém-PA)",
     "empresa": "Zoo Center Distribuidora",
@@ -59253,21 +57798,6 @@
     "tecnologias": []
   },
   {
-    "id": 1997,
-    "titulo": "Analista de Suporte I",
-    "empresa": "Nava Technology for Business",
-    "area": "Suporte Técnico",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP, Brasil",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "23/06/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-suporte-i-5",
-    "tecnologias": []
-  },
-  {
     "id": 1291,
     "titulo": "Auxiliar de TI - Foco em Infraestrutura (São Paulo - Barra Funda)",
     "empresa": "Pacaembu Autopeças",
@@ -59426,7 +57956,12 @@
     "fonte": "gupy",
     "url": "https://sidi.gupy.io/job/eyJqb2JJZCI6MTE1Mzc0MzMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Android"
+      "Android",
+      "Git",
+      "Inglês",
+      "Kotlin",
+      "POO",
+      "Testes Automatizados"
     ]
   },
   {
@@ -60244,13 +58779,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-vis%C3%A3o-computacional-e-automa%C3%A7%C3%A3o-at-exxata-4430148639",
     "tecnologias": [
-      "Análise de Dados",
-      "Automação",
-      "Banco de Dados",
-      "Inteligência Artificial",
-      "Lógica de Programação",
-      "Machine Learning",
-      "Python"
+      "Machine Learning"
     ]
   },
   {
@@ -60365,17 +58894,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/programa-de-est%C3%A1gio-em-ia-at-grupo-vilarejo-4429178601",
     "tecnologias": [
-      "API REST",
-      "Análise de Dados",
-      "Copilots & Assistentes de IA",
-      "Inglês",
-      "Inteligência Artificial",
-      "JavaScript",
-      "LLMs & IA Generativa",
-      "Lógica de Programação",
-      "Machine Learning",
-      "Python",
-      "UX/UI"
+      "Inteligência Artificial"
     ]
   },
   {
@@ -60483,10 +59002,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-abap-j%C3%BAnior-at-lumen-it-4429232229",
     "tecnologias": [
-      "ABAP",
-      "Inglês",
-      "SAP",
-      "Testes Automatizados"
+      "ABAP"
     ]
   },
   {
@@ -60803,8 +59319,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-help-desk-at-inetvip-internet-fibra-%C3%B3ptica-4427677186",
     "tecnologias": [
-      "Banco de Dados",
-      "Hardware",
       "Help Desk"
     ]
   },
@@ -60945,15 +59459,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-flutter-at-assessoria-gass-4427524657",
     "tecnologias": [
-      "API REST",
-      "Android",
-      "Dart",
-      "Firebase",
-      "Flutter",
-      "Git",
-      "Inglês",
-      "Lógica de Programação",
-      "POO"
+      "Flutter"
     ]
   },
   {
@@ -61218,7 +59724,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-oracle-pl-sql-j%C3%BAnior-at-cooper-card-administradora-de-cart%C3%B5es-ltda-4427047170",
     "tecnologias": [
-      "Banco de Dados",
       "Oracle",
       "PL/SQL",
       "SQL"
@@ -61459,11 +59964,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/consultor-t%C3%A9cnico-trainee-j%C3%BAnior-tecnologia-da-informa%C3%A7%C3%A3o-erp-varejo-at-sd-sistemas-4421961939",
     "tecnologias": [
-      "ERP",
-      "Hardware",
-      "Linux",
-      "Redes de Computadores",
-      "Windows"
+      "ERP"
     ]
   },
   {
@@ -61879,23 +60380,6 @@
     ]
   },
   {
-    "id": 1972,
-    "titulo": "Analista de Sistemas Júnior (SAP / MES)",
-    "empresa": "Randstad",
-    "area": "Sistemas / ERP",
-    "senioridade": "Júnior",
-    "localidade": "Joinville, SC, Brasil",
-    "polo": "Joinville",
-    "regiao": "Sul",
-    "modalidade": "Presencial",
-    "data_publicacao": "02/06/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/analista-de-sistemas-junior--sap---mes--1",
-    "tecnologias": [
-      "SAP"
-    ]
-  },
-  {
     "id": 1555,
     "titulo": "Assistente de Suporte Técnico",
     "empresa": "Confidencial",
@@ -62170,16 +60654,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-em-desenvolvimento-front-end-com-foco-em-ui-ux-at-bode-do-n%C3%B4-4421381819",
     "tecnologias": [
-      "CSS",
-      "Copilots & Assistentes de IA",
-      "Figma",
-      "HTML",
-      "Inteligência Artificial",
-      "JavaScript",
-      "LLMs & IA Generativa",
-      "Next.js",
-      "React",
-      "Tailwind",
       "UX/UI"
     ]
   },
@@ -62365,12 +60839,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-de-business-intelligence-at-grupo-v-f-4431402242",
     "tecnologias": [
-      "BI",
-      "Estatística",
-      "Excel",
-      "Modelagem de Dados",
-      "Power BI",
-      "Tableau"
+      "BI"
     ]
   },
   {
@@ -62509,11 +60978,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-bi-business-intelligence-at-grupo-ginseng-4417667216",
     "tecnologias": [
-      "Análise de Dados",
-      "BI",
-      "Estatística",
-      "Power BI",
-      "Tableau"
+      "BI"
     ]
   },
   {
@@ -63542,23 +62007,6 @@
     ]
   },
   {
-    "id": 1976,
-    "titulo": "Analista de Field Service Júnior",
-    "empresa": "Nava Technology for Business",
-    "area": "Field Service / Hardware",
-    "senioridade": "Júnior",
-    "localidade": "Ponta Grossa, PR, Brasil",
-    "polo": "Ponta Grossa",
-    "regiao": "Sul",
-    "modalidade": "Presencial",
-    "data_publicacao": "19/05/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-field-service-junior-4",
-    "tecnologias": [
-      "Linux"
-    ]
-  },
-  {
     "id": 571,
     "titulo": "Analista de QA Júnior",
     "empresa": "Clude Saúde",
@@ -63598,21 +62046,6 @@
       "Help Desk",
       "Windows"
     ]
-  },
-  {
-    "id": 2000,
-    "titulo": "Analista de Suporte Técnico N1",
-    "empresa": "Code Group",
-    "area": "Service Desk / Help Desk",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP, Brasil",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "18/05/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/code-group/jobs/analista-de-suporte-tecnico-n1-1",
-    "tecnologias": []
   },
   {
     "id": 1969,
@@ -64840,53 +63273,6 @@
       "Scrum",
       "Testes Funcionais",
       "Word"
-    ]
-  },
-  {
-    "id": 1980,
-    "titulo": "Analista de Redes Jr - Presencial - Florianópolis - CLT",
-    "empresa": "Costão do Santinho Resort",
-    "area": "Infraestrutura / Redes",
-    "senioridade": "Júnior",
-    "localidade": "Florianópolis, SC, Brasil",
-    "polo": "Florianópolis",
-    "regiao": "Sul",
-    "modalidade": "Presencial",
-    "data_publicacao": "23/04/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/costao-do-santinho-resort/jobs/analista-de-redes-jr---presencial---florianopolis---clt-1",
-    "tecnologias": [
-      "Cisco",
-      "Firewall",
-      "Java",
-      "Linux",
-      "Redes de Computadores",
-      "Ubiquiti",
-      "VPN",
-      "Windows",
-      "Windows Server",
-      "Zabbix"
-    ]
-  },
-  {
-    "id": 1973,
-    "titulo": "Analista de Sistemas/Negócios - Presencial - Florianópolis - CLT",
-    "empresa": "Costão do Santinho Resort",
-    "area": "Engenharia de Software",
-    "senioridade": "Júnior",
-    "localidade": "Florianópolis, SC, Brasil",
-    "polo": "Florianópolis",
-    "regiao": "Sul",
-    "modalidade": "Presencial",
-    "data_publicacao": "23/04/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/costao-do-santinho-resort/jobs/analista-de-sistemas-negocios----presencial---florianopolis---clt-1",
-    "tecnologias": [
-      "ERP",
-      "GLPI",
-      "Jira",
-      "SLA",
-      "TOTVS"
     ]
   },
   {
@@ -66259,8 +64645,6 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-at-wtime-business-intelligence-4391239641",
     "tecnologias": [
-      "Hardware",
-      "SLA",
       "Suporte N1/N2"
     ]
   },
@@ -67036,23 +65420,6 @@
     ]
   },
   {
-    "id": 1993,
-    "titulo": "Consultor SAP Funcional (PP/QM)",
-    "empresa": "Randstad",
-    "area": "Sistemas / ERP",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP, Brasil",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Híbrido",
-    "data_publicacao": "27/02/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/consultor-sap-funcional--pp-qm--1",
-    "tecnologias": [
-      "SAP"
-    ]
-  },
-  {
     "id": 2605,
     "titulo": "Auxiliar de Suporte Jr",
     "empresa": "NEXT SOLUCOES TECNOLOGICAS LTDA",
@@ -67165,33 +65532,6 @@
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-designer-gr%C3%A1fico-at-bbg-telecom-4377176256",
     "tecnologias": [
       "Figma"
-    ]
-  },
-  {
-    "id": 1974,
-    "titulo": "Programador Junior/Pleno C# e SQL",
-    "empresa": "Grupo Évora",
-    "area": "Engenharia de Software",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP, Brasil",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "22/02/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/evora-sp-regularizacao-documental-ltda/jobs/programador-pleno-senior-c--e-sql-1",
-    "tecnologias": [
-      ".NET",
-      "AWS",
-      "AWS SQS",
-      "Banco de Dados",
-      "C#",
-      "Copilots & Assistentes de IA",
-      "Git",
-      "Inteligência Artificial",
-      "SQL",
-      "SQL Server",
-      "Serverless"
     ]
   },
   {
@@ -67365,36 +65705,6 @@
       "Help Desk",
       "Redes de Computadores",
       "Windows"
-    ]
-  },
-  {
-    "id": 1971,
-    "titulo": "Analista de Sistemas Jr",
-    "empresa": "Randstad",
-    "area": "Engenharia de Software",
-    "senioridade": "Júnior",
-    "localidade": "Guarulhos, SP, Brasil",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "13/02/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/analista-de-sistemas-jr-3",
-    "tecnologias": [
-      "API REST",
-      "Automação",
-      "Azure",
-      "Banco de Dados",
-      "ERP",
-      "Git",
-      "JavaScript",
-      "Lógica de Programação",
-      "Node.js",
-      "OAuth/JWT",
-      "Python",
-      "SQL",
-      "SQL Server",
-      "TOTVS"
     ]
   },
   {
@@ -67947,25 +66257,6 @@
     ]
   },
   {
-    "id": 1994,
-    "titulo": "Desenvolvedor Protheus ADVPL",
-    "empresa": "Randstad",
-    "area": "Sistemas / ERP",
-    "senioridade": "Júnior",
-    "localidade": "São Paulo, SP, Brasil",
-    "polo": "São Paulo",
-    "regiao": "Sudeste",
-    "modalidade": "Híbrido",
-    "data_publicacao": "20/01/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/protheus-advpl-developer-1",
-    "tecnologias": [
-      "Inglês",
-      "SQL",
-      "TOTVS"
-    ]
-  },
-  {
     "id": 1390,
     "titulo": "Analista de TI Jr - Regional Vó Luzia",
     "empresa": "Scheffer oficial",
@@ -68057,13 +66348,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-bi-jr-%E2%80%93-foco-em-rpa-e-intelig%C3%AAncia-artificial-at-inspin-apaixonados-por-fazer-escolas-crescerem%21-4363814135",
     "tecnologias": [
-      "Análise de Dados",
-      "Estatística",
       "Inteligência Artificial",
-      "Pandas",
-      "Python",
-      "RPA",
-      "SQL"
+      "RPA"
     ]
   },
   {
@@ -68204,23 +66490,6 @@
     ]
   },
   {
-    "id": 1977,
-    "titulo": "Técnico de Campo",
-    "empresa": "Randstad",
-    "area": "Field Service / Hardware",
-    "senioridade": "Júnior",
-    "localidade": "Três Lagoas - MS, Brasil",
-    "polo": "Campo Grande",
-    "regiao": "Centro-Oeste",
-    "modalidade": "Presencial",
-    "data_publicacao": "08/01/2026",
-    "fonte": "geekhunter",
-    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-de-campo-1",
-    "tecnologias": [
-      "SLA"
-    ]
-  },
-  {
     "id": 2417,
     "titulo": "TECNICO EM MONITORAMENTO DE REDE - CANAA DOS CARAJAS",
     "empresa": "COELHO TECNOLOGIA LTDA",
@@ -68353,16 +66622,1128 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-programador-web-com-rails-at-plug-crm-4358240078",
     "tecnologias": [
-      "Angular",
+      "Ruby on Rails"
+    ]
+  },
+  {
+    "id": 3155,
+    "titulo": "Analista de Suporte Técnico N1.5 Júnior",
+    "empresa": "nava-technology-for-business-1",
+    "area": "Service Desk / Help Desk",
+    "senioridade": "Júnior",
+    "localidade": "Campinas, SP, Brasil",
+    "polo": "Campinas",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-suporte-tecnico-n1-5-junior-1",
+    "tecnologias": [
+      "GLPI",
+      "ITIL",
+      "ITSM",
+      "Jira",
+      "Redes de Computadores",
+      "SIEM/SOC",
+      "Zabbix"
+    ]
+  },
+  {
+    "id": 3130,
+    "titulo": "Pessoa Desenvolvedora Full-Stack (Foco em Front-end) JR",
+    "empresa": "consultoria-karina-matheus",
+    "area": "Fullstack",
+    "senioridade": "Júnior",
+    "localidade": "Florianópolis, SC, Brasil",
+    "polo": "Florianópolis",
+    "regiao": "Sul",
+    "modalidade": "Híbrido",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/consultoria-karina-matheus/jobs/pessoa-desenvolvedora-full-stack--foco-em-front-end--jr-1",
+    "tecnologias": [
+      "API REST",
+      "Análise de Dados",
+      "Automação Industrial",
+      "Banco de Dados",
+      "C#",
+      "CI/CD",
       "CSS",
+      "Expo",
+      "Figma",
       "Git",
+      "Go",
+      "Grafana",
       "HTML",
       "JavaScript",
-      "Linux",
-      "MongoDB",
-      "POO",
+      "Node.js",
+      "PostgreSQL",
+      "React",
+      "React Native",
+      "SQL",
+      "Svelte",
+      "Testes Automatizados",
+      "TypeScript",
+      "UX/UI",
+      "Vue.js",
+      "WebSockets"
+    ]
+  },
+  {
+    "id": 2991,
+    "titulo": "Analista de Suporte Técnico/Biomédico Junior",
+    "empresa": "nava-technology-for-business-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-suporte-tecnico-biomedico-1",
+    "tecnologias": [
+      "Inglês",
+      "LGPD",
+      "SLA",
+      "Suporte N1/N2",
+      "Windows"
+    ]
+  },
+  {
+    "id": 2978,
+    "titulo": "Analista de Projetos de Tecnologia Júnior",
+    "empresa": "fundacao-itau",
+    "area": "Backend",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/fundacao-itau/jobs/analista-de-projetos-de-tecnologia-junior-1",
+    "tecnologias": [
+      "Banco de Dados",
+      "Inglês",
+      "JavaScript",
+      "MySQL",
+      "Node.js",
+      "PHP",
+      "Python",
+      "React",
       "Ruby",
-      "Ruby on Rails"
+      "Ruby on Rails",
+      "SQL"
+    ]
+  },
+  {
+    "id": 2956,
+    "titulo": "Helpdesk Analyst",
+    "empresa": "randstad-1",
+    "area": "Service Desk / Help Desk",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/helpdesk-analyst-1",
+    "tecnologias": [
+      "Help Desk",
+      "Zendesk"
+    ]
+  },
+  {
+    "id": 2942,
+    "titulo": "Desenvolvedor(a) Backend Java – Sustentação",
+    "empresa": "nava-technology-for-business-1",
+    "area": "Backend",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/desenvolvedor-a--backend-java---sustentacao-1",
+    "tecnologias": [
+      "Java"
+    ]
+  },
+  {
+    "id": 2941,
+    "titulo": "Desenvolvedor(a) Backend Java Júnior",
+    "empresa": "nava-technology-for-business-1",
+    "area": "Backend",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/desenvolvedor-a--backend-java-junior-4",
+    "tecnologias": [
+      "Java"
+    ]
+  },
+  {
+    "id": 2833,
+    "titulo": "COORDENADOR SISTEMAS JUNIOR",
+    "empresa": "mv-saude-digital",
+    "area": "Engenharia de Software",
+    "senioridade": "Júnior",
+    "localidade": "Recife, PE, Brasil",
+    "polo": "Recife",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/mv-saude-digital/jobs/coordenador-sistemas-junior-1",
+    "tecnologias": [
+      "API REST",
+      "AWS",
+      "Azure",
+      "Banco de Dados",
+      "Certificações Ágeis",
+      "Engenharia de Software",
+      "GCP",
+      "Jira",
+      "Metodologias Ágeis",
+      "OCI",
+      "SLA",
+      "SQL",
+      "SQL Server",
+      "Scrum"
+    ]
+  },
+  {
+    "id": 2020,
+    "titulo": "Técnico em Informática de Campo",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Marília, SP, Brasil",
+    "polo": "Interior Paulista Ocidental",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica-campo-1",
+    "tecnologias": [
+      "Hardware"
+    ]
+  },
+  {
+    "id": 2019,
+    "titulo": "Técnico em Informática (Campo) - Uberlândia/MG",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Uberlândia, MG, Brasil",
+    "polo": "Uberlândia",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----uberlandia-mg-1",
+    "tecnologias": [
+      "Eletrônica",
+      "Hardware",
+      "ITIL",
+      "Linux",
+      "Windows"
+    ]
+  },
+  {
+    "id": 2018,
+    "titulo": "Técnico em Informática (Campo) - São Paulo/SP",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----sao-paulo-sp-1",
+    "tecnologias": [
+      "Eletrônica",
+      "Hardware",
+      "ITIL",
+      "Linux",
+      "Windows"
+    ]
+  },
+  {
+    "id": 2017,
+    "titulo": "Técnico em Informática (Campo) - Sinop-MT",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Sinop - MT, Brasil",
+    "polo": "Cuiabá",
+    "regiao": "Centro-Oeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----sinop-mt-1",
+    "tecnologias": [
+      "Eletrônica",
+      "Hardware",
+      "ITIL",
+      "Linux",
+      "Windows"
+    ]
+  },
+  {
+    "id": 2016,
+    "titulo": "Técnico em Informática (Campo) - Ponta Grossa/PR",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Ponta Grossa, PR, Brasil",
+    "polo": "Ponta Grossa",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----ponta-grossa-pr-1",
+    "tecnologias": [
+      "Eletrônica",
+      "Hardware",
+      "ITIL",
+      "Linux",
+      "Windows"
+    ]
+  },
+  {
+    "id": 2015,
+    "titulo": "Técnico em Informática (Campo) - Piracicaba",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Piracicaba - SP, Brasil",
+    "polo": "Interior Paulista Ocidental",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----piracicaba-1",
+    "tecnologias": [
+      "Eletrônica",
+      "Hardware",
+      "ITIL",
+      "Linux",
+      "Windows"
+    ]
+  },
+  {
+    "id": 2014,
+    "titulo": "Técnico em Informática (Campo) - Pato Branco/PR",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Pato Branco, PR, Brasil",
+    "polo": "Pato Branco",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----pato-branco-pr-1",
+    "tecnologias": [
+      "Eletrônica",
+      "Hardware",
+      "ITIL",
+      "Linux",
+      "Windows"
+    ]
+  },
+  {
+    "id": 2013,
+    "titulo": "Técnico em Informática (Campo) - Marília/SP",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Marília, SP, Brasil",
+    "polo": "Interior Paulista Ocidental",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----marilia-sp-1",
+    "tecnologias": [
+      "Eletrônica",
+      "Hardware",
+      "ITIL",
+      "Linux",
+      "Windows"
+    ]
+  },
+  {
+    "id": 2012,
+    "titulo": "Técnico em Informática (Campo) - Maringá/PR",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Maringá, PR, Brasil",
+    "polo": "Maringá",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----maringa-pr-1",
+    "tecnologias": [
+      "Eletrônica",
+      "Hardware",
+      "ITIL",
+      "Linux",
+      "Windows"
+    ]
+  },
+  {
+    "id": 2011,
+    "titulo": "Técnico em Informática (Campo) - Itajaí/SC",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Itajaí, SC, Brasil",
+    "polo": "Blumenau",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----itajai-sc-1",
+    "tecnologias": [
+      "Eletrônica",
+      "Hardware",
+      "ITIL",
+      "Linux",
+      "Windows"
+    ]
+  },
+  {
+    "id": 2010,
+    "titulo": "Técnico em Informática (Campo) - Cascavel/PR",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Cascavel, PR, Brasil",
+    "polo": "Cascavel",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----cascavel-pr-1",
+    "tecnologias": [
+      "Eletrônica",
+      "Hardware",
+      "ITIL",
+      "Linux",
+      "Windows"
+    ]
+  },
+  {
+    "id": 2009,
+    "titulo": "Técnico em Informática (Campo) - Campinas/SP",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Campinas, SP, Brasil",
+    "polo": "Campinas",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----campinas-sp-1",
+    "tecnologias": [
+      "Eletrônica",
+      "Hardware",
+      "ITIL",
+      "Linux",
+      "Windows"
+    ]
+  },
+  {
+    "id": 2008,
+    "titulo": "Técnico em Informática (Campo) - Belo Horizonte/MG",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Belo Horizonte, MG, Brasil",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-em-informatica--campo----belo-horizonte-mg-1",
+    "tecnologias": [
+      "Eletrônica",
+      "Hardware",
+      "ITIL",
+      "Linux",
+      "Windows"
+    ]
+  },
+  {
+    "id": 2007,
+    "titulo": "Técnico de TI de Campo",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Florianópolis, SC, Brasil",
+    "polo": "Florianópolis",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-de-informatica-campo-4",
+    "tecnologias": [
+      "Hardware"
+    ]
+  },
+  {
+    "id": 2006,
+    "titulo": "Técnico de Suporte júnior l - Araçariguama",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Araçariguama, SP, Brasil",
+    "polo": "Estado/SP",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-de-suporte-jr--l---aracariguama-1",
+    "tecnologias": [
+      "Hardware",
+      "Jira",
+      "Montagem e Manutenção de PCs",
+      "Windows"
+    ]
+  },
+  {
+    "id": 2005,
+    "titulo": "Técnico de Suporte Jr. l - DF02",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Brasília, DF, Brasil",
+    "polo": "Brasília",
+    "regiao": "Centro-Oeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-de-suporte-jr--l----df02-1",
+    "tecnologias": [
+      "Hardware",
+      "Jira",
+      "Montagem e Manutenção de PCs",
+      "Windows"
+    ]
+  },
+  {
+    "id": 2004,
+    "titulo": "Técnico de Suporte Jr. l",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Não informado",
+    "regiao": "Não informado",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-de-suporte-jr--l--5",
+    "tecnologias": [
+      "Hardware",
+      "Jira",
+      "Montagem e Manutenção de PCs",
+      "Windows"
+    ]
+  },
+  {
+    "id": 2003,
+    "titulo": "Técnico de Suporte Jr. - MG01",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Extrema, MG, Brasil",
+    "polo": "Estado/MG",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-de-suporte-jr-----mg01-1",
+    "tecnologias": [
+      "Hardware",
+      "Jira",
+      "Montagem e Manutenção de PCs",
+      "Windows"
+    ]
+  },
+  {
+    "id": 2002,
+    "titulo": "Técnico de Suporte Jr.",
+    "empresa": "randstad-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Cajamar, SP, Brasil",
+    "polo": "Jundiaí",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-de-suporte-jr--l--2",
+    "tecnologias": [
+      "Hardware",
+      "Jira",
+      "Montagem e Manutenção de PCs",
+      "Windows"
+    ]
+  },
+  {
+    "id": 2000,
+    "titulo": "Analista de Suporte Técnico N1",
+    "empresa": "code-group",
+    "area": "Service Desk / Help Desk",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/code-group/jobs/analista-de-suporte-tecnico-n1-1",
+    "tecnologias": []
+  },
+  {
+    "id": 1999,
+    "titulo": "Analista de Suporte Júnior",
+    "empresa": "nava-technology-for-business-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Campinas, SP, Brasil",
+    "polo": "Campinas",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-suporte-junior-11",
+    "tecnologias": []
+  },
+  {
+    "id": 1998,
+    "titulo": "Analista de Suporte Junior - Presencial em Biguaçu/ SC",
+    "empresa": "koerich-lab",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Biguaçu, SC, Brasil",
+    "polo": "Florianópolis",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/koerich-lab/jobs/analista-de-suporte-junior---presencial-em-biguacu--sc-2",
+    "tecnologias": []
+  },
+  {
+    "id": 1997,
+    "titulo": "Analista de Suporte I",
+    "empresa": "nava-technology-for-business-1",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-suporte-i-5",
+    "tecnologias": []
+  },
+  {
+    "id": 1996,
+    "titulo": "Analista de Suporte Ao Cliente",
+    "empresa": "hope-solution",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/hope-solution/jobs/analista-de-suporte-ao-cliente-1",
+    "tecnologias": [
+      "ERP"
+    ]
+  },
+  {
+    "id": 1995,
+    "titulo": "Analista de Suporte Acadêmico Júnior | Sistemas / Help Desk",
+    "empresa": "code-group",
+    "area": "Service Desk / Help Desk",
+    "senioridade": "Júnior",
+    "localidade": "Ribeirão Preto - SP, Brasil",
+    "polo": "Ribeirão Preto",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/code-group/jobs/analista-de-suporte-academico-junior--1",
+    "tecnologias": [
+      "Help Desk"
+    ]
+  },
+  {
+    "id": 1994,
+    "titulo": "Desenvolvedor Protheus ADVPL",
+    "empresa": "randstad-1",
+    "area": "Sistemas / ERP",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/protheus-advpl-developer-1",
+    "tecnologias": [
+      "TOTVS"
+    ]
+  },
+  {
+    "id": 1993,
+    "titulo": "Consultor SAP Funcional (PP/QM)",
+    "empresa": "randstad-1",
+    "area": "Sistemas / ERP",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/consultor-sap-funcional--pp-qm--1",
+    "tecnologias": [
+      "SAP"
+    ]
+  },
+  {
+    "id": 1992,
+    "titulo": "Assistente de Help Desk | Suporte ao Cliente (Software)",
+    "empresa": "logycware-sistemas",
+    "area": "Service Desk / Help Desk",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/logycware-sistemas/jobs/assistente-de-help-desk---suporte-ao-cliente--software---1",
+    "tecnologias": [
+      "Help Desk"
+    ]
+  },
+  {
+    "id": 1991,
+    "titulo": "Analista de Service Desk Junior (Noturno)",
+    "empresa": "nava-technology-for-business-1",
+    "area": "Service Desk / Help Desk",
+    "senioridade": "Júnior",
+    "localidade": "Barueri, SP, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-service-desk-junior--noturno--1",
+    "tecnologias": [
+      "Service Desk"
+    ]
+  },
+  {
+    "id": 1990,
+    "titulo": "Analista de Service Desk Junior (Diurno)",
+    "empresa": "nava-technology-for-business-1",
+    "area": "Service Desk / Help Desk",
+    "senioridade": "Júnior",
+    "localidade": "Barueri, SP, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-service-desk-junior-1",
+    "tecnologias": [
+      "Service Desk"
+    ]
+  },
+  {
+    "id": 1989,
+    "titulo": "Analista Suporte Acadêmico Junior",
+    "empresa": "code-group",
+    "area": "Service Desk / Help Desk",
+    "senioridade": "Júnior",
+    "localidade": "Ribeirão Preto - SP, Brasil",
+    "polo": "Ribeirão Preto",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/code-group/jobs/analista-suporte-academico-junior-1",
+    "tecnologias": [
+      "Help Desk"
+    ]
+  },
+  {
+    "id": 1988,
+    "titulo": "Analista de Cibersegurança Júnior",
+    "empresa": "nava-technology-for-business-1",
+    "area": "Segurança",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-ciberseguranca-junior-2",
+    "tecnologias": [
+      "Cibersegurança"
+    ]
+  },
+  {
+    "id": 1987,
+    "titulo": "Administrador de Segurança da Informação Junior",
+    "empresa": "nava-technology-for-business-1",
+    "area": "Segurança",
+    "senioridade": "Júnior",
+    "localidade": "Curitiba, PR, Brasil",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/administrador-de-seguranca-da-informacao-junior-1",
+    "tecnologias": [
+      "Redes de Computadores"
+    ]
+  },
+  {
+    "id": 1986,
+    "titulo": "Estágio em Testes de Software",
+    "empresa": "instituto-reconcavo-de-tecnologia",
+    "area": "QA",
+    "senioridade": "Estágio",
+    "localidade": "Salvador, BA, Brasil",
+    "polo": "Salvador",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/instituto-reconcavo-de-tecnologia/jobs/estagio-em-testes-de-software-1",
+    "tecnologias": [
+      "Metodologias Ágeis",
+      "Scrum"
+    ]
+  },
+  {
+    "id": 1985,
+    "titulo": "Analista de Testes QA Automação Júnior/Pleno – Java + SQL",
+    "empresa": "code-group",
+    "area": "QA",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/code-group/jobs/analista-de-testes-qa-automacao-junior-pleno---java---sql-1",
+    "tecnologias": [
+      "Java",
+      "SQL"
+    ]
+  },
+  {
+    "id": 1983,
+    "titulo": "Desenvolvedor Júnior de Inteligência Artificial e Automação",
+    "empresa": "randstad-1",
+    "area": "Inteligência Artificial",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/desenvolvedor-junior-de-inteligencia-artificial-e-automacao-1",
+    "tecnologias": [
+      "Inteligência Artificial"
+    ]
+  },
+  {
+    "id": 1982,
+    "titulo": "Estágio em Tecnologia (Infra, Cybersegurança e Digital)",
+    "empresa": "randstad-1",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Estágio",
+    "localidade": "Guarulhos, SP, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/estagio-em-tecnologia--infra--cyberseguranca-e-digital--1",
+    "tecnologias": [
+      "Automação",
+      "Azure",
+      "Cisco",
+      "Espanhol",
+      "Office 365",
+      "Power BI",
+      "Python",
+      "SIEM/SOC",
+      "Service Desk"
+    ]
+  },
+  {
+    "id": 1981,
+    "titulo": "Analista de Redes Júnior",
+    "empresa": "nava-technology-for-business-1",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Júnior",
+    "localidade": "Curitiba, PR, Brasil",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-redes-junior-1",
+    "tecnologias": [
+      "Linux",
+      "Redes de Computadores",
+      "VPN",
+      "Windows"
+    ]
+  },
+  {
+    "id": 1980,
+    "titulo": "Analista de Redes Jr - Presencial - Florianópolis - CLT",
+    "empresa": "costao-do-santinho-resort",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Júnior",
+    "localidade": "Florianópolis, SC, Brasil",
+    "polo": "Florianópolis",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/costao-do-santinho-resort/jobs/analista-de-redes-jr---presencial---florianopolis---clt-1",
+    "tecnologias": [
+      "Cisco",
+      "Firewall",
+      "Java",
+      "Linux",
+      "Redes de Computadores",
+      "Ubiquiti",
+      "VPN",
+      "Windows",
+      "Windows Server",
+      "Zabbix"
+    ]
+  },
+  {
+    "id": 1978,
+    "titulo": "Desenvolvedor Full Stack",
+    "empresa": "randstad-1",
+    "area": "Fullstack",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Remoto",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/desenvolvedor-full-stack-877",
+    "tecnologias": [
+      "API REST",
+      "CI/CD",
+      "CSS",
+      "Clean Architecture",
+      "Copilots & Assistentes de IA",
+      "Datadog",
+      "Design Patterns",
+      "Engenharia de Software",
+      "Espanhol",
+      "Figma",
+      "HTML",
+      "Inteligência Artificial",
+      "Java",
+      "JavaScript",
+      "Node.js",
+      "React",
+      "SAP",
+      "SOLID",
+      "Testes Automatizados",
+      "TypeScript",
+      "UX/UI"
+    ]
+  },
+  {
+    "id": 1977,
+    "titulo": "Técnico de Campo",
+    "empresa": "randstad-1",
+    "area": "Field Service / Hardware",
+    "senioridade": "Júnior",
+    "localidade": "Três Lagoas - MS, Brasil",
+    "polo": "Campo Grande",
+    "regiao": "Centro-Oeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/tecnico-de-campo-1",
+    "tecnologias": [
+      "SLA"
+    ]
+  },
+  {
+    "id": 1976,
+    "titulo": "Analista de Field Service Júnior",
+    "empresa": "nava-technology-for-business-1",
+    "area": "Field Service / Hardware",
+    "senioridade": "Júnior",
+    "localidade": "Ponta Grossa, PR, Brasil",
+    "polo": "Ponta Grossa",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-field-service-junior-4",
+    "tecnologias": [
+      "Linux"
+    ]
+  },
+  {
+    "id": 1975,
+    "titulo": "Analista de Field Service I",
+    "empresa": "nava-technology-for-business-1",
+    "area": "Field Service / Hardware",
+    "senioridade": "Júnior",
+    "localidade": "Indaiatuba, SP, Brasil",
+    "polo": "Campinas",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/nava-technology-for-business-1/jobs/analista-de-field-service-i-1",
+    "tecnologias": [
+      "Eletrônica",
+      "Excel",
+      "Hardware",
+      "ITIL",
+      "Montagem e Manutenção de PCs",
+      "VPN",
+      "Windows",
+      "Windows Server",
+      "Word"
+    ]
+  },
+  {
+    "id": 1974,
+    "titulo": "Programador Junior/Pleno C# e SQL",
+    "empresa": "evora-sp-regularizacao-documental-ltda",
+    "area": "Engenharia de Software",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/evora-sp-regularizacao-documental-ltda/jobs/programador-pleno-senior-c--e-sql-1",
+    "tecnologias": [
+      "C#",
+      "SQL"
+    ]
+  },
+  {
+    "id": 1973,
+    "titulo": "Analista de Sistemas/Negócios - Presencial - Florianópolis - CLT",
+    "empresa": "costao-do-santinho-resort",
+    "area": "Engenharia de Software",
+    "senioridade": "Júnior",
+    "localidade": "Florianópolis, SC, Brasil",
+    "polo": "Florianópolis",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/costao-do-santinho-resort/jobs/analista-de-sistemas-negocios----presencial---florianopolis---clt-1",
+    "tecnologias": [
+      "ERP",
+      "GLPI",
+      "Jira",
+      "SLA",
+      "TOTVS"
+    ]
+  },
+  {
+    "id": 1972,
+    "titulo": "Analista de Sistemas Júnior (SAP / MES)",
+    "empresa": "randstad-1",
+    "area": "Sistemas / ERP",
+    "senioridade": "Júnior",
+    "localidade": "Joinville, SC, Brasil",
+    "polo": "Joinville",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/analista-de-sistemas-junior--sap---mes--1",
+    "tecnologias": [
+      "SAP"
+    ]
+  },
+  {
+    "id": 1971,
+    "titulo": "Analista de Sistemas Jr",
+    "empresa": "randstad-1",
+    "area": "Engenharia de Software",
+    "senioridade": "Júnior",
+    "localidade": "Guarulhos, SP, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/randstad-1/jobs/analista-de-sistemas-jr-3",
+    "tecnologias": [
+      "API REST",
+      "Automação"
+    ]
+  },
+  {
+    "id": 1968,
+    "titulo": "Analista de Dados e Automação",
+    "empresa": "ddcom-it-systems",
+    "area": "Data",
+    "senioridade": "Júnior",
+    "localidade": "Barueri, SP, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/ddcom-it-systems/jobs/analista-de-dados-e-automacao-1",
+    "tecnologias": [
+      "Análise de Dados"
     ]
   },
   {
@@ -68381,6 +67762,63 @@
     "tecnologias": [
       "Ruby",
       "Ruby on Rails"
+    ]
+  },
+  {
+    "id": 1966,
+    "titulo": "Desenvolvedor(a) .NET Júnior",
+    "empresa": "agenda-digital-ltda",
+    "area": "Backend",
+    "senioridade": "Júnior",
+    "localidade": "Mogi-Mirim - SP, Brasil",
+    "polo": "Estado/SP",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/agenda-digital-ltda/jobs/desenvolvedor-a---net-junior--3",
+    "tecnologias": [
+      ".NET",
+      "C#"
+    ]
+  },
+  {
+    "id": 1965,
+    "titulo": "Desenvolvedor Java Junior",
+    "empresa": "code-group",
+    "area": "Backend",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP, Brasil",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/code-group/jobs/desenvolvedor-java-jr--5",
+    "tecnologias": [
+      "Java"
+    ]
+  },
+  {
+    "id": 1964,
+    "titulo": "Desenvolvedor Backend Java Júnior",
+    "empresa": "ntt-data",
+    "area": "Backend",
+    "senioridade": "Júnior",
+    "localidade": "Brasil",
+    "polo": "Remoto",
+    "regiao": "Remoto Nacional",
+    "modalidade": "Remoto",
+    "data_publicacao": null,
+    "fonte": "geekhunter",
+    "url": "https://www.geekhunter.com/pt/ntt-data/jobs/desenvolvedor-backend-java-junior-3",
+    "tecnologias": [
+      "Docker",
+      "Java",
+      "Kafka",
+      "Kubernetes",
+      "Microserviços",
+      "Spring"
     ]
   },
   {
