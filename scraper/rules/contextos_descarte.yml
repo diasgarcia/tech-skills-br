@@ -20,6 +20,19 @@ descartar:
     - "mundo do hardware"
     - "hardware e servicos"
     - "segmentos de hardware"
+  Eletrônica:
+    # "eletronica" casa com adjetivos do dia a dia, nao com a area:
+    # "e-mail eletronico", "ponto eletronico", "nota fiscal eletronica"...
+    - "e mail eletronico"
+    - "ponto eletronico"
+    - "prontuario eletronico"
+    - "assinatura eletronica"
+    - "comercio eletronico"
+    - "nota fiscal eletronica"
+    - "documento eletronico"
+    - "boletim eletronico"
+    - "certificado eletronico"
+    - "endereco eletronico"
   Storyboard:
     # "Storyboard" tambem e tecnica de UX (ilustrar ideias de design);
     # aqui so conta a ferramenta do iOS.
