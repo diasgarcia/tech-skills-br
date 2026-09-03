@@ -44,6 +44,16 @@ def test_nao_casa_junior_dentro_de_outra_palavra():
     assert flt.label("Gerente de Projetos") is None
 
 
+def test_n1_com_decimal_e_tier_de_suporte_nao_e_junior():
+    flt = SeniorityFilter.from_file()
+    assert flt.label("Analista de Suporte Técnico N1.5 Pleno") is None
+    assert flt.label("Analista de Suporte Técnico N1.5 Sênior") is None
+    assert flt.label("Analista de Redes (N1.5)") is None
+    assert flt.label("Técnico de Suporte Nível 1.5 Pleno") is None
+    # N1 "puro" continua valendo, mesmo com parentese de escala depois.
+    assert flt.label("Analista de Segurança da Informação - N1 (12x36 - Diurno)") == "Júnior"
+
+
 def test_senioridade_declarada_pela_fonte_vence_o_titulo():
     """Título sem marca de nível não descarta a vaga se a fonte já sabe o nível."""
     jobs = [

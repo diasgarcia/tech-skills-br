@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import unicodedata
 from functools import lru_cache
 from pathlib import Path
 
@@ -10,6 +11,24 @@ import yaml
 
 from .config import RULES_DIR
 from .models import Job, normalize
+
+_WS_RE = re.compile(r"\s+")
+_KEEP_RE = re.compile(r"[^a-z0-9. ]+")
+
+
+def _normalize_seniority(text: str | None) -> str:
+    """Minusculas, sem acento, PONTUACAO vira espaco -- exceto o ponto.
+
+    O ponto importa aqui: "N1.5" e tier de suporte (entre junior e
+    pleno), nao "N1" junior. Com o ponto preservado, a regra `\bn1\b`
+    pode exigir que nao venha ".digito" em seguida.
+    """
+    if not text:
+        return ""
+    text = unicodedata.normalize("NFKD", text)
+    text = "".join(c for c in text if not unicodedata.combining(c))
+    text = _KEEP_RE.sub(" ", text.lower())
+    return _WS_RE.sub(" ", text).strip()
 
 
 class SeniorityFilter:
@@ -41,12 +60,12 @@ class SeniorityFilter:
 
     def has_senior_signal(self, title: str) -> bool:
         """Titulo cita explicitamente um nivel acima de junior."""
-        text = normalize(title)
+        text = _normalize_seniority(title)
         return any(p.search(text) for p in self.exclude)
 
     def label(self, title: str) -> str | None:
         """Devolve o rotulo de senioridade ("Júnior", "Estágio", ...) ou None."""
-        text = normalize(title)
+        text = _normalize_seniority(title)
         if not text:
             return None
 
