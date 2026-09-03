@@ -2,7 +2,7 @@
   {
     "id": 3255,
     "titulo": "Estágio TI",
-    "empresa": "Agronegócio",
+    "empresa": "Grupofertipar",
     "area": "Suporte Técnico",
     "senioridade": "Estágio",
     "localidade": "Curitiba, Paraná",
@@ -35,6 +35,7 @@
     "tecnologias": [
       "Cibersegurança",
       "Excel",
+      "ITSM",
       "SLA"
     ]
   },
@@ -53,6 +54,7 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-tecnico-junior-at-dxc-technology-4461665878",
     "tecnologias": [
       "ITIL",
+      "ITSM",
       "Office 365",
       "Redes de Computadores",
       "Windows"
@@ -75,15 +77,21 @@
       "Android",
       "Backup",
       "Banco de Dados",
+      "Clonezilla",
       "Hardware",
       "ITIL",
+      "ITSM",
       "Inglês",
       "Linux",
       "Manutenção Preventiva",
+      "Microsoft Teams",
       "Oracle",
       "Service Desk",
+      "SharePoint",
       "Shell/Bash",
+      "Suporte Remoto",
       "VMware",
+      "VirtualBox",
       "Windows",
       "iOS"
     ]
@@ -106,6 +114,7 @@
       "Hardware",
       "Help Desk",
       "ITIL",
+      "ITSM",
       "Inglês",
       "Manutenção Preventiva",
       "Office 365",
@@ -270,6 +279,7 @@
       "Git",
       "Grafana",
       "Hyper-V",
+      "ITSM",
       "Inglês",
       "Kubernetes",
       "Linux",
@@ -626,7 +636,9 @@
     "data_publicacao": "03/09/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-m%C3%A9dio-t%C3%A9cnico-em-inform%C3%A1tica-52902-nova-vaga-dispon%C3%ADvel-at-rede-cidad%C3%A3-4460451987",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte Remoto"
+    ]
   },
   {
     "id": 3214,
@@ -1168,6 +1180,7 @@
       "Redes de Computadores",
       "SLA",
       "Service Desk",
+      "SharePoint",
       "Shell/Bash",
       "Windows",
       "Windows Server"
@@ -1380,7 +1393,14 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-de-suporte-de-ti-%E2%80%93-help-desk-at-grupo-viggo-4460909790",
     "tecnologias": [
-      "Help Desk"
+      "Excel",
+      "Hardware",
+      "Help Desk",
+      "Manutenção Preventiva",
+      "Office 365",
+      "Redes de Computadores",
+      "Windows",
+      "Word"
     ]
   },
   {
@@ -1399,6 +1419,7 @@
     "tecnologias": [
       "GLPI",
       "ITIL",
+      "ITSM",
       "Jira",
       "Redes de Computadores",
       "SIEM/SOC",
@@ -1430,6 +1451,7 @@
       "Office 365",
       "Redes de Computadores",
       "SIEM/SOC",
+      "SharePoint",
       "Shell/Bash",
       "Windows"
     ]
@@ -1624,6 +1646,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/junior-react-developer-remote-work-at-indi-staffing-services-4462198615",
     "tecnologias": [
+      "Angular",
+      "CSS",
+      "HTML",
+      "Inglês",
+      "JavaScript",
       "React"
     ]
   },
@@ -1795,6 +1822,7 @@
     "tecnologias": [
       "GLPI",
       "ITIL",
+      "ITSM",
       "Jira",
       "Redes de Computadores",
       "SIEM/SOC",
@@ -1821,6 +1849,7 @@
       "Inglês",
       "Office 365",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -1844,6 +1873,7 @@
       "Inglês",
       "Office 365",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -1983,7 +2013,8 @@
     "tecnologias": [
       "Hardware",
       "Help Desk",
-      "Office 365"
+      "Office 365",
+      "Suporte Remoto"
     ]
   },
   {
@@ -2000,7 +2031,20 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagiario-ciberseguran%C3%A7a-at-stefanini-brasil-4462467397",
     "tecnologias": [
-      "Cibersegurança"
+      "Active Directory",
+      "Antivírus",
+      "Azure",
+      "Cibersegurança",
+      "Excel",
+      "IAM",
+      "Inteligência Artificial",
+      "LGPD",
+      "Office 365",
+      "Redes de Computadores",
+      "SIEM/SOC",
+      "SharePoint",
+      "Shell/Bash",
+      "Windows"
     ]
   },
   {
@@ -2017,7 +2061,18 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-ciberseguran%C3%A7a-j%C3%BAnior-at-asper-4461301873",
     "tecnologias": [
-      "Cibersegurança"
+      "Cibersegurança",
+      "Espanhol",
+      "Estrutura de Dados",
+      "Firewall",
+      "IAM",
+      "ITIL",
+      "ITSM",
+      "Inglês",
+      "Jira",
+      "SIEM/SOC",
+      "SLA",
+      "Service Desk"
     ]
   },
   {
@@ -2308,7 +2363,16 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-da-informa%C3%A7%C3%A3o-an%C3%A1lise-de-dados-at-odebrecht-engenharia-constru%C3%A7%C3%A3o-4459997656",
     "tecnologias": [
-      "Análise de Dados"
+      "Análise de Dados",
+      "Automação",
+      "Banco de Dados",
+      "Excel",
+      "Inglês",
+      "Inteligência Artificial",
+      "Lógica de Programação",
+      "Montagem e Manutenção de PCs",
+      "Python",
+      "SQL"
     ]
   },
   {
@@ -2377,7 +2441,8 @@
       "Power BI",
       "Python",
       "Qualidade de Dados",
-      "SQL"
+      "SQL",
+      "SharePoint"
     ]
   },
   {
@@ -2431,7 +2496,17 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/programador-de-sistemas-embarcados-jr-i-curitiba-%E2%80%93-pr-at-spacecom-monitoramento-4459987944",
     "tecnologias": [
-      "Sistemas Embarcados"
+      "C++",
+      "Eletrônica",
+      "Estrutura de Dados",
+      "Firmware",
+      "Git",
+      "Hardware",
+      "IoT",
+      "Microcontroladores",
+      "Python",
+      "Sistemas Embarcados",
+      "Testes Automatizados"
     ]
   },
   {
@@ -2495,7 +2570,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/suporte-t%C3%A9cnico-de-nivel-1-e-2-at-bycomp-tecnologia-4459952262",
     "tecnologias": [
-      "Hardware"
+      "Hardware",
+      "Suporte Remoto"
     ]
   },
   {
@@ -2594,6 +2670,7 @@
       "Office 365",
       "Redes de Computadores",
       "Service Desk",
+      "SharePoint",
       "VPN",
       "VoIP",
       "Windows"
@@ -2613,7 +2690,15 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/tecnico-service-desk-jr-at-movida-aluguel-de-carros-4459979226",
     "tecnologias": [
-      "Service Desk"
+      "GLPI",
+      "Hardware",
+      "Linux",
+      "Office 365",
+      "Redes de Computadores",
+      "SLA",
+      "Service Desk",
+      "Windows",
+      "Zendesk"
     ]
   },
   {
@@ -2842,7 +2927,18 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/junior-ubuntu-software-engineer-at-jobgether-4460989373",
     "tecnologias": [
-      "Linux"
+      "C++",
+      "CI/CD",
+      "Firmware",
+      "Flutter",
+      "Go",
+      "Inglês",
+      "Inteligência Artificial",
+      "IoT",
+      "Linux",
+      "Next.js",
+      "Python",
+      "Rust"
     ]
   },
   {
@@ -3055,6 +3151,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/node-js-junior-developer-remote-work-at-indi-staffing-services-4462417064",
     "tecnologias": [
+      "Git",
+      "Inglês",
       "JavaScript",
       "Node.js"
     ]
@@ -3073,6 +3171,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/junior-node-developer-remote-work-at-indi-staffing-services-4462406378",
     "tecnologias": [
+      "Inglês",
       "Node.js"
     ]
   },
@@ -3090,6 +3189,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/junior-java-developer-remote-work-at-indi-staffing-services-4462199506",
     "tecnologias": [
+      "Inglês",
       "Java"
     ]
   },
@@ -3237,7 +3337,8 @@
       "Backup",
       "ERP",
       "Firewall",
-      "Hardware"
+      "Hardware",
+      "Suporte Remoto"
     ]
   },
   {
@@ -3396,12 +3497,14 @@
       "Excel",
       "Hardware",
       "Help Desk",
+      "ITSM",
       "Jira",
       "Montagem e Manutenção de PCs",
       "Office 365",
       "Redes de Computadores",
       "Salesforce",
       "Service Desk",
+      "SharePoint",
       "Windows",
       "Word",
       "Zendesk"
@@ -3429,12 +3532,14 @@
       "Excel",
       "Hardware",
       "Help Desk",
+      "ITSM",
       "Jira",
       "Montagem e Manutenção de PCs",
       "Office 365",
       "Redes de Computadores",
       "Salesforce",
       "Service Desk",
+      "SharePoint",
       "Windows",
       "Word",
       "Zendesk"
@@ -3588,6 +3693,7 @@
       "Linux",
       "Office 365",
       "Redes de Computadores",
+      "SharePoint",
       "Shell/Bash",
       "VMware",
       "VPN",
@@ -3612,9 +3718,11 @@
     "tecnologias": [
       "Antivírus",
       "Hardware",
+      "ITSM",
       "Linux",
       "Montagem e Manutenção de PCs",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -3801,6 +3909,7 @@
       "IAM",
       "Office 365",
       "Python",
+      "SharePoint",
       "Shell/Bash",
       "VPN",
       "Windows"
@@ -3884,7 +3993,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-no-desenvolvimento-delphi-at-intersolid-software-4460909720",
     "tecnologias": [
-      "Delphi"
+      "CSS",
+      "Delphi",
+      "Engenharia de Software",
+      "HTML",
+      "JavaScript"
     ]
   },
   {
@@ -3901,7 +4014,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-ti-at-dhl-global-forwarding-4461282062",
     "tecnologias": [
-      "Inglês"
+      "Inglês",
+      "SharePoint"
     ]
   },
   {
@@ -3973,6 +4087,7 @@
       "Office 365",
       "Power BI",
       "SLA",
+      "SharePoint",
       "iOS"
     ]
   },
@@ -4134,6 +4249,16 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-automa%C3%A7%C3%A3o-de-testes-j%C3%BAnior-at-primeup-4459961059",
     "tecnologias": [
+      "Banco de Dados",
+      "CI/CD",
+      "Cypress",
+      "Engenharia de Software",
+      "JMeter",
+      "Java",
+      "Jenkins",
+      "Jira",
+      "K6",
+      "Qualidade de Software",
       "Testes Automatizados"
     ]
   },
@@ -4193,6 +4318,7 @@
       "Eletrônica",
       "Linux",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -4210,7 +4336,13 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-t%C3%A9cnico-j%C3%BAnior-cftv-at-carbigdata-4460679418",
     "tecnologias": [
-      "CFTV"
+      "CFTV",
+      "Eletrônica",
+      "Firmware",
+      "Linux",
+      "Redes de Computadores",
+      "Suporte Remoto",
+      "Windows"
     ]
   },
   {
@@ -4249,11 +4381,13 @@
       "Hardware",
       "IAM",
       "ITIL",
+      "ITSM",
       "Office 365",
       "Redes de Computadores",
       "SLA",
       "Service Desk",
       "Suporte N1/N2",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -4596,7 +4730,9 @@
       "Azure",
       "Hardware",
       "Office 365",
+      "SharePoint",
       "Shell/Bash",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -4618,6 +4754,7 @@
       "ERP",
       "Hardware",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -4897,6 +5034,7 @@
       "Git",
       "HTML",
       "ITIL",
+      "ITSM",
       "Inteligência Artificial",
       "Java",
       "JavaEE",
@@ -4929,6 +5067,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/junior-react-frontend-engineer-remote-work-at-bairesdev-4460639770",
     "tecnologias": [
+      "Git",
+      "Hardware",
+      "Inglês",
+      "JavaScript",
       "React"
     ]
   },
@@ -4948,9 +5090,11 @@
     "tecnologias": [
       "Antivírus",
       "Hardware",
+      "ITSM",
       "Linux",
       "Montagem e Manutenção de PCs",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -5010,6 +5154,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/engenheiro-de-software-node-js-j%C3%BAnior-remote-work-at-bairesdev-4460661131",
     "tecnologias": [
+      "API REST",
+      "Banco de Dados",
+      "Clean Code",
+      "Hardware",
+      "Inglês",
       "JavaScript",
       "Node.js"
     ]
@@ -5120,7 +5269,22 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-backend-java-j%C3%BAnior-at-nava-tech-for-business-4461787817",
     "tecnologias": [
-      "Java"
+      "API REST",
+      "Análise de Dados",
+      "CI/CD",
+      "Datadog",
+      "Docker",
+      "Git",
+      "Java",
+      "Jira",
+      "Kafka",
+      "Kubernetes",
+      "Metodologias Ágeis",
+      "Microserviços",
+      "RabbitMQ",
+      "SQL",
+      "Spring",
+      "Testes Automatizados"
     ]
   },
   {
@@ -5137,6 +5301,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-java-junior-remote-work-at-bairesdev-4460651400",
     "tecnologias": [
+      "Git",
+      "Hardware",
+      "Inglês",
       "Java"
     ]
   },
@@ -5230,6 +5397,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-atendimento-de-suporte-a-postos-service-desk-vespertino-at-soutag-4459534464",
     "tecnologias": [
+      "CRM",
       "Service Desk"
     ]
   },
@@ -5416,6 +5584,12 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-react-junior-remote-work-at-bairesdev-4460293849",
     "tecnologias": [
+      "Algoritmos",
+      "Estrutura de Dados",
+      "Git",
+      "Hardware",
+      "Inglês",
+      "JavaScript",
       "React"
     ]
   },
@@ -5643,6 +5817,7 @@
       "Redes de Computadores",
       "SQL",
       "SQL Server",
+      "SharePoint",
       "Suporte N1/N2",
       "Windows",
       "Zabbix"
@@ -5704,7 +5879,8 @@
       "Java",
       "JavaScript",
       "SLA",
-      "Spring"
+      "Spring",
+      "Suporte Remoto"
     ]
   },
   {
@@ -5837,7 +6013,13 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-cloud-aws-junior-pleno-h%C3%ADbrido-at-sioux-digital-1-1-4460208057",
     "tecnologias": [
-      "AWS"
+      "AWS",
+      "Automação",
+      "CI/CD",
+      "IAM",
+      "Python",
+      "Serverless",
+      "Shell/Bash"
     ]
   },
   {
@@ -5953,7 +6135,18 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-node-junior-midlevel-trabalho-remoto-ref%23263959-at-bairesdev-4140199328",
     "tecnologias": [
-      "Node.js"
+      "Algoritmos",
+      "Banco de Dados",
+      "CI/CD",
+      "Clean Code",
+      "Design Patterns",
+      "Inglês",
+      "Metodologias Ágeis",
+      "Microserviços",
+      "Node.js",
+      "SOLID",
+      "SQL",
+      "Testes Automatizados"
     ]
   },
   {
@@ -5970,6 +6163,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/junior-ios-developer-swift-remote-work-ref%23284274-at-bairesdev-4258063381",
     "tecnologias": [
+      "Git",
+      "Hardware",
+      "Inglês",
       "Swift",
       "iOS"
     ]
@@ -5988,6 +6184,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/python-junior-developer-remote-work-ref%23283517-at-bairesdev-4192502474",
     "tecnologias": [
+      "Excel",
+      "Git",
+      "Hardware",
+      "Inglês",
       "Python"
     ]
   },
@@ -6005,6 +6205,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/junior-java-developer-remote-work-ref%23283522-at-bairesdev-4192197820",
     "tecnologias": [
+      "Git",
+      "Hardware",
+      "Inglês",
       "Java"
     ]
   },
@@ -6042,7 +6245,8 @@
     "url": "https://br.linkedin.com/jobs/view/vaga-de-est%C3%A1gio-engenharia-de-software-mg2026001418-at-universia-brasil-4458230889",
     "tecnologias": [
       "Engenharia de Software",
-      "Inteligência Artificial"
+      "Inteligência Artificial",
+      "SharePoint"
     ]
   },
   {
@@ -6221,6 +6425,7 @@
     "url": "https://br.linkedin.com/jobs/view/qa-j%C3%BAnior-servicenow-spm-at-capgemini-4461293804",
     "tecnologias": [
       "Certificações Ágeis",
+      "ITSM",
       "JavaScript",
       "Modelagem de Dados",
       "Testes Automatizados",
@@ -6243,7 +6448,8 @@
     "tecnologias": [
       "Excel",
       "Express",
-      "Inteligência Artificial"
+      "Inteligência Artificial",
+      "SharePoint"
     ]
   },
   {
@@ -6284,6 +6490,7 @@
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-n%C3%ADvel-superior-tecnologia-da-informa%C3%A7%C3%A3o-s%C3%A3o-jos%C3%A9-dos-campos-sp-at-ball-corporation-4461288757",
     "tecnologias": [
       "Automação",
+      "ITSM",
       "Inglês"
     ]
   },
@@ -6301,10 +6508,24 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/tech-engenharia-de-software-fullstack-j%C3%BAnior-node-js-typescript-react-at-totvs-4459247769",
     "tecnologias": [
+      "API REST",
+      "AWS",
+      "Banco de Dados",
+      "Copilots & Assistentes de IA",
       "Engenharia de Software",
+      "Estrutura de Dados",
+      "Express",
+      "Git",
+      "Inteligência Artificial",
       "JavaScript",
+      "Metodologias Ágeis",
+      "NestJS",
       "Node.js",
+      "OAuth/JWT",
       "React",
+      "SQL",
+      "Serverless",
+      "Testes Automatizados",
       "TypeScript"
     ]
   },
@@ -6351,7 +6572,13 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-python-junior-trabalho-remoto-at-bairesdev-4460075427",
     "tecnologias": [
-      "Python"
+      "Algoritmos",
+      "Clean Code",
+      "Estrutura de Dados",
+      "Git",
+      "Inglês",
+      "Python",
+      "Qualidade de Software"
     ]
   },
   {
@@ -6370,11 +6597,13 @@
     "tecnologias": [
       "Excel",
       "Hardware",
+      "ITSM",
       "Linux",
       "Office 365",
       "Redes de Computadores",
       "SLA",
       "Service Desk",
+      "Suporte Remoto",
       "VPN",
       "Windows",
       "Word"
@@ -6452,6 +6681,7 @@
       "Jira",
       "Linux",
       "Manutenção Preventiva",
+      "Suporte Remoto",
       "Windows",
       "Zendesk"
     ]
@@ -6471,6 +6701,7 @@
     "url": "https://vagas.solides.com.br/vaga/913471/auxiliar-de-suporte-tecnico-resende-rj",
     "tecnologias": [
       "Sistemas Embarcados",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -6551,6 +6782,7 @@
       "GLPI",
       "Hardware",
       "ITIL",
+      "ITSM",
       "Office 365",
       "Redes de Computadores",
       "SLA",
@@ -6572,7 +6804,18 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-help-desk-at-engineering-brasil-4459231633",
     "tecnologias": [
-      "Help Desk"
+      "Active Directory",
+      "Azure",
+      "GLPI",
+      "Hardware",
+      "Help Desk",
+      "ITIL",
+      "Inteligência Artificial",
+      "Jira",
+      "Montagem e Manutenção de PCs",
+      "Office 365",
+      "VPN",
+      "Windows"
     ]
   },
   {
@@ -6629,6 +6872,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-at-4b-digital-cloud-premium-4459231305",
     "tecnologias": [
+      "LGPD",
+      "SLA",
       "Suporte N1/N2"
     ]
   },
@@ -6953,7 +7198,26 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/tech-engenharia-de-desenvolvimento-de-software-j%C3%BAnior-nodejs-at-totvs-4459236316",
     "tecnologias": [
-      "Node.js"
+      "API REST",
+      "AWS",
+      "Banco de Dados",
+      "CI/CD",
+      "Copilots & Assistentes de IA",
+      "Estrutura de Dados",
+      "Express",
+      "Git",
+      "Inteligência Artificial",
+      "JavaScript",
+      "Metodologias Ágeis",
+      "NestJS",
+      "Node.js",
+      "OAuth/JWT",
+      "React",
+      "SQL",
+      "Scrum",
+      "Serverless",
+      "Testes Automatizados",
+      "TypeScript"
     ]
   },
   {
@@ -7047,6 +7311,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-junior-node-js-remote-work-at-bairesdev-4460074276",
     "tecnologias": [
+      "Algoritmos",
+      "Estrutura de Dados",
+      "Git",
+      "Hardware",
+      "Inglês",
       "JavaScript",
       "Node.js"
     ]
@@ -7237,7 +7506,19 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-sap-business-one-j%C3%BAnior-s%C3%A3o-jos%C3%A9-dos-campos-at-sps-group-4460038659",
     "tecnologias": [
-      "SAP"
+      "API REST",
+      "Análise de Dados",
+      "C#",
+      "Engenharia de Software",
+      "Git",
+      "JavaScript",
+      "Lógica de Programação",
+      "Node.js",
+      "Postman",
+      "SAP",
+      "SQL",
+      "SQL Server",
+      "UX/UI"
     ]
   },
   {
@@ -7396,11 +7677,13 @@
       "Android",
       "Excel",
       "Hardware",
+      "ITSM",
       "Inglês",
       "Jira",
       "Linux",
       "Office 365",
       "Redes de Computadores",
+      "Suporte Remoto",
       "VMware",
       "VPN",
       "Windows",
@@ -7436,6 +7719,7 @@
       "Microcontroladores",
       "Redes de Computadores",
       "SQL",
+      "Suporte Remoto",
       "Testes Funcionais"
     ]
   },
@@ -7717,8 +8001,19 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/tech-engenharia-de-software-backend-j%C3%BAnior-java-afirmativa-para-pessoas-com-defici%C3%AAncia-at-totvs-4459221847",
     "tecnologias": [
+      "API REST",
+      "Angular",
+      "ERP",
       "Engenharia de Software",
-      "Java"
+      "Git",
+      "Hibernate",
+      "Java",
+      "Jira",
+      "Oracle",
+      "SQL",
+      "Spring",
+      "TOTVS",
+      "Testes Automatizados"
     ]
   },
   {
@@ -7854,7 +8149,23 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-desenvolvimento-mobile-flutter-jr-vaga-afirmativa-pcd-at-jobgether-4459758743",
     "tecnologias": [
-      "Flutter"
+      "BDD",
+      "CI/CD",
+      "Clean Architecture",
+      "Design Patterns",
+      "Firebase",
+      "Flutter",
+      "Git",
+      "Inteligência Artificial",
+      "Jenkins",
+      "Jira",
+      "Metodologias Ágeis",
+      "Microserviços",
+      "Next.js",
+      "Scrum",
+      "SonarQube",
+      "TDD",
+      "UX/UI"
     ]
   },
   {
@@ -7900,6 +8211,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-sap-%E2%80%93-desenvolvimento-at-t-systems-do-brasil-4460025069",
     "tecnologias": [
+      "ABAP",
+      "Inglês",
+      "Lógica de Programação",
       "SAP"
     ]
   },
@@ -7978,7 +8292,18 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/jovem-aprendiz-service-desk-suporte-de-ti-manaus-at-eqi-investimentos-4450247179",
     "tecnologias": [
-      "Service Desk"
+      "Android",
+      "Excel",
+      "Hardware",
+      "Jira",
+      "Linux",
+      "Manutenção Preventiva",
+      "Office 365",
+      "Redes de Computadores",
+      "Service Desk",
+      "Windows",
+      "Word",
+      "iOS"
     ]
   },
   {
@@ -7995,7 +8320,18 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/jovem-aprendiz-service-desk-suporte-de-ti-macei%C3%B3-at-eqi-investimentos-4450235771",
     "tecnologias": [
-      "Service Desk"
+      "Android",
+      "Excel",
+      "Hardware",
+      "Jira",
+      "Linux",
+      "Manutenção Preventiva",
+      "Office 365",
+      "Redes de Computadores",
+      "Service Desk",
+      "Windows",
+      "Word",
+      "iOS"
     ]
   },
   {
@@ -8013,6 +8349,7 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-ti-j%C3%BAnior-itsm-esm-at-odebrecht-engenharia-constru%C3%A7%C3%A3o-4446641954",
     "tecnologias": [
       "ITIL",
+      "ITSM",
       "Montagem e Manutenção de PCs",
       "SLA",
       "Testes Funcionais"
@@ -8401,7 +8738,8 @@
       "Backup",
       "ERP",
       "Firewall",
-      "Hardware"
+      "Hardware",
+      "Suporte Remoto"
     ]
   },
   {
@@ -8601,7 +8939,9 @@
     "data_publicacao": "30/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/auxiliar-t%C3%A9cnico-de-inform%C3%A1tica-sp-at-hbl-solu%C3%A7%C3%B5es-em-impress%C3%B5es-e-c%C3%B3pias-de-documentos-ltda-4458820733",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte Remoto"
+    ]
   },
   {
     "id": 2733,
@@ -8872,9 +9212,11 @@
     "fonte": "solides",
     "url": "https://vagas.solides.com.br/vaga/912627/analista-de-service-desk-jr",
     "tecnologias": [
+      "ITSM",
       "Office 365",
       "Redes de Computadores",
       "Service Desk",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -8892,9 +9234,14 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-j%C3%BAnior-%E2%80%94-pl-sql-javascript-brl-4-500-clt-%2B-benef%C3%ADcios-at-nous-latam-4459485878",
     "tecnologias": [
+      "Git",
       "JavaScript",
+      "Metodologias Ágeis",
       "PL/SQL",
-      "SQL"
+      "SQL",
+      "Scrum",
+      "Spring",
+      "Testes Automatizados"
     ]
   },
   {
@@ -9002,6 +9349,7 @@
       "Hardware",
       "Help Desk",
       "ITIL",
+      "ITSM",
       "VPN",
       "Windows"
     ]
@@ -9228,7 +9576,12 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-ti-junior-swift-corporativo-at-swift-4441981886",
     "tecnologias": [
-      "Swift"
+      "Inglês",
+      "Metodologias Ágeis",
+      "SAP",
+      "Scrum",
+      "Swift",
+      "Testes Automatizados"
     ]
   },
   {
@@ -9400,7 +9753,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-i-at-gobrax-4459446481",
     "tecnologias": [
-      "Suporte N1/N2"
+      "Análise de Dados",
+      "Hardware",
+      "Service Desk",
+      "Suporte N1/N2",
+      "Testes Funcionais"
     ]
   },
   {
@@ -9488,7 +9845,9 @@
     "data_publicacao": "28/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/auxiliar-t%C3%A9cnico-de-inform%C3%A1tica-at-hbl-solu%C3%A7%C3%B5es-em-impress%C3%B5es-e-c%C3%B3pias-de-documentos-ltda-4460172485",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte Remoto"
+    ]
   },
   {
     "id": 2254,
@@ -9566,6 +9925,7 @@
       "Active Directory",
       "Hardware",
       "ITIL",
+      "ITSM",
       "Office 365",
       "Service Desk",
       "Windows"
@@ -9881,6 +10241,7 @@
       "Office 365",
       "Redes de Computadores",
       "Service Desk",
+      "Suporte Remoto",
       "Ubiquiti",
       "Windows"
     ]
@@ -9985,10 +10346,12 @@
       "Excel",
       "Hardware",
       "Inglês",
+      "Microsoft Teams",
       "Montagem e Manutenção de PCs",
       "Office 365",
       "Redes de Computadores",
       "Service Desk",
+      "Suporte Remoto",
       "VPN",
       "Windows",
       "Word"
@@ -10032,9 +10395,11 @@
       "GLPI",
       "Hardware",
       "Help Desk",
+      "ITSM",
       "Office 365",
       "SLA",
       "Service Desk",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -10106,7 +10471,9 @@
     "data_publicacao": "28/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-junior-at-vr-software-4460371994",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte Remoto"
+    ]
   },
   {
     "id": 1941,
@@ -10181,8 +10548,27 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-testes-qa-automa%C3%A7%C3%A3o-j%C3%BAnior-pleno-%E2%80%93-java-%2B-sql-at-4df-connect-4460539672",
     "tecnologias": [
+      "API REST",
+      "AWS",
+      "BDD",
+      "Banco de Dados",
+      "CI/CD",
+      "Git",
+      "Grafana",
+      "JMeter",
       "Java",
-      "SQL"
+      "Jira",
+      "Linux",
+      "Metodologias Ágeis",
+      "PostgreSQL",
+      "SQL",
+      "Scrum",
+      "Selenium",
+      "SonarQube",
+      "Testes Automatizados",
+      "Testes Funcionais",
+      "Testes Manuais",
+      "Testes de Regressão"
     ]
   },
   {
@@ -10271,7 +10657,21 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-desenvolvimento-mobile-flutter-jr-vaga-afirmativa-pcd-copy-at-banco-bv-4460528201",
     "tecnologias": [
-      "Flutter"
+      "BDD",
+      "CI/CD",
+      "Clean Architecture",
+      "Firebase",
+      "Flutter",
+      "Git",
+      "Inteligência Artificial",
+      "Jenkins",
+      "Jira",
+      "Metodologias Ágeis",
+      "Microserviços",
+      "Scrum",
+      "SonarQube",
+      "TDD",
+      "Testes Automatizados"
     ]
   },
   {
@@ -10445,7 +10845,27 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-j%C3%BAnior-front-end-angular-at-capgemini-4458097461",
     "tecnologias": [
-      "Angular"
+      "API REST",
+      "Angular",
+      "BDD",
+      "CSS",
+      "Clean Code",
+      "Copilots & Assistentes de IA",
+      "Docker",
+      "Engenharia de Software",
+      "Git",
+      "HTML",
+      "JavaScript",
+      "Jest",
+      "Kubernetes",
+      "Metodologias Ágeis",
+      "OpenAPI/Swagger",
+      "SOLID",
+      "SonarQube",
+      "TDD",
+      "Testes Automatizados",
+      "TypeScript",
+      "UX/UI"
     ]
   },
   {
@@ -10683,6 +11103,7 @@
       "Engenharia de Software",
       "Hardware",
       "ITIL",
+      "ITSM",
       "Metodologias Ágeis",
       "Montagem e Manutenção de PCs",
       "Windows"
@@ -10893,10 +11314,12 @@
       "Backup",
       "Firewall",
       "Firmware",
+      "ITSM",
       "Inglês",
       "Manutenção Preventiva",
       "Redes de Computadores",
       "SLA",
+      "Suporte Remoto",
       "VPN"
     ]
   },
@@ -11011,7 +11434,14 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvimento-de-aplica%C3%A7%C3%B5es-%E2%80%93-ti-j%C3%BAnior-ingles-fluente-at-ahoy-by-belago-4460337603",
     "tecnologias": [
-      "Inglês"
+      ".NET",
+      "Azure",
+      "C#",
+      "Inglês",
+      "Java",
+      "JavaScript",
+      "Node.js",
+      "Testes de Regressão"
     ]
   },
   {
@@ -11068,7 +11498,8 @@
       "Backup",
       "ERP",
       "Firewall",
-      "Hardware"
+      "Hardware",
+      "Suporte Remoto"
     ]
   },
   {
@@ -11360,6 +11791,7 @@
       "Office 365",
       "Redes de Computadores",
       "Service Desk",
+      "SharePoint",
       "VMware",
       "VoIP",
       "Windows"
@@ -11403,9 +11835,16 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/engenheiro-de-software-jr-node-js-react-js-at-uol-edtech-4440272651",
     "tecnologias": [
+      "API REST",
+      "Banco de Dados",
+      "Clean Code",
+      "Git",
       "JavaScript",
+      "NestJS",
+      "Next.js",
       "Node.js",
-      "React"
+      "React",
+      "TypeScript"
     ]
   },
   {
@@ -11458,7 +11897,23 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-java-j%C3%BAnior-s-op-at-americanas-s-a-4458029098",
     "tecnologias": [
-      "Java"
+      "API REST",
+      "Azure",
+      "Banco de Dados",
+      "Datadog",
+      "Design Patterns",
+      "Git",
+      "Grafana",
+      "Inteligência Artificial",
+      "Java",
+      "Metodologias Ágeis",
+      "MySQL",
+      "Oracle",
+      "RabbitMQ",
+      "React",
+      "SQL",
+      "Scrum",
+      "Spring"
     ]
   },
   {
@@ -11586,7 +12041,40 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-java-jr-at-auth21-4459662086",
     "tecnologias": [
-      "Java"
+      "API REST",
+      "Angular",
+      "Banco de Dados",
+      "CI/CD",
+      "CSS",
+      "Clean Code",
+      "Design Patterns",
+      "Docker",
+      "Engenharia de Software",
+      "Flutter",
+      "Git",
+      "HTML",
+      "JUnit",
+      "Java",
+      "JavaScript",
+      "Jira",
+      "Kafka",
+      "Microserviços",
+      "Modelagem de Dados",
+      "Node.js",
+      "OAuth/JWT",
+      "Oracle",
+      "PHP",
+      "Python",
+      "RPA",
+      "RabbitMQ",
+      "SOLID",
+      "SQL",
+      "SonarQube",
+      "Spring",
+      "TDD",
+      "Testes Automatizados",
+      "TypeScript",
+      "UX/UI"
     ]
   },
   {
@@ -11632,7 +12120,14 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-java-junior-at-sis-innov-tech-4460101142",
     "tecnologias": [
-      "Java"
+      ".NET",
+      "Azure",
+      "C#",
+      "Inglês",
+      "Java",
+      "JavaScript",
+      "Node.js",
+      "Testes de Regressão"
     ]
   },
   {
@@ -12360,6 +12855,7 @@
       "Manutenção Preventiva",
       "Montagem e Manutenção de PCs",
       "Redes de Computadores",
+      "Suporte Remoto",
       "VPN",
       "Windows"
     ]
@@ -12402,6 +12898,7 @@
       "Help Desk",
       "Office 365",
       "Service Desk",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -12461,7 +12958,23 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/consultor-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-jr-soc-threat-hunting-at-auth21-4459669186",
     "tecnologias": [
-      "SIEM/SOC"
+      "AWS",
+      "Antivírus",
+      "Azure",
+      "Cibersegurança",
+      "Firewall",
+      "Governança e Riscos (GRC)",
+      "Inglês",
+      "LGPD",
+      "Linux",
+      "Office 365",
+      "Qualidade de Dados",
+      "Redes de Computadores",
+      "SIEM/SOC",
+      "SLA",
+      "Service Desk",
+      "UML",
+      "Windows"
     ]
   },
   {
@@ -12565,8 +13078,10 @@
     "tecnologias": [
       "Active Directory",
       "ITIL",
+      "ITSM",
       "Manutenção Preventiva",
       "Office 365",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -12616,7 +13131,15 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/mobile-search-desenvolvedor-android-jr-at-auth21-4459656924",
     "tecnologias": [
-      "Android"
+      "Android",
+      "Banco de Dados",
+      "Design Patterns",
+      "Inglês",
+      "Java",
+      "Kotlin",
+      "MVVM",
+      "SQL",
+      "Testes Automatizados"
     ]
   },
   {
@@ -12924,9 +13447,11 @@
       "Firewall",
       "Hardware",
       "Hyper-V",
+      "ITSM",
       "Linux",
       "Office 365",
       "Redes de Computadores",
+      "Suporte Remoto",
       "VMware",
       "VPN",
       "Windows"
@@ -12983,8 +13508,18 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/jr-full-stack-java-developer-%E2%80%93-azure-cloud-at-ibm-4458687164",
     "tecnologias": [
+      "API REST",
+      "Angular",
       "Azure",
-      "Java"
+      "CI/CD",
+      "Docker",
+      "Git",
+      "GraphQL",
+      "Java",
+      "Kafka",
+      "Kubernetes",
+      "Microserviços",
+      "Spring"
     ]
   },
   {
@@ -13340,9 +13875,11 @@
       "Active Directory",
       "Hardware",
       "ITIL",
+      "ITSM",
       "Office 365",
       "Redes de Computadores",
       "Service Desk",
+      "Suporte Remoto",
       "VMware",
       "VPN",
       "Windows"
@@ -13384,7 +13921,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-jr-joinville-at-rotaexata-4459616940",
     "tecnologias": [
-      "Manutenção Preventiva"
+      "Manutenção Preventiva",
+      "Suporte Remoto"
     ]
   },
   {
@@ -13510,7 +14048,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-automa%C3%A7%C3%A3o-ia-desenvolvimento-at-auth21-4459663198",
     "tecnologias": [
-      "Inteligência Artificial"
+      "Banco de Dados",
+      "Engenharia de Software",
+      "Inteligência Artificial",
+      "Lógica de Programação",
+      "SQL"
     ]
   },
   {
@@ -13831,7 +14373,8 @@
       "Power BI",
       "Python",
       "Qualidade de Dados",
-      "SQL"
+      "SQL",
+      "SharePoint"
     ]
   },
   {
@@ -13878,7 +14421,18 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-bi-business-intelligence-at-equifax-4458648766",
     "tecnologias": [
-      "BI"
+      "Análise de Dados",
+      "BI",
+      "Banco de Dados",
+      "BigQuery",
+      "Confluence",
+      "GCP",
+      "Inglês",
+      "Inteligência Artificial",
+      "LLMs & IA Generativa",
+      "Looker",
+      "SQL",
+      "Salesforce"
     ]
   },
   {
@@ -13997,7 +14551,13 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/business-intelligence-i-at-banco-bradesco-4459861865",
     "tecnologias": [
-      "BI"
+      "Automação",
+      "BI",
+      "Databricks",
+      "Estatística",
+      "Excel",
+      "Power BI",
+      "Python"
     ]
   },
   {
@@ -14107,8 +14667,10 @@
       "Hardware",
       "Hyper-V",
       "ITIL",
+      "ITSM",
       "Inglês",
       "Manutenção Preventiva",
+      "Suporte Remoto",
       "VMware",
       "VPN"
     ]
@@ -14171,7 +14733,18 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-automa%C3%A7%C3%A3o-de-testes-j%C3%BAnior-vaga-afirmativa-at-dbc-company-4439951528",
     "tecnologias": [
-      "Testes Automatizados"
+      "API REST",
+      "Banco de Dados",
+      "CI/CD",
+      "JMeter",
+      "Java",
+      "Jenkins",
+      "Metodologias Ágeis",
+      "Selenium",
+      "SonarQube",
+      "TDD",
+      "Testes Automatizados",
+      "UX/UI"
     ]
   },
   {
@@ -14241,6 +14814,7 @@
     "tecnologias": [
       "Hardware",
       "ITIL",
+      "ITSM",
       "Inglês",
       "Montagem e Manutenção de PCs",
       "Windows"
@@ -14260,6 +14834,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-at-emitea%C3%AD-4459095237",
     "tecnologias": [
+      "SLA",
+      "Service Desk",
       "Suporte N1/N2"
     ]
   },
@@ -14315,6 +14891,7 @@
     "tecnologias": [
       "Hardware",
       "Linux",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -14528,6 +15105,7 @@
       "Manutenção Preventiva",
       "Office 365",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -14774,7 +15352,8 @@
       "Governança e Riscos (GRC)",
       "ISO 27001",
       "ITIL",
-      "LGPD"
+      "LGPD",
+      "SharePoint"
     ]
   },
   {
@@ -15523,6 +16102,7 @@
       "Active Directory",
       "Antivírus",
       "Hardware",
+      "ITSM",
       "Office 365",
       "Redes de Computadores",
       "Service Desk",
@@ -15590,7 +16170,8 @@
       "Governança e Riscos (GRC)",
       "ISO 27001",
       "ITIL",
-      "LGPD"
+      "LGPD",
+      "SharePoint"
     ]
   },
   {
@@ -15968,7 +16549,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-opera%C3%A7%C3%B5es-ci%C3%AAncia-de-dados-sistemas-de-informa%C3%A7%C3%A3o-engenharia-de-software-an%C3%A1lise-e-desenvolvimento-de-sistemas-ticket-servi%C3%A7os-at-instituto-via-de-acesso-4457259003",
     "tecnologias": [
-      "Engenharia de Software"
+      "Engenharia de Software",
+      "Excel",
+      "Inglês",
+      "Power BI",
+      "Python"
     ]
   },
   {
@@ -16375,7 +16960,21 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvimento-python-twilio-junior-pleno-remoto-s%C3%A3o-paulo-sp-135458-at-gft-technologies-4453457815",
     "tecnologias": [
-      "Python"
+      "API REST",
+      "AWS",
+      "Banco de Dados",
+      "CI/CD",
+      "Datadog",
+      "Docker",
+      "Git",
+      "JavaScript",
+      "Kafka",
+      "Kubernetes",
+      "Metodologias Ágeis",
+      "Microserviços",
+      "Python",
+      "Redis",
+      "SQL"
     ]
   },
   {
@@ -16515,6 +17114,7 @@
       "Inteligência Artificial",
       "Java",
       "SQL",
+      "SharePoint",
       "Windows"
     ]
   },
@@ -16721,7 +17321,8 @@
     "fonte": "solides",
     "url": "https://vagas.solides.com.br/vaga/910342/analista-de-suporte-jr-joinville",
     "tecnologias": [
-      "Manutenção Preventiva"
+      "Manutenção Preventiva",
+      "Suporte Remoto"
     ]
   },
   {
@@ -17026,6 +17627,7 @@
       "Help Desk",
       "Redes de Computadores",
       "SQL",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -17064,7 +17666,9 @@
     "tecnologias": [
       "Hardware",
       "ITIL",
+      "ITSM",
       "Inglês",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -17100,6 +17704,11 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2832150/analista-de-sistemas-suporte-n1-tasy",
     "tecnologias": [
+      "ERP",
+      "ITIL",
+      "SLA",
+      "SQL",
+      "Service Desk",
       "Suporte N1/N2"
     ]
   },
@@ -17120,6 +17729,7 @@
       "Estrutura de Dados",
       "Excel",
       "Hardware",
+      "ITSM",
       "Office 365",
       "SLA",
       "Service Desk",
@@ -17386,7 +17996,23 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-de-ti-sistemas-automa%C3%A7%C3%A3o-e-integra%C3%A7%C3%A3o-sap-at-fortlev-4456980108",
     "tecnologias": [
-      "SAP"
+      "Análise de Dados",
+      "Automação Industrial",
+      "Backup",
+      "Banco de Dados",
+      "C#",
+      "ERP",
+      "Eletrônica",
+      "Engenharia de Software",
+      "Excel",
+      "Git",
+      "Inglês",
+      "Java",
+      "JavaScript",
+      "Lógica de Programação",
+      "Python",
+      "SAP",
+      "SQL"
     ]
   },
   {
@@ -17422,7 +18048,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-vis%C3%A3o-computacional-at-sidi-4456907458",
     "tecnologias": [
-      "Machine Learning"
+      "C++",
+      "Inglês",
+      "Inteligência Artificial",
+      "Machine Learning",
+      "Python"
     ]
   },
   {
@@ -17511,10 +18141,16 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2832092/estagiario-em-desenvolvimento-de-sistemas",
     "tecnologias": [
+      ".NET",
+      "Banco de Dados",
       "CSS",
+      "Git",
       "HTML",
       "JavaScript",
-      "Lógica de Programação"
+      "Lógica de Programação",
+      "Node.js",
+      "Python",
+      "React"
     ]
   },
   {
@@ -17757,6 +18393,7 @@
       "JavaScript",
       "Linux",
       "SQL",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -17775,6 +18412,7 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-tecnico-junior-at-dxc-technology-4457496331",
     "tecnologias": [
       "ITIL",
+      "ITSM",
       "Office 365",
       "Redes de Computadores",
       "Windows"
@@ -17814,6 +18452,7 @@
     "url": "https://wyntech.gupy.io/job/eyJqb2JJZCI6MTIyNjIyMTQsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
       "ITIL",
+      "ITSM",
       "Inglês",
       "Windows"
     ]
@@ -17866,7 +18505,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-suporte-t%C3%A9cnico-de-service-desk-l1-at-unisys-4456938931",
     "tecnologias": [
-      "Service Desk"
+      "Excel",
+      "Hardware",
+      "Inglês",
+      "Service Desk",
+      "Word"
     ]
   },
   {
@@ -17983,7 +18626,8 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2832090/assistente-de-ti-belo-horizonte",
     "tecnologias": [
-      "Hardware"
+      "Hardware",
+      "Suporte Remoto"
     ]
   },
   {
@@ -18004,7 +18648,8 @@
       "Backup",
       "ERP",
       "Firewall",
-      "Hardware"
+      "Hardware",
+      "Suporte Remoto"
     ]
   },
   {
@@ -18093,7 +18738,9 @@
     "data_publicacao": "25/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/auxiliar-t%C3%A9cnico-de-inform%C3%A1tica-sp-at-hbl-solu%C3%A7%C3%B5es-em-impress%C3%B5es-e-c%C3%B3pias-de-documentos-ltda-4456556624",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte Remoto"
+    ]
   },
   {
     "id": 1289,
@@ -18145,9 +18792,18 @@
     "url": "https://www.vagas.com.br/vagas/v2832024/cientista-de-dados-junior-hibrido-jundiai-ou-mogi-guacu-sp",
     "tecnologias": [
       "AWS",
+      "Agentes de IA & RAG",
       "Azure",
+      "Databricks",
+      "Estatística",
       "GCP",
+      "Inglês",
       "Inteligência Artificial",
+      "LLMs & IA Generativa",
+      "Machine Learning",
+      "Python",
+      "SAP",
+      "SQL",
       "Spark"
     ]
   },
@@ -18342,6 +18998,7 @@
       "Office 365",
       "Oracle",
       "Power BI",
+      "SharePoint",
       "UX/UI"
     ]
   },
@@ -18477,7 +19134,8 @@
     "url": "https://br.linkedin.com/jobs/view/auxiliar-de-suporte-t%C3%A9cnico-at-seal-sistemas-e-tecnologia-4458752160",
     "tecnologias": [
       "Hardware",
-      "Inglês"
+      "Inglês",
+      "Suporte Remoto"
     ]
   },
   {
@@ -18498,10 +19156,12 @@
       "Excel",
       "Hardware",
       "ITIL",
+      "ITSM",
       "Inglês",
       "Inteligência Artificial",
       "Redes de Computadores",
       "SLA",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -18969,8 +19629,17 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-fullstack-java-angular-j%C3%BAnior-at-ibm-4456561371",
     "tecnologias": [
+      "API REST",
       "Angular",
-      "Java"
+      "CI/CD",
+      "Docker",
+      "Git",
+      "GraphQL",
+      "Java",
+      "Kafka",
+      "Kubernetes",
+      "Microserviços",
+      "Spring"
     ]
   },
   {
@@ -19118,6 +19787,7 @@
       "Active Directory",
       "Hardware",
       "ITIL",
+      "ITSM",
       "Manutenção Preventiva",
       "VPN"
     ]
@@ -19169,6 +19839,7 @@
     "fonte": "solides",
     "url": "https://vagas.solides.com.br/vaga/909805/analista-de-monitoramento-junior",
     "tecnologias": [
+      "ITSM",
       "Linux",
       "Redes de Computadores",
       "Service Desk",
@@ -19262,7 +19933,8 @@
     "tecnologias": [
       "ERP",
       "Hardware",
-      "SLA"
+      "SLA",
+      "Suporte Remoto"
     ]
   },
   {
@@ -19442,7 +20114,8 @@
       "CRM",
       "ERP",
       "Excel",
-      "IoT"
+      "IoT",
+      "Microsoft Teams"
     ]
   },
   {
@@ -19651,6 +20324,7 @@
     "tecnologias": [
       "ERP",
       "ITIL",
+      "ITSM",
       "Jira",
       "SLA",
       "SQL"
@@ -19687,7 +20361,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-help-desk-jr-hs-cons%C3%B3rcios-at-grupo-herval-4456540067",
     "tecnologias": [
-      "Help Desk"
+      "ERP",
+      "Help Desk",
+      "SQL",
+      "SQL Server"
     ]
   },
   {
@@ -20110,7 +20787,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-jr-b-noc-at-mamtech-tecnologia-4456522633",
     "tecnologias": [
-      "ERP"
+      "ERP",
+      "ITSM"
     ]
   },
   {
@@ -20131,6 +20809,7 @@
       "ERP",
       "Excel",
       "GLPI",
+      "ITSM",
       "Inteligência Artificial",
       "Jira",
       "Office 365",
@@ -20358,7 +21037,8 @@
       "Office 365",
       "Python",
       "RPA",
-      "SQL"
+      "SQL",
+      "SharePoint"
     ]
   },
   {
@@ -20482,6 +21162,7 @@
       "Python",
       "SQL",
       "SQL Server",
+      "SharePoint",
       "Windows",
       "jQuery"
     ]
@@ -20535,7 +21216,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-qualidade-de-software-junior-at-fcamara-4458238125",
     "tecnologias": [
-      "Qualidade de Software"
+      "Jira",
+      "Qualidade de Software",
+      "Testes Automatizados",
+      "Testes Funcionais"
     ]
   },
   {
@@ -20866,10 +21550,12 @@
     "tecnologias": [
       "Active Directory",
       "Hardware",
+      "ITSM",
       "Inglês",
       "Office 365",
       "SLA",
       "Service Desk",
+      "SharePoint",
       "VPN",
       "Windows"
     ]
@@ -21247,6 +21933,7 @@
     "tecnologias": [
       "Hardware",
       "Office 365",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -21422,7 +22109,8 @@
     "tecnologias": [
       "ERP",
       "Hardware",
-      "SLA"
+      "SLA",
+      "Suporte Remoto"
     ]
   },
   {
@@ -21493,11 +22181,13 @@
       "Hardware",
       "Help Desk",
       "ITIL",
+      "ITSM",
       "Office 365",
       "Redes de Computadores",
       "SLA",
       "Service Desk",
       "Suporte N1/N2",
+      "Suporte Remoto",
       "VPN",
       "Windows"
     ]
@@ -21972,6 +22662,7 @@
     "tecnologias": [
       "Grafana",
       "ITIL",
+      "ITSM",
       "Inglês",
       "Linux",
       "Redes de Computadores",
@@ -21994,7 +22685,12 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-j%C3%BAnior-de-soc-n1-brl-4k-m%C3%AAs-pj-at-nous-latam-4456254840",
     "tecnologias": [
-      "SIEM/SOC"
+      "Firewall",
+      "ITSM",
+      "Linux",
+      "Redes de Computadores",
+      "SIEM/SOC",
+      "Windows"
     ]
   },
   {
@@ -22239,6 +22935,7 @@
       "Manutenção Preventiva",
       "Montagem e Manutenção de PCs",
       "Redes de Computadores",
+      "Suporte Remoto",
       "VPN",
       "Windows"
     ]
@@ -22422,6 +23119,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-suporte-n2-jr-indaiatuba-at-topaz-4456277129",
     "tecnologias": [
+      "SLA",
       "Suporte N1/N2"
     ]
   },
@@ -22570,6 +23268,7 @@
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-suporte-jr-12x36-07h-as-19h-at-stefanini-brasil-4457510173",
     "tecnologias": [
       "Hardware",
+      "ITSM",
       "Inteligência Artificial",
       "Windows"
     ]
@@ -22588,7 +23287,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-erp-j%C3%BAnior-matriz-at-grupo-bamaq-4454685018",
     "tecnologias": [
-      "ERP"
+      "ERP",
+      "Service Desk",
+      "Suporte Remoto",
+      "TOTVS"
     ]
   },
   {
@@ -22628,6 +23330,7 @@
     "tecnologias": [
       "Excel",
       "Inglês",
+      "Microsoft Teams",
       "SAP",
       "Word"
     ]
@@ -22651,6 +23354,7 @@
       "Inglês",
       "Linux",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -22688,7 +23392,12 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831734/estagiario-de-projetos-de-telecomunicacoes-pmo",
     "tecnologias": [
-      "Análise de Dados"
+      "Análise de Dados",
+      "Excel",
+      "Inglês",
+      "Power BI",
+      "Python",
+      "Visual Basic/VBA"
     ]
   },
   {
@@ -22966,6 +23675,7 @@
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-suporte-jr-12x36-07h-as-19h-at-stefanini-brasil-4457507135",
     "tecnologias": [
       "Hardware",
+      "ITSM",
       "Inteligência Artificial",
       "Windows"
     ]
@@ -22985,6 +23695,7 @@
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-suporte-jr-at-stefanini-brasil-4457522093",
     "tecnologias": [
       "Hardware",
+      "ITSM",
       "Inteligência Artificial",
       "Windows"
     ]
@@ -23250,6 +23961,7 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-jr-microinform%C3%A1tica-at-ciser-4454673240",
     "tecnologias": [
       "Hardware",
+      "ITSM",
       "Manutenção Preventiva",
       "Montagem e Manutenção de PCs",
       "Redes de Computadores",
@@ -23310,6 +24022,16 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831663/trainee-ti-desenvolvimento",
     "tecnologias": [
+      "Automação",
+      "Azure",
+      "Inglês",
+      "Inteligência Artificial",
+      "Java",
+      "Jira",
+      "Metodologias Ágeis",
+      "Python",
+      "RPA",
+      "Scrum",
       "UML"
     ]
   },
@@ -23711,6 +24433,7 @@
     "tecnologias": [
       "Grafana",
       "ITIL",
+      "ITSM",
       "Jira",
       "Redes de Computadores",
       "Service Desk",
@@ -23753,7 +24476,8 @@
     "url": "https://br.linkedin.com/jobs/view/auxiliar-de-suporte-t%C3%A9cnico-at-jobbol-4456448286",
     "tecnologias": [
       "Hardware",
-      "Help Desk"
+      "Help Desk",
+      "Suporte Remoto"
     ]
   },
   {
@@ -23790,6 +24514,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-suporte-n1-at-jobbol-4457003665",
     "tecnologias": [
+      "Help Desk",
+      "Manutenção Preventiva",
+      "Redes de Computadores",
       "Suporte N1/N2"
     ]
   },
@@ -24001,7 +24728,8 @@
     "tecnologias": [
       "Automação",
       "Estrutura de Dados",
-      "Excel"
+      "Excel",
+      "ITSM"
     ]
   },
   {
@@ -24046,7 +24774,17 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-de-automa%C3%A7%C3%A3o-ia-%E2%80%93-j%C3%BAnior-pleno-at-via-importer-comercio-exterior-s-a-4456416952",
     "tecnologias": [
-      "Inteligência Artificial"
+      "API REST",
+      "Agentes de IA & RAG",
+      "Automação",
+      "Copilots & Assistentes de IA",
+      "Git",
+      "Inteligência Artificial",
+      "JavaScript",
+      "LLMs & IA Generativa",
+      "OAuth/JWT",
+      "Python",
+      "SQL"
     ]
   },
   {
@@ -24197,6 +24935,7 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-service-desk-n1-pleno-at-onset-tecnologia-4453867946",
     "tecnologias": [
       "ITIL",
+      "ITSM",
       "SLA",
       "Service Desk"
     ]
@@ -24402,7 +25141,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/ri-estagi%C3%A1rio-a-em-ti-an%C3%A1lise-de-dados-e-suporte-t%C3%A9cnico-at-machado-pereira-advogados-4456427809",
     "tecnologias": [
-      "Análise de Dados"
+      "Análise de Dados",
+      "ERP"
     ]
   },
   {
@@ -24624,6 +25364,7 @@
       "Banco de Dados",
       "Grafana",
       "ITIL",
+      "ITSM",
       "Inglês",
       "Inteligência Artificial",
       "LLMs & IA Generativa",
@@ -24653,7 +25394,8 @@
       "Banco de Dados",
       "ERP",
       "SQL",
-      "SQL Server"
+      "SQL Server",
+      "Suporte Remoto"
     ]
   },
   {
@@ -24708,7 +25450,20 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-desenvolvimento-de-software-ia-e-automa%C3%A7%C3%A3o-at-beumer-group-4456003145",
     "tecnologias": [
-      "Inteligência Artificial"
+      "Agentes de IA & RAG",
+      "Análise de Dados",
+      "Automação",
+      "C#",
+      "Copilots & Assistentes de IA",
+      "Engenharia de Software",
+      "Git",
+      "Inglês",
+      "Inteligência Artificial",
+      "Java",
+      "LLMs & IA Generativa",
+      "Lógica de Programação",
+      "Python",
+      "SQL"
     ]
   },
   {
@@ -24854,7 +25609,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-qualidade-de-software-jr-at-grupo-apisul-4457015168",
     "tecnologias": [
-      "Qualidade de Software"
+      "Postman",
+      "Qualidade de Software",
+      "SQL",
+      "Testes Funcionais"
     ]
   },
   {
@@ -25055,7 +25813,8 @@
       "Active Directory",
       "Antivírus",
       "Hardware",
-      "SLA"
+      "SLA",
+      "Suporte Remoto"
     ]
   },
   {
@@ -25073,6 +25832,7 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-em-t-i-n%C3%ADvel-1-at-abler-vagas-4457016439",
     "tecnologias": [
       "Linux",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -25339,8 +26099,10 @@
     "url": "https://br.linkedin.com/jobs/view/assistente-de-infraestrutura-ti-j%C3%BAnior-at-licitar-digital-4454118955",
     "tecnologias": [
       "Hardware",
+      "Microsoft Teams",
       "Office 365",
-      "Redes de Computadores"
+      "Redes de Computadores",
+      "SharePoint"
     ]
   },
   {
@@ -25445,6 +26207,7 @@
     "tecnologias": [
       "Backup",
       "Estrutura de Dados",
+      "SharePoint",
       "VPN"
     ]
   },
@@ -25506,6 +26269,7 @@
       "Hardware",
       "Help Desk",
       "ITIL",
+      "ITSM",
       "Inglês",
       "Manutenção Preventiva",
       "Office 365",
@@ -25619,6 +26383,7 @@
       "Linux",
       "Office 365",
       "Redes de Computadores",
+      "SharePoint",
       "Shell/Bash",
       "Ubiquiti",
       "VMware",
@@ -25748,6 +26513,7 @@
       "Power BI",
       "Redes de Computadores",
       "Service Desk",
+      "SharePoint",
       "Windows"
     ]
   },
@@ -25788,7 +26554,15 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/pessoa-estagi%C3%A1ria-em-banco-de-dados-at-arcelormittal-4455422362",
     "tecnologias": [
-      "Banco de Dados"
+      "AWS",
+      "Azure",
+      "Backup",
+      "Banco de Dados",
+      "Inglês",
+      "Linux",
+      "Modelagem de Dados",
+      "SQL",
+      "Windows"
     ]
   },
   {
@@ -25844,6 +26618,7 @@
       "Help Desk",
       "Office 365",
       "Service Desk",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -25882,7 +26657,8 @@
       "Governança e Riscos (GRC)",
       "ISO 27001",
       "ITIL",
-      "LGPD"
+      "LGPD",
+      "SharePoint"
     ]
   },
   {
@@ -25944,7 +26720,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/consultor-a-j%C3%BAnior-em-auditoria-de-ti-para-institui%C3%A7%C3%B5es-financeiras-s%C3%A3o-paulo-at-ey-4454970003",
     "tecnologias": [
-      "Governança e Riscos (GRC)"
+      "Agentes de IA & RAG",
+      "Espanhol",
+      "Governança e Riscos (GRC)",
+      "Inglês",
+      "Inteligência Artificial"
     ]
   },
   {
@@ -26100,7 +26880,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/business-intelligence-intern-amazon-university-talent-acquisition-at-amazon-4455795329",
     "tecnologias": [
-      "BI"
+      "BI",
+      "Estatística",
+      "Excel",
+      "Inglês",
+      "SQL"
     ]
   },
   {
@@ -26117,7 +26901,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/business-intelligence-intern-cajamar-amazon-university-talent-acquisition-at-amazon-4455915180",
     "tecnologias": [
-      "BI"
+      "BI",
+      "Estatística",
+      "Excel",
+      "Inglês",
+      "SQL"
     ]
   },
   {
@@ -26319,6 +27107,7 @@
       "Montagem e Manutenção de PCs",
       "Redes de Computadores",
       "Service Desk",
+      "Suporte Remoto",
       "Windows",
       "Word"
     ]
@@ -26353,7 +27142,8 @@
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-ti-n1-service-desk-at-instituto-das-cidades-inteligentes-4453498421",
     "tecnologias": [
       "Hardware",
-      "Service Desk"
+      "Service Desk",
+      "Suporte Remoto"
     ]
   },
   {
@@ -26376,6 +27166,7 @@
       "Hardware",
       "Redes de Computadores",
       "SQL",
+      "Suporte Remoto",
       "Word"
     ]
   },
@@ -26397,6 +27188,7 @@
       "Help Desk",
       "Office 365",
       "Service Desk",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -26414,6 +27206,13 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-t%C3%A9cnico-de-testes-manuais-qa-recife-at-deloitte-4456106077",
     "tecnologias": [
+      "Excel",
+      "Inglês",
+      "Jira",
+      "Metodologias Ágeis",
+      "Qualidade de Software",
+      "Scrum",
+      "Testes Automatizados",
       "Testes Manuais"
     ]
   },
@@ -26495,6 +27294,7 @@
     "tecnologias": [
       "Hardware",
       "ITIL",
+      "ITSM",
       "SQL",
       "SQL Server",
       "Service Desk",
@@ -26694,7 +27494,9 @@
     "data_publicacao": "19/08/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/auxiliar-administrativo-aprendiz-tecnologia-presencial-at-essentia-group-enhanced-company-4453429779",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte Remoto"
+    ]
   },
   {
     "id": 831,
@@ -26714,6 +27516,7 @@
       "Excel",
       "GLPI",
       "ITIL",
+      "ITSM",
       "Jira",
       "LGPD",
       "Power BI",
@@ -26738,6 +27541,7 @@
       "Banco de Dados",
       "Excel",
       "ITIL",
+      "ITSM",
       "LGPD"
     ]
   },
@@ -26755,7 +27559,23 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/aws-tech-intern-vaga-afirmativa-para-pessoas-com-defici%C3%AAncia-amazon-university-talent-acquisition-at-amazon-web-services-aws-4455908236",
     "tecnologias": [
-      "AWS"
+      "AWS",
+      "Banco de Dados",
+      "C#",
+      "C++",
+      "Inglês",
+      "IoT",
+      "Java",
+      "JavaScript",
+      "Linux",
+      "Machine Learning",
+      "Node.js",
+      "PHP",
+      "Python",
+      "Redes de Computadores",
+      "Ruby",
+      "VPN",
+      "Windows"
     ]
   },
   {
@@ -26820,7 +27640,21 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-python-j%C3%BAnior-captura-e-sustenta%C3%A7%C3%A3o-web-crawling-apis-vaga-afirmativa-para-pessoas-pretas-e-pardas-at-serasa-experian-4446384239",
     "tecnologias": [
-      "Python"
+      "API REST",
+      "AWS",
+      "AWS SQS",
+      "Airflow",
+      "Banco de Dados",
+      "Docker",
+      "Estrutura de Dados",
+      "Git",
+      "Linux",
+      "MySQL",
+      "PostgreSQL",
+      "Python",
+      "Selenium",
+      "Serverless",
+      "Terraform"
     ]
   },
   {
@@ -27048,7 +27882,23 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/aws-tech-intern-amazon-university-talent-acquisition-at-amazon-web-services-aws-4455795032",
     "tecnologias": [
-      "AWS"
+      "AWS",
+      "Banco de Dados",
+      "C#",
+      "C++",
+      "Inglês",
+      "IoT",
+      "Java",
+      "JavaScript",
+      "Linux",
+      "Machine Learning",
+      "Node.js",
+      "PHP",
+      "Python",
+      "Redes de Computadores",
+      "Ruby",
+      "VPN",
+      "Windows"
     ]
   },
   {
@@ -27065,7 +27915,14 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-business-intelligence-junior-ouvidoria-campinas-sp-at-agibank-4456358752",
     "tecnologias": [
-      "BI"
+      "Automação",
+      "BI",
+      "Copilots & Assistentes de IA",
+      "Inteligência Artificial",
+      "LLMs & IA Generativa",
+      "Power BI",
+      "Python",
+      "SQL"
     ]
   },
   {
@@ -27444,6 +28301,7 @@
       "Git",
       "HTML",
       "ITIL",
+      "ITSM",
       "Inteligência Artificial",
       "Java",
       "JavaEE",
@@ -27737,7 +28595,9 @@
     "data_publicacao": "18/08/2026",
     "fonte": "solides",
     "url": "https://vagas.solides.com.br/vaga/906151/especialista-em-produtos-e-servicos",
-    "tecnologias": []
+    "tecnologias": [
+      "ITSM"
+    ]
   },
   {
     "id": 2630,
@@ -27780,6 +28640,7 @@
       "CRM",
       "Help Desk",
       "Linux",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -28157,8 +29018,10 @@
       "Azure",
       "Hardware",
       "ITIL",
+      "ITSM",
       "Office 365",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -28233,7 +29096,13 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-jr-soc-at-pagbank-4454909503",
     "tecnologias": [
-      "SIEM/SOC"
+      "AWS",
+      "Banco de Dados",
+      "Cibersegurança",
+      "Firewall",
+      "Redes de Computadores",
+      "SIEM/SOC",
+      "SLA"
     ]
   },
   {
@@ -28321,6 +29190,8 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831050/tecnico-de-informatica-n1-lins-sp",
     "tecnologias": [
+      "Backup",
+      "Hardware",
       "Help Desk"
     ]
   },
@@ -28403,6 +29274,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-suporte-n1-s%C3%A3o-paulo-sp-at-minsait-4452842900",
     "tecnologias": [
+      "ITSM",
       "SAP",
       "Suporte N1/N2"
     ]
@@ -28422,7 +29294,8 @@
     "url": "https://br.linkedin.com/jobs/view/28406-pessoa-estagi%C3%A1ria-em-suporte-t%C3%A9cnico-do-seu-jeito-at-intelbras-4454781808",
     "tecnologias": [
       "Eletrônica",
-      "Redes de Computadores"
+      "Redes de Computadores",
+      "Suporte Remoto"
     ]
   },
   {
@@ -28550,6 +29423,7 @@
       "Eletrônica",
       "Linux",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows",
       "Zendesk"
     ]
@@ -28738,7 +29612,15 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-desenvolvedor-salesforce-jr-at-ai-r-everymind-4454900061",
     "tecnologias": [
-      "Salesforce"
+      "API REST",
+      "Apex",
+      "Azure",
+      "Git",
+      "Inteligência Artificial",
+      "Jira",
+      "Modelagem de Dados",
+      "Salesforce",
+      "Scrum"
     ]
   },
   {
@@ -28823,7 +29705,23 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/engenheiro-de-software-junior-ou-pleno-java-investment-products-at-btg-pactual-4455558143",
     "tecnologias": [
-      "Java"
+      "API REST",
+      "AWS",
+      "AWS SQS",
+      "Banco de Dados",
+      "CI/CD",
+      "Design Patterns",
+      "Docker",
+      "DynamoDB",
+      "Git",
+      "Java",
+      "Jenkins",
+      "Kubernetes",
+      "Microserviços",
+      "Node.js",
+      "Oracle",
+      "RabbitMQ",
+      "Spring"
     ]
   },
   {
@@ -28978,7 +29876,19 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-sistemas-j%C3%BAnior-foco-em-java-at-copel-companhia-paranaense-de-energia-4452851276",
     "tecnologias": [
-      "Java"
+      "API REST",
+      "Azure",
+      "Banco de Dados",
+      "Engenharia de Software",
+      "Git",
+      "Hibernate",
+      "Inglês",
+      "Java",
+      "JavaEE",
+      "Jira",
+      "Metodologias Ágeis",
+      "Oracle",
+      "Scrum"
     ]
   },
   {
@@ -29060,6 +29970,7 @@
       "Hardware",
       "Help Desk",
       "ITIL",
+      "ITSM",
       "VPN",
       "Windows"
     ]
@@ -29078,7 +29989,11 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831010/estagio-em-ti-tecnologia-cotacao-de-seguro",
     "tecnologias": [
-      "Engenharia de Software"
+      "Análise de Dados",
+      "Copilots & Assistentes de IA",
+      "Engenharia de Software",
+      "Inglês",
+      "Inteligência Artificial"
     ]
   },
   {
@@ -29137,8 +30052,15 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2831066/estagio-de-engenharia-em-ti",
     "tecnologias": [
+      "Análise de Dados",
+      "Automação",
+      "Engenharia de Software",
+      "Excel",
+      "Inglês",
       "Pandas",
+      "Power BI",
       "Python",
+      "SQL",
       "Selenium",
       "Visual Basic/VBA"
     ]
@@ -29323,7 +30245,22 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-t%C3%A9cnico-jr-sap-business-one-s%C3%A3o-jos%C3%A9-dos-campos-sp-at-sps-group-4454295718",
     "tecnologias": [
-      "SAP"
+      ".NET",
+      "API REST",
+      "Banco de Dados",
+      "C#",
+      "ERP",
+      "Engenharia de Software",
+      "GLPI",
+      "Git",
+      "ITSM",
+      "Jira",
+      "Lógica de Programação",
+      "SAP",
+      "SLA",
+      "SQL",
+      "SQL Server",
+      "Zendesk"
     ]
   },
   {
@@ -29369,6 +30306,7 @@
       "Inglês",
       "Office 365",
       "Redes de Computadores",
+      "SharePoint",
       "Shell/Bash",
       "TOTVS",
       "Ubiquiti",
@@ -29755,7 +30693,12 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830852/analista-de-suporte-i",
     "tecnologias": [
-      "Hardware"
+      "Estrutura de Dados",
+      "Hardware",
+      "Manutenção Preventiva",
+      "Redes de Computadores",
+      "VoIP",
+      "Windows"
     ]
   },
   {
@@ -29852,6 +30795,7 @@
       "Hardware",
       "Office 365",
       "Redes de Computadores",
+      "SharePoint",
       "Windows",
       "Windows Server"
     ]
@@ -29890,7 +30834,13 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/flutter-developer-j%C3%BAnior-h%C3%ADbrido-poa-at-kobe-apps-4454407654",
     "tecnologias": [
-      "Flutter"
+      "Dart",
+      "Design Patterns",
+      "Engenharia de Software",
+      "Flutter",
+      "Metodologias Ágeis",
+      "Scrum",
+      "Testes Automatizados"
     ]
   },
   {
@@ -29995,6 +30945,7 @@
       "Cisco",
       "Estrutura de Dados",
       "Hardware",
+      "ITSM",
       "Linux",
       "Redes de Computadores",
       "SLA",
@@ -30055,6 +31006,7 @@
       "Hardware",
       "Help Desk",
       "ITIL",
+      "ITSM",
       "Inglês",
       "Manutenção Preventiva",
       "Office 365",
@@ -30081,8 +31033,10 @@
     "tecnologias": [
       "Active Directory",
       "ITIL",
+      "ITSM",
       "Manutenção Preventiva",
       "Office 365",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -30100,7 +31054,15 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-infraestrutura-jr-azure-at-stefanini-brasil-4455368644",
     "tecnologias": [
-      "Azure"
+      "Active Directory",
+      "Azure",
+      "Backup",
+      "ITIL",
+      "Inteligência Artificial",
+      "Redes de Computadores",
+      "VPN",
+      "Windows",
+      "Windows Server"
     ]
   },
   {
@@ -30166,8 +31128,19 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/pessoa-desenvolvedora-de-agentes-de-ia-j%C3%BAnior-at-share-people-hub-vagas-4454404675",
     "tecnologias": [
+      "API REST",
       "Agentes de IA & RAG",
-      "Inteligência Artificial"
+      "Banco de Dados",
+      "Docker",
+      "Estrutura de Dados",
+      "Git",
+      "Inteligência Artificial",
+      "Jira",
+      "LLMs & IA Generativa",
+      "Lógica de Programação",
+      "Metodologias Ágeis",
+      "Python",
+      "SQL"
     ]
   },
   {
@@ -30207,6 +31180,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-salesforce-j%C3%BAnior-recife-at-deloitte-4409112622",
     "tecnologias": [
+      "Apex",
+      "Git",
       "Salesforce"
     ]
   },
@@ -30224,7 +31199,17 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-de-firmware-junior-at-diel-energia-4455343347",
     "tecnologias": [
-      "Firmware"
+      "C++",
+      "Eletrônica",
+      "Firmware",
+      "Git",
+      "Hardware",
+      "Inteligência Artificial",
+      "IoT",
+      "Metodologias Ágeis",
+      "Microcontroladores",
+      "Scrum",
+      "Sistemas Embarcados"
     ]
   },
   {
@@ -30491,6 +31476,7 @@
       "Inglês",
       "Office 365",
       "Redes de Computadores",
+      "SharePoint",
       "Shell/Bash",
       "TOTVS",
       "Ubiquiti",
@@ -30531,6 +31517,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830763/analista-de-pos-vendas-junior-suporte-ao-produto",
     "tecnologias": [
+      "Espanhol",
       "Inglês"
     ]
   },
@@ -30663,6 +31650,7 @@
       "Inteligência Artificial",
       "Jira",
       "LLMs & IA Generativa",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -30870,6 +31858,7 @@
       "Active Directory",
       "GLPI",
       "IAM",
+      "ITSM",
       "Jira",
       "SLA",
       "Suporte N1/N2"
@@ -31050,7 +32039,8 @@
       "Go",
       "Inglês",
       "Inteligência Artificial",
-      "Office 365"
+      "Office 365",
+      "SharePoint"
     ]
   },
   {
@@ -31127,6 +32117,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-porto-alegre-e-regi%C3%A3o-at-seprol-computadores-e-sistemas-4454836310",
     "tecnologias": [
+      "Hardware",
+      "ITIL",
+      "Redes de Computadores",
       "Suporte N1/N2"
     ]
   },
@@ -31187,7 +32180,29 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-salesforce-jr-at-brq-digital-solutions-4440360078",
     "tecnologias": [
-      "Salesforce"
+      "API REST",
+      "Apex",
+      "Azure",
+      "C#",
+      "CI/CD",
+      "Clean Code",
+      "Design Patterns",
+      "Engenharia de Software",
+      "Git",
+      "Inteligência Artificial",
+      "Java",
+      "JavaScript",
+      "Jenkins",
+      "LLMs & IA Generativa",
+      "Lógica de Programação",
+      "Microserviços",
+      "Node.js",
+      "POO",
+      "Python",
+      "SOLID",
+      "Salesforce",
+      "Testes Automatizados",
+      "TypeScript"
     ]
   },
   {
@@ -31258,6 +32273,7 @@
       "ERP",
       "Espanhol",
       "ITIL",
+      "ITSM",
       "Inglês",
       "SLA",
       "SQL",
@@ -31326,11 +32342,13 @@
       "Active Directory",
       "Excel",
       "GLPI",
+      "ITSM",
       "Office 365",
       "Redes de Computadores",
       "SLA",
       "Service Desk",
       "Shell/Bash",
+      "Suporte Remoto",
       "VPN",
       "Windows"
     ]
@@ -31628,6 +32646,7 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-t%C3%A9cnico-n1-n2-pleno-juatuba-mg-at-stefanini-brasil-4454540316",
     "tecnologias": [
       "Excel",
+      "ITSM",
       "Inteligência Artificial",
       "Montagem e Manutenção de PCs",
       "Office 365"
@@ -31702,6 +32721,7 @@
     "tecnologias": [
       "Cisco",
       "Excel",
+      "ITSM",
       "Redes de Computadores"
     ]
   },
@@ -31767,8 +32787,26 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvimento-java-aws-junior-pleno-h%C3%ADbrido-s%C3%A3o-paulo-133713-at-gft-technologies-4451261799",
     "tecnologias": [
+      "API REST",
       "AWS",
-      "Java"
+      "AWS SQS",
+      "Banco de Dados",
+      "CI/CD",
+      "Datadog",
+      "Docker",
+      "Git",
+      "Java",
+      "Kafka",
+      "Kotlin",
+      "Kubernetes",
+      "Metodologias Ágeis",
+      "Microserviços",
+      "Oracle",
+      "PostgreSQL",
+      "RabbitMQ",
+      "Scrum",
+      "SonarQube",
+      "Spring"
     ]
   },
   {
@@ -31852,8 +32890,17 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830534/assistente-de-infraestrutura-de-ti",
     "tecnologias": [
+      "Active Directory",
+      "Backup",
+      "Firewall",
+      "GLPI",
+      "Grafana",
+      "Help Desk",
+      "Office 365",
+      "Redes de Computadores",
       "Windows",
-      "Windows Server"
+      "Windows Server",
+      "Zabbix"
     ]
   },
   {
@@ -32084,12 +33131,14 @@
     "tecnologias": [
       "Excel",
       "Hardware",
+      "ITSM",
       "Manutenção Preventiva",
       "Montagem e Manutenção de PCs",
       "Office 365",
       "Redes de Computadores",
       "SLA",
       "Shell/Bash",
+      "Suporte Remoto",
       "VPN",
       "Windows"
     ]
@@ -32172,6 +33221,7 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-ti-jr-at-letha-ind%C3%BAstria-e-comercio-ltda-4451270023",
     "tecnologias": [
       "Hardware",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -32284,8 +33334,21 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-engenharia-de-software-e-ia-at-sanar-4453757283",
     "tecnologias": [
+      "AWS",
+      "Airflow",
+      "Copilots & Assistentes de IA",
+      "Data Lake",
       "Engenharia de Software",
-      "Inteligência Artificial"
+      "Git",
+      "Inteligência Artificial",
+      "JavaScript",
+      "LLMs & IA Generativa",
+      "Lógica de Programação",
+      "Node.js",
+      "Python",
+      "React",
+      "SQL",
+      "TypeScript"
     ]
   },
   {
@@ -32302,7 +33365,15 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830594/estagiario-em-desenvolvimento-de-software",
     "tecnologias": [
-      "ERP"
+      "Banco de Dados",
+      "Confluence",
+      "ERP",
+      "Inglês",
+      "Jira",
+      "Lógica de Programação",
+      "Metodologias Ágeis",
+      "Oracle",
+      "SQL"
     ]
   },
   {
@@ -32398,7 +33469,8 @@
       "Power BI",
       "Python",
       "RPA",
-      "SQL"
+      "SQL",
+      "SharePoint"
     ]
   },
   {
@@ -32454,6 +33526,7 @@
       "Hardware",
       "Help Desk",
       "Montagem e Manutenção de PCs",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -32661,6 +33734,7 @@
     "tecnologias": [
       "Grafana",
       "ITIL",
+      "ITSM",
       "Inglês",
       "Linux",
       "Oracle",
@@ -32758,7 +33832,17 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-business-intelligence-at-metlife-4450012766",
     "tecnologias": [
-      "BI"
+      "Análise de Dados",
+      "Automação",
+      "BI",
+      "Estatística",
+      "Excel",
+      "Inglês",
+      "Inteligência Artificial",
+      "Power BI",
+      "Python",
+      "RPA",
+      "SQL"
     ]
   },
   {
@@ -33084,6 +34168,7 @@
     "url": "https://br.linkedin.com/jobs/view/qa-j%C3%BAnior-servicenow-spm-at-capgemini-4454012313",
     "tecnologias": [
       "Certificações Ágeis",
+      "ITSM",
       "JavaScript",
       "Modelagem de Dados",
       "Testes Automatizados",
@@ -33334,6 +34419,7 @@
       "Inglês",
       "Lógica de Programação",
       "Montagem e Manutenção de PCs",
+      "Suporte Remoto",
       "TOTVS",
       "Visual Basic/VBA",
       "Windows",
@@ -33376,7 +34462,9 @@
     "tecnologias": [
       "Active Directory",
       "Hardware",
-      "Office 365"
+      "ITSM",
+      "Office 365",
+      "Suporte Remoto"
     ]
   },
   {
@@ -33482,7 +34570,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-desenvolvedor-jr-flutter-at-evo-systems-4454044477",
     "tecnologias": [
-      "Flutter"
+      "Banco de Dados",
+      "Flutter",
+      "Git",
+      "PostgreSQL"
     ]
   },
   {
@@ -33895,6 +34986,7 @@
       "Retool",
       "SQL",
       "Selenium",
+      "SharePoint",
       "Supabase"
     ]
   },
@@ -33986,7 +35078,8 @@
     "tecnologias": [
       "ERP",
       "Help Desk",
-      "SQL"
+      "SQL",
+      "Suporte Remoto"
     ]
   },
   {
@@ -34152,6 +35245,7 @@
       "Python",
       "SAP",
       "SQL",
+      "Suporte Remoto",
       "TOTVS",
       "Windows"
     ]
@@ -34327,6 +35421,7 @@
       "Hardware",
       "Help Desk",
       "ITIL",
+      "ITSM",
       "Linux",
       "Montagem e Manutenção de PCs",
       "Office 365",
@@ -34388,7 +35483,8 @@
       "Power BI",
       "Python",
       "RPA",
-      "SQL"
+      "SQL",
+      "SharePoint"
     ]
   },
   {
@@ -34464,6 +35560,8 @@
       "Office 365",
       "Redes de Computadores",
       "Service Desk",
+      "SharePoint",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -34484,6 +35582,7 @@
       "Eletrônica",
       "Hardware",
       "ITIL",
+      "ITSM",
       "Redes de Computadores",
       "Windows"
     ]
@@ -34651,8 +35750,16 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-de-desenvolvimento-full-stack-java-%2B-angular-at-framework-digital-4453147427",
     "tecnologias": [
+      "API REST",
       "Angular",
-      "Java"
+      "Banco de Dados",
+      "Engenharia de Software",
+      "Git",
+      "Java",
+      "Lógica de Programação",
+      "POO",
+      "SQL",
+      "Spring"
     ]
   },
   {
@@ -34686,6 +35793,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2830028/programa-de-estagio-2026-ti-sap-administracao-ciencias-da-computacao",
     "tecnologias": [
+      "Estrutura de Dados",
       "SAP"
     ]
   },
@@ -34788,7 +35896,9 @@
       "CRM",
       "Excel",
       "Hardware",
+      "ITSM",
       "SLA",
+      "Suporte Remoto",
       "VPN",
       "Windows",
       "Word"
@@ -34826,6 +35936,7 @@
       "Cibersegurança",
       "Cisco",
       "Hardware",
+      "ITSM",
       "Linux",
       "Python",
       "Redes de Computadores",
@@ -35012,6 +36123,7 @@
       "Active Directory",
       "Excel",
       "Hardware",
+      "ITSM",
       "Office 365",
       "SLA",
       "Windows"
@@ -35036,6 +36148,7 @@
       "Linux",
       "Office 365",
       "SLA",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -35089,7 +36202,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-seguran%C3%A7a-soc-j%C3%BAnior-at-ctc-4451977355",
     "tecnologias": [
-      "SIEM/SOC"
+      "Cibersegurança",
+      "SIEM/SOC",
+      "Windows"
     ]
   },
   {
@@ -35177,7 +36292,12 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-business-intelligence-sp-at-cescon-barrieu-flesch-barreto-advogados-4451981077",
     "tecnologias": [
-      "BI"
+      "Análise de Dados",
+      "BI",
+      "Estatística",
+      "Excel",
+      "Power BI",
+      "SQL"
     ]
   },
   {
@@ -35317,7 +36437,15 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-desenvolvedor-jr-net-at-evo-systems-4452683442",
     "tecnologias": [
-      ".NET"
+      ".NET",
+      "AWS",
+      "Angular",
+      "Azure",
+      "Banco de Dados",
+      "Git",
+      "Metodologias Ágeis",
+      "Scrum",
+      "Testes Automatizados"
     ]
   },
   {
@@ -35334,7 +36462,13 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-em-ti-foco-service-desk-at-tp-group-4451961697",
     "tecnologias": [
-      "Service Desk"
+      "Hardware",
+      "LGPD",
+      "Office 365",
+      "Redes de Computadores",
+      "Service Desk",
+      "Suporte Remoto",
+      "Windows"
     ]
   },
   {
@@ -35522,7 +36656,21 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2824782/desenvolvedor-de-software-jr",
     "tecnologias": [
-      "Git"
+      ".NET",
+      "Automação",
+      "C#",
+      "Flutter",
+      "Git",
+      "Inglês",
+      "Inteligência Artificial",
+      "Java",
+      "JavaScript",
+      "Metodologias Ágeis",
+      "Node.js",
+      "Python",
+      "React",
+      "Scrum",
+      "Spring"
     ]
   },
   {
@@ -35861,7 +37009,8 @@
     "url": "https://br.linkedin.com/jobs/view/28418-pessoa-estagi%C3%A1ria-em-suporte-t%C3%A9cnico-seguran%C3%A7a-eletr%C3%B4nica-at-intelbras-4451464487",
     "tecnologias": [
       "CFTV",
-      "Eletrônica"
+      "Eletrônica",
+      "Redes de Computadores"
     ]
   },
   {
@@ -35981,6 +37130,7 @@
       "Hardware",
       "ISO 27001",
       "ITIL",
+      "ITSM",
       "LLMs & IA Generativa",
       "Redes de Computadores",
       "SLA",
@@ -36063,8 +37213,12 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2826092/estagio-tecnico-em-eletronica",
     "tecnologias": [
+      "Automação Industrial",
       "Banco de Dados",
-      "Eletrônica"
+      "Eletrônica",
+      "Estrutura de Dados",
+      "Inglês",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -36275,6 +37429,7 @@
       "Montagem e Manutenção de PCs",
       "Office 365",
       "Redes de Computadores",
+      "SharePoint",
       "Windows",
       "Windows Server"
     ]
@@ -36339,6 +37494,7 @@
       "Linux",
       "Montagem e Manutenção de PCs",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows",
       "Word"
     ]
@@ -36392,7 +37548,15 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2829673/desenvolvedor-de-solucoes-jr-rpa",
     "tecnologias": [
-      "RPA"
+      "API REST",
+      "Análise de Dados",
+      "Automação",
+      "Banco de Dados",
+      "Oracle",
+      "PostgreSQL",
+      "RPA",
+      "SQL",
+      "SQL Server"
     ]
   },
   {
@@ -36412,6 +37576,7 @@
       "Banco de Dados",
       "ERP",
       "Excel",
+      "Suporte Remoto",
       "TOTVS"
     ]
   },
@@ -36617,7 +37782,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-governan%C3%A7a-em-cybersecurity-jr-at-celcoin-4460686424",
     "tecnologias": [
-      "Cibersegurança"
+      "Cibersegurança",
+      "Governança e Riscos (GRC)",
+      "ISO 27001",
+      "LGPD"
     ]
   },
   {
@@ -36680,6 +37848,7 @@
       "Criptografia",
       "Estrutura de Dados",
       "Firewall",
+      "ITSM",
       "Linux",
       "Redes de Computadores",
       "SLA",
@@ -36986,7 +38155,8 @@
     "tecnologias": [
       "Análise de Dados",
       "Confluence",
-      "Jira"
+      "Jira",
+      "SharePoint"
     ]
   },
   {
@@ -37177,6 +38347,7 @@
       "Linux",
       "SLA",
       "Service Desk",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -37194,8 +38365,16 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/tech-analista-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-j%C3%BAnior-siem-elastic-search-at-totvs-4449216063",
     "tecnologias": [
+      "Cibersegurança",
       "Elasticsearch",
-      "SIEM/SOC"
+      "Gestão de Vulnerabilidades",
+      "Linux",
+      "Python",
+      "Redes de Computadores",
+      "SIEM/SOC",
+      "Shell/Bash",
+      "TOTVS",
+      "UML"
     ]
   },
   {
@@ -37250,6 +38429,9 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2829498/tecnico-de-informatica-n1-cajamar",
     "tecnologias": [
+      "Automação Industrial",
+      "Backup",
+      "Hardware",
       "Help Desk"
     ]
   },
@@ -37385,6 +38567,7 @@
       "Linux",
       "SLA",
       "Service Desk",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -37528,7 +38711,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/rocha-neto-consultoria-em-tecnologia-analista-de-suporte-n1-j%C3%BAnior-at-cdl-uberl%C3%A2ndia-4450783865",
     "tecnologias": [
-      "Suporte N1/N2"
+      "Hardware",
+      "Montagem e Manutenção de PCs",
+      "Suporte N1/N2",
+      "Windows"
     ]
   },
   {
@@ -37595,7 +38781,9 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2829382/tecnico-de-automacao-junior-shopping-cidade-jardim",
     "tecnologias": [
-      "CFTV"
+      "CFTV",
+      "Eletrônica",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -37715,12 +38903,14 @@
       "Hardware",
       "Help Desk",
       "ITIL",
+      "ITSM",
       "Inglês",
       "Manutenção Preventiva",
       "Montagem e Manutenção de PCs",
       "Office 365",
       "Redes de Computadores",
       "SLA",
+      "SharePoint",
       "Shell/Bash"
     ]
   },
@@ -38164,6 +39354,7 @@
       "GLPI",
       "Gestão de Vulnerabilidades",
       "ISO 27001",
+      "ITSM",
       "Inglês",
       "LGPD",
       "Linux",
@@ -38195,6 +39386,7 @@
       "Governança e Riscos (GRC)",
       "IAM",
       "ISO 27001",
+      "ITSM",
       "Inglês",
       "LGPD",
       "Office 365",
@@ -38238,6 +39430,7 @@
       "Firewall",
       "Office 365",
       "Redes de Computadores",
+      "SharePoint",
       "VoIP",
       "Windows"
     ]
@@ -38380,6 +39573,7 @@
     "url": "https://br.linkedin.com/jobs/view/assistente-de-ti-at-gertec-4448441371",
     "tecnologias": [
       "Hardware",
+      "ITSM",
       "Redes de Computadores"
     ]
   },
@@ -38499,6 +39693,7 @@
     "url": "https://sbsc.gupy.io/job/eyJqb2JJZCI6MTE5NzM2NjgsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
       "ERP",
+      "Microsoft Teams",
       "SQL",
       "TOTVS"
     ]
@@ -38593,7 +39788,23 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-sistemas-j%C3%BAnior-com-ia-at-metrofile-brasil-gest%C3%A3o-da-informa%C3%A7%C3%A3o-4449979473",
     "tecnologias": [
-      "Inteligência Artificial"
+      ".NET",
+      "API REST",
+      "Banco de Dados",
+      "Copilots & Assistentes de IA",
+      "Engenharia de Software",
+      "GLPI",
+      "Git",
+      "Inteligência Artificial",
+      "LLMs & IA Generativa",
+      "Manutenção Preventiva",
+      "Oracle",
+      "PL/SQL",
+      "Python",
+      "SQL",
+      "Shell/Bash",
+      "T-SQL",
+      "Visual Basic/VBA"
     ]
   },
   {
@@ -38682,6 +39893,7 @@
       "Espanhol",
       "GCP",
       "ITIL",
+      "ITSM",
       "Inglês",
       "Inteligência Artificial",
       "Kubernetes",
@@ -38744,6 +39956,7 @@
       "Office 365",
       "Redes de Computadores",
       "SLA",
+      "SharePoint",
       "Windows",
       "Windows Server",
       "Zabbix"
@@ -38839,12 +40052,14 @@
       "Hardware",
       "Help Desk",
       "ITIL",
+      "ITSM",
       "Inglês",
       "Manutenção Preventiva",
       "Montagem e Manutenção de PCs",
       "Office 365",
       "Redes de Computadores",
       "SLA",
+      "SharePoint",
       "Shell/Bash"
     ]
   },
@@ -39003,10 +40218,12 @@
       "Azure",
       "Hardware",
       "ITIL",
+      "ITSM",
       "Linux",
       "Office 365",
       "SLA",
       "Service Desk",
+      "Suporte Remoto",
       "VPN",
       "Windows"
     ]
@@ -39029,10 +40246,12 @@
       "Azure",
       "Hardware",
       "ITIL",
+      "ITSM",
       "Linux",
       "Office 365",
       "SLA",
       "Service Desk",
+      "Suporte Remoto",
       "VPN",
       "Windows"
     ]
@@ -39098,6 +40317,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-thema-inform%C3%A1tica-an%C3%A1lise-relat%C3%B3rios-sql-at-pucrs-carreiras-4449136399",
     "tecnologias": [
+      "Engenharia de Software",
       "SQL"
     ]
   },
@@ -39215,6 +40435,7 @@
       "Espanhol",
       "GCP",
       "ITIL",
+      "ITSM",
       "Inglês",
       "Inteligência Artificial",
       "Kubernetes",
@@ -39386,7 +40607,13 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/service-desk-junior-analyst-at-lenovo-4449130978",
     "tecnologias": [
-      "Service Desk"
+      "Hardware",
+      "Help Desk",
+      "ITIL",
+      "ITSM",
+      "Next.js",
+      "Service Desk",
+      "Windows"
     ]
   },
   {
@@ -39514,7 +40741,17 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-full-stack-java-j%C3%BAnior-at-elotech-gest%C3%A3o-p%C3%BAblica-4448038315",
     "tecnologias": [
-      "Java"
+      "Banco de Dados",
+      "Git",
+      "HTML",
+      "Hibernate",
+      "Java",
+      "JavaScript",
+      "Metodologias Ágeis",
+      "PostgreSQL",
+      "Spring",
+      "Testes Automatizados",
+      "TypeScript"
     ]
   },
   {
@@ -39647,7 +40884,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-automa%C3%A7%C3%A3o-industrial-ci%C3%AAncia-da-computa%C3%A7%C3%A3o-ci%C3%AAncia-da-informa%C3%A7%C3%A3o-at-iel-sc-4448534547",
     "tecnologias": [
-      "Automação Industrial"
+      "Automação Industrial",
+      "Node.js"
     ]
   },
   {
@@ -39696,6 +40934,7 @@
       "Banco de Dados",
       "Estrutura de Dados",
       "Git",
+      "ITSM",
       "Inglês",
       "JavaScript",
       "UX/UI"
@@ -39715,7 +40954,8 @@
     "fonte": "solides",
     "url": "https://vagas.solides.com.br/vaga/897297/tecnico-de-suporte-em-ti",
     "tecnologias": [
-      "Redes de Computadores"
+      "Redes de Computadores",
+      "Suporte Remoto"
     ]
   },
   {
@@ -39941,6 +41181,7 @@
       "ERP",
       "Espanhol",
       "ITIL",
+      "ITSM",
       "SLA",
       "SQL",
       "Service Desk",
@@ -40008,6 +41249,7 @@
       "Azure",
       "GCP",
       "IAM",
+      "ITSM",
       "OAuth/JWT",
       "OCI",
       "Oracle",
@@ -40078,6 +41320,7 @@
       "Montagem e Manutenção de PCs",
       "Redes de Computadores",
       "Shell/Bash",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -40405,6 +41648,7 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2828792/estagiario-a-de-engenharia-barra-da-tijuca-rj",
     "tecnologias": [
+      "Banco de Dados",
       "Excel",
       "Inglês"
     ]
@@ -40484,7 +41728,8 @@
       "Office 365",
       "POO",
       "SQL",
-      "Scrum"
+      "Scrum",
+      "SharePoint"
     ]
   },
   {
@@ -40502,6 +41747,7 @@
     "url": "https://br.linkedin.com/jobs/view/analista-sistemas-jr-at-cofco-international-4448516160",
     "tecnologias": [
       "Banco de Dados",
+      "ITSM",
       "Inglês",
       "Oracle",
       "SLA",
@@ -40994,7 +42240,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1giario-a-de-service-desk-at-sgi-4446269065",
     "tecnologias": [
-      "Service Desk"
+      "ERP",
+      "ITIL",
+      "Inteligência Artificial",
+      "Service Desk",
+      "Suporte N1/N2"
     ]
   },
   {
@@ -41033,9 +42283,11 @@
     "tecnologias": [
       "Antivírus",
       "Hardware",
+      "ITSM",
       "Linux",
       "Montagem e Manutenção de PCs",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -41112,9 +42364,11 @@
     "tecnologias": [
       "Antivírus",
       "Hardware",
+      "ITSM",
       "Linux",
       "Montagem e Manutenção de PCs",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -41569,6 +42823,9 @@
       "Análise de Dados",
       "Banco de Dados",
       "Estatística",
+      "Excel",
+      "Inglês",
+      "Machine Learning",
       "Python",
       "SQL"
     ]
@@ -41651,6 +42908,7 @@
       "Office 365",
       "Redes de Computadores",
       "Service Desk",
+      "Suporte Remoto",
       "Windows",
       "Windows Server"
     ]
@@ -41684,7 +42942,28 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-j%C3%BAnior-automa%C3%A7%C3%A3o-e-ia-para-opera%C3%A7%C3%B5es-at-true-4458021646",
     "tecnologias": [
-      "Inteligência Artificial"
+      "API REST",
+      "Análise de Dados",
+      "BI",
+      "Banco de Dados",
+      "Clean Code",
+      "Copilots & Assistentes de IA",
+      "Engenharia de Software",
+      "Estatística",
+      "Excel",
+      "Git",
+      "Inteligência Artificial",
+      "JavaScript",
+      "LLMs & IA Generativa",
+      "Looker",
+      "Lógica de Programação",
+      "MySQL",
+      "PostgreSQL",
+      "Power BI",
+      "Python",
+      "SOLID",
+      "SQL",
+      "TypeScript"
     ]
   },
   {
@@ -41961,6 +43240,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/jovem-aprendiz-service-desk-at-funcional-health-tech-4445590573",
     "tecnologias": [
+      "Hardware",
+      "ITSM",
+      "Redes de Computadores",
       "Service Desk"
     ]
   },
@@ -42054,7 +43336,8 @@
     "fonte": "solides",
     "url": "https://vagas.solides.com.br/vaga/895431/atendente-cubatao-sp",
     "tecnologias": [
-      "Redes de Computadores"
+      "Redes de Computadores",
+      "Suporte Remoto"
     ]
   },
   {
@@ -42197,7 +43480,17 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/software-engineer-j%C3%BAnior-ia-integra%C3%A7%C3%B5es-at-planetaexo-4457617513",
     "tecnologias": [
-      "Inteligência Artificial"
+      "API REST",
+      "Banco de Dados",
+      "Copilots & Assistentes de IA",
+      "Git",
+      "Inglês",
+      "Inteligência Artificial",
+      "JavaScript",
+      "LLMs & IA Generativa",
+      "Lógica de Programação",
+      "Python",
+      "TypeScript"
     ]
   },
   {
@@ -42651,6 +43944,7 @@
       "Eletrônica",
       "Hardware",
       "ITIL",
+      "ITSM",
       "Redes de Computadores",
       "Windows"
     ]
@@ -42697,6 +43991,7 @@
       "Git",
       "HTML",
       "ITIL",
+      "ITSM",
       "Inteligência Artificial",
       "JavaScript",
       "Jira",
@@ -43005,6 +44300,7 @@
     "tecnologias": [
       "Hardware",
       "ITIL",
+      "ITSM",
       "Inglês",
       "Montagem e Manutenção de PCs",
       "Windows"
@@ -43106,6 +44402,7 @@
       "Eletrônica",
       "Hardware",
       "ITIL",
+      "ITSM",
       "Inglês",
       "LGPD",
       "Linux",
@@ -43264,6 +44561,7 @@
       "Montagem e Manutenção de PCs",
       "Office 365",
       "Redes de Computadores",
+      "Suporte Remoto",
       "VPN",
       "Windows"
     ]
@@ -43519,7 +44817,12 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-desenvolvimento-foco-em-intelig%C3%AAncia-artificial-at-servfaz-servi%C3%A7os-de-mao-de-obra-ltda-4446936049",
     "tecnologias": [
-      "Inteligência Artificial"
+      "Agentes de IA & RAG",
+      "Copilots & Assistentes de IA",
+      "Engenharia de Software",
+      "Inteligência Artificial",
+      "LLMs & IA Generativa",
+      "UML"
     ]
   },
   {
@@ -43716,6 +45019,7 @@
       "Eletrônica",
       "Hardware",
       "ITIL",
+      "ITSM",
       "Redes de Computadores",
       "Windows"
     ]
@@ -43818,8 +45122,10 @@
       "ERP",
       "Hardware",
       "ITIL",
+      "ITSM",
       "Redes de Computadores",
       "SLA",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -44031,7 +45337,13 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-dados-e-intelig%C3%AAncia-artificial-aplicada-ao-jur%C3%ADdico-at-aryst%C3%B3bulo-freitas-advogados-4446824455",
     "tecnologias": [
-      "Inteligência Artificial"
+      "Agentes de IA & RAG",
+      "Excel",
+      "Inteligência Artificial",
+      "LGPD",
+      "Python",
+      "Qualidade de Dados",
+      "SQL"
     ]
   },
   {
@@ -44188,6 +45500,7 @@
       "Eletrônica",
       "Hardware",
       "ITIL",
+      "ITSM",
       "Redes de Computadores",
       "Windows"
     ]
@@ -44324,7 +45637,17 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-business-intelligence-j%C3%BAnior-at-qualificar-ti-4446524240",
     "tecnologias": [
-      "BI"
+      "Automação",
+      "BI",
+      "Banco de Dados",
+      "Figma",
+      "PostgreSQL",
+      "Power BI",
+      "Python",
+      "SQL",
+      "SQL Server",
+      "SharePoint",
+      "UX/UI"
     ]
   },
   {
@@ -44429,6 +45752,7 @@
       "Montagem e Manutenção de PCs",
       "Office 365",
       "Redes de Computadores",
+      "Suporte Remoto",
       "VPN",
       "Windows"
     ]
@@ -44527,6 +45851,7 @@
       "GLPI",
       "Help Desk",
       "ITIL",
+      "ITSM",
       "Inglês",
       "IoT",
       "Linux",
@@ -44574,10 +45899,12 @@
       "Antivírus",
       "Backup",
       "Hardware",
+      "ITSM",
       "Inglês",
       "Office 365",
       "Redes de Computadores",
       "Service Desk",
+      "SharePoint",
       "Windows"
     ]
   },
@@ -44615,6 +45942,7 @@
       "ERP",
       "Excel",
       "Hardware",
+      "Microsoft Teams",
       "Redes de Computadores",
       "SAP",
       "SLA",
@@ -44741,7 +46069,8 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2820709/analista-de-qualidade-jr",
     "tecnologias": [
-      "Análise de Dados"
+      "Análise de Dados",
+      "Excel"
     ]
   },
   {
@@ -44775,7 +46104,15 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagio-an%C3%A1lise-e-desenvolvimento-de-sistemas-ci%C3%AAncia-da-computa%C3%A7%C3%A3o-redes-de-computadores-at-iel-sc-4445787500",
     "tecnologias": [
-      "Redes de Computadores"
+      "Active Directory",
+      "Eletrônica",
+      "Hardware",
+      "Help Desk",
+      "Manutenção Preventiva",
+      "Montagem e Manutenção de PCs",
+      "Redes de Computadores",
+      "Windows",
+      "Windows Server"
     ]
   },
   {
@@ -46182,6 +47519,7 @@
       "Hardware",
       "Office 365",
       "Redes de Computadores",
+      "Suporte Remoto",
       "VPN",
       "Windows"
     ]
@@ -46258,6 +47596,7 @@
       "LGPD",
       "Linux",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -46345,6 +47684,7 @@
       "Office 365",
       "Redes de Computadores",
       "Service Desk",
+      "Suporte Remoto",
       "Windows",
       "Word"
     ]
@@ -46435,6 +47775,7 @@
       "Redes de Computadores",
       "SLA",
       "Suporte N1/N2",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -46511,7 +47852,8 @@
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-na-%C3%A1rea-de-inform%C3%A1tica-at-cpet-centro-de-profissionaliza%C3%A7%C3%A3o-e-educa%C3%A7%C3%A3o-t%C3%A9cnica-4444997910",
     "tecnologias": [
       "Montagem e Manutenção de PCs",
-      "Redes de Computadores"
+      "Redes de Computadores",
+      "Suporte Remoto"
     ]
   },
   {
@@ -46646,6 +47988,7 @@
       "Hardware",
       "ITIL",
       "SLA",
+      "Suporte Remoto",
       "Word"
     ]
   },
@@ -46931,10 +48274,12 @@
       "Excel",
       "Firewall",
       "ITIL",
+      "ITSM",
       "Inglês",
       "Office 365",
       "Redes de Computadores",
       "SLA",
+      "SharePoint",
       "VPN",
       "Zabbix"
     ]
@@ -47206,6 +48551,7 @@
       "Active Directory",
       "Hardware",
       "ITIL",
+      "ITSM",
       "Manutenção Preventiva",
       "Office 365",
       "Redes de Computadores",
@@ -47372,6 +48718,8 @@
       "Redes de Computadores",
       "SLA",
       "SQL",
+      "SharePoint",
+      "Suporte Remoto",
       "VPN",
       "Windows"
     ]
@@ -47447,6 +48795,7 @@
       "Active Directory",
       "Hardware",
       "ITIL",
+      "ITSM",
       "Manutenção Preventiva",
       "Office 365",
       "Redes de Computadores",
@@ -47468,7 +48817,13 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-an%C3%A1lise-de-dados-programa%C3%A7%C3%A3o-desenvolvimento-at-evosolar-cabo-frio-4444291692",
     "tecnologias": [
-      "Análise de Dados"
+      "Análise de Dados",
+      "Banco de Dados",
+      "CRM",
+      "Estatística",
+      "Estrutura de Dados",
+      "Python",
+      "SQL"
     ]
   },
   {
@@ -47888,7 +49243,12 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-business-intelligence-jr-at-simpress-4441578229",
     "tecnologias": [
-      "BI"
+      "Automação",
+      "BI",
+      "Modelagem de Dados",
+      "Power BI",
+      "Python",
+      "SQL"
     ]
   },
   {
@@ -47905,6 +49265,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-php-vue-j%C3%BAnior-at-jobbol-4444726131",
     "tecnologias": [
+      "API REST",
+      "MySQL",
       "PHP",
       "Vue.js"
     ]
@@ -47972,7 +49334,8 @@
     "fonte": "solides",
     "url": "https://vagas.solides.com.br/vaga/889806/assistente-de-suporte-e-implantacao-junior-sistema-de-educacao-perfil-tecnologia",
     "tecnologias": [
-      "ERP"
+      "ERP",
+      "Suporte Remoto"
     ]
   },
   {
@@ -48937,6 +50300,7 @@
       "Help Desk",
       "Manutenção Preventiva",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -49201,6 +50565,7 @@
       "Hardware",
       "Linux",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -49220,7 +50585,9 @@
     "tecnologias": [
       "Automação",
       "Inteligência Artificial",
-      "Jira"
+      "Jira",
+      "Microsoft Teams",
+      "SharePoint"
     ]
   },
   {
@@ -49343,7 +50710,8 @@
     "tecnologias": [
       "ERP",
       "Help Desk",
-      "SLA"
+      "SLA",
+      "Suporte Remoto"
     ]
   },
   {
@@ -49617,7 +50985,24 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-de-desenvolvimento-de-firmware-at-instituto-hardware-br-hbr-4442412190",
     "tecnologias": [
-      "Firmware"
+      "Algoritmos",
+      "Automação Industrial",
+      "Banco de Dados",
+      "C++",
+      "CSS",
+      "Eletrônica",
+      "Firmware",
+      "Git",
+      "HTML",
+      "Inteligência Artificial",
+      "JavaScript",
+      "Linux",
+      "Microcontroladores",
+      "PostgreSQL",
+      "Python",
+      "SQLite",
+      "Sistemas Embarcados",
+      "Testes Automatizados"
     ]
   },
   {
@@ -49739,6 +51124,7 @@
       "Manutenção Preventiva",
       "Montagem e Manutenção de PCs",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -49777,6 +51163,7 @@
     "fonte": "solides",
     "url": "https://vagas.solides.com.br/vaga/887073/analista-de-triagem-e-contencao-de-incidentes-jr-cooperado",
     "tecnologias": [
+      "ITSM",
       "Linux",
       "OWASP",
       "Redes de Computadores",
@@ -49809,6 +51196,7 @@
       "Linux",
       "Office 365",
       "Redes de Computadores",
+      "SharePoint",
       "VMware",
       "VPN",
       "Windows",
@@ -49847,7 +51235,9 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-ciberseguran%C3%A7a-at-wl-tech-4441984743",
     "tecnologias": [
-      "Cibersegurança"
+      "Cibersegurança",
+      "Linux",
+      "Windows"
     ]
   },
   {
@@ -50119,6 +51509,7 @@
     "tecnologias": [
       "Hardware",
       "ITIL",
+      "ITSM",
       "Inglês",
       "Montagem e Manutenção de PCs",
       "Windows"
@@ -50276,6 +51667,7 @@
       "Office 365",
       "Redes de Computadores",
       "SLA",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -51039,7 +52431,8 @@
     "fonte": "vagas",
     "url": "https://www.vagas.com.br/vagas/v2825733/analista-de-orcamentos-junior",
     "tecnologias": [
-      "Banco de Dados"
+      "Banco de Dados",
+      "Excel"
     ]
   },
   {
@@ -51094,7 +52487,9 @@
     "data_publicacao": "15/07/2026",
     "fonte": "solides",
     "url": "https://vagas.solides.com.br/vaga/886634/analista-de-suporte-externo-n1",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte Remoto"
+    ]
   },
   {
     "id": 2577,
@@ -51293,11 +52688,13 @@
       "Hardware",
       "IAM",
       "ITIL",
+      "ITSM",
       "LGPD",
       "Office 365",
       "Redes de Computadores",
       "SLA",
       "Service Desk",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -51330,7 +52727,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-infraestrutura-linux-jr-at-redix-4438423722",
     "tecnologias": [
-      "Linux"
+      "Linux",
+      "Redes de Computadores",
+      "Service Desk",
+      "Windows",
+      "Windows Server"
     ]
   },
   {
@@ -51667,7 +53068,21 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-j%C3%BAnior-automa%C3%A7%C3%A3o-ia-e-dados-at-growdev-4440254413",
     "tecnologias": [
-      "Inteligência Artificial"
+      "API REST",
+      "AWS",
+      "Agentes de IA & RAG",
+      "Análise de Dados",
+      "Automação",
+      "Azure",
+      "ETL",
+      "GCP",
+      "Git",
+      "Inteligência Artificial",
+      "JavaScript",
+      "LLMs & IA Generativa",
+      "Lógica de Programação",
+      "Python",
+      "SQL"
     ]
   },
   {
@@ -51745,6 +53160,7 @@
       "Office 365",
       "Redes de Computadores",
       "SLA",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -51784,7 +53200,9 @@
     "data_publicacao": "14/07/2026",
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-inform%C3%A1tica-at-cpet-centro-de-profissionaliza%C3%A7%C3%A3o-e-educa%C3%A7%C3%A3o-t%C3%A9cnica-4441230088",
-    "tecnologias": []
+    "tecnologias": [
+      "Suporte Remoto"
+    ]
   },
   {
     "id": 2384,
@@ -52137,6 +53555,7 @@
       "LLMs & IA Generativa",
       "Linux",
       "Redes de Computadores",
+      "Suporte Remoto",
       "VPN",
       "Windows"
     ]
@@ -52197,7 +53616,9 @@
     "tecnologias": [
       "Active Directory",
       "Hardware",
-      "Office 365"
+      "ITSM",
+      "Office 365",
+      "Suporte Remoto"
     ]
   },
   {
@@ -52410,6 +53831,8 @@
       "Help Desk",
       "Office 365",
       "Redes de Computadores",
+      "SharePoint",
+      "Suporte Remoto",
       "VoIP"
     ]
   },
@@ -52558,7 +53981,8 @@
     "tecnologias": [
       "CRM",
       "Montagem e Manutenção de PCs",
-      "Redes de Computadores"
+      "Redes de Computadores",
+      "Suporte Remoto"
     ]
   },
   {
@@ -52596,7 +54020,8 @@
     "fonte": "gupy",
     "url": "https://voke.gupy.io/job/eyJqb2JJZCI6MTE0NTA0MDUsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
-      "Backup"
+      "Backup",
+      "ITSM"
     ]
   },
   {
@@ -52658,6 +54083,7 @@
       "Análise de Dados",
       "Excel",
       "ITIL",
+      "ITSM",
       "LLMs & IA Generativa",
       "Metodologias Ágeis",
       "SQL",
@@ -53048,7 +54474,8 @@
       "Banco de Dados",
       "ERP",
       "SQL",
-      "SQL Server"
+      "SQL Server",
+      "Suporte Remoto"
     ]
   },
   {
@@ -53197,11 +54624,17 @@
     "url": "https://www.vagas.com.br/vagas/v2824894/estagio-em-ciencia-de-dados-e-gen-ai-nucleo-de-ia-hstern",
     "tecnologias": [
       "Análise de Dados",
+      "Automação",
       "Copilots & Assistentes de IA",
+      "Estatística",
+      "Git",
+      "Inglês",
       "Inteligência Artificial",
       "LLMs & IA Generativa",
       "Machine Learning",
-      "Python"
+      "Pandas",
+      "Python",
+      "Scikit-Learn"
     ]
   },
   {
@@ -53278,7 +54711,8 @@
     "tecnologias": [
       "CRM",
       "Espanhol",
-      "Inglês"
+      "Inglês",
+      "Suporte Remoto"
     ]
   },
   {
@@ -53771,6 +55205,7 @@
       "Montagem e Manutenção de PCs",
       "Redes de Computadores",
       "Service Desk",
+      "Suporte Remoto",
       "VPN",
       "Windows"
     ]
@@ -54038,6 +55473,7 @@
       "Help Desk",
       "Montagem e Manutenção de PCs",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -54074,7 +55510,8 @@
       "PHP",
       "Power BI",
       "Python",
-      "SQL"
+      "SQL",
+      "SharePoint"
     ]
   },
   {
@@ -54128,7 +55565,8 @@
       "PHP",
       "Power BI",
       "Python",
-      "SQL"
+      "SQL",
+      "SharePoint"
     ]
   },
   {
@@ -54148,6 +55586,7 @@
       "Banco de Dados",
       "ERP",
       "Linux",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -54229,7 +55668,8 @@
       "Lógica de Programação",
       "PHP",
       "Power BI",
-      "Python"
+      "Python",
+      "SharePoint"
     ]
   },
   {
@@ -54307,7 +55747,8 @@
       "Excel",
       "Power BI",
       "Python",
-      "SQL"
+      "SQL",
+      "SharePoint"
     ]
   },
   {
@@ -54900,6 +56341,7 @@
     "tecnologias": [
       "Montagem e Manutenção de PCs",
       "SLA",
+      "Suporte Remoto",
       "VPN"
     ]
   },
@@ -56147,7 +57589,8 @@
     "url": "https://vagas.solides.com.br/vaga/876463/auxiliar-de-suporte-tecnico",
     "tecnologias": [
       "Hardware",
-      "Inglês"
+      "Inglês",
+      "Suporte Remoto"
     ]
   },
   {
@@ -56278,7 +57721,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-seguran%C3%A7a-da-informa%C3%A7%C3%A3o-foco-em-secops-at-cooperativa-central-ailos-4431978546",
     "tecnologias": [
-      "Cibersegurança"
+      "Cibersegurança",
+      "ITIL"
     ]
   },
   {
@@ -56339,7 +57783,8 @@
     "tecnologias": [
       "Help Desk",
       "Redes de Computadores",
-      "SQL"
+      "SQL",
+      "Suporte Remoto"
     ]
   },
   {
@@ -56767,6 +58212,7 @@
       "Hardware",
       "Jira",
       "LGPD",
+      "Microsoft Teams",
       "Office 365",
       "Redes de Computadores",
       "Windows"
@@ -58340,6 +59786,7 @@
       "Help Desk",
       "Manutenção Preventiva",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -58408,7 +59855,8 @@
       "Firewall",
       "Inglês",
       "Prisma",
-      "Redes de Computadores"
+      "Redes de Computadores",
+      "Suporte Remoto"
     ]
   },
   {
@@ -58559,6 +60007,7 @@
       "Inglês",
       "Linux",
       "Redes de Computadores",
+      "Suporte Remoto",
       "VoIP"
     ]
   },
@@ -58795,7 +60244,13 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-tecnologia-vis%C3%A3o-computacional-e-automa%C3%A7%C3%A3o-at-exxata-4430148639",
     "tecnologias": [
-      "Machine Learning"
+      "Análise de Dados",
+      "Automação",
+      "Banco de Dados",
+      "Inteligência Artificial",
+      "Lógica de Programação",
+      "Machine Learning",
+      "Python"
     ]
   },
   {
@@ -58910,7 +60365,17 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/programa-de-est%C3%A1gio-em-ia-at-grupo-vilarejo-4429178601",
     "tecnologias": [
-      "Inteligência Artificial"
+      "API REST",
+      "Análise de Dados",
+      "Copilots & Assistentes de IA",
+      "Inglês",
+      "Inteligência Artificial",
+      "JavaScript",
+      "LLMs & IA Generativa",
+      "Lógica de Programação",
+      "Machine Learning",
+      "Python",
+      "UX/UI"
     ]
   },
   {
@@ -59018,7 +60483,10 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-abap-j%C3%BAnior-at-lumen-it-4429232229",
     "tecnologias": [
-      "ABAP"
+      "ABAP",
+      "Inglês",
+      "SAP",
+      "Testes Automatizados"
     ]
   },
   {
@@ -59335,6 +60803,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-help-desk-at-inetvip-internet-fibra-%C3%B3ptica-4427677186",
     "tecnologias": [
+      "Banco de Dados",
+      "Hardware",
       "Help Desk"
     ]
   },
@@ -59438,7 +60908,8 @@
     "fonte": "solides",
     "url": "https://vagas.solides.com.br/vaga/865090/analista-de-suporte-e-implantacao",
     "tecnologias": [
-      "ERP"
+      "ERP",
+      "Suporte Remoto"
     ]
   },
   {
@@ -59474,7 +60945,15 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-em-flutter-at-assessoria-gass-4427524657",
     "tecnologias": [
-      "Flutter"
+      "API REST",
+      "Android",
+      "Dart",
+      "Firebase",
+      "Flutter",
+      "Git",
+      "Inglês",
+      "Lógica de Programação",
+      "POO"
     ]
   },
   {
@@ -59494,6 +60973,7 @@
       "Eletrônica",
       "Inglês",
       "Linux",
+      "Suporte Remoto",
       "Testes Funcionais"
     ]
   },
@@ -59720,7 +61200,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/suporte-t%C3%A9cnico-n1-at-fibranet-campinas-4426578540",
     "tecnologias": [
-      "Redes de Computadores"
+      "Redes de Computadores",
+      "Suporte Remoto"
     ]
   },
   {
@@ -59737,6 +61218,7 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-oracle-pl-sql-j%C3%BAnior-at-cooper-card-administradora-de-cart%C3%B5es-ltda-4427047170",
     "tecnologias": [
+      "Banco de Dados",
       "Oracle",
       "PL/SQL",
       "SQL"
@@ -59955,6 +61437,7 @@
       "Antivírus",
       "Backup",
       "Hardware",
+      "ITSM",
       "LGPD",
       "Montagem e Manutenção de PCs",
       "Office 365",
@@ -59976,7 +61459,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/consultor-t%C3%A9cnico-trainee-j%C3%BAnior-tecnologia-da-informa%C3%A7%C3%A3o-erp-varejo-at-sd-sistemas-4421961939",
     "tecnologias": [
-      "ERP"
+      "ERP",
+      "Hardware",
+      "Linux",
+      "Redes de Computadores",
+      "Windows"
     ]
   },
   {
@@ -60103,6 +61590,7 @@
       "Firewall",
       "Help Desk",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows",
       "Windows Server"
     ]
@@ -60345,6 +61833,7 @@
       "Jira",
       "SQL",
       "Service Desk",
+      "Suporte Remoto",
       "Zendesk"
     ]
   },
@@ -60681,6 +62170,16 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-em-desenvolvimento-front-end-com-foco-em-ui-ux-at-bode-do-n%C3%B4-4421381819",
     "tecnologias": [
+      "CSS",
+      "Copilots & Assistentes de IA",
+      "Figma",
+      "HTML",
+      "Inteligência Artificial",
+      "JavaScript",
+      "LLMs & IA Generativa",
+      "Next.js",
+      "React",
+      "Tailwind",
       "UX/UI"
     ]
   },
@@ -60866,7 +62365,12 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-de-business-intelligence-at-grupo-v-f-4431402242",
     "tecnologias": [
-      "BI"
+      "BI",
+      "Estatística",
+      "Excel",
+      "Modelagem de Dados",
+      "Power BI",
+      "Tableau"
     ]
   },
   {
@@ -60985,6 +62489,7 @@
       "Montagem e Manutenção de PCs",
       "Redes de Computadores",
       "SLA",
+      "Suporte Remoto",
       "Windows",
       "Windows Server",
       "Word"
@@ -61004,7 +62509,11 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/assistente-de-bi-business-intelligence-at-grupo-ginseng-4417667216",
     "tecnologias": [
-      "BI"
+      "Análise de Dados",
+      "BI",
+      "Estatística",
+      "Power BI",
+      "Tableau"
     ]
   },
   {
@@ -61391,9 +62900,11 @@
       "Active Directory",
       "Hardware",
       "Help Desk",
+      "ITSM",
       "SLA",
       "Service Desk",
       "Suporte N1/N2",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -61580,7 +63091,8 @@
       "Hardware",
       "Montagem e Manutenção de PCs",
       "Redes de Computadores",
-      "SQL"
+      "SQL",
+      "Suporte Remoto"
     ]
   },
   {
@@ -61723,6 +63235,7 @@
       "Grafana",
       "Linux",
       "Redes de Computadores",
+      "Suporte Remoto",
       "VMware",
       "Windows",
       "Windows Server",
@@ -61832,6 +63345,7 @@
     "url": "https://vagas.solides.com.br/vaga/851897/analista-de-tecnologia-jr-presencial-timoteo-mg",
     "tecnologias": [
       "Governança e Riscos (GRC)",
+      "ITSM",
       "SLA"
     ]
   },
@@ -62153,7 +63667,9 @@
       "Oracle",
       "Power BI",
       "Redes de Computadores",
+      "Suporte Remoto",
       "VMware",
+      "VirtualBox",
       "Windows",
       "Windows Server",
       "Zabbix"
@@ -62262,6 +63778,7 @@
       "Help Desk",
       "SAP",
       "SQL",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -62327,6 +63844,7 @@
       "LGPD",
       "Office 365",
       "Power BI",
+      "SharePoint",
       "Word"
     ]
   },
@@ -62584,7 +64102,8 @@
     "url": "https://aviator.gupy.io/job/eyJqb2JJZCI6MTEyNTU2NzYsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     "tecnologias": [
       "Manutenção Preventiva",
-      "Montagem e Manutenção de PCs"
+      "Montagem e Manutenção de PCs",
+      "Suporte Remoto"
     ]
   },
   {
@@ -62602,7 +64121,8 @@
     "url": "https://br.linkedin.com/jobs/view/assistente-de-ti-at-aviator-4411784318",
     "tecnologias": [
       "Manutenção Preventiva",
-      "Montagem e Manutenção de PCs"
+      "Montagem e Manutenção de PCs",
+      "Suporte Remoto"
     ]
   },
   {
@@ -63000,6 +64520,7 @@
       "Excel",
       "Hardware",
       "SQL",
+      "Suporte Remoto",
       "Word"
     ]
   },
@@ -63061,6 +64582,7 @@
       "Office 365",
       "Redes de Computadores",
       "Service Desk",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -63120,6 +64642,7 @@
     "url": "https://vagas.solides.com.br/vaga/837308/assistente-de-atendimento",
     "tecnologias": [
       "Excel",
+      "ITSM",
       "Inglês",
       "SLA",
       "Salesforce",
@@ -63161,6 +64684,7 @@
       "Excel",
       "GLPI",
       "ITIL",
+      "ITSM",
       "Inteligência Artificial",
       "Jira",
       "Service Desk"
@@ -63181,6 +64705,7 @@
     "url": "https://vagas.solides.com.br/vaga/836047/tecnico-de-suporte-remoto-jr",
     "tecnologias": [
       "Help Desk",
+      "Suporte Remoto",
       "Zendesk"
     ]
   },
@@ -63449,6 +64974,7 @@
       "Montagem e Manutenção de PCs",
       "Office 365",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -63539,6 +65065,7 @@
       "Montagem e Manutenção de PCs",
       "Office 365",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -63576,7 +65103,8 @@
     "url": "https://vagas.solides.com.br/vaga/832235/assistente-de-sistemas-de-ti",
     "tecnologias": [
       "Automação",
-      "SQL"
+      "SQL",
+      "SharePoint"
     ]
   },
   {
@@ -64054,6 +65582,7 @@
       "Banco de Dados",
       "Docker",
       "GCP",
+      "ITSM",
       "Inglês",
       "Kubernetes",
       "Linux",
@@ -64081,6 +65610,7 @@
       "Banco de Dados",
       "Docker",
       "GCP",
+      "ITSM",
       "Inglês",
       "Kubernetes",
       "Linux",
@@ -64579,7 +66109,8 @@
       "Inglês",
       "JavaScript",
       "Lógica de Programação",
-      "Power BI"
+      "Power BI",
+      "SharePoint"
     ]
   },
   {
@@ -64672,6 +66203,7 @@
       "Análise de Dados",
       "Datadog",
       "ITIL",
+      "ITSM",
       "Jira",
       "Redes de Computadores",
       "SLA",
@@ -64709,6 +66241,7 @@
     "tecnologias": [
       "Office 365",
       "Redes de Computadores",
+      "Suporte Remoto",
       "Windows"
     ]
   },
@@ -64726,6 +66259,8 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-suporte-n1-at-wtime-business-intelligence-4391239641",
     "tecnologias": [
+      "Hardware",
+      "SLA",
       "Suporte N1/N2"
     ]
   },
@@ -65405,6 +66940,7 @@
     "url": "https://vagas.solides.com.br/vaga/802852/analista-de-suporte-service-desk-pleno-i-field",
     "tecnologias": [
       "Hardware",
+      "ITSM",
       "Service Desk",
       "Windows"
     ]
@@ -66521,8 +68057,13 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/analista-de-bi-jr-%E2%80%93-foco-em-rpa-e-intelig%C3%AAncia-artificial-at-inspin-apaixonados-por-fazer-escolas-crescerem%21-4363814135",
     "tecnologias": [
+      "Análise de Dados",
+      "Estatística",
       "Inteligência Artificial",
-      "RPA"
+      "Pandas",
+      "Python",
+      "RPA",
+      "SQL"
     ]
   },
   {
@@ -66812,6 +68353,15 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/est%C3%A1gio-programador-web-com-rails-at-plug-crm-4358240078",
     "tecnologias": [
+      "Angular",
+      "CSS",
+      "Git",
+      "HTML",
+      "JavaScript",
+      "Linux",
+      "MongoDB",
+      "POO",
+      "Ruby",
       "Ruby on Rails"
     ]
   },
