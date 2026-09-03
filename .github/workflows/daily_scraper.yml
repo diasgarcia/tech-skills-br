@@ -67,10 +67,11 @@ jobs:
 
     - name: 5. Coletar todas as fontes (limite natural de paginacao de cada uma)
       run: |
-        OUT=$(python main.py --max-pages 200 --delay 2 --no-enrich 2>&1)
-        echo "$OUT"
-        echo "BRUTAS=$(echo "$OUT" | grep -oP 'Total bruto: \K[0-9]+' | tail -1)" >> "$GITHUB_ENV"
-        echo "ELEGIVEIS=$(echo "$OUT" | grep -oP 'RANKING DE AREAS -- \K[0-9]+' | tail -1)" >> "$GITHUB_ENV"
+        # tee em vez de capturar em variavel: o log aparece ao vivo no
+        # terminal da run (captura so exibiria no final).
+        python main.py --max-pages 200 --delay 2 --no-enrich 2>&1 | tee /tmp/coleta.log
+        echo "BRUTAS=$(grep -oP 'Total bruto: \K[0-9]+' /tmp/coleta.log | tail -1)" >> "$GITHUB_ENV"
+        echo "ELEGIVEIS=$(grep -oP 'RANKING DE AREAS -- \K[0-9]+' /tmp/coleta.log | tail -1)" >> "$GITHUB_ENV"
       env:
         PYTHONPATH: .
 
@@ -87,8 +88,8 @@ jobs:
         ATUALIZADAS=$(echo "$OUT_RODADA" | grep -oP 'Atualizadas[. ]+\K[0-9]+' | tail -1)
         echo "NOVAS=${NOVAS:-0}" >> "$GITHUB_ENV"
         echo "ATUALIZADAS=${ATUALIZADAS:-0}" >> "$GITHUB_ENV"
-        python scripts/enrich_outras_fontes.py 2>&1 | tee /tmp/enrich.log
-        python scripts/enrich_descriptions.py 2>&1 | tee -a /tmp/enrich.log
+        python -u scripts/enrich_outras_fontes.py 2>&1 | tee /tmp/enrich.log
+        python -u scripts/enrich_descriptions.py 2>&1 | tee -a /tmp/enrich.log
         python scripts/reclassify_areas.py
         python scripts/export_seed.py
         python scripts/report_db.py
