@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (3664 vagas)
 
-- **Data de geração:** 04/09/2026 12:02
+- **Data de geração:** 04/09/2026 13:19
 - **Período coberto:** 05/01/2026 até 04/09/2026
 - **Total de vagas consolidadas:** 3664
 
@@ -68,10 +68,9 @@
 | Senioridade | Vagas | % |
 |---|---|---|
 | Júnior | 2554 | 69.7% |
-| Estágio | 1017 | 27.8% |
+| Estágio | 1027 | 28.0% |
 | Aprendiz | 53 | 1.4% |
 | Trainee | 30 | 0.8% |
-| Estagiário | 10 | 0.3% |
 
 ## Distribuição por Portal de Origem
 
