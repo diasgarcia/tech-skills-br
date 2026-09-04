@@ -12,7 +12,7 @@ from sqlalchemy.orm import Session
 from api.dates import parse_published_date, reference_date_from_csv
 from api.database import make_engine
 from api.models import Tecnologia, Vaga
-from scripts.import_csv import importar
+from scripts.import_csv import _canonical_company, importar
 
 REFERENCIA = date(2026, 7, 31)
 
@@ -100,6 +100,37 @@ def test_importa_e_vincula_tecnologias(tmp_path):
         assert sorted(t.nome for t in vaga.tecnologias) == ["Python", "SQL"]
         # O vocabulario inteiro de skills.yml e semeado.
         assert db.scalar(select(func.count()).select_from(Tecnologia)) > 100
+
+
+@pytest.mark.parametrize(
+    "bruto,esperado",
+    [
+        ("Empresa confidencial", "Confidencial"),
+        ("confidencial", "Confidencial"),
+        ("Confidencial", "Confidencial"),
+        ("Empresa Confidencial", "Confidencial"),
+        ("Confidencial430", "Confidencial"),
+        ("Página de Carreira - Confidencial", "Confidencial"),
+        ("Randstad - Matriz", "Randstad"),
+        ("Nava | Tech for Business", "Nava Technology for Business"),
+        ("MINSAIT BRASIL", "Minsait"),
+        ("Minsait an Indra Company", "Minsait"),
+        ("ACME Tecnologia", "ACME Tecnologia"),  # empresa real passa direto
+        ("", ""),
+        (None, ""),
+    ],
+)
+def test_canonical_company(bruto, esperado):
+    assert _canonical_company(bruto or "") == esperado
+
+
+def test_import_canonicaliza_empresa_confidencial(tmp_path):
+    csv_path = _escrever_csv(tmp_path, [_linha(company="Empresa confidencial")])
+    importar(csv_path, tmp_path / "t.db")
+
+    with Session(make_engine(tmp_path / "t.db")) as db:
+        vaga = db.scalar(select(Vaga))
+        assert vaga.company == "Confidencial"
 
 
 def test_importacao_e_idempotente(tmp_path):
