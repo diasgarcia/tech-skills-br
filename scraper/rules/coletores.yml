@@ -75,6 +75,31 @@ solides:
   # portal aplica de forma frouxa -- nesses casos o coletor NAO rotula
   # senioridade e o filtro do pipeline decide pelo titulo.
 
+infojobs:
+  # Estagio/trainee/aprendiz sao "tipo de contrato" no portal, nao nivel
+  # de senioridade: entram pelos filtros nativos de contrato com o recorte
+  # de area (categoria 74 = Informatica, TI, Telecomunicacoes). "Junior"
+  # nao tem filtro nativo: entra pela busca textual Palabra= com os termos
+  # do projeto (o coletor separa os dois casos sozinho).
+  #
+  # `tipocontrato=4` (Estagio) e `im=1` (Estagiario) sao eixos diferentes
+  # do portal: o primeiro e o tipo de contrato, o segundo o nivel. Cada um
+  # tem vagas exclusivas (medido: 139 vs 150); os dois viram filtros
+  # separados e a deduplicacao do pipeline junta as sobrepostas.
+  filtros:
+    Estágio:
+      categoria: 74
+      tipocontrato: 4
+    Estagiário:
+      categoria: 74
+      im: 1
+    Trainee:
+      categoria: 74
+      tipocontrato: 15
+    Aprendiz:
+      categoria: 74
+      tipocontrato: 19
+
 trampos:
   tipos_de_entrada:
     estagio: Estágio

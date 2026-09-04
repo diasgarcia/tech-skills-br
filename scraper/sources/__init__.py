@@ -5,6 +5,7 @@ from __future__ import annotations
 from .base import JobSource
 from .geekhunter import GeekHunterSource
 from .gupy import GupySource
+from .infojobs import InfoJobsSource
 from .linkedin import LinkedInSource
 from .solides import SolidesSource
 from .trampos import TramposSource
@@ -17,6 +18,7 @@ SOURCE_REGISTRY: dict[str, type[JobSource]] = {
     LinkedInSource.name: LinkedInSource,
     SolidesSource.name: SolidesSource,
     GeekHunterSource.name: GeekHunterSource,
+    InfoJobsSource.name: InfoJobsSource,
 }
 
 AVAILABLE_SOURCES = list(SOURCE_REGISTRY)
@@ -27,6 +29,7 @@ DEFAULT_SOURCES = [
     "linkedin",
     "solides",
     "geekhunter",
+    "infojobs",
 ]
 
 
@@ -38,6 +41,7 @@ __all__ = [
     "LinkedInSource",
     "SolidesSource",
     "GeekHunterSource",
+    "InfoJobsSource",
     "SOURCE_REGISTRY",
     "AVAILABLE_SOURCES",
     "DEFAULT_SOURCES",
