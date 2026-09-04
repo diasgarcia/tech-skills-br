@@ -85,6 +85,20 @@ def default_filter(strict: bool = False) -> SeniorityFilter:
     return SeniorityFilter.from_file(strict=strict)
 
 
+def canonicalize_seniority(label: str, flt: SeniorityFilter | None = None) -> str:
+    """Normaliza o rotulo de senioridade informado pela fonte.
+
+    As fontes podem rotular o mesmo nivel com variantes ("Estagio" e
+    "Estagiario" sao filtros nativos diferentes nos portais). O rotulo
+    canonico sai das mesmas regras de `seniority.yml` usadas para o
+    titulo; variante desconhecida passa direto (nada e inventado).
+    """
+    if not label:
+        return ""
+    flt = flt or default_filter()
+    return flt.label(label) or label
+
+
 def filter_entry_level(jobs: list[Job], flt: SeniorityFilter | None = None) -> list[Job]:
     """Mantem apenas vagas de entrada, preenchendo `job.seniority`.
 
@@ -93,12 +107,14 @@ def filter_entry_level(jobs: list[Job], flt: SeniorityFilter | None = None) -> l
     a senioridade num campo proprio, que e mais confiavel do que adivinhar
     pelo titulo -- "Programador(a) PHP" nao tem marca nenhuma de nivel,
     mas o portal a classifica como Junior. Coletores que nao sabem o
-    nivel deixam o campo vazio e caem no regex.
+    nivel deixam o campo vazio e caem no regex. O rotulo da fonte passa
+    pela canonicalizacao (variantes viram a categoria unica do projeto).
     """
     flt = flt or default_filter()
     kept = []
     for job in jobs:
         if job.seniority:
+            job.seniority = canonicalize_seniority(job.seniority, flt)
             kept.append(job)
             continue
         label = flt.label(job.title)
