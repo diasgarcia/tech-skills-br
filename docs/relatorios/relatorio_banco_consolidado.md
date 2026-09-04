@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (3664 vagas)
 
-- **Data de geração:** 04/09/2026 13:19
+- **Data de geração:** 04/09/2026 13:40
 - **Período coberto:** 05/01/2026 até 04/09/2026
 - **Total de vagas consolidadas:** 3664
 
@@ -114,12 +114,12 @@
 | Empresa | Vagas |
 |---|---|
 | Jobbol | 84 |
+| Confidencial | 73 |
 | Auth21 | 53 |
+| Randstad | 40 |
 | Wyntech | 33 |
 | BairesDev | 30 |
-| randstad-1 | 28 |
-| Empresa confidencial | 23 |
-| confidencial | 21 |
+| Minsait | 29 |
+| Nava Technology for Business | 26 |
 | Quality Digital | 19 |
-| Confidencial | 19 |
 | TOTVS | 17 |
