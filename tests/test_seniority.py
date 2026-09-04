@@ -1,5 +1,5 @@
 from scraper.models import Job
-from scraper.seniority import SeniorityFilter, filter_entry_level
+from scraper.seniority import SeniorityFilter, canonicalize_seniority, filter_entry_level
 
 
 def test_reconhece_variacoes_de_junior():
@@ -85,3 +85,25 @@ def test_filter_entry_level_preenche_rotulo():
     assert [j.external_id for j in kept] == ["1", "3"]
     assert kept[0].seniority == "Júnior"
     assert kept[1].seniority == "Estágio"
+
+
+def test_canonicalize_senioridade():
+    assert canonicalize_seniority("Estagiário") == "Estágio"
+    assert canonicalize_seniority("Estágio") == "Estágio"
+    assert canonicalize_seniority("Trainee") == "Trainee"
+    assert canonicalize_seniority("Aprendiz") == "Aprendiz"
+    assert canonicalize_seniority("Júnior") == "Júnior"
+    # Variante desconhecida passa direto: nada e inventado.
+    assert canonicalize_seniority("Coordenador") == "Coordenador"
+    assert canonicalize_seniority("") == ""
+
+
+def test_filter_entry_level_canonicaliza_rotulo_da_fonte():
+    """'Estagiario' vindo do filtro nativo do portal vira 'Estágio'."""
+    jobs = [
+        Job(source="infojobs", external_id="1",
+            title="Técnico de Suporte", seniority="Estagiário"),
+    ]
+    kept = filter_entry_level(jobs)
+    assert len(kept) == 1
+    assert kept[0].seniority == "Estágio"
