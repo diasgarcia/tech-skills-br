@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: >-
+  Se você usa este software ou os dados gerados por ele, cite conforme
+  abaixo.
+title: tech-skills-br - Mapeamento de Skills em Tecnologia no Brasil
+abstract: >-
+  Projeto de pesquisa científica (PIBIC / Iniciação Científica) que
+  mapeia as habilidades técnicas demandadas em vagas de nível de
+  entrada no mercado de tecnologia brasileiro: júnior, estágio,
+  trainee e aprendiz. A coleta multi-fonte alimenta um pipeline que
+  extrai as habilidades por taxonomia curada, deduplica os anúncios e
+  consolida a base em um dashboard público. Os dados são confrontados
+  com as Diretrizes Curriculares Nacionais do MEC e os referenciais da
+  Sociedade Brasileira de Computação (SBC).
+authors:
+  - family-names: Dias Garcia
+    given-names: Rafael
+    email: 272207@unifio.edu.br
+keywords:
+  - habilidades técnicas
+  - vagas de nível de entrada
+  - mercado de trabalho brasileiro
+  - iniciação científica
+  - PIBIC
+  - ciência da computação
+license: MIT
+type: software
+repository-code: https://github.com/diasgarcia/tech-skills-br
+url: https://diasgarcia.github.io/tech-skills-br/
