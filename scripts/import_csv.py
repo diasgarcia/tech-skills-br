@@ -18,6 +18,7 @@ import argparse
 import csv
 import glob
 import logging
+import re
 import sys
 from datetime import date, datetime
 from pathlib import Path
@@ -39,8 +40,7 @@ from api.models import Tecnologia, Vaga  # noqa: E402
 from scraper.classifier import default_classifier  # noqa: E402
 from scraper.config import PROJECT_ROOT  # noqa: E402
 from scraper.geo import default_geo_classifier  # noqa: E402
-from scraper.models import infer_workplace  # noqa: E402
-
+from scraper.models import infer_workplace, normalize  # noqa: E402
 
 
 logger = logging.getLogger("import_csv")
@@ -54,6 +54,30 @@ CAMPOS_TEXTO = [
 ]
 
 MIN_DATA_CORTE = date(2026, 1, 1)
+
+# A mesma empresa com grafias diferentes entre portais. A chave e o
+# nome normalizado; o valor e o rotulo canonico exibido no ranking.
+_EMPRESAS_CANONICAS = {
+    "randstad matriz": "Randstad",
+    "nava tech for business": "Nava Technology for Business",
+    "minsait brasil": "Minsait",
+    "minsait an indra company": "Minsait",
+}
+
+
+def _canonical_company(nome: str) -> str:
+    """Junta variantes de grafia de empresa numa forma unica.
+
+    Cada portal grafa a mesma coisa do seu jeito: "Empresa confidencial"
+    na Solides, "confidencial" no InfoJobs, "Confidencial430" na Gupy;
+    "Randstad - Matriz" no InfoJobs e "Randstad" no GeekHunter. Sem a
+    normalizacao, o ranking de empresas conta a mesma empresa como
+    entidades diferentes.
+    """
+    chave = normalize(nome)
+    if re.search(r"\bconfidencial\d*\b", chave):
+        return "Confidencial"
+    return _EMPRESAS_CANONICAS.get(chave, nome)
 
 
 
@@ -203,6 +227,8 @@ def importar(
                 # vazio para vagas do LinkedIn).
                 for campo in CAMPOS_TEXTO:
                     novo = (linha.get(campo) or "").strip() or None
+                    if campo == "company" and novo:
+                        novo = _canonical_company(novo)
                     if campo == "description" and not novo and vaga.description:
                         continue
                     # Snippet novo nao regride descricao enriquecida: o
