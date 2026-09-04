@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .abler import AblerSource
 from .base import JobSource
 from .geekhunter import GeekHunterSource
 from .gupy import GupySource
@@ -19,6 +20,7 @@ SOURCE_REGISTRY: dict[str, type[JobSource]] = {
     SolidesSource.name: SolidesSource,
     GeekHunterSource.name: GeekHunterSource,
     InfoJobsSource.name: InfoJobsSource,
+    AblerSource.name: AblerSource,
 }
 
 AVAILABLE_SOURCES = list(SOURCE_REGISTRY)
@@ -30,6 +32,7 @@ DEFAULT_SOURCES = [
     "solides",
     "geekhunter",
     "infojobs",
+    "abler",
 ]
 
 
@@ -42,6 +45,7 @@ __all__ = [
     "SolidesSource",
     "GeekHunterSource",
     "InfoJobsSource",
+    "AblerSource",
     "SOURCE_REGISTRY",
     "AVAILABLE_SOURCES",
     "DEFAULT_SOURCES",

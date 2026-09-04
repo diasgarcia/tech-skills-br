@@ -53,6 +53,12 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     parser.add_argument(
+        "--abler-days", type=int, default=1,
+        help="Abler: janela de dias do sitemap (lastmod). Padrao 1 (ultimas "
+             "24h); use um valor grande para a coleta completa.",
+    )
+
+    parser.add_argument(
         "--delay", type=float, default=1.5,
         help="Segundos de espera entre requests (padrao: 1.5).",
     )
@@ -107,6 +113,7 @@ def main(argv: list[str] | None = None) -> int:
         max_pages_per_term=args.max_pages,
         only_junior=not args.all_levels,
         enrich_linkedin=not args.no_enrich,
+        abler_days_back=max(1, args.abler_days),
     )
 
 
