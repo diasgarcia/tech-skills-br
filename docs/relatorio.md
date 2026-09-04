@@ -80,6 +80,44 @@ Corrigi o stop do primeiro 429 para parar de verdade (as futures já enfileirada
 
 ---
 
+### 01/09/2026
+
+Rodei as três coletas automáticas do dia e um enriquecimento manual. Sem mudanças de código.
+
+---
+
+### 02/09/2026
+
+Corrigi os ids instáveis das vagas entre as runs do CI. O seed passou a exportar a coluna db_id. O import restaura o id original. O vagas.json parou de mudar inteiro a cada coleta. Simulei duas runs com banco do zero: zero ids diferentes nas 3067 vagas.
+
+Melhorei a classificação por área. Título específico vence o genérico. Suporte disfarçado de "Analista de Sistemas" vira Suporte Técnico. Movi 26 vagas e revisei uma a uma. Removi psycopg e httpx. O projeto ficou SQLite-only.
+
+Corrigi o import. Snippet novo não regride descrição enriquecida. A fila de pendentes drenou de verdade. O enriquecimento passou a parar o lote da fonte no primeiro 429. O LinkedIn ganhou a proteção que não tinha. Os commits de dados ganharam resumo da rodada no corpo. O rótulo do commit veio dos inputs do dispatch. Removi o critério "500 caracteres exatos" da fila do LinkedIn. Busca com sucesso marca a vaga como resolvida. Silenciei avisos repetidos do matplotlib no runner.
+
+---
+
+### 03/09/2026
+
+Corrigi as URLs do Solides. O redirectLink antigo usava subdomínios que não resolvem mais em DNS. O coletor passou a gravar a URL canônica do portal. Corrigi 678 URLs na base.
+
+Criei o portão novo. Vagas de campo, vendas, call center e loja saem da base. Medido: 61 vagas não-tech a menos. Mudei a classificação. Suporte Técnico virou área genérica. Título específico vence. "Analista de Suporte N1" vai para Service Desk. "Técnico Suporte Volante" vai para Field Service. Reclassifiquei 139 vagas. Removi 6 não-tech.
+
+Testei dois experimentos contra o 429 do Cloudflare no Vagas.com: fingerprint Safari e warm-up de sessão. Nenhum mudou o resultado. O limite é por IP. Reverti o Safari. Os logs da coleta e do enriquecimento passaram a aparecer ao vivo no runner.
+
+Corrigi a senioridade. "N1.5" é tier de suporte, não nível de entrada. Três vagas pleno/sênior saíram da base. Criei contextos de descarte para "eletrônica" como adjetivo. Dois falsos positivos saíram. Corrigi a empresa da Gupy em páginas compartilhadas. O nome vem do subdomínio, não do careerPageName. Adicionei ferramentas de suporte ao vocabulário: Suporte Remoto, Clonezilla, VirtualBox, SharePoint, Microsoft Teams e ITSM. Re-extraí as skills na base inteira. Revalidei 59 empresas do GeekHunter com o JSON-LD. A busca do dashboard ganhou filtro por fonte. A cidade vence o polo regional no display. Limpei comentários redundantes do código.
+
+---
+
+### 04/09/2026
+
+Implementei o coletor do InfoJobs. A busca pública é renderizada no servidor. Júnior entra pela busca textual. Estágio, trainee e aprendiz entram pelos filtros nativos de contrato. A primeira coleta completa trouxe 378 vagas novas. A fonte virou a quarta maior da base.
+
+O enriquecimento do InfoJobs busca a descrição completa no detalhe da vaga. O teaser da listagem tem 153 caracteres fixos. Vaga encerrada vira 404. O bloqueio suave não marca vaga como encerrada.
+
+Revisei 38 vagas do InfoJobs uma a uma. Corrigi aliases que não casavam. Adicionei Pacote Office, ServiceNow, Storage, Google Sheets, DAX, AutoCAD, PABX e Robótica ao vocabulário. Fibra óptica virou alias de Redes de Computadores. A cobertura subiu de 55% para 99%.
+
+---
+
 ### Pendências para o artigo
 
 - Medir a contribuição marginal de cada fonte com o avaliador.
