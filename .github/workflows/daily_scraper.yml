@@ -51,7 +51,7 @@ jobs:
         # MINUTOS_BRT cobre dispatches antigos sem inputs. O horario e o
         # de INICIO da run (09h16/14h16/19h16 BRT), nao o de conclusao.
         echo "MINUTOS_BRT=$((10#$(TZ=America/Sao_Paulo date +'%H%M')))" >> "$GITHUB_ENV"
-        echo "DATA_HOJE=$(date +'%d/%m/%Y')" >> "$GITHUB_ENV"
+        echo "DATA_HOJE=$(TZ=America/Sao_Paulo date +'%d/%m/%Y')" >> "$GITHUB_ENV"
 
     - name: 3. Configurar Python 3.12
       uses: actions/setup-python@v5
@@ -92,7 +92,14 @@ jobs:
         python -u scripts/enrich_descriptions.py 2>&1 | tee -a /tmp/enrich.log
         python scripts/reclassify_areas.py
         python scripts/export_seed.py
-        python scripts/report_db.py
+        # Graficos e relatorio so na rodada 1 (09:16): o snapshot e diario.
+        if [ "${{ github.event.inputs.rodada }}" = "2" ] || [ "${{ github.event.inputs.rodada }}" = "3" ]; then
+          python scripts/report_db.py --no-charts
+          echo "GERAR_RELATORIO=0" >> "$GITHUB_ENV"
+        else
+          python scripts/report_db.py
+          echo "GERAR_RELATORIO=1" >> "$GITHUB_ENV"
+        fi
         python scripts/export_pages_data.py
         python scripts/resumo_commit.py \
           --brutas "$BRUTAS" --elegiveis "$ELEGIVEIS" \
@@ -104,7 +111,10 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-        git add seed/vagas.csv docs/relatorios/ api/web/
+        git add seed/vagas.csv api/web/
+        if [ "$GERAR_RELATORIO" != "0" ]; then
+          git add docs/relatorios/
+        fi
 
         
         git diff --quiet && git diff --staged --quiet && exit 0
@@ -152,8 +162,12 @@ jobs:
           else
             git rebase --abort 2>/dev/null || true
             git reset --hard origin/main
-            git checkout "${COMMIT_BOT}" -- seed/vagas.csv docs/relatorios/ api/web/
-            git add seed/vagas.csv docs/relatorios/ api/web/
+            git checkout "${COMMIT_BOT}" -- seed/vagas.csv api/web/
+            git add seed/vagas.csv api/web/
+            if [ "$GERAR_RELATORIO" != "0" ]; then
+              git checkout "${COMMIT_BOT}" -- docs/relatorios/
+              git add docs/relatorios/
+            fi
             git commit -F /tmp/commit_msg.txt
           fi
           sleep 10
