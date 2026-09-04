@@ -87,6 +87,14 @@ def test_fetch_infojobs_sem_o_painel_trata_como_encerrada():
     assert status == 404
 
 
+def test_fetch_infojobs_body_vazio_nao_marca_como_encerrada():
+    """200 com body vazio e bloqueio suave: fica pendente, nunca vira 404."""
+    session = FakeSession([FakeResponse(text="")])
+    dados, status = fetch_infojobs(session, Lock(), "http://x")
+    assert dados.get("description", "") == ""
+    assert status is None
+
+
 def test_fetch_vagas_com_retorna_vazio_quando_api_falha():
     session = FakeSession([None])
     assert fetch_vagas_com(session, Lock(), "http://x") == ("", None)
