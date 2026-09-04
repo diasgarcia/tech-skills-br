@@ -15,7 +15,7 @@ from .http_client import PoliteSession
 from .models import NAO_INFORMADO, Job, SourceStats, infer_workplace
 
 
-from .seniority import SeniorityFilter, filter_entry_level
+from .seniority import SeniorityFilter, canonicalize_seniority, filter_entry_level
 from .skills import attach_skills
 from .sources import SOURCE_REGISTRY
 
@@ -83,7 +83,9 @@ def run(
     else:
         jobs = raw_jobs
         for job in jobs:
-            job.seniority = job.seniority or "Não filtrado"
+            job.seniority = (
+                canonicalize_seniority(job.seniority) if job.seniority else "Não filtrado"
+            )
         dropped_seniority = 0
     logger.info("Apos filtro de senioridade: %d vagas (-%d)", len(jobs), dropped_seniority)
 
