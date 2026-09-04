@@ -1,82 +1,82 @@
 [
   {
     "area": "Suporte Técnico",
-    "vagas": 1212,
-    "percentual": 32.7
+    "vagas": 1250,
+    "percentual": 32.8
   },
   {
     "area": "Engenharia de Software",
-    "vagas": 514,
-    "percentual": 13.8
+    "vagas": 519,
+    "percentual": 13.6
   },
   {
     "area": "Infraestrutura / Redes",
-    "vagas": 322,
-    "percentual": 8.7
+    "vagas": 328,
+    "percentual": 8.6
   },
   {
     "area": "Data",
-    "vagas": 248,
-    "percentual": 6.7
+    "vagas": 253,
+    "percentual": 6.6
   },
   {
     "area": "Backend",
-    "vagas": 204,
-    "percentual": 5.5
+    "vagas": 206,
+    "percentual": 5.4
   },
   {
     "area": "Service Desk / Help Desk",
-    "vagas": 192,
-    "percentual": 5.2
+    "vagas": 195,
+    "percentual": 5.1
   },
   {
     "area": "QA",
-    "vagas": 157,
+    "vagas": 159,
     "percentual": 4.2
   },
   {
-    "area": "Field Service / Hardware",
-    "vagas": 136,
-    "percentual": 3.7
+    "area": "Outros/TI Geral",
+    "vagas": 146,
+    "percentual": 3.8
   },
   {
-    "area": "Outros/TI Geral",
-    "vagas": 136,
+    "area": "Field Service / Hardware",
+    "vagas": 142,
     "percentual": 3.7
   },
   {
     "area": "Sistemas / ERP",
-    "vagas": 113,
-    "percentual": 3.0
+    "vagas": 117,
+    "percentual": 3.1
   },
   {
     "area": "Segurança",
-    "vagas": 109,
+    "vagas": 110,
     "percentual": 2.9
   },
   {
     "area": "Fullstack",
-    "vagas": 101,
-    "percentual": 2.7
+    "vagas": 105,
+    "percentual": 2.8
   },
   {
     "area": "Hardware / Eletrônica",
-    "vagas": 60,
-    "percentual": 1.6
+    "vagas": 67,
+    "percentual": 1.8
   },
   {
     "area": "DevOps",
     "vagas": 54,
-    "percentual": 1.5
+    "percentual": 1.4
   },
   {
     "area": "Frontend",
     "vagas": 47,
-    "percentual": 1.3
+    "percentual": 1.2
   },
   {
     "area": "Inteligência Artificial",
-    "vagas": 41,
+    "vagas": 43,
     "percentual": 1.1
   },
   {
@@ -86,7 +86,7 @@
   },
   {
     "area": "Design / UI / UX",
-    "vagas": 28,
+    "vagas": 29,
     "percentual": 0.8
   }
 ]

@@ -1,5 +1,56 @@
 [
   {
+    "id": 3915,
+    "titulo": "Estágio em Suporte de TI",
+    "empresa": "Jobz",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Serra, ES",
+    "polo": "Vitória",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "04/09/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-em-suporte-de-ti-470635",
+    "tecnologias": []
+  },
+  {
+    "id": 3873,
+    "titulo": "Estágio em Análise e Desen. de Sistemas",
+    "empresa": "Fundação Mudes",
+    "area": "Outros/TI Geral",
+    "senioridade": "Estágio",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "04/09/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-em-analise-e-desen-de-sistemas-827246",
+    "tecnologias": [
+      "SAP"
+    ]
+  },
+  {
+    "id": 3863,
+    "titulo": "Estágio em Infraestrutura de TI",
+    "empresa": "Confidencial",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Estágio",
+    "localidade": "Maringá, PR",
+    "polo": "Maringá",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "04/09/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-em-infraestrutura-de-ti-579711",
+    "tecnologias": [
+      "Hardware",
+      "Montagem e Manutenção de PCs",
+      "Redes de Computadores"
+    ]
+  },
+  {
     "id": 3827,
     "titulo": "Técnico De Suporte Jr I",
     "empresa": "Randstad",
@@ -1591,6 +1642,40 @@
       "Montagem e Manutenção de PCs",
       "Pacote Office",
       "Windows"
+    ]
+  },
+  {
+    "id": 3886,
+    "titulo": "Estágio Administrativo e inovação",
+    "empresa": "Confidencial",
+    "area": "Sistemas / ERP",
+    "senioridade": "Estágio",
+    "localidade": "Maringá, PR",
+    "polo": "Maringá",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-administrativo-e-inovacao-502319",
+    "tecnologias": [
+      "Banco de Dados"
+    ]
+  },
+  {
+    "id": 3880,
+    "titulo": "Estágio Compras - (TI)",
+    "empresa": "Grupo Fertipar",
+    "area": "Segurança",
+    "senioridade": "Estágio",
+    "localidade": "Curitiba, PR",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/09/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-ti-290585",
+    "tecnologias": [
+      "Automação"
     ]
   },
   {
@@ -4316,6 +4401,51 @@
       "Terraform",
       "TypeScript"
     ]
+  },
+  {
+    "id": 3924,
+    "titulo": "Técnico de Suporte JR",
+    "empresa": "RH NOSSA",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Curitiba, PR",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/tecnico-de-suporte-jr-503824",
+    "tecnologias": []
+  },
+  {
+    "id": 3884,
+    "titulo": "ANALISTA DE PLANEJ. TRAINEE - Segmento: Automação e Segurança",
+    "empresa": "CMGB* Gestão de Negócios",
+    "area": "Sistemas / ERP",
+    "senioridade": "Trainee",
+    "localidade": "Fortaleza, CE",
+    "polo": "Fortaleza",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-planej-trainee-segmento-automacao-e-seguranca-856460",
+    "tecnologias": []
+  },
+  {
+    "id": 3837,
+    "titulo": "Motion Designer Júnior",
+    "empresa": "Workers - Retail Branding",
+    "area": "Design / UI / UX",
+    "senioridade": "Júnior",
+    "localidade": "Curitiba, PR",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/09/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/motion-designer-junior-643229",
+    "tecnologias": []
   },
   {
     "id": 3762,
@@ -7775,6 +7905,41 @@
     ]
   },
   {
+    "id": 3892,
+    "titulo": "Analista de Engenharia de Processos Jr.",
+    "empresa": "Librelato",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Içara, SC",
+    "polo": "Criciúma",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/09/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-engenharia-de-processos-jr-645309",
+    "tecnologias": []
+  },
+  {
+    "id": 3836,
+    "titulo": "Programa de Estágio Engenharia, Dados, Inteligência Comercial",
+    "empresa": "Embarca",
+    "area": "Data",
+    "senioridade": "Estágio",
+    "localidade": "Curitiba, PR",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/09/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/programa-de-estagio-engenharia-dados-inteligencia-comercial-704417",
+    "tecnologias": [
+      "ETL",
+      "Estatística",
+      "Python",
+      "SQL"
+    ]
+  },
+  {
     "id": 3722,
     "titulo": "Estágio Em Suporte Técnico – Home Office",
     "empresa": "Mundiware",
@@ -10049,6 +10214,23 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-n%C3%ADvel-superior-pet-sistemas-neg%C3%B3cios-campinas-sp-at-mbrf-4452169201",
     "tecnologias": []
+  },
+  {
+    "id": 3851,
+    "titulo": "Estágio em Desenvolvedor Fullstack",
+    "empresa": "Confidencial",
+    "area": "Fullstack",
+    "senioridade": "Estágio",
+    "localidade": "Maringá, PR",
+    "polo": "Maringá",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "31/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-em-desenvolvedor-fullstack-104282",
+    "tecnologias": [
+      "Git"
+    ]
   },
   {
     "id": 3739,
@@ -13578,6 +13760,26 @@
     "url": "https://br.linkedin.com/jobs/view/analista-de-ti-junior-swift-corporativo-at-swift-4441981886",
     "tecnologias": [
       "Swift"
+    ]
+  },
+  {
+    "id": 3897,
+    "titulo": "Analista de Suporte Júnior I",
+    "empresa": "JUND EMPREGOS",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Jundiaí, SP",
+    "polo": "Jundiaí",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "28/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-suporte-junior-i-318396",
+    "tecnologias": [
+      "Help Desk",
+      "Linux",
+      "Redes de Computadores",
+      "VoIP"
     ]
   },
   {
@@ -21551,6 +21753,41 @@
     ]
   },
   {
+    "id": 3925,
+    "titulo": "Técnico de segurança eletrônica Jr I",
+    "empresa": "Grupo Attua Seleção e Desenvolvimento",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "25/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/tecnico-de-seguranca-eletronica-jr-i-390931",
+    "tecnologias": [
+      "CFTV",
+      "Eletrônica"
+    ]
+  },
+  {
+    "id": 3872,
+    "titulo": "Estágio de RH",
+    "empresa": "Humaniq",
+    "area": "Outros/TI Geral",
+    "senioridade": "Estágio",
+    "localidade": "Manaus, AM",
+    "polo": "Manaus",
+    "regiao": "Norte",
+    "modalidade": "Presencial",
+    "data_publicacao": "25/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-de-rh-409851",
+    "tecnologias": [
+      "Banco de Dados"
+    ]
+  },
+  {
     "id": 3727,
     "titulo": "Estágio Suporte",
     "empresa": "Interprocess Tecnologia da Informação Ltda",
@@ -24556,6 +24793,75 @@
     ]
   },
   {
+    "id": 3910,
+    "titulo": "Estagiário Nível Médio",
+    "empresa": "ESCOLA SUP. DE CIENCIAS DA STA CASA MIS. DE VIT-EMESCAM",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Vitória, ES",
+    "polo": "Vitória",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "24/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagiario-nivel-medio-894736",
+    "tecnologias": [
+      "Microsoft Teams"
+    ]
+  },
+  {
+    "id": 3900,
+    "titulo": "Aprendiz Auxiliar Administrativo - Tecnologia da Informação",
+    "empresa": "Cidade Júnior",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Curitiba, PR",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "24/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/aprendiz-auxiliar-administrativo-tecnologia-da-informacao-738057",
+    "tecnologias": [
+      "GLPI",
+      "Hardware",
+      "Help Desk"
+    ]
+  },
+  {
+    "id": 3848,
+    "titulo": "Técnico de informática JR",
+    "empresa": "CF RECURSOS HUMANOS LTDA",
+    "area": "Field Service / Hardware",
+    "senioridade": "Júnior",
+    "localidade": "Pinhais, PR",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Remoto",
+    "data_publicacao": "24/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/tecnico-de-informatica-jr-420803",
+    "tecnologias": []
+  },
+  {
+    "id": 3845,
+    "titulo": "Estágio em Técnico de Informática",
+    "empresa": "Fundação Mudes",
+    "area": "Field Service / Hardware",
+    "senioridade": "Estágio",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "24/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-em-tecnico-de-informatica-35309",
+    "tecnologias": [
+      "Hardware",
+      "Windows"
+    ]
+  },
+  {
     "id": 3750,
     "titulo": "Técnico De Suporte I",
     "empresa": "Stefanini",
@@ -27524,6 +27830,60 @@
     ]
   },
   {
+    "id": 3896,
+    "titulo": "Analista de Suporte Junior (Jabaquara/Diadema)",
+    "empresa": "Patrícia Honorato Desenvolvimento Humano e Organizacional Ltda",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "21/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-suporte-junior-jabaquara-diadema-113285",
+    "tecnologias": [
+      "Hardware",
+      "SLA"
+    ]
+  },
+  {
+    "id": 3866,
+    "titulo": "Trainee em Finanças",
+    "empresa": "AnkaTech",
+    "area": "Inteligência Artificial",
+    "senioridade": "Trainee",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Remoto",
+    "data_publicacao": "21/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/trainee-em-financas-739729",
+    "tecnologias": [
+      "Agentes de IA & RAG",
+      "ERP",
+      "Inglês",
+      "Inteligência Artificial",
+      "LLMs & IA Generativa"
+    ]
+  },
+  {
+    "id": 3842,
+    "titulo": "PROGRAMA DE ESTÁGIO 2026.2 - STATE GRID",
+    "empresa": "Grupo Capacitare",
+    "area": "Engenharia de Software",
+    "senioridade": "Estágio",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "21/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/programa-de-estagio-2026-2-state-grid-762340",
+    "tecnologias": []
+  },
+  {
     "id": 3818,
     "titulo": "Analista de Suporte e Soluções Júnior",
     "empresa": "Selbetti Tecnologia",
@@ -29519,6 +29879,39 @@
     ]
   },
   {
+    "id": 3901,
+    "titulo": "Assistente de Suporte (Qualidade e Treinamento) - Unimed",
+    "empresa": "Unimed Curitiba",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Curitiba, PR",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "20/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/assistente-de-suporte-qualidade-e-treinamento-unimed-750798",
+    "tecnologias": []
+  },
+  {
+    "id": 3881,
+    "titulo": "ANALISTA DE SUPORTE EM T.I. Nível 1",
+    "empresa": "BOUERI SOLUÇÕES EM RH",
+    "area": "Service Desk / Help Desk",
+    "senioridade": "Júnior",
+    "localidade": "Pindamonhangaba, SP",
+    "polo": "São José dos Campos",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "20/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-suporte-em-t-i-nivel-1-414142",
+    "tecnologias": [
+      "Linux",
+      "Windows"
+    ]
+  },
+  {
     "id": 3787,
     "titulo": "Vindi |Desenvolvedor (a) Júnior (.Net) | Remoto",
     "empresa": "Vindi",
@@ -31478,6 +31871,21 @@
       "POO",
       "Python"
     ]
+  },
+  {
+    "id": 3889,
+    "titulo": "Analista de Compras de Medicamentos I",
+    "empresa": "RH Center",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Curitiba, PR",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "19/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-compras-de-medicamentos-i-283844",
+    "tecnologias": []
   },
   {
     "id": 3817,
@@ -33832,6 +34240,77 @@
       "Node.js",
       "PostgreSQL",
       "TypeScript"
+    ]
+  },
+  {
+    "id": 3917,
+    "titulo": "Estágio em TI e Técnico em Informática - Penha (84858)",
+    "empresa": "Fundação Mudes",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "18/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-em-ti-e-tecnico-em-informatica-penha-84858-956862",
+    "tecnologias": [
+      "Montagem e Manutenção de PCs"
+    ]
+  },
+  {
+    "id": 3902,
+    "titulo": "Assistente de TI",
+    "empresa": "Indica Recrutamento e Seleção por Competência",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Tijucas, SC",
+    "polo": "Florianópolis",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "18/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/assistente-de-ti-262591",
+    "tecnologias": [
+      "GLPI",
+      "Hardware",
+      "Redes de Computadores"
+    ]
+  },
+  {
+    "id": 3864,
+    "titulo": "Técnico de Obras e Manutenção de Redes I",
+    "empresa": "COMPANHIA PARANAENSE DE ENERGIA - COPEL",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Júnior",
+    "localidade": "Maringá, PR",
+    "polo": "Maringá",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "18/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/tecnico-de-obras-e-manutencao-de-redes-i-93857",
+    "tecnologias": [
+      "Firmware",
+      "Testes Funcionais"
+    ]
+  },
+  {
+    "id": 3862,
+    "titulo": "Estágio BDR",
+    "empresa": "AM Gestão de Talentos",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Estágio",
+    "localidade": "Canoas, RS",
+    "polo": "Porto Alegre",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "18/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/bdr-junior-executivo-a-de-desenvolvimento-de-negocios-233799",
+    "tecnologias": [
+      "CRM"
     ]
   },
   {
@@ -37895,6 +38374,23 @@
     ]
   },
   {
+    "id": 3911,
+    "titulo": "Estagiário de Tecnologia da Informação",
+    "empresa": "Hospital INC",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Curitiba, PR",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "14/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagiario-de-tecnologia-da-informacao-188401",
+    "tecnologias": [
+      "Manutenção Preventiva"
+    ]
+  },
+  {
     "id": 3777,
     "titulo": "ANALISTA DE DADOS E AUTOMACAO DE G&G JÚNIOR (506649)",
     "empresa": "Grupo DPSP",
@@ -39240,6 +39736,21 @@
       "Pacote Office",
       "SQL"
     ]
+  },
+  {
+    "id": 3898,
+    "titulo": "Analista de Suporte Técnico I",
+    "empresa": "Neo Negócios & Carreira",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "13/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-suporte-tecnico-i-565374",
+    "tecnologias": []
   },
   {
     "id": 3790,
@@ -41782,6 +42293,64 @@
     ]
   },
   {
+    "id": 3923,
+    "titulo": "Técnico de Manutenção JR",
+    "empresa": "RH NOSSA",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Ilhéus, BA",
+    "polo": "Interior Baiano",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "11/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/tecnico-de-manutencao-jr-489291",
+    "tecnologias": [
+      "Manutenção Preventiva"
+    ]
+  },
+  {
+    "id": 3860,
+    "titulo": "Assistente de Infraestrutura de TI",
+    "empresa": "MAC Construtora e Incorporadora",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "11/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/assistente-de-infraestrutura-de-ti-604703",
+    "tecnologias": [
+      "Active Directory",
+      "Hardware"
+    ]
+  },
+  {
+    "id": 3834,
+    "titulo": "Analista de Engenharia de Dados e BI Júnior",
+    "empresa": "MAC Construtora e Incorporadora",
+    "area": "Data",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "11/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-bi-jr-129800",
+    "tecnologias": [
+      "Análise de Dados",
+      "Automação",
+      "BI",
+      "ETL",
+      "Power BI",
+      "SQL",
+      "Tableau"
+    ]
+  },
+  {
     "id": 3814,
     "titulo": "APRENDIZ - TI - MATUTINO - HOSPITAL GERAL DO GRAJAU",
     "empresa": "Instituto de Responsabilidade Social Sírio-Libanês",
@@ -42806,6 +43375,21 @@
       "Testes Automatizados",
       "TypeScript"
     ]
+  },
+  {
+    "id": 3879,
+    "titulo": "Analista de Qualidade Jr",
+    "empresa": "Enova Foods",
+    "area": "QA",
+    "senioridade": "Júnior",
+    "localidade": "Queluz, SP",
+    "polo": "Estado/SP",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "10/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-qualidade-jr-577406",
+    "tecnologias": []
   },
   {
     "id": 3688,
@@ -43944,6 +44528,25 @@
     ]
   },
   {
+    "id": 3870,
+    "titulo": "Estagiário de Tecnologia",
+    "empresa": "Devant RH",
+    "area": "Outros/TI Geral",
+    "senioridade": "Estágio",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "08/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagiario-de-tecnologia-94380",
+    "tecnologias": [
+      "Análise de Dados",
+      "Banco de Dados",
+      "Python"
+    ]
+  },
+  {
     "id": 3794,
     "titulo": "AUXILIAR DE APOIO À INFORMÁTICA",
     "empresa": "Hospital Porto Dias",
@@ -44229,6 +44832,24 @@
       "Salesforce",
       "Testes Funcionais",
       "Zendesk"
+    ]
+  },
+  {
+    "id": 3874,
+    "titulo": "Estágio em Engenharia Civil",
+    "empresa": "Jobz",
+    "area": "Outros/TI Geral",
+    "senioridade": "Estágio",
+    "localidade": "Serra, ES",
+    "polo": "Vitória",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "07/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-em-engenharia-civil-escritorio-862378",
+    "tecnologias": [
+      "AutoCAD",
+      "Banco de Dados"
     ]
   },
   {
@@ -45234,6 +45855,62 @@
     ]
   },
   {
+    "id": 3895,
+    "titulo": "Analista de Suporte Junior",
+    "empresa": "Patrícia Honorato Desenvolvimento Humano e Organizacional Ltda",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "06/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-suporte-junior-zona-sul-centro-e-zona-norte-587433",
+    "tecnologias": [
+      "Hardware",
+      "Windows"
+    ]
+  },
+  {
+    "id": 3875,
+    "titulo": "Kasznar Adv | Estágio | Computação",
+    "empresa": "KASZNAR ADVOGADOS RJ",
+    "area": "Outros/TI Geral",
+    "senioridade": "Estágio",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "06/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/kasznar-adv-estagio-computacao-897647",
+    "tecnologias": [
+      "Banco de Dados",
+      "Excel"
+    ]
+  },
+  {
+    "id": 3847,
+    "titulo": "Técnico de Informática Jr.",
+    "empresa": "JS Talent",
+    "area": "Field Service / Hardware",
+    "senioridade": "Júnior",
+    "localidade": "São José dos Pinhais, PR",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Remoto",
+    "data_publicacao": "06/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/tecnico-de-informatica-jr-517430",
+    "tecnologias": [
+      "Hardware",
+      "Montagem e Manutenção de PCs",
+      "Suporte Remoto",
+      "Windows"
+    ]
+  },
+  {
     "id": 3775,
     "titulo": "Desenvolvedor Backend Java Júnior",
     "empresa": "4DF Connect",
@@ -46175,6 +46852,24 @@
       "Power BI",
       "Qualidade de Dados",
       "SQL"
+    ]
+  },
+  {
+    "id": 3852,
+    "titulo": "Progamador Web Jr",
+    "empresa": "Empresa de Tecnologia Ltda",
+    "area": "Fullstack",
+    "senioridade": "Júnior",
+    "localidade": "Arujá, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "05/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/progamador-web-jr-284889",
+    "tecnologias": [
+      "Banco de Dados",
+      "Java"
     ]
   },
   {
@@ -48500,6 +49195,49 @@
     ]
   },
   {
+    "id": 3907,
+    "titulo": "Auxiliar de TI",
+    "empresa": "Grupo Genty",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "São José do Rio Preto, SP",
+    "polo": "Interior Paulista Ocidental",
+    "regiao": "Sudeste",
+    "modalidade": "Remoto",
+    "data_publicacao": "03/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/auxiliar-de-ti-871802",
+    "tecnologias": [
+      "CFTV",
+      "Eletrônica",
+      "Redes de Computadores"
+    ]
+  },
+  {
+    "id": 3853,
+    "titulo": "Estágio Engenharia Mecânica - Sistemas de Energia - SP",
+    "empresa": "Work4all",
+    "area": "Hardware / Eletrônica",
+    "senioridade": "Estágio",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/08/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-engenharia-mecanica-sistemas-de-energia-sp-711701",
+    "tecnologias": [
+      "AutoCAD",
+      "Automação Industrial",
+      "ERP",
+      "Espanhol",
+      "Estrutura de Dados",
+      "Inglês",
+      "Pacote Office",
+      "SAP"
+    ]
+  },
+  {
     "id": 3715,
     "titulo": "Estágio De Suporte De TI - Canoas/RS",
     "empresa": "COMISSARIA PIBERNAT",
@@ -49901,6 +50639,21 @@
     ]
   },
   {
+    "id": 3878,
+    "titulo": "Analista de Qualidade Jr",
+    "empresa": "Bennu Consultoria",
+    "area": "QA",
+    "senioridade": "Júnior",
+    "localidade": "Belo Horizonte, MG",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "31/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-qualidade-jr-422965",
+    "tecnologias": []
+  },
+  {
     "id": 3713,
     "titulo": "Estagiário De Tecnologia Da Informação",
     "empresa": "WAPMETAL INDUSTRIA E COMERCIO DE MOLAS E ESTAMPADOS LTDA",
@@ -50703,6 +51456,55 @@
       "UX/UI",
       "Visual Basic/VBA"
     ]
+  },
+  {
+    "id": 3914,
+    "titulo": "Estágio em Administração e Gestão",
+    "empresa": "Confidencial",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Curitiba, PR",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "30/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-em-administracao-e-gestao-293500",
+    "tecnologias": [
+      "Excel"
+    ]
+  },
+  {
+    "id": 3841,
+    "titulo": "Estágio em Desenvolvimento/ suporte",
+    "empresa": "Confidencial",
+    "area": "Engenharia de Software",
+    "senioridade": "Estágio",
+    "localidade": "Maringá, PR",
+    "polo": "Maringá",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "30/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-em-desenvolvimento-suporte-559046",
+    "tecnologias": [
+      "Automação"
+    ]
+  },
+  {
+    "id": 3840,
+    "titulo": "Estágio em Desenvolvimento",
+    "empresa": "Confidencial",
+    "area": "Engenharia de Software",
+    "senioridade": "Estágio",
+    "localidade": "Maringá, PR",
+    "polo": "Maringá",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "30/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-em-desenvolvimento-207369",
+    "tecnologias": []
   },
   {
     "id": 3655,
@@ -52466,6 +53268,36 @@
     "tecnologias": [
       "BI"
     ]
+  },
+  {
+    "id": 3894,
+    "titulo": "Analista de Suporte Jr",
+    "empresa": "BRT Consolidadora e Operadora de Turismo",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Curitiba, PR",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "28/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-suporte-jr-585811",
+    "tecnologias": []
+  },
+  {
+    "id": 3893,
+    "titulo": "Analista de Laboratório JR",
+    "empresa": "Ecofibra Compósitos",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Mandirituba, PR",
+    "polo": "Estado/PR",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "28/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-laboratorio-jr-641527",
+    "tecnologias": []
   },
   {
     "id": 3730,
@@ -54652,6 +55484,45 @@
     ]
   },
   {
+    "id": 3885,
+    "titulo": "Analista de Administração de Vendas JR",
+    "empresa": "RH NOSSA",
+    "area": "Sistemas / ERP",
+    "senioridade": "Júnior",
+    "localidade": "Eusébio, CE",
+    "polo": "Fortaleza",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "24/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-administracao-de-vendas-jr-264893",
+    "tecnologias": [
+      "SAP",
+      "ServiceNow"
+    ]
+  },
+  {
+    "id": 3833,
+    "titulo": "Analista de Dados e Performance Júnior",
+    "empresa": "Humanizata",
+    "area": "Data",
+    "senioridade": "Júnior",
+    "localidade": "Curitiba, PR",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "24/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-dados-e-performance-junior-178621",
+    "tecnologias": [
+      "Análise de Dados",
+      "CRM",
+      "Copilots & Assistentes de IA",
+      "Inteligência Artificial",
+      "LLMs & IA Generativa"
+    ]
+  },
+  {
     "id": 3454,
     "titulo": "Auxiliar Técnico De Informática",
     "empresa": "SPEEDYCOM TECNOLOGIA",
@@ -55397,6 +56268,41 @@
       "Scrum",
       "Spring",
       "Testes Automatizados"
+    ]
+  },
+  {
+    "id": 3922,
+    "titulo": "Suporte Técnico Júnior",
+    "empresa": "Jean Schuch Treinamentos em RH Ltda",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Caxias do Sul, RS",
+    "polo": "Caxias do Sul",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "23/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/suporte-tecnico-junior-826870",
+    "tecnologias": [
+      "CRM"
+    ]
+  },
+  {
+    "id": 3890,
+    "titulo": "Analista de Contas Médicas I",
+    "empresa": "RH Center",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Curitiba, PR",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "23/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-contas-medicas-i-417052",
+    "tecnologias": [
+      "Automação",
+      "SLA"
     ]
   },
   {
@@ -59203,6 +60109,23 @@
     ]
   },
   {
+    "id": 3920,
+    "titulo": "IBEU | TI | ESTÁGIO",
+    "empresa": "IBEU",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "16/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/ibeu-ti-estagio-449612",
+    "tecnologias": [
+      "Manutenção Preventiva"
+    ]
+  },
+  {
     "id": 3476,
     "titulo": "ESTAGIO ENGENHARIA DE TELECOMUNICACOES",
     "empresa": "ZOPONE ENGENHARIA E COMÉRCIO LTDA",
@@ -60719,6 +61642,40 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/desenvolvedor-a-backend-j%C3%BAnior-pleno-%E2%80%93-it-trading-at-btg-pactual-4404018383",
     "tecnologias": []
+  },
+  {
+    "id": 3891,
+    "titulo": "Analista de Engenharia Junior",
+    "empresa": "Romanzza Móveis Ltda",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Flores da Cunha, RS",
+    "polo": "Caxias do Sul",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "14/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-engenharia-junior-466638",
+    "tecnologias": []
+  },
+  {
+    "id": 3844,
+    "titulo": "ESTÁGIO TÉCNICO DE INFORMÁTICA",
+    "empresa": "Connect RH",
+    "area": "Field Service / Hardware",
+    "senioridade": "Estágio",
+    "localidade": "Salvador, BA",
+    "polo": "Salvador",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "14/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-tecnico-de-informatica-314317",
+    "tecnologias": [
+      "Hardware",
+      "Manutenção Preventiva",
+      "Redes de Computadores"
+    ]
   },
   {
     "id": 3522,
@@ -62670,6 +63627,26 @@
     ]
   },
   {
+    "id": 3854,
+    "titulo": "Estágio em Elétrica, Eletrônica, Eletrotécnica e área afins",
+    "empresa": "CIEE RIO",
+    "area": "Hardware / Eletrônica",
+    "senioridade": "Estágio",
+    "localidade": "Petrópolis, RJ",
+    "polo": "Petrópolis",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "09/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-em-eletrica-eletronica-eletrotecnica-e-area-afins-558284",
+    "tecnologias": [
+      "Análise de Dados",
+      "AutoCAD",
+      "Eletrônica",
+      "Power BI"
+    ]
+  },
+  {
     "id": 3668,
     "titulo": "Auxiliar De Informática",
     "empresa": "INFO K INFORMÁTICA",
@@ -63744,6 +64721,21 @@
     ]
   },
   {
+    "id": 3839,
+    "titulo": "Analista de Sistemas Júnior",
+    "empresa": "Empresa de Tecnologia Ltda",
+    "area": "Engenharia de Software",
+    "senioridade": "Júnior",
+    "localidade": "Arujá, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "07/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-sistemas-junior-918357",
+    "tecnologias": []
+  },
+  {
     "id": 3753,
     "titulo": "Técnico De Suporte Jr",
     "empresa": "Randstad",
@@ -64149,6 +65141,58 @@
     ]
   },
   {
+    "id": 3908,
+    "titulo": "Consultor Técnico JR",
+    "empresa": "Grupo Unità",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Jundiaí, SP",
+    "polo": "Jundiaí",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "06/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/consultor-tecnico-jr-709264",
+    "tecnologias": []
+  },
+  {
+    "id": 3877,
+    "titulo": "Vale |Tecnologia | Estágio",
+    "empresa": "Vale",
+    "area": "Outros/TI Geral",
+    "senioridade": "Estágio",
+    "localidade": "Belém (PA), PA",
+    "polo": "Belém",
+    "regiao": "Norte",
+    "modalidade": "Presencial",
+    "data_publicacao": "06/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/vale-tecnologia-estagio-363753",
+    "tecnologias": [
+      "Banco de Dados",
+      "Governança e Riscos (GRC)",
+      "ITIL",
+      "Qualidade de Dados"
+    ]
+  },
+  {
+    "id": 3855,
+    "titulo": "Estágio em Técnico em Eletrônica",
+    "empresa": "Fundação Mudes",
+    "area": "Hardware / Eletrônica",
+    "senioridade": "Estágio",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "06/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-em-tecnico-em-eletronica-9864",
+    "tecnologias": [
+      "Eletrônica"
+    ]
+  },
+  {
     "id": 3595,
     "titulo": "11512672 - TÉCNICO DE SUPORTE JÚNIOR",
     "empresa": "QUALITY SOFTWARE S/A",
@@ -64406,6 +65450,44 @@
     "fonte": "linkedin",
     "url": "https://br.linkedin.com/jobs/view/t%C3%A9cnico-de-suporte-jr-at-3am-it-services-4436952330",
     "tecnologias": []
+  },
+  {
+    "id": 3868,
+    "titulo": "Analista de Controladoria Júnior",
+    "empresa": "Essence",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-controladoria-pleno-541824",
+    "tecnologias": [
+      "SAP"
+    ]
+  },
+  {
+    "id": 3867,
+    "titulo": "Valia | Auditoria (TI e Dados) | Estágio",
+    "empresa": "Valia",
+    "area": "Inteligência Artificial",
+    "senioridade": "Estágio",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/valia-auditoria-ti-e-dados-estagio-338251",
+    "tecnologias": [
+      "Agentes de IA & RAG",
+      "Análise de Dados",
+      "Banco de Dados",
+      "Inteligência Artificial",
+      "Testes Automatizados"
+    ]
   },
   {
     "id": 3459,
@@ -64705,6 +65787,27 @@
       "Power BI",
       "SQL",
       "Testes de Regressão"
+    ]
+  },
+  {
+    "id": 3850,
+    "titulo": "Engenheiro de Software Full Stack Junior",
+    "empresa": "ATIVA BPO EMPRESARIAL LTDA",
+    "area": "Fullstack",
+    "senioridade": "Júnior",
+    "localidade": "Santo André (SP), SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/engenheiro-de-software-full-stack-junior-632718",
+    "tecnologias": [
+      "API REST",
+      "Angular",
+      "JavaScript",
+      "Node.js",
+      "React"
     ]
   },
   {
@@ -65089,6 +66192,43 @@
       "Machine Learning",
       "Python",
       "Shell/Bash"
+    ]
+  },
+  {
+    "id": 3916,
+    "titulo": "Estágio em TI (Suporte)",
+    "empresa": "Jobz",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-em-ti-suporte-911856",
+    "tecnologias": [
+      "Hardware",
+      "PABX",
+      "VoIP"
+    ]
+  },
+  {
+    "id": 3858,
+    "titulo": "Técnico em Eletrônica Jr. - Barra Shopping",
+    "empresa": "VX Case - RIO DE JANEIRO",
+    "area": "Hardware / Eletrônica",
+    "senioridade": "Júnior",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/07/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/tecnico-em-eletronica-jr-barra-shopping-145625",
+    "tecnologias": [
+      "Eletrônica",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -66288,6 +67428,23 @@
     ]
   },
   {
+    "id": 3919,
+    "titulo": "Garantista Jr",
+    "empresa": "Neo Negócios & Carreira",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Campinas, SP",
+    "polo": "Campinas",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "26/06/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/garantista-jr-796486",
+    "tecnologias": [
+      "Excel"
+    ]
+  },
+  {
     "id": 3590,
     "titulo": "Assistente De Implantação E Suporte De Sistemas ERP",
     "empresa": "Elevor Software",
@@ -67215,6 +68372,21 @@
     "tecnologias": []
   },
   {
+    "id": 3912,
+    "titulo": "Estágio Desenvolvedor",
+    "empresa": "Signo Tech",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Curitiba, PR",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "23/06/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-desenvolvedor-263708",
+    "tecnologias": []
+  },
+  {
     "id": 3572,
     "titulo": "ANALISTA SUP HELP DESK JUNIOR",
     "empresa": "Plan Sistemas Campinas",
@@ -68012,6 +69184,30 @@
       "Prisma",
       "Redes de Computadores",
       "Suporte Remoto"
+    ]
+  },
+  {
+    "id": 3882,
+    "titulo": "Analista De Suporte TI | Suporte N1 e N2",
+    "empresa": "Dream Job",
+    "area": "Service Desk / Help Desk",
+    "senioridade": "Júnior",
+    "localidade": "Joinville, SC",
+    "polo": "Joinville",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "19/06/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-suporte-ti-suporte-n1-e-n2-466729",
+    "tecnologias": [
+      "Active Directory",
+      "Hardware",
+      "ITIL",
+      "Linux",
+      "SLA",
+      "Suporte N1/N2",
+      "VPN",
+      "Windows"
     ]
   },
   {
@@ -69248,6 +70444,21 @@
     "tecnologias": []
   },
   {
+    "id": 3869,
+    "titulo": "Auxiliar de Laboratório de Informática",
+    "empresa": "PUC Campinas",
+    "area": "Outros/TI Geral",
+    "senioridade": "Júnior",
+    "localidade": "Campinas, SP",
+    "polo": "Campinas",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "12/06/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/auxiliar-de-laboratorio-de-informatica-852296",
+    "tecnologias": []
+  },
+  {
     "id": 3487,
     "titulo": "Auxiliar De Redes Cod1031",
     "empresa": "AC FOSENCA E SASSO LTDA",
@@ -70472,6 +71683,26 @@
     ]
   },
   {
+    "id": 3903,
+    "titulo": "Assistente de TI.",
+    "empresa": "Motocar Matriz",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Curitiba, PR",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/06/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/assistente-de-ti-591153",
+    "tecnologias": [
+      "Hardware",
+      "Jira",
+      "Power BI",
+      "Service Desk"
+    ]
+  },
+  {
     "id": 1648,
     "titulo": "ANALISTA DE SUPORTE JÚNIOR",
     "empresa": "Proative Technology",
@@ -70592,6 +71823,47 @@
       "Montagem e Manutenção de PCs",
       "Redes de Computadores",
       "Windows"
+    ]
+  },
+  {
+    "id": 3849,
+    "titulo": "Desenvolvedor Fullstack Junior",
+    "empresa": "AnkaTech",
+    "area": "Fullstack",
+    "senioridade": "Júnior",
+    "localidade": "São Paulo, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/06/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/desenvolvedor-fullstack-junior-945795",
+    "tecnologias": [
+      "API REST",
+      "Clean Code",
+      "GraphQL",
+      "JavaScript",
+      "Node.js",
+      "React",
+      "UX/UI"
+    ]
+  },
+  {
+    "id": 3846,
+    "titulo": "JOVEM APRENDIZ DE TECNOLOGIA DA INFORMAÇÃO (PROCESSOS)",
+    "empresa": "Office Total",
+    "area": "Field Service / Hardware",
+    "senioridade": "Aprendiz",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "02/06/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/jovem-aprendiz-de-tecnologia-da-informacao-891231",
+    "tecnologias": [
+      "Hardware",
+      "Montagem e Manutenção de PCs"
     ]
   },
   {
@@ -70870,6 +72142,26 @@
     ]
   },
   {
+    "id": 3906,
+    "titulo": "Auxiliar de TI",
+    "empresa": "Bennu Consultoria",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Belo Horizonte, MG",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/06/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/auxiliar-de-ti-255616",
+    "tecnologias": [
+      "Análise de Dados",
+      "Hardware",
+      "Montagem e Manutenção de PCs",
+      "Office 365"
+    ]
+  },
+  {
     "id": 2533,
     "titulo": "ANALISTA DE SUPORTE JÚNIOR",
     "empresa": "PROATIVE SOLUÇÕES EM TECNOLOGIA DA INFORMAÇÃO LTDA",
@@ -71055,6 +72347,23 @@
       "ERP",
       "Excel",
       "Google Sheets"
+    ]
+  },
+  {
+    "id": 3887,
+    "titulo": "✈️ Programa de Estágio 2026.1",
+    "empresa": "Profectum Tecnologia",
+    "area": "Sistemas / ERP",
+    "senioridade": "Estágio",
+    "localidade": "Fortaleza, CE",
+    "polo": "Fortaleza",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "29/05/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/programa-de-estagio-2026-1-681758",
+    "tecnologias": [
+      "ServiceNow"
     ]
   },
   {
@@ -72126,6 +73435,29 @@
     ]
   },
   {
+    "id": 3830,
+    "titulo": "Estagiário(a) em Desenvolvimento Back-end",
+    "empresa": "Madalozzo Corretora de Seguros Ltda",
+    "area": "Backend",
+    "senioridade": "Estágio",
+    "localidade": "Ponta Grossa, PR",
+    "polo": "Ponta Grossa",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "20/05/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagiario-a-em-desenvolvimento-back-end-176663",
+    "tecnologias": [
+      "CSS",
+      "Clean Code",
+      "Git",
+      "HTML",
+      "JavaScript",
+      "Node.js",
+      "PHP"
+    ]
+  },
+  {
     "id": 2811,
     "titulo": "Estágio TI / Sistemas (Palhoça - SC)",
     "empresa": "Strattner",
@@ -72382,6 +73714,45 @@
       "Selenium",
       "Testes Automatizados",
       "Testes Funcionais"
+    ]
+  },
+  {
+    "id": 3835,
+    "titulo": "Estagiário em Engenharia de Dados",
+    "empresa": "Profectum Tecnologia",
+    "area": "Data",
+    "senioridade": "Estágio",
+    "localidade": "Fortaleza, CE",
+    "polo": "Fortaleza",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "18/05/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagiario-engenharia-de-dados-931740",
+    "tecnologias": [
+      "AWS",
+      "Airflow",
+      "Análise de Dados",
+      "Automação",
+      "Azure",
+      "Banco de Dados",
+      "BigQuery",
+      "Docker",
+      "ETL",
+      "GCP",
+      "Git",
+      "Hadoop",
+      "Linux",
+      "Looker",
+      "Lógica de Programação",
+      "MongoDB",
+      "MySQL",
+      "PostgreSQL",
+      "Power BI",
+      "Python",
+      "SQL",
+      "Spark",
+      "Tableau"
     ]
   },
   {
@@ -72974,6 +74345,25 @@
     "tecnologias": []
   },
   {
+    "id": 3921,
+    "titulo": "Jovem Aprendiz (TI)",
+    "empresa": "Top Móveis e Eletros",
+    "area": "Suporte Técnico",
+    "senioridade": "Aprendiz",
+    "localidade": "Maracanaú, CE",
+    "polo": "Fortaleza",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "07/05/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/jovem-aprendiz-ti-607229",
+    "tecnologias": [
+      "Hardware",
+      "Manutenção Preventiva",
+      "Redes de Computadores"
+    ]
+  },
+  {
     "id": 2683,
     "titulo": "Técnico em Informática",
     "empresa": "RL NET INTERNET LTDA",
@@ -73027,6 +74417,21 @@
       "Montagem e Manutenção de PCs",
       "Redes de Computadores"
     ]
+  },
+  {
+    "id": 3838,
+    "titulo": "Analista de Sistemas Júnior",
+    "empresa": "Empresa de Tecnologia Ltda",
+    "area": "Engenharia de Software",
+    "senioridade": "Júnior",
+    "localidade": "Arujá, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "06/05/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-sistemas-junior-565710",
+    "tecnologias": []
   },
   {
     "id": 2678,
@@ -73140,6 +74545,21 @@
       "IAM",
       "Montagem e Manutenção de PCs"
     ]
+  },
+  {
+    "id": 3905,
+    "titulo": "Assistente de suporte técnico",
+    "empresa": "Heach RH",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Vila Velha, ES",
+    "polo": "Vitória",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "04/05/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/assistente-de-suporte-tecnico-483227",
+    "tecnologias": []
   },
   {
     "id": 2596,
@@ -74270,6 +75690,25 @@
     ]
   },
   {
+    "id": 3909,
+    "titulo": "ESTÁGIO EM TI",
+    "empresa": "Connect RH",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Salvador, BA",
+    "polo": "Salvador",
+    "regiao": "Nordeste",
+    "modalidade": "Remoto",
+    "data_publicacao": "13/04/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-em-ti-670446",
+    "tecnologias": [
+      "Hardware",
+      "Montagem e Manutenção de PCs",
+      "Pacote Office"
+    ]
+  },
+  {
     "id": 2367,
     "titulo": "Analista de Engenharia",
     "empresa": "Metrum Equipamentos de Medição e Teste - ltda",
@@ -74485,6 +75924,23 @@
       "Pacote Office",
       "Python",
       "SQL"
+    ]
+  },
+  {
+    "id": 3904,
+    "titulo": "Assistente de Tecnologia da Informação",
+    "empresa": "Vinte Consultoria",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Nova Lima, MG",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "09/04/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/assistente-de-tecnologia-da-informacao-956384",
+    "tecnologias": [
+      "Redes de Computadores"
     ]
   },
   {
@@ -74870,6 +76326,24 @@
     "tecnologias": []
   },
   {
+    "id": 3899,
+    "titulo": "Analista de Suporte de T.I",
+    "empresa": "Confidencial",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Piraquara, PR",
+    "polo": "Estado/PR",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "01/04/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-suporte-de-t-i-346862",
+    "tecnologias": [
+      "Redes de Computadores",
+      "SLA"
+    ]
+  },
+  {
     "id": 2394,
     "titulo": "Auxiliar de Redes",
     "empresa": "VMX DIGITAL DO BRASIL LTDA",
@@ -75244,6 +76718,21 @@
     ]
   },
   {
+    "id": 3843,
+    "titulo": "Analista Administrativo Jr. - Sindicato na CIDADE DE GOIÁS",
+    "empresa": "Agregar RH",
+    "area": "Field Service / Hardware",
+    "senioridade": "Júnior",
+    "localidade": "Goiás, GO",
+    "polo": "Estado/GO",
+    "regiao": "Centro-Oeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "25/03/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-administrativo-jr-sindicato-756641",
+    "tecnologias": []
+  },
+  {
     "id": 2079,
     "titulo": "TACTUS - ESTÁGIO EM TECNOLOGIA E AUTOMAÇÃO - PRESENCIAL/HÍBRIDO",
     "empresa": "TCT CONTABILIDADE LTDA",
@@ -75275,6 +76764,69 @@
     "url": "https://br.linkedin.com/jobs/view/jovem-aprendiz-inform%C3%A1tica-at-sydle-4390654642",
     "tecnologias": [
       "Hardware"
+    ]
+  },
+  {
+    "id": 3856,
+    "titulo": "Técnico em Eletrônica Jr.",
+    "empresa": "VX Case",
+    "area": "Hardware / Eletrônica",
+    "senioridade": "Júnior",
+    "localidade": "Salvador, BA",
+    "polo": "Salvador",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "24/03/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/tecnico-em-eletronica-jr-590606",
+    "tecnologias": [
+      "Eletrônica",
+      "Manutenção Preventiva"
+    ]
+  },
+  {
+    "id": 3831,
+    "titulo": "Progamador Web Junior",
+    "empresa": "Empresa de Tecnologia Ltda",
+    "area": "Backend",
+    "senioridade": "Júnior",
+    "localidade": "Arujá, SP",
+    "polo": "São Paulo",
+    "regiao": "Sudeste",
+    "modalidade": "Híbrido",
+    "data_publicacao": "24/03/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/progamador-web-junior-222852",
+    "tecnologias": [
+      "API REST",
+      "Banco de Dados",
+      "Bootstrap",
+      "CSS",
+      "Clean Code",
+      "HTML",
+      "Java",
+      "JavaScript",
+      "SQL",
+      "SQL Server",
+      "jQuery"
+    ]
+  },
+  {
+    "id": 3857,
+    "titulo": "Técnico em Eletrônica Jr. - BH Shopping",
+    "empresa": "VX Case",
+    "area": "Hardware / Eletrônica",
+    "senioridade": "Júnior",
+    "localidade": "Belo Horizonte, MG",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "23/03/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/tecnico-em-eletronica-jr-bh-shopping-640170",
+    "tecnologias": [
+      "Eletrônica",
+      "Manutenção Preventiva"
     ]
   },
   {
@@ -75374,6 +76926,28 @@
       "CRM",
       "ERP",
       "Power BI"
+    ]
+  },
+  {
+    "id": 3832,
+    "titulo": "Analista de Dados Júnior",
+    "empresa": "Vinte Consultoria",
+    "area": "Data",
+    "senioridade": "Júnior",
+    "localidade": "Belo Horizonte, MG",
+    "polo": "Belo Horizonte",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "18/03/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-dados-junior-223857",
+    "tecnologias": [
+      "Banco de Dados",
+      "Data Lake",
+      "Data Warehouse",
+      "ETL",
+      "Qualidade de Dados",
+      "SQL"
     ]
   },
   {
@@ -75866,6 +77440,53 @@
     ]
   },
   {
+    "id": 3888,
+    "titulo": "ASSISTENTE DE T.I",
+    "empresa": "ADM - CURITIBA",
+    "area": "Suporte Técnico",
+    "senioridade": "Júnior",
+    "localidade": "Curitiba, PR",
+    "polo": "Curitiba",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "26/02/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/analista-de-infraestrutura-234087",
+    "tecnologias": [
+      "Montagem e Manutenção de PCs"
+    ]
+  },
+  {
+    "id": 3865,
+    "titulo": "Técnico de redes I",
+    "empresa": "Radiante Engenharia",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Júnior",
+    "localidade": "Imperatriz, MA",
+    "polo": "São Luís",
+    "regiao": "Nordeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "26/02/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/tecnico-de-redes-i-458160",
+    "tecnologias": []
+  },
+  {
+    "id": 3861,
+    "titulo": "Auxiliar Técnico de Redes",
+    "empresa": "Radiante Engenharia",
+    "area": "Infraestrutura / Redes",
+    "senioridade": "Júnior",
+    "localidade": "Canoas, RS",
+    "polo": "Porto Alegre",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "26/02/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/auxiliar-tecnico-de-redes-591801",
+    "tecnologias": []
+  },
+  {
     "id": 2605,
     "titulo": "Auxiliar de Suporte Jr",
     "empresa": "NEXT SOLUCOES TECNOLOGICAS LTDA",
@@ -76101,6 +77722,38 @@
     ]
   },
   {
+    "id": 3883,
+    "titulo": "SUPORTE AO USUÁRIO NÍVEL 1 ( NÃO EXIGE EXPERIÊNCIA NA ÁREA)",
+    "empresa": "Traço Desenvolvimento Humano e Organizacional LTDA- ME",
+    "area": "Service Desk / Help Desk",
+    "senioridade": "Júnior",
+    "localidade": "Lavras, MG",
+    "polo": "Santa Rita do Sapucaí",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "19/02/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/suporte-ao-usuario-nivel-1-nao-exige-experiencia-na-area-526776",
+    "tecnologias": []
+  },
+  {
+    "id": 3859,
+    "titulo": "VALE | Engenharias, TI, Química ou Adm | Estágio",
+    "empresa": "Vale",
+    "area": "Hardware / Eletrônica",
+    "senioridade": "Estágio",
+    "localidade": "Canaã dos Carajás, PA",
+    "polo": "Estado/PA",
+    "regiao": "Norte",
+    "modalidade": "Presencial",
+    "data_publicacao": "19/02/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/vale-engenharias-ti-quimica-ou-adm-estagio-9009",
+    "tecnologias": [
+      "Eletrônica"
+    ]
+  },
+  {
     "id": 625,
     "titulo": "Assistente de Suporte Técnico Júnior",
     "empresa": "Pantheon Inc",
@@ -76195,6 +77848,23 @@
       "Pacote Office",
       "Redes de Computadores",
       "Windows"
+    ]
+  },
+  {
+    "id": 3913,
+    "titulo": "Estágio Suporte Técnico",
+    "empresa": "Ottimiza RH",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Maringá, PR",
+    "polo": "Maringá",
+    "regiao": "Sul",
+    "modalidade": "Remoto",
+    "data_publicacao": "14/02/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-suporte-tecnico-717203",
+    "tecnologias": [
+      "Suporte Remoto"
     ]
   },
   {
@@ -76524,6 +78194,40 @@
     ]
   },
   {
+    "id": 3876,
+    "titulo": "Vale Base Metals | Engenharias e Tecnologia | Estágio",
+    "empresa": "Vale",
+    "area": "Outros/TI Geral",
+    "senioridade": "Estágio",
+    "localidade": "Canaã dos Carajás, PA",
+    "polo": "Estado/PA",
+    "regiao": "Norte",
+    "modalidade": "Presencial",
+    "data_publicacao": "04/02/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/vale-base-metals-engenharias-e-tecnologia-estagio-500098",
+    "tecnologias": [
+      "Análise de Dados"
+    ]
+  },
+  {
+    "id": 3871,
+    "titulo": "Estagiário em Relações Públicas",
+    "empresa": "CAMP Mangueira",
+    "area": "Outros/TI Geral",
+    "senioridade": "Estágio",
+    "localidade": "Rio de Janeiro, RJ",
+    "polo": "Rio de Janeiro",
+    "regiao": "Sudeste",
+    "modalidade": "Presencial",
+    "data_publicacao": "03/02/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagiario-adm-comunicacao-884135",
+    "tecnologias": [
+      "Banco de Dados"
+    ]
+  },
+  {
     "id": 2326,
     "titulo": "Desenvolvedor Fullstack Jr.",
     "empresa": "CNP - People solutions",
@@ -76652,6 +78356,21 @@
     "tecnologias": [
       "CRM"
     ]
+  },
+  {
+    "id": 3918,
+    "titulo": "Estágio – Suporte Operacional / Atendente de Copa (manhã)",
+    "empresa": "Equilibrio Gastronomia Funcional",
+    "area": "Suporte Técnico",
+    "senioridade": "Estágio",
+    "localidade": "Foz do Iguaçu, PR",
+    "polo": "Cascavel",
+    "regiao": "Sul",
+    "modalidade": "Presencial",
+    "data_publicacao": "22/01/2026",
+    "fonte": "abler",
+    "url": "https://candidatos.abler.com.br/vagas/estagio-suporte-operacional-atendente-de-copa-tarde-651382",
+    "tecnologias": []
   },
   {
     "id": 2675,
