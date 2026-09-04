@@ -23,7 +23,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-ORDEM_FONTES = ("linkedin", "solides", "gupy", "vagas", "geekhunter", "trampos", "infojobs")
+ORDEM_FONTES = ("linkedin", "solides", "gupy", "vagas", "geekhunter", "trampos", "infojobs", "abler")
 
 PENDENTES_POR_FONTE = {
     "vagas.com": (
