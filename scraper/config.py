@@ -79,6 +79,7 @@ class Settings:
             "linkedin",
             "solides",
             "geekhunter",
+            "infojobs",
         ]
     )
 
