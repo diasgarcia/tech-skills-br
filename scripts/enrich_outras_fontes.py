@@ -221,11 +221,17 @@ def fetch_infojobs(session: PoliteSession, lock: Lock, url: str) -> tuple[dict, 
     Vaga encerrada responde 200 com o fallback da home (sem o painel de
     dados da vaga): devolve status 404 para o enriquecedor marca-la como
     encerrada (mesmo tratamento de um 404 real nas outras fontes).
+
+    Bloqueio suave do portal (200 com BODY VAZIO) NAO vira 404: devolver
+    404 ali marcaria a vaga como encerrada para sempre, quando na
+    verdade era so o IP marcado por alguns minutos.
     """
     with lock:
         response = session.get(url)
         status = session.last_status_code
     if response is None:
+        return {}, status
+    if not (response.text or "").strip():
         return {}, status
     soup = BeautifulSoup(response.text, "html.parser")
     painel = soup.select_one(".js_vacancyDataPanels")
