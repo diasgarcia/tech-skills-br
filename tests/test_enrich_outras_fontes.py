@@ -10,6 +10,7 @@ from scripts.enrich_outras_fontes import (
     _enriquecer,
     _fetch_parando,
     fetch_gupy,
+    fetch_infojobs,
     fetch_trampos,
     fetch_vagas_com,
 )
@@ -56,6 +57,34 @@ def test_fetch_vagas_com_sem_o_seletor_devolve_vazio():
     session = FakeSession([FakeResponse(text="<html>sem descricao</html>")])
     desc, _ = fetch_vagas_com(session, Lock(), "http://x")
     assert desc == ""
+
+
+INFOJOBS_DETAIL_HTML = """
+<html><body>
+  <div class="js_vacancyDataPanels js_applyVacancyHidden">
+    <p class="mb-16 text-break white-space-pre-line">
+      Procuramos pessoa desenvolvedora com Node.js, TypeScript e AWS.
+      Descrição da vaga: - Desenvolver e manter aplicações back-end.
+    </p>
+  </div>
+</body></html>
+"""
+
+
+def test_fetch_infojobs_extrai_a_descricao_completa():
+    session = FakeSession([FakeResponse(text=INFOJOBS_DETAIL_HTML)])
+    dados, status = fetch_infojobs(session, Lock(), "https://www.infojobs.com.br/vaga-x")
+    assert "Node.js" in dados["description"]
+    assert "Descrição da vaga" in dados["description"]
+    assert status is None
+
+
+def test_fetch_infojobs_sem_o_painel_trata_como_encerrada():
+    """Vaga encerrada responde 200 com o fallback da home: vira 404."""
+    session = FakeSession([FakeResponse(text="<html>home do portal</html>")])
+    dados, status = fetch_infojobs(session, Lock(), "http://x")
+    assert dados["description"] == ""
+    assert status == 404
 
 
 def test_fetch_vagas_com_retorna_vazio_quando_api_falha():

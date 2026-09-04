@@ -23,7 +23,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-ORDEM_FONTES = ("linkedin", "solides", "gupy", "vagas", "geekhunter", "trampos")
+ORDEM_FONTES = ("linkedin", "solides", "gupy", "vagas", "geekhunter", "trampos", "infojobs")
 
 PENDENTES_POR_FONTE = {
     "vagas.com": (
@@ -45,6 +45,10 @@ PENDENTES_POR_FONTE = {
     "linkedin": (
         "source='linkedin' AND (description IS NULL OR LENGTH(description) < 30)"
     ),
+    "infojobs": (
+        "source='infojobs' AND (description IS NULL OR LENGTH(description) < 160 "
+        "OR description LIKE '%...')"
+    ),
 }
 
 
@@ -56,13 +60,16 @@ def _parse_enriquecidas(log_path: Path | None):
         texto = log_path.read_text(encoding="utf-8", errors="replace")
         m = re.search(
             r"Enriquecimento concluido: (\d+) vagas\.com, (\d+) trampos, "
-            r"(\d+) gupy e (\d+) geekhunter\.",
+            r"(\d+) gupy, (\d+) geekhunter e (\d+) infojobs\.",
             texto,
         )
         if m:
             outras = {
                 fonte: int(n)
-                for fonte, n in zip(("vagas.com", "trampos", "gupy", "geekhunter"), m.groups())
+                for fonte, n in zip(
+                    ("vagas.com", "trampos", "gupy", "geekhunter", "infojobs"),
+                    m.groups(),
+                )
             }
         m2 = re.search(
             r"Enriquecimento concluido com sucesso: (\d+) vagas enriquecidas!",

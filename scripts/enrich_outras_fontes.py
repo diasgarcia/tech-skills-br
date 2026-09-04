@@ -17,6 +17,11 @@ banco e re-extrai as tecnologias com o skills.yml atual.
   auth) tem um bloco JSON-LD JobPosting com description completa,
   hiringOrganization (nome real da empresa) e datePosted. Alem da
   descricao, corrige o `company` (o coletor so tinha o slug da URL).
+- InfoJobs: o card traz um teaser fixo de 153 caracteres (sempre com
+  "..."); o detalhe (SSR, sem auth) tem a descricao completa em
+  `p.text-break.white-space-pre-line` dentro de `.js_vacancyDataPanels`.
+  Vaga encerrada responde 200 com o fallback da home (sem o painel):
+  nesse caso o status e tratado como 404 para marcar a vaga.
 
 Vagas publicadas ha mais de 30 dias nao sao tentadas (anuncio quase
 certamente expirado). PoliteSession com delay/retry; o lock serializa os
@@ -108,6 +113,21 @@ QUERY_GEEKHUNTER_PENDENTES = """
       )
 """
 
+# InfoJobs: o teaser da listagem tem exatos 153 caracteres e termina em
+# "..."; a descricao completa esta no detalhe. O corte cobre qualquer
+# teaser (menor que 160 ou terminando em "..."). Sem janela de dias:
+# pendente e tentada em toda rodada ate dar certo ou virar 404 (como no
+# Vagas.com e no LinkedIn).
+MIN_DESCRICAO_INFOJOBS = 160
+
+QUERY_INFOJOBS_PENDENTES = """
+    SELECT id, url, title FROM vagas
+    WHERE source = 'infojobs'
+      AND COALESCE(enrich_encerrada, 0) = 0
+      AND (description IS NULL OR LENGTH(description) < ?
+           OR description LIKE '%...')
+"""
+
 
 def fetch_vagas_com(session: PoliteSession, lock: Lock, url: str) -> tuple[str, int | None]:
     with lock:
@@ -189,6 +209,32 @@ def fetch_geekhunter(session: PoliteSession, lock: Lock, url: str) -> tuple[dict
         dados["published_date"] = (data.get("datePosted") or "")[:10]
         break
     return dados, status
+
+
+def fetch_infojobs(session: PoliteSession, lock: Lock, url: str) -> tuple[dict, int | None]:
+    """Busca o detalhe da vaga e extrai a descricao completa do painel.
+
+    A listagem so traz teaser de 153 caracteres; o detalhe (SSR, sem auth)
+    tem a descricao inteira em `p.text-break.white-space-pre-line` dentro
+    de `.js_vacancyDataPanels`.
+
+    Vaga encerrada responde 200 com o fallback da home (sem o painel de
+    dados da vaga): devolve status 404 para o enriquecedor marca-la como
+    encerrada (mesmo tratamento de um 404 real nas outras fontes).
+    """
+    with lock:
+        response = session.get(url)
+        status = session.last_status_code
+    if response is None:
+        return {}, status
+    soup = BeautifulSoup(response.text, "html.parser")
+    painel = soup.select_one(".js_vacancyDataPanels")
+    if painel is None:
+        return {"description": ""}, 404
+    el = painel.select_one("p.text-break.white-space-pre-line")
+    if el is None:
+        return {"description": ""}, 404
+    return {"description": el.get_text(" ", strip=True)}, status
 
 
 def _fetch_parando(parou: threading.Event, parar_em_429: bool, fetch):
@@ -325,6 +371,9 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
     query_geekhunter = QUERY_GEEKHUNTER_PENDENTES
     args_geekhunter: list = []
 
+    query_infojobs = QUERY_INFOJOBS_PENDENTES
+    args_infojobs = [MIN_DESCRICAO_INFOJOBS]
+
     if limit:
         query_vagas += " LIMIT ?"
         args_vagas.append(limit)
@@ -334,6 +383,8 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
         args_gupy.append(limit)
         query_geekhunter += " LIMIT ?"
         args_geekhunter.append(limit)
+        query_infojobs += " LIMIT ?"
+        args_infojobs.append(limit)
 
     with PoliteSession(
         user_agent=USER_AGENT,
@@ -351,7 +402,15 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
         max_retries=2,
         backoff_factor=1.5,
         impersonate="chrome",
-    ) as session_vagas:
+    ) as session_vagas, PoliteSession(
+        # O InfoJobs faz bloqueio suave por IP em rajadas (200 com body
+        # vazio por alguns minutos); delay maior para nao disparar.
+        user_agent=USER_AGENT,
+        delay_seconds=2.0,
+        timeout_seconds=12,
+        max_retries=2,
+        backoff_factor=1.5,
+    ) as session_infojobs:
         c.execute(query_vagas, args_vagas)
         pendentes_vagas = c.fetchall()
         logger.info("Vagas.com pendentes: %d", len(pendentes_vagas))
@@ -395,11 +454,20 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
             parar_em_429=True,
         )
 
+        c.execute(query_infojobs, args_infojobs)
+        logger.info("InfoJobs pendentes: %d", len(c.fetchall()))
+        total_infojobs = _enriquecer(
+            c, session_infojobs, lock, extractor, tech_map,
+            query_infojobs, args_infojobs,
+            lambda sess, lk, url: fetch_infojobs(sess, lk, url),
+        )
+
     conn.commit()
     conn.close()
     logger.info(
-        "Enriquecimento concluido: %d vagas.com, %d trampos, %d gupy e %d geekhunter.",
-        total_vagas, total_trampos, total_gupy, total_geekhunter,
+        "Enriquecimento concluido: %d vagas.com, %d trampos, %d gupy, "
+        "%d geekhunter e %d infojobs.",
+        total_vagas, total_trampos, total_gupy, total_geekhunter, total_infojobs,
     )
 
 
@@ -407,7 +475,7 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="Enriquece descricoes de Vagas.com, Trampos, Gupy e GeekHunter."
+        description="Enriquece descricoes de Vagas.com, Trampos, Gupy, GeekHunter e InfoJobs."
     )
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--janela", type=int, default=JANELA_TENTATIVA_DIAS,
