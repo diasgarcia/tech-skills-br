@@ -5,6 +5,7 @@ import pytest
 from scraper.config import Settings
 from scraper.sources.geekhunter import GeekHunterSource
 from scraper.sources.gupy import GupySource
+from scraper.sources.infojobs import FILTROS_NIVEL_ENTRADA as FILTROS_INFOJOBS, InfoJobsSource
 from scraper.sources.linkedin import GEO_ID_BRASIL, LinkedInSource
 from scraper.sources.solides import FILTROS_NIVEL_ENTRADA as FILTROS_SOLIDES, SolidesSource
 from scraper.sources.trampos import TramposSource
@@ -435,5 +436,122 @@ def test_linkedin_pagina_vazia():
 def test_linkedin_sem_descricao_no_card():
     """A busca não traz descrição; a classificação se apoia no título."""
     assert _source(LinkedInSource)._parse_page(LINKEDIN_HTML, "x")[0].description == ""
+
+
+# Recorte real de
+# GET https://www.infojobs.com.br/vagas-de-emprego.aspx?Palabra=desenvolvedor
+# (dois cards + o contêiner "vacancylistDetail" que NAO e card de vaga).
+INFOJOBS_HTML = """
+<div class="js_vacanciesGridFragment mb-16">
+<div data-typesimilar="" class="card card-shadow card-shadow-hover text-break mb-16 pb-24 grid-row js_rowCard active">
+  <div id="vacancy11985552" data-modelversion="" data-id="11985552" class="pt-24 px-24 cursor-pointer js_vacancyLoad js_rowCard js_cardLink" data-href="/vaga-de-desenvolvedor-devops-backend-senior-em-__11985552.aspx" data-testabbutton="false">
+    <div class="d-flex flex-wrap gap-8">
+      <div hidden class="js_date" data-value="2026/09/03 05:32:00"></div>
+    </div>
+    <div class="d-flex gap-8 justify-content-between">
+      <a class="text-decoration-none" href="/vaga-de-desenvolvedor-devops-backend-senior-em-__11985552.aspx">
+        <h2 class="h3 font-weight-bold text-body mb-2 js_vacancyTitle">Desenvolvedor Devops Backend S&#xEA;nior</h2>
+      </a>
+      <div class="text-medium small text-nowrap">Ontem</div>
+    </div>
+    <div class="d-flex align-items-baseline">
+      <div class="mr-8"><span class="font-weight-bold text-body">4,5</span></div>
+      <div class="text-body"> Empresa <span class="text-nowrap"> confidencial <span class="cursor-pointer"></span></span></div>
+    </div>
+    <div class="mb-8"> Todo Brasil </div>
+    <div class="d-inline-flex flex-wrap mb-8 text-medium" style="gap: 2px 16px">
+      <div><svg class="icon icon-money icon-size-16"></svg> A combinar </div>
+      <div><svg class="icon icon-suitcase icon-size-16"></svg> Entre 1 e 3 anos </div>
+      <div><svg class="icon icon-graduate-hat icon-size-16"></svg> Ensino Superior </div>
+      <div><svg class="icon icon-house-and-building icon-size-16"></svg> H&#xED;brido </div>
+    </div>
+    <div class="text-medium"> Procuramos uma Pessoa Desenvolvedora DevOps Back-End S&#xEA;nior com perfil altamente t&#xE9;cnico ... </div>
+  </div>
+</div>
+<div data-typesimilar="" class="card card-shadow card-shadow-hover text-break mb-16 pb-24 grid-row js_rowCard ">
+  <div id="vacancy11983931" data-modelversion="" data-id="11983931" class="pt-24 px-24 cursor-pointer js_vacancyLoad js_rowCard js_cardLink" data-href="/vaga-de-desenvolvedor-sr-em-sao-paulo__11983931.aspx">
+    <div class="d-flex flex-wrap gap-8">
+      <div hidden class="js_date" data-value="2026/09/03 01:52:00"></div>
+    </div>
+    <div class="d-flex gap-8 justify-content-between">
+      <a class="text-decoration-none" href="/vaga-de-desenvolvedor-sr-em-sao-paulo__11983931.aspx">
+        <h2 class="h3 font-weight-bold text-body mb-2 js_vacancyTitle">Desenvolvedor Sr.</h2>
+      </a>
+      <div class="text-medium small text-nowrap">Ontem</div>
+    </div>
+    <div class="d-flex align-items-baseline">
+      <div class="text-body">
+        <a class="text-body text-decoration-none" href="https://www.infojobs.com.br/gafor-ltda">
+          <span class="text-nowrap"> GAFOR <span class="cursor-pointer"></span></span>
+        </a>
+      </div>
+    </div>
+    <div class="mb-8"> Guarulhos - SP , 0 Km de voc&#xEA;. </div>
+    <div class="d-inline-flex flex-wrap mb-8 text-medium" style="gap: 2px 16px">
+      <div><svg class="icon icon-money icon-size-16"></svg> R$ 6.000,00 </div>
+      <div><svg class="icon icon-house-and-building icon-size-16"></svg> Presencial </div>
+    </div>
+    <div class="text-medium"> Desenvolvimento e manuten&#xE7;&#xE3;o de sistemas ... </div>
+  </div>
+</div>
+<div id="vacancylistDetailContainer" class="col-12 col-lg-auto position-relative detail-container">
+  <div id="vacancylistDetail" class="shadow-loading"></div>
+</div>
+</div>
+"""
+
+
+def test_infojobs_parse_page_mapeia_campos():
+    jobs = _source(InfoJobsSource)._parse_page(INFOJOBS_HTML, "desenvolvedor")
+    assert [j.external_id for j in jobs] == ["11985552", "11983931"]
+
+    job = jobs[0]
+    assert job.source == "infojobs"
+    assert job.title == "Desenvolvedor Devops Backend Sênior"
+    assert job.company == "confidencial"
+    assert job.url == (
+        "https://www.infojobs.com.br/vaga-de-desenvolvedor-devops-backend-"
+        "senior-em-__11985552.aspx"
+    )
+    assert job.location == "Todo Brasil"
+    assert job.workplace_type == "Híbrido"
+    assert job.published_date == "2026-09-03"
+    assert "DevOps Back-End" in job.description
+
+
+def test_infojobs_empresa_com_link_e_local_sem_km():
+    job = _source(InfoJobsSource)._parse_page(INFOJOBS_HTML, "x")[1]
+    assert job.company == "GAFOR"
+    assert job.location == "Guarulhos - SP"
+    assert job.workplace_type == "Presencial"
+
+
+def test_infojobs_ignora_containers_que_nao_sao_cards():
+    # `div[id^=vacancy]` pega tambem os contêineres vacancylistDetail*:
+    # o parse nao pode devolver cards sem data-id.
+    assert len(_source(InfoJobsSource)._parse_page(INFOJOBS_HTML, "x")) == 2
+
+
+def test_infojobs_ignora_vaga_anterior_a_2026():
+    html = INFOJOBS_HTML.replace(
+        'data-value="2026/09/03 05:32:00"', 'data-value="2025/12/31 10:00:00"'
+    )
+    jobs = _source(InfoJobsSource)._parse_page(html, "x")
+    assert [j.external_id for j in jobs] == ["11983931"]
+
+
+def test_infojobs_senioridade_so_nos_filtros_nativos():
+    jobs = _source(InfoJobsSource)._parse_page(INFOJOBS_HTML, "Estágio")
+    assert all(j.seniority == "Estágio" for j in jobs)
+    jobs = _source(InfoJobsSource)._parse_page(INFOJOBS_HTML, "desenvolvedor junior")
+    assert all(j.seniority == "" for j in jobs)
+
+
+def test_infojobs_filtros_nativos_por_nivel():
+    assert set(FILTROS_INFOJOBS) == {"Estágio", "Estagiário", "Trainee", "Aprendiz"}
+    assert FILTROS_INFOJOBS["Estágio"] == {"categoria": "74", "tipocontrato": "4"}
+    assert FILTROS_INFOJOBS["Estagiário"] == {"categoria": "74", "im": "1"}
+    assert FILTROS_INFOJOBS["Trainee"] == {"categoria": "74", "tipocontrato": "15"}
+    assert FILTROS_INFOJOBS["Aprendiz"] == {"categoria": "74", "tipocontrato": "19"}
 
 
