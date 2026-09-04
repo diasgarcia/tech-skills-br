@@ -80,6 +80,7 @@ class Settings:
             "solides",
             "geekhunter",
             "infojobs",
+            "abler",
         ]
     )
 
@@ -94,6 +95,11 @@ class Settings:
     page_size: int = 100  # a API da Gupy rejeita limit > 100 (HTTP 400)
     start_page: int = 1
     max_pages_per_term: int = 15
+
+    # Abler: janela de recencia do sitemap (lastmod). Padrao 1 = ultimas
+    # 24h (rodada diaria); a coleta completa usa um valor grande via
+    # --abler-days. O corte de 2026 (data minima do projeto) vale sempre.
+    abler_days_back: int = 1
 
     only_junior: bool = True
 
