@@ -107,8 +107,11 @@ mobile:
 
 dados:
   Power BI: [power bi, powerbi]
+  DAX: [dax]
   Excel: [excel, planilhas excel, excel avancado]
   Word: [word, microsoft word]
+  Pacote Office: [pacote office, microsoft office]
+  Google Sheets: [google sheets, planilhas google]
   Pandas: [pandas]
   NumPy: [numpy]
   Polars: [polars]
@@ -148,7 +151,7 @@ inteligencia_artificial:
 
 
 bancos:
-  Banco de Dados: [banco de dados, bancos de dados, base de dados]
+  Banco de Dados: [banco de dados, bancos de dados, bases de dados, base de dados]
   PostgreSQL: [postgresql, postgres, pgsql]
   MySQL: [mysql]
   SQL Server: [sql server, sqlserver, ms sql]
@@ -216,7 +219,7 @@ suporte_infra:
   Windows Server: [windows server, servidores windows]
   Active Directory: [active directory, ad, ldap, gpo]
   Windows: [windows, windows 10, windows 11]
-  Redes de Computadores: [tcp ip, redes de computadores, redes corporativas, redes locais, switches, roteadores, routing, switching, dhcp, dns, lan, wan, vlan, cabeamento estruturado, mikrotik]
+  Redes de Computadores: [tcp ip, tcp udp, redes de computadores, redes de dados, redes corporativas, redes locais, dispositivos de rede, switches, roteadores, routing, switching, dhcp, dns, lan, wan, vlan, cabeamento estruturado, fibra optica, ftth, gpon, mikrotik]
 
   VPN: [vpn]
   Firewall: [firewall, pfSense, fortinet, fortigate]
@@ -239,12 +242,15 @@ suporte_infra:
   Microsoft Teams: [microsoft teams, ms teams]
   ITSM: [itsm, ferramentas de itsm]
   Backup: [backup, rotinas de backup, becape]
+  Storage: [storage]
   VoIP: [voip, telefonia ip]
+  PABX: [pabx]
   Office 365: [office 365, o365, microsoft 365, m365]
+  ServiceNow: [servicenow]
   Hardware: [hardware, equipamentos de ti]
-  Montagem e Manutenção de PCs: [montagem de computadores, manutencao de computadores, montagem e manutencao, formatacao de computadores]
+  Montagem e Manutenção de PCs: [montagem de computadores, manutencao de computadores, manutencao basica de computadores, montagem e manutencao, formatacao de computadores, formatacao de maquinas, preparacao de maquinas]
   Manutenção Preventiva: [manutencao preventiva, manutencao corretiva]
-  VMware: [vmware, virtualizacao, proxmox]
+  VMware: [vmware, virtualizacao, ambientes virtualizados, proxmox]
   Hyper-V: [hyper-v, hyper v]
 
   Cisco: [cisco]
@@ -264,7 +270,7 @@ seguranca:
 
 
 engenharia_praticas:
-  API REST: [api rest, rest, restful, apis rest, web api]
+  API REST: [api rest, apis web, rest, restful, apis rest, web api]
   gRPC: [grpc]
   WebSockets: [websockets, websocket]
   OpenAPI/Swagger: [swagger, openapi]
@@ -288,6 +294,7 @@ engenharia_praticas:
   Inglês: [ingles, english, ingles intermediario, ingles avancado, ingles fluente, intermediate english]
   Espanhol: [espanhol, spanish, espanhol basico, espanhol intermediario, espanhol avancado]
   Figma: [figma]
+  AutoCAD: [autocad]
   UX/UI: [ux, ui, ux ui, design system]
   ERP: [erp, sistemas erp, sistema integrado]
   SAP: [sap, sap s4hana, sap ecc]
@@ -304,6 +311,7 @@ hardware_eletronica:
   Sistemas Embarcados: [sistemas embarcados, embarcados, embedded systems, embedded c]
   Microcontroladores: [microcontroladores, microcontrolador, stm32, pic, avr, arm cortex, esp32, esp8266, arduino, raspberry pi]
   IoT: [iot, internet das coisas, internet of things]
+  Robótica: [robotica]
   Eletrônica: [eletronica, circuitos eletricos, circuitos eletronicos, pcb, esquematicos, osciloscopio]
   CFTV: [cftv, cftv ip, cameras ip, seguranca eletronica]
   Automação Industrial: [automacao industrial, clp, plc, scada]
