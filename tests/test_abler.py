@@ -1,11 +1,20 @@
 """Testes do coletor da Abler, com fixtures capturadas do portal (offline)."""
 
 import csv
+from datetime import datetime, timedelta, timezone
 
 from scraper.config import Settings
 from scraper.sources.abler import CHECKPOINT_NAME, AblerSource
 
-SITEMAP_XML = """<?xml version="1.0" encoding="UTF-8"?>
+
+def _lastmod(horas_atras: int) -> str:
+    """Data de lastmod relativa a agora: fixtures de janela nao expiram."""
+    return (datetime.now(timezone.utc) - timedelta(hours=horas_atras)).strftime(
+        "%Y-%m-%dT%H:%M:%S+00:00"
+    )
+
+
+SITEMAP_XML = f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://candidatos.abler.com.br/vagas/</loc>
@@ -13,15 +22,15 @@ SITEMAP_XML = """<?xml version="1.0" encoding="UTF-8"?>
   </url>
   <url>
     <loc>https://candidatos.abler.com.br/vagas/217-estagio-de-engenharia-134508</loc>
-    <lastmod>2026-09-04T11:00:00+00:00</lastmod>
+    <lastmod>{_lastmod(1)}</lastmod>
   </url>
   <url>
     <loc>https://candidatos.abler.com.br/vagas/analista-de-suporte-943244</loc>
-    <lastmod>2026-09-04T10:00:00+00:00</lastmod>
+    <lastmod>{_lastmod(2)}</lastmod>
   </url>
   <url>
     <loc>https://candidatos.abler.com.br/vagas/vendedora-de-loja-332701</loc>
-    <lastmod>2026-09-04T11:00:00+00:00</lastmod>
+    <lastmod>{_lastmod(1)}</lastmod>
   </url>
   <url>
     <loc>https://candidatos.abler.com.br/vagas/advogado-a-jr-757511</loc>
