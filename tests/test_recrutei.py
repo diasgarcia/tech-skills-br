@@ -1,15 +1,24 @@
 """Testes do coletor do Recrutei, com fixtures capturadas do portal (offline)."""
 
 import csv
+from datetime import datetime, timedelta, timezone
 
 from scraper.config import Settings
 from scraper.sources.recrutei import CHECKPOINT_NAME, RecruteiSource
 
-SITEMAP_XML = """<?xml version="1.0" encoding="UTF-8"?>
+
+def _lastmod(horas_atras: int) -> str:
+    """Data de lastmod relativa a agora: fixtures de janela nao expiram."""
+    return (datetime.now(timezone.utc) - timedelta(hours=horas_atras)).strftime(
+        "%Y-%m-%dT%H:%M:%S+00:00"
+    )
+
+
+SITEMAP_XML = f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://empregos.recrutei.com.br/vaga/alpha-estagio/153211-estagio-em-ti</loc>
-    <lastmod>2026-09-04T10:00:00+00:00</lastmod>
+    <lastmod>{_lastmod(1)}</lastmod>
   </url>
   <url>
     <loc>https://empregos.recrutei.com.br/vaga/outra/999999-antiga</loc>
@@ -259,7 +268,7 @@ def test_checkpoint_grava_e_retoma(tmp_path):
     sitemap2 = SITEMAP_XML.replace(
         '999999-antiga</loc>',
         '999999-fresca</loc>'
-    ).replace('2026-08-01T10:00:00+00:00', '2026-09-04T11:00:00+00:00')
+    ).replace('2026-08-01T10:00:00+00:00', _lastmod(2))
     src = _source_com_sessao(
         tmp_path,
         [
