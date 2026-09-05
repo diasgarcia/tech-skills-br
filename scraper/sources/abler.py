@@ -155,9 +155,13 @@ class AblerSource(JobSource):
                     writer.writerow(job.to_row())
                     fh.flush()
                     if len(jobs) % 25 == 0:
-                        logger.info("[%s] progresso: %d vagas novas",
-                                    self.name, len(jobs))
-                        self.report(len(jobs))
+                        if self.settings.parallel_sources:
+                            logger.debug("[%s] progresso: %d vagas novas",
+                                         self.name, len(jobs))
+                        else:
+                            logger.info("[%s] progresso: %d vagas novas",
+                                        self.name, len(jobs))
+                        self.report(len(jobs), current_term=f"{len(jobs)} vagas novas")
                 else:
                     completou = True
         finally:
