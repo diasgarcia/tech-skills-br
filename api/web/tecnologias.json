@@ -29,7 +29,7 @@
     "grupo": "bancos",
     "vagas": 709,
     "percentual_total": 16.4,
-    "percentual_base_tech": 18.6
+    "percentual_base_tech": 18.7
   },
   {
     "posicao": 5,
@@ -53,7 +53,7 @@
     "grupo": "engenharia_praticas",
     "vagas": 637,
     "percentual_total": 14.8,
-    "percentual_base_tech": 16.7
+    "percentual_base_tech": 16.8
   },
   {
     "posicao": 8,
@@ -277,7 +277,7 @@
     "grupo": "linguagens",
     "vagas": 173,
     "percentual_total": 4.0,
-    "percentual_base_tech": 4.5
+    "percentual_base_tech": 4.6
   },
   {
     "posicao": 36,
@@ -285,7 +285,7 @@
     "grupo": "engenharia_praticas",
     "vagas": 173,
     "percentual_total": 4.0,
-    "percentual_base_tech": 4.5
+    "percentual_base_tech": 4.6
   },
   {
     "posicao": 37,
@@ -539,9 +539,9 @@
     "posicao": 68,
     "nome": "Cibersegurança",
     "grupo": "seguranca",
-    "vagas": 90,
+    "vagas": 89,
     "percentual_total": 2.1,
-    "percentual_base_tech": 2.4
+    "percentual_base_tech": 2.3
   },
   {
     "posicao": 69,
@@ -563,22 +563,22 @@
     "posicao": 71,
     "nome": "UX/UI",
     "grupo": "engenharia_praticas",
-    "vagas": 89,
-    "percentual_total": 2.1,
-    "percentual_base_tech": 2.3
-  },
-  {
-    "posicao": 72,
-    "nome": "ServiceNow",
-    "grupo": "suporte_infra",
     "vagas": 88,
     "percentual_total": 2.0,
     "percentual_base_tech": 2.3
   },
   {
-    "posicao": 73,
+    "posicao": 72,
     "nome": "Angular",
     "grupo": "frameworks",
+    "vagas": 87,
+    "percentual_total": 2.0,
+    "percentual_base_tech": 2.3
+  },
+  {
+    "posicao": 73,
+    "nome": "ServiceNow",
+    "grupo": "suporte_infra",
     "vagas": 87,
     "percentual_total": 2.0,
     "percentual_base_tech": 2.3
@@ -613,7 +613,7 @@
     "grupo": "engenharia_praticas",
     "vagas": 78,
     "percentual_total": 1.8,
-    "percentual_base_tech": 2.0
+    "percentual_base_tech": 2.1
   },
   {
     "posicao": 78,
@@ -785,19 +785,19 @@
   },
   {
     "posicao": 99,
-    "nome": "Qualidade de Software",
-    "grupo": "qa_testes",
+    "nome": "SIEM/SOC",
+    "grupo": "seguranca",
     "vagas": 52,
     "percentual_total": 1.2,
     "percentual_base_tech": 1.4
   },
   {
     "posicao": 100,
-    "nome": "SIEM/SOC",
-    "grupo": "seguranca",
-    "vagas": 52,
+    "nome": "Qualidade de Software",
+    "grupo": "qa_testes",
+    "vagas": 51,
     "percentual_total": 1.2,
-    "percentual_base_tech": 1.4
+    "percentual_base_tech": 1.3
   },
   {
     "posicao": 101,
@@ -913,14 +913,6 @@
   },
   {
     "posicao": 115,
-    "nome": "Testes Manuais",
-    "grupo": "qa_testes",
-    "vagas": 33,
-    "percentual_total": 0.8,
-    "percentual_base_tech": 0.9
-  },
-  {
-    "posicao": 116,
     "nome": "Google Sheets",
     "grupo": "dados",
     "vagas": 32,
@@ -928,9 +920,17 @@
     "percentual_base_tech": 0.8
   },
   {
-    "posicao": 117,
+    "posicao": 116,
     "nome": "Storage",
     "grupo": "suporte_infra",
+    "vagas": 32,
+    "percentual_total": 0.7,
+    "percentual_base_tech": 0.8
+  },
+  {
+    "posicao": 117,
+    "nome": "Testes Manuais",
+    "grupo": "qa_testes",
     "vagas": 32,
     "percentual_total": 0.7,
     "percentual_base_tech": 0.8
@@ -1033,14 +1033,6 @@
   },
   {
     "posicao": 130,
-    "nome": "Figma",
-    "grupo": "engenharia_praticas",
-    "vagas": 24,
-    "percentual_total": 0.6,
-    "percentual_base_tech": 0.6
-  },
-  {
-    "posicao": 131,
     "nome": "OAuth/JWT",
     "grupo": "seguranca",
     "vagas": 24,
@@ -1048,7 +1040,7 @@
     "percentual_base_tech": 0.6
   },
   {
-    "posicao": 132,
+    "posicao": 131,
     "nome": "Selenium",
     "grupo": "qa_testes",
     "vagas": 24,
@@ -1056,7 +1048,7 @@
     "percentual_base_tech": 0.6
   },
   {
-    "posicao": 133,
+    "posicao": 132,
     "nome": "Delphi",
     "grupo": "linguagens",
     "vagas": 23,
@@ -1064,9 +1056,17 @@
     "percentual_base_tech": 0.6
   },
   {
-    "posicao": 134,
+    "posicao": 133,
     "nome": "Elasticsearch",
     "grupo": "bancos",
+    "vagas": 23,
+    "percentual_total": 0.5,
+    "percentual_base_tech": 0.6
+  },
+  {
+    "posicao": 134,
+    "nome": "Figma",
+    "grupo": "engenharia_praticas",
     "vagas": 23,
     "percentual_total": 0.5,
     "percentual_base_tech": 0.6
