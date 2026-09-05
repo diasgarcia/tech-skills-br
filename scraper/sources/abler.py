@@ -129,7 +129,7 @@ class AblerSource(JobSource):
         try:
             with open(checkpoint, "a", encoding="utf-8-sig", newline="") as fh:
                 writer = None
-                for url in alvos:
+                for idx, url in enumerate(alvos, 1):
                     vid_url = url.rstrip("/").rsplit("-", 1)[-1]
                     if vid_url.isdigit() and vid_url in seen:
                         continue  # ja esta no checkpoint: nao refaz o GET
@@ -161,7 +161,11 @@ class AblerSource(JobSource):
                         else:
                             logger.info("[%s] progresso: %d vagas novas",
                                         self.name, len(jobs))
-                        self.report(len(jobs), current_term=f"{len(jobs)} vagas novas")
+                        self.report(
+                            len(jobs),
+                            current_term=f"{len(jobs)} vagas novas",
+                            progresso=idx / len(alvos),
+                        )
                 else:
                     completou = True
         finally:
