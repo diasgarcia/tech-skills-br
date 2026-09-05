@@ -34,16 +34,26 @@ class JobSource(ABC):
         self.stats = SourceStats(source=self.name)
         self.progress_callback = None
 
-    def report(self, total: int) -> None:
-        """Avisa o coletor externo quantas vagas esta fonte ja tem.
-
-        Usado pelo modo paralelo para montar a linha de resumo periodico
-        (::group::) sem depender do log. No-op sem callback.
-        """
+    def report(
+        self,
+        total: int,
+        current_term: str | None = None,
+        requests: int | None = None,
+    ) -> None:
+        """Avisa o coletor externo quantas vagas esta fonte ja tem."""
         if self.progress_callback is not None:
+            reqs = requests if requests is not None else self.session.request_count
             try:
-                self.progress_callback(total)
-            except Exception:  # o resumo nao pode derrubar a coleta
+                self.progress_callback(total, current_term, reqs)
+            except TypeError:
+                try:
+                    self.progress_callback(total, current_term)
+                except TypeError:
+                    try:
+                        self.progress_callback(total)
+                    except Exception:
+                        pass
+            except Exception:
                 pass
 
     def page_limit(self) -> int:
@@ -57,7 +67,8 @@ class JobSource(ABC):
     def fetch(self, terms: list[str]) -> list[Job]:
         """Coleta todos os termos, isolando falhas de um termo dos demais."""
         jobs: list[Job] = []
-        for term in terms:
+        total_terms = len(terms)
+        for idx, term in enumerate(terms, 1):
             try:
                 found = self.fetch_term(term)
             except Exception as exc:  # nao derruba a coleta inteira
@@ -65,9 +76,17 @@ class JobSource(ABC):
                 logger.warning("Erro coletando %s", message)
                 self.stats.errors.append(message)
                 continue
-            logger.info("[%s] '%s' -> %d vagas", self.name, term, len(found))
+            if self.settings.parallel_sources:
+                logger.debug("[%s] '%s' -> %d vagas", self.name, term, len(found))
+            else:
+                logger.info("[%s] '%s' -> %d vagas", self.name, term, len(found))
             jobs.extend(found)
-            self.report(len(jobs))
+            self.report(
+                len(jobs),
+                current_term=f"[{idx}/{total_terms}] {term}",
+                requests=self.session.request_count,
+            )
         self.stats.raw_jobs = len(jobs)
         self.stats.requests_made = self.session.request_count
         return jobs
+
