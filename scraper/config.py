@@ -64,6 +64,22 @@ def load_search_terms() -> list[str]:
 
 SEARCH_TERMS: list[str] = load_search_terms()
 
+# Matriz de delays da rodada padrao, medida em 05/09 (wiki "Limites e
+# Bloqueios"). LinkedIn 1.0s (ponto doce; 0.5s sofre backpressure da
+# API), InfoJobs 2.0s (bloqueio suave), Vagas.com 2.0s (Cloudflare),
+# Solides 2.0s e as demais 1.0s (sem limite observado).
+DELAYS_PADRAO: dict[str, float] = {
+    "linkedin": 1.0,
+    "infojobs": 2.0,
+    "vagas": 2.0,
+    "solides": 2.0,
+    "gupy": 1.0,
+    "trampos": 1.0,
+    "geekhunter": 1.0,
+    "abler": 1.0,
+    "recrutei": 1.0,
+}
+
 
 
 @dataclass
@@ -87,20 +103,25 @@ class Settings:
 
     output_dir: Path = DEFAULT_OUTPUT_DIR
 
-    delay_seconds: float = 1.5
+    delay_seconds: float = 1.0
     timeout_seconds: float = 30.0
     max_retries: int = 3
     backoff_factor: float = 1.5
     user_agent: str = USER_AGENT
 
-    # Delay por fonte (experimental): sobrescreve o delay padrao para a
-    # fonte indicada. Ex.: {"linkedin": 1.0}. Usado nos experimentos de
-    # tempo da coleta.
-    source_delays: dict[str, float] = field(default_factory=dict)
+    # Delay por fonte: sobrescreve o delay padrao para a fonte indicada.
+    # A matriz e o padrao da rodada (medido em 05/09, ver a wiki
+    # "Limites e Bloqueios"): LinkedIn 1.0s (ponto doce; 0.5s sofre
+    # backpressure), InfoJobs e Vagas.com 2.0s (bloqueio suave e
+    # Cloudflare), Solides 2.0s e as demais 1.0s. Os flags da CLI
+    # sobrescrevem por cima quando usados.
+    source_delays: dict[str, float] = field(
+        default_factory=lambda: dict(DELAYS_PADRAO)
+    )
 
-    # Coleta paralela entre fontes (experimental): cada fonte roda em
-    # thread propria com sessao propria; o delay vale por dominio.
-    parallel_sources: bool = False
+    # Coleta paralela entre fontes: cada fonte roda em thread propria
+    # com sessao propria; o delay vale por dominio. Padrao da rodada.
+    parallel_sources: bool = True
 
     page_size: int = 100  # a API da Gupy rejeita limit > 100 (HTTP 400)
     start_page: int = 1

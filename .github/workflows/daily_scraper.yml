@@ -69,23 +69,11 @@ jobs:
       run: |
         # tee em vez de capturar em variavel: o log aparece ao vivo no
         # terminal da run (captura so exibiria no final).
-        # Coleta sempre paralela, com a matriz de delays decidida em 05/09
-        # a partir das medicoes: LinkedIn 1.0s (0.5s foi testado em 05/09 e
-        # PIOROU: a API segura as respostas sob ritmo maior - ~33 req/min a
-        # 0.5s contra ~50 req/min a 1.0s), InfoJobs 2.0s (bloqueio suave
-        # medido em rajada), Vagas.com 2.0s (Cloudflare no detalhe do mesmo
-        # portal), Solides 2.0s (inalterado) e as demais fontes 1.0s (sem
-        # evidencia de limite ate agora).
-        FLAGS="--max-pages 200 --delay 1 --no-enrich --parallel-sources \
-          --source-delay linkedin 1 \
-          --source-delay infojobs 2 \
-          --source-delay vagas 2 \
-          --source-delay solides 2 \
-          --source-delay gupy 1 \
-          --source-delay trampos 1 \
-          --source-delay geekhunter 1 \
-          --source-delay abler 1 \
-          --source-delay recrutei 1"
+        # Os defaults vivem no codigo (scraper/config.py): coleta paralela
+        # ligada e a matriz de delays por fonte (LinkedIn 1.0s; InfoJobs,
+        # Vagas.com e Solides 2.0s; demais 1.0s - medido em 05/09, ver a
+        # wiki "Limites e Bloqueios"). A CLI so passa o teto de paginas.
+        FLAGS="--max-pages 200 --no-enrich"
         python main.py $FLAGS 2>&1 | tee /tmp/coleta.log
         echo "BRUTAS=$(grep -oP 'Total bruto: \K[0-9]+' /tmp/coleta.log | tail -1)" >> "$GITHUB_ENV"
         echo "ELEGIVEIS=$(grep -oP 'RANKING DE AREAS -- \K[0-9]+' /tmp/coleta.log | tail -1)" >> "$GITHUB_ENV"

@@ -2,16 +2,23 @@
 
 import os
 
-from scraper.config import Settings, _load_dotenv
+from scraper.config import DELAYS_PADRAO, Settings, _load_dotenv
 
 
 def test_settings_defaults_do_projeto():
     s = Settings()
-    assert s.delay_seconds == 1.5
+    assert s.delay_seconds == 1.0
     assert s.page_size == 100
     assert s.max_pages_per_term == 15
     assert s.only_junior is True
     assert s.enrich_linkedin is True
+    assert s.parallel_sources is True
+    assert s.source_delays == DELAYS_PADRAO
+    assert s.source_delays["linkedin"] == 1.0
+    assert s.source_delays["infojobs"] == 2.0
+    assert s.source_delays["vagas"] == 2.0
+    assert s.source_delays["solides"] == 2.0
+    assert s.source_delays["gupy"] == 1.0
 
 
 def test_ensure_output_dir_cria_diretorio(tmp_path):
