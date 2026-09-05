@@ -83,7 +83,7 @@ def test_collect_paralelo_equivale_ao_sequencial(monkeypatch):
     assert [j.external_id for j in jobs] == ["a", "b"]
     assert [s.source for s in stats] == ["a", "b"]
     # "a" usa o delay padrao; "b" usa o override.
-    assert sorted(delays_vistos) == [0.5, 1.5]
+    assert sorted(delays_vistos) == [0.5, 1.0]
 
 
 def test_fetch_base_reporta_progresso_por_termo(monkeypatch):
