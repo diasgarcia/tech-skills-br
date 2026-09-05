@@ -31,12 +31,12 @@ on:
         default: false
         type: boolean
       delay:
-        description: 'Delay padrao entre requests (segundos)'
+        description: 'Delay padrao entre requests (segundos); a rodada padrao sobrescreve por fonte'
         required: false
-        default: '2'
+        default: '1'
         type: string
       delay_linkedin:
-        description: 'Delay do LinkedIn (vazio = usa o delay padrao)'
+        description: 'Delay do LinkedIn (vazio = 1.0s, o padrao da rodada)'
         required: false
         default: ''
         type: string
@@ -88,9 +88,24 @@ jobs:
         if [ "${{ github.event.inputs.paralelo }}" = "true" ]; then
           FLAGS="$FLAGS --parallel-sources"
         fi
-        if [ -n "${{ github.event.inputs.delay_linkedin }}" ]; then
-          FLAGS="$FLAGS --source-delay linkedin ${{ github.event.inputs.delay_linkedin }}"
-        fi
+        # Matriz de delays da rodada padrao (decidida em 05/09 a partir das
+        # medicoes): LinkedIn 1.0s (1000/termo provado a 1.0s), InfoJobs 2.0s
+        # (bloqueio suave medido em rajada), Vagas.com 2.0s (Cloudflare no
+        # detalhe do mesmo portal), Solides 2.0s (inalterado) e as demais
+        # fontes 1.0s (sem evidencia de limite ate agora). O input
+        # delay_linkedin continua valendo para experimentos.
+        DELAY_LINKEDIN="${{ github.event.inputs.delay_linkedin }}"
+        if [ -z "$DELAY_LINKEDIN" ]; then DELAY_LINKEDIN="1"; fi
+        FLAGS="$FLAGS \
+          --source-delay linkedin $DELAY_LINKEDIN \
+          --source-delay infojobs 2 \
+          --source-delay vagas 2 \
+          --source-delay solides 2 \
+          --source-delay gupy 1 \
+          --source-delay trampos 1 \
+          --source-delay geekhunter 1 \
+          --source-delay abler 1 \
+          --source-delay recrutei 1"
         python main.py $FLAGS 2>&1 | tee /tmp/coleta.log
         echo "BRUTAS=$(grep -oP 'Total bruto: \K[0-9]+' /tmp/coleta.log | tail -1)" >> "$GITHUB_ENV"
         echo "ELEGIVEIS=$(grep -oP 'RANKING DE AREAS -- \K[0-9]+' /tmp/coleta.log | tail -1)" >> "$GITHUB_ENV"
