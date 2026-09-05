@@ -64,6 +64,7 @@ def test_collect_paralelo_equivale_ao_sequencial(monkeypatch):
     class FakePolite:
         def __init__(self, **kw):
             self.request_count = 0
+            self.last_status_code = None
             delays_vistos.append(kw.get("delay_seconds"))
 
         def __enter__(self):
@@ -145,14 +146,15 @@ def test_tabela_paralela_formata_e_atualiza():
 
 
 def test_tabela_paralela_renderiza_ci(monkeypatch, capsys):
-    """No GitHub Actions, a tabela e envelopada em grupo colapsavel."""
+    """No GitHub Actions, a tabela sai como linhas planas (sempre visivel)."""
     monkeypatch.setenv("GITHUB_ACTIONS", "true")
     monitor = pipeline._TabelaParalela(["gupy"])
     monitor.renderizar(forcar=True)
 
     saida = capsys.readouterr().out
-    assert "::group::[resumo" in saida
-    assert "::endgroup::" in saida
+    assert "::group::" not in saida
+    assert "[resumo" in saida
+    assert "Coleta Paralela" in saida
     assert "+----------------------+" in saida
 
 

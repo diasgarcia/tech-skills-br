@@ -39,20 +39,28 @@ class JobSource(ABC):
         total: int,
         current_term: str | None = None,
         requests: int | None = None,
+        progresso: float | None = None,
     ) -> None:
-        """Avisa o coletor externo quantas vagas esta fonte ja tem."""
+        """Avisa o coletor externo quantas vagas esta fonte ja tem.
+
+        `progresso` e a fracao do trabalho da fonte ja feita (0..1),
+        quando a fonte sabe calcular (termos ou paginas processados).
+        """
         if self.progress_callback is not None:
             reqs = requests if requests is not None else self.session.request_count
             try:
-                self.progress_callback(total, current_term, reqs)
+                self.progress_callback(total, current_term, reqs, progresso)
             except TypeError:
                 try:
-                    self.progress_callback(total, current_term)
+                    self.progress_callback(total, current_term, reqs)
                 except TypeError:
                     try:
-                        self.progress_callback(total)
-                    except Exception:
-                        pass
+                        self.progress_callback(total, current_term)
+                    except TypeError:
+                        try:
+                            self.progress_callback(total)
+                        except Exception:
+                            pass
             except Exception:
                 pass
 
@@ -85,6 +93,7 @@ class JobSource(ABC):
                 len(jobs),
                 current_term=f"[{idx}/{total_terms}] {term}",
                 requests=self.session.request_count,
+                progresso=idx / total_terms,
             )
         self.stats.raw_jobs = len(jobs)
         self.stats.requests_made = self.session.request_count
