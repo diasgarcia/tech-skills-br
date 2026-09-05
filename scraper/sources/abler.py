@@ -157,6 +157,7 @@ class AblerSource(JobSource):
                     if len(jobs) % 25 == 0:
                         logger.info("[%s] progresso: %d vagas novas",
                                     self.name, len(jobs))
+                        self.report(len(jobs))
                 else:
                     completou = True
         finally:

@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import logging
+import threading
+import time as _time
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -35,8 +37,56 @@ class PipelineResult:
         return self.ranking[0]["area"] if self.ranking else None
 
 
+RESUMO_INTERVALO_S = 45.0
+
+
+def _emitir_comando(texto: str) -> None:
+    """Linha crua no stdout: comandos de workflow so valem no inicio da linha."""
+    print(texto, flush=True)
+
+
+class _ResumoParalelo:
+    """Monta os grupos colapsaveis de resumo no log do Actions.
+
+    A cada intervalo, fecha o grupo atual e abre outro cujo titulo traz
+    a contagem de vagas por fonte ate aquele momento; as chamadas do
+    intervalo ficam dentro do grupo. O titulo do grupo e imutavel, por
+    isso a "atualizacao" acontece abrindo um grupo novo.
+    """
+
+    def __init__(self, nomes: list[str]) -> None:
+        self._contagens = {n: 0 for n in nomes}
+        self._lock = threading.Lock()
+        self._aberto = False
+
+    def registrar(self, nome: str, total: int) -> None:
+        with self._lock:
+            self._contagens[nome] = total
+
+    def atual(self) -> str:
+        with self._lock:
+            return " | ".join(
+                f"{nome} {self._contagens[nome]}" for nome in self._contagens
+            )
+
+    def abrir(self) -> None:
+        with self._lock:
+            if self._aberto:
+                _emitir_comando("::endgroup::")
+            self._aberto = True
+        _emitir_comando(
+            f"::group::[resumo {_time.strftime('%H:%M:%S')}] {self.atual()}"
+        )
+
+    def fechar(self) -> None:
+        with self._lock:
+            if self._aberto:
+                _emitir_comando("::endgroup::")
+                self._aberto = False
+
+
 def _collect_source(
-    source_name: str, settings: Settings
+    source_name: str, settings: Settings, reportar=None
 ) -> tuple[str, list[Job], SourceStats | None, int]:
     """Coleta uma unica fonte com sessao propria.
 
@@ -59,6 +109,8 @@ def _collect_source(
         backoff_factor=settings.backoff_factor,
     ) as session:
         source = source_cls(session, settings)
+        if reportar is not None:
+            source.progress_callback = reportar
         jobs = source.fetch(settings.search_terms)
         stats = source.stats
         requests = session.request_count
@@ -80,15 +132,35 @@ def collect(settings: Settings) -> tuple[list[Job], list[SourceStats], int]:
             "Coleta PARALELA: %d fontes ao mesmo tempo (delay por fonte preservado)",
             len(settings.sources),
         )
+        resumo = _ResumoParalelo(settings.sources)
+        resumo.abrir()
+        parar = threading.Event()
+
+        def _relogio():
+            while not parar.wait(RESUMO_INTERVALO_S):
+                resumo.abrir()
+
+        timer = threading.Thread(target=_relogio, daemon=True)
+        timer.start()
+
+        def _reportar(nome: str):
+            return lambda total: resumo.registrar(nome, total)
+
         resultados: dict[str, tuple[list[Job], SourceStats | None, int]] = {}
-        with ThreadPoolExecutor(max_workers=len(settings.sources)) as pool:
-            futures = {
-                pool.submit(_collect_source, nome, settings): nome
-                for nome in settings.sources
-            }
-            for future in as_completed(futures):
-                nome, jobs, fonte_stats, requests = future.result()
-                resultados[nome] = (jobs, fonte_stats, requests)
+        try:
+            with ThreadPoolExecutor(max_workers=len(settings.sources)) as pool:
+                futures = {
+                    pool.submit(_collect_source, nome, settings, _reportar(nome)): nome
+                    for nome in settings.sources
+                }
+                for future in as_completed(futures):
+                    nome, jobs, fonte_stats, requests = future.result()
+                    resultados[nome] = (jobs, fonte_stats, requests)
+                    resumo.registrar(nome, len(jobs))
+        finally:
+            parar.set()
+            timer.join(timeout=RESUMO_INTERVALO_S + 5)
+            resumo.fechar()
 
         # Ordem estavel: a mesma ordem de settings.sources.
         for nome in settings.sources:

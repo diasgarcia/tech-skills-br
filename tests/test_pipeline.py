@@ -85,6 +85,45 @@ def test_collect_paralelo_equivale_ao_sequencial(monkeypatch):
     assert sorted(delays_vistos) == [0.5, 1.5]
 
 
+def test_fetch_base_reporta_progresso_por_termo(monkeypatch):
+    """O JobSource.fetch avisa o callback com o total corrente a cada termo."""
+    from scraper.sources.base import JobSource as Base
+
+    class FonteFake(Base):
+        name = "f"
+
+        def fetch_term(self, term):
+            return [
+                Job(source=self.name, external_id=term, title=term)
+                for _ in range(int(term))
+            ]
+
+    class SessaoFake:
+        request_count = 0
+
+    fonte = FonteFake(session=SessaoFake(), settings=Settings(sources=["f"]))
+    vistos = []
+    fonte.progress_callback = vistos.append
+    jobs = fonte.fetch(["2", "3"])
+    assert len(jobs) == 5
+    assert vistos == [2, 5]
+
+
+def test_resumo_paralelo_abre_fecha_grupos(capsys):
+    """O resumo emite grupos colapsaveis com as contagens do momento."""
+    resumo = pipeline._ResumoParalelo(["a", "b"])
+    resumo.abrir()
+    resumo.registrar("a", 10)
+    resumo.registrar("b", 5)
+    resumo.abrir()  # fecha o anterior e abre com contagens novas
+    resumo.fechar()
+
+    saida = capsys.readouterr().out
+    assert saida.count("::group::[resumo") == 2
+    assert saida.count("::endgroup::") == 2
+    assert "a 10 | b 5" in saida
+
+
 @pytest.fixture
 def sem_enriquecimento(monkeypatch):
     monkeypatch.setattr(pipeline, "_enrich_linkedin_parallel", lambda jobs: None)
