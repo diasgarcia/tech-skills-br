@@ -38,7 +38,14 @@ import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from ..models import Job
+from ..models import (
+    HIBRIDO,
+    NAO_INFORMADO,
+    PRESENCIAL,
+    REMOTO,
+    Job,
+    normalize,
+)
 from .base import JobSource
 
 logger = logging.getLogger(__name__)
@@ -239,6 +246,14 @@ class RecruteiSource(JobSource):
             uf = endereco.get("addressRegion") or ""
             location = ", ".join(p for p in (cidade, uf) if p)
 
+            # A modalidade/lugar fica no bloco do header da pagina, e nao no
+            # JSON-LD (que costuma vir sem address para vagas remotas).
+            workplace = self._modalidade_do_header(
+                html, title, data.get("description") or ""
+            )
+            if not location:
+                location = self._local_do_header(html)
+
             vid = _vid_da_url(url)
             if not vid:
                 return None
@@ -251,8 +266,76 @@ class RecruteiSource(JobSource):
                 url=url,
                 description=data.get("description") or "",
                 location=location,
-                workplace_type="",
+                workplace_type=workplace,
                 published_date=published,
                 search_term="sitemap" if "sitemap" in url else "listing",
             )
         return None
+
+    @staticmethod
+    def _texto_do_header(html: str) -> str:
+        """Texto do bloco do header da vaga (<h6 ... text-center pb-2> com o
+        icone de mapa), onde o portal coloca "Remoto"/"Hibrido"/"Presencial"
+        ou a cidade. Devolve "" quando o bloco nao existe."""
+        m = re.search(
+            r'<h6[^>]*class="[^"]*text-muted text-center pb-2[^"]*"[^>]*>(.*?)</h6>',
+            html,
+            re.S,
+        )
+        if not m:
+            return ""
+        return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", m.group(1))).strip()
+
+    @classmethod
+    def _modalidade_do_header(cls, html: str, titulo: str = "", descricao: str = "") -> str:
+        texto = cls._texto_do_header(html)
+        if not texto:
+            return NAO_INFORMADO
+        alvo = normalize(texto)
+        if "remot" in alvo or "home office" in alvo:
+            return REMOTO
+        if "hibrid" in alvo:
+            return HIBRIDO
+        if "presencial" in alvo:
+            return PRESENCIAL
+        if "informado" in alvo:
+            return NAO_INFORMADO
+        # O header mostra so a cidade; a modalidade (quando nao e presencial)
+        # aparece no titulo ou numa frase explicita da descricao. Mencoes
+        # soltas de "home office"/"remoto" na descricao sao armadilha:
+        # "Auxilio Home Office" e beneficio e "suporte remoto a clientes"
+        # e atividade, nao modalidade de trabalho.
+        pistas_titulo = normalize(titulo)
+        if "hibrid" in pistas_titulo:
+            return HIBRIDO
+        if "remot" in pistas_titulo or "home office" in pistas_titulo:
+            return REMOTO
+        if "presencial" in pistas_titulo:
+            return PRESENCIAL
+        # O JSON-LD costuma colar texto ("JuniorAtuacao Hibrida"): separar
+        # maiuscula colada em minuscula antes de casar as palavras-chave.
+        alvo_desc = normalize(
+            re.sub(r"([a-z])([A-ZÀ-Ú])", r"\1 \2", descricao or "")
+        )
+        for m in re.finditer(
+            r"\b(modelo|atuacao|trabalho|regime|local|forma|modalidade|jornada)\b",
+            alvo_desc,
+        ):
+            trecho = alvo_desc[m.end(): m.end() + 60]
+            if "hibrid" in trecho:
+                return HIBRIDO
+            if "remot" in trecho or "home office" in trecho:
+                return REMOTO
+            if "presencial" in trecho:
+                return PRESENCIAL
+        return PRESENCIAL
+
+    @classmethod
+    def _local_do_header(cls, html: str) -> str:
+        texto = cls._texto_do_header(html)
+        if not texto:
+            return ""
+        alvo = normalize(texto)
+        if alvo in ("remoto", "hibrido", "presencial", "nao informado"):
+            return ""
+        return texto
