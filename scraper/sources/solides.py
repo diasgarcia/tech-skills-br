@@ -3,11 +3,14 @@
 Endpoint usado: o mesmo que o front publico de https://vagas.solides.com.br
 chama no browser, sem autenticacao:
 
-    GET https://apigw.solides.com.br/jobs/v3/portal-vacancies-new
+    GET https://apigw.solides.com.br/jobs/v3/portal-vacancies
 
 Descoberto decodificando o bundle JS do site (Network -> chamadas do proprio
 frontend). O endpoint anterior (api.solides.jobs/vacancy/public/search) exige
-token/API key e foi descartado.
+token/API key e foi descartado. O sufixo "-new" existiu ate ~02/09; a partir
+de 03/09 o gateway passou a responder 500 nele e o endpoint sem sufixo
+segue vivo (verificado ao vivo em 05/09: 109 paginas, 1.089 vagas junior).
+As variantes v4 respondem 403 (exigem auth).
 
 Detalhes praticos descobertos testando o endpoint ao vivo:
 
@@ -40,7 +43,7 @@ from .base import JobSource
 
 logger = logging.getLogger(__name__)
 
-API_URL = "https://apigw.solides.com.br/jobs/v3/portal-vacancies-new"
+API_URL = "https://apigw.solides.com.br/jobs/v3/portal-vacancies"
 
 
 def _url_publica(raw: dict) -> str:
