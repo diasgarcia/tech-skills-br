@@ -32,6 +32,19 @@ class JobSource(ABC):
         self.session = session
         self.settings = settings
         self.stats = SourceStats(source=self.name)
+        self.progress_callback = None
+
+    def report(self, total: int) -> None:
+        """Avisa o coletor externo quantas vagas esta fonte ja tem.
+
+        Usado pelo modo paralelo para montar a linha de resumo periodico
+        (::group::) sem depender do log. No-op sem callback.
+        """
+        if self.progress_callback is not None:
+            try:
+                self.progress_callback(total)
+            except Exception:  # o resumo nao pode derrubar a coleta
+                pass
 
     def page_limit(self) -> int:
         """Teto efetivo de paginacao: o menor entre CLI e o natural da fonte."""
@@ -54,6 +67,7 @@ class JobSource(ABC):
                 continue
             logger.info("[%s] '%s' -> %d vagas", self.name, term, len(found))
             jobs.extend(found)
+            self.report(len(jobs))
         self.stats.raw_jobs = len(jobs)
         self.stats.requests_made = self.session.request_count
         return jobs
