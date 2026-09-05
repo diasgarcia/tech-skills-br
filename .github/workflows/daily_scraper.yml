@@ -26,9 +26,9 @@ on:
         default: ''
         type: string
       paralelo:
-        description: 'Coleta paralela entre fontes (experimental)'
+        description: 'Coleta paralela entre fontes (padrao da rodada desde 05/09)'
         required: false
-        default: false
+        default: true
         type: boolean
       delay:
         description: 'Delay padrao entre requests (segundos); a rodada padrao sobrescreve por fonte'
