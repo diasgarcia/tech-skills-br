@@ -116,6 +116,28 @@ O enriquecimento do InfoJobs busca a descrição completa no detalhe da vaga. O 
 
 Revisei 38 vagas do InfoJobs uma a uma. Corrigi aliases que não casavam. Adicionei Pacote Office, ServiceNow, Storage, Google Sheets, DAX, AutoCAD, PABX e Robótica ao vocabulário. Fibra óptica virou alias de Redes de Computadores. A cobertura subiu de 55% para 99%.
 
+Canonicalizei a senioridade: "Estagiário" virou "Estágio" no import e 10 vagas da base foram re-rotuladas. Canonicalizei nomes de empresa: variantes de "Confidencial" e sufixos societários ("ltda", "sa", "holding"...) deixaram de criar empresas duplicadas. Normalizei as empresas da base e corrigi 62 slugs do GeekHunter.
+
+Adicionei o CITATION.cff (formato 1.2.0) no main e na branch do congresso. Alinhei o README ao Python 3.12 e registrei o InfoJobs no execucao-rapida. Os gráficos e o relatório consolidado passaram a ser gerados só na rodada das 09h16 (as outras duas só coletam, importam e enriquecem).
+
+Implementei o coletor da Abler via sitemap público com checkpoint incremental (rodada interrompida retoma sem refazer GET). A primeira coleta trouxe 96 vagas novas. Implementei o coletor do Recrutei: sitemap com lastmod (janela de 24h) ou varredura completa da listagem SSR. O detalhe traz JSON-LD com descrição integral, então a fonte não entra na fila de enriquecimento. A primeira coleta trouxe 56 vagas novas.
+
+Comecei o experimento de paralelismo: coleta das 9 fontes ao mesmo tempo com delay por fonte (--parallel-sources e --source-delay), LinkedIn com 100 páginas por termo (--max-pages 100) e inputs de dispatch no workflow para controlar o experimento sem mexer no código.
+
+---
+
+### 05/09/2026
+
+Rodei a coleta manual do experimento de paralelismo: 43.743 vagas brutas em 1h15, todas as fontes ao mesmo tempo. O LinkedIn entregou 37.210 vagas (3.733 requests a 1.0s) sem um único bloqueio — 1.000 vagas por termo confirmado nos 40 termos. Nenhuma outra fonte bloqueou. A Solides ficou fora: a API responde 500 desde o dia 03 (outage do lado deles, não rate limit nosso).
+
+Medi o throttle suave do LinkedIn no meu IP: depois de ~330 requests acumulados as páginas voltam vazias sem 429 — limite por volume e por IP, não por ritmo; o IP do Actions passou com 3.700+ requests em linha reta.
+
+A deduplicação comeu quase tudo: das 37 mil brutas do LinkedIn sobraram 2.207 elegíveis e apenas 356 novas na base. O ganho do 1000/termo é largura de cobertura, não explosão da base — que foi de 3.864 para 4.213 vagas, com o LinkedIn em 57,9%. Verifiquei as datas: nenhuma vaga pré-2026 no banco (o import descarta silenciosamente, sem contador no log), mas 65 vagas sem data passam pelo portão — 63 da GeekHunter. O enriquecimento do LinkedIn drenou 335 pendentes em 6,5 minutos, sem bloqueio.
+
+Corrigi a modalidade do Recrutei: o JSON-LD do detalhe não traz address para vagas remotas e a modalidade fica no bloco do header da página. Regra em três camadas com proteção contra falsos positivos — "Auxílio Home Office" é benefício e "suporte remoto a clientes" é atividade, não modalidade. Re-parseei as 56 vagas ao vivo e corrigi 9 no snapshot. Regeneirei a API estática localmente e o deploy saiu só pelo push (deploy_pages.yml), sem rodada de coleta.
+
+Adicionei o resumo colapsável na coleta paralela: o Actions não suporta TUI, então o log abre um grupo novo a cada 45s com as contagens por fonte no título (::group::), e cada fonte reporta o progresso por hook. Criei as issues #21 (medir os limites de cada fonte, coleta e enriquecimento, um por um) e #22 (página da wiki com limites e bloqueios das fontes).
+
 ---
 
 ### Pendências para o artigo
@@ -127,3 +149,5 @@ Revisei 38 vagas do InfoJobs uma a uma. Corrigi aliases que não casavam. Adicio
 - Descrever a classificação por área com pesos.
 - Descrever a estratificação geográfica por polos.
 - Registrar as decisões metodológicas: fontes públicas, sem contorno de bloqueio.
+- Medir os limites e bloqueios de cada fonte, coleta e enriquecimento, um por um (issue #21).
+- Criar a página da wiki "Limites e Bloqueios das Fontes" com o que for medido (issue #22).
