@@ -81,6 +81,7 @@ class Settings:
             "geekhunter",
             "infojobs",
             "abler",
+            "recrutei",
         ]
     )
 
@@ -100,6 +101,13 @@ class Settings:
     # 24h (rodada diaria); a coleta completa usa um valor grande via
     # --abler-days. O corte de 2026 (data minima do projeto) vale sempre.
     abler_days_back: int = 1
+
+    # Recrutei: janela de recencia do sitemap (padrao 24h na rodada
+    # diaria). A coleta completa usa --recrutei-full (paginacao SSR da
+    # listagem, que expoe todas as vagas ativas; o sitemap cobre so as
+    # ~1.000 mais recentes).
+    recrutei_days_back: int = 1
+    recrutei_full: bool = False
 
     only_junior: bool = True
 

@@ -59,6 +59,13 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     parser.add_argument(
+        "--recrutei-full", action="store_true",
+        help="Recrutei: coleta completa via paginacao SSR da listagem "
+             "(todas as vagas ativas). Sem a flag, o padrao diario usa o "
+             "sitemap das ultimas 24h.",
+    )
+
+    parser.add_argument(
         "--delay", type=float, default=1.5,
         help="Segundos de espera entre requests (padrao: 1.5).",
     )
@@ -114,6 +121,7 @@ def main(argv: list[str] | None = None) -> int:
         only_junior=not args.all_levels,
         enrich_linkedin=not args.no_enrich,
         abler_days_back=max(1, args.abler_days),
+        recrutei_full=args.recrutei_full,
     )
 
 
