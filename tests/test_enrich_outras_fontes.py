@@ -59,6 +59,19 @@ def test_fetch_vagas_com_sem_o_seletor_devolve_vazio():
     assert desc == ""
 
 
+PLACEHOLDER_HTML = """
+<html><head><title>Vagas de emprego para v2825887 | Vagas.com</title></head>
+<body><div>nenhuma descricao</div></body></html>
+"""
+
+
+def test_fetch_vagas_com_pagina_generica_conta_como_encerrada():
+    session = FakeSession([FakeResponse(text=PLACEHOLDER_HTML)])
+    desc, status = fetch_vagas_com(session, Lock(), "http://x")
+    assert desc == ""
+    assert status == 404
+
+
 INFOJOBS_DETAIL_HTML = """
 <html><body>
   <div class="js_vacancyDataPanels js_applyVacancyHidden">
