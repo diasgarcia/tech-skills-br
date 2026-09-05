@@ -381,12 +381,15 @@ class _TabelaParalela:
                     f"{concluidas}/{len(self.estado)} fontes ({tempo_str}) | "
                     f"{self._percentual()}%"
                 )
-            print("", flush=True)
+            # "Respirar" entre snapshots: linha vazia nao renderiza no
+            # viewer do Actions (HTML colapsa), mas uma linha com espacos
+            # sobrevive e funciona como enter visual.
+            print("  ", flush=True)
             print(_cor(_ANSI["negrito"], titulo), flush=True)
             print(texto, flush=True)
             # Separador visual entre um snapshot e o seguinte.
             print("-" * 144, flush=True)
-            print("", flush=True)
+            print("  ", flush=True)
             self.ultimo_render = agora
         elif self.is_tty:
             if self.linhas_impressas > 0:
