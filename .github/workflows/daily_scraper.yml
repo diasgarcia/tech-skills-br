@@ -25,6 +25,21 @@ on:
         required: false
         default: ''
         type: string
+      paralelo:
+        description: 'Coleta paralela entre fontes (experimental)'
+        required: false
+        default: false
+        type: boolean
+      delay:
+        description: 'Delay padrao entre requests (segundos)'
+        required: false
+        default: '2'
+        type: string
+      delay_linkedin:
+        description: 'Delay do LinkedIn (vazio = usa o delay padrao)'
+        required: false
+        default: ''
+        type: string
 
 concurrency:
   group: coleta-diaria
@@ -69,7 +84,14 @@ jobs:
       run: |
         # tee em vez de capturar em variavel: o log aparece ao vivo no
         # terminal da run (captura so exibiria no final).
-        python main.py --max-pages 200 --delay 2 --no-enrich 2>&1 | tee /tmp/coleta.log
+        FLAGS="--max-pages 200 --delay ${{ github.event.inputs.delay }} --no-enrich"
+        if [ "${{ github.event.inputs.paralelo }}" = "true" ]; then
+          FLAGS="$FLAGS --parallel-sources"
+        fi
+        if [ -n "${{ github.event.inputs.delay_linkedin }}" ]; then
+          FLAGS="$FLAGS --source-delay linkedin ${{ github.event.inputs.delay_linkedin }}"
+        fi
+        python main.py $FLAGS 2>&1 | tee /tmp/coleta.log
         echo "BRUTAS=$(grep -oP 'Total bruto: \K[0-9]+' /tmp/coleta.log | tail -1)" >> "$GITHUB_ENV"
         echo "ELEGIVEIS=$(grep -oP 'RANKING DE AREAS -- \K[0-9]+' /tmp/coleta.log | tail -1)" >> "$GITHUB_ENV"
       env:
