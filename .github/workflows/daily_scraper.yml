@@ -70,12 +70,13 @@ jobs:
         # tee em vez de capturar em variavel: o log aparece ao vivo no
         # terminal da run (captura so exibiria no final).
         # Coleta sempre paralela, com a matriz de delays decidida em 05/09
-        # a partir das medicoes: LinkedIn 1.0s (1000/termo provado a 1.0s),
-        # InfoJobs 2.0s (bloqueio suave medido em rajada), Vagas.com 2.0s
-        # (Cloudflare no detalhe do mesmo portal), Solides 2.0s (inalterado)
-        # e as demais fontes 1.0s (sem evidencia de limite ate agora).
+        # a partir das medicoes: LinkedIn 0.5s (em teste a partir de 05/09;
+        # 1000/termo foi provado a 1.0s), InfoJobs 2.0s (bloqueio suave
+        # medido em rajada), Vagas.com 2.0s (Cloudflare no detalhe do mesmo
+        # portal), Solides 2.0s (inalterado) e as demais fontes 1.0s (sem
+        # evidencia de limite ate agora).
         FLAGS="--max-pages 200 --delay 1 --no-enrich --parallel-sources \
-          --source-delay linkedin 1 \
+          --source-delay linkedin 0.5 \
           --source-delay infojobs 2 \
           --source-delay vagas 2 \
           --source-delay solides 2 \
