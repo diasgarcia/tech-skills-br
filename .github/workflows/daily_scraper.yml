@@ -25,21 +25,6 @@ on:
         required: false
         default: ''
         type: string
-      paralelo:
-        description: 'Coleta paralela entre fontes (padrao da rodada desde 05/09)'
-        required: false
-        default: true
-        type: boolean
-      delay:
-        description: 'Delay padrao entre requests (segundos); a rodada padrao sobrescreve por fonte'
-        required: false
-        default: '1'
-        type: string
-      delay_linkedin:
-        description: 'Delay do LinkedIn (vazio = 1.0s, o padrao da rodada)'
-        required: false
-        default: ''
-        type: string
 
 concurrency:
   group: coleta-diaria
@@ -84,20 +69,13 @@ jobs:
       run: |
         # tee em vez de capturar em variavel: o log aparece ao vivo no
         # terminal da run (captura so exibiria no final).
-        FLAGS="--max-pages 200 --delay ${{ github.event.inputs.delay }} --no-enrich"
-        if [ "${{ github.event.inputs.paralelo }}" = "true" ]; then
-          FLAGS="$FLAGS --parallel-sources"
-        fi
-        # Matriz de delays da rodada padrao (decidida em 05/09 a partir das
-        # medicoes): LinkedIn 1.0s (1000/termo provado a 1.0s), InfoJobs 2.0s
-        # (bloqueio suave medido em rajada), Vagas.com 2.0s (Cloudflare no
-        # detalhe do mesmo portal), Solides 2.0s (inalterado) e as demais
-        # fontes 1.0s (sem evidencia de limite ate agora). O input
-        # delay_linkedin continua valendo para experimentos.
-        DELAY_LINKEDIN="${{ github.event.inputs.delay_linkedin }}"
-        if [ -z "$DELAY_LINKEDIN" ]; then DELAY_LINKEDIN="1"; fi
-        FLAGS="$FLAGS \
-          --source-delay linkedin $DELAY_LINKEDIN \
+        # Coleta sempre paralela, com a matriz de delays decidida em 05/09
+        # a partir das medicoes: LinkedIn 1.0s (1000/termo provado a 1.0s),
+        # InfoJobs 2.0s (bloqueio suave medido em rajada), Vagas.com 2.0s
+        # (Cloudflare no detalhe do mesmo portal), Solides 2.0s (inalterado)
+        # e as demais fontes 1.0s (sem evidencia de limite ate agora).
+        FLAGS="--max-pages 200 --delay 1 --no-enrich --parallel-sources \
+          --source-delay linkedin 1 \
           --source-delay infojobs 2 \
           --source-delay vagas 2 \
           --source-delay solides 2 \
