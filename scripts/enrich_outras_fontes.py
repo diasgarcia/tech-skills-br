@@ -137,6 +137,15 @@ def fetch_vagas_com(session: PoliteSession, lock: Lock, url: str) -> tuple[str, 
         return "", status
     soup = BeautifulSoup(response.text, "html.parser")
     el = soup.select_one("div.job-description__text, div.texto")
+    if el is None:
+        # Vaga removida: o portal responde 200 com uma pagina generica
+        # ("Vagas de emprego para <id>") sem o bloco de descricao. Tratar
+        # como 404 tira a vaga da fila de enriquecimento para sempre --
+        # senao ela fica pendente eternamente, gastando request a cada
+        # rodada sem nunca enriquecer.
+        titulo = soup.select_one("title")
+        if titulo and "vagas de emprego para" in titulo.get_text(strip=True).lower():
+            return "", 404
     return (el.get_text(" ", strip=True) if el else ""), status
 
 
