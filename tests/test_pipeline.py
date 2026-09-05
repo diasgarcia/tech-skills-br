@@ -36,6 +36,55 @@ def _vaga(**kw):
     return Job(**base)
 
 
+def test_collect_paralelo_equivale_ao_sequencial(monkeypatch):
+    """Fontes em paralelo devolvem os mesmos jobs, na mesma ordem, com
+    delay por fonte respeitado (sessao propria por fonte)."""
+    from scraper.sources.base import JobSource as Base
+
+    def make_source(name):
+        return type(
+            f"{name.title()}Fake",
+            (Base,),
+            {
+                "name": name,
+                "label": name,
+                "fetch_term": lambda self, term: [],
+                "fetch": lambda self, terms: [
+                    Job(source=self.name, external_id=self.name, title=self.name)
+                ],
+            },
+        )
+
+    monkeypatch.setattr(
+        pipeline, "SOURCE_REGISTRY", {"a": make_source("a"), "b": make_source("b")}
+    )
+
+    delays_vistos = []
+
+    class FakePolite:
+        def __init__(self, **kw):
+            self.request_count = 0
+            delays_vistos.append(kw.get("delay_seconds"))
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+    monkeypatch.setattr(pipeline, "PoliteSession", FakePolite)
+
+    settings = Settings(
+        sources=["a", "b"], source_delays={"b": 0.5}, parallel_sources=True
+    )
+    jobs, stats, _ = pipeline.collect(settings)
+
+    assert [j.external_id for j in jobs] == ["a", "b"]
+    assert [s.source for s in stats] == ["a", "b"]
+    # "a" usa o delay padrao; "b" usa o override.
+    assert sorted(delays_vistos) == [0.5, 1.5]
+
+
 @pytest.fixture
 def sem_enriquecimento(monkeypatch):
     monkeypatch.setattr(pipeline, "_enrich_linkedin_parallel", lambda jobs: None)
