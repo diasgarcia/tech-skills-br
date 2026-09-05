@@ -220,7 +220,7 @@ def test_trampos_ignora_registro_incompleto():
 
 
 # Recorte real da resposta de
-# GET https://apigw.solides.com.br/jobs/v3/portal-vacancies-new
+# GET https://apigw.solides.com.br/jobs/v3/portal-vacancies
 SOLIDES_JOB = {
     "id": 911953,
     "title": "Desenvolvedor(a) Júnior | Prestação de Serviços (PJ)  em Franca/SP",
