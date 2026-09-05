@@ -124,6 +124,48 @@ def test_resumo_paralelo_abre_fecha_grupos(capsys):
     assert "a 10 | b 5" in saida
 
 
+def test_tabela_paralela_formata_e_atualiza():
+    """A tabela paralela formata as colunas e reflete atualizacoes."""
+    monitor = pipeline._TabelaParalela(
+        ["gupy", "vagas"], labels={"gupy": "Gupy", "vagas": "Vagas.com"}
+    )
+    monitor.atualizar("gupy", total=15, termo="[1/10] python", requests=2)
+    monitor.finalizar_fonte("vagas", total=10, requests=1)
+    monitor.erro_fonte("gupy", "timeout na conexao")
+
+    tabela = monitor.formatar()
+    assert "+----------------------+" in tabela
+    assert "Gupy" in tabela
+    assert "Vagas.com" in tabela
+    assert "10" in tabela
+    assert "15" in tabela
+    assert "Erro" in tabela
+    assert "Concluido" in tabela
+    assert "TOTAL" in tabela
+
+
+def test_tabela_paralela_renderiza_ci(monkeypatch, capsys):
+    """No GitHub Actions, a tabela e envelopada em grupo colapsavel."""
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    monitor = pipeline._TabelaParalela(["gupy"])
+    monitor.renderizar(forcar=True)
+
+    saida = capsys.readouterr().out
+    assert "::group::[resumo" in saida
+    assert "::endgroup::" in saida
+    assert "+----------------------+" in saida
+
+
+def test_tabela_paralela_iniciar_encerrar():
+    """Iniciar e encerrar iniciam e finalizam a thread de atualizacao sem travar."""
+    monitor = pipeline._TabelaParalela(["gupy"])
+    monitor.iniciar()
+    assert monitor.thread_timer is not None and monitor.thread_timer.is_alive()
+    monitor.encerrar()
+    assert not monitor.thread_timer.is_alive()
+
+
+
 @pytest.fixture
 def sem_enriquecimento(monkeypatch):
     monkeypatch.setattr(pipeline, "_enrich_linkedin_parallel", lambda jobs: None)
