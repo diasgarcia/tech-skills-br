@@ -1,128 +1,128 @@
-# Relatório Consolidado da Base de Vagas (3864 vagas)
+# Relatório Consolidado da Base de Vagas (4213 vagas)
 
-- **Data de geração:** 04/09/2026 21:23
-- **Período coberto:** 05/01/2026 até 04/09/2026
-- **Total de vagas consolidadas:** 3864
+- **Data de geração:** 05/09/2026 03:07
+- **Período coberto:** 05/01/2026 até 05/09/2026
+- **Total de vagas consolidadas:** 4213
 
 ## Ranking de Áreas de Tecnologia
 
 | Posição | Área | Vagas | % | Gráfico |
 |---|---|---|---|---|
-| 1 | Suporte Técnico | 1267 | 32.8% | #######............. |
-| 2 | Engenharia de Software | 523 | 13.5% | ###................. |
-| 3 | Infraestrutura / Redes | 334 | 8.6% | ##.................. |
-| 4 | Data | 258 | 6.7% | #................... |
-| 5 | Backend | 207 | 5.4% | #................... |
-| 6 | Service Desk / Help Desk | 200 | 5.2% | #................... |
-| 7 | QA | 160 | 4.1% | #................... |
-| 8 | Outros/TI Geral | 148 | 3.8% | #................... |
-| 9 | Field Service / Hardware | 143 | 3.7% | #................... |
-| 10 | Sistemas / ERP | 124 | 3.2% | #................... |
-| 11 | Segurança | 112 | 2.9% | #................... |
-| 12 | Fullstack | 105 | 2.7% | #................... |
-| 13 | Hardware / Eletrônica | 69 | 1.8% | .................... |
-| 14 | DevOps | 54 | 1.4% | .................... |
-| 15 | Frontend | 47 | 1.2% | .................... |
-| 16 | Inteligência Artificial | 44 | 1.1% | .................... |
-| 17 | Mobile | 38 | 1.0% | .................... |
-| 18 | Design / UI / UX | 31 | 0.8% | .................... |
+| 1 | Suporte Técnico | 1347 | 32.0% | ######.............. |
+| 2 | Engenharia de Software | 567 | 13.5% | ###................. |
+| 3 | Infraestrutura / Redes | 367 | 8.7% | ##.................. |
+| 4 | Data | 275 | 6.5% | #................... |
+| 5 | Service Desk / Help Desk | 233 | 5.5% | #................... |
+| 6 | Backend | 218 | 5.2% | #................... |
+| 7 | Outros/TI Geral | 189 | 4.5% | #................... |
+| 8 | QA | 174 | 4.1% | #................... |
+| 9 | Field Service / Hardware | 155 | 3.7% | #................... |
+| 10 | Sistemas / ERP | 141 | 3.3% | #................... |
+| 11 | Segurança | 117 | 2.8% | #................... |
+| 12 | Fullstack | 107 | 2.5% | .................... |
+| 13 | Hardware / Eletrônica | 93 | 2.2% | .................... |
+| 14 | DevOps | 60 | 1.4% | .................... |
+| 15 | Frontend | 47 | 1.1% | .................... |
+| 16 | Inteligência Artificial | 46 | 1.1% | .................... |
+| 17 | Mobile | 39 | 0.9% | .................... |
+| 18 | Design / UI / UX | 38 | 0.9% | .................... |
 
 ## Distribuição por Macrorregião
 
 | Região | Vagas | % | Gráfico |
 |---|---|---|---|
-| Sudeste | 2151 | 55.7% | ###########......... |
-| Sul | 758 | 19.6% | ####................ |
-| Nordeste | 325 | 8.4% | ##.................. |
-| Remoto Nacional | 256 | 6.6% | #................... |
-| Centro-Oeste | 185 | 4.8% | #................... |
-| Norte | 106 | 2.7% | #................... |
-| Não informado | 62 | 1.6% | .................... |
-| Nacional | 21 | 0.5% | .................... |
+| Sudeste | 2330 | 55.3% | ###########......... |
+| Sul | 841 | 20.0% | ####................ |
+| Nordeste | 352 | 8.4% | ##.................. |
+| Remoto Nacional | 286 | 6.8% | #................... |
+| Centro-Oeste | 203 | 4.8% | #................... |
+| Norte | 112 | 2.7% | #................... |
+| Não informado | 62 | 1.5% | .................... |
+| Nacional | 27 | 0.6% | .................... |
 
 ## Top 10 Polos Tecnológicos Regionais
 
 | Posição | Polo | Vagas | % | Gráfico |
 |---|---|---|---|---|
-| 1 | São Paulo | 1124 | 29.1% | ######.............. |
-| 2 | Belo Horizonte | 291 | 7.5% | ##.................. |
-| 3 | Remoto | 256 | 6.6% | #................... |
-| 4 | Rio de Janeiro | 207 | 5.4% | #................... |
-| 5 | Curitiba | 149 | 3.9% | #................... |
-| 6 | Porto Alegre | 145 | 3.8% | #................... |
-| 7 | Florianópolis | 123 | 3.2% | #................... |
-| 8 | Campinas | 89 | 2.3% | .................... |
-| 9 | Salvador | 72 | 1.9% | .................... |
-| 10 | Brasília | 71 | 1.8% | .................... |
+| 1 | São Paulo | 1197 | 28.4% | ######.............. |
+| 2 | Belo Horizonte | 307 | 7.3% | #................... |
+| 3 | Remoto | 286 | 6.8% | #................... |
+| 4 | Rio de Janeiro | 221 | 5.2% | #................... |
+| 5 | Curitiba | 162 | 3.8% | #................... |
+| 6 | Porto Alegre | 162 | 3.8% | #................... |
+| 7 | Florianópolis | 136 | 3.2% | #................... |
+| 8 | Campinas | 107 | 2.5% | .................... |
+| 9 | Salvador | 77 | 1.8% | .................... |
+| 10 | Fortaleza | 76 | 1.8% | .................... |
 
 ## Distribuição por Modalidade de Trabalho
 
 | Modalidade | Vagas | % | Gráfico |
 |---|---|---|---|
-| Presencial | 2752 | 71.2% | ##############...... |
-| Remoto | 620 | 16.0% | ###................. |
-| Híbrido | 491 | 12.7% | ###................. |
+| Presencial | 3004 | 71.3% | ##############...... |
+| Remoto | 689 | 16.4% | ###................. |
+| Híbrido | 519 | 12.3% | ##.................. |
 | Não informado | 1 | 0.0% | .................... |
 
 ## Distribuição por Nível de Entrada
 
 | Senioridade | Vagas | % |
 |---|---|---|
-| Júnior | 2686 | 69.5% |
-| Estágio | 1086 | 28.1% |
-| Aprendiz | 58 | 1.5% |
-| Trainee | 34 | 0.9% |
+| Júnior | 2898 | 68.8% |
+| Estágio | 1207 | 28.6% |
+| Aprendiz | 70 | 1.7% |
+| Trainee | 38 | 0.9% |
 
 ## Distribuição por Portal de Origem
 
 | Portal | Vagas | % |
 |---|---|---|
-| linkedin | 2104 | 54.5% |
-| solides | 622 | 16.1% |
-| gupy | 427 | 11.1% |
-| infojobs | 384 | 9.9% |
-| vagas | 102 | 2.6% |
-| abler | 96 | 2.5% |
-| geekhunter | 68 | 1.8% |
-| recrutei | 56 | 1.4% |
+| linkedin | 2439 | 57.9% |
+| solides | 622 | 14.8% |
+| gupy | 434 | 10.3% |
+| infojobs | 391 | 9.3% |
+| vagas | 102 | 2.4% |
+| abler | 96 | 2.3% |
+| geekhunter | 68 | 1.6% |
+| recrutei | 56 | 1.3% |
 | trampos | 5 | 0.1% |
 
 ## Top 20 Tecnologias Mais Demandadas
 
 | Posição | Tecnologia | Vagas Citadas |
 |---|---|---|
-| 1 | Hardware | 747 |
-| 2 | Redes de Computadores | 701 |
-| 3 | Windows | 667 |
-| 4 | Banco de Dados | 664 |
-| 5 | SQL | 630 |
-| 6 | Pacote Office | 624 |
-| 7 | Inglês | 584 |
-| 8 | Python | 457 |
-| 9 | Git | 441 |
-| 10 | Inteligência Artificial | 426 |
-| 11 | Excel | 405 |
-| 12 | JavaScript | 364 |
-| 13 | Linux | 341 |
-| 14 | Análise de Dados | 313 |
-| 15 | Engenharia de Software | 312 |
-| 16 | Montagem e Manutenção de PCs | 305 |
-| 17 | Manutenção Preventiva | 283 |
-| 18 | ERP | 276 |
-| 19 | API REST | 253 |
-| 20 | Office 365 | 247 |
+| 1 | Hardware | 798 |
+| 2 | Redes de Computadores | 754 |
+| 3 | Banco de Dados | 709 |
+| 4 | Windows | 702 |
+| 5 | Pacote Office | 688 |
+| 6 | SQL | 672 |
+| 7 | Inglês | 638 |
+| 8 | Python | 488 |
+| 9 | Inteligência Artificial | 465 |
+| 10 | Excel | 463 |
+| 11 | Git | 462 |
+| 12 | JavaScript | 382 |
+| 13 | Linux | 363 |
+| 14 | Análise de Dados | 343 |
+| 15 | Engenharia de Software | 332 |
+| 16 | Montagem e Manutenção de PCs | 320 |
+| 17 | ERP | 307 |
+| 18 | Manutenção Preventiva | 304 |
+| 19 | Office 365 | 266 |
+| 20 | Metodologias Ágeis | 260 |
 
 ## Top 10 Empresas com Mais Vagas
 
 | Empresa | Vagas |
 |---|---|
-| Jobbol | 85 |
-| Confidencial | 80 |
-| Auth21 | 53 |
+| Jobbol | 119 |
+| Confidencial | 81 |
+| Auth21 | 58 |
 | Wyntech | 33 |
-| Minsait | 30 |
-| BairesDev | 30 |
-| randstad-1 | 27 |
-| TOTVS | 20 |
-| Quality Digital | 20 |
-| Alpha Estágio | 18 |
+| Minsait | 33 |
+| BairesDev | 32 |
+| randstad-1 | 28 |
+| IEL/SC - Instituto Euvaldo Lodi de Santa Catarina | 25 |
+| Alpha Estágio | 25 |
+| TOTVS | 23 |
