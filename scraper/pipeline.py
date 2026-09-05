@@ -35,33 +35,76 @@ class PipelineResult:
         return self.ranking[0]["area"] if self.ranking else None
 
 
+def _collect_source(
+    source_name: str, settings: Settings
+) -> tuple[str, list[Job], SourceStats | None, int]:
+    """Coleta uma unica fonte com sessao propria.
+
+    Cada fonte tem sua sessao (e seu delay): isso permite rodar as
+    fontes em paralelo sem compartilhar estado, mantendo o ritmo por
+    dominio.
+    """
+    source_cls = SOURCE_REGISTRY.get(source_name)
+    if source_cls is None:
+        logger.warning("Portal desconhecido, ignorando: %s", source_name)
+        return source_name, [], None, 0
+
+    delay = settings.source_delays.get(source_name, settings.delay_seconds)
+    logger.info("=== Coletando em %s (delay %.1fs) ===", source_cls.label, delay)
+    with PoliteSession(
+        user_agent=settings.user_agent,
+        delay_seconds=delay,
+        timeout_seconds=settings.timeout_seconds,
+        max_retries=settings.max_retries,
+        backoff_factor=settings.backoff_factor,
+    ) as session:
+        source = source_cls(session, settings)
+        jobs = source.fetch(settings.search_terms)
+        stats = source.stats
+        requests = session.request_count
+
+    logger.info("%s: %d vagas brutas (%d requests)", source_cls.label, len(jobs), requests)
+    return source_name, jobs, stats, requests
+
+
 def collect(settings: Settings) -> tuple[list[Job], list[SourceStats], int]:
     """Roda todos os portais selecionados e devolve as vagas brutas."""
     all_jobs: list[Job] = []
     stats: list[SourceStats] = []
     total_requests = 0
 
-    for source_name in settings.sources:
-        source_cls = SOURCE_REGISTRY.get(source_name)
-        if source_cls is None:
-            logger.warning("Portal desconhecido, ignorando: %s", source_name)
-            continue
+    if settings.parallel_sources and len(settings.sources) > 1:
+        from concurrent.futures import ThreadPoolExecutor, as_completed
 
-        logger.info("=== Coletando em %s ===", source_cls.label)
-        with PoliteSession(
-            user_agent=settings.user_agent,
-            delay_seconds=settings.delay_seconds,
-            timeout_seconds=settings.timeout_seconds,
-            max_retries=settings.max_retries,
-            backoff_factor=settings.backoff_factor,
-        ) as session:
-            source = source_cls(session, settings)
-            jobs = source.fetch(settings.search_terms)
+        logger.info(
+            "Coleta PARALELA: %d fontes ao mesmo tempo (delay por fonte preservado)",
+            len(settings.sources),
+        )
+        resultados: dict[str, tuple[list[Job], SourceStats | None, int]] = {}
+        with ThreadPoolExecutor(max_workers=len(settings.sources)) as pool:
+            futures = {
+                pool.submit(_collect_source, nome, settings): nome
+                for nome in settings.sources
+            }
+            for future in as_completed(futures):
+                nome, jobs, fonte_stats, requests = future.result()
+                resultados[nome] = (jobs, fonte_stats, requests)
+
+        # Ordem estavel: a mesma ordem de settings.sources.
+        for nome in settings.sources:
+            jobs, fonte_stats, requests = resultados[nome]
             all_jobs.extend(jobs)
-            stats.append(source.stats)
-            total_requests += session.request_count
+            if fonte_stats is not None:
+                stats.append(fonte_stats)
+            total_requests += requests
+        return all_jobs, stats, total_requests
 
-        logger.info("%s: %d vagas brutas", source_cls.label, len(jobs))
+    for source_name in settings.sources:
+        _, jobs, fonte_stats, requests = _collect_source(source_name, settings)
+        all_jobs.extend(jobs)
+        if fonte_stats is not None:
+            stats.append(fonte_stats)
+        total_requests += requests
 
     return all_jobs, stats, total_requests
 

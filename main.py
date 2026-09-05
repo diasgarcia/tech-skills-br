@@ -66,6 +66,19 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     parser.add_argument(
+        "--parallel-sources", action="store_true",
+        help="Coleta paralela entre fontes (experimental): uma thread por "
+             "fonte, cada uma com sessao e delay proprios.",
+    )
+
+    parser.add_argument(
+        "--source-delay", nargs=2, action="append", metavar=("FONTE", "SEGUNDOS"),
+        default=[],
+        help="Delay por fonte (ex.: --source-delay linkedin 1.0). Sobrescreve "
+             "o --delay para a fonte indicada.",
+    )
+
+    parser.add_argument(
         "--delay", type=float, default=1.5,
         help="Segundos de espera entre requests (padrao: 1.5).",
     )
@@ -122,6 +135,11 @@ def main(argv: list[str] | None = None) -> int:
         enrich_linkedin=not args.no_enrich,
         abler_days_back=max(1, args.abler_days),
         recrutei_full=args.recrutei_full,
+        parallel_sources=args.parallel_sources,
+        source_delays={
+            fonte: float(segundos)
+            for fonte, segundos in (args.source_delay or [])
+        },
     )
 
 

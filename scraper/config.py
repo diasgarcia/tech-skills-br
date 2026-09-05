@@ -93,6 +93,15 @@ class Settings:
     backoff_factor: float = 1.5
     user_agent: str = USER_AGENT
 
+    # Delay por fonte (experimental): sobrescreve o delay padrao para a
+    # fonte indicada. Ex.: {"linkedin": 1.0}. Usado nos experimentos de
+    # tempo da coleta.
+    source_delays: dict[str, float] = field(default_factory=dict)
+
+    # Coleta paralela entre fontes (experimental): cada fonte roda em
+    # thread propria com sessao propria; o delay vale por dominio.
+    parallel_sources: bool = False
+
     page_size: int = 100  # a API da Gupy rejeita limit > 100 (HTTP 400)
     start_page: int = 1
     max_pages_per_term: int = 15
