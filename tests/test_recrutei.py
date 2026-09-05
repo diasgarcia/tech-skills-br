@@ -52,6 +52,40 @@ DETALHE_HTML = """
 
 VAGA_URL = "https://empregos.recrutei.com.br/vaga/alpha-estagio/153211-estagio-em-ti"
 
+DETALHE_REMOTO_HTML = """
+<html><head>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "JobPosting",
+ "title": "Desenvolvimento Analytics Junior",
+ "description": "desc",
+ "datePosted": "2026-08-31T12:00:00.000000Z",
+ "hiringOrganization": {"@type": "Organization", "name": "Digisystem"}
+}
+</script>
+</head><body>
+<h6 class="text-muted text-center pb-2"><i class="mdi mdi-map-marker mr-2"></i> Remoto </h6>
+</body></html>
+"""
+
+DETALHE_CIDADE_HTML = """
+<html><head>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "JobPosting",
+ "title": "Analista de Suporte Junior",
+ "description": "desc",
+ "datePosted": "2026-08-31T12:00:00.000000Z",
+ "hiringOrganization": {"@type": "Organization", "name": "Acme"}
+}
+</script>
+</head><body>
+<h6 class="text-muted text-center pb-2"><i class="mdi mdi-map-marker mr-2"></i> Brasília, DF, Brasil </h6>
+</body></html>
+"""
+
 
 def _source(**kw):
     base = dict(output_dir=kw.pop("output_dir", None) or "output", recrutei_days_back=1)
@@ -79,6 +113,87 @@ def test_parse_page_ignora_vaga_anterior_a_2026():
 
 def test_parse_page_ignora_html_sem_jobposting():
     assert _source()._parse_page("<html>sem json-ld</html>", VAGA_URL) is None
+
+
+def test_parse_page_le_modalidade_remota_do_header():
+    job = _source()._parse_page(DETALHE_REMOTO_HTML, VAGA_URL)
+    assert job is not None
+    assert job.workplace_type == "Remoto"
+    assert job.location == ""
+
+
+def test_parse_page_le_cidade_do_header():
+    job = _source()._parse_page(DETALHE_CIDADE_HTML, VAGA_URL)
+    assert job is not None
+    assert job.workplace_type == "Presencial"
+    assert job.location == "Brasília, DF, Brasil"
+
+
+def test_parse_page_modalidade_do_header_prevalece_sobre_cidade_do_jsonld():
+    html = DETALHE_REMOTO_HTML.replace(
+        '"hiringOrganization": {"@type": "Organization", "name": "Digisystem"}',
+        '"hiringOrganization": {"@type": "Organization", "name": "Digisystem"},'
+        ' "jobLocation": {"@type": "Place", "address": {'
+        '"@type": "PostalAddress", "addressLocality": "Belo Horizonte",'
+        ' "addressRegion": "MG", "addressCountry": "Brasil"}}',
+    )
+    job = _source()._parse_page(html, VAGA_URL)
+    assert job is not None
+    assert job.workplace_type == "Remoto"
+    assert job.location == "Belo Horizonte, MG"
+
+
+def test_parse_page_cidade_no_header_com_hibrido_no_titulo():
+    html = DETALHE_CIDADE_HTML.replace(
+        '"title": "Analista de Suporte Junior"',
+        '"title": "Analista de Suporte de Sistemas Junior | Hibrido"',
+    )
+    job = _source()._parse_page(html, VAGA_URL)
+    assert job is not None
+    assert job.workplace_type == "Híbrido"
+    assert job.location == "Brasília, DF, Brasil"
+
+
+def test_parse_page_modalidade_explicita_na_descricao():
+    html = DETALHE_CIDADE_HTML.replace(
+        '"description": "desc"',
+        '"description": "Atividades de suporte. Forma de trabalho: Hibrido. Requisitos."',
+    )
+    job = _source()._parse_page(html, VAGA_URL)
+    assert job is not None
+    assert job.workplace_type == "Híbrido"
+    assert job.location == "Brasília, DF, Brasil"
+
+
+def test_parse_page_modalidade_em_modelo_de_trabalho():
+    html = DETALHE_CIDADE_HTML.replace(
+        '"description": "desc"',
+        '"description": "Estamos trabalhando em modelo hibrido, com escritorio em Sao Paulo."',
+    )
+    job = _source()._parse_page(html, VAGA_URL)
+    assert job is not None
+    assert job.workplace_type == "Híbrido"
+
+
+def test_parse_page_modalidade_colada_ao_titulo():
+    html = DETALHE_CIDADE_HTML.replace(
+        '"description": "desc"',
+        '"description": "JuniorAtua\\u00e7\\u00e3o Hibrida/remota; - Faria Lima; Inicio Imediato."',
+    )
+    job = _source()._parse_page(html, VAGA_URL)
+    assert job is not None
+    assert job.workplace_type == "Híbrido"
+
+
+def test_parse_page_ignora_mencoes_soltas_de_home_office_na_descricao():
+    html = DETALHE_CIDADE_HTML.replace(
+        '"description": "desc"',
+        '"description": "Suporte remoto a clientes. Beneficios: Auxilio Home Office."',
+    )
+    job = _source()._parse_page(html, VAGA_URL)
+    assert job is not None
+    assert job.workplace_type == "Presencial"
+    assert job.location == "Brasília, DF, Brasil"
 
 
 def test_vid_da_url_aceita_numerico_e_uuid():
