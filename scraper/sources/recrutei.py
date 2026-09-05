@@ -183,7 +183,7 @@ class RecruteiSource(JobSource):
         try:
             with open(checkpoint, "a", encoding="utf-8-sig", newline="") as fh:
                 writer = None
-                for url in alvos:
+                for idx, url in enumerate(alvos, 1):
                     if _vid_da_url(url) in seen:
                         continue  # ja esta no checkpoint: nao refaz o GET
                     page = self.session.get(url)
@@ -213,7 +213,11 @@ class RecruteiSource(JobSource):
                         else:
                             logger.info("[%s] progresso: %d vagas novas",
                                         self.name, len(jobs))
-                        self.report(len(jobs), current_term=f"{len(jobs)} vagas novas")
+                        self.report(
+                            len(jobs),
+                            current_term=f"{len(jobs)} vagas novas",
+                            progresso=idx / len(alvos),
+                        )
                 else:
                     completou = True
         finally:

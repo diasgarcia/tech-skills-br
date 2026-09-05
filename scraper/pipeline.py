@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import os
+import re
 import sys
 import threading
 import time as _time
@@ -40,6 +41,27 @@ class PipelineResult:
 
 
 RESUMO_INTERVALO_S = 45.0
+
+# Cores ANSI para o viewer do Actions (renderiza SGR; "clear" nao existe).
+_ANSI = {
+    "verde": "\033[32m",
+    "vermelho": "\033[31m",
+    "amarelo": "\033[33m",
+    "ciano": "\033[36m",
+    "cinza": "\033[90m",
+    "negrito": "\033[1m",
+}
+
+_STATUS_COR = {
+    "Concluido": _ANSI["verde"],
+    "Erro": _ANSI["vermelho"],
+    "Coletando": _ANSI["amarelo"],
+    "Iniciando": _ANSI["cinza"],
+}
+
+
+def _cor(estilo: str, texto: str) -> str:
+    return f"{estilo}{texto}\033[0m"
 
 
 def _emitir_comando(texto: str) -> None:
@@ -98,8 +120,9 @@ class _TabelaParalela:
     """Monitor de progresso em tabela para coleta paralela entre fontes.
 
     - Em terminal interativo (TTY local): redesenha a tabela in-place sem rolar telas.
-    - No GitHub Actions / nao-TTY: emite snapshots da tabela em intervalos limpos,
-      envelopados em grupos colapsaveis no Actions.
+    - No GitHub Actions / nao-TTY: imprime snapshots da tabela como linhas
+      planas (sempre visiveis; o Actions nao deixa controlar o estado
+      inicial de um ::group:: e nao renderiza ANSI, entao nada de "clear").
     """
 
     def __init__(self, fontes: list[str], labels: dict[str, str] | None = None) -> None:
@@ -118,10 +141,11 @@ class _TabelaParalela:
                 "vagas": 0,
                 "requests": 0,
                 "termo": "-",
+                "progresso": 0.0,
             }
             for f in fontes
         }
-        self.lock = threading.Lock()
+        self.lock = threading.RLock()
         self.inicio = _time.time()
         self.linhas_impressas = 0
         self.ultimo_render = 0.0
@@ -137,43 +161,72 @@ class _TabelaParalela:
             total_vagas = sum(d["vagas"] for d in self.estado.values())
             total_reqs = sum(d["requests"] for d in self.estado.values())
             concluidas = sum(
-                1 for d in self.estado.values() if d["status"] in ("Concluido", "Erro")
+                1 for d in self.estado.values()
+                if d["status"] == "Concluido" or d["status"].startswith("Erro")
             )
             total_fontes = len(self.estado)
 
             cabecalho = (
                 f"[Coleta Paralela: {total_fontes} fontes | "
-                f"{concluidas}/{total_fontes} concluidas | {tempo_str} decorridos]"
+                f"{concluidas}/{total_fontes} concluidas | "
+                f"{self._percentual()}% | {tempo_str} decorridos]"
             )
+
+            # A ultima coluna cresce conforme o conteudo (sem cortar o termo);
+            # o log do Actions tem scroll horizontal para linhas longas.
+            celulas_info = [d["termo"] or "-" for d in
+                            (self.estado[n] for n in self.fontes)]
+            celulas_info.append(f"{total_vagas} vagas brutas")
+            larg_info = max(len("Ultimo Termo / Info"), *(len(c) for c in celulas_info))
+
+            larguras = [20, 10, 7, 8, larg_info]
+            borda = "+" + "+".join("-" * (w + 2) for w in larguras) + "+"
+            cabecalhos = ["Fonte", "Status", "Vagas", "Requests", "Ultimo Termo / Info"]
+            colorir = self.is_ci or self.is_tty
+
+            def cel(c, w, cor=None):
+                t = c.ljust(w)
+                return _cor(cor, t) if (cor and colorir) else t
+
             linhas = [
                 cabecalho,
-                "+----------------------+------------+---------+----------+--------------------------+",
-                "| Fonte                | Status     |   Vagas | Requests | Ultimo Termo / Info      |",
-                "+----------------------+------------+---------+----------+--------------------------+",
+                borda,
+                "| " + " | ".join(cel(c, w, _ANSI["ciano"]) for c, w in zip(cabecalhos, larguras)) + " |",
+                borda,
             ]
 
             for nome in self.fontes:
                 d = self.estado[nome]
-                lbl = d["label"][:20].ljust(20)
-                st = d["status"][:10].ljust(10)
-                vg = f"{d['vagas']:,}".replace(",", ".").rjust(7)
-                rq = f"{d['requests']:,}".replace(",", ".").rjust(8)
-                tm = (d["termo"] or "-")[:24].ljust(24)
-                linhas.append(f"| {lbl} | {st} | {vg} | {rq} | {tm} |")
+                lbl = d["label"][:20]
+                st = d["status"][:10]
+                vg = f"{d['vagas']:,}".replace(",", ".")
+                rq = f"{d['requests']:,}".replace(",", ".")
+                tm = d["termo"] or "-"
+                linhas.append(
+                    "| " + " | ".join([
+                        cel(lbl, 20),
+                        cel(st, 10, self._cor_status(d["status"])),
+                        cel(vg.rjust(7), 7),
+                        cel(rq.rjust(8), 8),
+                        cel(tm, larg_info),
+                    ]) + " |"
+                )
 
+            linhas.append(borda)
+            resumo_st = f"{concluidas}/{total_fontes} conc."
+            tot_vg = f"{total_vagas:,}".replace(",", ".")
+            tot_rq = f"{total_reqs:,}".replace(",", ".")
+            tot_info = f"{total_vagas} vagas brutas"
             linhas.append(
-                "+----------------------+------------+---------+----------+--------------------------+"
+                "| " + " | ".join([
+                    cel("TOTAL", 20, _ANSI["negrito"]),
+                    cel(resumo_st, 10),
+                    cel(tot_vg.rjust(7), 7),
+                    cel(tot_rq.rjust(8), 8),
+                    cel(tot_info, larg_info),
+                ]) + " |"
             )
-            resumo_st = f"{concluidas}/{total_fontes} conc.".ljust(10)
-            tot_vg = f"{total_vagas:,}".replace(",", ".").rjust(7)
-            tot_rq = f"{total_reqs:,}".replace(",", ".").rjust(8)
-            tot_info = f"{total_vagas} vagas brutas".ljust(24)
-            linhas.append(
-                f"| {'TOTAL'.ljust(20)} | {resumo_st} | {tot_vg} | {tot_rq} | {tot_info} |"
-            )
-            linhas.append(
-                "+----------------------+------------+---------+----------+--------------------------+"
-            )
+            linhas.append(borda)
             return "\n".join(linhas)
 
     def atualizar(
@@ -183,6 +236,7 @@ class _TabelaParalela:
         termo: str | None = None,
         requests: int | None = None,
         status: str | None = None,
+        progresso: float | None = None,
     ) -> None:
         with self.lock:
             if nome in self.estado:
@@ -192,10 +246,27 @@ class _TabelaParalela:
                     self.estado[nome]["termo"] = termo
                 if requests is not None:
                     self.estado[nome]["requests"] = requests
+                if progresso is not None:
+                    self.estado[nome]["progresso"] = min(1.0, max(0.0, progresso))
                 if status is not None:
                     self.estado[nome]["status"] = status
                 elif self.estado[nome]["status"] == "Iniciando":
                     self.estado[nome]["status"] = "Coletando"
+
+    @staticmethod
+    def _cor_status(status: str) -> str | None:
+        if status.startswith("Erro"):
+            return _ANSI["vermelho"]
+        return _STATUS_COR.get(status)
+
+    def _percentual(self) -> int:
+        with self.lock:
+            if not self.estado:
+                return 0
+            return round(
+                100 * sum(d["progresso"] for d in self.estado.values())
+                / len(self.estado)
+            )
 
     def finalizar_fonte(self, nome: str, total: int, requests: int) -> None:
         with self.lock:
@@ -204,21 +275,26 @@ class _TabelaParalela:
                 self.estado[nome]["requests"] = requests
                 self.estado[nome]["status"] = "Concluido"
                 self.estado[nome]["termo"] = "finalizado"
+                self.estado[nome]["progresso"] = 1.0
         if not self.is_tty:
             # Em CI/nao-TTY, renderiza se ja passou intervalo ou se todas terminaram
             concluidas = sum(
-                1 for d in self.estado.values() if d["status"] in ("Concluido", "Erro")
+                1 for d in self.estado.values()
+                if d["status"] == "Concluido" or d["status"].startswith("Erro")
             )
             if concluidas == len(self.estado):
                 self.renderizar(forcar=True)
             else:
                 self.renderizar(forcar=False)
 
-    def erro_fonte(self, nome: str, erro: str) -> None:
+    def erro_fonte(self, nome: str, erro: str = "", codigo: int | None = None) -> None:
         with self.lock:
             if nome in self.estado:
-                self.estado[nome]["status"] = "Erro"
-                self.estado[nome]["termo"] = erro[:24]
+                self.estado[nome]["status"] = (
+                    f"Erro {codigo}" if codigo else "Erro"
+                )
+                self.estado[nome]["termo"] = erro or "erro"
+                self.estado[nome]["progresso"] = 1.0
         if not self.is_tty:
             self.renderizar(forcar=False)
 
@@ -233,21 +309,26 @@ class _TabelaParalela:
         linhas = texto.splitlines()
 
         if self.is_ci:
+            # Linhas planas, sem ::group::: o Actions decide sozinho se o
+            # grupo nasce aberto ou fechado (hoje nasce fechado), e nao
+            # existe parametro para forcar. A linha de titulo continua
+            # permitindo um resumo de relance no meio do log.
             with self.lock:
                 decorrido = agora - self.inicio
                 minutos, segundos = divmod(int(decorrido), 60)
                 tempo_str = f"{minutos:02d}m{segundos:02d}s"
                 total_vagas = sum(d["vagas"] for d in self.estado.values())
                 concluidas = sum(
-                    1 for d in self.estado.values() if d["status"] in ("Concluido", "Erro")
+                    1 for d in self.estado.values()
+                    if d["status"] == "Concluido" or d["status"].startswith("Erro")
                 )
                 titulo = (
                     f"[resumo {_time.strftime('%H:%M:%S')}] {total_vagas} vagas | "
-                    f"{concluidas}/{len(self.estado)} fontes ({tempo_str})"
+                    f"{concluidas}/{len(self.estado)} fontes ({tempo_str}) | "
+                    f"{self._percentual()}%"
                 )
-            _emitir_comando(f"::group::{titulo}")
-            _emitir_comando(texto)
-            _emitir_comando("::endgroup::")
+            print(_cor(_ANSI["negrito"], titulo), flush=True)
+            print(texto, flush=True)
             self.ultimo_render = agora
         elif self.is_tty:
             if self.linhas_impressas > 0:
@@ -284,19 +365,26 @@ class _TabelaParalela:
 
 
 
+def _codigo_do_erro(mensagem: str) -> int | None:
+    """Extrai um codigo HTTP de uma mensagem de excecao ('HTTP 429', '500 Server Error'...)."""
+    m = re.search(r"\b([45]\d\d)\b", mensagem or "")
+    return int(m.group(1)) if m else None
+
+
 def _collect_source(
     source_name: str, settings: Settings, reportar=None
-) -> tuple[str, list[Job], SourceStats | None, int]:
+) -> tuple[str, list[Job], SourceStats | None, int, int | None]:
     """Coleta uma unica fonte com sessao propria.
 
     Cada fonte tem sua sessao (e seu delay): isso permite rodar as
     fontes em paralelo sem compartilhar estado, mantendo o ritmo por
-    dominio.
+    dominio. O ultimo elemento devolve o status HTTP da ultima chamada
+    (para o monitor marcar bloqueio/erro na tabela).
     """
     source_cls = SOURCE_REGISTRY.get(source_name)
     if source_cls is None:
         logger.warning("Portal desconhecido, ignorando: %s", source_name)
-        return source_name, [], None, 0
+        return source_name, [], None, 0, None
 
     delay = settings.source_delays.get(source_name, settings.delay_seconds)
     if not settings.parallel_sources:
@@ -317,13 +405,14 @@ def _collect_source(
         jobs = source.fetch(settings.search_terms)
         stats = source.stats
         requests = session.request_count
+        ultimo_status = session.last_status_code
 
     if not settings.parallel_sources:
         logger.info("%s: %d vagas brutas (%d requests)", source_cls.label, len(jobs), requests)
     else:
         logger.debug("%s: %d vagas brutas (%d requests)", source_cls.label, len(jobs), requests)
 
-    return source_name, jobs, stats, requests
+    return source_name, jobs, stats, requests, ultimo_status
 
 
 def collect(settings: Settings) -> tuple[list[Job], list[SourceStats], int]:
@@ -344,8 +433,8 @@ def collect(settings: Settings) -> tuple[list[Job], list[SourceStats], int]:
         monitor.iniciar()
 
         def _reportar(nome: str):
-            return lambda total, termo=None, reqs=None: monitor.atualizar(
-                nome, total=total, termo=termo, requests=reqs
+            return lambda total, termo=None, reqs=None, progresso=None: monitor.atualizar(
+                nome, total=total, termo=termo, requests=reqs, progresso=progresso
             )
 
         resultados: dict[str, tuple[list[Job], SourceStats | None, int]] = {}
@@ -358,12 +447,17 @@ def collect(settings: Settings) -> tuple[list[Job], list[SourceStats], int]:
                 for future in as_completed(futures):
                     nome = futures[future]
                     try:
-                        _, jobs, fonte_stats, requests = future.result()
+                        _, jobs, fonte_stats, requests, ultimo = future.result()
                         resultados[nome] = (jobs, fonte_stats, requests)
-                        monitor.finalizar_fonte(nome, len(jobs), requests)
+                        if ultimo is not None and ultimo >= 400:
+                            # Bloqueio/erro no portal: mostra o codigo no
+                            # status e deixa o termo como "erro".
+                            monitor.erro_fonte(nome, "erro", codigo=ultimo)
+                        else:
+                            monitor.finalizar_fonte(nome, len(jobs), requests)
                     except Exception as exc:
                         resultados[nome] = ([], None, 0)
-                        monitor.erro_fonte(nome, str(exc))
+                        monitor.erro_fonte(nome, str(exc), codigo=_codigo_do_erro(str(exc)))
         finally:
             monitor.encerrar()
 
@@ -377,7 +471,7 @@ def collect(settings: Settings) -> tuple[list[Job], list[SourceStats], int]:
         return all_jobs, stats, total_requests
 
     for source_name in settings.sources:
-        _, jobs, fonte_stats, requests = _collect_source(source_name, settings)
+        _, jobs, fonte_stats, requests, _ = _collect_source(source_name, settings)
         all_jobs.extend(jobs)
         if fonte_stats is not None:
             stats.append(fonte_stats)
