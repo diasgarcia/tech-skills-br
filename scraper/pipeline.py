@@ -69,6 +69,60 @@ def _emitir_comando(texto: str) -> None:
     print(texto, flush=True)
 
 
+class _CapturaHandler(logging.Handler):
+    """Handler que guarda os registros em memoria em vez de imprimir."""
+
+    def __init__(self, destino: list[str]) -> None:
+        super().__init__()
+        self._destino = destino
+        self.setFormatter(
+            logging.Formatter(
+                "%(asctime)s  %(levelname)-7s %(message)s", datefmt="%H:%M:%S"
+            )
+        )
+
+    def emit(self, record: logging.LogRecord) -> None:
+        self._destino.append(self.format(record))
+
+
+class _BufferLog:
+    """Silencia o logging durante a coleta paralela e despeja no final.
+
+    Na rodada padrao o monitor (tabela) e a unica saida durante a coleta:
+    as linhas das fontes (sitemaps, warnings de 429/500 etc.) ficam
+    guardadas e aparecem juntas no fim, como um log geral.
+    """
+
+    def __init__(self) -> None:
+        self.linhas: list[str] = []
+        self._handler: logging.Handler | None = None
+        self._originais: list[logging.Handler] = []
+
+    def ativar(self) -> None:
+        raiz = logging.getLogger()
+        self._originais = list(raiz.handlers)
+        for handler in self._originais:
+            raiz.removeHandler(handler)
+        self._handler = _CapturaHandler(self.linhas)
+        raiz.addHandler(self._handler)
+
+    def desativar(self) -> None:
+        raiz = logging.getLogger()
+        if self._handler is not None:
+            raiz.removeHandler(self._handler)
+            self._handler = None
+        for handler in self._originais:
+            raiz.addHandler(handler)
+        self._originais = []
+
+    def despejar(self) -> None:
+        if not self.linhas:
+            return
+        print("------  log geral da coleta  ------", flush=True)
+        for linha in self.linhas:
+            print(linha, flush=True)
+
+
 class _ResumoParalelo:
     """Mantido para compatibilidade de testes unitarios."""
 
@@ -329,6 +383,8 @@ class _TabelaParalela:
                 )
             print(_cor(_ANSI["negrito"], titulo), flush=True)
             print(texto, flush=True)
+            # Separador visual entre um snapshot e o seguinte.
+            print("-" * 72, flush=True)
             self.ultimo_render = agora
         elif self.is_tty:
             if self.linhas_impressas > 0:
@@ -438,12 +494,17 @@ def collect(settings: Settings) -> tuple[list[Job], list[SourceStats], int]:
             )
 
         resultados: dict[str, tuple[list[Job], SourceStats | None, int]] = {}
+        buffer = _BufferLog()
+        buffer.ativar()
         try:
             with ThreadPoolExecutor(max_workers=len(settings.sources)) as pool:
-                futures = {
-                    pool.submit(_collect_source, nome, settings, _reportar(nome)): nome
-                    for nome in settings.sources
-                }
+                futures = {}
+                for nome in settings.sources:
+                    futures[pool.submit(_collect_source, nome, settings, _reportar(nome))] = nome
+                    # Marca "Coletando" ja no disparo: o primeiro report so
+                    # vem depois do primeiro termo, e fontes de termo unico
+                    # ficariam "Iniciando" ate o final sem isso.
+                    monitor.atualizar(nome, status="Coletando")
                 for future in as_completed(futures):
                     nome = futures[future]
                     try:
@@ -460,6 +521,8 @@ def collect(settings: Settings) -> tuple[list[Job], list[SourceStats], int]:
                         monitor.erro_fonte(nome, str(exc), codigo=_codigo_do_erro(str(exc)))
         finally:
             monitor.encerrar()
+            buffer.desativar()
+        buffer.despejar()
 
         # Ordem estavel: a mesma ordem de settings.sources.
         for nome in settings.sources:
