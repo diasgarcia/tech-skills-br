@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import logging
+import os
+import sys
 import threading
 import time as _time
 from dataclasses import dataclass, field
@@ -46,13 +48,7 @@ def _emitir_comando(texto: str) -> None:
 
 
 class _ResumoParalelo:
-    """Monta os grupos colapsaveis de resumo no log do Actions.
-
-    A cada intervalo, fecha o grupo atual e abre outro cujo titulo traz
-    a contagem de vagas por fonte ate aquele momento; as chamadas do
-    intervalo ficam dentro do grupo. O titulo do grupo e imutavel, por
-    isso a "atualizacao" acontece abrindo um grupo novo.
-    """
+    """Mantido para compatibilidade de testes unitarios."""
 
     def __init__(self, nomes: list[str]) -> None:
         self._contagens = {n: 0 for n in nomes}
@@ -85,6 +81,209 @@ class _ResumoParalelo:
                 self._aberto = False
 
 
+FONTES_LABELS = {
+    "linkedin": "LinkedIn",
+    "gupy": "Gupy",
+    "vagas": "Vagas.com",
+    "trampos": "Trampos.co",
+    "solides": "Solides",
+    "geekhunter": "GeekHunter",
+    "infojobs": "InfoJobs",
+    "abler": "Abler",
+    "recrutei": "Recrutei",
+}
+
+
+class _TabelaParalela:
+    """Monitor de progresso em tabela para coleta paralela entre fontes.
+
+    - Em terminal interativo (TTY local): redesenha a tabela in-place sem rolar telas.
+    - No GitHub Actions / nao-TTY: emite snapshots da tabela em intervalos limpos,
+      envelopados em grupos colapsaveis no Actions.
+    """
+
+    def __init__(self, fontes: list[str], labels: dict[str, str] | None = None) -> None:
+        self.fontes = list(fontes)
+        self.labels = labels or {}
+        self.is_ci = os.getenv("GITHUB_ACTIONS") == "true"
+        self.is_tty = sys.stdout.isatty() and not self.is_ci
+
+        if self.is_tty and sys.platform == "win32":
+            os.system("")  # Ativa virtual terminal ANSI no conhost se necessario
+
+        self.estado: dict[str, dict] = {
+            f: {
+                "label": self.labels.get(f, FONTES_LABELS.get(f, f.capitalize())),
+                "status": "Iniciando",
+                "vagas": 0,
+                "requests": 0,
+                "termo": "-",
+            }
+            for f in fontes
+        }
+        self.lock = threading.Lock()
+        self.inicio = _time.time()
+        self.linhas_impressas = 0
+        self.ultimo_render = 0.0
+        self.parar = threading.Event()
+        self.thread_timer: threading.Thread | None = None
+
+    def formatar(self) -> str:
+        with self.lock:
+            decorrido = _time.time() - self.inicio
+            minutos, segundos = divmod(int(decorrido), 60)
+            tempo_str = f"{minutos:02d}m{segundos:02d}s"
+
+            total_vagas = sum(d["vagas"] for d in self.estado.values())
+            total_reqs = sum(d["requests"] for d in self.estado.values())
+            concluidas = sum(
+                1 for d in self.estado.values() if d["status"] in ("Concluido", "Erro")
+            )
+            total_fontes = len(self.estado)
+
+            cabecalho = (
+                f"[Coleta Paralela: {total_fontes} fontes | "
+                f"{concluidas}/{total_fontes} concluidas | {tempo_str} decorridos]"
+            )
+            linhas = [
+                cabecalho,
+                "+----------------------+------------+---------+----------+--------------------------+",
+                "| Fonte                | Status     |   Vagas | Requests | Ultimo Termo / Info      |",
+                "+----------------------+------------+---------+----------+--------------------------+",
+            ]
+
+            for nome in self.fontes:
+                d = self.estado[nome]
+                lbl = d["label"][:20].ljust(20)
+                st = d["status"][:10].ljust(10)
+                vg = f"{d['vagas']:,}".replace(",", ".").rjust(7)
+                rq = f"{d['requests']:,}".replace(",", ".").rjust(8)
+                tm = (d["termo"] or "-")[:24].ljust(24)
+                linhas.append(f"| {lbl} | {st} | {vg} | {rq} | {tm} |")
+
+            linhas.append(
+                "+----------------------+------------+---------+----------+--------------------------+"
+            )
+            resumo_st = f"{concluidas}/{total_fontes} conc.".ljust(10)
+            tot_vg = f"{total_vagas:,}".replace(",", ".").rjust(7)
+            tot_rq = f"{total_reqs:,}".replace(",", ".").rjust(8)
+            tot_info = f"{total_vagas} vagas brutas".ljust(24)
+            linhas.append(
+                f"| {'TOTAL'.ljust(20)} | {resumo_st} | {tot_vg} | {tot_rq} | {tot_info} |"
+            )
+            linhas.append(
+                "+----------------------+------------+---------+----------+--------------------------+"
+            )
+            return "\n".join(linhas)
+
+    def atualizar(
+        self,
+        nome: str,
+        total: int | None = None,
+        termo: str | None = None,
+        requests: int | None = None,
+        status: str | None = None,
+    ) -> None:
+        with self.lock:
+            if nome in self.estado:
+                if total is not None:
+                    self.estado[nome]["vagas"] = total
+                if termo is not None:
+                    self.estado[nome]["termo"] = termo
+                if requests is not None:
+                    self.estado[nome]["requests"] = requests
+                if status is not None:
+                    self.estado[nome]["status"] = status
+                elif self.estado[nome]["status"] == "Iniciando":
+                    self.estado[nome]["status"] = "Coletando"
+
+    def finalizar_fonte(self, nome: str, total: int, requests: int) -> None:
+        with self.lock:
+            if nome in self.estado:
+                self.estado[nome]["vagas"] = total
+                self.estado[nome]["requests"] = requests
+                self.estado[nome]["status"] = "Concluido"
+                self.estado[nome]["termo"] = "finalizado"
+        if not self.is_tty:
+            # Em CI/nao-TTY, renderiza se ja passou intervalo ou se todas terminaram
+            concluidas = sum(
+                1 for d in self.estado.values() if d["status"] in ("Concluido", "Erro")
+            )
+            if concluidas == len(self.estado):
+                self.renderizar(forcar=True)
+            else:
+                self.renderizar(forcar=False)
+
+    def erro_fonte(self, nome: str, erro: str) -> None:
+        with self.lock:
+            if nome in self.estado:
+                self.estado[nome]["status"] = "Erro"
+                self.estado[nome]["termo"] = erro[:24]
+        if not self.is_tty:
+            self.renderizar(forcar=False)
+
+    def renderizar(self, forcar: bool = False) -> None:
+        agora = _time.time()
+        if not self.is_tty and not forcar:
+            # Em CI/nao-TTY, evita snapshots repetidos em menos de 15 segundos
+            if agora - self.ultimo_render < 15.0:
+                return
+
+        texto = self.formatar()
+        linhas = texto.splitlines()
+
+        if self.is_ci:
+            with self.lock:
+                decorrido = agora - self.inicio
+                minutos, segundos = divmod(int(decorrido), 60)
+                tempo_str = f"{minutos:02d}m{segundos:02d}s"
+                total_vagas = sum(d["vagas"] for d in self.estado.values())
+                concluidas = sum(
+                    1 for d in self.estado.values() if d["status"] in ("Concluido", "Erro")
+                )
+                titulo = (
+                    f"[resumo {_time.strftime('%H:%M:%S')}] {total_vagas} vagas | "
+                    f"{concluidas}/{len(self.estado)} fontes ({tempo_str})"
+                )
+            _emitir_comando(f"::group::{titulo}")
+            _emitir_comando(texto)
+            _emitir_comando("::endgroup::")
+            self.ultimo_render = agora
+        elif self.is_tty:
+            if self.linhas_impressas > 0:
+                sys.stdout.write(f"\033[{self.linhas_impressas}F")
+            sys.stdout.write(texto + "\n")
+            sys.stdout.flush()
+            self.linhas_impressas = len(linhas)
+            self.ultimo_render = agora
+        else:
+            print(texto, flush=True)
+            self.ultimo_render = agora
+
+    def iniciar(self) -> None:
+        intervalo = 1.0 if self.is_tty else RESUMO_INTERVALO_S
+
+        def _loop():
+            while not self.parar.wait(intervalo):
+                self.renderizar()
+
+        self.renderizar(forcar=True)
+        self.thread_timer = threading.Thread(target=_loop, daemon=True)
+        self.thread_timer.start()
+
+    def encerrar(self) -> None:
+        self.parar.set()
+        if self.thread_timer is not None:
+            self.thread_timer.join(timeout=2.0)
+        if self.is_tty:
+            self.renderizar(forcar=True)
+            print("", flush=True)
+        else:
+            if _time.time() - self.ultimo_render > 1.0:
+                self.renderizar(forcar=True)
+
+
+
 def _collect_source(
     source_name: str, settings: Settings, reportar=None
 ) -> tuple[str, list[Job], SourceStats | None, int]:
@@ -100,7 +299,11 @@ def _collect_source(
         return source_name, [], None, 0
 
     delay = settings.source_delays.get(source_name, settings.delay_seconds)
-    logger.info("=== Coletando em %s (delay %.1fs) ===", source_cls.label, delay)
+    if not settings.parallel_sources:
+        logger.info("=== Coletando em %s (delay %.1fs) ===", source_cls.label, delay)
+    else:
+        logger.debug("=== Coletando em %s (delay %.1fs) ===", source_cls.label, delay)
+
     with PoliteSession(
         user_agent=settings.user_agent,
         delay_seconds=delay,
@@ -115,7 +318,11 @@ def _collect_source(
         stats = source.stats
         requests = session.request_count
 
-    logger.info("%s: %d vagas brutas (%d requests)", source_cls.label, len(jobs), requests)
+    if not settings.parallel_sources:
+        logger.info("%s: %d vagas brutas (%d requests)", source_cls.label, len(jobs), requests)
+    else:
+        logger.debug("%s: %d vagas brutas (%d requests)", source_cls.label, len(jobs), requests)
+
     return source_name, jobs, stats, requests
 
 
@@ -128,23 +335,18 @@ def collect(settings: Settings) -> tuple[list[Job], list[SourceStats], int]:
     if settings.parallel_sources and len(settings.sources) > 1:
         from concurrent.futures import ThreadPoolExecutor, as_completed
 
-        logger.info(
-            "Coleta PARALELA: %d fontes ao mesmo tempo (delay por fonte preservado)",
-            len(settings.sources),
-        )
-        resumo = _ResumoParalelo(settings.sources)
-        resumo.abrir()
-        parar = threading.Event()
-
-        def _relogio():
-            while not parar.wait(RESUMO_INTERVALO_S):
-                resumo.abrir()
-
-        timer = threading.Thread(target=_relogio, daemon=True)
-        timer.start()
+        labels = {
+            s: FONTES_LABELS.get(s, SOURCE_REGISTRY[s].label)
+            for s in settings.sources
+            if s in SOURCE_REGISTRY
+        }
+        monitor = _TabelaParalela(settings.sources, labels=labels)
+        monitor.iniciar()
 
         def _reportar(nome: str):
-            return lambda total: resumo.registrar(nome, total)
+            return lambda total, termo=None, reqs=None: monitor.atualizar(
+                nome, total=total, termo=termo, requests=reqs
+            )
 
         resultados: dict[str, tuple[list[Job], SourceStats | None, int]] = {}
         try:
@@ -154,17 +356,20 @@ def collect(settings: Settings) -> tuple[list[Job], list[SourceStats], int]:
                     for nome in settings.sources
                 }
                 for future in as_completed(futures):
-                    nome, jobs, fonte_stats, requests = future.result()
-                    resultados[nome] = (jobs, fonte_stats, requests)
-                    resumo.registrar(nome, len(jobs))
+                    nome = futures[future]
+                    try:
+                        _, jobs, fonte_stats, requests = future.result()
+                        resultados[nome] = (jobs, fonte_stats, requests)
+                        monitor.finalizar_fonte(nome, len(jobs), requests)
+                    except Exception as exc:
+                        resultados[nome] = ([], None, 0)
+                        monitor.erro_fonte(nome, str(exc))
         finally:
-            parar.set()
-            timer.join(timeout=RESUMO_INTERVALO_S + 5)
-            resumo.fechar()
+            monitor.encerrar()
 
         # Ordem estavel: a mesma ordem de settings.sources.
         for nome in settings.sources:
-            jobs, fonte_stats, requests = resultados[nome]
+            jobs, fonte_stats, requests = resultados.get(nome, ([], None, 0))
             all_jobs.extend(jobs)
             if fonte_stats is not None:
                 stats.append(fonte_stats)
@@ -179,6 +384,7 @@ def collect(settings: Settings) -> tuple[list[Job], list[SourceStats], int]:
         total_requests += requests
 
     return all_jobs, stats, total_requests
+
 
 
 def run(
