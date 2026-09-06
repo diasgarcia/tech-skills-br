@@ -120,7 +120,7 @@ jobs:
         python scripts/export_pages_data.py
         if [ "${{ github.event.inputs.rodada }}" = "1" ]; then
           pip install pandas pyarrow kagglehub
-          python scripts/export_kaggle.py
+          python scripts/export_kaggle.py || echo "AVISO: upload para o Kaggle falhou (a run segue)"
         fi
         python scripts/resumo_commit.py \
           --brutas "$BRUTAS" --elegiveis "$ELEGIVEIS" \
