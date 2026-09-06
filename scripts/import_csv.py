@@ -310,6 +310,10 @@ def importar(
                     # (ex.: LinkedIn re-coletado com --no-enrich, em que o card
                     # nao traz descricao) nao pode apagar as tecnologias ja
                     # acumuladas no banco pelo enriquecimento.
+                    # Acessar a relacao antes de substituir carrega os
+                    # vinculos existentes: o SQLAlchemy calcula o diff e nao
+                    # tenta inserir de novo o que ja existe (UNIQUE do par).
+                    _ = vaga.tecnologias
                     vaga.tecnologias = [
                         conhecidas[n.lower()] for n in nomes if n.lower() in conhecidas
                     ]

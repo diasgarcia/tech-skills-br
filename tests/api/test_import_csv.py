@@ -280,6 +280,19 @@ def test_linha_sem_skills_nao_apaga_skills_do_banco(tmp_path):
         assert sorted(t.nome for t in vaga.tecnologias) == ["Python", "SQL"]
 
 
+def test_reimportar_com_as_mesmas_skills_nao_duplica_vinculos(tmp_path):
+    # Rodada que re-importa uma vaga com as mesmas skills ja salvas nao
+    # pode tentar inserir o par de novo (UNIQUE de vaga_tecnologia).
+    db_path = tmp_path / "t.db"
+    csv_path = _escrever_csv(tmp_path, [_linha(skills="Python, SQL")])
+    importar(csv_path, db_path)
+    importar(csv_path, db_path)
+
+    with Session(make_engine(db_path)) as db:
+        vaga = db.scalar(select(Vaga))
+        assert sorted(t.nome for t in vaga.tecnologias) == ["Python", "SQL"]
+
+
 def test_referencia_explicita_vence_o_nome_do_arquivo(tmp_path):
     """O snapshot versionado depende disso: no deploy o mtime é a data do clone."""
     csv_path = _escrever_csv(tmp_path, [_linha(published_date="Ontem")])
