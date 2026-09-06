@@ -35,3 +35,10 @@ GET /api/tecnologias.json HTTP/1.1
 
 GET /api/vagas.json HTTP/1.1
 ```
+
+## Dataset no Kaggle
+
+A base tambem fica no Kaggle.
+O dataset tem snapshots diarios em Parquet.
+Cada versao registra a rodada e a quantidade de vagas.
+Acesse: <https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br>
