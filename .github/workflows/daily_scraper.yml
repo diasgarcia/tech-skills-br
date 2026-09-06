@@ -25,6 +25,11 @@ on:
         required: false
         default: ''
         type: string
+      fontes:
+        description: 'Fontes para coletar, separadas por espaco (vazio = todas)'
+        required: false
+        default: ''
+        type: string
 
 concurrency:
   group: coleta-diaria
@@ -74,6 +79,9 @@ jobs:
         # Vagas.com e Solides 2.0s; demais 1.0s - medido em 05/09, ver a
         # wiki "Limites e Bloqueios"). A CLI so passa o teto de paginas.
         FLAGS="--max-pages 200 --no-enrich"
+        if [ -n "${{ github.event.inputs.fontes }}" ]; then
+          FLAGS="$FLAGS --sources ${{ github.event.inputs.fontes }}"
+        fi
         python main.py $FLAGS 2>&1 | tee /tmp/coleta.log
         echo "BRUTAS=$(grep -oP 'Total bruto: \K[0-9]+' /tmp/coleta.log | tail -1)" >> "$GITHUB_ENV"
         echo "ELEGIVEIS=$(grep -oP 'RANKING DE AREAS -- \K[0-9]+' /tmp/coleta.log | tail -1)" >> "$GITHUB_ENV"
