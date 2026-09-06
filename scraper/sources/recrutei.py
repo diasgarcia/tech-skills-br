@@ -133,7 +133,9 @@ class RecruteiSource(JobSource):
                 continue
             alvos.append(m.group(1))
 
-        logger.info("[%s] sitemap: %d vagas dentro da janela", self.name, len(alvos))
+        logger.info("[%s] sitemap: %d vagas dentro da janela", self.name, len(alvos)) if not self.settings.parallel_sources else logger.debug(
+            "[%s] sitemap: %d vagas dentro da janela", self.name, len(alvos)
+        )
         return self._coletar_detalhes(alvos)
 
     def _coletar_completa(self) -> list[Job]:
@@ -173,7 +175,7 @@ class RecruteiSource(JobSource):
         checkpoint = self._checkpoint_path()
         checkpoint.parent.mkdir(parents=True, exist_ok=True)
         seen = self._ler_checkpoint()
-        if seen:
+        if seen and not self.settings.parallel_sources:
             logger.info("[%s] retomando checkpoint com %d vagas ja coletadas",
                         self.name, len(seen))
         novo_checkpoint = not checkpoint.is_file()
@@ -223,7 +225,9 @@ class RecruteiSource(JobSource):
         finally:
             if completou:
                 checkpoint.unlink(missing_ok=True)
-                logger.info("[%s] coleta completa; checkpoint removido", self.name)
+                logger.info("[%s] coleta completa; checkpoint removido", self.name) if not self.settings.parallel_sources else logger.debug(
+                    "[%s] coleta completa; checkpoint removido", self.name
+                )
 
         self.stats.raw_jobs = len(jobs)
         self.stats.requests_made = self.session.request_count

@@ -114,12 +114,15 @@ class AblerSource(JobSource):
             return []
 
         alvos = self._filtrar_sitemap(response.text)
-        logger.info("[%s] sitemap: %d paginas dentro da janela", self.name, len(alvos))
+        if self.settings.parallel_sources:
+            logger.debug("[%s] sitemap: %d paginas dentro da janela", self.name, len(alvos))
+        else:
+            logger.info("[%s] sitemap: %d paginas dentro da janela", self.name, len(alvos))
 
         checkpoint = self._checkpoint_path()
         checkpoint.parent.mkdir(parents=True, exist_ok=True)
         seen = self._ler_checkpoint()
-        if seen:
+        if seen and not self.settings.parallel_sources:
             logger.info("[%s] retomando checkpoint com %d vagas ja coletadas",
                         self.name, len(seen))
         novo_checkpoint = not checkpoint.is_file()
@@ -171,7 +174,9 @@ class AblerSource(JobSource):
         finally:
             if completou:
                 checkpoint.unlink(missing_ok=True)
-                logger.info("[%s] coleta completa; checkpoint removido", self.name)
+                logger.info("[%s] coleta completa; checkpoint removido", self.name) if not self.settings.parallel_sources else logger.debug(
+                    "[%s] coleta completa; checkpoint removido", self.name
+                )
 
         self.stats.raw_jobs = len(jobs)
         self.stats.requests_made = self.session.request_count
