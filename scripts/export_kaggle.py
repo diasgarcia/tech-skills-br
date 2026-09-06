@@ -21,7 +21,7 @@ import pandas as pd
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DB_PATH = PROJECT_ROOT / "data" / "vagas.db"
 EXPORT_DIR = PROJECT_ROOT / "kaggle"
-HANDLE = "diasgarcia/tech-skills-br"
+HANDLE = "rafaeldiasgarcia/tech-skills-br"
 
 logger = logging.getLogger(__name__)
 
