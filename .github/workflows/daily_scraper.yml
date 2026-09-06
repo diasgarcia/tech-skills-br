@@ -153,8 +153,10 @@ jobs:
           git add docs/relatorios/*.md
         fi
 
-        
-        git diff --quiet && git diff --staged --quiet && exit 0
+        # So importa o que foi staged: nas rodadas 2/3 o relatorio .md e
+        # regenerado mas nao entra no commit, e a arvore suja nao pode
+        # impedir o exit 0 (ja quebrou a rodada 2 do dia 06/09).
+        git diff --staged --quiet && exit 0
 
         # Rotulo do commit. A fonte da verdade sao os inputs do dispatch
         # (origem/rodada), enviados pelo cron-job.org. O horario de inicio
