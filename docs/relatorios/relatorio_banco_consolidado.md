@@ -1,8 +1,8 @@
-# Relatório Consolidado da Base de Vagas (4396 vagas)
+# Relatório Consolidado da Base de Vagas (4399 vagas)
 
-- **Data de geração:** 06/09/2026 15:10
-- **Período coberto:** 04/01/2026 até 05/09/2026
-- **Total de vagas consolidadas:** 4396
+- **Data de geração:** 06/09/2026 15:34
+- **Período coberto:** 04/01/2026 até 06/09/2026
+- **Total de vagas consolidadas:** 4399
 
 ## Ranking de Áreas de Tecnologia
 
@@ -10,7 +10,7 @@
 |---|---|---|---|---|
 | 1 | Suporte Técnico | 1417 | 32.2% | ######.............. |
 | 2 | Engenharia de Software | 589 | 13.4% | ###................. |
-| 3 | Infraestrutura / Redes | 384 | 8.7% | ##.................. |
+| 3 | Infraestrutura / Redes | 385 | 8.8% | ##.................. |
 | 4 | Data | 287 | 6.5% | #................... |
 | 5 | Service Desk / Help Desk | 253 | 5.8% | #................... |
 | 6 | Backend | 223 | 5.1% | #................... |
@@ -24,15 +24,15 @@
 | 14 | DevOps | 61 | 1.4% | .................... |
 | 15 | Inteligência Artificial | 48 | 1.1% | .................... |
 | 16 | Frontend | 47 | 1.1% | .................... |
-| 17 | Mobile | 40 | 0.9% | .................... |
-| 18 | Design / UI / UX | 39 | 0.9% | .................... |
+| 17 | Mobile | 41 | 0.9% | .................... |
+| 18 | Design / UI / UX | 40 | 0.9% | .................... |
 
 ## Distribuição por Macrorregião
 
 | Região | Vagas | % | Gráfico |
 |---|---|---|---|
-| Sudeste | 2410 | 54.8% | ###########......... |
-| Sul | 889 | 20.2% | ####................ |
+| Sudeste | 2411 | 54.8% | ###########......... |
+| Sul | 891 | 20.3% | ####................ |
 | Nordeste | 366 | 8.3% | ##.................. |
 | Remoto Nacional | 302 | 6.9% | #................... |
 | Centro-Oeste | 216 | 4.9% | #................... |
@@ -47,7 +47,7 @@
 | 1 | São Paulo | 1233 | 28.0% | ######.............. |
 | 2 | Belo Horizonte | 316 | 7.2% | #................... |
 | 3 | Remoto | 302 | 6.9% | #................... |
-| 4 | Rio de Janeiro | 231 | 5.3% | #................... |
+| 4 | Rio de Janeiro | 232 | 5.3% | #................... |
 | 5 | Porto Alegre | 175 | 4.0% | #................... |
 | 6 | Curitiba | 164 | 3.7% | #................... |
 | 7 | Florianópolis | 145 | 3.3% | #................... |
@@ -59,16 +59,16 @@
 
 | Modalidade | Vagas | % | Gráfico |
 |---|---|---|---|
-| Presencial | 3127 | 71.1% | ##############...... |
+| Presencial | 3129 | 71.1% | ##############...... |
 | Remoto | 726 | 16.5% | ###................. |
-| Híbrido | 543 | 12.4% | ##.................. |
+| Híbrido | 544 | 12.4% | ##.................. |
 
 ## Distribuição por Nível de Entrada
 
 | Senioridade | Vagas | % |
 |---|---|---|
-| Júnior | 3032 | 69.0% |
-| Estágio | 1245 | 28.3% |
+| Júnior | 3033 | 68.9% |
+| Estágio | 1247 | 28.3% |
 | Aprendiz | 76 | 1.7% |
 | Trainee | 43 | 1.0% |
 
@@ -76,7 +76,7 @@
 
 | Portal | Vagas | % |
 |---|---|---|
-| linkedin | 2592 | 59.0% |
+| linkedin | 2595 | 59.0% |
 | solides | 649 | 14.8% |
 | gupy | 434 | 9.9% |
 | infojobs | 392 | 8.9% |
@@ -93,7 +93,7 @@
 | 1 | Hardware | 819 |
 | 2 | Redes de Computadores | 774 |
 | 3 | Windows | 724 |
-| 4 | Banco de Dados | 720 |
+| 4 | Banco de Dados | 721 |
 | 5 | Pacote Office | 704 |
 | 6 | SQL | 683 |
 | 7 | Inglês | 653 |
@@ -101,7 +101,7 @@
 | 9 | Inteligência Artificial | 473 |
 | 10 | Git | 470 |
 | 11 | Excel | 464 |
-| 12 | JavaScript | 389 |
+| 12 | JavaScript | 391 |
 | 13 | Linux | 366 |
 | 14 | Análise de Dados | 351 |
 | 15 | Montagem e Manutenção de PCs | 339 |
