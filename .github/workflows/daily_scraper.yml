@@ -118,10 +118,17 @@ jobs:
           echo "GERAR_RELATORIO=1" >> "$GITHUB_ENV"
         fi
         python scripts/export_pages_data.py
+        if [ "$GERAR_RELATORIO" != "0" ]; then
+          pip install pandas pyarrow kagglehub
+          python scripts/export_kaggle.py
+        fi
         python scripts/resumo_commit.py \
           --brutas "$BRUTAS" --elegiveis "$ELEGIVEIS" \
           --novas "$NOVAS" --atualizadas "$ATUALIZADAS" \
           --log /tmp/enrich.log > /tmp/corpo_commit.txt
+      env:
+        PYTHONPATH: .
+        KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
 
     - name: 7. Comitar e enviar dados atualizados para o GitHub
       run: |
