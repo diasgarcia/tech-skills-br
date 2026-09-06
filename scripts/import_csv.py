@@ -231,6 +231,19 @@ def importar(
                         novo = _canonical_company(novo)
                     if campo == "description" and not novo and vaga.description:
                         continue
+                    # Slug de URL como empresa (ex.: GeekHunter grava o
+                    # segmento do caminho) nao regride um nome real ja
+                    # corrigido pelo enriquecimento ("Code Group").
+                    if (
+                        campo == "company"
+                        and novo
+                        and "-" in novo
+                        and " " not in novo
+                        and novo == novo.lower()
+                        and vaga.company
+                        and " " in vaga.company
+                    ):
+                        continue
                     # Snippet novo nao regride descricao enriquecida: o
                     # card do Vagas.com traz ~400 chars (com ou sem "...").
                     if campo == "description" and novo and vaga.description:
