@@ -31,14 +31,14 @@ def exportar() -> tuple[Path, int]:
     conn = sqlite3.connect(DB_PATH)
     df = pd.read_sql_query(
         """
-        SELECT v.source, v.external_id, v.title, v.company, v.location,
-               v.workplace_type, v.published_date, v.url, v.description,
-               v.area, v.seniority, v.regiao, v.polo, v.search_term,
-               v.enrich_encerrada,
+        SELECT v.source, v.external_id, v.title, v.company,
                (SELECT GROUP_CONCAT(t.nome, '; ')
                   FROM vaga_tecnologia vt
                   JOIN tecnologias t ON t.id = vt.tecnologia_id
-                 WHERE vt.vaga_id = v.id) AS skills
+                 WHERE vt.vaga_id = v.id) AS skills,
+               v.area, v.seniority, v.workplace_type, v.location,
+               v.regiao, v.polo, v.published_date, v.description, v.url,
+               v.search_term, v.enrich_encerrada
           FROM vagas v
         """,
         conn,

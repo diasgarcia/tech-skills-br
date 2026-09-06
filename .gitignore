@@ -55,5 +55,8 @@ desktop.ini
 # Planos e rascunhos locais
 PLANO*.md
 
+# Exportacao do Kaggle (gerada em cada rodada; o dataset fica no Kaggle)
+kaggle/
+
 !.env.example
 
