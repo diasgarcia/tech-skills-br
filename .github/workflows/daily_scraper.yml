@@ -104,6 +104,7 @@ jobs:
         ATUALIZADAS=$(echo "$OUT_RODADA" | grep -oP 'Atualizadas[. ]+\K[0-9]+' | tail -1)
         echo "NOVAS=${NOVAS:-0}" >> "$GITHUB_ENV"
         echo "ATUALIZADAS=${ATUALIZADAS:-0}" >> "$GITHUB_ENV"
+        HASH_ANTES=$(sha256sum data/vagas.db | cut -d' ' -f1)
         python -u scripts/enrich_outras_fontes.py 2>&1 | tee /tmp/enrich.log
         python -u scripts/enrich_descriptions.py 2>&1 | tee -a /tmp/enrich.log
         python scripts/reclassify_areas.py
@@ -118,9 +119,16 @@ jobs:
           echo "GERAR_RELATORIO=1" >> "$GITHUB_ENV"
         fi
         python scripts/export_pages_data.py
-        if [ "${{ github.event.inputs.rodada }}" = "1" ]; then
+        MUDOU=0
+        [ "${NOVAS:-0}" -gt 0 ] && MUDOU=1
+        [ "${ATUALIZADAS:-0}" -gt 0 ] && MUDOU=1
+        HASH_DEPOIS=$(sha256sum data/vagas.db | cut -d' ' -f1)
+        [ "$HASH_ANTES" != "$HASH_DEPOIS" ] && MUDOU=1
+        if [ "$MUDOU" = "1" ]; then
           pip install pandas pyarrow kagglehub
           python scripts/export_kaggle.py || echo "AVISO: upload para o Kaggle falhou (a run segue)"
+        else
+          echo "Kaggle: nada mudou nesta rodada; nenhuma versao nova."
         fi
         python scripts/resumo_commit.py \
           --brutas "$BRUTAS" --elegiveis "$ELEGIVEIS" \
@@ -129,6 +137,8 @@ jobs:
       env:
         PYTHONPATH: .
         KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+        RODADA: ${{ github.event.inputs.rodada }}
+        DATA_HOJE: ${{ env.DATA_HOJE }}
 
     - name: 7. Comitar e enviar dados atualizados para o GitHub
       run: |
