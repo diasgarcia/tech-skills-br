@@ -108,6 +108,7 @@ jobs:
         python -u scripts/enrich_outras_fontes.py 2>&1 | tee /tmp/enrich.log
         python -u scripts/enrich_descriptions.py 2>&1 | tee -a /tmp/enrich.log
         python scripts/reclassify_areas.py
+        python scripts/reextract_all_skills.py
         python scripts/export_seed.py
         gh release upload latest data/vagas.db --clobber
         # Graficos e relatorio so na rodada 1 (09:16): o snapshot e diario.
