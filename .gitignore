@@ -34,7 +34,15 @@ output/
 *.xlsx
 
 # Excecao: o snapshot que alimenta a consolidacao precisa ser versionado.
+# (Plano #24: o seed saira do git quando o Release asset substituir)
 !seed/*.csv
+
+# API estatica gerada em cada rodada: o Pages usa o artifact do deploy,
+# nao os arquivos commitados (plano #24).
+api/web/
+
+# Graficos gerados: ficam fora do git; o relatorio .md continua.
+docs/relatorios/*.png
 
 # Editores / SO
 .vscode/
@@ -49,7 +57,7 @@ desktop.ini
 .env.*
 
 # Planos e rascunhos locais
-PLANO_*.md
+PLANO*.md
 
 !.env.example
 

@@ -33,6 +33,11 @@ jobs:
 
       - name: 3. Montar artefato do Pages
         run: |
+          # Os JSONs nao sao commitados (#24): gera a partir do seed
+          # antes de montar o _site.
+          pip install -r requirements.txt
+          python scripts/import_csv.py --csv seed/vagas.csv --recriar
+          python scripts/export_pages_data.py
           mkdir -p _site/api
           cp .github/web/index.html _site/
           cp api/web/*.json _site/api/
