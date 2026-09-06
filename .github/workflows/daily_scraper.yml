@@ -109,7 +109,7 @@ jobs:
         python -u scripts/enrich_descriptions.py 2>&1 | tee -a /tmp/enrich.log
         python scripts/reclassify_areas.py
         python scripts/export_seed.py
-        gh release upload latest data/vagas.db --clobber
+        gh release upload latest data/vagas.db seed/vagas.csv --clobber
         # Graficos e relatorio so na rodada 1 (09:16): o snapshot e diario.
         if [ "${{ github.event.inputs.rodada }}" = "2" ] || [ "${{ github.event.inputs.rodada }}" = "3" ]; then
           python scripts/report_db.py --no-charts
