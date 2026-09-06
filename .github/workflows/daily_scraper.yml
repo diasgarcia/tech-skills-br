@@ -82,7 +82,8 @@ jobs:
 
     - name: 6. Carregar historico, consolidar novas vagas e atualizar snapshot
       run: |
-        python scripts/import_csv.py --csv seed/vagas.csv
+        gh release download latest --pattern 'vagas.db' --dir data --clobber \
+          || python scripts/import_csv.py --csv seed/vagas.csv
         # Importa todos os CSVs da rodada, do mais antigo para o mais novo.
         OUT_RODADA=""
         for csv in $(ls -tr output/vagas_*.csv); do
@@ -97,6 +98,7 @@ jobs:
         python -u scripts/enrich_descriptions.py 2>&1 | tee -a /tmp/enrich.log
         python scripts/reclassify_areas.py
         python scripts/export_seed.py
+        gh release upload latest data/vagas.db --clobber
         # Graficos e relatorio so na rodada 1 (09:16): o snapshot e diario.
         if [ "${{ github.event.inputs.rodada }}" = "2" ] || [ "${{ github.event.inputs.rodada }}" = "3" ]; then
           python scripts/report_db.py --no-charts
@@ -116,9 +118,8 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-        # So o seed e o relatorio .md entram no git: os JSONs vao como
-        # artifact do Pages e os graficos ficam fora do historico (#24).
-        git add seed/vagas.csv
+        # O estado operacional vive no asset vagas.db do release "latest";
+        # no git entra so o relatorio .md da rodada 1 (#24).
         if [ "$GERAR_RELATORIO" != "0" ]; then
           git add docs/relatorios/*.md
         fi
@@ -155,12 +156,8 @@ jobs:
         git commit -F /tmp/commit_msg.txt
         COMMIT_BOT=$(git rev-parse HEAD)
         # Em caso de corrida com outro push, rebaseia e tenta de novo.
-        # Se o rebase conflitar em arquivos de dados (seed, relatorio),
-        # a versao do bot e a mais nova - vem do banco da propria run.
-        # Refaz entao o commit por cima da main atual, reaplicando SOMENTE
-        # os dados do bot: reset --soft do checkout antigo levaria junto o
-        # codigo defasado do clone inicial e reverteria commits que
-        # entraram no main durante a coleta (ja aconteceu na rodada - 2).
+        # Se o rebase conflitar no relatorio, a versao do bot e a mais
+        # nova - vem do banco da propria run.
         for tentativa in 1 2 3; do
           if git pull --rebase origin main; then
             if git push; then
@@ -169,8 +166,6 @@ jobs:
           else
             git rebase --abort 2>/dev/null || true
             git reset --hard origin/main
-            git checkout "${COMMIT_BOT}" -- seed/vagas.csv
-            git add seed/vagas.csv
             if [ "$GERAR_RELATORIO" != "0" ]; then
               git checkout "${COMMIT_BOT}" -- docs/relatorios/*.md
               git add docs/relatorios/*.md
