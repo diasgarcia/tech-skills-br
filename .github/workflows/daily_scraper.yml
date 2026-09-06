@@ -118,7 +118,7 @@ jobs:
           echo "GERAR_RELATORIO=1" >> "$GITHUB_ENV"
         fi
         python scripts/export_pages_data.py
-        if [ "$GERAR_RELATORIO" != "0" ]; then
+        if [ "${{ github.event.inputs.rodada }}" = "1" ]; then
           pip install pandas pyarrow kagglehub
           python scripts/export_kaggle.py
         fi
