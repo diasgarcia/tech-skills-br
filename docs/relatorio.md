@@ -150,6 +150,30 @@ O monitor da coleta paralela virou tabela de verdade. Tem cores por status, colu
 
 ---
 
+### 06/09/2026
+
+Tirei os dados do git. O plano #24 virou realidade. Os JSON do site e os gráficos saíram do histórico. O estado operacional passou a viver como asset da release `latest` no GitHub. Cada rodada baixa o `vagas.db` no início e sobe o novo no fim. O git guarda só código, regras e documentação.
+
+O seed CSV também foi para a release. O commit da rodada ficou reduzido ao relatório em texto. O `deploy_pages.yml` passou a gerar os JSON a partir do banco da release.
+
+Criei o dataset no Kaggle (`rafaeldiasgarcia/tech-skills-br`). Cada rodada envia uma versão em Parquet. A nota registra a data, a rodada e a quantidade de vagas. Versões vazias não sobem. O workflow usa o token novo da Kaggle.
+
+Completei os metadados do dataset. A licença ficou MIT. A frequência ficou diária. A descrição ficou em um parágrafo no estilo STE. As colunas do Parquet foram reordenadas. A coluna skills ficou no início. O Data Explorer mostra as tecnologias na tabela padrão.
+
+Limpei o histórico com `filter-repo`. Removi `seed/vagas.csv`, `api/web`, `docs/api`, `.github/pages`, `site/api` e todos os gráficos de todas as versões. O repositório caiu de 105 MB para menos de 1 MB. Guardei um backup espelho do histórico antigo.
+
+Corrigi problemas que a mudança revelou. O runner não tinha o `gh` autenticado. Adicionei o `GH_TOKEN` explícito. A rodada das 14:16 quebrou no commit porque o relatório regenerado ficava fora do stage. O guard passou a olhar só o que foi staged.
+
+Revalidei as empresas do GeekHunter. 62 vagas guardavam o slug da URL em vez do nome real. O JSON-LD do detalhe corrigiu 57. As outras 5 não tinham nome no detalhe. Usei o nome resolvido das vagas irmãs. Zero slugs restantes.
+
+Achei churn nas vagas da GeekHunter. Sete vagas antigas de 2025 entram na base toda rodada e saem no corte de 2026 do enriquecimento. O total não muda. As mesmas sete entram e saem sempre.
+
+Perdi e recuperei três vagas do LinkedIn no bootstrap da release. O banco local estava defasado. O merge do seed completo devolveu as três. A lição ficou no plano: conferir a contagem antes de subir o asset.
+
+Atualizei a wiki. A Home ganhou o Kaggle e a release no diagrama de contexto. A Arquitetura ganhou a nova persistência. A página de Automação ganhou o fluxo novo. A jornada da vaga ganhou um diagrama vertical. Criei as issues #23, #24 e #25.
+
+---
+
 ### Pendências para o artigo
 
 - Medir a contribuição marginal de cada fonte com o avaliador.
