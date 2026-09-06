@@ -33,10 +33,6 @@ output/
 *.csv
 *.xlsx
 
-# Excecao: o snapshot que alimenta a consolidacao precisa ser versionado.
-# (Plano #24: o seed saira do git quando o Release asset substituir)
-!seed/*.csv
-
 # API estatica gerada em cada rodada: o Pages usa o artifact do deploy,
 # nao os arquivos commitados (plano #24).
 api/web/
