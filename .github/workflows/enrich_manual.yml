@@ -62,7 +62,7 @@ jobs:
         python scripts/report_db.py
         python scripts/export_pages_data.py
         python scripts/resumo_commit.py --log /tmp/enrich.log > /tmp/corpo_commit.txt
-        gh release upload latest data/vagas.db --clobber
+        gh release upload latest data/vagas.db seed/vagas.csv --clobber
       env:
         PYTHONPATH: .
 
