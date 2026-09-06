@@ -21,6 +21,9 @@ jobs:
       pages: write     # Necessario para o artefato do Pages
       id-token: write
 
+    env:
+      GH_TOKEN: ${{ github.token }}
+
     steps:
     - name: 1. Baixar repositorio
       uses: actions/checkout@v4
