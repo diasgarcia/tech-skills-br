@@ -82,8 +82,7 @@ jobs:
 
     - name: 6. Carregar historico, consolidar novas vagas e atualizar snapshot
       run: |
-        gh release download latest --pattern 'vagas.db' --dir data --clobber \
-          || python scripts/import_csv.py --csv seed/vagas.csv
+        gh release download latest --pattern 'vagas.db' --dir data --clobber
         # Importa todos os CSVs da rodada, do mais antigo para o mais novo.
         OUT_RODADA=""
         for csv in $(ls -tr output/vagas_*.csv); do

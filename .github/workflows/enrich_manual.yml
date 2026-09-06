@@ -38,7 +38,7 @@ jobs:
 
     - name: 4. Carregar historico no SQLite
       run: |
-        python scripts/import_csv.py --csv seed/vagas.csv
+        gh release download latest --pattern 'vagas.db' --dir data --clobber
 
     - name: 5. Enriquecer descricoes pendentes
       run: |
@@ -59,6 +59,7 @@ jobs:
         python scripts/report_db.py
         python scripts/export_pages_data.py
         python scripts/resumo_commit.py --log /tmp/enrich.log > /tmp/corpo_commit.txt
+        gh release upload latest data/vagas.db --clobber
       env:
         PYTHONPATH: .
 
@@ -67,20 +68,15 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-        git add seed/vagas.csv docs/relatorios/ api/web/ .github/web/
+        git add docs/relatorios/*.md
 
         DATA_HOJE=$(date +'%d/%m/%Y')
         git diff --quiet && git diff --staged --quiet && exit 0
         # O corpo do commit traz o resumo do enriquecimento (enriquecidas
         # e pendentes por fonte), gerado no passo 7.
         { echo "chore(data): enriquecimento manual de vagas [${DATA_HOJE}]"; echo; cat /tmp/corpo_commit.txt; } > /tmp/commit_msg.txt
-        # Sem [skip ci]: o push em api/web/** precisa disparar o
-        # deploy_pages.yml (o marcador suprimiria todos os workflows do push).
         git commit -F /tmp/commit_msg.txt
         # Em caso de corrida com outro push, rebaseia e tenta de novo.
-        # Se o rebase conflitar em arquivos de dados (seed, docs, api/web),
-        # a versao do bot e a mais nova - vem do banco da propria run.
-        # Refaz entao o commit por cima da main atual, com os dados do bot.
         for tentativa in 1 2 3; do
           if git pull --rebase origin main; then
             if git push; then
@@ -88,8 +84,9 @@ jobs:
             fi
           else
             git rebase --abort 2>/dev/null || true
-            git reset --soft origin/main
-            git add seed/vagas.csv docs/relatorios/ api/web/ .github/web/
+            git reset --hard origin/main
+            git checkout "${COMMIT_BOT}" -- docs/relatorios/*.md
+            git add docs/relatorios/*.md
             git commit -F /tmp/commit_msg.txt
           fi
           sleep 10
