@@ -127,7 +127,7 @@ jobs:
         HASH_DEPOIS=$(sha256sum data/vagas.db | cut -d' ' -f1)
         [ "$HASH_ANTES" != "$HASH_DEPOIS" ] && MUDOU=1
         if [ "$MUDOU" = "1" ]; then
-          pip install pandas pyarrow kagglehub
+          pip install pandas pyarrow kagglehub kaggle
           python scripts/export_kaggle.py || echo "AVISO: upload para o Kaggle falhou (a run segue)"
         else
           echo "Kaggle: nada mudou nesta rodada; nenhuma versao nova."

@@ -10,9 +10,12 @@ Requisitos:
 
 from __future__ import annotations
 
+import json
 import logging
 import os
 import sqlite3
+import subprocess
+import tempfile
 from datetime import date
 from pathlib import Path
 
@@ -22,6 +25,42 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DB_PATH = PROJECT_ROOT / "data" / "vagas.db"
 EXPORT_DIR = PROJECT_ROOT / "kaggle"
 HANDLE = "rafaeldiasgarcia/tech-skills-br"
+
+# Metadata completo do dataset. O upload de versao via kagglehub LIMPA as
+# keywords (tags) do dataset, entao todo envio reaplica este arquivo depois
+# via `kaggle datasets metadata --update`. Formato das keywords: minusculas
+# com espaco (slug e rejeitado). O titulo e obrigatorio no update (6-50).
+METADATA = {
+    "title": "tech-skills-br",
+    "id": HANDLE,
+    "subtitle": "Base diaria de vagas de entrada em tecnologia no Brasil.",
+    "description": (
+        "Esta base registra vagas de entrada em tecnologia no Brasil. Ela "
+        "cobre os niveis junior, estagio, trainee e aprendiz. A coleta usa "
+        "nove portais publicos brasileiros. Cada registro tem titulo, "
+        "empresa, local, modalidade, senioridade, area e tecnologias. A base "
+        "e atualizada tres vezes por dia. Ela apoia a pesquisa PIBIC/CNPq "
+        "'Mapeamento de Skills em Tecnologia no Brasil'. Codigo e "
+        "metodologia: https://github.com/diasgarcia/tech-skills-br "
+        "— Dashboard: https://diasgarcia.github.io/tech-skills-br/"
+    ),
+    "licenses": [{"name": "MIT"}],
+    "keywords": [
+        "jobs and career",
+        "science and technology",
+        "brazil",
+        "education",
+        "research",
+    ],
+    "expectedUpdateFrequency": "daily",
+    "userSpecifiedSources": (
+        "Os dados sao coletados automaticamente de nove portais publicos de "
+        "empregos no Brasil: LinkedIn, Gupy, Solides, InfoJobs, Vagas.com, "
+        "GeekHunter, Abler, Recrutei e Trampos. A coleta roda tres vezes por "
+        "dia (09:16, 14:16 e 19:16, horario de Brasilia) e mantem apenas "
+        "vagas de nivel de entrada: junior, estagio, trainee e aprendiz."
+    ),
+}
 
 logger = logging.getLogger(__name__)
 
@@ -59,6 +98,35 @@ def _nota_padrao(n_vagas: int) -> str:
     return f"Coleta {data} · rodada {rodada} ({sufixo}) · {n_vagas} vagas"
 
 
+def _reaplicar_metadata() -> None:
+    """Reaplica keywords e demais metadados apos o upload da versao.
+
+    O `kagglehub.dataset_upload` zera as keywords do dataset (comprovado em
+    07/09: tags sumiam toda vez que a rodada subia uma versao). A CLI oficial
+    `kaggle datasets metadata --update` restaura tudo a partir do METADATA.
+    """
+    with tempfile.TemporaryDirectory() as tmp:
+        caminho = Path(tmp) / "dataset-metadata.json"
+        caminho.write_text(
+            json.dumps(METADATA, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+        resultado = subprocess.run(
+            [
+                "kaggle", "datasets", "metadata", HANDLE,
+                "-p", str(Path(tmp)), "--update",
+            ],
+            capture_output=True,
+            text=True,
+        )
+        if resultado.returncode != 0:
+            logger.warning(
+                "Reaplicacao de metadata falhou (%s): %s",
+                resultado.returncode, resultado.stderr.strip(),
+            )
+        else:
+            logger.info("Metadata reaplicado (tags preservadas): %s", HANDLE)
+
+
 def subir(notas: str | None = None) -> None:
     if not os.getenv("KAGGLE_API_TOKEN"):
         raise SystemExit("KAGGLE_API_TOKEN nao definido no ambiente")
@@ -89,6 +157,8 @@ def subir(notas: str | None = None) -> None:
             version_notes=notas,
         )
         logger.info("Dataset criado e versao enviada: %s", HANDLE)
+
+    _reaplicar_metadata()
 
 
 if __name__ == "__main__":
