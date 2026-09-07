@@ -26,3 +26,23 @@ python scripts/export_kaggle.py
 ```
 
 O estado operacional vive na release `latest` (`vagas.db` + `vagas.csv`). O histórico versionado fica no Kaggle: <https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br>
+
+## Atualizar o repo local (puxar a base nova do GitHub)
+
+O banco **não fica no git** — ele vive na release. Então `git pull` traz código e relatórios, mas não a base. Para deixar o repo local igual ao do GitHub:
+
+```powershell
+# 1. Primeira vez só: logar no GitHub CLI.
+gh auth login
+
+# 2. Traz código, scripts e relatórios novos:
+git pull origin main
+
+# 3. Baixa o banco operacional mais recente da release:
+gh release download latest --pattern vagas.db --dir data --clobber
+
+# 4. Confere se veio a base atualizada (total de vagas e maior id):
+python -c "import sqlite3; c = sqlite3.connect('data/vagas.db'); print(c.execute('SELECT COUNT(*), MAX(id) FROM vagas').fetchone())"
+```
+
+Dica: compare o `MAX(id)` impresso com o da release no GitHub; se for igual, a base local está atualizada. A partir daí, `python main.py` coleta por cima dessa base, e os passos 2–6 da seção anterior seguem valendo.
