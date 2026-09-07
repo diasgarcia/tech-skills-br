@@ -23,7 +23,7 @@ import sys
 from datetime import date, datetime
 from pathlib import Path
 
-from sqlalchemy import func, select
+from sqlalchemy import func, select, text
 from sqlalchemy.orm import Session
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -310,13 +310,29 @@ def importar(
                     # (ex.: LinkedIn re-coletado com --no-enrich, em que o card
                     # nao traz descricao) nao pode apagar as tecnologias ja
                     # acumuladas no banco pelo enriquecimento.
-                    # Acessar a relacao antes de substituir carrega os
-                    # vinculos existentes: o SQLAlchemy calcula o diff e nao
-                    # tenta inserir de novo o que ja existe (UNIQUE do par).
-                    _ = vaga.tecnologias
-                    vaga.tecnologias = [
-                        conhecidas[n.lower()] for n in nomes if n.lower() in conhecidas
+                    # Sincronizacao por SQL direto: o diff de colecao do ORM
+                    # inseriu pares repetidos em vaga_tecnologia e derrubou
+                    # a rodada de 06/09 com UNIQUE. DELETE + INSERT OR IGNORE
+                    # nao pode duplicar.
+                    ids_novas = [
+                        conhecidas[n.lower()].id
+                        for n in nomes
+                        if n.lower() in conhecidas
                     ]
+                    db.flush()  # garante o id da vaga recem-criada
+                    vid = vaga.id
+                    db.execute(
+                        text("DELETE FROM vaga_tecnologia WHERE vaga_id = :vid"),
+                        {"vid": vid},
+                    )
+                    for tid in ids_novas:
+                        db.execute(
+                            text(
+                                "INSERT OR IGNORE INTO vaga_tecnologia "
+                                "(vaga_id, tecnologia_id) VALUES (:vid, :tid)"
+                            ),
+                            {"vid": vid, "tid": tid},
+                        )
 
         if limite_data:
             from sqlalchemy import delete
