@@ -40,9 +40,9 @@ METADATA = {
         "nove portais publicos brasileiros. Cada registro tem titulo, "
         "empresa, local, modalidade, senioridade, area e tecnologias. A base "
         "e atualizada tres vezes por dia. Ela apoia a pesquisa PIBIC/CNPq "
-        "'Mapeamento de Skills em Tecnologia no Brasil'. Codigo e "
-        "metodologia: https://github.com/diasgarcia/tech-skills-br "
-        "— Dashboard: https://diasgarcia.github.io/tech-skills-br/"
+        "'Mapeamento de Skills em Tecnologia no Brasil'.\n\n"
+        "Codigo e metodologia: https://github.com/diasgarcia/tech-skills-br  \n\n"
+        "Dashboard: https://diasgarcia.github.io/tech-skills-br/"
     ),
     "licenses": [{"name": "MIT"}],
     "keywords": [
