@@ -4,12 +4,12 @@
 
 Projeto de pesquisa científica (PIBIC / Iniciação Científica) que coleta e extrai as habilidades técnicas demandadas pelo mercado de tecnologia no Brasil. Esses dados serão posteriormente confrontados com as Diretrizes Curriculares Nacionais do MEC e os referenciais da Sociedade Brasileira de Computação (SBC).
 
-| Item | Descrição |
-| :--- | :--- |
-| **Linguagem** | Python 3.12+ |
-| **Banco de dados** | SQLite (SQLAlchemy 2.0) |
-| **Documentação** | [Wiki](https://github.com/diasgarcia/tech-skills-br/wiki) — Manual de Uso, Arquitetura, Pipeline, Modelo de Dados, Classificação e Automação |
-| **Integração contínua** | [GitHub Actions](https://github.com/diasgarcia/tech-skills-br/actions/workflows/ci.yml) |
+| Item                             | Descrição                                                                                                                                      |
+| :------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Linguagem**              | Python 3.12+                                                                                                                                     |
+| **Banco de dados**         | SQLite (SQLAlchemy 2.0)                                                                                                                          |
+| **Documentação**         | [Wiki](https://github.com/diasgarcia/tech-skills-br/wiki) — Manual de Uso, Arquitetura, Pipeline, Modelo de Dados, Classificação e Automação |
+| **Integração contínua** | [GitHub Actions](https://github.com/diasgarcia/tech-skills-br/actions/workflows/ci.yml)                                                           |
 
 ## Problema de Pesquisa
 
@@ -26,6 +26,7 @@ Os comandos essenciais estão em [docs/execucao-rapida](docs/execucao-rapida.md)
 O projeto publica um painel web minimalista e uma API JSON estática com CORS liberado no GitHub Pages:
 
 **Base URL:** [diasgarcia.github.io/tech-skills-br](https://diasgarcia.github.io/tech-skills-br/)
+
 ```http
 GET /api/resumo.json HTTP/1.1
 
@@ -40,5 +41,4 @@ GET /api/vagas.json HTTP/1.1
 
 A base tambem fica no Kaggle.
 O dataset tem snapshots diarios em Parquet.
-Cada versao registra a rodada e a quantidade de vagas.
-Acesse: <https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br>
+Acesse: [kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br](https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br)
