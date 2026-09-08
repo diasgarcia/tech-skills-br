@@ -180,6 +180,10 @@ Revisei as 454 vagas com descrição e sem skill extraída. Retirei 75 vagas for
 
 Também refinei o portão de relevância. Ele agora bloqueia títulos ambíguos que entravam pela palavra “sistemas”, como sistemas biomédicos, e evita tratar qualidade industrial como QA de software.
 
+Ampliei a cobertura de funções de entrada da issue #23. O coletor passou a buscar DBA, RPA, telecom, mainframe, sistemas embarcados, jogos, suporte de aplicações e integrações. O classificador ganhou sinais para essas funções e testes de título e descrição. Sistemas embarcados agora ficam em Hardware / Eletrônica. Integrações entre sistemas ficam em Engenharia de Software.
+
+No piloto sem LinkedIn e InfoJobs, a coleta retornou 158 vagas brutas e 40 vagas técnicas de entrada. Entraram resultados de suporte de aplicações, sistemas embarcados, telecom e integrações. RPA, mainframe e jogos não tiveram resultado final no piloto. A regra seguirá em observação por três dias antes do fechamento da issue.
+
 ---
 
 ### Pendências para o artigo
