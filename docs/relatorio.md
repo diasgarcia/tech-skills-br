@@ -174,6 +174,14 @@ Atualizei a wiki. A Home ganhou o Kaggle e a release no diagrama de contexto. A 
 
 ---
 
+### 07/09/2026
+
+Revisei as 454 vagas com descrição e sem skill extraída. Retirei 75 vagas fora do recorte de Computação, como qualidade industrial, laboratório, logística, vendas, atividades administrativas e saúde operacional. Restaram 379 vagas de TI, software, infraestrutura, suporte técnico ou telecom sem tecnologia nomeada no anúncio.
+
+Também refinei o portão de relevância. Ele agora bloqueia títulos ambíguos que entravam pela palavra “sistemas”, como sistemas biomédicos, e evita tratar qualidade industrial como QA de software.
+
+---
+
 ### Pendências para o artigo
 
 - Medir a contribuição marginal de cada fonte com o avaliador.
