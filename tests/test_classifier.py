@@ -111,6 +111,9 @@ def test_tech_gate_descarta_vagas_fora_de_tecnologia(clf, title):
     [
         "Estágio Syngenta 2026 - Holambra | Pesquisa e Desenvolvimento",
         "Estágio em Odontologia Digital",
+        "ESTÁGIO SISTEMAS BIOMÉDICOS - BOS BANCO DE OLHOS",
+        "Analista de Qualidade Júnior",
+        "Programador de Carga Júnior",
         "Estágio em Pedagogia para Tecnologia Educacional",
         "Analista de Desenvolvimento de Negócios Jr",
         "Técnico de Segurança do Trabalho Júnior",
