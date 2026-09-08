@@ -22,8 +22,6 @@ secoes_descarte:
   - o que voce pode esperar
   - what to expect from us
   - como tornamos seu trabalho
-  - parcerias com
-  - parceria com
   - remuneracao e beneficios
   - etapas do processo
   - sobre o processo seletivo
@@ -31,6 +29,9 @@ secoes_descarte:
 # Secoes de conteudo (requisitos/atividades). Usadas so para decidir se
 # uma secao de descarte pode ou nao cortar o texto: se houver marcador de
 # conteudo DEPOIS da secao de descarte, o corte e adiado (nao acontece).
+# "parceria com"/"parcerias com" sairam do descarte: aparecem em boilerplate
+# de empresa ("atuar em parceria com o time") e cortavam texto ANTES dos
+# requisitos (ex.: vaga 18 do BTG perdia Java/C#/Python/AWS; 24 vagas no total).
 secoes_conteudo:
   - requisitos
   - qualificacoes
@@ -39,7 +40,18 @@ secoes_conteudo:
   - atividades
   - o que voce vai fazer
   - o que voce fara
+  - o que voce ira fazer
   - o que esperamos de voce
+  - o que buscamos
+  - o que procuramos
+  - requisitos e qualificacoes
+  - requisitos obrigatorios
+  - requisitos desejaveis
+  - conhecimentos necessarios
+  - conhecimentos e habilidades
+  - responsabilidades e atribuicoes
+  - diferenciais
+  - skills
   - what you will do
   - what you ll do
   - what we are looking for
