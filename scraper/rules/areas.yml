@@ -116,6 +116,56 @@ tech_gate:
     - pedagogia
     - arquivologia
     - biomedicina
+    # Sistemas biomédicos trata de equipamentos e processos de saúde, não de
+    # sistemas de informação. A palavra "sistemas" no título causava entrada
+    # indevida no recorte de TI.
+    - sistemas biomedicos
+    # Títulos que usam uma palavra ampla do portão, mas descrevem atividade
+    # industrial, administrativa, comercial ou de saúde — não uma vaga de TI.
+    - desenvolvimento analitico
+    - sistemas da qualidade
+    - seguranca patrimonial
+    - analista de redes e canais
+    - analista de marketing
+    - analista de e commerce
+    - auxiliar de almoxarifado
+    - assistente de filial
+    - administrativo em ti
+    - administrativo ti
+    - suporte na area administrativa
+    - suporte comercial
+    - sistemas eletricos
+    - sistemas de purificacao de agua
+    - inspetor de solda
+    - programador de carga
+    - programador de oficina
+    - programador de trafego
+    - analista fiscal tributario
+    - auxiliar de cobranca
+    - jovem auxiliar de loja
+    - tecnologia e celulares
+    - auxiliar de saude digital
+    - laboratorio qualidade
+    - estagio em administracao
+    - especialista de relacionamento com operadoras
+    - consultor comercial de ti
+    - pcd pessoa com deficiencia varias areas
+    - analista administrativo junior
+    - analista administrativo jr
+    - auxiliar administrativo ii ti
+    - compras de medicamentos
+    - analista de laboratorio
+    - atendente de copa
+    - auxiliar de monitoramento de sistemas de seguranca
+    - monitor de sistemas eletronicos de seg interno
+    - suporte automotivo
+    - estagiario de projetos e orcamentos
+    - assistente administrativo tecnico
+    - estagio grupo texo
+    - assistente administrativo de suporte tecnico
+    - tecnico de suporte industrial
+    - auxiliar de programacao
+    - assistente de programacao
     - nutricao
     - fisioterapia
     - arquitetura e urbanismo
@@ -471,11 +521,9 @@ areas:
       - quality assurance
       - qa engineer
       - analista de qa
-      - analista de qualidade
       - software tester
       - testador de software
       - analista de testes
-      - engenheiro de qualidade
       - testes automatizados
       - automacao de testes
       - qualidade de software
