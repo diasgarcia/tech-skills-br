@@ -66,6 +66,9 @@ tech_gate:
     - qa
     - devops
     - cloud
+    # Linguagem explícita no título é evidência suficiente para o LinkedIn,
+    # cuja listagem não entrega a descrição da vaga.
+    - python
     - cybersecurity
     - seguranca da informacao
     - fullstack
@@ -258,6 +261,12 @@ areas:
       - data lake
       - anaplan
       - data lakehouse
+      - dba
+      - analista dba
+      - administrador de banco de dados
+      - administrador banco de dados
+      - analista de banco de dados
+      - analista banco dados
     peso_medio:
       # "data" sozinho NAO entra: em portugues casa com "data de admissao".
       - dados
@@ -381,13 +390,13 @@ areas:
       - desenvolvimento de apis
       - desenvolvedor rpa
       - engenheiro de rpa
+      - rpa
+      - analista de rpa
       - power platform
       - power apps
       - powerapps
       - low code
       - low-code
-      - software embarcado
-      - sistemas embarcados
       - desenvolvedor delphi
       - desenvolvedora delphi
       - programador delphi
@@ -415,8 +424,6 @@ areas:
       - rest
       - microservicos
       - microsservicos
-      - rpa
-      - embarcados
       - iot
       - delphi
       - object pascal
@@ -522,6 +529,7 @@ areas:
       - qa engineer
       - analista de qa
       - software tester
+      - mainframe tester
       - testador de software
       - analista de testes
       - testes automatizados
@@ -570,6 +578,19 @@ areas:
       - software engineer
       - software developer
       - software engineering
+      - desenvolvedor de jogos
+      - game developer
+      - mainframe
+      - analista de integracao
+      - analista de integracoes
+      # Integracao entre sistemas, APIs e software e desenvolvimento. As
+      # frases completas evitam mandar vagas administrativas para esta area.
+      - integracao de sistemas
+      - integracoes de sistemas
+      - integracao entre sistemas
+      - integracoes entre sistemas
+      - integracao de software
+      - integracoes de software
       - engenheiro a de software
       - progettista software
     peso_medio:
@@ -766,6 +787,8 @@ areas:
       - tecnico de suporte
       - suporte de ti
       - analista de suporte ti
+      - suporte de aplicacoes
+      - suporte de sistemas
       - estagio suporte
       - estagio em suporte
       - estagiario de suporte
@@ -817,6 +840,10 @@ areas:
       - tecnico de redes
       - cabeamento estruturado
       - telecomunicacoes
+      - analista de telecom
+      - analista telecom
+      - analista noc
+      - analista noc telecom
     peso_medio:
       - infra
       - infraestrutura
@@ -863,11 +890,18 @@ areas:
       - engenharia de hardware
       - desenvolvimento de hardware
       - engenheiro de hardware
+      - hardware engineer
       - tecnico em eletronica
       - engenharia eletronica
       - engenharia de telecomunicacoes
       - desenvolvimento de firmware
       - firmware
+      # Sistemas embarcados ligam software ao hardware. Mantemos todas as
+      # formas aqui para nao serem vencidas por Backend.
+      - software embarcado
+      - sistemas embarcados
+      - desenvolvedor embarcado
+      - desenvolvedor de sistemas embarcados
       - desenvolvedor de hardware
       - engenheiro de automacao
       - engenharia de automacao

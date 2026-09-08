@@ -25,6 +25,15 @@ def clf():
         ("Analista de Testes Júnior", "QA"),
         ("Desenvolvedor Fullstack Júnior", "Fullstack"),
         ("Estágio em Segurança da Informação", "Segurança"),
+        ("Administrador de Banco de Dados (DBA) Júnior", "Data"),
+        ("Analista de RPA Júnior", "Backend"),
+        ("Analista de Telecom Júnior", "Infraestrutura / Redes"),
+        ("Desenvolvedor de Jogos Júnior", "Engenharia de Software"),
+        ("Analista de Integração de Sistemas Júnior", "Engenharia de Software"),
+        ("Mainframe Tester Júnior", "QA"),
+        ("Engenheiro de Software Embarcado Júnior", "Hardware / Eletrônica"),
+        ("Desenvolvedor de Sistemas Embarcados Júnior", "Hardware / Eletrônica"),
+        ("Suporte de Aplicações Júnior", "Suporte Técnico"),
     ],
 )
 def test_classifica_pelo_titulo(clf, title, expected):
@@ -45,6 +54,14 @@ def test_descricao_decide_quando_titulo_e_generico(clf):
         "Vaga para atuar com pipelines de ETL, SQL, Airflow e data warehouse.",
     )
     assert result.area == "Data"
+
+
+def test_integracao_na_descricao_classifica_titulo_generico(clf):
+    result = clf.classify(
+        "Analista de TI Jr",
+        "Configurar e validar integrações entre sistemas, APIs e logs.",
+    )
+    assert result.area == "Engenharia de Software"
 
 
 def test_titulo_dominante_vence_ruido_da_descricao(clf):
@@ -138,6 +155,10 @@ def test_tech_gate_ignora_palavra_generica_na_descricao(clf):
         "Estágio em TI",
         "Analista de Sistemas Jr",
         "Estágio em Tecnologia",
+        "Administrador de Banco de Dados (DBA) Júnior",
+        "Analista de RPA Júnior",
+        "Analista de Telecom Júnior",
+        "Suporte de Aplicações Júnior",
     ],
 )
 def test_tech_gate_mantem_vagas_de_tecnologia(clf, title):
