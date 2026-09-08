@@ -29,6 +29,18 @@ termos:
   - analista de seguranca junior
   - seguranca da informacao junior
   - cybersecurity junior
+  # Funcoes de entrada medidas na auditoria de cobertura (#23). As formas
+  # especificas reduzem o ruido que termos amplos como "automacao" e
+  # "telecom" trazem dos portais.
+  - dba junior
+  - analista de rpa junior
+  - analista de telecom junior
+  - mainframe junior
+  - embarcados junior
+  - desenvolvedor de jogos junior
+  - suporte aplicacoes junior
+  - analista de integracao junior
+  - analista de integracoes junior
   - suporte tecnico junior
   - analista de suporte junior
   - assistente de ti
