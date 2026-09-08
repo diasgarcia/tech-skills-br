@@ -184,6 +184,8 @@ Ampliei a cobertura de funções de entrada da issue #23. O coletor passou a bus
 
 No piloto sem LinkedIn e InfoJobs, a coleta retornou 158 vagas brutas e 40 vagas técnicas de entrada. Entraram resultados de suporte de aplicações, sistemas embarcados, telecom e integrações. RPA, mainframe e jogos não tiveram resultado final no piloto. A regra seguirá em observação por três dias antes do fechamento da issue.
 
+Importei o CSV do piloto no banco local. Foram duas vagas novas e 38 atualizações de registros existentes. O snapshot ficou com 4.353 vagas.
+
 ---
 
 ### Pendências para o artigo
