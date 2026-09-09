@@ -186,6 +186,52 @@ def test_extrai_conceitos_genericos_de_dados(ext):
             "Automação"} <= set(found)
 
 
+def test_extrai_skills_adicionadas_na_revisao_de_cobertura(ext):
+    desc = (
+        "Usar Node-RED e arquitetura de dados Bronze, Silver e Gold em um "
+        "lakehouse. Possuir certificação CTFL (ISTQB Foundation Level), "
+        "conhecimento de SOQL, Gherkin, Azure DevOps e Businessmap/Kanbanize."
+    )
+    found = ext.extract("Analista de Tecnologia", desc)
+    assert {
+        "Node-RED", "Arquitetura de Dados", "CTFL (ISTQB Foundation Level)",
+        "SOQL", "Gherkin", "Azure DevOps", "Businessmap/Kanbanize",
+    } <= set(found)
+
+
+def test_extrai_atividades_de_suporte_da_vaga_embelleze(ext):
+    desc = (
+        "Auxiliar na manutencao de equipamentos e redes. Acompanhar chamados "
+        "para garantir o funcionamento da infraestrutura de TI. Apoiar na "
+        "seguranca da informacao e backupsVaga Presencial."
+    )
+    found = ext.extract("Estagio em TI", desc)
+    assert {
+        "Hardware", "Redes de Computadores", "Gestão de Chamados",
+        "Infraestrutura de TI", "Segurança da Informação", "Backup",
+    } <= set(found)
+
+
+def test_extrai_api_e_planilhas_genericas_da_vaga_omie(ext):
+    desc = "Conhecimento em integrações via API ou planilhas será um diferencial."
+    assert {"APIs", "Planilhas"} <= set(ext.extract("Analista Júnior", desc))
+
+
+def test_extrai_atividades_especificas_de_suporte_gupy(ext):
+    desc = (
+        "Análise de alarmes, diagnóstico e troubleshooting de redes. "
+        "Conhecimento de microinformática e sistemas operacionais. Abertura de tickets. "
+        "Atender usuários - 1º nível - e fazer abertura de incidentes. "
+        "Manutenções preventivas em hardwares e equipamentos de informática. "
+        "Registrar as solicitações no sistema de chamados e montar racks."
+    )
+    assert {
+        "Redes de Computadores", "Gestão de Chamados", "Suporte N1/N2",
+        "Manutenção Preventiva", "Hardware", "Microinformática",
+        "Sistemas Operacionais",
+    } <= set(ext.extract("Técnico de Suporte", desc))
+
+
 def test_sem_texto_devolve_lista_vazia(ext):
     assert ext.extract("") == []
     assert ext.extract("Analista Júnior", "") == []
