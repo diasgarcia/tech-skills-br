@@ -16,6 +16,7 @@ import os
 import sqlite3
 import subprocess
 import tempfile
+import time
 from datetime import date
 from pathlib import Path
 
@@ -63,6 +64,11 @@ METADATA = {
 }
 
 logger = logging.getLogger(__name__)
+
+# Quando a conexao cai depois de enviar o Parquet, o Kaggle pode ter aceitado
+# a versao e estar apenas processando o arquivo. Antes de tentar novo envio,
+# consultamos a versao atual para nao criar duplicatas.
+_ESPERAS_CONFIRMACAO = (0, 15, 30, 60, 120)
 
 
 def exportar() -> tuple[Path, int]:
@@ -127,6 +133,54 @@ def _reaplicar_metadata() -> None:
             logger.info("Metadata reaplicado (tags preservadas): %s", HANDLE)
 
 
+def _status_dataset() -> dict[str, object] | None:
+    """Le o estado e a versao atual pelo CLI oficial do Kaggle."""
+    resultado = subprocess.run(
+        ["kaggle", "datasets", "status", HANDLE, "--format", "json"],
+        capture_output=True,
+        text=True,
+    )
+    if resultado.returncode != 0:
+        logger.warning("Nao foi possivel consultar o status do Kaggle: %s", resultado.stderr.strip())
+        return None
+    try:
+        dados = json.loads(resultado.stdout)
+    except json.JSONDecodeError:
+        logger.warning("Status do Kaggle nao retornou JSON valido: %s", resultado.stdout.strip())
+        return None
+    return dados if isinstance(dados, dict) else None
+
+
+def _versao_atual(status: dict[str, object] | None) -> int | None:
+    if not status:
+        return None
+    try:
+        return int(status["current_version_number"])
+    except (KeyError, TypeError, ValueError):
+        return None
+
+
+def _aguardar_confirmacao(versao_anterior: int | None) -> bool:
+    """Confirma se uma versao nova apareceu apos erro de conexao."""
+    if versao_anterior is None:
+        logger.warning("Versao anterior indisponivel; nao ha como confirmar o upload com seguranca.")
+        return False
+
+    for espera in _ESPERAS_CONFIRMACAO:
+        if espera:
+            time.sleep(espera)
+        status = _status_dataset()
+        versao = _versao_atual(status)
+        if versao is not None and versao > versao_anterior:
+            logger.info(
+                "Kaggle confirmou a versao %d apos erro de conexao (status: %s).",
+                versao,
+                status.get("status", "desconhecido") if status else "desconhecido",
+            )
+            return True
+    return False
+
+
 def subir(notas: str | None = None) -> None:
     if not os.getenv("KAGGLE_API_TOKEN"):
         raise SystemExit("KAGGLE_API_TOKEN nao definido no ambiente")
@@ -135,6 +189,7 @@ def subir(notas: str | None = None) -> None:
     import kagglehub
 
     notas = notas or _nota_padrao(n_vagas)
+    versao_anterior = _versao_atual(_status_dataset())
     try:
         kagglehub.dataset_upload(
             handle=HANDLE,
@@ -143,20 +198,9 @@ def subir(notas: str | None = None) -> None:
         )
         logger.info("Versao enviada para o Kaggle: %s", HANDLE)
     except Exception as exc:
-        logger.warning("Upload falhou (%s); tentando criar o dataset", exc)
-        dono, slug = HANDLE.split("/")
-        kagglehub.dataset_create(
-            owner_slug=dono,
-            dataset_slug=slug,
-            files=[str(EXPORT_DIR / "vagas.parquet")],
-            license_name="MIT",
-        )
-        kagglehub.dataset_upload(
-            handle=HANDLE,
-            local_dataset_dir=str(EXPORT_DIR),
-            version_notes=notas,
-        )
-        logger.info("Dataset criado e versao enviada: %s", HANDLE)
+        logger.warning("Upload sem confirmacao (%s); aguardando o Kaggle processar a versao.", exc)
+        if not _aguardar_confirmacao(versao_anterior):
+            raise RuntimeError("Kaggle nao confirmou uma nova versao apos o upload.") from exc
 
     _reaplicar_metadata()
 
