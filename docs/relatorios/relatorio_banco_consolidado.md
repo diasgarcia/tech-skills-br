@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (4566 vagas)
 
-- **Data de geração:** 09/09/2026 13:52
+- **Data de geração:** 09/09/2026 13:38
 - **Período coberto:** 03/01/2026 até 09/09/2026
 - **Total de vagas consolidadas:** 4566
 
@@ -9,12 +9,12 @@
 | Posição | Área | Vagas | % | Gráfico |
 |---|---|---|---|---|
 | 1 | Suporte Técnico | 1474 | 32.3% | ######.............. |
-| 2 | Engenharia de Software | 624 | 13.7% | ###................. |
+| 2 | Engenharia de Software | 625 | 13.7% | ###................. |
 | 3 | Infraestrutura / Redes | 403 | 8.8% | ##.................. |
 | 4 | Data | 315 | 6.9% | #................... |
 | 5 | Service Desk / Help Desk | 258 | 5.7% | #................... |
-| 6 | Backend | 222 | 4.9% | #................... |
-| 7 | Outros/TI Geral | 190 | 4.2% | #................... |
+| 6 | Backend | 223 | 4.9% | #................... |
+| 7 | Outros/TI Geral | 187 | 4.1% | #................... |
 | 8 | QA | 172 | 3.8% | #................... |
 | 9 | Field Service / Hardware | 159 | 3.5% | #................... |
 | 10 | Sistemas / ERP | 149 | 3.3% | #................... |
@@ -22,7 +22,7 @@
 | 12 | Fullstack | 116 | 2.5% | .................... |
 | 13 | Hardware / Eletrônica | 115 | 2.5% | .................... |
 | 14 | DevOps | 61 | 1.3% | .................... |
-| 15 | Frontend | 51 | 1.1% | .................... |
+| 15 | Frontend | 52 | 1.1% | .................... |
 | 16 | Inteligência Artificial | 49 | 1.1% | .................... |
 | 17 | Mobile | 42 | 0.9% | .................... |
 | 18 | Design / UI / UX | 41 | 0.9% | .................... |
@@ -90,26 +90,26 @@
 
 | Posição | Tecnologia | Vagas Citadas |
 |---|---|---|
-| 1 | Hardware | 859 |
-| 2 | Redes de Computadores | 818 |
-| 3 | Banco de Dados | 792 |
-| 4 | Windows | 762 |
-| 5 | Pacote Office | 762 |
-| 6 | SQL | 740 |
-| 7 | Inglês | 706 |
-| 8 | Python | 540 |
-| 9 | Git | 513 |
-| 10 | Inteligência Artificial | 512 |
-| 11 | Excel | 501 |
-| 12 | JavaScript | 427 |
-| 13 | Linux | 392 |
-| 14 | Análise de Dados | 376 |
-| 15 | Engenharia de Software | 352 |
-| 16 | Montagem e Manutenção de PCs | 350 |
-| 17 | ERP | 342 |
-| 18 | Manutenção Preventiva | 313 |
-| 19 | Metodologias Ágeis | 278 |
-| 20 | API REST | 278 |
+| 1 | Hardware | 1118 |
+| 2 | Banco de Dados | 911 |
+| 3 | Redes de Computadores | 903 |
+| 4 | Windows | 862 |
+| 5 | SQL | 856 |
+| 6 | Inglês | 851 |
+| 7 | Pacote Office | 834 |
+| 8 | Sistemas Operacionais | 782 |
+| 9 | Git | 628 |
+| 10 | Python | 607 |
+| 11 | Gestão de Chamados | 604 |
+| 12 | Inteligência Artificial | 577 |
+| 13 | Excel | 560 |
+| 14 | Segurança da Informação | 542 |
+| 15 | JavaScript | 492 |
+| 16 | Linux | 441 |
+| 17 | Manutenção Preventiva | 421 |
+| 18 | Análise de Dados | 418 |
+| 19 | Montagem e Manutenção de PCs | 390 |
+| 20 | Engenharia de Software | 390 |
 
 ## Top 10 Empresas com Mais Vagas
 
@@ -119,9 +119,9 @@
 | Confidencial | 85 |
 | Auth21 | 58 |
 | Nava Technology for Business | 43 |
+| Randstad | 42 |
 | BairesDev | 39 |
 | Minsait | 37 |
 | Wyntech | 33 |
-| randstad-1 | 28 |
 | Alpha Estágio | 28 |
 | IEL/SC - Instituto Euvaldo Lodi de Santa Catarina | 26 |
