@@ -1,4 +1,4 @@
-"""Enriquecedor de descricoes para Vagas.com e Trampos.
+"""Enriquecedor de descricoes para fontes com detalhe publico.
 
 A listagem dessas fontes nao traz a descricao completa da vaga. Este
 script busca o detalhe de cada vaga PENDENTE, atualiza a descricao no
@@ -9,10 +9,10 @@ banco e re-extrai as tecnologias com o skills.yml atual.
 - Trampos: GET em https://trampos.co/api/v2/opportunities/{slug}, onde o
   slug e o ultimo segmento da URL da vaga; junta description,
   prerequisite, desirable e other_info.
-- Gupy: apenas as descricoes TRUNCADAS (exatamente 500 caracteres, legado
-  do corte antigo do CSV). GET no endpoint publico de detalhe
-  employability-portal.gupy.io/api/v1/jobs/{id}; vagas ja removidas
-  respondem 404 e ficam como estao.
+- Gupy: descricoes TRUNCADAS do legado. GET na pagina publica da vaga; a
+  descricao integral vem no JSON-LD JobPosting ou no `__NEXT_DATA__`,
+  conforme a versao do portal. A API global da Gupy nao reconhece vagas de
+  todos os job boards e, por isso, nao e usada como fonte de 404.
 - GeekHunter: o card da listagem so traz snippet; o detalhe (SSR, sem
   auth) tem um bloco JSON-LD JobPosting com description completa,
   hiringOrganization (nome real da empresa) e datePosted. Alem da
@@ -20,8 +20,9 @@ banco e re-extrai as tecnologias com o skills.yml atual.
 - InfoJobs: o card traz um teaser fixo de 153 caracteres (sempre com
   "..."); o detalhe (SSR, sem auth) tem a descricao completa em
   `p.text-break.white-space-pre-line` dentro de `.js_vacancyDataPanels`.
-  Vaga encerrada responde 200 com o fallback da home (sem o painel):
-  nesse caso o status e tratado como 404 para marcar a vaga.
+  Resposta 200 sem o painel nao e tratada como encerramento, pois tambem
+  pode ser bloqueio suave ou mudanca temporaria de layout. Somente HTTP
+  404/410 real encerra a vaga.
 
 Vagas publicadas ha mais de 30 dias nao sao tentadas (anuncio quase
 certamente expirado). PoliteSession com delay/retry; o lock serializa os
@@ -30,6 +31,7 @@ GETs para o delay valer de verdade.
 
 from __future__ import annotations
 
+import html
 import json
 import logging
 import sqlite3
@@ -61,8 +63,6 @@ JANELA_TENTATIVA_DIAS = 30
 
 TRAMPOS_API_URL = "https://trampos.co/api/v2/opportunities/{slug}"
 
-GUPY_API_URL = "https://employability-portal.gupy.io/api/v1/jobs/{job_id}"
-
 # O card do Vagas.com traz um snippet do portal (ate ~400 chars, as vezes
 # terminando com "..."), longe da descricao completa (1825+ chars quando
 # enriquecida). O corte precisa cobrir esses snippets: abaixo de 500 ou
@@ -87,13 +87,13 @@ QUERY_TRAMPOS_PENDENTES = """
       AND (published_date IS NULL OR published_date >= date('now', ?))
 """
 
-# Gupy: so as truncadas legadas (exatamente 500 caracteres). As vagas
-# atuais ja chegam com a descricao completa na listagem.
+# Gupy: descricoes legadas truncadas em torno de 500 caracteres. Parte
+# delas perde um caractere ao normalizar espacos durante a importacao.
 QUERY_GUPY_PENDENTES = """
-    SELECT id, external_id, title FROM vagas
+    SELECT id, url, title FROM vagas
     WHERE source = 'gupy'
       AND COALESCE(enrich_encerrada, 0) = 0
-      AND LENGTH(description) = 500
+      AND LENGTH(description) BETWEEN 490 AND 500
       AND (published_date IS NULL OR published_date >= date('now', ?))
 """
 
@@ -113,6 +113,28 @@ QUERY_GEEKHUNTER_PENDENTES = """
       )
 """
 
+# Revisao manual de legado: inclui descricoes truncadas e qualquer vaga sem
+# skills, mesmo se uma tentativa anterior foi marcada como resolvida.
+QUERY_GUPY_FORCADO = """
+    SELECT id, url, title FROM vagas
+    WHERE source = 'gupy'
+      AND (
+          LENGTH(description) BETWEEN 490 AND 500
+          OR NOT EXISTS (
+              SELECT 1 FROM vaga_tecnologia
+              WHERE vaga_tecnologia.vaga_id = vagas.id
+          )
+      )
+"""
+
+# Usado apenas por uma revisao manual: revisita toda a fonte, inclusive
+# vagas que ja tinham sido marcadas como resolvidas. Assim e possivel
+# recuperar descricoes quando a listagem mudou ou houve falha anterior.
+QUERY_GEEKHUNTER_FORCADO = """
+    SELECT id, url, title FROM vagas
+    WHERE source = 'geekhunter'
+"""
+
 # InfoJobs: o teaser da listagem tem exatos 153 caracteres e termina em
 # "..."; a descricao completa esta no detalhe. O corte cobre qualquer
 # teaser (menor que 160 ou terminando em "..."). Sem janela de dias:
@@ -126,6 +148,18 @@ QUERY_INFOJOBS_PENDENTES = """
       AND COALESCE(enrich_encerrada, 0) = 0
       AND (description IS NULL OR LENGTH(description) < ?
            OR description LIKE '%...')
+"""
+
+# Revisao manual das vagas que foram marcadas como resolvidas enquanto ainda
+# continham apenas o teaser da listagem. Ignora o flag antigo, mas mantem o
+# recorte estrito para nao revisitar descricoes completas sem necessidade.
+QUERY_INFOJOBS_FORCADO = """
+    SELECT id, url, title FROM vagas
+    WHERE source = 'infojobs'
+      AND (
+          description IS NULL OR LENGTH(description) <= ?
+          OR description LIKE '%...'
+      )
 """
 
 
@@ -171,17 +205,48 @@ def fetch_trampos(session: PoliteSession, lock: Lock, slug: str) -> tuple[str, i
     return " ".join(partes), status
 
 
-def fetch_gupy(session: PoliteSession, lock: Lock, job_id: str) -> tuple[str, int | None]:
+def fetch_gupy(session: PoliteSession, lock: Lock, url: str) -> tuple[str, int | None]:
+    """Extrai a descricao da pagina publica da Gupy.
+
+    A API global de empregos retorna 404 para vagas ainda publicadas em
+    job boards proprios (como o da Claro). O HTML server-rendered e a fonte
+    confiavel para decidir se uma vaga Gupy existe ou foi encerrada.
+    """
     with lock:
-        response = session.get(GUPY_API_URL.format(job_id=job_id))
+        response = session.get(url)
         status = session.last_status_code
     if response is None:
         return "", status
-    try:
-        desc = (response.json() or {}).get("description") or ""
-    except ValueError:
-        return "", status
-    return strip_html(desc), status
+    soup = BeautifulSoup(response.text, "html.parser")
+    for script in soup.find_all("script", type="application/ld+json"):
+        try:
+            data = json.loads(html.unescape(script.string or ""))
+        except (ValueError, TypeError):
+            continue
+        if isinstance(data, dict) and data.get("@type") == "JobPosting":
+            return strip_html(data.get("description") or ""), status
+
+    # Parte dos job boards usa uma versao anterior do front da Gupy. Nela,
+    # nao ha JSON-LD: os campos completos estao no estado SSR do Next.js.
+    next_data = soup.find("script", id="__NEXT_DATA__")
+    if next_data is not None:
+        try:
+            payload = json.loads(next_data.string or "")
+            job = payload["props"]["pageProps"]["job"]
+        except (KeyError, TypeError, ValueError):
+            job = {}
+        if isinstance(job, dict):
+            partes = [
+                strip_html(job.get(campo) or "")
+                for campo in ("description", "responsibilities", "prerequisites")
+            ]
+            descricao = " ".join(parte for parte in partes if parte).strip()
+            if descricao:
+                return descricao, status
+
+    # A pagina de vaga removida da Gupy devolve 200 com o fallback do
+    # portal. Sem JobPosting nem estado SSR, ela equivale a 404 para a fila.
+    return "", 404
 
 
 def fetch_geekhunter(session: PoliteSession, lock: Lock, url: str) -> tuple[dict, int | None]:
@@ -198,6 +263,7 @@ def fetch_geekhunter(session: PoliteSession, lock: Lock, url: str) -> tuple[dict
         return {}, status
     soup = BeautifulSoup(response.text, "html.parser")
     dados: dict[str, str] = {}
+    encontrou_vaga = False
     for script in soup.find_all("script", type="application/ld+json"):
         try:
             data = json.loads(script.string or "")
@@ -205,6 +271,7 @@ def fetch_geekhunter(session: PoliteSession, lock: Lock, url: str) -> tuple[dict
             continue
         if data.get("@type") != "JobPosting":
             continue
+        encontrou_vaga = True
         descricao = strip_html(data.get("description") or "")
         # O JSON-LD tambem declara a lista curada de skills do portal
         # ("Angular 8+, AWS, Spring Boot..."); anexa ao texto para o
@@ -217,6 +284,11 @@ def fetch_geekhunter(session: PoliteSession, lock: Lock, url: str) -> tuple[dict
         dados["company"] = (org.get("name") or "").strip()
         dados["published_date"] = (data.get("datePosted") or "")[:10]
         break
+    # A GeekHunter responde 200 para uma pagina institucional quando o
+    # anuncio nao existe mais. Sem JSON-LD JobPosting, e o mesmo caso de
+    # um 404: nao deixe a vaga voltar para a fila em todas as rodadas.
+    if not encontrou_vaga and status == 200:
+        return {}, 404
     return dados, status
 
 
@@ -227,13 +299,9 @@ def fetch_infojobs(session: PoliteSession, lock: Lock, url: str) -> tuple[dict, 
     tem a descricao inteira em `p.text-break.white-space-pre-line` dentro
     de `.js_vacancyDataPanels`.
 
-    Vaga encerrada responde 200 com o fallback da home (sem o painel de
-    dados da vaga): devolve status 404 para o enriquecedor marca-la como
-    encerrada (mesmo tratamento de um 404 real nas outras fontes).
-
-    Bloqueio suave do portal (200 com BODY VAZIO) NAO vira 404: devolver
-    404 ali marcaria a vaga como encerrada para sempre, quando na
-    verdade era so o IP marcado por alguns minutos.
+    Resposta 200 sem o painel ou com BODY VAZIO fica pendente. Isso pode
+    ser bloqueio suave ou mudanca temporaria de layout; marcar como 404
+    perderia uma descricao valida. Somente o status HTTP real e repassado.
     """
     with lock:
         response = session.get(url)
@@ -245,11 +313,16 @@ def fetch_infojobs(session: PoliteSession, lock: Lock, url: str) -> tuple[dict, 
     soup = BeautifulSoup(response.text, "html.parser")
     painel = soup.select_one(".js_vacancyDataPanels")
     if painel is None:
-        return {"description": ""}, 404
+        return {"description": ""}, status
     el = painel.select_one("p.text-break.white-space-pre-line")
     if el is None:
-        return {"description": ""}, 404
-    return {"description": el.get_text(" ", strip=True)}, status
+        return {"description": ""}, status
+    descricao = el.get_text(" ", strip=True)
+    # Nunca marque o teaser como enriquecimento concluido. Se o portal
+    # devolver outro recorte curto, a vaga permanece para a proxima rodada.
+    if len(descricao) <= MIN_DESCRICAO_INFOJOBS or descricao.endswith("..."):
+        return {"description": ""}, status
+    return {"description": descricao}, status
 
 
 def _fetch_parando(parou: threading.Event, parar_em_429: bool, fetch):
@@ -307,8 +380,9 @@ def _enriquecer(
                     resultado = {"description": resultado}
                 desc = resultado.get("description", "")
                 if not desc:
-                    # 404 = anuncio encerrado na fonte: nada a fazer.
-                    if status == 404:
+                    # 404/410 = anuncio encerrado na fonte: nada a fazer.
+                    # A GeekHunter usa 410 em parte das vagas removidas.
+                    if status in (404, 410):
                         c.execute(
                             "UPDATE vagas SET enrich_encerrada = 1 WHERE id = ?",
                             (vid,),
@@ -361,7 +435,21 @@ def _enriquecer(
     return total
 
 
-def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIAS) -> None:
+def enriquecer(
+    limit: int | None = None,
+    janela_dias: int = JANELA_TENTATIVA_DIAS,
+    fonte: str | None = None,
+    forcar: bool = False,
+) -> None:
+    """Enriquece as fontes pendentes ou uma fonte selecionada manualmente."""
+    fontes = {"vagas", "trampos", "gupy", "geekhunter", "infojobs"}
+    if fonte is not None and fonte not in fontes:
+        raise ValueError(f"Fonte invalida: {fonte}")
+    if forcar and fonte not in {"geekhunter", "gupy", "infojobs"}:
+        raise ValueError(
+            "--forcar so pode ser usado com --fonte geekhunter, gupy ou infojobs"
+        )
+
     with open(RULES_DIR / "skills.yml", encoding="utf-8") as fh:
         rules = yaml.safe_load(fh) or {}
     extractor = SkillExtractor(rules)
@@ -380,14 +468,40 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
     query_trampos = QUERY_TRAMPOS_PENDENTES
     args_trampos = [MIN_DESCRICAO_TRAMPOS, *janela]
 
-    query_gupy = QUERY_GUPY_PENDENTES
-    args_gupy = list(janela)
+    query_gupy = (
+        QUERY_GUPY_FORCADO
+        if fonte == "gupy" and forcar
+        else QUERY_GUPY_PENDENTES
+    )
+    args_gupy = [] if fonte == "gupy" and forcar else list(janela)
 
-    query_geekhunter = QUERY_GEEKHUNTER_PENDENTES
+    query_geekhunter = (
+        QUERY_GEEKHUNTER_FORCADO
+        if fonte == "geekhunter" and forcar
+        else QUERY_GEEKHUNTER_PENDENTES
+    )
     args_geekhunter: list = []
 
-    query_infojobs = QUERY_INFOJOBS_PENDENTES
+    query_infojobs = (
+        QUERY_INFOJOBS_FORCADO
+        if fonte == "infojobs" and forcar
+        else QUERY_INFOJOBS_PENDENTES
+    )
     args_infojobs = [MIN_DESCRICAO_INFOJOBS]
+
+    # A opcao --fonte serve para uma revisao localizada sem gerar requests
+    # para os demais portais. Mantem as consultas e os logs uniformes.
+    consulta_vazia = "SELECT id, url, title FROM vagas WHERE 1 = 0"
+    if fonte and fonte != "vagas":
+        query_vagas, args_vagas = consulta_vazia, []
+    if fonte and fonte != "trampos":
+        query_trampos, args_trampos = consulta_vazia, []
+    if fonte and fonte != "gupy":
+        query_gupy, args_gupy = consulta_vazia, []
+    if fonte and fonte != "geekhunter":
+        query_geekhunter, args_geekhunter = consulta_vazia, []
+    if fonte and fonte != "infojobs":
+        query_infojobs, args_infojobs = consulta_vazia, []
 
     if limit:
         query_vagas += " LIMIT ?"
@@ -400,6 +514,24 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
         args_geekhunter.append(limit)
         query_infojobs += " LIMIT ?"
         args_infojobs.append(limit)
+
+    # Uma revisao forcada precisa desfazer o estado antigo antes dos GETs.
+    # Assim, sucesso e 404/410 real voltam a marcar a vaga; resposta vazia,
+    # bloqueio suave ou layout desconhecido deixam o item pendente.
+    if fonte and forcar:
+        consulta_fonte, argumentos_fonte = {
+            "gupy": (query_gupy, args_gupy),
+            "geekhunter": (query_geekhunter, args_geekhunter),
+            "infojobs": (query_infojobs, args_infojobs),
+        }[fonte]
+        c.execute(consulta_fonte, argumentos_fonte)
+        ids_reabertos = [(row[0],) for row in c.fetchall()]
+        c.executemany(
+            "UPDATE vagas SET enrich_encerrada = 0 WHERE id = ?",
+            ids_reabertos,
+        )
+        conn.commit()
+        logger.info("Revisao forcada reabriu %d registros.", len(ids_reabertos))
 
     with PoliteSession(
         user_agent=USER_AGENT,
@@ -456,7 +588,7 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
         logger.info("Gupy truncadas pendentes: %d", len(c.fetchall()))
         total_gupy = _enriquecer(
             c, session, lock, extractor, tech_map, query_gupy, args_gupy,
-            lambda sess, lk, job_id: fetch_gupy(sess, lk, job_id),
+            lambda sess, lk, url: fetch_gupy(sess, lk, url),
             parar_em_429=True,
         )
 
@@ -475,6 +607,7 @@ def enriquecer(limit: int | None = None, janela_dias: int = JANELA_TENTATIVA_DIA
             c, session_infojobs, lock, extractor, tech_map,
             query_infojobs, args_infojobs,
             lambda sess, lk, url: fetch_infojobs(sess, lk, url),
+            parar_em_429=True,
         )
 
     conn.commit()
@@ -495,5 +628,23 @@ if __name__ == "__main__":
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--janela", type=int, default=JANELA_TENTATIVA_DIAS,
                         help="Dias de janela de publicacao (padrao: 30).")
+    parser.add_argument(
+        "--fonte",
+        choices=("vagas", "trampos", "gupy", "geekhunter", "infojobs"),
+        help="Enriquece somente esta fonte.",
+    )
+    parser.add_argument(
+        "--forcar",
+        action="store_true",
+        help=(
+            "Revisa vagas ja resolvidas: todas da GeekHunter ou as "
+            "Gupy sem skills/truncadas e os teasers do InfoJobs."
+        ),
+    )
     args = parser.parse_args()
-    enriquecer(limit=args.limit, janela_dias=args.janela)
+    enriquecer(
+        limit=args.limit,
+        janela_dias=args.janela,
+        fonte=args.fonte,
+        forcar=args.forcar,
+    )
