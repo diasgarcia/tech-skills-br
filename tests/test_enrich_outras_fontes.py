@@ -6,9 +6,13 @@ from threading import Lock
 
 from scraper.skills import SkillExtractor
 from scripts.enrich_outras_fontes import (
+    QUERY_GEEKHUNTER_FORCADO,
+    QUERY_GUPY_FORCADO,
+    QUERY_INFOJOBS_FORCADO,
     QUERY_VAGAS_PENDENTES,
     _enriquecer,
     _fetch_parando,
+    fetch_geekhunter,
     fetch_gupy,
     fetch_infojobs,
     fetch_trampos,
@@ -72,12 +76,27 @@ def test_fetch_vagas_com_pagina_generica_conta_como_encerrada():
     assert status == 404
 
 
+def test_fetch_geekhunter_pagina_institucional_conta_como_encerrada():
+    html = """
+    <html><head>
+      <script type="application/ld+json">{"@type": "Organization"}</script>
+    </head><body>Pagina institucional da GeekHunter</body></html>
+    """
+    session = FakeSession([FakeResponse(text=html)])
+    session.last_status_code = 200
+    dados, status = fetch_geekhunter(session, Lock(), "https://www.geekhunter.com/pt/x")
+    assert dados == {}
+    assert status == 404
+
+
 INFOJOBS_DETAIL_HTML = """
 <html><body>
   <div class="js_vacancyDataPanels js_applyVacancyHidden">
     <p class="mb-16 text-break white-space-pre-line">
       Procuramos pessoa desenvolvedora com Node.js, TypeScript e AWS.
       Descrição da vaga: - Desenvolver e manter aplicações back-end.
+      A pessoa também fará integrações, correções, documentação técnica,
+      testes e acompanhamento das entregas junto ao restante da equipe.
     </p>
   </div>
 </body></html>
@@ -92,12 +111,12 @@ def test_fetch_infojobs_extrai_a_descricao_completa():
     assert status is None
 
 
-def test_fetch_infojobs_sem_o_painel_trata_como_encerrada():
-    """Vaga encerrada responde 200 com o fallback da home: vira 404."""
+def test_fetch_infojobs_sem_o_painel_permanece_pendente():
+    """200 sem painel pode ser bloqueio ou layout novo: nunca vira 404."""
     session = FakeSession([FakeResponse(text="<html>home do portal</html>")])
     dados, status = fetch_infojobs(session, Lock(), "http://x")
     assert dados["description"] == ""
-    assert status == 404
+    assert status is None
 
 
 def test_fetch_infojobs_body_vazio_nao_marca_como_encerrada():
@@ -150,14 +169,46 @@ def test_fetch_trampos_resposta_invalida_devolve_vazio():
 
 
 def test_fetch_gupy_extrai_e_limpa_html_da_descricao():
-    payload = {
-        "id": 123,
-        "description": "<p>Vaga para atuar com <b>Python</b> e Django.</p>",
-    }
-    session = FakeSession([FakeResponse(payload=payload)])
-    desc, _ = fetch_gupy(session, Lock(), "123")
+    html = """
+    <script type="application/ld+json">
+      {"@type": "JobPosting", "description": "<p>Vaga para atuar com <b>Python</b> e Django.</p>"}
+    </script>
+    """
+    session = FakeSession([FakeResponse(text=html)])
+    desc, _ = fetch_gupy(session, Lock(), "https://empresa.gupy.io/job/abc")
     assert "Python" in desc
     assert "<p>" not in desc
+
+
+def test_fetch_gupy_extrai_descricao_do_next_data():
+    html = """
+    <script id="__NEXT_DATA__" type="application/json">
+      {"props":{"pageProps":{"job":{
+        "description":"<p>Descrição da vaga</p>",
+        "responsibilities":"<p>Configurar Hardware e Service Desk.</p>",
+        "prerequisites":"<p>Conhecimento em Pacote Office.</p>"
+      }}}}
+    </script>
+    """
+    session = FakeSession([FakeResponse(text=html)])
+    desc, status = fetch_gupy(session, Lock(), "https://empresa.gupy.io/job/abc")
+    assert status is None
+    assert "Hardware" in desc
+    assert "Service Desk" in desc
+    assert "Pacote Office" in desc
+    assert "<p>" not in desc
+
+
+def test_fetch_infojobs_teaser_curto_permanece_pendente():
+    html = """
+    <div class="js_vacancyDataPanels">
+      <p class="text-break white-space-pre-line">Descrição curta...</p>
+    </div>
+    """
+    session = FakeSession([FakeResponse(text=html)])
+    dados, status = fetch_infojobs(session, Lock(), "http://x")
+    assert dados["description"] == ""
+    assert status is None
 
 
 def test_fetch_gupy_job_removido_devolve_vazio():
@@ -271,6 +322,29 @@ def test_sucesso_marca_a_vaga_como_resolvida():
     ).fetchone()[0] == 1
 
 
+def test_status_410_marca_a_vaga_como_encerrada():
+    conn, c = _vagas_com_fixture()
+    c.execute(
+        "INSERT INTO vagas (id, url, title, description, enrich_encerrada) "
+        "VALUES (1, 'u1', 't', 'descricao antiga', 0)"
+    )
+    extractor = SkillExtractor(
+        {}, secoes_descarte=[], secoes_conteudo=[], contextos_descarte={}
+    )
+
+    def fake_fetch(session, lock, url):
+        return {}, 410
+
+    total = _enriquecer(
+        c, None, Lock(), extractor, {},
+        "SELECT id, url, title FROM vagas", [], fake_fetch,
+    )
+    assert total == 0
+    assert c.execute(
+        "SELECT enrich_encerrada FROM vagas WHERE id = 1"
+    ).fetchone()[0] == 1
+
+
 def test_fetch_parando_nao_chama_a_fonte_depois_do_429():
     # Depois do primeiro 429 o lote para de fazer requests de verdade:
     # as futures restantes devolvem 429 falso sem tocar na fonte.
@@ -321,3 +395,57 @@ def test_query_vagas_seleciona_snippet_truncado_do_portal():
     )
     ids = {r[0] for r in c.execute(QUERY_VAGAS_PENDENTES, (500,))}
     assert ids == {1, 3, 5, 6}
+
+
+def test_query_geekhunter_forcado_inclui_vagas_ja_resolvidas():
+    conn, c = _vagas_com_fixture()
+    c.executemany(
+        "INSERT INTO vagas (id, url, title, description, enrich_encerrada) "
+        "VALUES (?, ?, ?, ?, ?)",
+        [
+            (1, "u1", "t1", "descricao completa", 1),
+            (2, "u2", "t2", "outra descricao", 0),
+        ],
+    )
+    c.execute("UPDATE vagas SET source = 'geekhunter'")
+    conn.commit()
+
+    ids = {r[0] for r in c.execute(QUERY_GEEKHUNTER_FORCADO)}
+    assert ids == {1, 2}
+
+
+def test_query_gupy_forcado_inclui_truncada_marcada_como_resolvida():
+    conn, c = _vagas_com_fixture()
+    c.execute(
+        "CREATE TABLE vaga_tecnologia (vaga_id INTEGER, tecnologia_id INTEGER)"
+    )
+    c.executemany(
+        "INSERT INTO vagas (id, url, title, description, source, enrich_encerrada) "
+        "VALUES (?, ?, ?, ?, ?, ?)",
+        [
+            (1, "u1", "t1", "x" * 500, "gupy", 1),
+            (2, "u2", "t2", "x" * 499, "gupy", 0),
+            (3, "u3", "t3", "descricao completa", "gupy", 1),
+        ],
+    )
+    c.execute("INSERT INTO vaga_tecnologia VALUES (3, 1)")
+    conn.commit()
+
+    ids = {r[0] for r in c.execute(QUERY_GUPY_FORCADO)}
+    assert ids == {1, 2}
+
+
+def test_query_infojobs_forcado_inclui_teaser_marcado_como_resolvido():
+    conn, c = _vagas_com_fixture()
+    c.executemany(
+        "INSERT INTO vagas (id, url, title, description, source, enrich_encerrada) "
+        "VALUES (?, ?, ?, ?, ?, ?)",
+        [
+            (1, "u1", "t1", "x" * 152, "infojobs", 1),
+            (2, "u2", "t2", "texto completo " * 100, "infojobs", 1),
+        ],
+    )
+    conn.commit()
+
+    ids = {r[0] for r in c.execute(QUERY_INFOJOBS_FORCADO, (160,))}
+    assert ids == {1}
