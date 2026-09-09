@@ -128,7 +128,17 @@ jobs:
         [ "$HASH_ANTES" != "$HASH_DEPOIS" ] && MUDOU=1
         if [ "$MUDOU" = "1" ]; then
           pip install pandas pyarrow kagglehub kaggle
-          python scripts/export_kaggle.py || echo "AVISO: upload para o Kaggle falhou (a run segue)"
+          # A release e o estado operacional. O Kaggle e uma replica: se
+          # ele nao confirmar a versao depois da espera do script, a coleta
+          # continua e deixa um aviso visivel para retomar a publicacao.
+          if ! python scripts/export_kaggle.py; then
+            echo "::warning title=Kaggle nao confirmado::A release foi atualizada, mas o Kaggle nao confirmou a nova versao. Execute o workflow Publicar Snapshot no Kaggle para tentar de novo."
+            {
+              echo "## Aviso: Kaggle nao confirmado"
+              echo "A release latest foi atualizada. O Kaggle nao confirmou a nova versao apos a espera automatica."
+              echo "Use o workflow **Publicar Snapshot no Kaggle** para repetir apenas a replica."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
         else
           echo "Kaggle: nada mudou nesta rodada; nenhuma versao nova."
         fi
