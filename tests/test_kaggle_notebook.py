@@ -15,7 +15,7 @@ METADATA_PATH = NOTEBOOK_DIR / "kernel-metadata.json"
 def test_metadata_vincula_dataset_mais_recente() -> None:
     metadata = json.loads(METADATA_PATH.read_text(encoding="utf-8"))
 
-    assert metadata["id"] == "rafaeldiasgarcia/tech-skills-br-analise-diaria"
+    assert metadata["id"] == "rafaeldiasgarcia/tech-skills-brasil-an-lise-di-ria"
     assert metadata["code_file"] == NOTEBOOK_PATH.name
     assert metadata["kernel_type"] == "notebook"
     assert metadata["dataset_sources"] == ["rafaeldiasgarcia/tech-skills-br"]
