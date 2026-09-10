@@ -65,12 +65,18 @@ METADATA = {
 
 logger = logging.getLogger(__name__)
 
-CATEGORICAL_COLUMNS = (
+CATEGORICAL_VAGAS = (
     "source",
     "area",
     "seniority",
     "workplace_type",
     "regiao",
+)
+
+CATEGORICAL_ANALISE = (
+    "skill",
+    "categoria_skill",
+    *CATEGORICAL_VAGAS,
 )
 
 # Quando a conexao cai depois de enviar o Parquet, o Kaggle pode ter aceitado
@@ -79,60 +85,119 @@ CATEGORICAL_COLUMNS = (
 _ESPERAS_CONFIRMACAO = (0, 15, 30, 60, 120)
 
 
-def _aplicar_tipos_parquet(df: pd.DataFrame) -> pd.DataFrame:
-    """Aplica tipos semanticos antes de gravar o snapshot no Parquet."""
+def _converter_data(df: pd.DataFrame, column: str = "published_date") -> None:
+    """Converte uma data ISO do SQLite para date32 na gravacao Parquet."""
+    df[column] = pd.to_datetime(df[column], errors="coerce").dt.date
+
+
+def _categorizar(df: pd.DataFrame, columns: tuple[str, ...]) -> None:
+    """Usa dictionary encoding nos vocabularios controlados."""
+    for column in columns:
+        df[column] = df[column].astype("category")
+
+
+def _aplicar_tipos_vagas(df: pd.DataFrame) -> pd.DataFrame:
+    """Aplica tipos semanticos ao arquivo principal de vagas."""
     df = df.copy()
 
     # O SQLite devolve DATE como texto ISO e BOOLEAN como 0/1. Sem estas
     # conversoes, o Parquet replica esses tipos de armazenamento em vez dos
     # tipos reais dos dados.
-    df["published_date"] = pd.to_datetime(
-        df["published_date"], errors="coerce"
-    ).dt.date
+    _converter_data(df)
     df["enrich_encerrada"] = df["enrich_encerrada"].astype("boolean")
-
-    # Uma vaga sem habilidade detectada tem uma lista vazia. A representacao
-    # anterior juntava os nomes em uma string separada por ponto e virgula.
-    df["skills"] = df["skills"].map(
-        lambda value: (
-            [skill.strip() for skill in value.split(";") if skill.strip()]
-            if isinstance(value, str)
-            else []
-        )
-    )
 
     # Campos de vocabulario controlado sao gravados com codificacao dictionary
     # no Parquet. Isso preserva os rotulos e evita impor um ENUM rigido.
-    for column in CATEGORICAL_COLUMNS:
-        df[column] = df[column].astype("category")
+    _categorizar(df, CATEGORICAL_VAGAS)
 
     return df
 
 
-def exportar() -> tuple[Path, int]:
-    """Grava kaggle/vagas.parquet a partir do banco. Devolve (caminho, n de vagas)."""
-    conn = sqlite3.connect(DB_PATH)
-    df = pd.read_sql_query(
+def _aplicar_tipos_analise(df: pd.DataFrame) -> pd.DataFrame:
+    """Aplica tipos semanticos a visao desnormalizada de skills."""
+    df = df.copy()
+    _converter_data(df)
+    _categorizar(df, CATEGORICAL_ANALISE)
+
+    return df
+
+
+def exportar(
+    db_path: Path = DB_PATH,
+    export_dir: Path = EXPORT_DIR,
+) -> tuple[Path, int]:
+    """Exporta as tres tabelas do SQLite e uma visao analitica para o Kaggle."""
+    conn = sqlite3.connect(db_path)
+    vagas = pd.read_sql_query(
         """
         SELECT v.source, v.external_id, v.title, v.company,
-               (SELECT GROUP_CONCAT(t.nome, '; ')
-                  FROM vaga_tecnologia vt
-                  JOIN tecnologias t ON t.id = vt.tecnologia_id
-                 WHERE vt.vaga_id = v.id) AS skills,
+               (SELECT GROUP_CONCAT(nome, '; ')
+                  FROM (
+                       SELECT t.nome AS nome
+                         FROM vaga_tecnologia vt
+                         JOIN tecnologias t ON t.id = vt.tecnologia_id
+                        WHERE vt.vaga_id = v.id
+                        ORDER BY t.nome COLLATE NOCASE
+                  )) AS skills,
                v.area, v.seniority, v.workplace_type, v.location,
                v.regiao, v.polo, v.published_date, v.description, v.url,
-               v.search_term, v.enrich_encerrada
+               v.search_term, v.enrich_encerrada, v.id
           FROM vagas v
+         ORDER BY v.id
+        """,
+        conn,
+    )
+    tecnologias = pd.read_sql_query(
+        """
+        SELECT id, nome, grupo
+          FROM tecnologias
+         ORDER BY id
+        """,
+        conn,
+    )
+    relacionamentos = pd.read_sql_query(
+        """
+        SELECT vaga_id, tecnologia_id
+          FROM vaga_tecnologia
+         ORDER BY vaga_id, tecnologia_id
+        """,
+        conn,
+    )
+    analise = pd.read_sql_query(
+        """
+        SELECT t.nome AS skill, t.grupo AS categoria_skill,
+               v.source, v.area, v.seniority, v.workplace_type,
+               v.regiao, v.polo, v.published_date, v.company, v.title,
+               v.search_term, v.id AS vaga_id, t.id AS tecnologia_id,
+               v.external_id, v.url
+          FROM vaga_tecnologia vt
+          JOIN vagas v ON v.id = vt.vaga_id
+          JOIN tecnologias t ON t.id = vt.tecnologia_id
+         ORDER BY t.nome COLLATE NOCASE, v.id
         """,
         conn,
     )
     conn.close()
-    df = _aplicar_tipos_parquet(df)
-    EXPORT_DIR.mkdir(exist_ok=True)
-    caminho = EXPORT_DIR / "vagas.parquet"
-    df.to_parquet(caminho, index=False)
-    logger.info("Parquet exportado: %d vagas em %s", len(df), caminho)
-    return caminho, len(df)
+
+    vagas = _aplicar_tipos_vagas(vagas)
+    tecnologias["grupo"] = tecnologias["grupo"].astype("category")
+    analise = _aplicar_tipos_analise(analise)
+
+    export_dir.mkdir(exist_ok=True)
+    arquivos = {
+        "vagas": (vagas, export_dir / "vagas.parquet"),
+        "tecnologias": (tecnologias, export_dir / "tecnologias.parquet"),
+        "vaga_tecnologia": (
+            relacionamentos,
+            export_dir / "vaga_tecnologia.parquet",
+        ),
+        "analise_skills": (analise, export_dir / "analise_skills.parquet"),
+    }
+    for nome, (dados, caminho) in arquivos.items():
+        dados.to_parquet(caminho, index=False)
+        logger.info("Parquet %s exportado: %d linhas em %s", nome, len(dados), caminho)
+
+    return arquivos["vagas"][1], len(vagas)
 
 
 def _nota_padrao(n_vagas: int) -> str:
