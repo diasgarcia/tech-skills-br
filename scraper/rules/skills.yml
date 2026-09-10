@@ -180,6 +180,7 @@ cloud_devops:
   Ansible: [ansible]
   Azure DevOps: [azure devops, azuredevops]
   Jenkins: [jenkins]
+  n8n: [n8n, n8n.io]
   Git: [git, github, gitlab, bitbucket, versionamento]
   CI/CD: [ci cd, integracao continua, continuous integration, continuous delivery]
   Linux: [linux, ubuntu, centos, debian, redhat, rhel]
