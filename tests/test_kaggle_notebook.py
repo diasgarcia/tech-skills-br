@@ -23,13 +23,17 @@ def test_metadata_vincula_dataset_mais_recente() -> None:
 
 def test_notebook_e_json_valido_e_codigo_compila() -> None:
     notebook = json.loads(NOTEBOOK_PATH.read_text(encoding="utf-8"))
+    celulas_codigo = [
+        cell for cell in notebook["cells"] if cell["cell_type"] == "code"
+    ]
     codigo = "\n\n".join(
         "".join(cell["source"])
-        for cell in notebook["cells"]
-        if cell["cell_type"] == "code"
+        for cell in celulas_codigo
     )
 
     assert notebook["nbformat"] == 4
+    assert all(cell["metadata"].get("_kg_hide-input") is True for cell in celulas_codigo)
+    assert all(not cell["metadata"].get("_kg_hide-output", False) for cell in celulas_codigo)
     assert "/kaggle/input/tech-skills-br/vagas.parquet" in codigo
     assert "/kaggle/input/datasets/rafaeldiasgarcia/tech-skills-br/vagas.parquet" in codigo
     assert '.rglob("vagas.parquet")' in codigo
