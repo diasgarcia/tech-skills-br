@@ -31,5 +31,7 @@ def test_notebook_e_json_valido_e_codigo_compila() -> None:
 
     assert notebook["nbformat"] == 4
     assert "/kaggle/input/tech-skills-br/vagas.parquet" in codigo
+    assert "/kaggle/input/datasets/rafaeldiasgarcia/tech-skills-br/vagas.parquet" in codigo
+    assert '.rglob("vagas.parquet")' in codigo
     assert '.str.split(";")' in codigo
     compile(codigo, str(NOTEBOOK_PATH), "exec")
