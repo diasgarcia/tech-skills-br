@@ -65,10 +65,48 @@ METADATA = {
 
 logger = logging.getLogger(__name__)
 
+CATEGORICAL_COLUMNS = (
+    "source",
+    "area",
+    "seniority",
+    "workplace_type",
+    "regiao",
+)
+
 # Quando a conexao cai depois de enviar o Parquet, o Kaggle pode ter aceitado
 # a versao e estar apenas processando o arquivo. Antes de tentar novo envio,
 # consultamos a versao atual para nao criar duplicatas.
 _ESPERAS_CONFIRMACAO = (0, 15, 30, 60, 120)
+
+
+def _aplicar_tipos_parquet(df: pd.DataFrame) -> pd.DataFrame:
+    """Aplica tipos semanticos antes de gravar o snapshot no Parquet."""
+    df = df.copy()
+
+    # O SQLite devolve DATE como texto ISO e BOOLEAN como 0/1. Sem estas
+    # conversoes, o Parquet replica esses tipos de armazenamento em vez dos
+    # tipos reais dos dados.
+    df["published_date"] = pd.to_datetime(
+        df["published_date"], errors="coerce"
+    ).dt.date
+    df["enrich_encerrada"] = df["enrich_encerrada"].astype("boolean")
+
+    # Uma vaga sem habilidade detectada tem uma lista vazia. A representacao
+    # anterior juntava os nomes em uma string separada por ponto e virgula.
+    df["skills"] = df["skills"].map(
+        lambda value: (
+            [skill.strip() for skill in value.split(";") if skill.strip()]
+            if isinstance(value, str)
+            else []
+        )
+    )
+
+    # Campos de vocabulario controlado sao gravados com codificacao dictionary
+    # no Parquet. Isso preserva os rotulos e evita impor um ENUM rigido.
+    for column in CATEGORICAL_COLUMNS:
+        df[column] = df[column].astype("category")
+
+    return df
 
 
 def exportar() -> tuple[Path, int]:
@@ -89,6 +127,7 @@ def exportar() -> tuple[Path, int]:
         conn,
     )
     conn.close()
+    df = _aplicar_tipos_parquet(df)
     EXPORT_DIR.mkdir(exist_ok=True)
     caminho = EXPORT_DIR / "vagas.parquet"
     df.to_parquet(caminho, index=False)
