@@ -41,6 +41,7 @@ from scraper.classifier import default_classifier  # noqa: E402
 from scraper.config import PROJECT_ROOT  # noqa: E402
 from scraper.geo import default_geo_classifier  # noqa: E402
 from scraper.models import infer_workplace, normalize  # noqa: E402
+from scraper.skills import default_extractor  # noqa: E402
 
 
 logger = logging.getLogger("import_csv")
@@ -171,6 +172,7 @@ def importar(
 
     clf = default_classifier()
     geo = default_geo_classifier()
+    skill_extractor = default_extractor()
     valid_areas = set(vocabulary.areas())
 
     lote_seen_ids: set[tuple[str, str]] = set()
@@ -225,11 +227,13 @@ def importar(
                 # Linha da rodada sem descricao nao pode apagar uma
                 # descricao ja salva (pipeline --no-enrich deixa o campo
                 # vazio para vagas do LinkedIn).
+                descricao_preservada = False
                 for campo in CAMPOS_TEXTO:
                     novo = (linha.get(campo) or "").strip() or None
                     if campo == "company" and novo:
                         novo = _canonical_company(novo)
                     if campo == "description" and not novo and vaga.description:
+                        descricao_preservada = True
                         continue
                     # Slug de URL como empresa (ex.: GeekHunter grava o
                     # segmento do caminho) nao regride um nome real ja
@@ -255,6 +259,7 @@ def importar(
                             len(novo) < 500 or novo.endswith("...")
                         )
                         if velha_cheia and nova_snippet:
+                            descricao_preservada = True
                             continue
                     setattr(vaga, campo, novo)
 
@@ -302,14 +307,24 @@ def importar(
                     vaga.polo = polo
                     vaga.regiao = regiao
 
-                nomes = [
+                nomes_csv = [
                     n.strip() for n in (linha.get("skills") or "").split(",") if n.strip()
                 ]
+                nomes_extraidos = (
+                    skill_extractor.extract(vaga.title, vaga.description or "")
+                    if descricao_preservada
+                    else []
+                )
+                nomes = sorted(set(nomes_csv) | set(nomes_extraidos))
                 if nomes:
-                    # Linha COM skills substitui as do banco. Linha SEM skills
-                    # (ex.: LinkedIn re-coletado com --no-enrich, em que o card
-                    # nao traz descricao) nao pode apagar as tecnologias ja
-                    # acumuladas no banco pelo enriquecimento.
+                    # O CSV pode vir de um card resumido. As skills precisam
+                    # considerar a descricao FINAL preservada acima; usar so
+                    # a lista parcial da rodada apagava vinculos validos como
+                    # Node-RED e n8n. Skills encontradas antes do truncamento
+                    # do CSV tambem sao mantidas por meio de nomes_csv.
+                    #
+                    # Sem descricao e sem skills novas, nao ha evidencia para
+                    # substituir os vinculos acumulados pelo enriquecimento.
                     # Sincronizacao por SQL direto: o diff de colecao do ORM
                     # inseriu pares repetidos em vaga_tecnologia e derrubou
                     # a rodada de 06/09 com UNIQUE. DELETE + INSERT OR IGNORE
