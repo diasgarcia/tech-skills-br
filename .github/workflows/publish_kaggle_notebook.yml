@@ -28,3 +28,24 @@ jobs:
 
       - name: Publicar e executar notebook
         run: kaggle kernels push --path notebooks/kaggle --timeout 900
+
+      - name: Aguardar resultado da execucao
+        run: |
+          for tentativa in {1..90}; do
+            ESTADO=$(kaggle kernels status rafaeldiasgarcia/tech-skills-brasil-an-lise-di-ria 2>&1)
+            echo "$ESTADO"
+
+            if echo "$ESTADO" | grep -Eqi 'status "(complete|completed)"'; then
+              exit 0
+            fi
+
+            if echo "$ESTADO" | grep -Eqi 'status "(error|failed|cancelled)"'; then
+              kaggle kernels logs rafaeldiasgarcia/tech-skills-brasil-an-lise-di-ria || true
+              exit 1
+            fi
+
+            sleep 10
+          done
+
+          echo "::error title=Notebook sem confirmacao::O Kaggle nao concluiu o notebook em 15 minutos."
+          exit 1
