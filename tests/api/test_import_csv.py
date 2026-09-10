@@ -203,6 +203,71 @@ def test_snippet_nao_regride_descricao_enriquecida(tmp_path):
         assert vaga.description == desc_cheia
 
 
+def test_snippet_parcial_nao_apaga_skills_da_descricao_preservada(tmp_path):
+    """Skills do card complementam as extraidas da descricao final do banco."""
+    db_path = tmp_path / "t.db"
+    desc_cheia = (
+        "Atuação com n8n e Docker. " + ("contexto técnico " * 80)
+    ).strip()
+
+    importar(
+        _escrever_csv(
+            tmp_path,
+            [_linha(
+                title="Desenvolvedor de Automação Júnior",
+                description=desc_cheia,
+                skills="n8n, Docker",
+            )],
+        ),
+        db_path,
+    )
+    importar(
+        _escrever_csv(
+            tmp_path,
+            [_linha(
+                title="Desenvolvedor de Automação Júnior",
+                description="Card resumido com Python...",
+                skills="Python",
+            )],
+        ),
+        db_path,
+    )
+
+    with Session(make_engine(db_path)) as db:
+        vaga = db.scalar(select(Vaga))
+        assert vaga.description == desc_cheia
+        assert sorted(t.nome for t in vaga.tecnologias) == [
+            "Docker", "Python", "n8n",
+        ]
+
+
+def test_descricao_completa_nova_pode_substituir_skills_antigas(tmp_path):
+    """Uma atualizacao completa nao deixa skill antiga presa ao registro."""
+    db_path = tmp_path / "t.db"
+    desc_antiga = ("Atuação com n8n. " + ("contexto anterior " * 80)).strip()
+    desc_nova = ("Atuação com Python. " + ("contexto atualizado " * 80)).strip()
+
+    importar(
+        _escrever_csv(
+            tmp_path,
+            [_linha(description=desc_antiga, skills="n8n")],
+        ),
+        db_path,
+    )
+    importar(
+        _escrever_csv(
+            tmp_path,
+            [_linha(description=desc_nova, skills="Python")],
+        ),
+        db_path,
+    )
+
+    with Session(make_engine(db_path)) as db:
+        vaga = db.scalar(select(Vaga))
+        assert vaga.description == desc_nova
+        assert [t.nome for t in vaga.tecnologias] == ["Python"]
+
+
 def test_slug_nao_regride_nome_de_empresa_corrigido(tmp_path):
     """O slug de URL do coletor (ex.: GeekHunter) nao regride o nome real."""
     db_path = tmp_path / "t.db"
