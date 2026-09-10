@@ -22,6 +22,39 @@ def test_normalize_tech_preserva_cerquilha_e_mais():
     assert normalize_tech("Programação Ágil") == "programacao agil"
 
 
+@pytest.mark.parametrize(
+    "texto,espera_nodejs,espera_node_red",
+    [
+        ("Node", True, False),
+        ("Node.js", True, False),
+        ("NodeJS", True, False),
+        ("Node-RED", False, True),
+        ("node red", False, True),
+        ("nodered", False, True),
+        ("Node-RED e Node.js", True, True),
+    ],
+)
+def test_node_nao_confunde_nodejs_com_node_red(
+    ext, texto, espera_nodejs, espera_node_red
+):
+    encontradas = set(ext.extract("Desenvolvedor Júnior", texto))
+    assert ("Node.js" in encontradas) is espera_nodejs
+    assert ("Node-RED" in encontradas) is espera_node_red
+
+
+def test_exclusao_de_sufixo_do_alias_e_generica():
+    extractor = SkillExtractor(
+        {"grupo": {"Ferramenta": ["foo"], "Ferramenta Bar": ["foo bar"]}},
+        secoes_descarte=[],
+        secoes_conteudo=[],
+        contextos_descarte={},
+        exclusoes_sufixo_alias={"Ferramenta": {"foo": ("bar",)}},
+    )
+
+    assert extractor.extract("Uso de foo") == ["Ferramenta"]
+    assert extractor.extract("Uso de foo bar") == ["Ferramenta Bar"]
+
+
 def test_extrai_linguagens_e_frameworks(ext):
     found = ext.extract("Desenvolvedor Júnior", "Vaga com Python, Django e PostgreSQL.")
     assert {"Python", "Django", "PostgreSQL"} <= set(found)

@@ -75,6 +75,37 @@ def _carregar_contextos_descarte() -> dict[str, list[re.Pattern]]:
     return compiladas
 
 
+def _carregar_exclusoes_sufixo_alias() -> dict[str, dict[str, tuple[str, ...]]]:
+    """Carrega excecoes contextuais especificas de cada alias.
+
+    Exemplo: o alias "node" de Node.js nao deve casar quando vier antes de
+    "red", mas "node red" precisa continuar disponivel para Node-RED.
+    """
+    try:
+        with open(ARQUIVO_CONTEXTOS_DESCARTE, encoding="utf-8") as fh:
+            dados = yaml.safe_load(fh) or {}
+    except OSError:
+        return {}
+
+    resultado: dict[str, dict[str, tuple[str, ...]]] = {}
+    for tecnologia, aliases in (dados.get("aliases_contextuais") or {}).items():
+        por_alias: dict[str, tuple[str, ...]] = {}
+        for alias, configuracao in (aliases or {}).items():
+            if not isinstance(configuracao, dict):
+                continue
+            alias_normalizado = normalize_tech(alias)
+            sufixos = tuple(
+                token
+                for item in (configuracao.get("nao_seguido_por") or [])
+                if (token := normalize_tech(item))
+            )
+            if alias_normalizado and sufixos:
+                por_alias[alias_normalizado] = sufixos
+        if por_alias:
+            resultado[tecnologia] = por_alias
+    return resultado
+
+
 def normalize_tech(text: str | None) -> str:
     """Minusculas, sem acento, mantendo '#' e '+'. Pontuacao vira espaco."""
     if not text:
@@ -85,11 +116,17 @@ def normalize_tech(text: str | None) -> str:
     return _WS_RE.sub(" ", text).strip()
 
 
-def _compile_alias(alias: str) -> re.Pattern:
+def _compile_alias(alias: str, suffixes: tuple[str, ...] = ()) -> re.Pattern:
     token = normalize_tech(alias)
     if not token:
         return re.compile(r"(?!x)x")
-    return re.compile(rf"(?<!{_BOUNDARY}){re.escape(token)}(?!{_BOUNDARY})")
+    suffix_guard = ""
+    if suffixes:
+        alternatives = "|".join(re.escape(suffix) for suffix in suffixes)
+        suffix_guard = rf"(?!\s+(?:{alternatives})(?!{_BOUNDARY}))"
+    return re.compile(
+        rf"(?<!{_BOUNDARY}){re.escape(token)}{suffix_guard}(?!{_BOUNDARY})"
+    )
 
 
 def _compile_case_alias(alias: str) -> re.Pattern:
@@ -109,6 +146,7 @@ class SkillExtractor:
         secoes_descarte: list[str] | None = None,
         secoes_conteudo: list[str] | None = None,
         contextos_descarte: dict[str, list[re.Pattern]] | None = None,
+        exclusoes_sufixo_alias: dict[str, dict[str, tuple[str, ...]]] | None = None,
     ) -> None:
         self.skills: dict[str, list[re.Pattern]] = {}
         self.case_sensitive: dict[str, list[re.Pattern]] = {}
@@ -128,14 +166,21 @@ class SkillExtractor:
             if contextos_descarte is not None
             else _carregar_contextos_descarte()
         )
+        self.exclusoes_sufixo_alias = (
+            exclusoes_sufixo_alias
+            if exclusoes_sufixo_alias is not None
+            else _carregar_exclusoes_sufixo_alias()
+        )
         for group, entries in (rules or {}).items():
             for canonical, aliases in (entries or {}).items():
                 patterns = []
                 case_patterns = []
+                exclusoes_canonicas = self.exclusoes_sufixo_alias.get(canonical, {})
                 for a in (aliases or [canonical]):
                     case_only = a.startswith("~")
                     if case_only:
                         a = a[1:]
+                    suffixes = exclusoes_canonicas.get(normalize_tech(a), ())
                     if any(c.isupper() for c in a):
                         # Alias com maiuscula casa no texto original preservando
                         # caixa ("Go" != "go" != "GO"). A nao ser que o alias
@@ -143,9 +188,9 @@ class SkillExtractor:
                         # casamento normal, insensivel a caixa (ex.: "pfSense").
                         case_patterns.append(_compile_case_alias(a))
                         if not case_only:
-                            patterns.append(_compile_alias(a))
+                            patterns.append(_compile_alias(a, suffixes))
                     else:
-                        patterns.append(_compile_alias(a))
+                        patterns.append(_compile_alias(a, suffixes))
                 self.skills[canonical] = patterns
                 self.case_sensitive[canonical] = case_patterns
                 self.groups[canonical] = group
