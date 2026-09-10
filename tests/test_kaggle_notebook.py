@@ -34,4 +34,5 @@ def test_notebook_e_json_valido_e_codigo_compila() -> None:
     assert "/kaggle/input/datasets/rafaeldiasgarcia/tech-skills-br/vagas.parquet" in codigo
     assert '.rglob("vagas.parquet")' in codigo
     assert '.str.split(";")' in codigo
+    assert 'vagas["area"].astype("string").fillna("Não informada")' in codigo
     compile(codigo, str(NOTEBOOK_PATH), "exec")
