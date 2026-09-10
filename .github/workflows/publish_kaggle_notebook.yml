@@ -1,0 +1,30 @@
+name: Publicar Notebook de Analise no Kaggle
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Criar ou atualizar notebook
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    env:
+      KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+
+    steps:
+      - name: Baixar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar cliente do Kaggle
+        run: python -m pip install --upgrade kaggle
+
+      - name: Publicar e executar notebook
+        run: kaggle kernels push --path notebooks/kaggle --timeout 900
