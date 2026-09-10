@@ -13,6 +13,14 @@
 # virando espaco). O trecho casado e substituido por espacos antes da
 # extracao de skills.
 
+# Excecoes que valem somente para um alias de uma tecnologia. Elas evitam
+# ambiguidades sem remover o termo completo das outras tecnologias.
+aliases_contextuais:
+  Node.js:
+    node:
+      nao_seguido_por:
+        - red
+
 descartar:
   Hardware:
     - "instituto hardware"
