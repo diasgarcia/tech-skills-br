@@ -65,7 +65,7 @@ METADATA = {
 
 logger = logging.getLogger(__name__)
 
-CATEGORICAL_VAGAS = (
+CATEGORICAL_COLUMNS = (
     "source",
     "area",
     "seniority",
@@ -73,10 +73,10 @@ CATEGORICAL_VAGAS = (
     "regiao",
 )
 
-CATEGORICAL_ANALISE = (
-    "skill",
-    "categoria_skill",
-    *CATEGORICAL_VAGAS,
+ARQUIVOS_PARQUET_OBSOLETOS = (
+    "tecnologias.parquet",
+    "vaga_tecnologia.parquet",
+    "analise_skills.parquet",
 )
 
 # Quando a conexao cai depois de enviar o Parquet, o Kaggle pode ter aceitado
@@ -108,16 +108,7 @@ def _aplicar_tipos_vagas(df: pd.DataFrame) -> pd.DataFrame:
 
     # Campos de vocabulario controlado sao gravados com codificacao dictionary
     # no Parquet. Isso preserva os rotulos e evita impor um ENUM rigido.
-    _categorizar(df, CATEGORICAL_VAGAS)
-
-    return df
-
-
-def _aplicar_tipos_analise(df: pd.DataFrame) -> pd.DataFrame:
-    """Aplica tipos semanticos a visao desnormalizada de skills."""
-    df = df.copy()
-    _converter_data(df)
-    _categorizar(df, CATEGORICAL_ANALISE)
+    _categorizar(df, CATEGORICAL_COLUMNS)
 
     return df
 
@@ -126,7 +117,7 @@ def exportar(
     db_path: Path = DB_PATH,
     export_dir: Path = EXPORT_DIR,
 ) -> tuple[Path, int]:
-    """Exporta as tres tabelas do SQLite e uma visao analitica para o Kaggle."""
+    """Exporta uma linha por vaga para o unico Parquet publicado no Kaggle."""
     conn = sqlite3.connect(db_path)
     vagas = pd.read_sql_query(
         """
@@ -141,63 +132,25 @@ def exportar(
                   )) AS skills,
                v.area, v.seniority, v.workplace_type, v.location,
                v.regiao, v.polo, v.published_date, v.description, v.url,
-               v.search_term, v.enrich_encerrada, v.id
+               v.search_term, v.enrich_encerrada
           FROM vagas v
          ORDER BY v.id
-        """,
-        conn,
-    )
-    tecnologias = pd.read_sql_query(
-        """
-        SELECT id, nome, grupo
-          FROM tecnologias
-         ORDER BY id
-        """,
-        conn,
-    )
-    relacionamentos = pd.read_sql_query(
-        """
-        SELECT vaga_id, tecnologia_id
-          FROM vaga_tecnologia
-         ORDER BY vaga_id, tecnologia_id
-        """,
-        conn,
-    )
-    analise = pd.read_sql_query(
-        """
-        SELECT t.nome AS skill, t.grupo AS categoria_skill,
-               v.source, v.area, v.seniority, v.workplace_type,
-               v.regiao, v.polo, v.published_date, v.company, v.title,
-               v.search_term, v.id AS vaga_id, t.id AS tecnologia_id,
-               v.external_id, v.url
-          FROM vaga_tecnologia vt
-          JOIN vagas v ON v.id = vt.vaga_id
-          JOIN tecnologias t ON t.id = vt.tecnologia_id
-         ORDER BY t.nome COLLATE NOCASE, v.id
         """,
         conn,
     )
     conn.close()
 
     vagas = _aplicar_tipos_vagas(vagas)
-    tecnologias["grupo"] = tecnologias["grupo"].astype("category")
-    analise = _aplicar_tipos_analise(analise)
 
     export_dir.mkdir(exist_ok=True)
-    arquivos = {
-        "vagas": (vagas, export_dir / "vagas.parquet"),
-        "tecnologias": (tecnologias, export_dir / "tecnologias.parquet"),
-        "vaga_tecnologia": (
-            relacionamentos,
-            export_dir / "vaga_tecnologia.parquet",
-        ),
-        "analise_skills": (analise, export_dir / "analise_skills.parquet"),
-    }
-    for nome, (dados, caminho) in arquivos.items():
-        dados.to_parquet(caminho, index=False)
-        logger.info("Parquet %s exportado: %d linhas em %s", nome, len(dados), caminho)
+    for nome in ARQUIVOS_PARQUET_OBSOLETOS:
+        (export_dir / nome).unlink(missing_ok=True)
 
-    return arquivos["vagas"][1], len(vagas)
+    caminho = export_dir / "vagas.parquet"
+    vagas.to_parquet(caminho, index=False)
+    logger.info("Parquet exportado: %d vagas em %s", len(vagas), caminho)
+
+    return caminho, len(vagas)
 
 
 def _nota_padrao(n_vagas: int) -> str:
