@@ -64,6 +64,24 @@ def load_search_terms() -> list[str]:
 
 SEARCH_TERMS: list[str] = load_search_terms()
 
+
+def load_term_match_rules() -> dict[str, list[str]]:
+    """Sinais exigidos nos resultados de buscas textuais muito especificas."""
+    with open(RULES_DIR / "coletores.yml", encoding="utf-8") as fh:
+        dados = yaml.safe_load(fh) or {}
+
+    regras = dados.get("validacao_de_termos") or {}
+    return {
+        str(termo).strip(): [
+            str(sinal).strip() for sinal in sinais or [] if str(sinal).strip()
+        ]
+        for termo, sinais in regras.items()
+        if str(termo).strip()
+    }
+
+
+TERM_MATCH_RULES: dict[str, list[str]] = load_term_match_rules()
+
 # Matriz de delays da rodada padrao, medida em 05/09 (wiki "Limites e
 # Bloqueios"). LinkedIn 1.0s (ponto doce; 0.5s sofre backpressure da
 # API), InfoJobs 2.0s (bloqueio suave), Vagas.com 2.0s (Cloudflare),
@@ -87,6 +105,11 @@ class Settings:
     """Parametros de execucao. Sobrescritos pela CLI em `main.py`."""
 
     search_terms: list[str] = field(default_factory=lambda: list(SEARCH_TERMS))
+    term_match_rules: dict[str, list[str]] = field(
+        default_factory=lambda: {
+            termo: list(sinais) for termo, sinais in TERM_MATCH_RULES.items()
+        }
+    )
     sources: list[str] = field(
         default_factory=lambda: [
             "gupy",

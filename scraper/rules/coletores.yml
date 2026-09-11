@@ -58,6 +58,66 @@ termos:
   - trainee tecnologia
   - trainee ti
 
+# Alguns portais, em especial o LinkedIn, tratam buscas especificas como uma
+# sugestao e devolvem cargos sem relacao com o termo. Para estas funcoes, o
+# resultado so segue no pipeline quando o titulo ou a descricao contem um dos
+# sinais abaixo. Vagas tecnicas descartadas aqui ainda podem entrar por outro
+# termo normal da coleta.
+validacao_de_termos:
+  dba junior:
+    - dba
+    - administrador de banco de dados
+    - administradora de banco de dados
+    - database administrator
+  analista de rpa junior:
+    - rpa
+    - robotic process automation
+    - automacao robotica de processos
+    - uipath
+    - automation anywhere
+    - power automate
+  analista de telecom junior:
+    - telecom
+    - telecomunicacoes
+  mainframe junior:
+    - mainframe
+    - cobol
+    - ibm z
+    - z os
+  embarcados junior:
+    - embarcado
+    - embarcados
+    - embarcada
+    - embarcadas
+    - embedded
+    - firmware
+  desenvolvedor de jogos junior:
+    - jogo
+    - jogos
+    - game
+    - games
+    - unity
+    - unreal
+  suporte aplicacoes junior:
+    - suporte aplicacoes
+    - suporte de aplicacoes
+    - suporte a aplicacoes
+    - suporte de sistemas
+    - suporte a sistemas
+    - sustentacao de aplicacoes
+    - sustentacao de sistemas
+    - application support
+  analista de integracao junior:
+    - integracao
+    - integracoes
+    - integration
+    - integrations
+  analista de integracoes junior:
+    - integracao
+    - integracoes
+    - integration
+    - integrations
+
 solides:
   # Cada entrada vira um "termo" de coleta: a chave rotula a senioridade
   # declarada pelo portal e o valor sao os params nativos do endpoint.
