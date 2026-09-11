@@ -9,7 +9,10 @@ Detalhes praticos descobertos testando ao vivo:
 
 - A paginacao `?page=N` SO funciona no path `/pt/vagas` (sem o `/pt`, o
   parametro e ignorado e a pagina 1 vem sempre).
-- Sao ~803 vagas anunciadas em ~81 paginas de 10 cards.
+- O total de paginas muda com frequencia. A ultima pagina e lida dos
+  controles de paginacao do proprio portal.
+- O portal responde 404 na primeira pagina depois do fim, em vez de
+  devolver uma pagina vazia. Esse 404 e fim normal de paginacao.
 - NAO existe filtro de nivel de senioridade via URL: a listagem mistura
   junior/pleno/senior. O corte fica para o portao de relevancia e o
   filtro de senioridade do projeto (esperar taxa alta de descarte).
@@ -36,12 +39,13 @@ JOBS_URL = f"{BASE_URL}/pt/vagas"
 _CARD_RE = re.compile(r"^job-")
 _WS_RE = re.compile(r"\s+")
 _HORA_RE = re.compile(r"há \d+ (horas|dias)", re.I)
+_PAGE_RE = re.compile(r"(?:[?&])page=(\d+)")
 
 
 class GeekHunterSource(JobSource):
     name = "geekhunter"
     label = "GeekHunter"
-    MAX_PAGES_PER_TERM = 81
+    MAX_PAGES_PER_TERM = 200
 
     def fetch(self, terms: list[str]) -> list[Job]:
         """Ignora os termos do projeto: o portal nao tem busca por termo.
@@ -65,10 +69,26 @@ class GeekHunterSource(JobSource):
         start_page = max(1, self.settings.start_page)
         end_page = max(start_page, self.page_limit())
 
-        for page in range(start_page, end_page + 1):
+        page = start_page
+        while page <= end_page:
             response = self.session.get(JOBS_URL, params={"page": page})
             if response is None:
+                # Sem os controles de paginacao, a unica forma de descobrir
+                # o fim e consultar a pagina seguinte. A GeekHunter responde
+                # 404 nesse caso; depois de paginas validas, isso nao e erro.
+                if jobs and self.session.last_status_code == 404:
+                    logger.debug(
+                        "[%s] fim da paginacao na pagina %d (HTTP 404 esperado)",
+                        self.name,
+                        page,
+                    )
+                    self.session.last_status_code = None
                 break
+
+            if page == start_page:
+                ultima_pagina = self._ultima_pagina(response.text)
+                if ultima_pagina is not None:
+                    end_page = min(end_page, max(page, ultima_pagina))
 
             batch = self._parse_page(response.text, term)
             if not batch:
@@ -85,7 +105,20 @@ class GeekHunterSource(JobSource):
             if new_in_page == 0:
                 break  # paginacao repetindo; evita loop inutil
 
+            page += 1
+
         return jobs
+
+    @staticmethod
+    def _ultima_pagina(html: str) -> int | None:
+        """Le o maior numero declarado nos links de paginacao."""
+        soup = BeautifulSoup(html, "html.parser")
+        paginas: list[int] = []
+        for link in soup.select('a[href*="page="]'):
+            match = _PAGE_RE.search(link.get("href") or "")
+            if match:
+                paginas.append(int(match.group(1)))
+        return max(paginas, default=None)
 
     def _parse_page(self, html: str, term: str) -> list[Job]:
         soup = BeautifulSoup(html, "html.parser")

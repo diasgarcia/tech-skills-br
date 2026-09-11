@@ -1,5 +1,7 @@
 """Testes dos parsers, usando respostas reais capturadas dos portais (offline)."""
 
+from types import SimpleNamespace
+
 import pytest
 
 from scraper.config import Settings
@@ -337,6 +339,48 @@ def test_geekhunter_nao_confia_em_nivel_alto_do_portal():
     card = GEEKHUNTER_CARD.replace(">Júnior<", ">Pleno<")
     job = _source(GeekHunterSource)._parse_page(card, "todas")[0]
     assert job.seniority == ""
+
+
+def test_geekhunter_para_na_ultima_pagina_anunciada():
+    paginas_pedidas = []
+    pagina_1 = GEEKHUNTER_CARD + '<a href="/pt/vagas?page=2">2</a>'
+    pagina_2 = GEEKHUNTER_CARD.replace(
+        "fullstack-java-junior-1", "fullstack-java-junior-2"
+    )
+
+    class Session:
+        last_status_code = None
+
+        def get(self, _url, **kwargs):
+            pagina = kwargs["params"]["page"]
+            paginas_pedidas.append(pagina)
+            self.last_status_code = 200
+            return SimpleNamespace(text={1: pagina_1, 2: pagina_2}[pagina])
+
+    source = GeekHunterSource(Session(), Settings(max_pages_per_term=200))
+    jobs = source.fetch_term("todas")
+
+    assert paginas_pedidas == [1, 2]
+    assert len(jobs) == 2
+    assert source.session.last_status_code == 200
+
+
+def test_geekhunter_404_depois_de_resultados_e_fim_normal():
+    class Session:
+        last_status_code = None
+
+        def get(self, _url, **kwargs):
+            if kwargs["params"]["page"] == 1:
+                self.last_status_code = 200
+                return SimpleNamespace(text=GEEKHUNTER_CARD)
+            self.last_status_code = 404
+            return None
+
+    source = GeekHunterSource(Session(), Settings(max_pages_per_term=2))
+    jobs = source.fetch_term("todas")
+
+    assert len(jobs) == 1
+    assert source.session.last_status_code is None
 
 
 def test_trampos_usa_custom_company_name_quando_existe():
