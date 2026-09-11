@@ -58,6 +58,18 @@ class AreaClassifier:
         self.gate_exclude: list[re.Pattern] = [
             _compile_keyword(kw) for kw in (gate.get("excluir") or [])
         ]
+        self.gate_context_exclude: list[
+            tuple[list[re.Pattern], list[re.Pattern]]
+        ] = []
+        for rule in gate.get("excluir_contextos") or []:
+            title_patterns = [
+                _compile_keyword(kw) for kw in (rule.get("titulo") or [])
+            ]
+            body_patterns = [
+                _compile_keyword(kw) for kw in (rule.get("descricao") or [])
+            ]
+            if title_patterns and body_patterns:
+                self.gate_context_exclude.append((title_patterns, body_patterns))
 
         self.strong_weight: float = self.tiers.get("peso_alto", 4.0)
 
@@ -175,12 +187,18 @@ class AreaClassifier:
         title_text = normalize(title)
         if any(p.search(title_text) for p in self.gate_exclude):
             return False
+        body_text = normalize(description)
+        if any(
+            any(pattern.search(title_text) for pattern in title_patterns)
+            and any(pattern.search(body_text) for pattern in body_patterns)
+            for title_patterns, body_patterns in self.gate_context_exclude
+        ):
+            return False
         if any(p.search(title_text) for p in self.gate_title):
             return True
         if any(p.search(title_text) for p in self._strong_patterns()):
             return True
 
-        body_text = normalize(description)
         if not body_text:
             return False
         if any(p.search(body_text) for p in self.gate_body):
