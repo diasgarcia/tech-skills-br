@@ -1,5 +1,7 @@
 """Testes das funcoes de paginacao/coleta das fontes, com sessao falsa (offline)."""
 
+import pytest
+
 from scraper.config import Settings
 from scraper.models import Job
 from scraper.sources.base import JobSource
@@ -191,6 +193,79 @@ def test_fetch_isola_falha_de_um_termo():
     assert [j.title for j in jobs] == ["ok1", "ok2"]
     assert source.stats.raw_jobs == 2
     assert any("explode" in e for e in source.stats.errors)
+
+
+class _FonteComBuscaImprecisa(JobSource):
+    name = "imprecisa"
+
+    def fetch_term(self, term: str) -> list[Job]:
+        return [
+            Job(source=self.name, external_id="1", title="Mainframe Tester Júnior"),
+            Job(source=self.name, external_id="2", title="Operador Técnico N1 Júnior"),
+            Job(
+                source=self.name,
+                external_id="3",
+                title="Analista de TI Júnior",
+                description="Manutenção de sistemas legados em COBOL.",
+            ),
+        ]
+
+
+def test_fetch_exige_sinal_de_busca_especifica():
+    settings = _settings(
+        term_match_rules={"mainframe junior": ["mainframe", "cobol"]}
+    )
+    source = _FonteComBuscaImprecisa(session=FakeSession([]), settings=settings)
+
+    jobs = source.fetch(["mainframe junior"])
+
+    assert [job.external_id for job in jobs] == ["1", "3"]
+    assert source.stats.raw_jobs == 2
+
+
+def test_fetch_mantem_flexiveis_os_termos_sem_validacao():
+    source = _FonteComBuscaImprecisa(
+        session=FakeSession([]), settings=_settings(term_match_rules={})
+    )
+
+    jobs = source.fetch(["desenvolvedor junior"])
+
+    assert [job.external_id for job in jobs] == ["1", "2", "3"]
+
+
+@pytest.mark.parametrize(
+    "term,title,description",
+    [
+        ("dba junior", "Database Administrator Junior", ""),
+        ("analista de rpa junior", "UiPath Developer Junior", ""),
+        ("analista de telecom junior", "Analista de Telecom Júnior", ""),
+        ("mainframe junior", "Mainframe Tester Júnior", ""),
+        ("embarcados junior", "Analista Júnior", "Desenvolvimento de firmware."),
+        ("desenvolvedor de jogos junior", "Unity Developer Junior", ""),
+        ("suporte aplicacoes junior", "Suporte a Sistemas Júnior", ""),
+        ("analista de integracao junior", "Analista de Integração Júnior", ""),
+        ("analista de integracoes junior", "Integration Analyst Junior", ""),
+    ],
+)
+def test_fetch_aceita_sinais_das_funcoes_auditadas(term, title, description):
+    class Fonte(JobSource):
+        name = "auditada"
+
+        def fetch_term(self, current_term: str) -> list[Job]:
+            return [
+                Job(
+                    source=self.name,
+                    external_id="1",
+                    title=title,
+                    description=description,
+                )
+            ]
+
+    source = Fonte(session=FakeSession([]), settings=_settings())
+
+    jobs = source.fetch([term])
+
+    assert [job.external_id for job in jobs] == ["1"]
 
 
 def test_infojobs_pagina_deduplica_e_para_em_repeticao():

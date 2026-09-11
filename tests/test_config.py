@@ -21,6 +21,9 @@ def test_settings_defaults_do_projeto():
     assert s.source_delays["vagas"] == 2.0
     assert s.source_delays["solides"] == 2.0
     assert s.source_delays["gupy"] == 1.0
+    assert {"mainframe", "cobol"} <= set(
+        s.term_match_rules["mainframe junior"]
+    )
 
 
 def test_ensure_output_dir_cria_diretorio(tmp_path):
