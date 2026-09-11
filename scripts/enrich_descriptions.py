@@ -35,6 +35,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from api.database import SessionLocal, init_db  # noqa: E402
 from api.models import Tecnologia, Vaga, vaga_tecnologia  # noqa: E402
+from scraper.classifier import default_classifier  # noqa: E402
 from scraper.config import RULES_DIR, USER_AGENT  # noqa: E402
 from scraper.geo import default_geo_classifier  # noqa: E402
 from scraper.http_client import PoliteSession  # noqa: E402
@@ -99,6 +100,7 @@ def enrich_linkedin_jobs(
     with open(RULES_DIR / "skills.yml", encoding="utf-8") as fh:
         rules = yaml.safe_load(fh) or {}
     extractor = SkillExtractor(rules)
+    classifier = default_classifier()
     geo = default_geo_classifier()
 
     conn = sqlite3.connect(PROJECT_ROOT / "data" / "vagas.db")
@@ -143,6 +145,18 @@ def enrich_linkedin_jobs(
                 try:
                     _, desc, status = future.result()
                     if desc:
+                        if not classifier.is_tech(title, desc):
+                            c.execute(
+                                "DELETE FROM vaga_tecnologia WHERE vaga_id = ?",
+                                (db_id,),
+                            )
+                            c.execute("DELETE FROM vagas WHERE id = ?", (db_id,))
+                            logger.info(
+                                "Vaga %s removida apos descricao confirmar "
+                                "contexto fora de TI.",
+                                ext_id,
+                            )
+                            continue
                         c.execute("UPDATE vagas SET description = ? WHERE id = ?", (desc, db_id))
 
                         # A descricao completa e mais confiavel que o palpite

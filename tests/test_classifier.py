@@ -138,12 +138,69 @@ def test_tech_gate_descarta_vagas_fora_de_tecnologia(clf, title):
         "Estágio em Pedagogia para Tecnologia Educacional",
         "Analista de Desenvolvimento de Negócios Jr",
         "Técnico de Segurança do Trabalho Júnior",
+        "Programador de Logística de Vendas Jr",
+        "Assistente Administrativo (Controle e Processos de TI)",
+        "Pesquisador Tecnologia Farmacêutica Júnior",
+        "Analista de Cultura e Desenvolvimento Júnior",
+        "Analista de Gestão de Contratos Jr - Telecomunicações",
+        "Aprendiz - Monitoração Redes Clientes",
+        "Operador de Programação Logística I",
     ],
 )
 def test_tech_gate_exclui_contextos_nao_tech(clf, title):
     result = clf.is_tech(title)
 
     assert result is False
+
+
+@pytest.mark.parametrize(
+    "title,description",
+    [
+        (
+            "Analista de Expansão de Redes Jr",
+            "Prospecção e expansão comercial da carteira de clientes.",
+        ),
+        (
+            "Analista de Implantação Júnior",
+            "Atuação em corretora de seguros e envio do primeiro faturamento.",
+        ),
+        (
+            "Auxiliar de Tecnologia da Informação",
+            "Oportunidade administrativa com conhecimento de legislação marítima.",
+        ),
+        (
+            "Instrutor de Nível Superior Jr - Automação Industrial",
+            "Aplicar a metodologia SENAI e ministrar aulas e treinamentos.",
+        ),
+    ],
+)
+def test_tech_gate_exclui_titulo_ambiguo_pelo_contexto(clf, title, description):
+    result = clf.is_tech(title, description)
+
+    assert result is False
+
+
+@pytest.mark.parametrize(
+    "title,description",
+    [
+        (
+            "Analista de Expansão de Redes Jr",
+            "Planejar enlaces, roteadores e redes de telecomunicações.",
+        ),
+        (
+            "Analista de Implantação Júnior",
+            "Implantar software ERP, configurar APIs e banco de dados.",
+        ),
+        (
+            "Auxiliar de Tecnologia da Informação",
+            "Prestar suporte técnico, configurar computadores e redes.",
+        ),
+    ],
+)
+def test_tech_gate_mantem_titulo_ambiguo_em_contexto_tech(clf, title, description):
+    result = clf.is_tech(title, description)
+
+    assert result is True
 
 
 def test_tech_gate_ignora_palavra_generica_na_descricao(clf):

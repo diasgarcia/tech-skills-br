@@ -2,6 +2,7 @@
 
 import sqlite3
 
+from scraper.classifier import default_classifier
 from scripts.enrich_descriptions import QUERY_PENDENTES
 
 
@@ -33,3 +34,14 @@ def test_query_pendentes_ignora_a_janela_de_dias():
     ids = {r[0] for r in c.execute(QUERY_PENDENTES)}
 
     assert ids == {1, 3}
+
+
+def test_descricao_enriquecida_confirma_contexto_fora_de_ti():
+    classifier = default_classifier()
+
+    result = classifier.is_tech(
+        "Auxiliar de Tecnologia da Informação",
+        "Oportunidade administrativa com conhecimento de legislação marítima.",
+    )
+
+    assert result is False

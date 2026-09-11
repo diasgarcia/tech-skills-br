@@ -223,6 +223,40 @@ tech_gate:
     - gestao de saude
     - atendente de sac
     - cobranca retencao
+    - programador de logistica
+    - assistente administrativo controle e processos de ti
+    - tecnologia farmaceutica
+    - analista de cultura e desenvolvimento
+    - analista de gestao de contratos
+    - aprendiz monitoracao redes clientes
+    - operador de programacao logistica
+
+  # Alguns titulos tambem nomeiam funcoes validas de TI. Nesses casos, a vaga
+  # so e bloqueada quando a descricao confirma o contexto fora do recorte.
+  excluir_contextos:
+    - titulo:
+        - analista de expansao de redes
+      descricao:
+        - expansao comercial
+        - carteira de clientes
+        - prospeccao
+    - titulo:
+        - analista de implantacao junior
+        - analista de implantacao jr
+      descricao:
+        - corretora de seguros
+        - primeiro faturamento
+    - titulo:
+        - auxiliar de tecnologia da informacao
+        - auxiliar de ti
+      descricao:
+        - oportunidade administrativa
+        - legislacao maritima
+    - titulo:
+        - instrutor de nivel superior
+      descricao:
+        - ministrar aulas
+        - metodologia senai
 
 
   descricao: # sinais estritos -- precisam sobreviver ao boilerplate das descricoes
