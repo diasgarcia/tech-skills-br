@@ -7,7 +7,9 @@ def test_remove_mesma_vaga_do_mesmo_portal():
         Job(source="gupy", external_id="1", title="Dev Júnior", company="ACME"),
         Job(source="gupy", external_id="1", title="Dev Júnior", company="ACME"),
     ]
+
     unique, removed = deduplicate(jobs)
+
     assert len(unique) == 1
     assert removed == 1
 
@@ -19,7 +21,9 @@ def test_mantem_a_versao_com_descricao_mais_longa():
         Job(source="gupy", external_id="1", title="Dev Júnior",
             company="ACME", description="uma descricao bem mais longa da vaga"),
     ]
+
     unique, _ = deduplicate(jobs)
+
     assert unique[0].description == "uma descricao bem mais longa da vaga"
 
 
@@ -28,7 +32,9 @@ def test_cruza_portais_por_titulo_e_empresa():
         Job(source="gupy", external_id="1", title="Desenvolvedor Júnior", company="ACME"),
         Job(source="vagas", external_id="99", title="desenvolvedor junior", company="Acme"),
     ]
+
     unique, removed = deduplicate(jobs)
+
     assert len(unique) == 1
     assert removed == 1
 
@@ -38,7 +44,9 @@ def test_nao_cruza_vagas_de_empresas_diferentes():
         Job(source="gupy", external_id="1", title="Desenvolvedor Júnior", company="ACME"),
         Job(source="gupy", external_id="2", title="Desenvolvedor Júnior", company="Globex"),
     ]
+
     unique, removed = deduplicate(jobs)
+
     assert len(unique) == 2
     assert removed == 0
 
@@ -48,7 +56,9 @@ def test_vagas_sem_empresa_nao_sao_agrupadas():
         Job(source="gupy", external_id="1", title="Desenvolvedor Júnior", company=""),
         Job(source="gupy", external_id="2", title="Desenvolvedor Júnior", company=""),
     ]
+
     unique, removed = deduplicate(jobs)
+
     assert len(unique) == 2
     assert removed == 0
 
@@ -61,7 +71,9 @@ def test_funde_mesma_vaga_com_nome_de_empresa_diferente():
         Job(source="linkedin", external_id="9", title="Desenvolvedor Fullstack Jr",
             company="Minsait"),
     ]
+
     unique, removed = deduplicate(jobs)
+
     assert len(unique) == 1 and removed == 1
     assert unique[0].description == "descricao longa"
 
@@ -73,7 +85,10 @@ def test_funde_quando_o_nome_curto_esta_contido_no_longo():
         Job(source="linkedin", external_id="9", title="Analista de Sistemas Júnior",
             company="FEI"),
     ]
-    assert len(deduplicate(jobs)[0]) == 1
+
+    unique, _ = deduplicate(jobs)
+
+    assert len(unique) == 1
 
 
 def test_titulo_generico_em_empresas_diferentes_nao_funde():
@@ -84,7 +99,9 @@ def test_titulo_generico_em_empresas_diferentes_nao_funde():
         Job(source="linkedin", external_id="9", title="Analista de Sistemas Júnior",
             company="Globoaves"),
     ]
+
     unique, removed = deduplicate(jobs)
+
     assert len(unique) == 2 and removed == 0
 
 
@@ -96,7 +113,10 @@ def test_confidencial_nao_identifica_empresa():
         Job(source="vagas", external_id="9", title="Analista Júnior de TI",
             company="Confidencial"),
     ]
-    assert len(deduplicate(jobs)[0]) == 2
+
+    unique, _ = deduplicate(jobs)
+
+    assert len(unique) == 2
 
 
 def test_sufixo_societario_nao_impede_a_fusao():
@@ -105,7 +125,10 @@ def test_sufixo_societario_nao_impede_a_fusao():
         Job(source="linkedin", external_id="9", title="Dev Júnior",
             company="ACME Soluções em Tecnologia LTDA"),
     ]
-    assert len(deduplicate(jobs)[0]) == 1
+
+    unique, _ = deduplicate(jobs)
+
+    assert len(unique) == 1
 
 
 def test_titulos_diferentes_da_mesma_empresa_nao_fundem():
@@ -116,10 +139,14 @@ def test_titulos_diferentes_da_mesma_empresa_nao_fundem():
         Job(source="linkedin", external_id="9", title="Analista de Testes Júnior",
             company="ACME"),
     ]
-    assert len(deduplicate(jobs)[0]) == 2
+
+    unique, _ = deduplicate(jobs)
+
+    assert len(unique) == 2
 
 
 def test_lista_vazia():
     unique, removed = deduplicate([])
+
     assert unique == []
     assert removed == 0

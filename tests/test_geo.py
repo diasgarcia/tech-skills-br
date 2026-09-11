@@ -52,6 +52,7 @@ def test_geo_classify_mapeia_corretamente(
     classifier, loc, modalidade, esperado_polo, esperada_regiao
 ):
     polo, regiao = classifier.classify(loc, modalidade)
+
     assert polo == esperado_polo
     assert regiao == esperada_regiao
 
@@ -80,7 +81,9 @@ def test_attach_geo_info(classifier):
             workplace_type="Remoto",
         ),
     ]
+
     attach_geo_info(jobs, classifier)
+
     assert jobs[0].polo == "Recife"
     assert jobs[0].regiao == "Nordeste"
     assert jobs[1].polo == "Curitiba"

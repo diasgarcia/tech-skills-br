@@ -37,7 +37,9 @@ def clf():
     ],
 )
 def test_classifica_pelo_titulo(clf, title, expected):
-    assert clf.classify(title).area == expected
+    result = clf.classify(title)
+
+    assert result.area == expected
 
 
 def test_titulo_vale_mais_que_descricao(clf):
@@ -120,7 +122,9 @@ def test_classify_jobs_preenche_campos():
     ],
 )
 def test_tech_gate_descarta_vagas_fora_de_tecnologia(clf, title):
-    assert clf.is_tech(title) is False
+    result = clf.is_tech(title)
+
+    assert result is False
 
 
 @pytest.mark.parametrize(
@@ -137,14 +141,18 @@ def test_tech_gate_descarta_vagas_fora_de_tecnologia(clf, title):
     ],
 )
 def test_tech_gate_exclui_contextos_nao_tech(clf, title):
-    assert clf.is_tech(title) is False
+    result = clf.is_tech(title)
+
+    assert result is False
 
 
 def test_tech_gate_ignora_palavra_generica_na_descricao(clf):
-    assert clf.is_tech(
+    result = clf.is_tech(
         "Analista Administrativo Junior",
         "Alimentar os sistemas da empresa e organizar os dados dos contratos.",
-    ) is False
+    )
+
+    assert result is False
 
 
 @pytest.mark.parametrize(
@@ -162,19 +170,27 @@ def test_tech_gate_ignora_palavra_generica_na_descricao(clf):
     ],
 )
 def test_tech_gate_mantem_vagas_de_tecnologia(clf, title):
-    assert clf.is_tech(title) is True
+    result = clf.is_tech(title)
+
+    assert result is True
 
 
 def test_tech_gate_usa_a_descricao_quando_o_titulo_e_generico(clf):
-    assert clf.is_tech("Analista Júnior") is False
-    assert clf.is_tech(
+    sem_descricao = clf.is_tech("Analista Júnior")
+    com_descricao = clf.is_tech(
         "Analista Júnior", "Atuar com desenvolvimento de software em Python."
-    ) is True
+    )
+
+    assert sem_descricao is False
+    assert com_descricao is True
 
 
 def test_suporte_tecnico_vai_para_area_propria(clf):
-    assert clf.classify("Analista de Suporte Técnico Júnior").area == "Suporte Técnico"
-    assert clf.classify("Técnico de Suporte Júnior").area == "Suporte Técnico"
+    titulos = ["Analista de Suporte Técnico Júnior", "Técnico de Suporte Júnior"]
+
+    areas = [clf.classify(titulo).area for titulo in titulos]
+
+    assert areas == ["Suporte Técnico", "Suporte Técnico"]
 
 
 @pytest.mark.parametrize(
@@ -190,7 +206,9 @@ def test_suporte_tecnico_vai_para_area_propria(clf):
     ],
 )
 def test_titulo_especifico_vence_suporte_generico(clf, title, expected):
-    assert clf.classify(title).area == expected
+    result = clf.classify(title)
+
+    assert result.area == expected
 
 
 @pytest.mark.parametrize(
@@ -203,7 +221,9 @@ def test_titulo_especifico_vence_suporte_generico(clf, title, expected):
     ],
 )
 def test_tech_gate_descarta_nao_tech_do_suporte(clf, title):
-    assert clf.is_tech(title) is False
+    result = clf.is_tech(title)
+
+    assert result is False
 
 
 def test_seguranca_nao_dispara_com_a_palavra_solta(clf):

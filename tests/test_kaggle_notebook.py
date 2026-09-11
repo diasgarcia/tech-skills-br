@@ -30,6 +30,7 @@ def test_notebook_e_json_valido_e_codigo_compila() -> None:
         "".join(cell["source"])
         for cell in celulas_codigo
     )
+    compiled = compile(codigo, str(NOTEBOOK_PATH), "exec")
 
     assert notebook["nbformat"] == 4
     assert all(cell["metadata"].get("_kg_hide-input") is True for cell in celulas_codigo)
@@ -39,4 +40,4 @@ def test_notebook_e_json_valido_e_codigo_compila() -> None:
     assert '.rglob("vagas.parquet")' in codigo
     assert '.str.split(";")' in codigo
     assert 'vagas["area"].astype("string").fillna("Não informada")' in codigo
-    compile(codigo, str(NOTEBOOK_PATH), "exec")
+    assert compiled is not None

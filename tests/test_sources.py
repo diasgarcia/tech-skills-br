@@ -70,7 +70,10 @@ def _source(cls):
 
 
 def test_gupy_parse_mapeia_campos():
-    job = _source(GupySource)._parse(GUPY_JOB, "desenvolvedor junior")
+    source = _source(GupySource)
+
+    job = source._parse(GUPY_JOB, "desenvolvedor junior")
+
     assert job is not None
     assert job.source == "gupy"
     assert job.external_id == "11617525"
@@ -84,25 +87,39 @@ def test_gupy_parse_mapeia_campos():
 
 
 def test_gupy_parse_limpa_html_da_descricao():
-    job = _source(GupySource)._parse(GUPY_JOB, "x")
+    source = _source(GupySource)
+
+    job = source._parse(GUPY_JOB, "x")
+
     assert "<p>" not in job.description
     assert "Júnior" in job.description
 
 
 def test_gupy_parse_ignora_registro_incompleto():
-    assert _source(GupySource)._parse({"id": None, "name": ""}, "x") is None
-    assert _source(GupySource)._parse({"id": 1}, "x") is None
+    source = _source(GupySource)
+    registros = [{"id": None, "name": ""}, {"id": 1}]
+
+    results = [source._parse(registro, "x") for registro in registros]
+
+    assert results == [None, None]
 
 
 def test_gupy_usa_country_quando_nao_ha_cidade():
     raw = dict(GUPY_JOB, city="", state="")
-    assert _source(GupySource)._parse(raw, "x").location == "Brasil"
+    source = _source(GupySource)
+
+    job = source._parse(raw, "x")
+
+    assert job.location == "Brasil"
 
 
 def test_vagas_parse_page():
-    jobs = _source(VagasComSource)._parse_page(VAGAS_HTML, "desenvolvedor junior")
-    assert len(jobs) == 1
+    source = _source(VagasComSource)
+
+    jobs = source._parse_page(VAGAS_HTML, "desenvolvedor junior")
     job = jobs[0]
+
+    assert len(jobs) == 1
     assert job.source == "vagas"
     assert job.external_id == "2824782"
     assert job.title == "Desenvolvedor de Software Jr"
@@ -116,18 +133,28 @@ def test_vagas_parse_page():
 
 def test_vagas_parse_page_detecta_home_office():
     html = VAGAS_HTML.replace("Rio de Janeiro / RJ", "100% Home Office")
-    job = _source(VagasComSource)._parse_page(html, "x")[0]
+    source = _source(VagasComSource)
+
+    job = source._parse_page(html, "x")[0]
+
     assert job.workplace_type == "Remoto"
     assert job.location == "100% Home Office"
 
 
 def test_vagas_parse_page_vazia():
-    assert _source(VagasComSource)._parse_page("<html><body></body></html>", "x") == []
+    source = _source(VagasComSource)
+
+    jobs = source._parse_page("<html><body></body></html>", "x")
+
+    assert jobs == []
 
 
 def test_slugify_term():
-    assert slugify_term("desenvolvedor júnior") == "desenvolvedor-junior"
-    assert slugify_term("Estágio  em TI") == "estagio-em-ti"
+    terms = ["desenvolvedor júnior", "Estágio  em TI"]
+
+    slugs = [slugify_term(term) for term in terms]
+
+    assert slugs == ["desenvolvedor-junior", "estagio-em-ti"]
 
 
 # Recorte real de GET https://trampos.co/api/v2/opportunities?tr=desenvolvedor&page=1
@@ -155,7 +182,10 @@ TRAMPOS_JSON = {
 
 
 def test_trampos_parse_mapeia_campos():
-    job = _source(TramposSource)._parse(TRAMPOS_JSON, "desenvolvedor")
+    source = _source(TramposSource)
+
+    job = source._parse(TRAMPOS_JSON, "desenvolvedor")
+
     assert job is not None
     assert job.source == "trampos"
     assert job.external_id == "773915"
@@ -167,7 +197,10 @@ def test_trampos_parse_mapeia_campos():
 
 def test_trampos_url_sai_do_link_de_compartilhamento():
     # A API não devolve a URL da vaga; ela está dentro das de compartilhamento.
-    job = _source(TramposSource)._parse(TRAMPOS_JSON, "x")
+    source = _source(TramposSource)
+
+    job = source._parse(TRAMPOS_JSON, "x")
+
     assert job.url == "https://trampos.co/oportunidades/773915-desenvolvedor-a-net-c"
 
 
@@ -183,42 +216,63 @@ def test_trampos_url_sai_do_link_de_compartilhamento():
 )
 def test_trampos_modalidade(flags, esperado):
     # `hybrid` vem sempre; `home_office` às vezes vem nulo.
-    assert TramposSource._modalidade(flags) == esperado
+    modalidade = TramposSource._modalidade(flags)
+
+    assert modalidade == esperado
 
 
 def test_trampos_estagio_vem_do_tipo_nativo():
     raw = dict(TRAMPOS_JSON, type_slug="estagio", type_name="Estágio")
-    assert _source(TramposSource)._parse(raw, "x").seniority == "Estágio"
+    source = _source(TramposSource)
+
+    job = source._parse(raw, "x")
+
+    assert job.seniority == "Estágio"
 
 
 def test_trampos_emprego_deixa_senioridade_para_o_regex():
-    assert _source(TramposSource)._parse(TRAMPOS_JSON, "x").seniority == ""
+    source = _source(TramposSource)
+
+    job = source._parse(TRAMPOS_JSON, "x")
+
+    assert job.seniority == ""
 
 
 def test_trampos_descricao_usa_a_categoria_nativa():
-    job = _source(TramposSource)._parse(TRAMPOS_JSON, "x")
+    source = _source(TramposSource)
+
+    job = source._parse(TRAMPOS_JSON, "x")
+
     assert "Tecnologia da Informação" in job.description
 
 
 def test_trampos_descricao_ignora_o_texto_da_empresa():
     """company.description fala da EMPRESA -- usá-la classificaria errado."""
-    job = _source(TramposSource)._parse(TRAMPOS_JSON, "x")
+    source = _source(TramposSource)
+
+    job = source._parse(TRAMPOS_JSON, "x")
+
     assert "inovação" not in job.description
 
 
 def test_trampos_salario_nao_divulgado_fica_de_fora():
-    job = _source(TramposSource)._parse(TRAMPOS_JSON, "x")
-    assert "Salário" not in job.description
-    com_salario = _source(TramposSource)._parse(
-        dict(TRAMPOS_JSON, salary="R$ 5.000"), "x"
-    )
+    source = _source(TramposSource)
+    raw_com_salario = dict(TRAMPOS_JSON, salary="R$ 5.000")
+
+    sem_salario = source._parse(TRAMPOS_JSON, "x")
+    com_salario = source._parse(raw_com_salario, "x")
+
+    assert "Salário" not in sem_salario.description
     assert "Salário: R$ 5.000." in com_salario.description
 
 
 def test_trampos_ignora_registro_incompleto():
     src = _source(TramposSource)
-    assert src._parse({"id": None, "name": "x"}, "t") is None
-    assert src._parse({"id": 1, "name": ""}, "t") is None
+    registros = [{"id": None, "name": "x"}, {"id": 1, "name": ""}]
+
+    results = [src._parse(registro, "t") for registro in registros]
+
+    assert results == [None, None]
 
 
 # Recorte real da resposta de
@@ -240,7 +294,9 @@ SOLIDES_JOB = {
 
 def test_solides_parse_mapeia_campos():
     src = _source(SolidesSource)
+
     job = src._parse(SOLIDES_JOB, "Júnior")
+
     assert job is not None
     assert job.source == "solides"
     assert job.external_id == "911953"
@@ -260,26 +316,34 @@ def test_solides_parse_mapeia_campos():
 
 
 def test_solides_home_office_vira_remoto():
-    job = _source(SolidesSource)._parse(
-        dict(SOLIDES_JOB, homeOffice=True, jobType="presencial"), "Júnior"
-    )
+    raw = dict(SOLIDES_JOB, homeOffice=True, jobType="presencial")
+    source = _source(SolidesSource)
+
+    job = source._parse(raw, "Júnior")
+
     assert job.workplace_type == "Remoto"
 
 
 def test_solides_ignora_registro_incompleto_e_antigo():
     src = _source(SolidesSource)
-    assert src._parse({"id": None, "title": "x"}, "Júnior") is None
-    assert src._parse({"id": 1, "title": ""}, "Júnior") is None
     antiga = dict(SOLIDES_JOB, createdAt="2025-12-31")
-    assert src._parse(antiga, "Júnior") is None
+    registros = [{"id": None, "title": "x"}, {"id": 1, "title": ""}, antiga]
+
+    results = [src._parse(registro, "Júnior") for registro in registros]
+
+    assert results == [None, None, None]
 
 
 def test_solides_filtros_nativos_por_nivel():
-    assert set(FILTROS_SOLIDES) == {"Júnior", "Estágio", "Estagiário", "Trainee", "Aprendiz"}
-    assert FILTROS_SOLIDES["Júnior"]["seniorities"] == "junior"
-    assert FILTROS_SOLIDES["Estágio"]["title"] == "estagio"
-    assert FILTROS_SOLIDES["Estagiário"]["title"] == "estagiario"
-    assert FILTROS_SOLIDES["Aprendiz"]["title"] == "aprendiz"
+    filtros = FILTROS_SOLIDES
+
+    niveis = set(filtros)
+
+    assert niveis == {"Júnior", "Estágio", "Estagiário", "Trainee", "Aprendiz"}
+    assert filtros["Júnior"]["seniorities"] == "junior"
+    assert filtros["Estágio"]["title"] == "estagio"
+    assert filtros["Estagiário"]["title"] == "estagiario"
+    assert filtros["Aprendiz"]["title"] == "aprendiz"
 
 
 # Recorte real da listagem publica de https://www.geekhunter.com.br/pt/vagas
@@ -312,9 +376,11 @@ GEEKHUNTER_CARD = """
 
 def test_geekhunter_parse_mapeia_campos():
     src = _source(GeekHunterSource)
+
     jobs = src._parse_page(GEEKHUNTER_CARD, "todas")
-    assert len(jobs) == 1
     job = jobs[0]
+
+    assert len(jobs) == 1
     assert job.source == "geekhunter"
     assert job.external_id == "desenvolvedor-a--fullstack-java-junior-1"
     assert job.title == "Desenvolvedor(a) Fullstack Java Júnior"
@@ -329,7 +395,11 @@ def test_geekhunter_parse_mapeia_campos():
 
 def test_geekhunter_ignora_card_sem_link():
     src = _source(GeekHunterSource)
-    assert src._parse_page("<li id='job-x'><article><p>sem link</p></article></li>", "todas") == []
+    html = "<li id='job-x'><article><p>sem link</p></article></li>"
+
+    jobs = src._parse_page(html, "todas")
+
+    assert jobs == []
 
 
 def test_geekhunter_nao_confia_em_nivel_alto_do_portal():
@@ -337,7 +407,10 @@ def test_geekhunter_nao_confia_em_nivel_alto_do_portal():
     senioridade decide pelo titulo (titulos mistos 'Júnior/Pleno' seguem
     aceitando candidatos juniores)."""
     card = GEEKHUNTER_CARD.replace(">Júnior<", ">Pleno<")
-    job = _source(GeekHunterSource)._parse_page(card, "todas")[0]
+    source = _source(GeekHunterSource)
+
+    job = source._parse_page(card, "todas")[0]
+
     assert job.seniority == ""
 
 
@@ -358,6 +431,7 @@ def test_geekhunter_para_na_ultima_pagina_anunciada():
             return SimpleNamespace(text={1: pagina_1, 2: pagina_2}[pagina])
 
     source = GeekHunterSource(Session(), Settings(max_pages_per_term=200))
+
     jobs = source.fetch_term("todas")
 
     assert paginas_pedidas == [1, 2]
@@ -377,6 +451,7 @@ def test_geekhunter_404_depois_de_resultados_e_fim_normal():
             return None
 
     source = GeekHunterSource(Session(), Settings(max_pages_per_term=2))
+
     jobs = source.fetch_term("todas")
 
     assert len(jobs) == 1
@@ -385,7 +460,11 @@ def test_geekhunter_404_depois_de_resultados_e_fim_normal():
 
 def test_trampos_usa_custom_company_name_quando_existe():
     raw = dict(TRAMPOS_JSON, custom_company_name="Empresa Confidencial")
-    assert _source(TramposSource)._parse(raw, "x").company == "Empresa Confidencial"
+    source = _source(TramposSource)
+
+    job = source._parse(raw, "x")
+
+    assert job.company == "Empresa Confidencial"
 
 
 # Recorte real de
@@ -412,9 +491,12 @@ LINKEDIN_HTML = """
 
 
 def test_linkedin_parse_mapeia_campos():
-    jobs = _source(LinkedInSource)._parse_page(LINKEDIN_HTML, "desenvolvedor junior")
-    assert len(jobs) == 1
+    source = _source(LinkedInSource)
+
+    jobs = source._parse_page(LINKEDIN_HTML, "desenvolvedor junior")
     job = jobs[0]
+
+    assert len(jobs) == 1
     assert job.source == "linkedin"
     assert job.external_id == "4422123289"
     assert job.title == "Desenvolvedor Back-end Júnior"
@@ -425,7 +507,10 @@ def test_linkedin_parse_mapeia_campos():
 
 
 def test_linkedin_url_perde_os_parametros_de_rastreio():
-    job = _source(LinkedInSource)._parse_page(LINKEDIN_HTML, "x")[0]
+    source = _source(LinkedInSource)
+
+    job = source._parse_page(LINKEDIN_HTML, "x")[0]
+
     assert job.url == (
         "https://www.linkedin.com/jobs/view/desenvolvedor-junior-at-acme-4422123289"
     )
@@ -434,7 +519,9 @@ def test_linkedin_url_perde_os_parametros_de_rastreio():
 
 def test_linkedin_usa_geoid_do_brasil():
     """`location=Brasil` em português falha em silêncio e traz vagas dos EUA."""
-    assert GEO_ID_BRASIL == "106057199"
+    geo_id = GEO_ID_BRASIL
+
+    assert geo_id == "106057199"
 
 
 @pytest.mark.parametrize(
@@ -451,35 +538,52 @@ def test_linkedin_usa_geoid_do_brasil():
     ],
 )
 def test_linkedin_modalidade(local, esperado):
-    assert LinkedInSource._modalidade(local) == esperado
+    modalidade = LinkedInSource._modalidade(local)
+
+    assert modalidade == esperado
 
 
 
 
 def test_linkedin_ignora_card_sem_urn_ou_titulo():
     src = _source(LinkedInSource)
-    assert src._parse_page('<div class="base-card"><h3>X</h3></div>', "x") == []
-    assert src._parse_page(
-        '<div class="base-card" data-entity-urn="urn:li:jobPosting:1"></div>', "x"
-    ) == []
+    sem_urn = '<div class="base-card"><h3>X</h3></div>'
+    sem_titulo = '<div class="base-card" data-entity-urn="urn:li:jobPosting:1"></div>'
+
+    jobs_sem_urn = src._parse_page(sem_urn, "x")
+    jobs_sem_titulo = src._parse_page(sem_titulo, "x")
+
+    assert jobs_sem_urn == []
+    assert jobs_sem_titulo == []
 
 
 def test_linkedin_titulo_com_remoto_vence_cidade_do_card():
-    assert LinkedInSource._modalidade(
+    remoto = LinkedInSource._modalidade(
         "Goiânia, GO", title="Desenvolvedor Python Junior - Trabalho Remoto"
-    ) == "Remoto"
-    assert LinkedInSource._modalidade(
+    )
+    presencial = LinkedInSource._modalidade(
         "Goiânia, GO", title="Desenvolvedor Python Junior"
-    ) == "Presencial"
+    )
+
+    assert remoto == "Remoto"
+    assert presencial == "Presencial"
 
 
 def test_linkedin_pagina_vazia():
-    assert _source(LinkedInSource)._parse_page("<html></html>", "x") == []
+    source = _source(LinkedInSource)
+
+    jobs = source._parse_page("<html></html>", "x")
+
+    assert jobs == []
 
 
 def test_linkedin_sem_descricao_no_card():
     """A busca não traz descrição; a classificação se apoia no título."""
-    assert _source(LinkedInSource)._parse_page(LINKEDIN_HTML, "x")[0].description == ""
+    source = _source(LinkedInSource)
+
+    job = source._parse_page(LINKEDIN_HTML, "x")[0]
+
+    assert job.description == ""
 
 
 # Recorte real de
@@ -546,10 +650,12 @@ INFOJOBS_HTML = """
 
 
 def test_infojobs_parse_page_mapeia_campos():
-    jobs = _source(InfoJobsSource)._parse_page(INFOJOBS_HTML, "desenvolvedor")
-    assert [j.external_id for j in jobs] == ["11985552", "11983931"]
+    source = _source(InfoJobsSource)
 
+    jobs = source._parse_page(INFOJOBS_HTML, "desenvolvedor")
     job = jobs[0]
+
+    assert [j.external_id for j in jobs] == ["11985552", "11983931"]
     assert job.source == "infojobs"
     assert job.title == "Desenvolvedor Devops Backend Sênior"
     assert job.company == "confidencial"
@@ -564,7 +670,10 @@ def test_infojobs_parse_page_mapeia_campos():
 
 
 def test_infojobs_empresa_com_link_e_local_sem_km():
-    job = _source(InfoJobsSource)._parse_page(INFOJOBS_HTML, "x")[1]
+    source = _source(InfoJobsSource)
+
+    job = source._parse_page(INFOJOBS_HTML, "x")[1]
+
     assert job.company == "GAFOR"
     assert job.location == "Guarulhos - SP"
     assert job.workplace_type == "Presencial"
@@ -573,29 +682,43 @@ def test_infojobs_empresa_com_link_e_local_sem_km():
 def test_infojobs_ignora_containers_que_nao_sao_cards():
     # `div[id^=vacancy]` pega tambem os contêineres vacancylistDetail*:
     # o parse nao pode devolver cards sem data-id.
-    assert len(_source(InfoJobsSource)._parse_page(INFOJOBS_HTML, "x")) == 2
+    source = _source(InfoJobsSource)
+
+    jobs = source._parse_page(INFOJOBS_HTML, "x")
+
+    assert len(jobs) == 2
 
 
 def test_infojobs_ignora_vaga_anterior_a_2026():
     html = INFOJOBS_HTML.replace(
         'data-value="2026/09/03 05:32:00"', 'data-value="2025/12/31 10:00:00"'
     )
-    jobs = _source(InfoJobsSource)._parse_page(html, "x")
+    source = _source(InfoJobsSource)
+
+    jobs = source._parse_page(html, "x")
+
     assert [j.external_id for j in jobs] == ["11983931"]
 
 
 def test_infojobs_senioridade_so_nos_filtros_nativos():
-    jobs = _source(InfoJobsSource)._parse_page(INFOJOBS_HTML, "Estágio")
-    assert all(j.seniority == "Estágio" for j in jobs)
-    jobs = _source(InfoJobsSource)._parse_page(INFOJOBS_HTML, "desenvolvedor junior")
-    assert all(j.seniority == "" for j in jobs)
+    source = _source(InfoJobsSource)
+
+    jobs_estagio = source._parse_page(INFOJOBS_HTML, "Estágio")
+    jobs_junior = source._parse_page(INFOJOBS_HTML, "desenvolvedor junior")
+
+    assert all(j.seniority == "Estágio" for j in jobs_estagio)
+    assert all(j.seniority == "" for j in jobs_junior)
 
 
 def test_infojobs_filtros_nativos_por_nivel():
-    assert set(FILTROS_INFOJOBS) == {"Estágio", "Estagiário", "Trainee", "Aprendiz"}
-    assert FILTROS_INFOJOBS["Estágio"] == {"categoria": "74", "tipocontrato": "4"}
-    assert FILTROS_INFOJOBS["Estagiário"] == {"categoria": "74", "im": "1"}
-    assert FILTROS_INFOJOBS["Trainee"] == {"categoria": "74", "tipocontrato": "15"}
-    assert FILTROS_INFOJOBS["Aprendiz"] == {"categoria": "74", "tipocontrato": "19"}
+    filtros = FILTROS_INFOJOBS
+
+    niveis = set(filtros)
+
+    assert niveis == {"Estágio", "Estagiário", "Trainee", "Aprendiz"}
+    assert filtros["Estágio"] == {"categoria": "74", "tipocontrato": "4"}
+    assert filtros["Estagiário"] == {"categoria": "74", "im": "1"}
+    assert filtros["Trainee"] == {"categoria": "74", "tipocontrato": "15"}
+    assert filtros["Aprendiz"] == {"categoria": "74", "tipocontrato": "19"}
 
 
