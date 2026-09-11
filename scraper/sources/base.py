@@ -3,13 +3,23 @@
 from __future__ import annotations
 
 import logging
+import re
 from abc import ABC, abstractmethod
+from functools import lru_cache
 
 from ..config import Settings
 from ..http_client import PoliteSession
-from ..models import Job, SourceStats
+from ..models import Job, SourceStats, normalize
 
 logger = logging.getLogger(__name__)
+
+
+@lru_cache(maxsize=None)
+def _signal_pattern(signal: str) -> re.Pattern:
+    normalized = normalize(signal)
+    if not normalized:
+        return re.compile(r"(?!x)x")
+    return re.compile(rf"(?<![a-z0-9]){re.escape(normalized)}(?![a-z0-9])")
 
 
 class JobSource(ABC):
@@ -84,6 +94,25 @@ class JobSource(ABC):
                 logger.warning("Erro coletando %s", message)
                 self.stats.errors.append(message)
                 continue
+            sinais = self.settings.term_match_rules.get(term, [])
+            if sinais:
+                total_encontrado = len(found)
+                found = [
+                    job
+                    for job in found
+                    if any(
+                        _signal_pattern(sinal).search(job.searchable_text())
+                        for sinal in sinais
+                    )
+                ]
+                descartadas = total_encontrado - len(found)
+                if descartadas:
+                    logger.debug(
+                        "[%s] '%s': %d resultados sem o sinal esperado",
+                        self.name,
+                        term,
+                        descartadas,
+                    )
             if self.settings.parallel_sources:
                 logger.debug("[%s] '%s' -> %d vagas", self.name, term, len(found))
             else:
