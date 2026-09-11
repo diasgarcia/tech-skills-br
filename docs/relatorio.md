@@ -186,6 +186,8 @@ No piloto sem LinkedIn e InfoJobs, a coleta retornou 158 vagas brutas e 40 vagas
 
 Importei o CSV do piloto no banco local. Foram duas vagas novas e 38 atualizações de registros existentes. O snapshot ficou com 4.353 vagas.
 
+Após nove rodadas concluídas entre 8 e 10 de setembro, confirmei que os termos ampliaram a cobertura, mas alguns portais devolveram resultados sem relação com a função pesquisada. Adicionei uma validação local para os nove termos específicos. O resultado agora precisa citar um alias da função no título ou na descrição. Também retirei 11 vagas fora do recorte e adicionei bloqueios por título ou contexto para impedir que elas voltem.
+
 ---
 
 ### Pendências para o artigo
