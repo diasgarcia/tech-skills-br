@@ -7,11 +7,10 @@ from scripts.export_pages_data import export_all_pages_data
 from scripts.import_csv import importar
 
 
-def test_export_all_pages_data_cria_endpoints_validos(tmp_path: Path):
+def test_export_all_pages_data_cria_endpoints_validos(tmp_path: Path, csv_vagas_minimo):
     db_file = tmp_path / "teste_pages.db"
     out_dir = tmp_path / "api_out"
-    csv_file = Path(__file__).resolve().parent.parent / "seed" / "vagas.csv"
-    importar(csv_file, db_path=db_file)
+    importar(csv_vagas_minimo, db_path=db_file)
 
     arquivos = export_all_pages_data(output_dir=out_dir, db_path=db_file)
     conteudos = {

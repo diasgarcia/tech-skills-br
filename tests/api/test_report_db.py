@@ -14,10 +14,9 @@ def test_generate_db_report_empty_db(tmp_path: Path):
     assert out == ""
 
 
-def test_generate_db_report_with_data(tmp_path: Path):
+def test_generate_db_report_with_data(tmp_path: Path, csv_vagas_minimo):
     db_file = tmp_path / "teste.db"
-    csv_file = Path(__file__).resolve().parents[2] / "seed" / "vagas.csv"
-    importar(csv_file, db_path=db_file)
+    importar(csv_vagas_minimo, db_path=db_file)
 
     md_text = generate_db_report(db_path=db_file, export_md=False)
 
