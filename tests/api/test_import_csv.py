@@ -38,25 +38,36 @@ REFERENCIA = date(2026, 7, 31)
     ],
 )
 def test_parse_published_date(bruto, esperado):
-    assert parse_published_date(bruto, REFERENCIA) == esperado
+    result = parse_published_date(bruto, REFERENCIA)
+
+    assert result == esperado
 
 
 def test_datas_relativas_usam_a_referencia_e_nao_hoje():
     """Importar um CSV antigo tem que reproduzir as datas da época da coleta."""
     antiga = date(2020, 1, 10)
-    assert parse_published_date("Ontem", antiga) == date(2020, 1, 9)
+
+    result = parse_published_date("Ontem", antiga)
+
+    assert result == date(2020, 1, 9)
 
 
 def test_referencia_sai_do_nome_do_arquivo(tmp_path):
     arquivo = tmp_path / "vagas_20260731_174407.csv"
     arquivo.write_text("x", encoding="utf-8")
-    assert reference_date_from_csv(arquivo) == date(2026, 7, 31)
+
+    result = reference_date_from_csv(arquivo)
+
+    assert result == date(2026, 7, 31)
 
 
 def test_referencia_cai_para_mtime_sem_timestamp_no_nome(tmp_path):
     arquivo = tmp_path / "vagas_sem_stamp.csv"
     arquivo.write_text("x", encoding="utf-8")
-    assert isinstance(reference_date_from_csv(arquivo), date)
+
+    result = reference_date_from_csv(arquivo)
+
+    assert isinstance(result, date)
 
 
 COLUNAS = [
@@ -88,18 +99,22 @@ def _linha(**kwargs):
 
 def test_importa_e_vincula_tecnologias(tmp_path):
     csv_path = _escrever_csv(tmp_path, [_linha()])
+
     resultado = importar(csv_path, tmp_path / "t.db")
+    with Session(make_engine(tmp_path / "t.db")) as db:
+        vaga = db.scalar(select(Vaga))
+        title = vaga.title
+        published_date = vaga.published_date
+        tecnologias = sorted(t.nome for t in vaga.tecnologias)
+        # O vocabulario inteiro de skills.yml e semeado.
+        total_tecnologias = db.scalar(select(func.count()).select_from(Tecnologia))
 
     assert resultado["criadas"] == 1
     assert resultado["total"] == 1
-
-    with Session(make_engine(tmp_path / "t.db")) as db:
-        vaga = db.scalar(select(Vaga))
-        assert vaga.title == "Analista de Dados Jr"
-        assert vaga.published_date == date(2026, 7, 20)
-        assert sorted(t.nome for t in vaga.tecnologias) == ["Python", "SQL"]
-        # O vocabulario inteiro de skills.yml e semeado.
-        assert db.scalar(select(func.count()).select_from(Tecnologia)) > 100
+    assert title == "Analista de Dados Jr"
+    assert published_date == date(2026, 7, 20)
+    assert tecnologias == ["Python", "SQL"]
+    assert total_tecnologias > 100
 
 
 @pytest.mark.parametrize(
@@ -121,16 +136,19 @@ def test_importa_e_vincula_tecnologias(tmp_path):
     ],
 )
 def test_canonical_company(bruto, esperado):
-    assert _canonical_company(bruto or "") == esperado
+    result = _canonical_company(bruto or "")
+
+    assert result == esperado
 
 
 def test_import_canonicaliza_empresa_confidencial(tmp_path):
     csv_path = _escrever_csv(tmp_path, [_linha(company="Empresa confidencial")])
-    importar(csv_path, tmp_path / "t.db")
 
+    importar(csv_path, tmp_path / "t.db")
     with Session(make_engine(tmp_path / "t.db")) as db:
-        vaga = db.scalar(select(Vaga))
-        assert vaga.company == "Confidencial"
+        company = db.scalar(select(Vaga)).company
+
+    assert company == "Confidencial"
 
 
 def test_importacao_e_idempotente(tmp_path):
@@ -138,9 +156,9 @@ def test_importacao_e_idempotente(tmp_path):
     db_path = tmp_path / "t.db"
 
     primeira = importar(csv_path, db_path)
-    assert (primeira["criadas"], primeira["atualizadas"]) == (2, 0)
-
     segunda = importar(csv_path, db_path)
+
+    assert (primeira["criadas"], primeira["atualizadas"]) == (2, 0)
     assert (segunda["criadas"], segunda["atualizadas"]) == (0, 2)
     assert segunda["total"] == 2
 
@@ -163,44 +181,70 @@ def test_db_id_do_seed_sobrevive_ao_banco_recriado(tmp_path):
 
     db1 = tmp_path / "a.db"
     db2 = tmp_path / "b.db"
-    importar(caminho, db1)
-    importar(caminho, db2)
-
-    for db in (db1, db2):
-        with Session(make_engine(db)) as s:
-            ids = {v.external_id: v.id for v in s.scalars(select(Vaga))}
-        assert ids == {"1": 42, "2": 7}
-
-    # Vaga nova (CSV da rodada, sem db_id) continua ganhando autoincrement
-    # depois do maior id importado.
     csv_novo = _escrever_csv(
         tmp_path, [_linha(external_id="3", title="QA Jr")],
         nome="vagas_20260731_180000.csv",
     )
+
+    importar(caminho, db1)
+    importar(caminho, db2)
+    ids_por_banco = []
+    for db in (db1, db2):
+        with Session(make_engine(db)) as s:
+            ids = {v.external_id: v.id for v in s.scalars(select(Vaga))}
+        ids_por_banco.append(ids)
+    # Vaga nova (CSV da rodada, sem db_id) continua ganhando autoincrement
+    # depois do maior id importado.
     importar(csv_novo, db1)
     with Session(make_engine(db1)) as s:
-        v3 = s.scalar(select(Vaga).where(Vaga.external_id == "3"))
-        assert v3.id > 42
+        v3_id = s.scalar(select(Vaga).where(Vaga.external_id == "3")).id
+
+    assert ids_por_banco == [{"1": 42, "2": 7}, {"1": 42, "2": 7}]
+    assert v3_id > 42
 
 
 def test_reimportacao_atualiza_campos_alterados(tmp_path):
     db_path = tmp_path / "t.db"
-    importar(_escrever_csv(tmp_path, [_linha(title="Analista de Dados Pleno")]), db_path)
-    importar(_escrever_csv(tmp_path, [_linha(title="Cientista de Dados Pleno")]), db_path)
+    csv_inicial = _escrever_csv(
+        tmp_path,
+        [_linha(title="Analista de Dados Pleno")],
+        nome="vagas_20260731_170000.csv",
+    )
+    csv_atualizado = _escrever_csv(
+        tmp_path,
+        [_linha(title="Cientista de Dados Pleno")],
+        nome="vagas_20260731_180000.csv",
+    )
 
+    importar(csv_inicial, db_path)
+    importar(csv_atualizado, db_path)
     with Session(make_engine(db_path)) as db:
-        assert db.scalar(select(Vaga)).title == "Cientista de Dados Pleno"
+        title = db.scalar(select(Vaga)).title
+
+    assert title == "Cientista de Dados Pleno"
 
 
 def test_snippet_nao_regride_descricao_enriquecida(tmp_path):
     """O card do Vagas.com traz snippet; a descricao completa ja salva fica."""
     db_path = tmp_path / "t.db"
     desc_cheia = "x" * 1200
-    importar(_escrever_csv(tmp_path, [_linha(description=desc_cheia)]), db_path)
-    importar(_escrever_csv(tmp_path, [_linha(description="trecho curto...")]), db_path)
+    csv_completo = _escrever_csv(
+        tmp_path,
+        [_linha(description=desc_cheia)],
+        nome="vagas_20260731_170000.csv",
+    )
+    csv_snippet = _escrever_csv(
+        tmp_path,
+        [_linha(description="trecho curto...")],
+        nome="vagas_20260731_180000.csv",
+    )
+
+    importar(csv_completo, db_path)
+    importar(csv_snippet, db_path)
     with Session(make_engine(db_path)) as s:
-        vaga = s.scalar(select(Vaga))
-        assert vaga.description == desc_cheia
+        description = s.scalar(select(Vaga)).description
+
+    assert description == desc_cheia
 
 
 def test_snippet_parcial_nao_apaga_skills_da_descricao_preservada(tmp_path):
@@ -209,36 +253,34 @@ def test_snippet_parcial_nao_apaga_skills_da_descricao_preservada(tmp_path):
     desc_cheia = (
         "Atuação com n8n e Docker. " + ("contexto técnico " * 80)
     ).strip()
-
-    importar(
-        _escrever_csv(
-            tmp_path,
-            [_linha(
-                title="Desenvolvedor de Automação Júnior",
-                description=desc_cheia,
-                skills="n8n, Docker",
-            )],
-        ),
-        db_path,
+    csv_completo = _escrever_csv(
+        tmp_path,
+        [_linha(
+            title="Desenvolvedor de Automação Júnior",
+            description=desc_cheia,
+            skills="n8n, Docker",
+        )],
+        nome="vagas_20260731_170000.csv",
     )
-    importar(
-        _escrever_csv(
-            tmp_path,
-            [_linha(
-                title="Desenvolvedor de Automação Júnior",
-                description="Card resumido com Python...",
-                skills="Python",
-            )],
-        ),
-        db_path,
+    csv_snippet = _escrever_csv(
+        tmp_path,
+        [_linha(
+            title="Desenvolvedor de Automação Júnior",
+            description="Card resumido com Python...",
+            skills="Python",
+        )],
+        nome="vagas_20260731_180000.csv",
     )
 
+    importar(csv_completo, db_path)
+    importar(csv_snippet, db_path)
     with Session(make_engine(db_path)) as db:
         vaga = db.scalar(select(Vaga))
-        assert vaga.description == desc_cheia
-        assert sorted(t.nome for t in vaga.tecnologias) == [
-            "Docker", "Python", "n8n",
-        ]
+        description = vaga.description
+        tecnologias = sorted(t.nome for t in vaga.tecnologias)
+
+    assert description == desc_cheia
+    assert tecnologias == ["Docker", "Python", "n8n"]
 
 
 def test_descricao_completa_nova_pode_substituir_skills_antigas(tmp_path):
@@ -246,36 +288,48 @@ def test_descricao_completa_nova_pode_substituir_skills_antigas(tmp_path):
     db_path = tmp_path / "t.db"
     desc_antiga = ("Atuação com n8n. " + ("contexto anterior " * 80)).strip()
     desc_nova = ("Atuação com Python. " + ("contexto atualizado " * 80)).strip()
-
-    importar(
-        _escrever_csv(
-            tmp_path,
-            [_linha(description=desc_antiga, skills="n8n")],
-        ),
-        db_path,
+    csv_antigo = _escrever_csv(
+        tmp_path,
+        [_linha(description=desc_antiga, skills="n8n")],
+        nome="vagas_20260731_170000.csv",
     )
-    importar(
-        _escrever_csv(
-            tmp_path,
-            [_linha(description=desc_nova, skills="Python")],
-        ),
-        db_path,
+    csv_novo = _escrever_csv(
+        tmp_path,
+        [_linha(description=desc_nova, skills="Python")],
+        nome="vagas_20260731_180000.csv",
     )
 
+    importar(csv_antigo, db_path)
+    importar(csv_novo, db_path)
     with Session(make_engine(db_path)) as db:
         vaga = db.scalar(select(Vaga))
-        assert vaga.description == desc_nova
-        assert [t.nome for t in vaga.tecnologias] == ["Python"]
+        description = vaga.description
+        tecnologias = [t.nome for t in vaga.tecnologias]
+
+    assert description == desc_nova
+    assert tecnologias == ["Python"]
 
 
 def test_slug_nao_regride_nome_de_empresa_corrigido(tmp_path):
     """O slug de URL do coletor (ex.: GeekHunter) nao regride o nome real."""
     db_path = tmp_path / "t.db"
-    importar(_escrever_csv(tmp_path, [_linha(company="Code Group")]), db_path)
-    importar(_escrever_csv(tmp_path, [_linha(company="code-group")]), db_path)
+    csv_nome = _escrever_csv(
+        tmp_path,
+        [_linha(company="Code Group")],
+        nome="vagas_20260731_170000.csv",
+    )
+    csv_slug = _escrever_csv(
+        tmp_path,
+        [_linha(company="code-group")],
+        nome="vagas_20260731_180000.csv",
+    )
+
+    importar(csv_nome, db_path)
+    importar(csv_slug, db_path)
     with Session(make_engine(db_path)) as s:
-        vaga = s.scalar(select(Vaga))
-        assert vaga.company == "Code Group"
+        company = s.scalar(select(Vaga)).company
+
+    assert company == "Code Group"
 
 
 def test_vaga_fora_do_escopo_tech_nao_entra(tmp_path):
@@ -294,15 +348,20 @@ def test_mesma_external_id_em_fontes_diferentes_sao_vagas_distintas(tmp_path):
     csv_path = _escrever_csv(
         tmp_path, [_linha(source="gupy"), _linha(source="vagas")]
     )
-    assert importar(csv_path, tmp_path / "t.db")["total"] == 2
+
+    resultado = importar(csv_path, tmp_path / "t.db")
+
+    assert resultado["total"] == 2
 
 
 def test_data_relativa_resolvida_pelo_nome_do_csv(tmp_path):
     csv_path = _escrever_csv(tmp_path, [_linha(published_date="Ontem")])
-    importar(csv_path, tmp_path / "t.db")
 
+    importar(csv_path, tmp_path / "t.db")
     with Session(make_engine(tmp_path / "t.db")) as db:
-        assert db.scalar(select(Vaga)).published_date == date(2026, 7, 30)
+        published_date = db.scalar(select(Vaga)).published_date
+
+    assert published_date == date(2026, 7, 30)
 
 
 def test_linha_sem_identidade_e_ignorada(tmp_path):
@@ -311,38 +370,54 @@ def test_linha_sem_identidade_e_ignorada(tmp_path):
         _linha(external_id="", source="gupy"),
         _linha(external_id="9", title=""),
     ])
-    assert importar(csv_path, tmp_path / "t.db")["total"] == 1
+
+    resultado = importar(csv_path, tmp_path / "t.db")
+
+    assert resultado["total"] == 1
 
 
 def test_tecnologia_fora_do_vocabulario_e_ignorada(tmp_path):
     csv_path = _escrever_csv(tmp_path, [_linha(skills="Python, Fortran-77")])
-    importar(csv_path, tmp_path / "t.db")
 
+    importar(csv_path, tmp_path / "t.db")
     with Session(make_engine(tmp_path / "t.db")) as db:
-        assert [t.nome for t in db.scalar(select(Vaga)).tecnologias] == ["Python"]
+        tecnologias = [t.nome for t in db.scalar(select(Vaga)).tecnologias]
+
+    assert tecnologias == ["Python"]
 
 
 def test_campos_vazios_viram_null(tmp_path):
     csv_path = _escrever_csv(tmp_path, [_linha(company="", location="", skills="")])
-    importar(csv_path, tmp_path / "t.db")
 
+    importar(csv_path, tmp_path / "t.db")
     with Session(make_engine(tmp_path / "t.db")) as db:
         vaga = db.scalar(select(Vaga))
-        assert vaga.company is None
-        assert vaga.location is None
-        assert vaga.tecnologias == []
+        result = (vaga.company, vaga.location, vaga.tecnologias)
+
+    assert result == (None, None, [])
 
 
 def test_linha_sem_skills_nao_apaga_skills_do_banco(tmp_path):
     # O CSV da coleta roda com --no-enrich: vagas do LinkedIn re-coletadas
     # chegam SEM skills e nao podem sobrescrever o que o banco acumulou.
     db_path = tmp_path / "t.db"
-    importar(_escrever_csv(tmp_path, [_linha(skills="Python, SQL")]), db_path)
-    importar(_escrever_csv(tmp_path, [_linha(skills="")]), db_path)
+    csv_com_skills = _escrever_csv(
+        tmp_path,
+        [_linha(skills="Python, SQL")],
+        nome="vagas_20260731_170000.csv",
+    )
+    csv_sem_skills = _escrever_csv(
+        tmp_path,
+        [_linha(skills="")],
+        nome="vagas_20260731_180000.csv",
+    )
 
+    importar(csv_com_skills, db_path)
+    importar(csv_sem_skills, db_path)
     with Session(make_engine(db_path)) as db:
-        vaga = db.scalar(select(Vaga))
-        assert sorted(t.nome for t in vaga.tecnologias) == ["Python", "SQL"]
+        tecnologias = sorted(t.nome for t in db.scalar(select(Vaga)).tecnologias)
+
+    assert tecnologias == ["Python", "SQL"]
 
 
 def test_reimportar_com_as_mesmas_skills_nao_duplica_vinculos(tmp_path):
@@ -350,37 +425,54 @@ def test_reimportar_com_as_mesmas_skills_nao_duplica_vinculos(tmp_path):
     # pode tentar inserir o par de novo (UNIQUE de vaga_tecnologia).
     db_path = tmp_path / "t.db"
     csv_path = _escrever_csv(tmp_path, [_linha(skills="Python, SQL")])
-    importar(csv_path, db_path)
-    importar(csv_path, db_path)
 
+    importar(csv_path, db_path)
+    importar(csv_path, db_path)
     with Session(make_engine(db_path)) as db:
-        vaga = db.scalar(select(Vaga))
-        assert sorted(t.nome for t in vaga.tecnologias) == ["Python", "SQL"]
+        tecnologias = sorted(t.nome for t in db.scalar(select(Vaga)).tecnologias)
+
+    assert tecnologias == ["Python", "SQL"]
 
 
 def test_referencia_explicita_vence_o_nome_do_arquivo(tmp_path):
     """O snapshot versionado depende disso: no deploy o mtime é a data do clone."""
     csv_path = _escrever_csv(tmp_path, [_linha(published_date="Ontem")])
-    importar(csv_path, tmp_path / "t.db", referencia=date(2020, 1, 10))
 
+    importar(csv_path, tmp_path / "t.db", referencia=date(2020, 1, 10))
     with Session(make_engine(tmp_path / "t.db")) as db:
-        assert db.scalar(select(Vaga)).published_date == date(2020, 1, 9)
+        published_date = db.scalar(select(Vaga)).published_date
+
+    assert published_date == date(2020, 1, 9)
 
 
 def test_referencia_explicita_funciona_sem_timestamp_no_nome(tmp_path):
     csv_path = _escrever_csv(
         tmp_path, [_linha(published_date="Há 3 dias")], nome="vagas.csv"
     )
-    importar(csv_path, tmp_path / "t.db", referencia=date(2026, 7, 31))
 
+    importar(csv_path, tmp_path / "t.db", referencia=date(2026, 7, 31))
     with Session(make_engine(tmp_path / "t.db")) as db:
-        assert db.scalar(select(Vaga)).published_date == date(2026, 7, 28)
+        published_date = db.scalar(select(Vaga)).published_date
+
+    assert published_date == date(2026, 7, 28)
 
 
 def test_recriar_limpa_o_banco(tmp_path):
     db_path = tmp_path / "t.db"
-    importar(_escrever_csv(tmp_path, [_linha(), _linha(external_id="2")]), db_path)
-    resultado = importar(_escrever_csv(tmp_path, [_linha()]), db_path, recriar=True)
+    csv_duas = _escrever_csv(
+        tmp_path,
+        [_linha(), _linha(external_id="2")],
+        nome="vagas_20260731_170000.csv",
+    )
+    csv_uma = _escrever_csv(
+        tmp_path,
+        [_linha()],
+        nome="vagas_20260731_180000.csv",
+    )
+
+    importar(csv_duas, db_path)
+    resultado = importar(csv_uma, db_path, recriar=True)
+
     assert resultado["total"] == 1
 
 
@@ -397,11 +489,12 @@ def test_linkedin_descricao_remota_corrige_palpite_de_cidade(tmp_path):
             description="Modalidade 100% remota - trabalhe de qualquer lugar.",
         )],
     )
-    importar(csv_path, tmp_path / "t.db")
 
+    importar(csv_path, tmp_path / "t.db")
     with Session(make_engine(tmp_path / "t.db")) as db:
-        vaga = db.scalar(select(Vaga))
-        assert vaga.workplace_type == "Remoto"
+        workplace_type = db.scalar(select(Vaga)).workplace_type
+
+    assert workplace_type == "Remoto"
 
 
 def test_linkedin_sem_sinal_de_modalidade_mantem_o_palpite(tmp_path):
@@ -415,30 +508,44 @@ def test_linkedin_sem_sinal_de_modalidade_mantem_o_palpite(tmp_path):
             description="Atuacao na area de back-end com Python e Django.",
         )],
     )
-    importar(csv_path, tmp_path / "t.db")
 
+    importar(csv_path, tmp_path / "t.db")
     with Session(make_engine(tmp_path / "t.db")) as db:
-        assert db.scalar(select(Vaga)).workplace_type == "Presencial"
+        workplace_type = db.scalar(select(Vaga)).workplace_type
+
+    assert workplace_type == "Presencial"
 
 
 def test_csv_sem_descricao_nao_rebaixa_area_nem_apaga_descricao(tmp_path):
     """O pipeline roda com --no-enrich: a linha da rodada vem com area de
     fallback e descricao vazia. Nao pode degradar a vaga ja classificada."""
     db_path = tmp_path / "t.db"
-    importar(_escrever_csv(tmp_path, [_linha(
-        source="linkedin", workplace_type="Presencial",
-        location="Goiânia, GO", title="Assistente de TI",
-        area="Suporte Técnico", area_score="6.0",
-        description="Suporte tecnico presencial e remoto aos usuarios.",
-    )]), db_path)
+    csv_completo = _escrever_csv(
+        tmp_path,
+        [_linha(
+            source="linkedin", workplace_type="Presencial",
+            location="Goiânia, GO", title="Assistente de TI",
+            area="Suporte Técnico", area_score="6.0",
+            description="Suporte tecnico presencial e remoto aos usuarios.",
+        )],
+        nome="vagas_20260731_170000.csv",
+    )
+    csv_sem_descricao = _escrever_csv(
+        tmp_path,
+        [_linha(
+            source="linkedin", workplace_type="Presencial",
+            location="Goiânia, GO", title="Assistente de TI",
+            area="Outros/TI Geral", area_score="0.0", description="",
+        )],
+        nome="vagas_20260731_180000.csv",
+    )
 
-    importar(_escrever_csv(tmp_path, [_linha(
-        source="linkedin", workplace_type="Presencial",
-        location="Goiânia, GO", title="Assistente de TI",
-        area="Outros/TI Geral", area_score="0.0", description="",
-    )]), db_path)
-
+    importar(csv_completo, db_path)
+    importar(csv_sem_descricao, db_path)
     with Session(make_engine(db_path)) as db:
         vaga = db.scalar(select(Vaga))
-        assert vaga.area == "Suporte Técnico"
-        assert "Suporte tecnico" in (vaga.description or "")
+        area = vaga.area
+        description = vaga.description or ""
+
+    assert area == "Suporte Técnico"
+    assert "Suporte tecnico" in description

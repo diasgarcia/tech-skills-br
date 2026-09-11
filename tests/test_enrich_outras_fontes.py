@@ -51,7 +51,9 @@ class FakeSession:
 
 def test_fetch_vagas_com_extrai_a_descricao_completa():
     session = FakeSession([FakeResponse(text=VAGAS_HTML)])
+
     desc, status = fetch_vagas_com(session, Lock(), "https://www.vagas.com.br/vagas/v1/x")
+
     assert "Spring Boot" in desc
     assert "manutencao" in desc
     assert status is None
@@ -59,7 +61,9 @@ def test_fetch_vagas_com_extrai_a_descricao_completa():
 
 def test_fetch_vagas_com_sem_o_seletor_devolve_vazio():
     session = FakeSession([FakeResponse(text="<html>sem descricao</html>")])
+
     desc, _ = fetch_vagas_com(session, Lock(), "http://x")
+
     assert desc == ""
 
 
@@ -71,7 +75,9 @@ PLACEHOLDER_HTML = """
 
 def test_fetch_vagas_com_pagina_generica_conta_como_encerrada():
     session = FakeSession([FakeResponse(text=PLACEHOLDER_HTML)])
+
     desc, status = fetch_vagas_com(session, Lock(), "http://x")
+
     assert desc == ""
     assert status == 404
 
@@ -84,7 +90,9 @@ def test_fetch_geekhunter_pagina_institucional_conta_como_encerrada():
     """
     session = FakeSession([FakeResponse(text=html)])
     session.last_status_code = 200
+
     dados, status = fetch_geekhunter(session, Lock(), "https://www.geekhunter.com/pt/x")
+
     assert dados == {}
     assert status == 404
 
@@ -105,7 +113,9 @@ INFOJOBS_DETAIL_HTML = """
 
 def test_fetch_infojobs_extrai_a_descricao_completa():
     session = FakeSession([FakeResponse(text=INFOJOBS_DETAIL_HTML)])
+
     dados, status = fetch_infojobs(session, Lock(), "https://www.infojobs.com.br/vaga-x")
+
     assert "Node.js" in dados["description"]
     assert "Descrição da vaga" in dados["description"]
     assert status is None
@@ -114,7 +124,9 @@ def test_fetch_infojobs_extrai_a_descricao_completa():
 def test_fetch_infojobs_sem_o_painel_permanece_pendente():
     """200 sem painel pode ser bloqueio ou layout novo: nunca vira 404."""
     session = FakeSession([FakeResponse(text="<html>home do portal</html>")])
+
     dados, status = fetch_infojobs(session, Lock(), "http://x")
+
     assert dados["description"] == ""
     assert status is None
 
@@ -122,14 +134,19 @@ def test_fetch_infojobs_sem_o_painel_permanece_pendente():
 def test_fetch_infojobs_body_vazio_nao_marca_como_encerrada():
     """200 com body vazio e bloqueio suave: fica pendente, nunca vira 404."""
     session = FakeSession([FakeResponse(text="")])
+
     dados, status = fetch_infojobs(session, Lock(), "http://x")
+
     assert dados.get("description", "") == ""
     assert status is None
 
 
 def test_fetch_vagas_com_retorna_vazio_quando_api_falha():
     session = FakeSession([None])
-    assert fetch_vagas_com(session, Lock(), "http://x") == ("", None)
+
+    result = fetch_vagas_com(session, Lock(), "http://x")
+
+    assert result == ("", None)
 
 
 def test_fetch_trampos_junta_os_campos_de_texto():
@@ -143,7 +160,9 @@ def test_fetch_trampos_junta_os_campos_de_texto():
         }
     }
     session = FakeSession([FakeResponse(payload=payload)])
+
     desc, _ = fetch_trampos(session, Lock(), "1-vaga-x")
+
     assert "Django" in desc
     assert "Git" in desc
     assert "AWS" in desc
@@ -158,14 +177,19 @@ def test_fetch_trampos_suporta_listas_nos_campos():
         }
     }
     session = FakeSession([FakeResponse(payload=payload)])
+
     desc, _ = fetch_trampos(session, Lock(), "1-x")
+
     assert "Logica de programacao" in desc
     assert "Testes automatizados" in desc
 
 
 def test_fetch_trampos_resposta_invalida_devolve_vazio():
     session = FakeSession([FakeResponse(text="<html>nao json</html>")])
-    assert fetch_trampos(session, Lock(), "1-x")[0] == ""
+
+    desc, _ = fetch_trampos(session, Lock(), "1-x")
+
+    assert desc == ""
 
 
 def test_fetch_gupy_extrai_e_limpa_html_da_descricao():
@@ -175,7 +199,9 @@ def test_fetch_gupy_extrai_e_limpa_html_da_descricao():
     </script>
     """
     session = FakeSession([FakeResponse(text=html)])
+
     desc, _ = fetch_gupy(session, Lock(), "https://empresa.gupy.io/job/abc")
+
     assert "Python" in desc
     assert "<p>" not in desc
 
@@ -191,7 +217,9 @@ def test_fetch_gupy_extrai_descricao_do_next_data():
     </script>
     """
     session = FakeSession([FakeResponse(text=html)])
+
     desc, status = fetch_gupy(session, Lock(), "https://empresa.gupy.io/job/abc")
+
     assert status is None
     assert "Hardware" in desc
     assert "Service Desk" in desc
@@ -206,14 +234,19 @@ def test_fetch_infojobs_teaser_curto_permanece_pendente():
     </div>
     """
     session = FakeSession([FakeResponse(text=html)])
+
     dados, status = fetch_infojobs(session, Lock(), "http://x")
+
     assert dados["description"] == ""
     assert status is None
 
 
 def test_fetch_gupy_job_removido_devolve_vazio():
     session = FakeSession([None])  # PoliteSession devolve None em 404
-    assert fetch_gupy(session, Lock(), "123") == ("", None)
+
+    result = fetch_gupy(session, Lock(), "123")
+
+    assert result == ("", None)
 
 
 def test_data_anterior_ao_corte_remove_a_vaga_em_vez_de_atualizar():
@@ -252,8 +285,9 @@ def test_data_anterior_ao_corte_remove_a_vaga_em_vez_de_atualizar():
         c, None, Lock(), extractor, tech_map,
         "SELECT id, url, title FROM vagas", [], fake_fetch,
     )
-    assert total == 1
     sobreviventes = c.execute("SELECT id, published_date FROM vagas").fetchall()
+
+    assert total == 1
     assert sobreviventes == [(2, "2026-08-01")]
 
 
@@ -290,10 +324,17 @@ def test_parar_em_429_interrompe_o_lote_sem_marcar_encerrada():
         "SELECT id, url, title FROM vagas", [], fake_fetch,
         parar_em_429=True,
     )
+    descricao = c.execute(
+        "SELECT description FROM vagas WHERE id = 1"
+    ).fetchone()[0]
+    encerrada = c.execute(
+        "SELECT enrich_encerrada FROM vagas WHERE id = 2"
+    ).fetchone()[0]
+
     assert total == 1
-    assert c.execute("SELECT description FROM vagas WHERE id = 1").fetchone()[0] == "Rotina com Python"
+    assert descricao == "Rotina com Python"
     # 429 nao pode marcar como encerrada: fica pendente para a proxima rodada.
-    assert c.execute("SELECT enrich_encerrada FROM vagas WHERE id = 2").fetchone()[0] == 0
+    assert encerrada == 0
 
 
 def test_sucesso_marca_a_vaga_como_resolvida():
@@ -316,10 +357,12 @@ def test_sucesso_marca_a_vaga_como_resolvida():
         c, None, Lock(), extractor, {},
         "SELECT id, url, title FROM vagas", [], fake_fetch,
     )
-    assert total == 1
-    assert c.execute(
+    encerrada = c.execute(
         "SELECT enrich_encerrada FROM vagas WHERE id = 1"
-    ).fetchone()[0] == 1
+    ).fetchone()[0]
+
+    assert total == 1
+    assert encerrada == 1
 
 
 def test_status_410_marca_a_vaga_como_encerrada():
@@ -339,10 +382,12 @@ def test_status_410_marca_a_vaga_como_encerrada():
         c, None, Lock(), extractor, {},
         "SELECT id, url, title FROM vagas", [], fake_fetch,
     )
-    assert total == 0
-    assert c.execute(
+    encerrada = c.execute(
         "SELECT enrich_encerrada FROM vagas WHERE id = 1"
-    ).fetchone()[0] == 1
+    ).fetchone()[0]
+
+    assert total == 0
+    assert encerrada == 1
 
 
 def test_fetch_parando_nao_chama_a_fonte_depois_do_429():
@@ -356,9 +401,13 @@ def test_fetch_parando_nao_chama_a_fonte_depois_do_429():
         return {"description": ""}, 429
 
     wrapper = _fetch_parando(parou, True, fake_fetch)
-    assert wrapper(None, None, "http://um") == ({"description": ""}, 429)
-    assert wrapper(None, None, "http://dois") == ({"description": ""}, 429)
-    assert wrapper(None, None, "http://tres") == ({"description": ""}, 429)
+    primeira = wrapper(None, None, "http://um")
+    segunda = wrapper(None, None, "http://dois")
+    terceira = wrapper(None, None, "http://tres")
+
+    assert primeira == ({"description": ""}, 429)
+    assert segunda == ({"description": ""}, 429)
+    assert terceira == ({"description": ""}, 429)
     assert chamadas == ["http://um"]  # os demais nem chamaram a fonte
 
 

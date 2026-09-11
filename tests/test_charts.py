@@ -23,24 +23,36 @@ def _vaga(area="Backend", skills=None):
 
 
 def test_chart_areas_sem_vagas_levanta_erro(tmp_path):
+    output = tmp_path / "x.png"
+
     with pytest.raises(ValueError):
-        chart_areas([], tmp_path / "x.png")
+        chart_areas([], output)
 
 
 def test_chart_workplace_sem_vagas_levanta_erro(tmp_path):
+    output = tmp_path / "x.png"
+
     with pytest.raises(ValueError):
-        chart_workplace([], tmp_path / "x.png")
+        chart_workplace([], output)
 
 
 def test_chart_regions_sem_vagas_levanta_erro(tmp_path):
+    output = tmp_path / "x.png"
+
     with pytest.raises(ValueError):
-        chart_regions([], tmp_path / "x.png")
+        chart_regions([], output)
 
 
-def test_chart_skills_devolve_none_quando_nenhuma_area_informa_tecnologia(tmp_path):
-    assert chart_skills([_vaga()], tmp_path / "skills.png") is None
-    assert chart_skills([], tmp_path / "skills.png") is None
+@pytest.mark.parametrize("jobs", [[_vaga()], []])
+def test_chart_skills_devolve_none_quando_nenhuma_area_informa_tecnologia(tmp_path, jobs):
+    output = tmp_path / "skills.png"
+
+    result = chart_skills(jobs, output)
+
+    assert result is None
 
 
 def test_export_charts_sem_vagas_devolve_dicionario_vazio(tmp_path):
-    assert export_charts([], tmp_path, "stamp") == {}
+    result = export_charts([], tmp_path, "stamp")
+
+    assert result == {}

@@ -78,6 +78,7 @@ def test_collect_paralelo_equivale_ao_sequencial(monkeypatch):
     settings = Settings(
         sources=["a", "b"], source_delays={"b": 0.5}, parallel_sources=True
     )
+
     jobs, stats, _ = pipeline.collect(settings)
 
     assert [j.external_id for j in jobs] == ["a", "b"]
@@ -105,7 +106,9 @@ def test_fetch_base_reporta_progresso_por_termo(monkeypatch):
     fonte = FonteFake(session=SessaoFake(), settings=Settings(sources=["f"]))
     vistos = []
     fonte.progress_callback = vistos.append
+
     jobs = fonte.fetch(["2", "3"])
+
     assert len(jobs) == 5
     assert vistos == [2, 5]
 
@@ -113,13 +116,14 @@ def test_fetch_base_reporta_progresso_por_termo(monkeypatch):
 def test_resumo_paralelo_abre_fecha_grupos(capsys):
     """O resumo emite grupos colapsaveis com as contagens do momento."""
     resumo = pipeline._ResumoParalelo(["a", "b"])
+
     resumo.abrir()
     resumo.registrar("a", 10)
     resumo.registrar("b", 5)
     resumo.abrir()  # fecha o anterior e abre com contagens novas
     resumo.fechar()
-
     saida = capsys.readouterr().out
+
     assert saida.count("::group::[resumo") == 2
     assert saida.count("::endgroup::") == 2
     assert "a 10 | b 5" in saida
@@ -130,11 +134,12 @@ def test_tabela_paralela_formata_e_atualiza():
     monitor = pipeline._TabelaParalela(
         ["gupy", "vagas"], labels={"gupy": "Gupy", "vagas": "Vagas.com"}
     )
+
     monitor.atualizar("gupy", total=15, termo="[1/10] python", requests=2)
     monitor.finalizar_fonte("vagas", total=10, requests=1)
     monitor.erro_fonte("gupy", "timeout na conexao")
-
     tabela = monitor.formatar()
+
     assert "+----------------------+" in tabela
     assert "Gupy" in tabela
     assert "Vagas.com" in tabela
@@ -149,9 +154,10 @@ def test_tabela_paralela_renderiza_ci(monkeypatch, capsys):
     """No GitHub Actions, a tabela sai como linhas planas (sempre visivel)."""
     monkeypatch.setenv("GITHUB_ACTIONS", "true")
     monitor = pipeline._TabelaParalela(["gupy"])
-    monitor.renderizar(forcar=True)
 
+    monitor.renderizar(forcar=True)
     saida = capsys.readouterr().out
+
     assert "::group::" not in saida
     assert "[resumo" in saida
     assert "Coleta Paralela" in saida
@@ -161,10 +167,14 @@ def test_tabela_paralela_renderiza_ci(monkeypatch, capsys):
 def test_tabela_paralela_iniciar_encerrar():
     """Iniciar e encerrar iniciam e finalizam a thread de atualizacao sem travar."""
     monitor = pipeline._TabelaParalela(["gupy"])
+
     monitor.iniciar()
-    assert monitor.thread_timer is not None and monitor.thread_timer.is_alive()
+    estava_ativa = monitor.thread_timer is not None and monitor.thread_timer.is_alive()
     monitor.encerrar()
-    assert not monitor.thread_timer.is_alive()
+    esta_ativa = monitor.thread_timer.is_alive()
+
+    assert estava_ativa
+    assert not esta_ativa
 
 
 
@@ -178,6 +188,7 @@ def test_run_coleta_classifica_e_exporta(tmp_path, monkeypatch, sem_enriquecimen
         return [_vaga()], [], 0
 
     monkeypatch.setattr(pipeline, "collect", coleta_fake)
+
     result = run(_settings(tmp_path), with_charts=False)
 
     assert isinstance(result, PipelineResult)
@@ -204,7 +215,9 @@ def test_run_descarta_vaga_nao_tech(tmp_path, monkeypatch, sem_enriquecimento):
         ),
     ]
     monkeypatch.setattr(pipeline, "collect", lambda settings: (vagas, [], 0))
+
     result = run(_settings(tmp_path), with_charts=False)
+
     assert len(result.jobs) == 1
     assert result.meta["dropped_non_tech"] == 1
 
@@ -220,7 +233,9 @@ def test_run_mantem_nao_tech_quando_pedido(tmp_path, monkeypatch, sem_enriquecim
         ),
     ]
     monkeypatch.setattr(pipeline, "collect", lambda settings: (vagas, [], 0))
+
     result = run(_settings(tmp_path), keep_non_tech=True, with_charts=False)
+
     assert len(result.jobs) == 2
     assert result.meta["dropped_non_tech"] == 0
 
@@ -231,7 +246,9 @@ def test_run_pula_enriquecimento_quando_desabilitado(tmp_path, monkeypatch):
         pipeline, "_enrich_linkedin_parallel", lambda jobs: chamadas.append(len(jobs))
     )
     monkeypatch.setattr(pipeline, "collect", lambda settings: ([_vaga()], [], 0))
+
     run(_settings(tmp_path, enrich_linkedin=False), with_charts=False)
+
     assert chamadas == []
 
 
@@ -259,7 +276,9 @@ def test_enriquecimento_preenche_descricao_da_vaga(monkeypatch):
 
     monkeypatch.setattr("scraper.http_client.PoliteSession", FakeSession)
     job = _vaga()
+
     _enrich_linkedin_parallel([job])
+
     assert "Django" in job.description
 
 
@@ -283,7 +302,9 @@ def test_enriquecimento_ignora_html_sem_o_seletor(monkeypatch):
 
     monkeypatch.setattr("scraper.http_client.PoliteSession", FakeSession)
     job = _vaga()
+
     _enrich_linkedin_parallel([job])
+
     assert job.description == ""
 
 
@@ -303,5 +324,7 @@ def test_enriquecimento_suporta_erro_de_sessao(monkeypatch):
 
     monkeypatch.setattr("scraper.http_client.PoliteSession", FakeSession)
     job = _vaga()
+
     _enrich_linkedin_parallel([job])  # nao pode derrubar a coleta
+
     assert job.description == ""

@@ -71,7 +71,9 @@ def _source(**kw):
 
 def test_sitemap_filtra_slug_tech_e_janela_de_dias():
     src = _source(abler_days_back=1)
+
     alvos = src._filtrar_sitemap(SITEMAP_XML)
+
     assert alvos == [
         "https://candidatos.abler.com.br/vagas/217-estagio-de-engenharia-134508",
         "https://candidatos.abler.com.br/vagas/analista-de-suporte-943244",
@@ -81,13 +83,18 @@ def test_sitemap_filtra_slug_tech_e_janela_de_dias():
 def test_sitemap_janela_maior_pega_2026_mas_nunca_antes_de_2026():
     """A coleta completa volta ate o corte do projeto, nunca antes dele."""
     src = _source(abler_days_back=36500)
+
     alvos = src._filtrar_sitemap(SITEMAP_XML)
+
     assert any("advogado-a-jr-757511" in a for a in alvos)
     assert not any("analista-de-dados-junior-111111" in a for a in alvos)
 
 
 def test_parse_page_mapeia_campos():
-    job = _source()._parse_page(VAGA_HTML, VAGA_URL)
+    src = _source()
+
+    job = src._parse_page(VAGA_HTML, VAGA_URL)
+
     assert job is not None
     assert job.source == "abler"
     assert job.external_id == "134508"
@@ -101,7 +108,11 @@ def test_parse_page_mapeia_campos():
 
 
 def test_parse_page_ignora_html_sem_payload():
-    assert _source()._parse_page("<html>sem vaga</html>", VAGA_URL) is None
+    src = _source()
+
+    job = src._parse_page("<html>sem vaga</html>", VAGA_URL)
+
+    assert job is None
 
 
 def test_parse_page_ignora_vaga_anterior_a_2026():
@@ -109,7 +120,11 @@ def test_parse_page_ignora_vaga_anterior_a_2026():
         'publishedAt:"2026-08-19T11:37:25.943-03:00"',
         'publishedAt:"2025-12-01T11:37:25.943-03:00"',
     )
-    assert _source()._parse_page(antiga, VAGA_URL) is None
+    src = _source()
+
+    job = src._parse_page(antiga, VAGA_URL)
+
+    assert job is None
 
 
 class FakeResponse:
@@ -145,12 +160,14 @@ def test_coleta_grava_checkpoint_ao_parar_no_body_vazio(tmp_path):
             FakeResponse(""),
         ],
     )
+
     jobs = src._coletar()
-    assert len(jobs) == 1
     checkpoint = tmp_path / CHECKPOINT_NAME
-    assert checkpoint.is_file()
     with open(checkpoint, encoding="utf-8-sig", newline="") as fh:
         linhas = list(csv.DictReader(fh))
+
+    assert len(jobs) == 1
+    assert checkpoint.is_file()
     assert [l["external_id"] for l in linhas] == ["134508"]
 
 
@@ -167,7 +184,9 @@ def test_coleta_retoma_do_checkpoint_e_nao_refaz_get(tmp_path):
             FakeResponse(VAGA_HTML),
         ],
     )
+
     jobs = src._coletar()
+
     # 134508 pulado sem GET; so a segunda pagina foi buscada.
     assert [j.external_id for j in jobs] == ["943244"]
     assert src.session.request_count == 2  # sitemap + 1 pagina
@@ -182,5 +201,9 @@ def test_coleta_completa_remove_o_checkpoint(tmp_path):
         ],
         abler_days_back=36500,
     )
+
     src._coletar()
-    assert not (tmp_path / CHECKPOINT_NAME).exists()
+
+    checkpoint_exists = (tmp_path / CHECKPOINT_NAME).exists()
+
+    assert not checkpoint_exists

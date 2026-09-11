@@ -55,18 +55,22 @@ def test_gupy_pagina_deduplica_e_para_em_repeticao():
         ]
     )
     source = GupySource(session=session, settings=_settings(page_size=1))
+
     jobs = source.fetch_term("desenvolvedor junior")
+    offsets = [p["offset"] for p in session.chamadas]
 
     assert {j.external_id for j in jobs} == {"11617525", "999"}
     assert session.request_count == 2
-    offsets = [p["offset"] for p in session.chamadas]
     assert offsets == [0, 1]
 
 
 def test_gupy_para_quando_api_falha():
     session = FakeSession([None, {"data": [GUPY_JOB]}])
     source = GupySource(session=session, settings=_settings())
-    assert source.fetch_term("x") == []
+
+    jobs = source.fetch_term("x")
+
+    assert jobs == []
     assert session.request_count == 1
 
 
@@ -79,11 +83,12 @@ def test_linkedin_pagina_deduplica_e_para_em_repeticao():
         ]
     )
     source = LinkedInSource(session=session, settings=_settings(max_pages_per_term=4))
+
     jobs = source.fetch_term("desenvolvedor junior")
+    starts = [p["start"] for p in session.chamadas]
 
     assert [j.external_id for j in jobs] == ["4422123289"]
     assert session.request_count == 2
-    starts = [p["start"] for p in session.chamadas]
     assert starts == [0, 10]
 
 
@@ -98,6 +103,7 @@ def test_linkedin_para_em_pagina_vazia():
         ]
     )
     source = LinkedInSource(session=session, settings=_settings(max_pages_per_term=4))
+
     jobs = source.fetch_term("desenvolvedor junior")
 
     assert {j.external_id for j in jobs} == {"4422123289", "9999999"}
@@ -107,7 +113,10 @@ def test_linkedin_para_em_pagina_vazia():
 def test_linkedin_para_quando_api_falha():
     session = FakeSession([None])
     source = LinkedInSource(session=session, settings=_settings())
-    assert source.fetch_term("x") == []
+
+    jobs = source.fetch_term("x")
+
+    assert jobs == []
 
 
 def test_vagas_com_pagina_e_deduplica():
@@ -121,11 +130,12 @@ def test_vagas_com_pagina_e_deduplica():
         ]
     )
     source = VagasComSource(session=session, settings=_settings(max_pages_per_term=3))
+
     jobs = source.fetch_term("desenvolvedor junior")
+    paginas = [p["pagina"] for p in session.chamadas]
 
     assert [j.external_id for j in jobs] == ["1"]
     assert session.request_count == 2
-    paginas = [p["pagina"] for p in session.chamadas]
     assert paginas == [1, 2]
 
 
@@ -136,7 +146,9 @@ def test_vagas_com_para_em_repeticao():
     )
     session = FakeSession([FakeHtmlResponse(html), FakeHtmlResponse(html)])
     source = VagasComSource(session=session, settings=_settings(max_pages_per_term=3))
+
     jobs = source.fetch_term("x")
+
     assert len(jobs) == 1
     assert session.request_count == 2
 
@@ -146,6 +158,7 @@ def test_trampos_para_no_total_pages():
                "pagination": {"total_pages": 2}}
     session = FakeSession([payload, dict(payload), dict(payload)])
     source = TramposSource(session=session, settings=_settings(max_pages_per_term=10))
+
     jobs = source.fetch_term("desenvolvedor")
 
     assert [j.external_id for j in jobs] == ["1"]
@@ -155,7 +168,10 @@ def test_trampos_para_no_total_pages():
 def test_trampos_para_quando_api_falha():
     session = FakeSession([None])
     source = TramposSource(session=session, settings=_settings())
-    assert source.fetch_term("x") == []
+
+    jobs = source.fetch_term("x")
+
+    assert jobs == []
 
 
 class _FonteDeTeste(JobSource):
@@ -169,6 +185,7 @@ class _FonteDeTeste(JobSource):
 
 def test_fetch_isola_falha_de_um_termo():
     source = _FonteDeTeste(session=FakeSession([]), settings=_settings())
+
     jobs = source.fetch(["ok1", "explode", "ok2"])
 
     assert [j.title for j in jobs] == ["ok1", "ok2"]
@@ -185,11 +202,12 @@ def test_infojobs_pagina_deduplica_e_para_em_repeticao():
         ]
     )
     source = InfoJobsSource(session=session, settings=_settings(max_pages_per_term=4))
+
     jobs = source.fetch_term("desenvolvedor")
+    paginas = [p["Page"] for p in session.chamadas]
 
     assert {j.external_id for j in jobs} == {"11985552", "11983931"}
     assert session.request_count == 2
-    paginas = [p["Page"] for p in session.chamadas]
     assert paginas == [1, 2]
 
 
@@ -201,7 +219,9 @@ def test_infojobs_para_em_pagina_vazia():
         ]
     )
     source = InfoJobsSource(session=session, settings=_settings(max_pages_per_term=4))
+
     jobs = source.fetch_term("desenvolvedor")
+
     assert len(jobs) == 2
     assert session.request_count == 2
 
@@ -216,7 +236,9 @@ def test_infojobs_para_em_body_vazio():
         ]
     )
     source = InfoJobsSource(session=session, settings=_settings(max_pages_per_term=4))
+
     jobs = source.fetch_term("desenvolvedor")
+
     assert len(jobs) == 2
     assert session.request_count == 2
 
@@ -225,11 +247,12 @@ def test_infojobs_fetch_separa_termos_junior_dos_filtros_nativos():
     """Estagio/trainee/aprendiz vem dos filtros nativos; junior da busca textual."""
     session = FakeSession([])
     source = InfoJobsSource(session=session, settings=_settings(max_pages_per_term=4))
+
     source.fetch(["desenvolvedor junior", "estagio ti", "trainee tecnologia", "devops junior"])
+    chaves = [sorted(p) for p in session.chamadas]
 
     # 4 filtros nativos + 2 termos junior; estagio/trainee nao repetem.
     assert session.request_count == 6
-    chaves = [sorted(p) for p in session.chamadas]
     assert chaves[0] == ["Page", "categoria", "tipocontrato"]  # Estágio
     assert chaves[1] == ["Page", "categoria", "im"]            # Estagiário
     assert chaves[4] == ["Page", "Palabra", "categoria"]       # termo junior
