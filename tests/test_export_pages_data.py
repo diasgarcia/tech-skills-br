@@ -10,36 +10,22 @@ from scripts.import_csv import importar
 def test_export_all_pages_data_cria_endpoints_validos(tmp_path: Path):
     db_file = tmp_path / "teste_pages.db"
     out_dir = tmp_path / "api_out"
-    
     csv_file = Path(__file__).resolve().parent.parent / "seed" / "vagas.csv"
-    if not csv_file.exists():
-        csv_file = Path(__file__).resolve().parent / "seed" / "vagas.csv"
-
-    if csv_file.exists():
-        importar(csv_file, db_path=db_file)
+    importar(csv_file, db_path=db_file)
 
     arquivos = export_all_pages_data(output_dir=out_dir, db_path=db_file)
+    conteudos = {
+        chave: json.loads(path.read_text(encoding="utf-8"))
+        for chave, path in arquivos.items()
+    }
+    resumo = conteudos["resumo"]
+    vagas = conteudos["vagas"]
 
-    if csv_file.exists():
-        assert "resumo" in arquivos
-        assert "areas" in arquivos
-        assert "tecnologias" in arquivos
-        assert "vagas" in arquivos
-
-        for k, p in arquivos.items():
-            assert p.is_file()
-            with open(p, encoding="utf-8") as f:
-                dados = json.load(f)
-                assert dados is not None
-
-        with open(arquivos["resumo"], encoding="utf-8") as f:
-            resumo = json.load(f)
-            assert resumo["metadados"]["total_vagas"] > 0
-            assert len(resumo["areas"]) > 0
-
-        with open(arquivos["vagas"], encoding="utf-8") as f:
-            vagas = json.load(f)
-            assert isinstance(vagas, list)
-            assert len(vagas) > 0
-            assert "titulo" in vagas[0]
-
+    assert {"resumo", "areas", "tecnologias", "vagas"}.issubset(arquivos)
+    assert all(path.is_file() for path in arquivos.values())
+    assert all(dados is not None for dados in conteudos.values())
+    assert resumo["metadados"]["total_vagas"] > 0
+    assert len(resumo["areas"]) > 0
+    assert isinstance(vagas, list)
+    assert len(vagas) > 0
+    assert "titulo" in vagas[0]

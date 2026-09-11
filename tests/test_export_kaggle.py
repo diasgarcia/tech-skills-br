@@ -77,12 +77,11 @@ def test_exporta_apenas_a_tabela_de_vagas(tmp_path):
         (export_dir / nome).write_bytes(b"versao anterior")
 
     caminho_principal, total = exportar(db_path=db_path, export_dir=export_dir)
+    vagas = pd.read_parquet(export_dir / "vagas.parquet")
 
     assert total == 2
     assert caminho_principal == export_dir / "vagas.parquet"
     assert {path.name for path in export_dir.glob("*.parquet")} == {"vagas.parquet"}
-
-    vagas = pd.read_parquet(export_dir / "vagas.parquet")
 
     assert len(vagas) == 2
     assert vagas.loc[vagas["external_id"] == "abc-1", "skills"].item() == "Docker; Python"
@@ -94,8 +93,8 @@ def test_exporta_tipos_semanticos_no_parquet(tmp_path):
     db_path = tmp_path / "vagas.db"
     export_dir = tmp_path / "kaggle"
     _criar_banco(db_path)
-    exportar(db_path=db_path, export_dir=export_dir)
 
+    exportar(db_path=db_path, export_dir=export_dir)
     vagas = pq.read_schema(export_dir / "vagas.parquet")
 
     assert pa.types.is_string(vagas.field("skills").type) or pa.types.is_large_string(

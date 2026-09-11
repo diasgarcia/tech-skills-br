@@ -1,12 +1,14 @@
 """Testes da configuracao central: Settings e carregamento de .env."""
 
 import os
+from pathlib import Path
 
 from scraper.config import DELAYS_PADRAO, Settings, _load_dotenv
 
 
 def test_settings_defaults_do_projeto():
     s = Settings()
+
     assert s.delay_seconds == 1.0
     assert s.page_size == 100
     assert s.max_pages_per_term == 15
@@ -22,14 +24,23 @@ def test_settings_defaults_do_projeto():
 
 
 def test_ensure_output_dir_cria_diretorio(tmp_path):
-    s = Settings(output_dir=tmp_path / "saida")
-    assert not (tmp_path / "saida").exists()
-    assert s.ensure_output_dir() == tmp_path / "saida"
-    assert (tmp_path / "saida").is_dir()
+    output_dir = tmp_path / "saida"
+    s = Settings(output_dir=output_dir)
+    existed_before = output_dir.exists()
+
+    result = s.ensure_output_dir()
+
+    assert not existed_before
+    assert result == output_dir
+    assert output_dir.is_dir()
 
 
 def test_load_dotenv_sem_arquivo_devolve_nada():
-    assert _load_dotenv(tmp := __import__("pathlib").Path("nao/existe/.env")) is None
+    env_path = Path("nao/existe/.env")
+
+    result = _load_dotenv(env_path)
+
+    assert result is None
 
 
 def test_load_dotenv_parseia_arquivo_sem_python_dotenv(tmp_path, monkeypatch):
@@ -54,7 +65,8 @@ def test_load_dotenv_parseia_arquivo_sem_python_dotenv(tmp_path, monkeypatch):
     monkeypatch.delenv("CHAVE_SIMPLES", raising=False)
     monkeypatch.delenv("CHAVE_ASPAS", raising=False)
 
-    _load_dotenv(env)
+    result = _load_dotenv(env)
 
+    assert result is None
     assert os.environ["CHAVE_SIMPLES"] == "valor1"
     assert os.environ["CHAVE_ASPAS"] == "valor com espaco"

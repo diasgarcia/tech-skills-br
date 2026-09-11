@@ -29,5 +29,7 @@ def test_query_pendentes_ignora_a_janela_de_dias():
             (6, "gupy", "e6", "t", None, 0, "2026-04-23"),           # outra fonte -> fora
         ],
     )
+
     ids = {r[0] for r in c.execute(QUERY_PENDENTES)}
+
     assert ids == {1, 3}

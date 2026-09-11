@@ -4,7 +4,7 @@ import csv
 from datetime import datetime, timedelta, timezone
 
 from scraper.config import Settings
-from scraper.sources.recrutei import CHECKPOINT_NAME, RecruteiSource
+from scraper.sources.recrutei import CHECKPOINT_NAME, RecruteiSource, _vid_da_url
 
 
 def _lastmod(horas_atras: int) -> str:
@@ -103,7 +103,10 @@ def _source(**kw):
 
 
 def test_parse_page_mapeia_campos():
-    job = _source()._parse_page(DETALHE_HTML, VAGA_URL)
+    src = _source()
+
+    job = src._parse_page(DETALHE_HTML, VAGA_URL)
+
     assert job is not None
     assert job.source == "recrutei"
     assert job.external_id == "153211"
@@ -117,22 +120,36 @@ def test_parse_page_mapeia_campos():
 
 def test_parse_page_ignora_vaga_anterior_a_2026():
     antiga = DETALHE_HTML.replace("2026-08-06", "2025-12-01")
-    assert _source()._parse_page(antiga, VAGA_URL) is None
+    src = _source()
+
+    job = src._parse_page(antiga, VAGA_URL)
+
+    assert job is None
 
 
 def test_parse_page_ignora_html_sem_jobposting():
-    assert _source()._parse_page("<html>sem json-ld</html>", VAGA_URL) is None
+    src = _source()
+
+    job = src._parse_page("<html>sem json-ld</html>", VAGA_URL)
+
+    assert job is None
 
 
 def test_parse_page_le_modalidade_remota_do_header():
-    job = _source()._parse_page(DETALHE_REMOTO_HTML, VAGA_URL)
+    src = _source()
+
+    job = src._parse_page(DETALHE_REMOTO_HTML, VAGA_URL)
+
     assert job is not None
     assert job.workplace_type == "Remoto"
     assert job.location == ""
 
 
 def test_parse_page_le_cidade_do_header():
-    job = _source()._parse_page(DETALHE_CIDADE_HTML, VAGA_URL)
+    src = _source()
+
+    job = src._parse_page(DETALHE_CIDADE_HTML, VAGA_URL)
+
     assert job is not None
     assert job.workplace_type == "Presencial"
     assert job.location == "Brasília, DF, Brasil"
@@ -146,7 +163,10 @@ def test_parse_page_modalidade_do_header_prevalece_sobre_cidade_do_jsonld():
         '"@type": "PostalAddress", "addressLocality": "Belo Horizonte",'
         ' "addressRegion": "MG", "addressCountry": "Brasil"}}',
     )
-    job = _source()._parse_page(html, VAGA_URL)
+    src = _source()
+
+    job = src._parse_page(html, VAGA_URL)
+
     assert job is not None
     assert job.workplace_type == "Remoto"
     assert job.location == "Belo Horizonte, MG"
@@ -157,7 +177,10 @@ def test_parse_page_cidade_no_header_com_hibrido_no_titulo():
         '"title": "Analista de Suporte Junior"',
         '"title": "Analista de Suporte de Sistemas Junior | Hibrido"',
     )
-    job = _source()._parse_page(html, VAGA_URL)
+    src = _source()
+
+    job = src._parse_page(html, VAGA_URL)
+
     assert job is not None
     assert job.workplace_type == "Híbrido"
     assert job.location == "Brasília, DF, Brasil"
@@ -168,7 +191,10 @@ def test_parse_page_modalidade_explicita_na_descricao():
         '"description": "desc"',
         '"description": "Atividades de suporte. Forma de trabalho: Hibrido. Requisitos."',
     )
-    job = _source()._parse_page(html, VAGA_URL)
+    src = _source()
+
+    job = src._parse_page(html, VAGA_URL)
+
     assert job is not None
     assert job.workplace_type == "Híbrido"
     assert job.location == "Brasília, DF, Brasil"
@@ -179,7 +205,10 @@ def test_parse_page_modalidade_em_modelo_de_trabalho():
         '"description": "desc"',
         '"description": "Estamos trabalhando em modelo hibrido, com escritorio em Sao Paulo."',
     )
-    job = _source()._parse_page(html, VAGA_URL)
+    src = _source()
+
+    job = src._parse_page(html, VAGA_URL)
+
     assert job is not None
     assert job.workplace_type == "Híbrido"
 
@@ -189,7 +218,10 @@ def test_parse_page_modalidade_colada_ao_titulo():
         '"description": "desc"',
         '"description": "JuniorAtua\\u00e7\\u00e3o Hibrida/remota; - Faria Lima; Inicio Imediato."',
     )
-    job = _source()._parse_page(html, VAGA_URL)
+    src = _source()
+
+    job = src._parse_page(html, VAGA_URL)
+
     assert job is not None
     assert job.workplace_type == "Híbrido"
 
@@ -199,18 +231,25 @@ def test_parse_page_ignora_mencoes_soltas_de_home_office_na_descricao():
         '"description": "desc"',
         '"description": "Suporte remoto a clientes. Beneficios: Auxilio Home Office."',
     )
-    job = _source()._parse_page(html, VAGA_URL)
+    src = _source()
+
+    job = src._parse_page(html, VAGA_URL)
+
     assert job is not None
     assert job.workplace_type == "Presencial"
     assert job.location == "Brasília, DF, Brasil"
 
 
 def test_vid_da_url_aceita_numerico_e_uuid():
-    from scraper.sources.recrutei import _vid_da_url
-    assert _vid_da_url(VAGA_URL) == "153211"
-    assert _vid_da_url(
+    uuid_url = (
         "https://empregos.recrutei.com.br/vaga/anonimo/7b2d9a38-9099-439b-873e-917a82d70feb"
-    ) == "7b2d9a38-9099-439b-873e-917a82d70feb"
+    )
+
+    numeric_id = _vid_da_url(VAGA_URL)
+    uuid_id = _vid_da_url(uuid_url)
+
+    assert numeric_id == "153211"
+    assert uuid_id == "7b2d9a38-9099-439b-873e-917a82d70feb"
 
 
 class FakeResponse:
@@ -247,7 +286,9 @@ def test_coleta_completa_percorre_a_listagem_e_para_no_fim(tmp_path):
         ],
         recrutei_full=True,
     )
+
     jobs = src.fetch([])
+
     assert [j.external_id for j in jobs] == ["153211"]
 
 
@@ -259,7 +300,9 @@ def test_coleta_sitemap_usa_a_janela_de_dias(tmp_path):
             FakeResponse(DETALHE_HTML),
         ],
     )
+
     jobs = src.fetch([])
+
     # so a vaga de 04/09 esta dentro das ultimas 24h
     assert [j.external_id for j in jobs] == ["153211"]
 
@@ -277,12 +320,14 @@ def test_checkpoint_grava_e_retoma(tmp_path):
             FakeResponse(""),  # body vazio: para e mantem o checkpoint
         ],
     )
+
     jobs = src.fetch([])
-    assert len(jobs) == 1
     checkpoint = tmp_path / CHECKPOINT_NAME
-    assert checkpoint.is_file()
     with open(checkpoint, encoding="utf-8-sig", newline="") as fh:
         linhas = list(csv.DictReader(fh))
+
+    assert len(jobs) == 1
+    assert checkpoint.is_file()
     assert [l["external_id"] for l in linhas] == ["153211"]
 
 
@@ -297,5 +342,9 @@ def test_coleta_completa_remove_o_checkpoint(tmp_path):
         ],
         recrutei_full=True,
     )
+
     src.fetch([])
-    assert not (tmp_path / CHECKPOINT_NAME).exists()
+
+    checkpoint_exists = (tmp_path / CHECKPOINT_NAME).exists()
+
+    assert not checkpoint_exists

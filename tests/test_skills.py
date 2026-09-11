@@ -16,10 +16,18 @@ def ext():
     return SkillExtractor.from_file()
 
 
-def test_normalize_tech_preserva_cerquilha_e_mais():
-    assert normalize_tech("C# e C++") == "c# e c++"
-    assert normalize_tech("Node.js") == "node js"
-    assert normalize_tech("Programação Ágil") == "programacao agil"
+@pytest.mark.parametrize(
+    "raw,expected",
+    [
+        ("C# e C++", "c# e c++"),
+        ("Node.js", "node js"),
+        ("Programação Ágil", "programacao agil"),
+    ],
+)
+def test_normalize_tech_preserva_cerquilha_e_mais(raw, expected):
+    result = normalize_tech(raw)
+
+    assert result == expected
 
 
 @pytest.mark.parametrize(
@@ -51,8 +59,11 @@ def test_exclusao_de_sufixo_do_alias_e_generica():
         exclusoes_sufixo_alias={"Ferramenta": {"foo": ("bar",)}},
     )
 
-    assert extractor.extract("Uso de foo") == ["Ferramenta"]
-    assert extractor.extract("Uso de foo bar") == ["Ferramenta Bar"]
+    foo = extractor.extract("Uso de foo")
+    foo_bar = extractor.extract("Uso de foo bar")
+
+    assert foo == ["Ferramenta"]
+    assert foo_bar == ["Ferramenta Bar"]
 
 
 def test_extrai_linguagens_e_frameworks(ext):
@@ -62,30 +73,44 @@ def test_extrai_linguagens_e_frameworks(ext):
 
 def test_c_sharp_nao_vira_c_solto(ext):
     # "C#" nao pode ser reduzido a "c" e casar com qualquer letra c do texto.
-    assert "C#" in ext.extract("Dev .NET", "Experiência com C# e SQL Server.")
-    assert "C#" not in ext.extract("Analista", "Turno c de segunda a sexta.")
+    legitimas = ext.extract("Dev .NET", "Experiência com C# e SQL Server.")
+    falso_positivo = ext.extract("Analista", "Turno c de segunda a sexta.")
+
+    assert "C#" in legitimas
+    assert "C#" not in falso_positivo
 
 
 def test_nao_casa_dentro_de_outra_palavra(ext):
     found = ext.extract("Vaga em Goiânia", "Atuação presencial.")
-    assert "Go" not in found
     java_only = ext.extract("Dev", "Stack JavaScript no front.")
+
+    assert "Go" not in found
     assert "JavaScript" in java_only
     assert "Java" not in java_only
 
 
 def test_go_casa_so_com_g_maiusculo(ext):
     # "Go" (linguagem) casa; "go" minusculo e palavra comum do ingles.
-    assert "Go" in ext.extract("Dev", "Conhecimento de Go.")
-    assert "Go" not in ext.extract("Dev", "Apoiar o go live do sistema.")
-    assert "Go" not in ext.extract("Dev", "Vaga em Anápolis, GO.")
+    linguagem = ext.extract("Dev", "Conhecimento de Go.")
+    go_live = ext.extract("Dev", "Apoiar o go live do sistema.")
+    estado = ext.extract("Dev", "Vaga em Anápolis, GO.")
+
+    assert "Go" in linguagem
+    assert "Go" not in go_live
+    assert "Go" not in estado
 
 
 def test_alias_de_caixa_mista_casa_em_qualquer_caixa(ext):
     # "pfSense" tem maiuscula no proprio nome: continua casando normalizado.
-    assert "Firewall" in ext.extract("Dev", "Configurar pfSense na rede.")
-    assert "Firewall" in ext.extract("Dev", "Configurar PFSENSE na rede.")
-    assert "Firewall" in ext.extract("Dev", "Configurar pfsense na rede.")
+    textos = [
+        "Configurar pfSense na rede.",
+        "Configurar PFSENSE na rede.",
+        "Configurar pfsense na rede.",
+    ]
+
+    resultados = [ext.extract("Dev", texto) for texto in textos]
+
+    assert all("Firewall" in resultado for resultado in resultados)
 
 
 def test_secao_de_beneficios_nao_conta_como_requisito(ext):
@@ -112,7 +137,10 @@ def test_beneficio_de_hardware_nao_conta_como_skill(ext):
 
 def test_requisitos_depois_de_beneficios_seguem_valendo_antes(ext):
     desc = "Conhecimento em Git e AWS. Informações adicionais: vale refeição."
-    assert {"Git", "AWS"} <= set(ext.extract("Dev", desc))
+
+    found = ext.extract("Dev", desc)
+
+    assert {"Git", "AWS"} <= set(found)
 
 
 def test_beneficios_no_meio_nao_corta_requisitos(ext):
@@ -174,8 +202,10 @@ def test_llama_cpp_nao_conta_como_cpp(ext):
     # "cpp" da linguagem C++.
     desc = "Execucao local de modelos abertos (ollama, vllm ou llama.cpp)."
     found = ext.extract("Desenvolvedor FullStack", desc)
+    legitimas = ext.extract("Dev", "Conhecimento de C++.")
+
     assert "C++" not in found
-    assert "C++" in ext.extract("Dev", "Conhecimento de C++.")
+    assert "C++" in legitimas
 
 
 def test_extrai_certificacoes_sla_e_oci_da_mv(ext):
@@ -200,13 +230,17 @@ def test_extrai_requisitos_genericos_de_engenharia(ext):
 
 def test_complexidade_generica_nao_vira_algoritmos(ext):
     # "requisições de baixa complexidade" nao e complexidade algoritmica.
-    assert "Algoritmos" not in ext.extract(
-        "Analista", "Tratar incidentes e requisições de baixa complexidade.")
+    found = ext.extract(
+        "Analista", "Tratar incidentes e requisições de baixa complexidade."
+    )
+
+    assert "Algoritmos" not in found
 
 
 def test_https_de_link_nao_vira_criptografia(ext):
-    assert "Criptografia" not in ext.extract(
-        "Analista", "Saiba mais em https://exemplo.com/pagina")
+    found = ext.extract("Analista", "Saiba mais em https://exemplo.com/pagina")
+
+    assert "Criptografia" not in found
 
 
 def test_extrai_conceitos_genericos_de_dados(ext):
@@ -247,7 +281,10 @@ def test_extrai_atividades_de_suporte_da_vaga_embelleze(ext):
 
 def test_extrai_api_e_planilhas_genericas_da_vaga_omie(ext):
     desc = "Conhecimento em integrações via API ou planilhas será um diferencial."
-    assert {"APIs", "Planilhas"} <= set(ext.extract("Analista Júnior", desc))
+
+    found = ext.extract("Analista Júnior", desc)
+
+    assert {"APIs", "Planilhas"} <= set(found)
 
 
 def test_extrai_atividades_especificas_de_suporte_gupy(ext):
@@ -258,16 +295,21 @@ def test_extrai_atividades_especificas_de_suporte_gupy(ext):
         "Manutenções preventivas em hardwares e equipamentos de informática. "
         "Registrar as solicitações no sistema de chamados e montar racks."
     )
+    found = ext.extract("Técnico de Suporte", desc)
+
     assert {
         "Redes de Computadores", "Gestão de Chamados", "Suporte N1/N2",
         "Manutenção Preventiva", "Hardware", "Microinformática",
         "Sistemas Operacionais",
-    } <= set(ext.extract("Técnico de Suporte", desc))
+    } <= set(found)
 
 
 def test_sem_texto_devolve_lista_vazia(ext):
-    assert ext.extract("") == []
-    assert ext.extract("Analista Júnior", "") == []
+    vazio = ext.extract("")
+    titulo_sem_descricao = ext.extract("Analista Júnior", "")
+
+    assert vazio == []
+    assert titulo_sem_descricao == []
 
 
 def test_resultado_sem_repeticao_e_ordenado(ext):
@@ -296,7 +338,10 @@ def test_skills_by_area_agrupa_e_ordena():
 
 def test_skills_by_area_ignora_area_sem_skills():
     jobs = [Job(source="t", external_id="1", title="a", area="QA", skills=[])]
-    assert "QA" not in skills_by_area(jobs)
+
+    result = skills_by_area(jobs)
+
+    assert "QA" not in result
 
 
 def test_jobs_with_skills_by_area():
@@ -313,7 +358,9 @@ def test_jobs_with_skills_by_area():
 
 
 def test_jobs_with_skills_by_area_lista_vazia():
-    assert jobs_with_skills_by_area([]) == {}
+    result = jobs_with_skills_by_area([])
+
+    assert result == {}
 
 
 def test_overall_skill_counts():
@@ -321,24 +368,38 @@ def test_overall_skill_counts():
         Job(source="t", external_id="1", title="a", skills=["SQL", "Python"]),
         Job(source="t", external_id="2", title="b", skills=["SQL"]),
     ]
-    assert overall_skill_counts(jobs)[0] == ("SQL", 2)
+
+    result = overall_skill_counts(jobs)
+
+    assert result[0] == ("SQL", 2)
 
 
 def test_skills_vao_para_o_csv_como_texto():
     job = Job(source="t", external_id="1", title="a", skills=["SQL", "Python"])
-    assert job.to_row()["skills"] == "SQL, Python"
+
+    row = job.to_row()
+
+    assert row["skills"] == "SQL, Python"
 
 def test_contextos_descarte_ignora_mencao_a_empresa(ext):
     # 'Hardware' nao deve contar quando fala da empresa contratante.
     texto = ('Vaga de suporte. Uma gigante brasileira de hardware e servicos, '
              'referencia em inovacao. Requisitos: conhecimento em redes.')
-    assert 'Hardware' not in ext.extract('Vaga', texto)
+
+    found = ext.extract('Vaga', texto)
+
+    assert 'Hardware' not in found
 
 
 def test_contextos_descarte_ignora_nome_proprio(ext):
-    assert 'Hardware' not in ext.extract('Estagio', 'Vaga no Instituto Hardware BR.')
+    found = ext.extract('Estagio', 'Vaga no Instituto Hardware BR.')
+
+    assert 'Hardware' not in found
 
 
 def test_contextos_descarte_mantem_menção_legitima(ext):
     texto = 'Tecnico: realizar manutencao de hardware e software. Instalar equipamentos.'
-    assert 'Hardware' in ext.extract('Tecnico', texto)
+
+    found = ext.extract('Tecnico', texto)
+
+    assert 'Hardware' in found

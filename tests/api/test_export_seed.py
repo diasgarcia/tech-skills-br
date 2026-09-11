@@ -41,14 +41,13 @@ def test_exportar_seed_gera_csv_corretamente():
         finally:
             engine.dispose()
 
+        with open(output_csv, encoding="utf-8-sig") as fh:
+            reader = list(csv.DictReader(fh))
 
         assert resultado["total_vagas"] == 1
         assert output_csv.exists()
-
-        with open(output_csv, encoding="utf-8-sig") as fh:
-            reader = list(csv.DictReader(fh))
-            assert len(reader) == 1
-            assert reader[0]["source"] == "gupy"
-            assert reader[0]["title"] == "Dev Python Jr"
-            assert reader[0]["skills"] == "Docker, Python"
-            assert reader[0]["workplace_type"] == "Presencial"
+        assert len(reader) == 1
+        assert reader[0]["source"] == "gupy"
+        assert reader[0]["title"] == "Dev Python Jr"
+        assert reader[0]["skills"] == "Docker, Python"
+        assert reader[0]["workplace_type"] == "Presencial"
