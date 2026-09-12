@@ -35,8 +35,7 @@ PENDENTES_POR_FONTE = {
         "AND (published_date IS NULL OR published_date >= date('now', '-30 days'))"
     ),
     "gupy": (
-        "source='gupy' AND LENGTH(description) = 500 "
-        "AND (published_date IS NULL OR published_date >= date('now', '-30 days'))"
+        "source='gupy' AND url LIKE '%://%.gupy.io/%'"
     ),
     "geekhunter": (
         "source='geekhunter' AND (description IS NULL OR LENGTH(description) < 300 "

@@ -8,6 +8,7 @@ from scraper.skills import SkillExtractor
 from scripts.enrich_outras_fontes import (
     QUERY_GEEKHUNTER_FORCADO,
     QUERY_GUPY_FORCADO,
+    QUERY_GUPY_PENDENTES,
     QUERY_INFOJOBS_FORCADO,
     QUERY_VAGAS_PENDENTES,
     _enriquecer,
@@ -195,15 +196,18 @@ def test_fetch_trampos_resposta_invalida_devolve_vazio():
 def test_fetch_gupy_extrai_e_limpa_html_da_descricao():
     html = """
     <script type="application/ld+json">
-      {"@type": "JobPosting", "description": "<p>Vaga para atuar com <b>Python</b> e Django.</p>"}
+      {"@type": "JobPosting",
+       "description": "<p>Vaga para atuar com <b>Python</b> e Django.</p>",
+       "hiringOrganization": {"@type": "Organization", "name": "FCamara"}}
     </script>
     """
     session = FakeSession([FakeResponse(text=html)])
 
-    desc, _ = fetch_gupy(session, Lock(), "https://empresa.gupy.io/job/abc")
+    dados, _ = fetch_gupy(session, Lock(), "https://empresa.gupy.io/job/abc")
 
-    assert "Python" in desc
-    assert "<p>" not in desc
+    assert "Python" in dados["description"]
+    assert "<p>" not in dados["description"]
+    assert dados["company"] == "FCamara"
 
 
 def test_fetch_gupy_extrai_descricao_do_next_data():
@@ -212,19 +216,21 @@ def test_fetch_gupy_extrai_descricao_do_next_data():
       {"props":{"pageProps":{"job":{
         "description":"<p>Descrição da vaga</p>",
         "responsibilities":"<p>Configurar Hardware e Service Desk.</p>",
-        "prerequisites":"<p>Conhecimento em Pacote Office.</p>"
+        "prerequisites":"<p>Conhecimento em Pacote Office.</p>",
+        "careerPage":{"name":"Empresa pelo Next.js"}
       }}}}
     </script>
     """
     session = FakeSession([FakeResponse(text=html)])
 
-    desc, status = fetch_gupy(session, Lock(), "https://empresa.gupy.io/job/abc")
+    dados, status = fetch_gupy(session, Lock(), "https://empresa.gupy.io/job/abc")
 
     assert status is None
-    assert "Hardware" in desc
-    assert "Service Desk" in desc
-    assert "Pacote Office" in desc
-    assert "<p>" not in desc
+    assert "Hardware" in dados["description"]
+    assert "Service Desk" in dados["description"]
+    assert "Pacote Office" in dados["description"]
+    assert "<p>" not in dados["description"]
+    assert dados["company"] == "Empresa pelo Next.js"
 
 
 def test_fetch_infojobs_teaser_curto_permanece_pendente():
@@ -246,7 +252,17 @@ def test_fetch_gupy_job_removido_devolve_vazio():
 
     result = fetch_gupy(session, Lock(), "123")
 
-    assert result == ("", None)
+    assert result == ({}, None)
+
+
+def test_fetch_gupy_layout_desconhecido_nao_inventa_404():
+    session = FakeSession([FakeResponse(text="<html>layout novo</html>")])
+    session.last_status_code = 200
+
+    dados, status = fetch_gupy(session, Lock(), "https://empresa.gupy.io/job/abc")
+
+    assert dados == {}
+    assert status == 200
 
 
 def test_data_anterior_ao_corte_remove_a_vaga_em_vez_de_atualizar():
@@ -392,6 +408,41 @@ def test_status_410_marca_a_vaga_como_encerrada():
     assert encerrada == 1
 
 
+def test_descricao_menor_nao_substitui_atual_mas_empresa_e_corrigida():
+    conn, c = _vagas_com_fixture()
+    c.execute("ALTER TABLE vagas ADD COLUMN company TEXT")
+    descricao_atual = "Descrição completa com Python, Django e testes automatizados."
+    c.execute(
+        "INSERT INTO vagas "
+        "(id, url, title, description, company, enrich_encerrada) "
+        "VALUES (1, 'u1', 'Dev Python', ?, 'VENHA PARA NOSSO TIME', 0)",
+        (descricao_atual,),
+    )
+    c.execute(
+        "CREATE TABLE vaga_tecnologia (vaga_id INTEGER, tecnologia_id INTEGER)"
+    )
+    extractor = SkillExtractor(
+        {"linguagens": {"Python": ["python"]}},
+        secoes_descarte=[], secoes_conteudo=[], contextos_descarte={},
+    )
+
+    def fake_fetch(session, lock, url):
+        return {"description": "Descrição curta", "company": "FCamara"}, 200
+
+    total = _enriquecer(
+        c, None, Lock(), extractor, {"python": 1},
+        "SELECT id, url, title FROM vagas", [], fake_fetch,
+    )
+    vaga = c.execute(
+        "SELECT description, company, enrich_encerrada FROM vagas WHERE id = 1"
+    ).fetchone()
+    skills = c.execute("SELECT * FROM vaga_tecnologia").fetchall()
+
+    assert total == 1
+    assert vaga == (descricao_atual, "FCamara", 1)
+    assert skills == [(1, 1)]
+
+
 def test_fetch_parando_nao_chama_a_fonte_depois_do_429():
     # Depois do primeiro 429 o lote para de fazer requests de verdade:
     # as futures restantes devolvem 429 falso sem tocar na fonte.
@@ -465,11 +516,27 @@ def test_query_geekhunter_forcado_inclui_vagas_ja_resolvidas():
     assert ids == {1, 2}
 
 
-def test_query_gupy_forcado_inclui_truncada_marcada_como_resolvida():
+def test_query_gupy_pendente_inclui_toda_vaga_ainda_nao_conferida():
     conn, c = _vagas_com_fixture()
-    c.execute(
-        "CREATE TABLE vaga_tecnologia (vaga_id INTEGER, tecnologia_id INTEGER)"
+    c.executemany(
+        "INSERT INTO vagas (id, url, title, description, source, enrich_encerrada) "
+        "VALUES (?, ?, ?, ?, ?, ?)",
+        [
+            (1, "https://um.gupy.io/job/1", "t1", "descricao completa", "gupy", 0),
+            (2, "https://dois.gupy.io/job/2", "t2", "x" * 499, "gupy", 0),
+            (3, "https://tres.gupy.io/job/3", "t3", "descricao completa", "gupy", 1),
+            (4, "https://fora.example/4", "t4", "descricao completa", "vagas", 0),
+            (5, "https://vaga-ja.com/vagas/5", "t5", "descricao completa", "gupy", 0),
+        ],
     )
+
+    ids = {r[0] for r in c.execute(QUERY_GUPY_PENDENTES)}
+
+    assert ids == {1, 2}
+
+
+def test_query_gupy_forcado_inclui_todo_o_legado():
+    conn, c = _vagas_com_fixture()
     c.executemany(
         "INSERT INTO vagas (id, url, title, description, source, enrich_encerrada) "
         "VALUES (?, ?, ?, ?, ?, ?)",
@@ -479,11 +546,10 @@ def test_query_gupy_forcado_inclui_truncada_marcada_como_resolvida():
             (3, "u3", "t3", "descricao completa", "gupy", 1),
         ],
     )
-    c.execute("INSERT INTO vaga_tecnologia VALUES (3, 1)")
-    conn.commit()
 
     ids = {r[0] for r in c.execute(QUERY_GUPY_FORCADO)}
-    assert ids == {1, 2}
+
+    assert ids == {1, 2, 3}
 
 
 def test_query_infojobs_forcado_inclui_teaser_marcado_como_resolvido():
