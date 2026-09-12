@@ -7,9 +7,8 @@ on:
   # manual continua disponivel.
   #
   # `origem` e `rodada` sao informados pelo cron-job.org no corpo do
-  # dispatch e tornam a rotulagem do commit infalivel (relogio do runner
-  # atrasa na fila). O botao manual usa o default (manual). Sem inputs
-  # (config antiga), vale a heuristica do relogio como fallback.
+  # dispatch. Somente cron com rodada 1, 2 ou 3 e automatico; qualquer
+  # combinacao sem uma rodada valida e tratada como execucao manual.
   workflow_dispatch:
     inputs:
       origem:
@@ -52,13 +51,8 @@ jobs:
     - name: 1. Baixar repositorio
       uses: actions/checkout@v4
 
-    - name: 2. Registrar horario de inicio da rodada
+    - name: 2. Registrar data da rodada
       run: |
-        # O horario de inicio e o fallback do rotulo do commit: a fonte da
-        # verdade sao os inputs origem/rodada do dispatch (passo 7), e o
-        # MINUTOS_BRT cobre dispatches antigos sem inputs. O horario e o
-        # de INICIO da run (09h16/14h16/19h16 BRT), nao o de conclusao.
-        echo "MINUTOS_BRT=$((10#$(TZ=America/Sao_Paulo date +'%H%M')))" >> "$GITHUB_ENV"
         echo "DATA_HOJE=$(TZ=America/Sao_Paulo date +'%d/%m/%Y')" >> "$GITHUB_ENV"
 
     - name: 3. Configurar Python 3.12
@@ -112,13 +106,27 @@ jobs:
         # o parquet (Kaggle) precisam ser o MESMO snapshot da rodada.
         python scripts/export_seed.py
         gh release upload latest data/vagas.db seed/vagas.csv --clobber
-        # O relatorio entra no git so na rodada 1 (09:16). Os graficos do
-        # README sao gerados depois, direto no artefato do Pages, em toda rodada.
-        python scripts/report_db.py
-        if [ "${{ github.event.inputs.rodada }}" = "2" ] || [ "${{ github.event.inputs.rodada }}" = "3" ]; then
-          echo "GERAR_RELATORIO=0" >> "$GITHUB_ENV"
+        ORIGEM_INPUT="$ORIGEM"
+        RODADA_INPUT="$RODADA"
+        if [ "$ORIGEM_INPUT" = "cron" ] && { [ "$RODADA_INPUT" = "1" ] || [ "$RODADA_INPUT" = "2" ] || [ "$RODADA_INPUT" = "3" ]; }; then
+          EXECUCAO="cron"
+          RODADA_EXECUCAO="$RODADA_INPUT"
+          export RODADA="$RODADA_INPUT"
         else
-          echo "GERAR_RELATORIO=1" >> "$GITHUB_ENV"
+          EXECUCAO="manual"
+          RODADA_EXECUCAO="manual"
+          export RODADA="manual"
+        fi
+        echo "EXECUCAO=$EXECUCAO" >> "$GITHUB_ENV"
+        echo "RODADA_EXECUCAO=$RODADA_EXECUCAO" >> "$GITHUB_ENV"
+
+        # O relatorio e os graficos do README sao atualizados na rodada 3
+        # (19:16 BRT) ou quando a coleta e tratada como manual.
+        if [ "$EXECUCAO" = "manual" ] || [ "$RODADA_INPUT" = "3" ]; then
+          python scripts/report_db.py
+          echo "ATUALIZAR_RESUMOS=1" >> "$GITHUB_ENV"
+        else
+          echo "ATUALIZAR_RESUMOS=0" >> "$GITHUB_ENV"
         fi
         python scripts/export_pages_data.py
         MUDOU=0
@@ -149,6 +157,7 @@ jobs:
       env:
         PYTHONPATH: .
         KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+        ORIGEM: ${{ github.event.inputs.origem }}
         RODADA: ${{ github.event.inputs.rodada }}
         DATA_HOJE: ${{ env.DATA_HOJE }}
 
@@ -158,33 +167,19 @@ jobs:
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
         # O estado operacional vive no asset vagas.db do release "latest";
-        # no git entra so o relatorio .md da rodada 1 (#24).
-        if [ "$GERAR_RELATORIO" != "0" ]; then
+        # no git entra so o relatorio .md da rodada 3 ou de uma coleta manual (#24).
+        if [ "$ATUALIZAR_RESUMOS" = "1" ]; then
           git add docs/relatorios/*.md
         fi
 
-        # So importa o que foi staged: nas rodadas 2/3 o relatorio .md e
-        # regenerado mas nao entra no commit, e a arvore suja nao pode
-        # impedir o exit 0 (ja quebrou a rodada 2 do dia 06/09).
+        # So importa o que foi staged: nas rodadas automaticas 1/2 nao ha
+        # arquivo do relatorio para commitar.
         git diff --staged --quiet && exit 0
 
-        # Rotulo do commit. A fonte da verdade sao os inputs do dispatch
-        # (origem/rodada), enviados pelo cron-job.org. O horario de inicio
-        # (MINUTOS_BRT, registrado no passo 2) fica como fallback para
-        # dispatches antigos sem inputs.
-        ORIGEM="${{ github.event.inputs.origem }}"
-        RODADA="${{ github.event.inputs.rodada }}"
-        if [ "$ORIGEM" = "cron" ] && { [ "$RODADA" = "1" ] || [ "$RODADA" = "2" ] || [ "$RODADA" = "3" ]; }; then
-          MENSAGEM="chore(data): coleta automatizada de vagas [${DATA_HOJE}] - ${RODADA}"
-        elif [ "$ORIGEM" = "manual" ]; then
-          N=$(git log --format='%s' | grep -c "coleta automatizada de vagas \[${DATA_HOJE}\] - manual" || true)
-          MENSAGEM="chore(data): coleta automatizada de vagas [${DATA_HOJE}] - manual $((N + 1))"
-        elif [ "${MINUTOS_BRT}" -ge 916 ] && [ "${MINUTOS_BRT}" -le 921 ]; then
-          MENSAGEM="chore(data): coleta automatizada de vagas [${DATA_HOJE}] - 1"
-        elif [ "${MINUTOS_BRT}" -ge 1416 ] && [ "${MINUTOS_BRT}" -le 1421 ]; then
-          MENSAGEM="chore(data): coleta automatizada de vagas [${DATA_HOJE}] - 2"
-        elif [ "${MINUTOS_BRT}" -ge 1916 ] && [ "${MINUTOS_BRT}" -le 1921 ]; then
-          MENSAGEM="chore(data): coleta automatizada de vagas [${DATA_HOJE}] - 3"
+        # Somente cron com rodada valida recebe o rotulo automatico.
+        # Cron sem rodada (ou com valor invalido) usa o fluxo manual.
+        if [ "$EXECUCAO" = "cron" ]; then
+          MENSAGEM="chore(data): coleta automatizada de vagas [${DATA_HOJE}] - ${RODADA_EXECUCAO}"
         else
           N=$(git log --format='%s' | grep -c "coleta automatizada de vagas \[${DATA_HOJE}\] - manual" || true)
           MENSAGEM="chore(data): coleta automatizada de vagas [${DATA_HOJE}] - manual $((N + 1))"
@@ -207,7 +202,7 @@ jobs:
           else
             git rebase --abort 2>/dev/null || true
             git reset --hard origin/main
-            if [ "$GERAR_RELATORIO" != "0" ]; then
+            if [ "$ATUALIZAR_RESUMOS" = "1" ]; then
               git checkout "${COMMIT_BOT}" -- docs/relatorios/*.md
               git add docs/relatorios/*.md
             fi
@@ -222,7 +217,17 @@ jobs:
         mkdir -p _site/api _site/assets
         cp .github/web/index.html _site/
         cp api/web/*.json _site/api/
-        python scripts/export_readme_charts.py --output-dir _site/assets
+        if [ "$ATUALIZAR_RESUMOS" = "1" ]; then
+          python scripts/export_readme_charts.py --output-dir _site/assets
+        else
+          # O Pages e publicado em toda rodada para atualizar a API JSON.
+          # Preserve os graficos publicados ate a rodada 3.
+          for arquivo in vagas-habilidades-30d.svg areas-habilidades.svg; do
+            curl --fail --silent --show-error --location --retry 3 \
+              "https://diasgarcia.github.io/tech-skills-br/assets/${arquivo}" \
+              --output "_site/assets/${arquivo}"
+          done
+        fi
 
     - name: 9. Preparar artefato do GitHub Pages
       uses: actions/upload-pages-artifact@v3
