@@ -126,6 +126,7 @@ def test_importa_e_vincula_tecnologias(tmp_path):
         ("Empresa Confidencial", "Confidencial"),
         ("Confidencial430", "Confidencial"),
         ("Página de Carreira - Confidencial", "Confidencial"),
+        ("VENHA SER #SANGUELARANJA 🧡🚀", "FCamara"),
         ("randstad-1", "Randstad"),
         ("Randstad - Matriz", "Randstad"),
         ("Nava | Tech for Business", "Nava Technology for Business"),

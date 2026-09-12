@@ -59,6 +59,7 @@ MIN_DATA_CORTE = date(2026, 1, 1)
 # A mesma empresa com grafias diferentes entre portais. A chave e o
 # nome normalizado; o valor e o rotulo canonico exibido no ranking.
 _EMPRESAS_CANONICAS = {
+    "venha ser sanguelaranja": "FCamara",
     "randstad 1": "Randstad",
     "randstad matriz": "Randstad",
     "nava tech for business": "Nava Technology for Business",
