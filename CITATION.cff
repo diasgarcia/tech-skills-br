@@ -5,7 +5,7 @@ message: >-
 title: tech-skills-br - Mapeamento de Skills em Tecnologia no Brasil
 abstract: >-
   Projeto de pesquisa científica (PIBIC / Iniciação Científica) que
-  mapeia as habilidades técnicas demandadas em vagas de nível de
+  mapeia as habilidades técnicas citadas em anúncios de vagas de nível de
   entrada no mercado de tecnologia brasileiro: júnior, estágio,
   trainee e aprendiz. A coleta multi-fonte alimenta um pipeline que
   extrai as habilidades por taxonomia curada, deduplica os anúncios e

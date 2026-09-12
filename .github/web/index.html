@@ -435,7 +435,7 @@
         <h1>tech-skills-br</h1>
         <p style="color: var(--text-muted); font-size: 11px; margin-top: 2px;">
 
-          Mineração de dados e mapeamento contínuo das habilidades demandadas pelo mercado brasileiro
+          Mapeamento das habilidades citadas em anúncios de vagas de entrada em tecnologia no Brasil
         </p>
       </div>
     </div>
@@ -465,7 +465,7 @@
         <p style="color: var(--text-muted); font-size: 11px; margin-top: 4px;">Empresas únicas catalogadas</p>
       </div>
       <div class="card">
-        <div class="card-title">Tecnologia Mais Demandada</div>
+        <div class="card-title">Tecnologia Mais Citada</div>
         <div class="card-value" style="color: var(--green);" id="kpi-top-skill">--</div>
         <p style="color: var(--text-muted); font-size: 11px; margin-top: 4px;" id="kpi-top-skill-count">--</p>
       </div>
@@ -508,15 +508,15 @@
     <div class="card">
       <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 8px;">
         <div>
-          <div class="card-title" style="font-weight: 700;">Ranking Geral de Tecnologias Demandadas</div>
-          <p style="color: var(--text-muted); font-size: 11px;">Percentual calculado sobre as vagas que informam requisitos técnicos.</p>
+          <div class="card-title" style="font-weight: 700;">Tecnologias Mais Citadas nos Anúncios</div>
+          <p style="color: var(--text-muted); font-size: 11px;">Frequência entre os anúncios com ao menos uma habilidade identificada. Uma vaga pode citar várias habilidades.</p>
         </div>
         <input type="text" class="search-input" id="search-skills" placeholder="Filtrar tecnologia..." oninput="renderSkillsTable()">
       </div>
 
       <div class="scroll-table">
         <table id="table-skills" class="skills-table">
-          <thead><tr><th class="rank-col">#</th><th class="technology-col">Tecnologia</th><th class="hide-mobile" style="text-align: center; width: 22%;">Categoria</th><th style="text-align: center; width: 14%;">Vagas</th><th style="text-align: right; width: 10%;">Demanda %</th><th class="hide-mobile proportion-col">Proporção</th></tr></thead>
+          <thead><tr><th class="rank-col">#</th><th class="technology-col">Tecnologia</th><th class="hide-mobile" style="text-align: center; width: 22%;">Categoria</th><th style="text-align: center; width: 14%;">Vagas</th><th style="text-align: right; width: 10%;">Freq. %</th><th class="hide-mobile proportion-col">Proporção</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -537,7 +537,7 @@
 
       <div class="scroll-table">
         <table id="table-area-skills" class="skills-table">
-          <thead><tr><th class="rank-col">#</th><th class="technology-col">Tecnologia</th><th class="hide-mobile" style="text-align: center; width: 22%;">Categoria</th><th style="text-align: center; width: 14%;"><span class="hide-mobile">Vagas na Área</span><span class="show-mobile">Vagas</span></th><th style="text-align: right; width: 10%;">Demanda %</th><th class="hide-mobile proportion-col">Proporção</th></tr></thead>
+          <thead><tr><th class="rank-col">#</th><th class="technology-col">Tecnologia</th><th class="hide-mobile" style="text-align: center; width: 22%;">Categoria</th><th style="text-align: center; width: 14%;"><span class="hide-mobile">Vagas na Área</span><span class="show-mobile">Vagas</span></th><th style="text-align: right; width: 10%;">Freq. %</th><th class="hide-mobile proportion-col">Proporção</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -601,7 +601,7 @@
           </tr>
           <tr>
             <td><code>GET /api/tecnologias.json</code></td>
-            <td class="hide-mobile">Ranking completo de todas as tecnologias e habilidades demandadas</td>
+            <td class="hide-mobile">Ranking de tecnologias e habilidades identificadas nos anúncios</td>
             <td style="text-align: center;"><a href="api/tecnologias.json" target="_blank" rel="noopener noreferrer" title="Abrir JSON" style="font-size: 14px; text-decoration: none;">↗</a></td>
           </tr>
           <tr>
@@ -624,11 +624,11 @@
       <div class="about-copy">
         <p>O Tech Skills Brasil é uma pesquisa de iniciação científica. O projeto estuda as habilidades que aparecem em vagas de entrada na área de tecnologia no Brasil.</p>
 
-        <p>A pesquisa identifica as habilidades que o mercado pede. Depois, ela compara os resultados com a formação dos estudantes de computação.</p>
+        <p>A pesquisa identifica as habilidades citadas nos anúncios coletados. Depois, ela relaciona os resultados com a formação dos estudantes de computação.</p>
 
-        <p>O estudo considera vagas de estágio, trainee, aprendiz e nível júnior. Ele não avalia a demanda por profissionais plenos, seniores ou líderes.</p>
+        <p>O estudo considera vagas de estágio, trainee, aprendiz e nível júnior. Ele não inclui profissionais plenos, seniores ou líderes.</p>
 
-        <p>Os números mostram as vagas encontradas durante o período da pesquisa. Eles não representam todas as vagas de tecnologia do Brasil. Os resultados podem mudar com o tempo.</p>
+        <p>Os números mostram os anúncios encontrados durante a pesquisa. Eles não representam todas as vagas de tecnologia do Brasil nem o número de contratações. Textos incompletos e termos fora do vocabulário podem deixar habilidades sem registro.</p>
 
         <p>Este projeto não é um portal de empregos. Os links mostram a origem das informações. O projeto não recomenda vagas e não participa de contratações.</p>
 
@@ -865,15 +865,16 @@ function selectArea(areaName) {
 
 function renderAreaDetail() {
   const areaInfo = (resumoData.skills_by_area && resumoData.skills_by_area[currentArea]) || { total_vagas: 0, skills: [] };
-  document.getElementById("area-detail-title").innerText = `Habilidades mais exigidas em ${currentArea}`;
-  document.getElementById("area-detail-subtitle").innerText = `Base: ${areaInfo.total_vagas} vagas na área. Todas as tecnologias com ao menos 1 registro:`;
+  document.getElementById("area-detail-title").innerText = `Habilidades mais citadas em ${currentArea}`;
+  const baseSkills = areaInfo.skills?.length ? (areaInfo.vagas_com_tech || 0) : 0;
+  document.getElementById("area-detail-subtitle").innerText = `${areaInfo.total_vagas} anúncios na área. Frequência calculada sobre ${baseSkills} com ao menos uma habilidade identificada.`;
 
   const tbody = document.querySelector("#table-area-skills tbody");
   tbody.innerHTML = "";
 
   if (!areaInfo.skills || areaInfo.skills.length === 0) {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td colspan="6" style="text-align: center; color: var(--text-muted); padding: 18px;">As vagas desta especialidade focam em atribuições funcionais de cargo (ex: montagem, bancada, circuitos, firmware) sem stacks padronizadas de software listadas no corpo do anúncio.</td>`;
+    tr.innerHTML = `<td colspan="6" style="text-align: center; color: var(--text-muted); padding: 18px;">Nenhuma habilidade foi identificada nos textos disponíveis desta área. Isso pode ocorrer por texto incompleto ou termos fora do vocabulário.</td>`;
     tbody.appendChild(tr);
     return;
   }

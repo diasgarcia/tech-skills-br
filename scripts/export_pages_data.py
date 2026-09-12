@@ -4,7 +4,7 @@ Gera os endpoints estaticos JSON que alimentam o site e funcionam como uma API p
   - `api/web/resumo.json`      -> Metadados gerais, KPIs e distribuicoes
   - `api/web/vagas.json`       -> Lista consolidada de todas as vagas
   - `api/web/areas.json`       -> Ranking das areas tecnicas
-  - `api/web/tecnologias.json`  -> Ranking de tecnologias demandadas
+  - `api/web/tecnologias.json`  -> Ranking de tecnologias citadas nos anuncios
 """
 
 from __future__ import annotations

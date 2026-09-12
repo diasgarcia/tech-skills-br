@@ -23,7 +23,7 @@ from scraper.sources import AVAILABLE_SOURCES, DEFAULT_SOURCES
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="tech-skills-br",
-        description="Mineracao e mapeamento de habilidades tecnicas (skills) demandadas no mercado de tecnologia no Brasil (PIBIC).",
+        description="Mineracao e mapeamento de habilidades tecnicas citadas em anuncios de vagas de tecnologia no Brasil (PIBIC).",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
@@ -165,8 +165,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  {row['posicao']:>2}. {row['area']:<18} {row['vagas']:>4} vagas "
               f"({row['percentual']:>5.1f}%) {bar}")
     print("=" * 62)
-    demanda_label = "demanda junior" if settings.only_junior else "demanda geral"
-    print(f"\n  Area com mais {demanda_label}: {result.top_area}")
+    print(f"\n  Area com mais anuncios coletados: {result.top_area}")
 
 
     print("\n  Arquivos gerados:")

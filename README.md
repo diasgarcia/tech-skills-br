@@ -1,6 +1,6 @@
 # Tech Skills Brasil
 
-Dados sobre as habilidades exigidas em vagas de entrada no mercado brasileiro de tecnologia.
+Dados sobre as habilidades citadas em anúncios de vagas de entrada em tecnologia no Brasil.
 
 [Explorar o painel](https://diasgarcia.github.io/tech-skills-br/) · [Analisar no Kaggle](https://www.kaggle.com/code/rafaeldiasgarcia/tech-skills-brasil-an-lise-di-ria) · [Baixar o dataset](https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br) · [Consultar a metodologia](https://github.com/diasgarcia/tech-skills-br/wiki)
 
@@ -16,9 +16,9 @@ Os gráficos são gerados com o banco consolidado. Eles mudam automaticamente qu
 
 ## Pergunta da pesquisa
 
-> Em que medida as diretrizes curriculares do MEC e os referenciais da Sociedade Brasileira de Computação preparam os estudantes para as habilidades exigidas pelo mercado de trabalho brasileiro?
+> Como as habilidades citadas nos anúncios de vagas de entrada observados se relacionam com a formação prevista nas diretrizes curriculares do MEC e nos referenciais da Sociedade Brasileira de Computação?
 
-Os dados oferecem evidências quantitativas para comparar a formação em Computação com as demandas encontradas nos anúncios.
+Os dados permitem analisar a frequência de menções nos anúncios coletados. A comparação com a formação em Computação exige interpretar as competências curriculares. A ausência do nome de uma ferramenta no currículo, por si só, não indica uma lacuna de formação.
 
 ## Como os dados são produzidos
 
@@ -29,6 +29,8 @@ Os dados oferecem evidências quantitativas para comparar a formação em Comput
 5. O projeto publica o banco consolidado, a API, o painel e o dataset.
 
 Detalhes sobre fontes, critérios, limitações e decisões estão na [wiki do projeto](https://github.com/diasgarcia/tech-skills-br/wiki).
+
+O [protocolo de validação](docs/validacao.md) separa os casos usados para ajustar as regras dos casos reservados para avaliação. As métricas dependem de anotação humana; os testes de código não medem a acurácia na amostra real.
 
 ## Acesse os resultados
 
@@ -43,6 +45,7 @@ Detalhes sobre fontes, critérios, limitações e decisões estão na [wiki do p
 ## Escopo
 
 - A amostra contém vagas encontradas durante o período da pesquisa. Ela não representa todas as vagas de tecnologia do Brasil.
+- Uma menção identificada no anúncio não mede contratações nem a necessidade real de uma habilidade no trabalho. A ausência de registro pode resultar de texto incompleto ou de um termo fora do vocabulário.
 - Os resultados mudam conforme novos anúncios entram na base.
 - O projeto não é um portal de empregos e não participa de processos seletivos.
 - Os links das vagas identificam a origem das informações.

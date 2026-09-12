@@ -127,6 +127,7 @@ def generate_db_report(
     lines.append(f"- **Período coberto:** {periodo_str}")
     lines.append(f"- **Total de vagas consolidadas:** {total_vagas}")
     lines.append("")
+    lines.append("Os resultados descrevem os anúncios coletados. As menções identificadas não representam toda a demanda do mercado nem o número de contratações.\n")
 
     print("\n[RANKING DE ÁREAS DE TECNOLOGIA]")
     lines.append("## Ranking de Áreas de Tecnologia\n")
@@ -188,9 +189,9 @@ def generate_db_report(
         lines.append(f"| {src} | {count} | {pct}% |")
 
     if tech_counts:
-        print("\n[TOP 20 TECNOLOGIAS MAIS DEMANDADAS]")
-        lines.append("\n## Top 20 Tecnologias Mais Demandadas\n")
-        lines.append("| Posição | Tecnologia | Vagas Citadas |")
+        print("\n[TOP 20 TECNOLOGIAS MAIS CITADAS NOS ANÚNCIOS]")
+        lines.append("\n## Top 20 Tecnologias Mais Citadas nos Anúncios\n")
+        lines.append("| Posição | Tecnologia | Anúncios com menção identificada |")
         lines.append("|---|---|---|")
         for pos, (tech, count) in enumerate(tech_counts, start=1):
             print(f"  {pos:2d}. {tech:<20} {count:4d} citações")
