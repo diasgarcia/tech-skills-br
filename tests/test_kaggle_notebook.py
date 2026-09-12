@@ -15,7 +15,9 @@ METADATA_PATH = NOTEBOOK_DIR / "kernel-metadata.json"
 def test_metadata_vincula_dataset_mais_recente() -> None:
     metadata = json.loads(METADATA_PATH.read_text(encoding="utf-8"))
 
-    assert metadata["id"] == "rafaeldiasgarcia/tech-skills-brasil-an-lise-di-ria"
+    assert metadata["id_no"] == 133865421
+    assert "id" not in metadata
+    assert metadata["title"] == "Tech Skills Brasil - Analise diaria"
     assert metadata["code_file"] == NOTEBOOK_PATH.name
     assert metadata["kernel_type"] == "notebook"
     assert metadata["dataset_sources"] == ["rafaeldiasgarcia/tech-skills-br"]
@@ -41,3 +43,23 @@ def test_notebook_e_json_valido_e_codigo_compila() -> None:
     assert '.str.split(";")' in codigo
     assert 'vagas["area"].astype("string").fillna("Não informada")' in codigo
     assert compiled is not None
+
+
+def test_workflows_usam_slug_sem_acentos_e_rodada_3_atualiza_notebook() -> None:
+    slug = "rafaeldiasgarcia/tech-skills-brasil-analise-diaria"
+    old_slug = "rafaeldiasgarcia/tech-skills-brasil-an-lise-di-ria"
+    daily = (ROOT / ".github" / "workflows" / "daily_scraper.yml").read_text(
+        encoding="utf-8"
+    )
+    manual = (
+        ROOT / ".github" / "workflows" / "publish_kaggle_notebook.yml"
+    ).read_text(encoding="utf-8")
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+
+    assert slug in daily
+    assert slug in manual
+    assert slug in readme
+    assert old_slug not in daily + manual + readme
+    assert "env.RODADA_EXECUCAO == '3'" in daily
+    assert "env.KAGGLE_PRONTO == '1'" in daily
+    assert "kaggle kernels push --path notebooks/kaggle --timeout 900" in daily

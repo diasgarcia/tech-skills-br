@@ -32,7 +32,7 @@ jobs:
       - name: Aguardar resultado da execucao
         run: |
           for tentativa in {1..90}; do
-            ESTADO=$(kaggle kernels status rafaeldiasgarcia/tech-skills-brasil-an-lise-di-ria 2>&1)
+            ESTADO=$(kaggle kernels status rafaeldiasgarcia/tech-skills-brasil-analise-diaria 2>&1)
             echo "$ESTADO"
 
             if echo "$ESTADO" | grep -Eqi 'status "[^"]*(complete|completed)[^"]*"'; then
@@ -40,7 +40,7 @@ jobs:
             fi
 
             if echo "$ESTADO" | grep -Eqi 'status "[^"]*(error|failed|cancel)[^"]*"'; then
-              kaggle kernels logs rafaeldiasgarcia/tech-skills-brasil-an-lise-di-ria || true
+              kaggle kernels logs rafaeldiasgarcia/tech-skills-brasil-analise-diaria || true
               exit 1
             fi
 

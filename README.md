@@ -2,7 +2,7 @@
 
 Dados sobre as habilidades citadas em anúncios de vagas de entrada em tecnologia no Brasil.
 
-[Explorar o painel](https://diasgarcia.github.io/tech-skills-br/) · [Analisar no Kaggle](https://www.kaggle.com/code/rafaeldiasgarcia/tech-skills-brasil-an-lise-di-ria) · [Baixar o dataset](https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br) · [Consultar a metodologia](https://github.com/diasgarcia/tech-skills-br/wiki)
+[Explorar o painel](https://diasgarcia.github.io/tech-skills-br/) · [Analisar no Kaggle](https://www.kaggle.com/code/rafaeldiasgarcia/tech-skills-brasil-analise-diaria) · [Baixar o dataset](https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br) · [Consultar a metodologia](https://github.com/diasgarcia/tech-skills-br/wiki)
 
 O projeto acompanha anúncios de estágio, aprendiz, trainee e nível júnior. A coleta consulta nove portais três vezes por dia. O processo organiza as vagas por área e identifica as habilidades citadas em cada anúncio.
 
@@ -10,7 +10,7 @@ O projeto acompanha anúncios de estágio, aprendiz, trainee e nível júnior. A
 
 [![Gráfico de vagas coletadas e habilidades distintas identificadas nos últimos 30 dias](https://diasgarcia.github.io/tech-skills-br/assets/vagas-habilidades-30d.svg)](https://diasgarcia.github.io/tech-skills-br/)
 
-[![Mapa de calor das seis maiores áreas e das seis habilidades mais citadas](https://diasgarcia.github.io/tech-skills-br/assets/areas-habilidades.svg)](https://www.kaggle.com/code/rafaeldiasgarcia/tech-skills-brasil-an-lise-di-ria)
+[![Mapa de calor das seis maiores áreas e das seis habilidades mais citadas](https://diasgarcia.github.io/tech-skills-br/assets/areas-habilidades.svg)](https://www.kaggle.com/code/rafaeldiasgarcia/tech-skills-brasil-analise-diaria)
 
 Os gráficos são gerados com o banco consolidado. Eles mudam automaticamente quando uma área ou habilidade altera sua posição no ranking.
 
@@ -35,7 +35,7 @@ Detalhes sobre fontes, critérios, limitações e decisões estão na [wiki do p
 | Recurso | Conteúdo |
 |---|---|
 | [Painel público](https://diasgarcia.github.io/tech-skills-br/) | Visão geral, rankings e exploradores de vagas e áreas |
-| [Notebook no Kaggle](https://www.kaggle.com/code/rafaeldiasgarcia/tech-skills-brasil-an-lise-di-ria) | Análise atualizada da base |
+| [Notebook no Kaggle](https://www.kaggle.com/code/rafaeldiasgarcia/tech-skills-brasil-analise-diaria) | Análise atualizada da base |
 | [Dataset no Kaggle](https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br) | Snapshot em Parquet para análise e reutilização |
 | [API JSON](https://diasgarcia.github.io/tech-skills-br/api/resumo.json) | Dados estáticos usados pelo painel |
 | [Relatório consolidado](docs/relatorios/relatorio_banco_consolidado.md) | Resumo textual mais recente |
