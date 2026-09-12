@@ -126,6 +126,7 @@ def test_importa_e_vincula_tecnologias(tmp_path):
         ("Empresa Confidencial", "Confidencial"),
         ("Confidencial430", "Confidencial"),
         ("Página de Carreira - Confidencial", "Confidencial"),
+        ("randstad-1", "Randstad"),
         ("Randstad - Matriz", "Randstad"),
         ("Nava | Tech for Business", "Nava Technology for Business"),
         ("MINSAIT BRASIL", "Minsait"),
@@ -149,6 +150,33 @@ def test_import_canonicaliza_empresa_confidencial(tmp_path):
         company = db.scalar(select(Vaga)).company
 
     assert company == "Confidencial"
+
+
+def test_import_canonicaliza_empresa_legada_ausente_do_csv_atual(tmp_path):
+    db_path = tmp_path / "t.db"
+    csv_antigo = _escrever_csv(
+        tmp_path,
+        [_linha(company="Empresa antiga")],
+        nome="vagas_20260731_170000.csv",
+    )
+    csv_novo = _escrever_csv(
+        tmp_path,
+        [_linha(external_id="2", company="Outra empresa")],
+        nome="vagas_20260731_180000.csv",
+    )
+    importar(csv_antigo, db_path)
+    with Session(make_engine(db_path)) as db:
+        vaga = db.scalar(select(Vaga).where(Vaga.external_id == "1"))
+        vaga.company = "randstad-1"
+        db.commit()
+
+    importar(csv_novo, db_path)
+    with Session(make_engine(db_path)) as db:
+        company = db.scalar(
+            select(Vaga.company).where(Vaga.external_id == "1")
+        )
+
+    assert company == "Randstad"
 
 
 def test_importacao_e_idempotente(tmp_path):

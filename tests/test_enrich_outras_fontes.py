@@ -275,7 +275,7 @@ def test_data_anterior_ao_corte_remove_a_vaga_em_vez_de_atualizar():
     tech_map = {"python": 1}
     respostas = {
         "http://velha": ({"description": "Vaga de 2025", "published_date": "2025-07-21", "company": "X"}, None),
-        "http://nova": ({"description": "Vaga com Python", "published_date": "2026-08-01", "company": "Y"}, None),
+        "http://nova": ({"description": "Vaga com Python", "published_date": "2026-08-01", "company": "Randstad - Matriz"}, None),
     }
 
     def fake_fetch(session, lock, url):
@@ -285,10 +285,12 @@ def test_data_anterior_ao_corte_remove_a_vaga_em_vez_de_atualizar():
         c, None, Lock(), extractor, tech_map,
         "SELECT id, url, title FROM vagas", [], fake_fetch,
     )
-    sobreviventes = c.execute("SELECT id, published_date FROM vagas").fetchall()
+    sobreviventes = c.execute(
+        "SELECT id, published_date, company FROM vagas"
+    ).fetchall()
 
     assert total == 1
-    assert sobreviventes == [(2, "2026-08-01")]
+    assert sobreviventes == [(2, "2026-08-01", "Randstad")]
 
 
 def test_parar_em_429_interrompe_o_lote_sem_marcar_encerrada():
