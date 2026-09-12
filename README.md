@@ -30,8 +30,6 @@ Os dados permitem analisar a frequência de menções nos anúncios coletados. A
 
 Detalhes sobre fontes, critérios, limitações e decisões estão na [wiki do projeto](https://github.com/diasgarcia/tech-skills-br/wiki).
 
-O [protocolo de validação](docs/validacao.md) separa os casos usados para ajustar as regras dos casos reservados para avaliação. As métricas dependem de anotação humana; os testes de código não medem a acurácia na amostra real.
-
 ## Acesse os resultados
 
 | Recurso | Conteúdo |
