@@ -4,6 +4,8 @@
 - **Período coberto:** 03/01/2026 até 11/09/2026
 - **Total de vagas consolidadas:** 4992
 
+Os resultados descrevem os anúncios coletados. As menções identificadas não representam toda a demanda do mercado nem o número de contratações.
+
 ## Ranking de Áreas de Tecnologia
 
 | Posição | Área | Vagas | % | Gráfico |
@@ -86,9 +88,9 @@
 | recrutei | 62 | 1.2% |
 | trampos | 6 | 0.1% |
 
-## Top 20 Tecnologias Mais Demandadas
+## Top 20 Tecnologias Mais Citadas nos Anúncios
 
-| Posição | Tecnologia | Vagas Citadas |
+| Posição | Tecnologia | Anúncios com menção identificada |
 |---|---|---|
 | 1 | Hardware | 1214 |
 | 2 | Banco de Dados | 994 |
