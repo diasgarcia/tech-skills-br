@@ -59,6 +59,7 @@ MIN_DATA_CORTE = date(2026, 1, 1)
 # A mesma empresa com grafias diferentes entre portais. A chave e o
 # nome normalizado; o valor e o rotulo canonico exibido no ranking.
 _EMPRESAS_CANONICAS = {
+    "randstad 1": "Randstad",
     "randstad matriz": "Randstad",
     "nava tech for business": "Nava Technology for Business",
     "minsait brasil": "Minsait",
@@ -356,6 +357,9 @@ def importar(
 
         todas_vagas = db.scalars(select(Vaga)).all()
         for v in todas_vagas:
+            if v.company:
+                v.company = _canonical_company(v.company)
+
             # No LinkedIn o card nao informa modalidade: o palpite feito na
             # coleta (cidade -> Presencial) pode contradizer a descricao
             # completa ("Modalidade 100% remota"). A descricao e autoridade.
