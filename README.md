@@ -1,44 +1,58 @@
-# Mapeamento de Skills em Tecnologia no Brasil (PIBIC)
+# Tech Skills Brasil
 
-## Resumo
+Dados sobre as habilidades exigidas em vagas de entrada no mercado brasileiro de tecnologia.
 
-Projeto de pesquisa científica (PIBIC / Iniciação Científica) que coleta e extrai as habilidades técnicas demandadas pelo mercado de tecnologia no Brasil. Esses dados serão posteriormente confrontados com as Diretrizes Curriculares Nacionais do MEC e os referenciais da Sociedade Brasileira de Computação (SBC).
+[Explorar o painel](https://diasgarcia.github.io/tech-skills-br/) · [Analisar no Kaggle](https://www.kaggle.com/code/rafaeldiasgarcia/tech-skills-brasil-an-lise-di-ria) · [Baixar o dataset](https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br) · [Consultar a metodologia](https://github.com/diasgarcia/tech-skills-br/wiki)
 
-| Item                             | Descrição                                                                                                                                      |
-| :------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Linguagem**              | Python 3.12+                                                                                                                                     |
-| **Banco de dados**         | SQLite (SQLAlchemy 2.0)                                                                                                                          |
-| **Documentação**         | [Wiki](https://github.com/diasgarcia/tech-skills-br/wiki) — Manual de Uso, Arquitetura, Pipeline, Modelo de Dados, Classificação e Automação |
-| **Integração contínua** | [GitHub Actions](https://github.com/diasgarcia/tech-skills-br/actions/workflows/ci.yml)                                                           |
+O projeto acompanha anúncios de estágio, aprendiz, trainee e nível júnior. A coleta consulta nove portais três vezes por dia. O processo organiza as vagas por área e identifica as habilidades citadas em cada anúncio.
 
-## Problema de Pesquisa
+## Visão atual da pesquisa
 
-> **"Em que medida as diretrizes curriculares do MEC (DCNs) e os referenciais da SBC preparam os egressos de Computação para as tecnologias e habilidades exigidas pelo mercado de trabalho brasileiro?"**
+[![Gráfico de vagas coletadas e habilidades distintas identificadas nos últimos 30 dias](https://diasgarcia.github.io/tech-skills-br/assets/vagas-habilidades-30d.svg)](https://diasgarcia.github.io/tech-skills-br/)
 
-Para responder a essa pergunta com evidências quantitativas e reprodutíveis, o projeto executa um pipeline de coleta multi-fonte, extração de tecnologias por taxonomia curada, deduplicação e análise estatística. A metodologia completa está documentada na [wiki](https://github.com/diasgarcia/tech-skills-br/wiki).
+[![Mapa de calor das seis maiores áreas e das seis habilidades mais citadas](https://diasgarcia.github.io/tech-skills-br/assets/areas-habilidades.svg)](https://www.kaggle.com/code/rafaeldiasgarcia/tech-skills-brasil-an-lise-di-ria)
 
-## Execução Rápida
+Os gráficos são gerados com o banco consolidado. Eles mudam automaticamente quando uma área ou habilidade altera sua posição no ranking.
 
-Os comandos essenciais estão em [docs/execucao-rapida](docs/execucao-rapida.md).
+## Pergunta da pesquisa
 
-## Site Público e API JSON Estática (GitHub Pages)
+> Em que medida as diretrizes curriculares do MEC e os referenciais da Sociedade Brasileira de Computação preparam os estudantes para as habilidades exigidas pelo mercado de trabalho brasileiro?
 
-O projeto publica um painel web minimalista e uma API JSON estática com CORS liberado no GitHub Pages:
+Os dados oferecem evidências quantitativas para comparar a formação em Computação com as demandas encontradas nos anúncios.
 
-**Base URL:** [diasgarcia.github.io/tech-skills-br](https://diasgarcia.github.io/tech-skills-br/)
+## Como os dados são produzidos
 
-```http
-GET /api/resumo.json HTTP/1.1
+1. A coleta localiza vagas de entrada em nove portais.
+2. Os filtros removem duplicidades e anúncios fora do escopo.
+3. Cada vaga recebe uma área técnica, uma modalidade e uma região.
+4. Uma taxonomia curada identifica as habilidades presentes na descrição.
+5. O projeto publica o banco consolidado, a API, o painel e o dataset.
 
-GET /api/areas.json HTTP/1.1
+Detalhes sobre fontes, critérios, limitações e decisões estão na [wiki do projeto](https://github.com/diasgarcia/tech-skills-br/wiki).
 
-GET /api/tecnologias.json HTTP/1.1
+## Acesse os resultados
 
-GET /api/vagas.json HTTP/1.1
-```
+| Recurso | Conteúdo |
+|---|---|
+| [Painel público](https://diasgarcia.github.io/tech-skills-br/) | Visão geral, rankings e exploradores de vagas e áreas |
+| [Notebook no Kaggle](https://www.kaggle.com/code/rafaeldiasgarcia/tech-skills-brasil-an-lise-di-ria) | Análise atualizada da base |
+| [Dataset no Kaggle](https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br) | Snapshot em Parquet para análise e reutilização |
+| [API JSON](https://diasgarcia.github.io/tech-skills-br/api/resumo.json) | Dados estáticos usados pelo painel |
+| [Relatório consolidado](docs/relatorios/relatorio_banco_consolidado.md) | Resumo textual mais recente |
 
-## Dataset no Kaggle
+## Escopo
 
-A base tambem fica no Kaggle.
-O dataset tem snapshots diarios em Parquet.
-Acesse: [kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br](https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br)
+- A amostra contém vagas encontradas durante o período da pesquisa. Ela não representa todas as vagas de tecnologia do Brasil.
+- Os resultados mudam conforme novos anúncios entram na base.
+- O projeto não é um portal de empregos e não participa de processos seletivos.
+- Os links das vagas identificam a origem das informações.
+
+## Execução local
+
+O guia de [execução rápida](docs/execucao-rapida.md) contém os comandos necessários para preparar o ambiente e consultar a base.
+
+## Pesquisa e licença
+
+Este projeto de iniciação científica é desenvolvido no Centro Universitário das Faculdades Integradas de Ourinhos. A professora Jessica Antonio Delgado orienta a pesquisa.
+
+O código é distribuído sob a [licença MIT](LICENSE).
