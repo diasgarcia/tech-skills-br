@@ -112,12 +112,12 @@ jobs:
         # o parquet (Kaggle) precisam ser o MESMO snapshot da rodada.
         python scripts/export_seed.py
         gh release upload latest data/vagas.db seed/vagas.csv --clobber
-        # Graficos e relatorio so na rodada 1 (09:16): o snapshot e diario.
+        # O relatorio entra no git so na rodada 1 (09:16). Os graficos do
+        # README sao gerados depois, direto no artefato do Pages, em toda rodada.
+        python scripts/report_db.py
         if [ "${{ github.event.inputs.rodada }}" = "2" ] || [ "${{ github.event.inputs.rodada }}" = "3" ]; then
-          python scripts/report_db.py --no-charts
           echo "GERAR_RELATORIO=0" >> "$GITHUB_ENV"
         else
-          python scripts/report_db.py
           echo "GERAR_RELATORIO=1" >> "$GITHUB_ENV"
         fi
         python scripts/export_pages_data.py
@@ -219,9 +219,10 @@ jobs:
 
     - name: 8. Montar artefato do GitHub Pages
       run: |
-        mkdir -p _site/api
+        mkdir -p _site/api _site/assets
         cp .github/web/index.html _site/
         cp api/web/*.json _site/api/
+        python scripts/export_readme_charts.py --output-dir _site/assets
 
     - name: 9. Preparar artefato do GitHub Pages
       uses: actions/upload-pages-artifact@v3

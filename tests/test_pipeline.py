@@ -189,7 +189,7 @@ def test_run_coleta_classifica_e_exporta(tmp_path, monkeypatch, sem_enriquecimen
 
     monkeypatch.setattr(pipeline, "collect", coleta_fake)
 
-    result = run(_settings(tmp_path), with_charts=False)
+    result = run(_settings(tmp_path))
 
     assert isinstance(result, PipelineResult)
     assert len(result.jobs) == 1
@@ -216,7 +216,7 @@ def test_run_descarta_vaga_nao_tech(tmp_path, monkeypatch, sem_enriquecimento):
     ]
     monkeypatch.setattr(pipeline, "collect", lambda settings: (vagas, [], 0))
 
-    result = run(_settings(tmp_path), with_charts=False)
+    result = run(_settings(tmp_path))
 
     assert len(result.jobs) == 1
     assert result.meta["dropped_non_tech"] == 1
@@ -234,7 +234,7 @@ def test_run_mantem_nao_tech_quando_pedido(tmp_path, monkeypatch, sem_enriquecim
     ]
     monkeypatch.setattr(pipeline, "collect", lambda settings: (vagas, [], 0))
 
-    result = run(_settings(tmp_path), keep_non_tech=True, with_charts=False)
+    result = run(_settings(tmp_path), keep_non_tech=True)
 
     assert len(result.jobs) == 2
     assert result.meta["dropped_non_tech"] == 0
@@ -247,7 +247,7 @@ def test_run_pula_enriquecimento_quando_desabilitado(tmp_path, monkeypatch):
     )
     monkeypatch.setattr(pipeline, "collect", lambda settings: ([_vaga()], [], 0))
 
-    run(_settings(tmp_path, enrich_linkedin=False), with_charts=False)
+    run(_settings(tmp_path, enrich_linkedin=False))
 
     assert chamadas == []
 
@@ -306,7 +306,6 @@ def test_enriquecimento_ignora_html_sem_o_seletor(monkeypatch):
     _enrich_linkedin_parallel([job])
 
     assert job.description == ""
-
 
 def test_enriquecimento_suporta_erro_de_sessao(monkeypatch):
     class FakeSession:

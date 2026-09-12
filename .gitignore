@@ -37,9 +37,6 @@ output/
 # nao os arquivos commitados (plano #24).
 api/web/
 
-# Graficos gerados: ficam fora do git; o relatorio .md continua.
-docs/relatorios/*.png
-
 # Editores / SO
 .vscode/
 .idea/

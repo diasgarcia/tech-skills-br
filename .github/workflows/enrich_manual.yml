@@ -98,9 +98,10 @@ jobs:
 
     - name: 9. Montar artefato do GitHub Pages
       run: |
-        mkdir -p _site/api
+        mkdir -p _site/api _site/assets
         cp .github/web/index.html _site/
         cp api/web/*.json _site/api/
+        python scripts/export_readme_charts.py --output-dir _site/assets
 
     - name: 10. Preparar artefato do GitHub Pages
       uses: actions/upload-pages-artifact@v3

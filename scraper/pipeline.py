@@ -553,7 +553,6 @@ def run(
     settings: Settings,
     strict_seniority: bool = False,
     keep_non_tech: bool = False,
-    with_charts: bool = True,
 ) -> PipelineResult:
     """Executa o fluxo completo e grava os arquivos de saida."""
     raw_jobs, stats, requests_made = collect(settings)
@@ -616,8 +615,7 @@ def run(
         "requests": requests_made,
     }
 
-    files = export_all(jobs, settings.ensure_output_dir(), meta,
-                       with_charts=with_charts)
+    files = export_all(jobs, settings.ensure_output_dir(), meta)
     return PipelineResult(jobs=jobs, ranking=ranking, files=files,
                           stats=stats, meta=meta)
 
