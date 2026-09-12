@@ -276,11 +276,11 @@ def skills_by_area(jobs: list[Job], top_n: int = 8) -> dict[str, list[tuple[str,
 
 
 def jobs_with_skills_by_area(jobs: list[Job]) -> dict[str, int]:
-    """Quantas vagas de cada area citam ao menos uma tecnologia.
+    """Quantas vagas de cada area possuem ao menos uma skill identificada.
 
-    E a base correta para percentuais: nem toda vaga informa tecnologia. O
-    LinkedIn nao traz descricao no card, entao areas cheias de vaga vinda de la
-    tem base bem menor que o total -- em "Outros/TI Geral", 31 de 144.
+    Base dos percentuais condicionais do ranking. Ausencia de match nao
+    prova ausencia de requisito: pode haver texto incompleto ou termo
+    desconhecido pelo vocabulario. Nao equivale ao total de anuncios da area.
     """
     base: dict[str, int] = {}
     for job in jobs:
