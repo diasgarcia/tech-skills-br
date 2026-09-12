@@ -190,6 +190,20 @@ Após nove rodadas concluídas entre 8 e 10 de setembro, confirmei que os termos
 
 ---
 
+### 12/09/2026
+
+Reescrevi o README para dar uma visão direta do projeto. Adicionei um gráfico de vagas e habilidades por dia. Adicionei um mapa de calor com as seis principais áreas e habilidades. O GitHub Pages gera os dois gráficos como arquivos SVG. O processo substitui os arquivos existentes e não aumenta o histórico do git.
+
+Mudei o horário de atualização dos gráficos e do relatório consolidado. A rodada 3, às 19h16, atualiza esses resultados. As rodadas 1 e 2 preservam os resultados anteriores. A coleta manual e o enriquecimento manual atualizam todos os resultados. Uma execução com origem `cron` e sem uma rodada válida usa a configuração manual. As três rodadas atualizam a API JSON e o painel.
+
+Corrigi o nome da Randstad. A GeekHunter guardou `randstad-1`, pois o nome veio do endereço da vaga. O enriquecimento não corrigiu o nome porque 28 anúncios já estavam encerrados. A normalização agora reúne essas vagas com as 16 vagas do InfoJobs. O relatório mostra 44 vagas da Randstad. O importador também revisa nomes antigos que não aparecem na coleta atual.
+
+Atualizei o rodapé do site. Adicionei os links do GitHub e do dataset no Kaggle. A versão para celular mostra somente os ícones. A versão para computador mostra os ícones e os nomes. Os ícones usam uma cor discreta. Os ícones ficam azuis quando o ponteiro passa sobre o link ou quando o link recebe foco.
+
+Atualizei o relatório consolidado com 4.992 vagas. Adicionei testes para os gráficos, para os workflows, para a normalização de empresas e para o rodapé.
+
+---
+
 ### Pendências para o artigo
 
 - Medir a contribuição marginal de cada fonte com o avaliador.
