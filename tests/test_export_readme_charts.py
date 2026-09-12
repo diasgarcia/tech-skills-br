@@ -9,11 +9,12 @@ from scripts.import_csv import importar
 
 
 ROOT = Path(__file__).resolve().parents[1]
-WORKFLOWS = (
+PAGES_WORKFLOWS = (
     ROOT / ".github" / "workflows" / "daily_scraper.yml",
     ROOT / ".github" / "workflows" / "deploy_pages.yml",
     ROOT / ".github" / "workflows" / "enrich_manual.yml",
 )
+DAILY_WORKFLOW = PAGES_WORKFLOWS[0]
 
 
 def test_export_pages_charts_carrega_banco_e_gera_svgs(
@@ -40,11 +41,54 @@ def test_export_pages_charts_rejeita_banco_vazio(tmp_path):
         export_pages_charts(tmp_path / "assets", db_path)
 
 
-@pytest.mark.parametrize("workflow", WORKFLOWS)
-def test_todo_deploy_do_pages_gera_os_graficos(workflow):
+@pytest.mark.parametrize("workflow", PAGES_WORKFLOWS)
+def test_todo_deploy_do_pages_inclui_os_graficos(workflow):
     content = workflow.read_text(encoding="utf-8")
 
+    gera = "python scripts/export_readme_charts.py --output-dir _site/assets"
+    preserva = "vagas-habilidades-30d.svg areas-habilidades.svg"
+    assert gera in content or preserva in content
+
+
+def test_rodada_3_e_coleta_manual_atualizam_relatorio_e_graficos():
+    content = DAILY_WORKFLOW.read_text(encoding="utf-8")
+
+    condition = 'if [ "$EXECUCAO" = "manual" ] || [ "$RODADA_INPUT" = "3" ]; then'
+    start = content.index(condition)
+    end = content.index("fi", start)
+    rodada_3 = content[start:end]
+
+    assert "python scripts/report_db.py" in rodada_3
+    assert 'echo "ATUALIZAR_RESUMOS=1"' in rodada_3
+    assert content.count("python scripts/report_db.py") == 1
+    assert content.count(
+        "python scripts/export_readme_charts.py --output-dir _site/assets"
+    ) == 1
+
+
+def test_cron_sem_rodada_valida_e_tratado_como_manual():
+    content = DAILY_WORKFLOW.read_text(encoding="utf-8")
+
+    assert 'EXECUCAO="manual"' in content
+    assert 'RODADA_EXECUCAO="manual"' in content
+    assert 'export RODADA="manual"' in content
+    assert 'if [ "$EXECUCAO" = "cron" ]; then' in content
+
+
+def test_deploy_de_codigo_preserva_graficos_publicados():
+    workflow = PAGES_WORKFLOWS[1]
+    content = workflow.read_text(encoding="utf-8")
+
+    assert "python scripts/export_readme_charts.py" not in content
+    assert "https://diasgarcia.github.io/tech-skills-br/assets/${arquivo}" in content
+
+
+def test_enriquecimento_manual_atualiza_relatorio_e_graficos():
+    content = PAGES_WORKFLOWS[2].read_text(encoding="utf-8")
+
+    assert "python scripts/report_db.py" in content
     assert "python scripts/export_readme_charts.py --output-dir _site/assets" in content
+    assert "git add docs/relatorios/*.md" in content
 
 
 def test_readme_referencia_os_assets_estaveis():

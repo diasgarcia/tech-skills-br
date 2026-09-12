@@ -47,7 +47,13 @@ jobs:
           mkdir -p _site/api _site/assets
           cp .github/web/index.html _site/
           cp api/web/*.json _site/api/
-          python scripts/export_readme_charts.py --output-dir _site/assets
+          # Este deploy atualiza o site e a API, mas preserva os graficos.
+          # Os SVGs sao recalculados apenas na rodada 3 da coleta diaria.
+          for arquivo in vagas-habilidades-30d.svg areas-habilidades.svg; do
+            curl --fail --silent --show-error --location --retry 3 \
+              "https://diasgarcia.github.io/tech-skills-br/assets/${arquivo}" \
+              --output "_site/assets/${arquivo}"
+          done
 
       - name: 4. Preparar artefato do Pages (_site)
         uses: actions/upload-pages-artifact@v3
