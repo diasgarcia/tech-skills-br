@@ -101,10 +101,6 @@ def build_parser() -> argparse.ArgumentParser:
              "solta dos portais devolve. Por padrao elas sao descartadas.",
     )
     parser.add_argument(
-        "--no-charts", action="store_true",
-        help="Nao gera os graficos PNG (util se matplotlib nao estiver instalado).",
-    )
-    parser.add_argument(
         "--no-enrich", action="store_true",
         help="Nao busca descricoes do LinkedIn durante a coleta (o enriquecimento "
              "fica para scripts/enrich_descriptions.py, so para vagas pendentes).",
@@ -154,7 +150,6 @@ def main(argv: list[str] | None = None) -> int:
         settings,
         strict_seniority=args.strict,
         keep_non_tech=args.keep_non_tech,
-        with_charts=not args.no_charts,
     )
 
     if not result.jobs:

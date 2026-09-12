@@ -9,7 +9,6 @@ Exemplos de uso:
 from __future__ import annotations
 
 import argparse
-import shutil
 import sys
 from collections import Counter
 from datetime import datetime
@@ -23,9 +22,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from api.database import Base, database_url, make_engine, url_sem_senha
 from api.models import Tecnologia, Vaga, vaga_tecnologia
-from scraper.charts import export_charts
 from scraper.config import DEFAULT_OUTPUT_DIR, PROJECT_ROOT
-from scraper.models import Job
 
 
 
@@ -39,7 +36,6 @@ def _bar(percent: float, width: int = 20) -> str:
 def generate_db_report(
     db_path: Path | str | None = None,
     export_md: bool = True,
-    with_charts: bool = True,
 ) -> str:
     engine = make_engine(db_path)
 
@@ -114,28 +110,6 @@ def generate_db_report(
             .order_by(func.count(Vaga.id).desc())
             .limit(10)
         ).all()
-
-        all_vagas = session.scalars(select(Vaga)).all()
-        jobs: list[Job] = []
-        for v in all_vagas:
-            jobs.append(
-                Job(
-                    source=v.source or "",
-                    external_id=v.external_id or "",
-                    title=v.title or "",
-                    company=v.company or "",
-                    location=v.location or "",
-                    workplace_type=v.workplace_type or "Não informado",
-                    area=v.area or "Outros/TI Geral",
-                    seniority=v.seniority or "",
-                    published_date=v.published_date.isoformat() if v.published_date else None,
-                    skills=[t.nome for t in v.tecnologias if t.nome],
-                    regiao=v.regiao,
-                    polo=v.polo,
-                    description=v.description or "",
-                    url=v.url or "",
-                )
-            )
 
     now_str = datetime.now().strftime("%d/%m/%Y %H:%M")
     header = (
@@ -250,30 +224,6 @@ def generate_db_report(
         docs_md_path.write_text(md_content, encoding="utf-8")
         print(f"  - Snapshot Docs: {docs_md_path}")
 
-        if with_charts and jobs:
-            chart_files = export_charts(
-                jobs,
-                output_dir,
-                f"consolidado_{stamp}",
-                subtitle=f"Base consolidada ({total_vagas} vagas de tecnologia)",
-            )
-            for chart_key, chart_file in chart_files.items():
-                print(f"  - Gráfico {chart_key}: {chart_file}")
-
-                canon_name = f"grafico_{chart_key.replace('chart_', '')}_consolidado.png"
-                if chart_key == "chart_workplace":
-                    canon_name = "grafico_modalidade_consolidado.png"
-                elif chart_key == "chart_regions":
-                    canon_name = "grafico_regioes_consolidado.png"
-                elif chart_key == "chart_areas":
-                    canon_name = "grafico_areas_consolidado.png"
-                elif chart_key == "chart_skills":
-                    canon_name = "grafico_skills_consolidado.png"
-
-                target_chart = docs_reports_dir / canon_name
-                shutil.copyfile(chart_file, target_chart)
-                print(f"  - Snapshot Docs Gráfico: {target_chart}")
-
     return md_content
 
 
@@ -288,15 +238,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--no-export", action="store_true", help="Nao grava o arquivo Markdown em output/."
     )
-    parser.add_argument(
-        "--no-charts", action="store_true", help="Nao gera os graficos PNG analiticos."
-    )
     args = parser.parse_args(argv)
 
     generate_db_report(
         db_path=args.db,
         export_md=not args.no_export,
-        with_charts=not args.no_charts,
     )
 
     try:

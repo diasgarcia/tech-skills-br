@@ -1,54 +1,63 @@
-"""Graficos: distribuicao de vagas por area e principais tecnologias por area.
-
-Decisoes de forma (e por que):
-
-- **Barras horizontais, nao pizza.** A tarefa do leitor e comparar grandezas e os
-  nomes das areas sao longos.
-- **Uma cor so, nao um degrade por valor.** Areas de tecnologia sao categorias
-  *nominais* (nao tem ordem natural). Pintar a barra maior mais escura gastaria o
-  canal de cor repetindo o que o comprimento da barra ja diz.
-- **Small multiples para as tecnologias.** Um painel por area, em vez de 8 cores
-  disputando a mesma figura -- a pergunta e "quais techs nesta area?", e cada
-  painel responde isso sozinho.
-- Valor rotulado na ponta de cada barra, entao nao ha grade nem eixo x: rotulo
-  direto vem antes de gridline.
-"""
+"""Graficos compactos publicados no README por meio do GitHub Pages."""
 
 from __future__ import annotations
 
 import logging
+import textwrap
+from collections import Counter, defaultdict
+from dataclasses import dataclass
+from datetime import date, timedelta
 from pathlib import Path
 
 import matplotlib
 
 matplotlib.use("Agg")
-# A DejaVu Sans nao tem peso 600 e o NotoColorEmoji reclama no scan:
-# avisos sem efeito visual, silenciados.
 logging.getLogger("matplotlib.font_manager").setLevel(logging.ERROR)
+import matplotlib.dates as mdates  # noqa: E402
 import matplotlib.pyplot as plt  # noqa: E402
-from matplotlib.patches import FancyBboxPatch, Rectangle  # noqa: E402
+import numpy as np  # noqa: E402
+from matplotlib.colors import LinearSegmentedColormap  # noqa: E402
+from matplotlib.lines import Line2D  # noqa: E402
+from matplotlib.patches import Patch  # noqa: E402
+from matplotlib.ticker import MaxNLocator  # noqa: E402
 
-from .export import (
-    build_ranking,
-    build_region_ranking,
-    build_workplace_ranking,
-)  # noqa: E402
-from .models import Job  # noqa: E402
 
-from .skills import jobs_with_skills_by_area, skills_by_area  # noqa: E402
-
-logger = logging.getLogger(__name__)
-
-SURFACE = "#fcfcfb"
-SERIES_1 = "#2a78d6"
-INK_PRIMARY = "#0b0b0b"
-INK_SECONDARY = "#52514e"
-INK_MUTED = "#898781"
-
+BACKGROUND = "#0d1117"
+PANEL = "#111820"
+TEXT = "#f0f6fc"
+MUTED = "#8b9aaa"
+GRID = "#29313b"
+BLUE = "#388bfd"
+PURPLE = "#bc8cff"
 FONT_STACK = ["Segoe UI", "DejaVu Sans", "sans-serif"]
-BAR_THICKNESS = 0.46
-MAX_BAR_PX = 46
-CORNER_PX = 9
+
+
+@dataclass(frozen=True)
+class ChartJob:
+    """Campos minimos de uma vaga usados pelos graficos do README."""
+
+    published_date: date | None
+    area: str
+    skills: tuple[str, ...] = ()
+
+
+@dataclass(frozen=True)
+class DailyActivity:
+    dates: tuple[date, ...]
+    jobs: tuple[int, ...]
+    skills: tuple[int, ...]
+    total_jobs: int
+    period_jobs: int
+    period_skills: int
+    last_date: date
+
+
+@dataclass(frozen=True)
+class AreaSkillMatrix:
+    areas: tuple[str, ...]
+    area_sizes: tuple[int, ...]
+    skills: tuple[str, ...]
+    percentages: tuple[tuple[float, ...], ...]
 
 
 def _style() -> None:
@@ -56,346 +65,305 @@ def _style() -> None:
         {
             "font.family": "sans-serif",
             "font.sans-serif": FONT_STACK,
-            "figure.facecolor": SURFACE,
-            "axes.facecolor": SURFACE,
-            "savefig.facecolor": SURFACE,
-            "axes.edgecolor": INK_MUTED,
-            "text.color": INK_PRIMARY,
+            "figure.facecolor": BACKGROUND,
+            "axes.facecolor": PANEL,
+            "axes.edgecolor": GRID,
+            "text.color": TEXT,
+            "axes.labelcolor": MUTED,
+            "xtick.color": MUTED,
+            "ytick.color": MUTED,
+            "savefig.facecolor": BACKGROUND,
+            "svg.fonttype": "none",
         }
     )
 
 
-def _add_rounded_bars(ax, values: list[float], color: str = SERIES_1,
-                      height: float = BAR_THICKNESS) -> None:
-    """Desenha as barras com a ponta do dado arredondada e a base quadrada.
+def _format_int(value: int) -> str:
+    return f"{value:,}".replace(",", ".")
 
-    O raio e calculado em PIXELS e convertido para unidades de dado de cada eixo.
-    Fazer o contrario (raio fixo em unidades de dado, como e o obvio no
-    matplotlib) deforma o canto quando os eixos tem escalas diferentes: num
-    painel cujo eixo x vai so ate 3, um raio em unidades de dado vira uma
-    "pilula" horizontal. Por isso esta funcao roda depois do layout, quando as
-    dimensoes reais do eixo em pixels ja existem.
-    """
-    ax.figure.canvas.draw()
-    bbox = ax.get_window_extent()
-    x_min, x_max = ax.get_xlim()
-    y_min, y_max = ax.get_ylim()
-    x_per_px = (x_max - x_min) / max(bbox.width, 1)
-    y_per_px = (y_max - y_min) / max(bbox.height, 1)
 
-    # Com poucas linhas a faixa fica alta e a barra engrossa demais; o teto em
-    # pixels mantem a marca fina independente de quantas categorias existem.
-    height = min(height, MAX_BAR_PX * y_per_px)
+def _format_pct(value: float) -> str:
+    return f"{value:.1f}%".replace(".", ",")
 
-    bar_height_px = height / y_per_px
-    radius_px = min(CORNER_PX, bar_height_px / 2)
-    radius_y = radius_px * y_per_px
 
-    for i, value in enumerate(values):
-        if value <= 0:
+def _hide_spines(ax) -> None:
+    for spine in ax.spines.values():
+        spine.set_visible(False)
+
+
+def build_daily_activity(
+    jobs: list[ChartJob], days: int = 30
+) -> DailyActivity:
+    """Agrupa vagas e habilidades distintas pela data de publicacao."""
+    if days < 1:
+        raise ValueError("O periodo precisa ter ao menos um dia.")
+
+    dated_jobs = [job for job in jobs if job.published_date is not None]
+    if not dated_jobs:
+        raise ValueError("Nenhuma vaga com data de publicacao.")
+
+    last_date = max(job.published_date for job in dated_jobs if job.published_date)
+    first_date = last_date - timedelta(days=days - 1)
+    dates = tuple(first_date + timedelta(days=offset) for offset in range(days))
+    jobs_by_date: Counter[date] = Counter()
+    skills_by_date: dict[date, set[str]] = defaultdict(set)
+
+    for job in dated_jobs:
+        published = job.published_date
+        if published is None or published < first_date or published > last_date:
             continue
-        radius_x = min(radius_px * x_per_px, value / 2)
-        # mutation_aspect estica o arredondamento no eixo y: com isso o raio
-        # fica igual (em pixels) nas duas direcoes.
-        aspect = radius_y / radius_x if radius_x > 0 else 1.0
-        ax.add_patch(
-            FancyBboxPatch(
-                (0, i - height / 2),
-                max(value - radius_x, 1e-9),
-                height,
-                boxstyle=f"round,pad=0,rounding_size={radius_x}",
-                mutation_aspect=aspect,
-                facecolor=color,
-                edgecolor="none",
-                linewidth=0,
-                zorder=2,
-            )
-        )
-        # Quadra a extremidade encostada na linha de base.
-        ax.add_patch(
-            Rectangle(
-                (0, i - height / 2), radius_x, height,
-                facecolor=color, edgecolor="none", zorder=2,
-            )
-        )
+        jobs_by_date[published] += 1
+        skills_by_date[published].update(skill for skill in job.skills if skill)
 
-
-def _bare_axes(ax) -> None:
-    """Remove tudo que nao e dado: sem grade, sem eixo x, sem moldura."""
-    for side in ("top", "right", "bottom", "left"):
-        ax.spines[side].set_visible(False)
-    ax.set_xticks([])
-    ax.tick_params(axis="y", length=0, pad=8)
-    ax.grid(False)
-
-
-def chart_areas(jobs: list[Job], output_path: Path, subtitle: str = "") -> Path:
-    """Grafico 1 -- distribuicao das vagas por area de tecnologia."""
-    _style()
-    ranking = build_ranking(jobs)
-    if not ranking:
-        raise ValueError("Sem vagas para plotar.")
-
-    # Menor em cima -> maior embaixo fica invertido em barh; plotamos ascendente.
-    rows = list(reversed(ranking))
-    labels = [r["area"] for r in rows]
-    values = [r["vagas"] for r in rows]
-    percents = [r["percentual"] for r in rows]
-
-    height = max(3.0, 0.42 * len(rows) + 1.1)
-    fig, ax = plt.subplots(figsize=(9.5, height), dpi=200)
-
-    for i, (value, pct) in enumerate(zip(values, percents)):
-        ax.text(
-            value + max(values) * 0.015, i, f"{value}  ({pct}%)",
-            va="center", ha="left", fontsize=10, color=INK_SECONDARY,
-        )
-
-    ax.set_yticks(range(len(labels)))
-    ax.set_yticklabels(labels, fontsize=11, color=INK_PRIMARY)
-    ax.set_xlim(0, max(values) * 1.22)
-    ax.set_ylim(-0.6, len(rows) - 0.4)
-    _bare_axes(ax)
-
-    # Titulo preso ao eixo (e nao a figura): o tight_layout reserva o
-    # espaco certo e nao sobra faixa vazia entre o subtitulo e a primeira barra.
-    ax.set_title(
-        "Vagas júnior de tecnologia por área",
-        loc="left", fontsize=15, fontweight="bold", color=INK_PRIMARY,
-        pad=34 if subtitle else 16,
-    )
-    if subtitle:
-        ax.text(
-            0, 1.012, subtitle, transform=ax.transAxes,
-            ha="left", va="bottom", fontsize=9.5, color=INK_MUTED,
-        )
-
-    fig.tight_layout()
-    _add_rounded_bars(ax, values)
-    fig.savefig(output_path, bbox_inches="tight", pad_inches=0.32)
-    plt.close(fig)
-    return output_path
-
-
-def chart_workplace(jobs: list[Job], output_path: Path, subtitle: str = "") -> Path:
-    """Grafico 3 -- distribuicao por modalidade (remoto / hibrido / presencial)."""
-    _style()
-    ranking = build_workplace_ranking(jobs)
-    if not ranking:
-        raise ValueError("Sem vagas para plotar.")
-
-    rows = list(reversed(ranking))
-    labels = [r["modalidade"] for r in rows]
-    values = [r["vagas"] for r in rows]
-    percents = [r["percentual"] for r in rows]
-
-    fig, ax = plt.subplots(figsize=(9.0, 0.52 * len(rows) + 1.5), dpi=200)
-
-    for i, (value, pct) in enumerate(zip(values, percents)):
-        ax.text(
-            value + max(values) * 0.015, i, f"{value}  ({pct}%)",
-            va="center", ha="left", fontsize=10, color=INK_SECONDARY,
-        )
-
-    ax.set_yticks(range(len(labels)))
-    ax.set_yticklabels(labels, fontsize=11, color=INK_PRIMARY)
-    ax.set_xlim(0, max(values) * 1.22)
-    ax.set_ylim(-0.6, len(rows) - 0.4)
-    _bare_axes(ax)
-
-    ax.set_title(
-        "Vagas júnior de tecnologia por modalidade de trabalho",
-        loc="left", fontsize=15, fontweight="bold", color=INK_PRIMARY,
-        pad=34 if subtitle else 16,
-    )
-    if subtitle:
-        ax.text(
-            0, 1.012, subtitle, transform=ax.transAxes,
-            ha="left", va="bottom", fontsize=9.5, color=INK_MUTED,
-        )
-
-    fig.tight_layout()
-    _add_rounded_bars(ax, values)
-    fig.savefig(output_path, bbox_inches="tight", pad_inches=0.32)
-    plt.close(fig)
-    return output_path
-
-
-def chart_skills(
-    jobs: list[Job],
-    output_path: Path,
-    top_areas: int = 16,
-    top_skills: int = 8,
-    min_jobs: int = 6,
-    subtitle: str = "",
-) -> Path | None:
-
-
-    """Grafico 2 -- small multiples: principais tecnologias por area.
-
-    As barras sao **percentuais**, e nao contagens: as areas tem tamanhos muito
-    diferentes (144 vagas em "Outros/TI Geral" contra 8 em Mobile), entao
-    contagem absoluta nao permite comparar um painel com o outro.
-
-    A base do percentual e o numero de vagas da area que **informam alguma
-    tecnologia**, nao o total da area. Nem toda vaga informa: o card do LinkedIn
-    nao traz descricao, entao em "Outros/TI Geral" so 31 das 144 vagas tem
-    tecnologia. Usar o total daria percentuais artificialmente baixos justamente
-    nas areas mais contaminadas por essa limitacao.
-
-    Por isso `min_jobs` filtra pela base, e nao pelo tamanho da area: com 4
-    vagas informando tecnologia, cada uma valeria 25% e o painel seria ruido.
-    """
-    _style()
-    per_area = skills_by_area(jobs, top_n=top_skills)
-    area_sizes = {r["area"]: r["vagas"] for r in build_ranking(jobs)}
-    bases = jobs_with_skills_by_area(jobs)
-
-    areas = [
-        a for a in sorted(per_area, key=lambda a: -bases.get(a, 0))
-        if bases.get(a, 0) >= min_jobs and per_area[a]
-    ][:top_areas]
-
-    if not areas:
-        logger.warning("Nenhuma area com vagas suficientes para o grafico de skills.")
-        return None
-
-    cols = 2 if len(areas) > 1 else 1
-    rows = (len(areas) + cols - 1) // cols
-    fig, axes = plt.subplots(
-        rows, cols, figsize=(11.5, 2.55 * rows + 1.5), dpi=200, squeeze=False
+    job_counts = tuple(jobs_by_date[current] for current in dates)
+    skill_counts = tuple(len(skills_by_date[current]) for current in dates)
+    period_skills = len(set().union(*(skills_by_date[current] for current in dates)))
+    return DailyActivity(
+        dates=dates,
+        jobs=job_counts,
+        skills=skill_counts,
+        total_jobs=len(jobs),
+        period_jobs=sum(job_counts),
+        period_skills=period_skills,
+        last_date=last_date,
     )
 
-    panels: list[tuple] = []
-    for idx, ax in enumerate(axes.flat):
-        if idx >= len(areas):
-            ax.set_visible(False)
+
+def build_area_skill_matrix(
+    jobs: list[ChartJob], top_areas: int = 6, top_skills: int = 6
+) -> AreaSkillMatrix:
+    """Seleciona e cruza dinamicamente as areas e habilidades mais frequentes."""
+    if not jobs:
+        raise ValueError("Nenhuma vaga para o heatmap.")
+
+    area_counts = Counter(job.area for job in jobs if job.area)
+    skill_counts: Counter[str] = Counter()
+    for job in jobs:
+        skill_counts.update(set(skill for skill in job.skills if skill))
+
+    areas = tuple(
+        name
+        for name, _ in sorted(
+            area_counts.items(), key=lambda item: (-item[1], item[0].casefold())
+        )[:top_areas]
+    )
+    skills = tuple(
+        name
+        for name, _ in sorted(
+            skill_counts.items(), key=lambda item: (-item[1], item[0].casefold())
+        )[:top_skills]
+    )
+    if not areas or not skills:
+        raise ValueError("Areas ou habilidades insuficientes para o heatmap.")
+
+    intersections: Counter[tuple[str, str]] = Counter()
+    selected_areas = set(areas)
+    selected_skills = set(skills)
+    for job in jobs:
+        if job.area not in selected_areas:
             continue
+        for skill in set(job.skills) & selected_skills:
+            intersections[(job.area, skill)] += 1
 
-        area = areas[idx]
-        base = bases.get(area, 0) or 1
-        data = list(reversed(per_area[area]))
-        names = [d[0] for d in data]
-        counts = [d[1] for d in data]
-        pcts = [100 * c / base for c in counts]
-        panels.append((ax, pcts))
-
-        for i, (pct, count) in enumerate(zip(pcts, counts)):
-            ax.text(
-                pct + max(pcts) * 0.04, i, f"{pct:.0f}%  ({count})",
-                va="center", ha="left", fontsize=9, color=INK_SECONDARY,
-            )
-
-        ax.set_yticks(range(len(names)))
-        ax.set_yticklabels(names, fontsize=9.5, color=INK_PRIMARY)
-        ax.set_xlim(0, max(pcts) * 1.38)
-        ax.set_ylim(-0.6, len(names) - 0.4)
-        _bare_axes(ax)
-        ax.set_title(
-            f"{area}",
-            loc="left", fontsize=11, fontweight="bold",
-            color=INK_PRIMARY, pad=10,
+    area_sizes = tuple(area_counts[area] for area in areas)
+    percentages = tuple(
+        tuple(
+            100 * intersections[(area, skill)] / area_counts[area]
+            for skill in skills
         )
-
-    fig.suptitle(
-        "Tecnologias mais pedidas em vagas júnior, por área",
-        x=0.02, y=0.985, ha="left", fontsize=15, fontweight="bold",
-        color=INK_PRIMARY,
+        for area in areas
     )
-    if subtitle:
-        fig.text(0.02, 0.952, subtitle, ha="left", fontsize=9.5, color=INK_MUTED)
+    return AreaSkillMatrix(
+        areas=areas,
+        area_sizes=area_sizes,
+        skills=skills,
+        percentages=percentages,
+    )
 
 
-    fig.tight_layout(rect=(0, 0, 1, 0.93), h_pad=2.6, w_pad=4.0)
-    for ax, counts in panels:
-        _add_rounded_bars(ax, counts)
-    fig.savefig(output_path, bbox_inches="tight", pad_inches=0.35)
-    plt.close(fig)
-    return output_path
-
-
-def chart_regions(jobs: list[Job], output_path: Path, subtitle: str = "") -> Path:
-    """Grafico 4 -- distribuicao por macrorregiao e remoto nacional."""
+def chart_daily_jobs_and_skills(
+    jobs: list[ChartJob], output_path: Path, days: int = 30
+) -> Path:
+    """Colunas de vagas e linha de habilidades distintas por dia."""
+    data = build_daily_activity(jobs, days=days)
     _style()
-    ranking = build_region_ranking(jobs)
-    if not ranking:
-        raise ValueError("Sem vagas para plotar.")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    rows = list(reversed(ranking))
-    labels = [r["regiao"] for r in rows]
-    values = [r["vagas"] for r in rows]
-    percents = [r["percentual"] for r in rows]
+    fig, ax = plt.subplots(figsize=(12, 4.8), dpi=180)
+    fig.subplots_adjust(left=0.075, right=0.97, bottom=0.18, top=0.72)
+    ax.bar(
+        data.dates,
+        data.jobs,
+        width=0.82,
+        color=BLUE,
+        alpha=0.48,
+        linewidth=0,
+        zorder=2,
+    )
+    ax.plot(
+        data.dates,
+        data.skills,
+        color=PURPLE,
+        linewidth=2.8,
+        solid_capstyle="round",
+        zorder=3,
+    )
 
-    fig, ax = plt.subplots(figsize=(9.0, 0.52 * len(rows) + 1.5), dpi=200)
+    ax.set_xlim(data.dates[0] - timedelta(days=1), data.dates[-1] + timedelta(days=1))
+    ax.set_ylim(bottom=0)
+    ax.yaxis.set_major_locator(MaxNLocator(nbins=5, integer=True))
+    ax.xaxis.set_major_locator(mdates.WeekdayLocator(interval=1))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%d/%m"))
+    ax.grid(axis="y", color=GRID, linewidth=0.8, alpha=0.75, zorder=1)
+    ax.grid(axis="x", visible=False)
+    ax.tick_params(axis="both", length=0, labelsize=9)
+    ax.tick_params(axis="x", pad=10)
+    _hide_spines(ax)
 
-    for i, (value, pct) in enumerate(zip(values, percents)):
-        ax.text(
-            value + max(values) * 0.015,
-            i,
-            f"{value}  ({pct}%)",
-            va="center",
-            ha="left",
-            fontsize=10,
-            color=INK_SECONDARY,
-        )
-
-    ax.set_yticks(range(len(labels)))
-    ax.set_yticklabels(labels, fontsize=11, color=INK_PRIMARY)
-    ax.set_xlim(0, max(values) * 1.22)
-    ax.set_ylim(-0.6, len(rows) - 0.4)
-    _bare_axes(ax)
-
-    ax.set_title(
-        "Vagas júnior de tecnologia por macrorregião",
-        loc="left",
-        fontsize=15,
+    fig.text(0.075, 0.91, "Vagas e habilidades por dia", fontsize=19, fontweight="bold")
+    fig.text(
+        0.075,
+        0.835,
+        f"Últimos {days} dias · agrupadas pela data de publicação",
+        fontsize=10.5,
+        color=MUTED,
+    )
+    fig.text(
+        0.97,
+        0.91,
+        _format_int(data.period_jobs),
+        fontsize=19,
         fontweight="bold",
-        color=INK_PRIMARY,
-        pad=34 if subtitle else 16,
+        ha="right",
     )
-    if subtitle:
-        ax.text(
-            0,
-            1.012,
-            subtitle,
-            transform=ax.transAxes,
-            ha="left",
-            va="bottom",
-            fontsize=9.5,
-            color=INK_MUTED,
-        )
+    fig.text(
+        0.97,
+        0.835,
+        f"vagas · {data.period_skills} habilidades distintas",
+        fontsize=10.5,
+        color=MUTED,
+        ha="right",
+    )
+    legend = [
+        Patch(facecolor=BLUE, alpha=0.48, label="Vagas coletadas"),
+        Line2D(
+            [0],
+            [0],
+            color=PURPLE,
+            linewidth=2.8,
+            label="Habilidades distintas identificadas",
+        ),
+    ]
+    ax.legend(
+        handles=legend,
+        loc="upper left",
+        bbox_to_anchor=(0, 1.15),
+        frameon=False,
+        ncol=2,
+        fontsize=9.5,
+        labelcolor=MUTED,
+        handlelength=2,
+        columnspacing=1.8,
+    )
+    fig.text(
+        0.075,
+        0.055,
+        f"Base: {_format_int(data.total_jobs)} vagas · "
+        f"atualizada em {data.last_date.strftime('%d/%m/%Y')}",
+        fontsize=8.7,
+        color=MUTED,
+    )
 
-    fig.tight_layout()
-    _add_rounded_bars(ax, values)
-    fig.savefig(output_path, bbox_inches="tight", pad_inches=0.32)
+    fig.savefig(output_path, facecolor=BACKGROUND)
     plt.close(fig)
     return output_path
 
 
-def export_charts(jobs: list[Job], output_dir: Path, stamp: str,
-                  subtitle: str = "") -> dict[str, Path]:
-    """Gera os graficos analiticos e devolve os caminhos."""
+def chart_area_skill_heatmap(
+    jobs: list[ChartJob], output_path: Path, top_n: int = 6
+) -> Path:
+    """Heatmap das areas e habilidades mais citadas na base."""
+    data = build_area_skill_matrix(jobs, top_areas=top_n, top_skills=top_n)
+    _style()
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    values = np.array(data.percentages)
+    cmap = LinearSegmentedColormap.from_list(
+        "tech_skills_heatmap", [PANEL, "#193b66", BLUE, PURPLE]
+    )
+    fig, ax = plt.subplots(figsize=(12, 6.2), dpi=180)
+    fig.subplots_adjust(left=0.23, right=0.9, bottom=0.21, top=0.74)
+    image = ax.imshow(values, aspect="auto", cmap=cmap, vmin=0, vmax=values.max())
+
+    ax.set_xticks(range(len(data.skills)))
+    ax.set_xticklabels(
+        ["\n".join(textwrap.wrap(skill, 14)) for skill in data.skills],
+        fontsize=9.5,
+    )
+    ax.set_yticks(range(len(data.areas)))
+    ax.set_yticklabels(
+        [
+            f"{area}  ·  {_format_int(size)}"
+            for area, size in zip(data.areas, data.area_sizes)
+        ],
+        fontsize=9.5,
+    )
+    ax.tick_params(axis="x", length=0, pad=12)
+    ax.tick_params(axis="y", length=0, pad=12)
+    _hide_spines(ax)
+
+    threshold = values.max() * 0.48
+    for row in range(values.shape[0]):
+        for column in range(values.shape[1]):
+            value = values[row, column]
+            ax.text(
+                column,
+                row,
+                "—" if value == 0 else _format_pct(value),
+                ha="center",
+                va="center",
+                fontsize=10,
+                fontweight="bold" if value >= threshold else "normal",
+                color=TEXT if value >= threshold else "#c7d1dc",
+            )
+
+    colorbar = fig.colorbar(image, ax=ax, fraction=0.03, pad=0.035)
+    colorbar.ax.tick_params(length=0, labelsize=8.5, colors=MUTED)
+    colorbar.outline.set_visible(False)
+    colorbar.set_label("Percentual das vagas da área", color=MUTED, labelpad=12)
+
+    fig.text(
+        0.08,
+        0.92,
+        "Onde as habilidades mais citadas aparecem",
+        fontsize=19,
+        fontweight="bold",
+    )
+    fig.text(
+        0.08,
+        0.85,
+        f"{top_n} maiores áreas × {top_n} habilidades mais citadas na base",
+        fontsize=10.5,
+        color=MUTED,
+    )
+
+    fig.savefig(output_path, facecolor=BACKGROUND)
+    plt.close(fig)
+    return output_path
+
+
+def export_readme_charts(
+    jobs: list[ChartJob], output_dir: Path
+) -> dict[str, Path]:
+    """Gera os dois SVGs estaveis publicados pelo GitHub Pages."""
     if not jobs:
         return {}
     output_dir.mkdir(parents=True, exist_ok=True)
-    files: dict[str, Path] = {}
-
-
-    files["chart_areas"] = chart_areas(
-        jobs, output_dir / f"grafico_areas_{stamp}.png", subtitle=subtitle
-    )
-    files["chart_workplace"] = chart_workplace(
-        jobs, output_dir / f"grafico_modalidade_{stamp}.png", subtitle=subtitle
-    )
-    files["chart_regions"] = chart_regions(
-        jobs, output_dir / f"grafico_regioes_{stamp}.png", subtitle=subtitle
-    )
-    skills_path = chart_skills(
-        jobs, output_dir / f"grafico_skills_{stamp}.png",
-        subtitle="Percentual das vagas da área que citam cada tecnologia "
-                 "(base: vagas em que o portal informa tecnologias)",
-    )
-    if skills_path:
-        files["chart_skills"] = skills_path
-    return files
-
+    return {
+        "daily": chart_daily_jobs_and_skills(
+            jobs, output_dir / "vagas-habilidades-30d.svg"
+        ),
+        "heatmap": chart_area_skill_heatmap(
+            jobs, output_dir / "areas-habilidades.svg"
+        ),
+    }
