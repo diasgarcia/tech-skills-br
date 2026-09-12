@@ -9,10 +9,11 @@ banco e re-extrai as tecnologias com o skills.yml atual.
 - Trampos: GET em https://trampos.co/api/v2/opportunities/{slug}, onde o
   slug e o ultimo segmento da URL da vaga; junta description,
   prerequisite, desirable e other_info.
-- Gupy: descricoes TRUNCADAS do legado. GET na pagina publica da vaga; a
-  descricao integral vem no JSON-LD JobPosting ou no `__NEXT_DATA__`,
-  conforme a versao do portal. A API global da Gupy nao reconhece vagas de
-  todos os job boards e, por isso, nao e usada como fonte de 404.
+- Gupy: GET na pagina publica de cada vaga ainda nao conferida. A descricao
+  integral e o nome declarado da empresa vem no JSON-LD JobPosting ou no
+  `__NEXT_DATA__`, conforme a versao do portal. A API global da Gupy nao
+  reconhece vagas de todos os job boards e, por isso, nao e usada como fonte
+  de 404.
 - GeekHunter: o card da listagem so traz snippet; o detalhe (SSR, sem
   auth) tem um bloco JSON-LD JobPosting com description completa,
   hiringOrganization (nome real da empresa) e datePosted. Alem da
@@ -87,14 +88,15 @@ QUERY_TRAMPOS_PENDENTES = """
       AND (published_date IS NULL OR published_date >= date('now', ?))
 """
 
-# Gupy: descricoes legadas truncadas em torno de 500 caracteres. Parte
-# delas perde um caractere ao normalizar espacos durante a importacao.
+# Gupy: toda vaga nova passa uma vez pelo detalhe. Alem de completar uma
+# eventual descricao truncada, isso substitui o `careerPageName` da busca
+# (que pode ser um slogan) pelo `hiringOrganization.name` declarado na vaga.
+# Sucesso e 404/410 saem da fila pelo flag; falhas temporarias permanecem.
 QUERY_GUPY_PENDENTES = """
     SELECT id, url, title FROM vagas
     WHERE source = 'gupy'
       AND COALESCE(enrich_encerrada, 0) = 0
-      AND LENGTH(description) BETWEEN 490 AND 500
-      AND (published_date IS NULL OR published_date >= date('now', ?))
+      AND url LIKE '%://%.gupy.io/%'
 """
 
 # GeekHunter: o card so traz um snippet; o detalhe tem a descricao
@@ -113,18 +115,11 @@ QUERY_GEEKHUNTER_PENDENTES = """
       )
 """
 
-# Revisao manual de legado: inclui descricoes truncadas e qualquer vaga sem
-# skills, mesmo se uma tentativa anterior foi marcada como resolvida.
+# Revisao manual do legado: revisita toda a Gupy para corrigir tambem as vagas
+# que ja haviam sido marcadas antes de o nome estruturado ser aproveitado.
 QUERY_GUPY_FORCADO = """
     SELECT id, url, title FROM vagas
     WHERE source = 'gupy'
-      AND (
-          LENGTH(description) BETWEEN 490 AND 500
-          OR NOT EXISTS (
-              SELECT 1 FROM vaga_tecnologia
-              WHERE vaga_tecnologia.vaga_id = vagas.id
-          )
-      )
 """
 
 # Usado apenas por uma revisao manual: revisita toda a fonte, inclusive
@@ -205,26 +200,36 @@ def fetch_trampos(session: PoliteSession, lock: Lock, slug: str) -> tuple[str, i
     return " ".join(partes), status
 
 
-def fetch_gupy(session: PoliteSession, lock: Lock, url: str) -> tuple[str, int | None]:
-    """Extrai a descricao da pagina publica da Gupy.
+def fetch_gupy(session: PoliteSession, lock: Lock, url: str) -> tuple[dict, int | None]:
+    """Extrai descricao e empresa declarada na pagina publica da Gupy.
 
     A API global de empregos retorna 404 para vagas ainda publicadas em
     job boards proprios (como o da Claro). O HTML server-rendered e a fonte
-    confiavel para decidir se uma vaga Gupy existe ou foi encerrada.
+    usada aqui. Ausencia dos blocos conhecidos em uma resposta 200 e tratada
+    como falha temporaria ou mudanca de layout, nunca como encerramento.
     """
     with lock:
         response = session.get(url)
         status = session.last_status_code
     if response is None:
-        return "", status
+        return {}, status
     soup = BeautifulSoup(response.text, "html.parser")
+    dados: dict[str, str] = {}
     for script in soup.find_all("script", type="application/ld+json"):
         try:
             data = json.loads(html.unescape(script.string or ""))
         except (ValueError, TypeError):
             continue
         if isinstance(data, dict) and data.get("@type") == "JobPosting":
-            return strip_html(data.get("description") or ""), status
+            descricao = strip_html(data.get("description") or "")
+            if descricao:
+                dados["description"] = descricao
+            org = data.get("hiringOrganization") or {}
+            if isinstance(org, dict):
+                empresa = (org.get("name") or "").strip()
+                if empresa:
+                    dados["company"] = empresa
+            break
 
     # Parte dos job boards usa uma versao anterior do front da Gupy. Nela,
     # nao ha JSON-LD: os campos completos estao no estado SSR do Next.js.
@@ -236,17 +241,24 @@ def fetch_gupy(session: PoliteSession, lock: Lock, url: str) -> tuple[str, int |
         except (KeyError, TypeError, ValueError):
             job = {}
         if isinstance(job, dict):
-            partes = [
-                strip_html(job.get(campo) or "")
-                for campo in ("description", "responsibilities", "prerequisites")
-            ]
-            descricao = " ".join(parte for parte in partes if parte).strip()
-            if descricao:
-                return descricao, status
+            if not dados.get("description"):
+                partes = [
+                    strip_html(job.get(campo) or "")
+                    for campo in (
+                        "description", "responsibilities", "prerequisites"
+                    )
+                ]
+                descricao = " ".join(parte for parte in partes if parte).strip()
+                if descricao:
+                    dados["description"] = descricao
+            if not dados.get("company"):
+                career_page = job.get("careerPage") or {}
+                if isinstance(career_page, dict):
+                    empresa = (career_page.get("name") or "").strip()
+                    if empresa:
+                        dados["company"] = empresa
 
-    # A pagina de vaga removida da Gupy devolve 200 com o fallback do
-    # portal. Sem JobPosting nem estado SSR, ela equivale a 404 para a fila.
-    return "", 404
+    return dados, status
 
 
 def fetch_geekhunter(session: PoliteSession, lock: Lock, url: str) -> tuple[dict, int | None]:
@@ -378,8 +390,10 @@ def _enriquecer(
                 if isinstance(resultado, str):
                     # Fontes antigas devolvem (descricao, status).
                     resultado = {"description": resultado}
-                desc = resultado.get("description", "")
-                if not desc:
+                desc = (resultado.get("description") or "").strip()
+                company = (resultado.get("company") or "").strip()
+                pub = (resultado.get("published_date") or "").strip()
+                if not desc and not company and not pub:
                     # 404/410 = anuncio encerrado na fonte: nada a fazer.
                     # A GeekHunter usa 410 em parte das vagas removidas.
                     if status in (404, 410):
@@ -388,7 +402,6 @@ def _enriquecer(
                             (vid,),
                         )
                     continue
-                pub = resultado.get("published_date", "")
                 if pub:
                     # A data do JSON-LD (GeekHunter) chega aqui sem passar
                     # pelo corte do import_csv. Vaga mais antiga que a
@@ -402,8 +415,18 @@ def _enriquecer(
                     if pub_iso is not None and pub_iso < MIN_DATA_CORTE:
                         c.execute("DELETE FROM vagas WHERE id = ?", (vid,))
                         continue
-                c.execute("UPDATE vagas SET description = ? WHERE id = ?", (desc, vid))
-                company = resultado.get("company", "")
+                descricao_atual = c.execute(
+                    "SELECT description FROM vagas WHERE id = ?", (vid,)
+                ).fetchone()[0] or ""
+                # Nunca troca uma descricao ja salva por uma versao vazia ou
+                # menor. O detalhe ainda pode corrigir a empresa normalmente.
+                if desc and len(desc) > len(descricao_atual):
+                    c.execute(
+                        "UPDATE vagas SET description = ? WHERE id = ?", (desc, vid)
+                    )
+                    descricao_final = desc
+                else:
+                    descricao_final = descricao_atual
                 if company:
                     company = _canonical_company(company)
                     c.execute(
@@ -414,7 +437,7 @@ def _enriquecer(
                         "UPDATE vagas SET published_date = ? WHERE id = ?",
                         (pub, vid),
                     )
-                for s in extractor.extract(title, desc):
+                for s in extractor.extract(title, descricao_final):
                     tid = tech_map.get(s.lower())
                     if tid:
                         c.execute(
@@ -474,7 +497,7 @@ def enriquecer(
         if fonte == "gupy" and forcar
         else QUERY_GUPY_PENDENTES
     )
-    args_gupy = [] if fonte == "gupy" and forcar else list(janela)
+    args_gupy: list = []
 
     query_geekhunter = (
         QUERY_GEEKHUNTER_FORCADO
@@ -586,7 +609,7 @@ def enriquecer(
         )
 
         c.execute(query_gupy, args_gupy)
-        logger.info("Gupy truncadas pendentes: %d", len(c.fetchall()))
+        logger.info("Gupy pendentes de detalhe: %d", len(c.fetchall()))
         total_gupy = _enriquecer(
             c, session, lock, extractor, tech_map, query_gupy, args_gupy,
             lambda sess, lk, url: fetch_gupy(sess, lk, url),
@@ -638,8 +661,8 @@ if __name__ == "__main__":
         "--forcar",
         action="store_true",
         help=(
-            "Revisa vagas ja resolvidas: todas da GeekHunter ou as "
-            "Gupy sem skills/truncadas e os teasers do InfoJobs."
+            "Revisa vagas ja resolvidas: todas da Gupy/GeekHunter ou os "
+            "teasers do InfoJobs."
         ),
     )
     args = parser.parse_args()
