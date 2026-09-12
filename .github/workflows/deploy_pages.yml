@@ -5,8 +5,12 @@ on:
     branches:
       - main
     paths:
+      - 'README.md'
       - 'api/web/**'
       - '.github/web/**'
+      - 'scraper/charts.py'
+      - 'scripts/export_readme_charts.py'
+      - '.github/workflows/deploy_pages.yml'
   workflow_dispatch:
 
 permissions:
@@ -40,9 +44,10 @@ jobs:
           gh release download latest --pattern 'vagas.db' --dir data --clobber
           pip install -r requirements.txt
           python scripts/export_pages_data.py
-          mkdir -p _site/api
+          mkdir -p _site/api _site/assets
           cp .github/web/index.html _site/
           cp api/web/*.json _site/api/
+          python scripts/export_readme_charts.py --output-dir _site/assets
 
       - name: 4. Preparar artefato do Pages (_site)
         uses: actions/upload-pages-artifact@v3

@@ -277,8 +277,7 @@ def export_skills_csv(jobs: list[Job], output_dir: Path,
     return path
 
 
-def export_all(jobs: list[Job], output_dir: Path, meta: dict,
-               with_charts: bool = True) -> dict[str, Path]:
+def export_all(jobs: list[Job], output_dir: Path, meta: dict) -> dict[str, Path]:
     output_dir.mkdir(parents=True, exist_ok=True)
     stamp = _timestamp()
     ranking = build_ranking(jobs)
@@ -288,15 +287,5 @@ def export_all(jobs: list[Job], output_dir: Path, meta: dict,
         "skills_csv": export_skills_csv(jobs, output_dir, stamp),
         "report_md": export_report_md(jobs, ranking, output_dir, meta, stamp),
     }
-
-    if with_charts:
-        from .charts import export_charts
-
-        subtitle = (
-            f"{len(jobs)} vagas de nível de entrada · "
-            f"{' e '.join(meta.get('sources', []))} · "
-            f"coleta em {datetime.now().strftime('%d/%m/%Y')}"
-        )
-        files.update(export_charts(jobs, output_dir, stamp, subtitle=subtitle))
 
     return files
