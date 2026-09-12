@@ -71,6 +71,25 @@ def test_extrai_linguagens_e_frameworks(ext):
     assert {"Python", "Django", "PostgreSQL"} <= set(found)
 
 
+def test_extrai_habilidades_de_analise_de_redes_sociais(ext):
+    texto = (
+        "Analisar dados e desenvolver dashboards de social media. "
+        "Atuar com Social Listening nas ferramentas Stilingue e Sprinklr. "
+        "Transformação de dados em narrativas para apoiar decisões."
+    )
+
+    found = set(ext.extract("Analista de Dados Júnior", texto))
+
+    assert {
+        "Análise de Dados",
+        "Social Listening",
+        "Data Storytelling",
+        "Stilingue",
+        "Sprinklr",
+    } <= found
+    assert "Dashboards" not in found
+
+
 def test_c_sharp_nao_vira_c_solto(ext):
     # "C#" nao pode ser reduzido a "c" e casar com qualquer letra c do texto.
     legitimas = ext.extract("Dev .NET", "Experiência com C# e SQL Server.")
