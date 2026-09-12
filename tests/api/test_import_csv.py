@@ -132,6 +132,8 @@ def test_importa_e_vincula_tecnologias(tmp_path):
         ("MINSAIT BRASIL", "Minsait"),
         ("Minsait an Indra Company", "Minsait"),
         ("ACME Tecnologia", "ACME Tecnologia"),  # empresa real passa direto
+        ("E", ""),
+        (" x ", ""),
         ("", ""),
         (None, ""),
     ],
@@ -150,6 +152,37 @@ def test_import_canonicaliza_empresa_confidencial(tmp_path):
         company = db.scalar(select(Vaga)).company
 
     assert company == "Confidencial"
+
+
+def test_import_descarta_empresa_com_uma_letra(tmp_path):
+    csv_path = _escrever_csv(tmp_path, [_linha(company="E")])
+
+    importar(csv_path, tmp_path / "t.db")
+    with Session(make_engine(tmp_path / "t.db")) as db:
+        company = db.scalar(select(Vaga)).company
+
+    assert company is None
+
+
+def test_empresa_com_uma_letra_nao_apaga_nome_valido(tmp_path):
+    db_path = tmp_path / "t.db"
+    csv_nome = _escrever_csv(
+        tmp_path,
+        [_linha(company="T-Systems do Brasil")],
+        nome="vagas_20260731_170000.csv",
+    )
+    csv_incompleto = _escrever_csv(
+        tmp_path,
+        [_linha(company="E")],
+        nome="vagas_20260731_180000.csv",
+    )
+
+    importar(csv_nome, db_path)
+    importar(csv_incompleto, db_path)
+    with Session(make_engine(db_path)) as db:
+        company = db.scalar(select(Vaga)).company
+
+    assert company == "T-Systems do Brasil"
 
 
 def test_import_canonicaliza_empresa_legada_ausente_do_csv_atual(tmp_path):

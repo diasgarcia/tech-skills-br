@@ -77,6 +77,8 @@ def _canonical_company(nome: str) -> str:
     entidades diferentes.
     """
     chave = normalize(nome)
+    if len(chave) <= 1:
+        return ""
     if re.search(r"\bconfidencial\d*\b", chave):
         return "Confidencial"
     return _EMPRESAS_CANONICAS.get(chave, nome)
@@ -232,7 +234,12 @@ def importar(
                 for campo in CAMPOS_TEXTO:
                     novo = (linha.get(campo) or "").strip() or None
                     if campo == "company" and novo:
-                        novo = _canonical_company(novo)
+                        novo = _canonical_company(novo) or None
+                        # Cards incompletos do LinkedIn podem devolver apenas
+                        # uma letra no lugar da empresa. Esse valor nao pode
+                        # apagar um nome valido que ja esteja consolidado.
+                        if novo is None and vaga.company:
+                            continue
                     if campo == "description" and not novo and vaga.description:
                         descricao_preservada = True
                         continue
