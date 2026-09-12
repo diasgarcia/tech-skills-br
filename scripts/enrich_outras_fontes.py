@@ -54,7 +54,7 @@ from scraper.config import RULES_DIR, USER_AGENT  # noqa: E402
 from scraper.http_client import PoliteSession  # noqa: E402
 from scraper.models import strip_html  # noqa: E402
 from scraper.skills import SkillExtractor  # noqa: E402
-from scripts.import_csv import MIN_DATA_CORTE  # noqa: E402
+from scripts.import_csv import MIN_DATA_CORTE, _canonical_company  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)-7s %(message)s")
 logger = logging.getLogger("enrich_outras")
@@ -405,6 +405,7 @@ def _enriquecer(
                 c.execute("UPDATE vagas SET description = ? WHERE id = ?", (desc, vid))
                 company = resultado.get("company", "")
                 if company:
+                    company = _canonical_company(company)
                     c.execute(
                         "UPDATE vagas SET company = ? WHERE id = ?", (company, vid)
                     )
