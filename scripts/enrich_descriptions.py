@@ -22,6 +22,7 @@ import logging
 import sqlite3
 import sys
 import threading
+from collections import Counter
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from threading import Lock
@@ -117,11 +118,21 @@ def enrich_linkedin_jobs(
 
     if not jobs_to_enrich:
         logger.info("Nenhuma vaga pendente de enriquecimento.")
+        logger.info(
+            "Resumo enriquecimento linkedin: tentadas=0 | enriquecidas=0 | "
+            "encerradas=0 | removidas=0 | pendentes=0 | falhas=0"
+        )
+        conn.close()
         return
 
     c.execute("SELECT id, nome FROM tecnologias")
     tech_map = {nome.lower(): tid for tid, nome in c.fetchall()}
     enriched_count = 0
+    encerradas = 0
+    removidas = 0
+    pendentes = 0
+    falhas = 0
+    motivos_pendentes: Counter[str] = Counter()
     lock = Lock()
     parou = threading.Event()
 
@@ -136,12 +147,12 @@ def enrich_linkedin_jobs(
             futures = {
                 pool.submit(
                     fetch_one_description, session, lock, ext_id, parou
-                ): (db_id, ext_id, title, location, workplace)
+                ): (db_id, ext_id, title, url, location, workplace)
                 for db_id, ext_id, title, url, location, workplace in jobs_to_enrich
             }
 
             for future in as_completed(futures):
-                db_id, ext_id, title, location, workplace = futures[future]
+                db_id, ext_id, title, url, location, workplace = futures[future]
                 try:
                     _, desc, status = future.result()
                     if desc:
@@ -156,6 +167,7 @@ def enrich_linkedin_jobs(
                                 "contexto fora de TI.",
                                 ext_id,
                             )
+                            removidas += 1
                             continue
                         c.execute("UPDATE vagas SET description = ? WHERE id = ?", (desc, db_id))
 
@@ -201,12 +213,46 @@ def enrich_linkedin_jobs(
                             "UPDATE vagas SET enrich_encerrada = 1 WHERE id = ?",
                             (db_id,),
                         )
+                        encerradas += 1
+                        logger.info(
+                            "linkedin: vaga %s encerrada | http=404 | "
+                            "titulo=%r | url=%s",
+                            ext_id, title, url,
+                        )
+                    else:
+                        if status is None or status < 400:
+                            motivo = "descricao_ausente"
+                        else:
+                            motivo = f"http_{status}"
+                        motivos_pendentes[motivo] += 1
+                        pendentes += 1
+                        logger.warning(
+                            "linkedin: vaga %s permaneceu pendente | "
+                            "motivo=%s | http=%s | titulo=%r | url=%s",
+                            ext_id, motivo, status, title, url,
+                        )
                 except Exception as e:
+                    falhas += 1
+                    pendentes += 1
+                    motivos_pendentes["erro_de_processamento"] += 1
                     logger.warning("Falha ao processar job %s: %s", ext_id, e)
 
     conn.commit()
     conn.close()
     logger.info("Enriquecimento concluido com sucesso: %d vagas enriquecidas!", enriched_count)
+    logger.info(
+        "Resumo enriquecimento linkedin: tentadas=%d | enriquecidas=%d | "
+        "encerradas=%d | removidas=%d | pendentes=%d | falhas=%d",
+        len(jobs_to_enrich), enriched_count, encerradas, removidas, pendentes, falhas,
+    )
+    if motivos_pendentes:
+        logger.warning(
+            "Pendencias linkedin por motivo: %s",
+            " | ".join(
+                f"{motivo}={quantidade}"
+                for motivo, quantidade in sorted(motivos_pendentes.items())
+            ),
+        )
 
 
 if __name__ == "__main__":
