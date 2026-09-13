@@ -1,11 +1,14 @@
 """Testes do enriquecedor de Vagas.com e Trampos, com sessao falsa."""
 
+import logging
 import sqlite3
 import threading
 from threading import Lock
 
 from scraper.skills import SkillExtractor
 from scripts.enrich_outras_fontes import (
+    CHAVE_DETALHES,
+    CHAVE_DIAGNOSTICO,
     QUERY_GEEKHUNTER_FORCADO,
     QUERY_GUPY_FORCADO,
     QUERY_GUPY_PENDENTES,
@@ -31,9 +34,10 @@ VAGAS_HTML = """
 
 
 class FakeResponse:
-    def __init__(self, text=None, payload=None):
+    def __init__(self, text=None, payload=None, url=None):
         self.text = text or ""
         self._payload = payload
+        self.url = url
 
     def json(self):
         if self._payload is None:
@@ -128,7 +132,8 @@ def test_fetch_infojobs_sem_o_painel_permanece_pendente():
 
     dados, status = fetch_infojobs(session, Lock(), "http://x")
 
-    assert dados["description"] == ""
+    assert dados[CHAVE_DIAGNOSTICO] == "painel_da_vaga_ausente"
+    assert "corpo=27 caracteres" in dados[CHAVE_DETALHES]
     assert status is None
 
 
@@ -138,7 +143,8 @@ def test_fetch_infojobs_body_vazio_nao_marca_como_encerrada():
 
     dados, status = fetch_infojobs(session, Lock(), "http://x")
 
-    assert dados.get("description", "") == ""
+    assert dados[CHAVE_DIAGNOSTICO] == "resposta_vazia"
+    assert "corpo=0 caracteres" in dados[CHAVE_DETALHES]
     assert status is None
 
 
@@ -243,7 +249,8 @@ def test_fetch_infojobs_teaser_curto_permanece_pendente():
 
     dados, status = fetch_infojobs(session, Lock(), "http://x")
 
-    assert dados["description"] == ""
+    assert dados[CHAVE_DIAGNOSTICO] == "descricao_curta_ou_truncada"
+    assert "descricao=18 caracteres" in dados[CHAVE_DETALHES]
     assert status is None
 
 
@@ -252,7 +259,7 @@ def test_fetch_gupy_job_removido_devolve_vazio():
 
     result = fetch_gupy(session, Lock(), "123")
 
-    assert result == ({}, None)
+    assert result == ({CHAVE_DIAGNOSTICO: "sem_resposta"}, None)
 
 
 def test_fetch_gupy_layout_desconhecido_nao_inventa_404():
@@ -261,7 +268,23 @@ def test_fetch_gupy_layout_desconhecido_nao_inventa_404():
 
     dados, status = fetch_gupy(session, Lock(), "https://empresa.gupy.io/job/abc")
 
-    assert dados == {}
+    assert dados[CHAVE_DIAGNOSTICO] == "jobposting_ausente"
+    assert "corpo=24 caracteres" in dados[CHAVE_DETALHES]
+    assert status == 200
+
+
+def test_fetch_gupy_identifica_redirecionamento_para_login():
+    response = FakeResponse(
+        text="<html>login</html>",
+        url="https://empresa.gupy.io/candidates/signin",
+    )
+    session = FakeSession([response])
+    session.last_status_code = 200
+
+    dados, status = fetch_gupy(session, Lock(), "https://empresa.gupy.io/job/abc")
+
+    assert dados[CHAVE_DIAGNOSTICO] == "redirecionamento_para_login"
+    assert "candidates/signin" in dados[CHAVE_DETALHES]
     assert status == 200
 
 
@@ -459,9 +482,45 @@ def test_fetch_parando_nao_chama_a_fonte_depois_do_429():
     terceira = wrapper(None, None, "http://tres")
 
     assert primeira == ({"description": ""}, 429)
-    assert segunda == ({"description": ""}, 429)
-    assert terceira == ({"description": ""}, 429)
+    esperado_interrompido = (
+        {CHAVE_DIAGNOSTICO: "lote_interrompido_apos_429"},
+        429,
+    )
+    assert segunda == esperado_interrompido
+    assert terceira == esperado_interrompido
     assert chamadas == ["http://um"]  # os demais nem chamaram a fonte
+
+
+def test_enriquecer_registra_diagnostico_da_pendencia(caplog):
+    conn, c = _vagas_com_fixture()
+    c.execute(
+        "INSERT INTO vagas (id, url, title, description, enrich_encerrada) "
+        "VALUES (1, 'http://vaga', 'Estagio em TI', 'teaser', 0)"
+    )
+    extractor = SkillExtractor(
+        {}, secoes_descarte=[], secoes_conteudo=[], contextos_descarte={}
+    )
+
+    def fake_fetch(session, lock, url):
+        return {
+            CHAVE_DIAGNOSTICO: "painel_da_vaga_ausente",
+            CHAVE_DETALHES: "url_final=http://vaga; corpo=100 caracteres",
+        }, 200
+
+    with caplog.at_level(logging.INFO, logger="enrich_outras"):
+        total = _enriquecer(
+            c, None, Lock(), extractor, {},
+            "SELECT id, url, title FROM vagas", [], fake_fetch,
+            fonte="infojobs",
+        )
+
+    assert total == 0
+    assert "motivo=painel_da_vaga_ausente" in caplog.text
+    assert "Resumo enriquecimento infojobs: tentadas=1" in caplog.text
+    assert (
+        "Pendencias infojobs por motivo: painel_da_vaga_ausente=1"
+        in caplog.text
+    )
 
 
 def _vagas_com_fixture():
