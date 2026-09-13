@@ -47,6 +47,13 @@ jobs:
       run: |
         python -u scripts/enrich_outras_fontes.py 2>&1 | tee /tmp/enrich.log
         python -u scripts/enrich_descriptions.py 2>&1 | tee -a /tmp/enrich.log
+        {
+          echo "## Diagnostico do enriquecimento"
+          echo
+          echo '```text'
+          grep -E 'Resumo enriquecimento|Pendencias .* por motivo' /tmp/enrich.log || true
+          echo '```'
+        } >> "$GITHUB_STEP_SUMMARY"
       env:
         PYTHONPATH: .
 

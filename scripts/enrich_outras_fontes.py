@@ -39,6 +39,7 @@ import sqlite3
 import sys
 import threading
 import time
+from collections import Counter
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date
 from pathlib import Path
@@ -137,6 +138,9 @@ QUERY_GEEKHUNTER_FORCADO = """
 # Vagas.com e no LinkedIn).
 MIN_DESCRICAO_INFOJOBS = 160
 
+CHAVE_DIAGNOSTICO = "_diagnostico"
+CHAVE_DETALHES = "_detalhes"
+
 QUERY_INFOJOBS_PENDENTES = """
     SELECT id, url, title FROM vagas
     WHERE source = 'infojobs'
@@ -212,8 +216,10 @@ def fetch_gupy(session: PoliteSession, lock: Lock, url: str) -> tuple[dict, int 
         response = session.get(url)
         status = session.last_status_code
     if response is None:
-        return {}, status
-    soup = BeautifulSoup(response.text, "html.parser")
+        return {CHAVE_DIAGNOSTICO: "sem_resposta"}, status
+    corpo = response.text or ""
+    url_final = str(getattr(response, "url", url) or url)
+    soup = BeautifulSoup(corpo, "html.parser")
     dados: dict[str, str] = {}
     for script in soup.find_all("script", type="application/ld+json"):
         try:
@@ -257,6 +263,17 @@ def fetch_gupy(session: PoliteSession, lock: Lock, url: str) -> tuple[dict, int 
                     empresa = (career_page.get("name") or "").strip()
                     if empresa:
                         dados["company"] = empresa
+
+    if not dados:
+        motivo = (
+            "redirecionamento_para_login"
+            if "/candidates/signin" in url_final
+            else "jobposting_ausente"
+        )
+        dados[CHAVE_DIAGNOSTICO] = motivo
+        dados[CHAVE_DETALHES] = (
+            f"url_final={url_final}; corpo={len(corpo)} caracteres"
+        )
 
     return dados, status
 
@@ -319,21 +336,36 @@ def fetch_infojobs(session: PoliteSession, lock: Lock, url: str) -> tuple[dict, 
         response = session.get(url)
         status = session.last_status_code
     if response is None:
-        return {}, status
-    if not (response.text or "").strip():
-        return {}, status
-    soup = BeautifulSoup(response.text, "html.parser")
+        return {CHAVE_DIAGNOSTICO: "sem_resposta"}, status
+    corpo = response.text or ""
+    url_final = str(getattr(response, "url", url) or url)
+    detalhes = f"url_final={url_final}; corpo={len(corpo)} caracteres"
+    if not corpo.strip():
+        return {
+            CHAVE_DIAGNOSTICO: "resposta_vazia",
+            CHAVE_DETALHES: detalhes,
+        }, status
+    soup = BeautifulSoup(corpo, "html.parser")
     painel = soup.select_one(".js_vacancyDataPanels")
     if painel is None:
-        return {"description": ""}, status
+        return {
+            CHAVE_DIAGNOSTICO: "painel_da_vaga_ausente",
+            CHAVE_DETALHES: detalhes,
+        }, status
     el = painel.select_one("p.text-break.white-space-pre-line")
     if el is None:
-        return {"description": ""}, status
+        return {
+            CHAVE_DIAGNOSTICO: "descricao_ausente_no_painel",
+            CHAVE_DETALHES: detalhes,
+        }, status
     descricao = el.get_text(" ", strip=True)
     # Nunca marque o teaser como enriquecimento concluido. Se o portal
     # devolver outro recorte curto, a vaga permanece para a proxima rodada.
     if len(descricao) <= MIN_DESCRICAO_INFOJOBS or descricao.endswith("..."):
-        return {"description": ""}, status
+        return {
+            CHAVE_DIAGNOSTICO: "descricao_curta_ou_truncada",
+            CHAVE_DETALHES: f"{detalhes}; descricao={len(descricao)} caracteres",
+        }, status
     return {"description": descricao}, status
 
 
@@ -347,7 +379,7 @@ def _fetch_parando(parou: threading.Event, parar_em_429: bool, fetch):
 
     def wrapper(sess, lk, alvo):
         if parou.is_set():
-            return {"description": ""}, 429
+            return {CHAVE_DIAGNOSTICO: "lote_interrompido_apos_429"}, 429
         resultado, status = fetch(sess, lk, alvo)
         if status == 429 and parar_em_429:
             if not parou.is_set():
@@ -371,25 +403,33 @@ def _enriquecer(
     args: list,
     fetch,
     parar_em_429: bool = False,
+    fonte: str = "fonte",
 ) -> int:
     c.execute(query, args)
     rows = c.fetchall()
     total = 0
+    encerradas = 0
+    removidas = 0
+    pendentes = 0
+    falhas = 0
+    motivos_pendentes: Counter[str] = Counter()
     parou = threading.Event()
     fetch_com_parada = _fetch_parando(parou, parar_em_429, fetch)
 
     with ThreadPoolExecutor(max_workers=3) as pool:
         futures = {
-            pool.submit(fetch_com_parada, session, lock, alvo): (vid, title)
+            pool.submit(fetch_com_parada, session, lock, alvo): (vid, title, alvo)
             for vid, alvo, title in rows
         }
         for future in as_completed(futures):
-            vid, title = futures[future]
+            vid, title, alvo = futures[future]
             try:
                 resultado, status = future.result()
                 if isinstance(resultado, str):
                     # Fontes antigas devolvem (descricao, status).
                     resultado = {"description": resultado}
+                diagnostico = str(resultado.get(CHAVE_DIAGNOSTICO) or "").strip()
+                detalhes = str(resultado.get(CHAVE_DETALHES) or "").strip()
                 desc = (resultado.get("description") or "").strip()
                 company = (resultado.get("company") or "").strip()
                 pub = (resultado.get("published_date") or "").strip()
@@ -400,6 +440,28 @@ def _enriquecer(
                         c.execute(
                             "UPDATE vagas SET enrich_encerrada = 1 WHERE id = ?",
                             (vid,),
+                        )
+                        encerradas += 1
+                        logger.info(
+                            "%s: vaga %s encerrada | http=%s | titulo=%r | url=%s",
+                            fonte, vid, status, title, alvo,
+                        )
+                    else:
+                        if diagnostico:
+                            motivo = diagnostico
+                        elif status is None:
+                            motivo = "sem_resposta"
+                        elif status >= 400:
+                            motivo = f"http_{status}"
+                        else:
+                            motivo = "conteudo_sem_dados_utilizaveis"
+                        motivos_pendentes[motivo] += 1
+                        pendentes += 1
+                        complemento = f" | {detalhes}" if detalhes else ""
+                        logger.warning(
+                            "%s: vaga %s permaneceu pendente | motivo=%s | "
+                            "http=%s | titulo=%r | url=%s%s",
+                            fonte, vid, motivo, status, title, alvo, complemento,
                         )
                     continue
                 if pub:
@@ -414,6 +476,12 @@ def _enriquecer(
                         pub_iso = None
                     if pub_iso is not None and pub_iso < MIN_DATA_CORTE:
                         c.execute("DELETE FROM vagas WHERE id = ?", (vid,))
+                        removidas += 1
+                        logger.info(
+                            "%s: vaga %s removida por data anterior ao corte | "
+                            "data=%s | titulo=%r | url=%s",
+                            fonte, vid, pub, title, alvo,
+                        )
                         continue
                 descricao_atual = c.execute(
                     "SELECT description FROM vagas WHERE id = ?", (vid,)
@@ -455,7 +523,24 @@ def _enriquecer(
                     # nao perde o que ja foi preenchido.
                     c.connection.commit()
             except Exception as exc:
+                falhas += 1
+                pendentes += 1
+                motivos_pendentes["erro_de_processamento"] += 1
                 logger.warning("Falha ao processar vaga %s: %s", vid, exc)
+    logger.info(
+        "Resumo enriquecimento %s: tentadas=%d | enriquecidas=%d | "
+        "encerradas=%d | removidas=%d | pendentes=%d | falhas=%d",
+        fonte, len(rows), total, encerradas, removidas, pendentes, falhas,
+    )
+    if motivos_pendentes:
+        logger.warning(
+            "Pendencias %s por motivo: %s",
+            fonte,
+            " | ".join(
+                f"{motivo}={quantidade}"
+                for motivo, quantidade in sorted(motivos_pendentes.items())
+            ),
+        )
     return total
 
 
@@ -596,6 +681,7 @@ def enriquecer(
             c, session_vagas, lock, extractor, tech_map, query_vagas, args_vagas,
             lambda sess, lk, url: fetch_vagas_com(sess, lk, url),
             parar_em_429=True,
+            fonte="vagas.com",
         )
 
         c.execute(query_trampos, args_trampos)
@@ -606,6 +692,7 @@ def enriquecer(
                 sess, lk, url.rstrip("/").split("/")[-1]
             ),
             parar_em_429=True,
+            fonte="trampos",
         )
 
         c.execute(query_gupy, args_gupy)
@@ -614,6 +701,7 @@ def enriquecer(
             c, session, lock, extractor, tech_map, query_gupy, args_gupy,
             lambda sess, lk, url: fetch_gupy(sess, lk, url),
             parar_em_429=True,
+            fonte="gupy",
         )
 
         c.execute(query_geekhunter, args_geekhunter)
@@ -623,6 +711,7 @@ def enriquecer(
             query_geekhunter, args_geekhunter,
             lambda sess, lk, url: fetch_geekhunter(sess, lk, url),
             parar_em_429=True,
+            fonte="geekhunter",
         )
 
         c.execute(query_infojobs, args_infojobs)
@@ -632,6 +721,7 @@ def enriquecer(
             query_infojobs, args_infojobs,
             lambda sess, lk, url: fetch_infojobs(sess, lk, url),
             parar_em_429=True,
+            fonte="infojobs",
         )
 
     conn.commit()
