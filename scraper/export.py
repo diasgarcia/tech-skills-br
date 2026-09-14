@@ -7,6 +7,7 @@ from collections import Counter
 from datetime import datetime
 from pathlib import Path
 
+from .checkpoints import atomic_csv_file
 from .models import WORKPLACE_ORDER, Job
 
 JOB_COLUMNS = [
@@ -39,7 +40,7 @@ def _timestamp() -> str:
 def export_jobs_csv(jobs: list[Job], output_dir: Path, stamp: str | None = None) -> Path:
     stamp = stamp or _timestamp()
     path = output_dir / f"vagas_{stamp}.csv"
-    with open(path, "w", encoding="utf-8-sig", newline="") as fh:
+    with atomic_csv_file(path) as fh:
         writer = csv.DictWriter(fh, fieldnames=JOB_COLUMNS, extrasaction="ignore")
         writer.writeheader()
         for job in sorted(jobs, key=lambda j: (j.area, j.title)):

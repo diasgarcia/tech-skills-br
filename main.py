@@ -15,7 +15,7 @@ import logging
 import sys
 from pathlib import Path
 
-from scraper.config import DELAYS_PADRAO, SEARCH_TERMS, Settings
+from scraper.config import DELAYS_PADRAO, Settings, _load_dotenv, load_search_terms
 from scraper.pipeline import run
 from scraper.sources import AVAILABLE_SOURCES, DEFAULT_SOURCES
 
@@ -36,7 +36,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     parser.add_argument(
         "--terms", nargs="+", default=None,
-        help=f"Termos de busca (padrao: {len(SEARCH_TERMS)} termos de config.py).",
+        help=f"Termos de busca (padrao: {len(load_search_terms())} termos de coletores.yml).",
     )
     parser.add_argument(
         "--start-page", type=int, default=1,
@@ -112,7 +112,20 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
-    args = build_parser().parse_args(argv)
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    _load_dotenv()
+    for name in ("start_page", "max_pages", "page_size", "abler_days"):
+        if getattr(args, name) < 1:
+            parser.error(f"--{name.replace('_', '-')} deve ser maior que zero.")
+    overrides = {}
+    for source, seconds in args.source_delay:
+        if source not in AVAILABLE_SOURCES:
+            parser.error(f"Fonte desconhecida em --source-delay: {source}")
+        try:
+            overrides[source] = float(seconds)
+        except ValueError:
+            parser.error(f"Atraso invalido para {source}: {seconds}")
 
     logging.basicConfig(
         level=logging.DEBUG if args.verbose else logging.INFO,
@@ -121,27 +134,10 @@ def main(argv: list[str] | None = None) -> int:
         stream=sys.stdout,
     )
 
-    settings = Settings(
-        search_terms=args.terms or list(SEARCH_TERMS),
-        sources=args.sources,
-        delay_seconds=args.delay,
-        page_size=min(args.page_size, 100),
-        start_page=max(1, args.start_page),
-        max_pages_per_term=args.max_pages,
-        only_junior=not args.all_levels,
-        enrich_linkedin=not args.no_enrich,
-        abler_days_back=max(1, args.abler_days),
-        recrutei_full=args.recrutei_full,
-        parallel_sources=not args.sequencial,
-        source_delays={
-            **DELAYS_PADRAO,
-            **{
-                fonte: float(segundos)
-                for fonte, segundos in (args.source_delay or [])
-            },
-        },
-    )
-
+    try:
+        settings = _settings_from_args(args, overrides)
+    except ValueError as exc:
+        parser.error(str(exc))
 
     if args.output:
         settings.output_dir = args.output
@@ -151,7 +147,30 @@ def main(argv: list[str] | None = None) -> int:
         strict_seniority=args.strict,
         keep_non_tech=args.keep_non_tech,
     )
+    return _print_result(result, settings)
 
+
+def _settings_from_args(args, overrides) -> Settings:
+    return Settings(
+        search_terms=args.terms or load_search_terms(),
+        sources=args.sources,
+        delay_seconds=args.delay,
+        page_size=min(args.page_size, 100),
+        start_page=args.start_page,
+        max_pages_per_term=args.max_pages,
+        only_junior=not args.all_levels,
+        enrich_linkedin=not args.no_enrich,
+        abler_days_back=args.abler_days,
+        recrutei_full=args.recrutei_full,
+        parallel_sources=not args.sequencial,
+        source_delays={
+            **DELAYS_PADRAO,
+            **overrides,
+        },
+    )
+
+
+def _print_result(result, settings) -> int:
     if not result.jobs:
         print("\nNenhuma vaga encontrada. Verifique conexao e termos de busca.")
         return 1

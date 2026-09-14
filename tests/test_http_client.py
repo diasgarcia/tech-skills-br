@@ -11,7 +11,10 @@ from scraper.http_client import PoliteSession
 
 @pytest.fixture
 def polite():
-    return PoliteSession(user_agent="test-agent", delay_seconds=0.0, max_retries=1)
+    with PoliteSession(
+        user_agent="test-agent", delay_seconds=0.0, max_retries=1, backoff_factor=0.0,
+    ) as session:
+        yield session
 
 
 def test_get_bem_sucedido_devolve_resposta(polite):
@@ -196,3 +199,118 @@ def test_context_manager_fecha_sessao():
         fechar = session.session.close = MagicMock()
 
     fechar.assert_called_once()
+
+
+@pytest.mark.parametrize("impersonate", [None, "chrome"])
+@pytest.mark.parametrize("status", [400, 401, 403, 404, 410, 422, 501, 505])
+def test_erros_definitivos_nao_sao_repetidos(impersonate, status):
+    with PoliteSession(
+        user_agent="t", delay_seconds=0, max_retries=3, backoff_factor=0,
+        impersonate=impersonate,
+    ) as session:
+        session.session.get = MagicMock(return_value=MagicMock(status_code=status, text="erro"))
+
+        result = session.get("https://example.com/job")
+
+        assert result is None
+        assert session.last_status_code == status
+        assert session.session.get.call_count == 1
+        assert session.request_count == session.attempt_count == 1
+
+
+@pytest.mark.parametrize("impersonate", [None, "chrome"])
+@pytest.mark.parametrize("status", [429, 500, 502, 503, 504])
+def test_retry_transitorio_tem_a_mesma_politica_nos_transportes(impersonate, status):
+    with PoliteSession(
+        user_agent="t", delay_seconds=0, max_retries=2, backoff_factor=0,
+        impersonate=impersonate,
+    ) as session:
+        response = MagicMock(status_code=200)
+        session.session.get = MagicMock(side_effect=[
+            MagicMock(status_code=status, text="falha", headers={"Retry-After": "82800"}), response,
+        ])
+
+        result = session.get("https://example.com/job")
+
+        assert result is response
+        assert session.request_count == 1
+        assert session.attempt_count == 2
+        assert session.last_status_code == 200
+
+
+@pytest.mark.parametrize("impersonate", [None, "chrome"])
+def test_retry_de_rede_respeita_limite_e_nao_deixa_status_antigo(impersonate):
+    with PoliteSession(
+        user_agent="t", delay_seconds=0, max_retries=2, backoff_factor=0,
+        impersonate=impersonate,
+    ) as session:
+        session.session.get = MagicMock(side_effect=[
+            MagicMock(status_code=503, text="falha"), requests.Timeout(), requests.Timeout(),
+        ])
+
+        result = session.get("https://example.com/job")
+
+        assert result is None
+        assert session.last_status_code is None
+        assert session.request_count == 1
+        assert session.attempt_count == 3
+
+
+def test_falha_nativa_cffi_pode_ser_repetida():
+    from curl_cffi.requests.exceptions import Timeout
+
+    with PoliteSession(
+        user_agent="t", delay_seconds=0, max_retries=1, backoff_factor=0,
+        impersonate="chrome",
+    ) as session:
+        response = MagicMock(status_code=200)
+        session.session.get = MagicMock(side_effect=[Timeout("timeout"), response])
+
+        result = session.get("https://example.com/job")
+
+        assert result is response
+        assert session.attempt_count == 2
+
+
+@pytest.mark.parametrize("impersonate", [None, "chrome"])
+def test_post_nao_repete_automaticamente_operacao_nao_idempotente(impersonate):
+    with PoliteSession(
+        user_agent="t", delay_seconds=0, max_retries=3, backoff_factor=0,
+        impersonate=impersonate,
+    ) as session:
+        session.session.post = MagicMock(return_value=MagicMock(status_code=503, text="erro"))
+
+        result = session.post("https://example.com/operation")
+
+        assert result is None
+        assert session.last_status_code == 503
+        assert session.attempt_count == 1
+
+
+def test_post_limpa_status_anterior_apos_falha_de_rede(polite):
+    polite.last_status_code = 200
+    polite.session.post = MagicMock(side_effect=requests.Timeout())
+
+    result = polite.post("https://example.com/operation")
+
+    assert result is None
+    assert polite.last_status_code is None
+    assert polite.attempt_count == 1
+
+
+def test_get_aplica_delay_a_cada_tentativa_e_backoff_limitado(polite, monkeypatch):
+    polite.backoff_factor = 0.5
+    wait = MagicMock()
+    sleep = MagicMock()
+    monkeypatch.setattr(polite, "_wait_turn", wait)
+    monkeypatch.setattr(time, "sleep", sleep)
+    polite.session.get = MagicMock(side_effect=[
+        MagicMock(status_code=429, text="erro", headers={"Retry-After": "82800"}),
+        MagicMock(status_code=200),
+    ])
+
+    polite.get("https://example.com/job")
+
+    assert wait.call_count == 2
+    sleep.assert_called_once_with(0.5)
+    assert polite.session.adapters["https://"].max_retries.total == 0

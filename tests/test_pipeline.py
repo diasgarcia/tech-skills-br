@@ -87,6 +87,95 @@ def test_collect_paralelo_equivale_ao_sequencial(monkeypatch):
     assert sorted(delays_vistos) == [0.5, 1.0]
 
 
+@pytest.mark.parametrize("parallel", [False, True])
+def test_falha_de_fonte_preserva_diagnostico_e_contagem_sem_parar_as_demais(monkeypatch, parallel):
+    from scraper.sources.base import JobSource
+
+    class GoodSource(JobSource):
+        name = "good"
+        label = "Good"
+
+        def fetch_term(self, term):
+            self.session.request_count += 1
+            return [_vaga(source=self.name)]
+
+    class BrokenSource(JobSource):
+        name = "broken"
+        label = "Broken"
+
+        def fetch_term(self, term):
+            return []
+
+        def fetch(self, terms):
+            self.session.request_count += 3
+            self.stats.errors.append("erro anterior por termo")
+            raise ValueError("HTML invalido")
+
+    class FakeSession:
+        def __init__(self, **kwargs):
+            self.request_count = 0
+            self.last_status_code = None
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            return False
+
+    monkeypatch.setattr(pipeline, "PoliteSession", FakeSession)
+    monkeypatch.setattr(pipeline, "SOURCE_REGISTRY", {"broken": BrokenSource, "good": GoodSource})
+    settings = Settings(sources=["broken", "good"], search_terms=["term"], parallel_sources=parallel)
+
+    jobs, stats, requests = pipeline.collect(settings)
+
+    assert [job.source for job in jobs] == ["good"]
+    assert [stat.source for stat in stats] == ["broken", "good"]
+    assert stats[0].errors == ["erro anterior por termo", "broken: ValueError: HTML invalido"]
+    assert stats[0].requests_made == 3
+    assert stats[1].raw_jobs == 1
+    assert requests == 4
+
+
+@pytest.mark.parametrize("parallel", [False, True])
+def test_falha_na_construcao_de_fonte_tambem_gera_estatistica(monkeypatch, parallel):
+    def failed_collect(*args):
+        raise RuntimeError("nao iniciou a sessao")
+
+    monkeypatch.setattr(pipeline, "_collect_source", failed_collect)
+    settings = Settings(sources=["abler", "recrutei"], parallel_sources=parallel)
+
+    jobs, stats, requests = pipeline.collect(settings)
+
+    assert jobs == []
+    assert requests == 0
+    assert [stat.source for stat in stats] == ["abler", "recrutei"]
+    assert all("nao iniciou a sessao" in stat.errors[0] for stat in stats)
+
+
+def test_falha_de_fonte_recupera_checkpoint_completo(tmp_path, monkeypatch):
+    from scraper.checkpoints import JobCheckpoint
+    from scraper.sources.abler import AblerSource
+
+    original = _vaga(source="abler")
+    checkpoint = JobCheckpoint(tmp_path / "abler_partial.csv", "abler")
+
+    def fail_after_save(source, terms):
+        checkpoint.save([original])
+        source.session.request_count += 1
+        raise ValueError("falha depois de salvar")
+
+    monkeypatch.setattr(AblerSource, "fetch", fail_after_save)
+    settings = Settings(sources=["abler"], output_dir=tmp_path, parallel_sources=False)
+
+    jobs, stats, requests = pipeline.collect(settings)
+
+    assert jobs == [original]
+    assert stats[0].raw_jobs == 1
+    assert "falha depois de salvar" in stats[0].errors[0]
+    assert requests == 1
+    assert checkpoint.path.exists()
+
+
 def test_fetch_base_reporta_progresso_por_termo(monkeypatch):
     """O JobSource.fetch avisa o callback com o total corrente a cada termo."""
     from scraper.sources.base import JobSource as Base
@@ -113,20 +202,22 @@ def test_fetch_base_reporta_progresso_por_termo(monkeypatch):
     assert vistos == [2, 5]
 
 
-def test_resumo_paralelo_abre_fecha_grupos(capsys):
-    """O resumo emite grupos colapsaveis com as contagens do momento."""
-    resumo = pipeline._ResumoParalelo(["a", "b"])
+def test_typeerror_interno_do_callback_nao_repete_a_chamada(caplog):
+    from scraper.sources.abler import AblerSource
 
-    resumo.abrir()
-    resumo.registrar("a", 10)
-    resumo.registrar("b", 5)
-    resumo.abrir()  # fecha o anterior e abre com contagens novas
-    resumo.fechar()
-    saida = capsys.readouterr().out
+    source = AblerSource(session=None, settings=Settings())
+    calls = []
 
-    assert saida.count("::group::[resumo") == 2
-    assert saida.count("::endgroup::") == 2
-    assert "a 10 | b 5" in saida
+    def callback(*args):
+        calls.append(args)
+        raise TypeError("erro interno, nao erro de assinatura")
+
+    source.progress_callback = callback
+
+    source.report(5, requests=3)
+
+    assert calls == [(5, None, 3, None)]
+    assert "erro interno, nao erro de assinatura" in caplog.text
 
 
 def test_tabela_paralela_formata_e_atualiza():
@@ -180,7 +271,7 @@ def test_tabela_paralela_iniciar_encerrar():
 
 @pytest.fixture
 def sem_enriquecimento(monkeypatch):
-    monkeypatch.setattr(pipeline, "_enrich_linkedin_parallel", lambda jobs: None)
+    monkeypatch.setattr(pipeline, "_enrich_linkedin_parallel", lambda jobs, **kwargs: 0)
 
 
 def test_run_coleta_classifica_e_exporta(tmp_path, monkeypatch, sem_enriquecimento):
@@ -243,7 +334,7 @@ def test_run_mantem_nao_tech_quando_pedido(tmp_path, monkeypatch, sem_enriquecim
 def test_run_pula_enriquecimento_quando_desabilitado(tmp_path, monkeypatch):
     chamadas = []
     monkeypatch.setattr(
-        pipeline, "_enrich_linkedin_parallel", lambda jobs: chamadas.append(len(jobs))
+        pipeline, "_enrich_linkedin_parallel", lambda jobs, **kwargs: chamadas.append(len(jobs))
     )
     monkeypatch.setattr(pipeline, "collect", lambda settings: ([_vaga()], [], 0))
 

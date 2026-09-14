@@ -11,14 +11,15 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 logger = logging.getLogger(__name__)
+RETRYABLE_STATUSES = frozenset({429, 500, 502, 503, 504})
 
 
 class PoliteSession:
     """Wrapper sobre `requests.Session` que espaca as chamadas e tenta de novo em falhas.
 
-    - Retry automatico (com backoff exponencial) em 429/5xx e erros de conexao.
+    - Retry (com backoff exponencial) em 429/5xx transitorios e erros de conexao.
     - Delay minimo entre requests, com jitter para nao criar um padrao robotico.
-    - Nunca levanta excecao para o chamador: devolve `None` quando desiste.
+    - Devolve `None` ao esgotar falhas de rede/HTTP; erros de programacao propagam.
     """
 
     def __init__(
@@ -36,7 +37,9 @@ class PoliteSession:
         self.backoff_factor = backoff_factor
         self._last_request_at = 0.0
         self.request_count = 0
+        self.attempt_count = 0
         self.last_status_code: int | None = None
+        self._network_errors = (requests.RequestException,)
 
         cabecalhos = {
             "User-Agent": user_agent,
@@ -52,6 +55,7 @@ class PoliteSession:
             # Vagas.com (o requests puro era flagado e tomava 429/403).
             from curl_cffi import requests as cffi_requests
 
+            self._network_errors += (cffi_requests.RequestsError,)
             self.session = cffi_requests.Session(impersonate=impersonate)
             self.session.headers.update(cabecalhos)
             return
@@ -59,20 +63,9 @@ class PoliteSession:
         self.session = requests.Session()
         self.session.headers.update(cabecalhos)
 
-        retry = Retry(
-            total=max_retries,
-            connect=max_retries,
-            read=max_retries,
-            status=max_retries,
-            backoff_factor=backoff_factor,
-            status_forcelist=(429, 500, 502, 503, 504),
-            allowed_methods=frozenset(["GET", "POST"]),
-            raise_on_status=False,
-            # Sem teto, um Retry-After grande travaria a coleta: o Cloudflare
-            # ja respondeu 429 com Retry-After de 23h. O backoff exponencial
-            # proprio (acima) ja espaca os retries de forma segura.
-            respect_retry_after_header=False,
-        )
+        # Uma unica politica para os dois transportes. O adaptador nao repete
+        # por conta propria, evitando multiplicar silenciosamente tentativas.
+        retry = Retry(total=0, respect_retry_after_header=False)
         adapter = HTTPAdapter(max_retries=retry, pool_maxsize=4)
         self.session.mount("https://", adapter)
         self.session.mount("http://", adapter)
@@ -84,54 +77,48 @@ class PoliteSession:
             time.sleep(remaining + random.uniform(0, 0.4))
         self._last_request_at = time.monotonic()
 
-    def get(self, url: str, **kwargs) -> requests.Response | None:
-        """GET com delay + retry. Devolve `None` em caso de falha definitiva."""
-        self._wait_turn()
+    def _request(self, method: str, url: str, **kwargs) -> requests.Response | None:
+        """Uma chamada logica; cada tentativa respeita delay e politica comum.
+
+        `request_count` mantem a contagem historica de chamadas logicas.
+        `attempt_count` inclui repeticoes feitas aqui, nao redirecionamentos
+        internos do transporte. Retry-After nao altera o limite de espera.
+        """
         kwargs.setdefault("timeout", self.timeout_seconds)
         self.request_count += 1
         self.last_status_code = None
-
-        if self._cffi:
-            # curl_cffi nao tem o Retry do urllib3: repete aqui em 429/5xx
-            # com backoff exponencial (sem respeitar Retry-After gigantes).
-            for tentativa in range(self.max_retries + 1):
-                try:
-                    response = self.session.get(url, **kwargs)
-                except Exception as exc:
-                    logger.warning("Falha de rede (cffi) em %s: %s", url, exc)
+        send = getattr(self.session, method)
+        # POST pode ter efeito mesmo quando a resposta se perde. Sem contrato
+        # de idempotencia, o cliente nao repete essa operacao automaticamente.
+        retry_limit = self.max_retries if method == "get" else 0
+        for attempt in range(retry_limit + 1):
+            self._wait_turn()
+            self.attempt_count += 1
+            self.last_status_code = None
+            try:
+                response = send(url, **kwargs)
+            except self._network_errors as exc:
+                if attempt >= retry_limit:
+                    logger.warning("Falha de rede em %s: %s", url, exc)
                     return None
+            else:
                 self.last_status_code = response.status_code
-                if response.status_code < 400 or tentativa >= self.max_retries:
-                    break
-                time.sleep(self.backoff_factor * (2**tentativa))
-            if response.status_code >= 400:
-                logger.warning(
-                    "HTTP %s em %s (params=%s, resp=%s)",
-                    response.status_code,
-                    url,
-                    kwargs.get("params"),
-                    response.text[:200],
-                )
-                return None
-            return response
+                if response.status_code < 400:
+                    return response
+                if response.status_code not in RETRYABLE_STATUSES or attempt >= retry_limit:
+                    logger.warning(
+                        "HTTP %s em %s (params=%s, resp=%s)",
+                        response.status_code, url, kwargs.get("params"), response.text[:200],
+                    )
+                    return None
+            backoff = self.backoff_factor * (2**attempt)
+            if backoff > 0:
+                time.sleep(backoff)
+        return None
 
-        try:
-            response = self.session.get(url, **kwargs)
-        except requests.RequestException as exc:
-            logger.warning("Falha de rede em %s: %s", url, exc)
-            return None
-
-        self.last_status_code = response.status_code
-        if response.status_code >= 400:
-            logger.warning(
-                "HTTP %s em %s (params=%s, resp=%s)",
-                response.status_code,
-                url,
-                kwargs.get("params"),
-                response.text[:200],
-            )
-            return None
-        return response
+    def get(self, url: str, **kwargs) -> requests.Response | None:
+        """GET com delay + retry. Devolve `None` em caso de falha definitiva."""
+        return self._request("get", url, **kwargs)
 
     def get_json(self, url: str, **kwargs) -> dict | list | None:
         response = self.get(url, **kwargs)
@@ -145,26 +132,8 @@ class PoliteSession:
             return None
 
     def post(self, url: str, **kwargs) -> requests.Response | None:
-        """POST com delay + retry. Devolve `None` em caso de falha definitiva."""
-        self._wait_turn()
-        kwargs.setdefault("timeout", self.timeout_seconds)
-        self.request_count += 1
-        try:
-            response = self.session.post(url, **kwargs)
-        except requests.RequestException as exc:
-            logger.warning("Falha de rede em %s: %s", url, exc)
-            return None
-
-        if response.status_code >= 400:
-            logger.warning(
-                "HTTP %s em %s (json=%s, resp=%s)",
-                response.status_code,
-                url,
-                kwargs.get("json"),
-                response.text[:200],
-            )
-            return None
-        return response
+        """POST com delay, sem retry automatico de operacao nao idempotente."""
+        return self._request("post", url, **kwargs)
 
 
     def post_json(self, url: str, **kwargs) -> dict | list | None:

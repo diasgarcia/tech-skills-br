@@ -7,7 +7,9 @@ esta neste arquivo ou nos YAMLs em `scraper/rules/`.
 from __future__ import annotations
 
 import os
+import math
 from dataclasses import dataclass, field
+from functools import lru_cache
 from pathlib import Path
 
 import yaml
@@ -44,8 +46,6 @@ def _load_dotenv(env_path: Path | None = None) -> None:
             pass
 
 
-_load_dotenv()
-
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
@@ -54,21 +54,22 @@ USER_AGENT = (
 
 
 
+@lru_cache(maxsize=1)
+def _collector_rules() -> dict:
+    with open(RULES_DIR / "coletores.yml", encoding="utf-8") as fh:
+        return yaml.safe_load(fh) or {}
+
+
 def load_search_terms() -> list[str]:
     """Termos de busca do projeto, declarados em coletores.yml."""
-    with open(RULES_DIR / "coletores.yml", encoding="utf-8") as fh:
-        dados = yaml.safe_load(fh) or {}
+    dados = _collector_rules()
     termos = dados.get("termos") or []
     return [str(t).strip() for t in termos if str(t).strip()]
 
 
-SEARCH_TERMS: list[str] = load_search_terms()
-
-
 def load_term_match_rules() -> dict[str, list[str]]:
     """Sinais exigidos nos resultados de buscas textuais muito especificas."""
-    with open(RULES_DIR / "coletores.yml", encoding="utf-8") as fh:
-        dados = yaml.safe_load(fh) or {}
+    dados = _collector_rules()
 
     regras = dados.get("validacao_de_termos") or {}
     return {
@@ -79,8 +80,6 @@ def load_term_match_rules() -> dict[str, list[str]]:
         if str(termo).strip()
     }
 
-
-TERM_MATCH_RULES: dict[str, list[str]] = load_term_match_rules()
 
 # Matriz de delays da rodada padrao, medida em 05/09 (wiki "Limites e
 # Bloqueios"). LinkedIn 1.0s (ponto doce; 0.5s sofre backpressure da
@@ -104,25 +103,9 @@ DELAYS_PADRAO: dict[str, float] = {
 class Settings:
     """Parametros de execucao. Sobrescritos pela CLI em `main.py`."""
 
-    search_terms: list[str] = field(default_factory=lambda: list(SEARCH_TERMS))
-    term_match_rules: dict[str, list[str]] = field(
-        default_factory=lambda: {
-            termo: list(sinais) for termo, sinais in TERM_MATCH_RULES.items()
-        }
-    )
-    sources: list[str] = field(
-        default_factory=lambda: [
-            "gupy",
-            "vagas",
-            "trampos",
-            "linkedin",
-            "solides",
-            "geekhunter",
-            "infojobs",
-            "abler",
-            "recrutei",
-        ]
-    )
+    search_terms: list[str] = field(default_factory=load_search_terms)
+    term_match_rules: dict[str, list[str]] = field(default_factory=load_term_match_rules)
+    sources: list[str] = field(default_factory=lambda: default_sources())
 
     output_dir: Path = DEFAULT_OUTPUT_DIR
 
@@ -169,7 +152,28 @@ class Settings:
     # (so para vagas pendentes, via scripts/enrich_descriptions.py).
     enrich_linkedin: bool = True
 
+    def __post_init__(self) -> None:
+        for name in ("page_size", "start_page", "max_pages_per_term", "abler_days_back", "recrutei_days_back"):
+            if getattr(self, name) < 1:
+                raise ValueError(f"{name} deve ser maior que zero.")
+        if self.page_size > 100:
+            raise ValueError("page_size deve ser no maximo 100.")
+        for name in ("delay_seconds", "timeout_seconds", "backoff_factor"):
+            value = getattr(self, name)
+            if not math.isfinite(value) or value < 0 or (name == "timeout_seconds" and value == 0):
+                raise ValueError(f"{name} possui valor invalido.")
+        if self.max_retries < 0:
+            raise ValueError("max_retries nao pode ser negativo.")
+        if any(not math.isfinite(delay) or delay < 0 for delay in self.source_delays.values()):
+            raise ValueError("O atraso por fonte deve ser um numero finito nao negativo.")
+
     def ensure_output_dir(self) -> Path:
         self.output_dir.mkdir(parents=True, exist_ok=True)
         return self.output_dir
+
+
+def default_sources() -> list[str]:
+    from scraper.sources import DEFAULT_SOURCES
+
+    return list(DEFAULT_SOURCES)
 

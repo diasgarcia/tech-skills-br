@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import re
+from inspect import signature
 from abc import ABC, abstractmethod
 from functools import lru_cache
 
@@ -58,21 +59,23 @@ class JobSource(ABC):
         """
         if self.progress_callback is not None:
             reqs = requests if requests is not None else self.session.request_count
+            arguments = (total, current_term, reqs, progresso)
             try:
-                self.progress_callback(total, current_term, reqs, progresso)
-            except TypeError:
-                try:
-                    self.progress_callback(total, current_term, reqs)
-                except TypeError:
+                callback_signature = signature(self.progress_callback)
+            except (TypeError, ValueError):
+                callback_signature = None
+            if callback_signature is not None:
+                for count in range(len(arguments), 0, -1):
                     try:
-                        self.progress_callback(total, current_term)
+                        callback_signature.bind(*arguments[:count])
                     except TypeError:
-                        try:
-                            self.progress_callback(total)
-                        except Exception:
-                            pass
-            except Exception:
-                pass
+                        continue
+                    arguments = arguments[:count]
+                    break
+            try:
+                self.progress_callback(*arguments)
+            except Exception as exc:
+                logger.warning("[%s] falha no callback de progresso: %s", self.name, exc)
 
     def page_limit(self) -> int:
         """Teto efetivo de paginacao: o menor entre CLI e o natural da fonte."""

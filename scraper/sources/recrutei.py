@@ -14,9 +14,9 @@ Tudo renderizado no servidor, sem autenticacao:
   - Coleta completa (--recrutei-full): paginacao SSR de /vagas?page=N
     (12 por pagina, rel=next). O sitemap cobre so as ~1.000 vagas mais
     recentes; a listagem expoe todas as ativas (~3,7k).
-- Checkpoint incremental em output/recrutei_partial.csv: cada vaga
-  gravada na hora; rodada interrompida retoma sem refazer GET e a
-  rodada completa remove o arquivo.
+- Checkpoint completo em output/recrutei_partial.csv: cada vaga
+  gravada na hora; rodada interrompida retoma sem refazer GET e o
+  pipeline confirma o arquivo somente depois da exportacao.
 
 Detalhes descobertos testando ao vivo:
 
@@ -31,13 +31,13 @@ Detalhes descobertos testando ao vivo:
 
 from __future__ import annotations
 
-import csv
 import json
 import logging
 import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+from ..checkpoints import CHECKPOINT_NAMES, JobCheckpoint
 from ..models import (
     HIBRIDO,
     NAO_INFORMADO,
@@ -54,7 +54,7 @@ PORTAL_URL = "https://empregos.recrutei.com.br"
 SITEMAP_URL = f"{PORTAL_URL}/sitemap-vagas-1.xml"
 LISTAGEM_URL = f"{PORTAL_URL}/vagas"
 
-CHECKPOINT_NAME = "recrutei_partial.csv"
+CHECKPOINT_NAME = CHECKPOINT_NAMES["recrutei"]
 
 _VAGA_URL_RE = re.compile(r'<loc>([^<]+/vaga/[^<]+)</loc>')
 _LASTMOD_RE = re.compile(r"<lastmod>([^<]+)</lastmod>")
@@ -97,23 +97,11 @@ class RecruteiSource(JobSource):
     def _checkpoint_path(self) -> Path:
         return Path(self.settings.output_dir) / CHECKPOINT_NAME
 
-    def _ler_checkpoint(self) -> set[str]:
-        path = self._checkpoint_path()
-        if not path.is_file():
-            return set()
-        ids: set[str] = set()
-        with open(path, encoding="utf-8-sig", newline="") as fh:
-            for linha in csv.DictReader(fh):
-                vid = (linha.get("external_id") or "").strip()
-                if vid:
-                    ids.add(vid)
-        return ids
-
     def _coletar_sitemap(self) -> list[Job]:
         response = self.session.get(SITEMAP_URL)
         if response is None or not response.text.strip():
             logger.warning("[%s] sitemap inacessivel; abortando a coleta", self.name)
-            return []
+            return self._coletar_detalhes([])
 
         dias = max(1, int(getattr(self.settings, "recrutei_days_back", 1) or 1))
         recencia = datetime.now(timezone.utc) - timedelta(days=dias)
@@ -172,61 +160,39 @@ class RecruteiSource(JobSource):
         return self._coletar_detalhes(alvos)
 
     def _coletar_detalhes(self, alvos: list[str]) -> list[Job]:
-        checkpoint = self._checkpoint_path()
-        checkpoint.parent.mkdir(parents=True, exist_ok=True)
-        seen = self._ler_checkpoint()
+        checkpoint = JobCheckpoint(self._checkpoint_path(), self.name)
+        jobs = checkpoint.load()
+        seen = {job.external_id for job in jobs}
+        recovered_count = len(jobs)
         if seen and not self.settings.parallel_sources:
             logger.info("[%s] retomando checkpoint com %d vagas ja coletadas",
                         self.name, len(seen))
-        novo_checkpoint = not checkpoint.is_file()
-
-        jobs: list[Job] = []
-        completou = False
-        try:
-            with open(checkpoint, "a", encoding="utf-8-sig", newline="") as fh:
-                writer = None
-                for idx, url in enumerate(alvos, 1):
-                    if _vid_da_url(url) in seen:
-                        continue  # ja esta no checkpoint: nao refaz o GET
-                    page = self.session.get(url)
-                    if page is None:
-                        continue
-                    if not page.text.strip():
-                        logger.warning(
-                            "[%s] body vazio em %s; parando a coleta "
-                            "(o checkpoint fica para retomar)", self.name, url,
-                        )
-                        break
-                    job = self._parse_page(page.text, url)
-                    if job is None or job.external_id in seen:
-                        continue
-                    seen.add(job.external_id)
-                    jobs.append(job)
-                    if writer is None:
-                        writer = csv.DictWriter(fh, fieldnames=list(job.to_row()))
-                        if novo_checkpoint:
-                            writer.writeheader()
-                    writer.writerow(job.to_row())
-                    fh.flush()
-                    if len(jobs) % 25 == 0:
-                        if self.settings.parallel_sources:
-                            logger.debug("[%s] progresso: %d vagas novas",
-                                         self.name, len(jobs))
-                        else:
-                            logger.info("[%s] progresso: %d vagas novas",
-                                        self.name, len(jobs))
-                        self.report(
-                            len(jobs),
-                            current_term=f"{len(jobs)} vagas novas",
-                            progresso=idx / len(alvos),
-                        )
-                else:
-                    completou = True
-        finally:
-            if completou:
-                checkpoint.unlink(missing_ok=True)
-                logger.info("[%s] coleta completa; checkpoint removido", self.name) if not self.settings.parallel_sources else logger.debug(
-                    "[%s] coleta completa; checkpoint removido", self.name
+        for idx, url in enumerate(alvos, 1):
+            if _vid_da_url(url) in seen:
+                continue
+            page = self.session.get(url)
+            if page is None:
+                continue
+            if not page.text.strip():
+                logger.warning(
+                    "[%s] body vazio em %s; parando a coleta "
+                    "(o checkpoint fica para retomar)", self.name, url,
+                )
+                break
+            job = self._parse_page(page.text, url)
+            if job is None or job.external_id in seen:
+                continue
+            checkpoint.save([*jobs, job])
+            seen.add(job.external_id)
+            jobs.append(job)
+            new_count = len(jobs) - recovered_count
+            if new_count % 25 == 0:
+                log_progress = logger.debug if self.settings.parallel_sources else logger.info
+                log_progress("[%s] progresso: %d vagas novas", self.name, new_count)
+                self.report(
+                    len(jobs),
+                    current_term=f"{new_count} vagas novas",
+                    progresso=idx / len(alvos),
                 )
 
         self.stats.raw_jobs = len(jobs)

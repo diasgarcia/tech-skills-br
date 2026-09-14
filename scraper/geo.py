@@ -11,7 +11,7 @@ from typing import Any
 import yaml
 
 from .config import RULES_DIR
-from .models import REMOTO, Job, normalize
+from .models import REMOTO, Job
 
 _WS_RE = re.compile(r"\s+")
 _NON_ALNUM_RE = re.compile(r"[^a-z0-9 ]+")
