@@ -25,9 +25,7 @@ from sqlalchemy import func, select
 from api.database import read_session
 from api.models import Tecnologia, Vaga, vaga_tecnologia
 
-from scraper.config import PROJECT_ROOT
-
-PAGES_API_DIR = PROJECT_ROOT / "api" / "web"
+PAGES_API_DIR = ROOT_DIR / "api" / "web"
 
 logger = logging.getLogger(__name__)
 

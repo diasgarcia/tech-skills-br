@@ -85,6 +85,14 @@ def test_deploy_de_codigo_preserva_graficos_publicados():
     assert "https://diasgarcia.github.io/tech-skills-br/assets/${arquivo}" in content
 
 
+def test_deploy_estatico_nao_participa_do_fluxo_de_snapshots():
+    content = PAGES_WORKFLOWS[1].read_text(encoding="utf-8")
+
+    assert "gh release download latest --pattern 'vagas.db'" in content
+    assert "scripts/release_snapshot.py" not in content
+    assert "pip install -r requirements.txt" not in content
+
+
 def test_enriquecimento_manual_atualiza_relatorio_e_graficos():
     content = PAGES_WORKFLOWS[2].read_text(encoding="utf-8")
 
