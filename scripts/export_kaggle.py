@@ -11,10 +11,12 @@ Requisitos:
 from __future__ import annotations
 
 import json
+import argparse
+from contextlib import closing
 import logging
 import os
-import sqlite3
 import subprocess
+import sys
 import tempfile
 import time
 from datetime import date
@@ -23,6 +25,11 @@ from pathlib import Path
 import pandas as pd
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from api.database import connect_sqlite, resolve_sqlite_path
+from api.snapshots import sha256
 DB_PATH = PROJECT_ROOT / "data" / "vagas.db"
 EXPORT_DIR = PROJECT_ROOT / "kaggle"
 HANDLE = "rafaeldiasgarcia/tech-skills-br"
@@ -114,35 +121,34 @@ def _aplicar_tipos_vagas(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def exportar(
-    db_path: Path = DB_PATH,
+    db_path: Path | str | None = None,
     export_dir: Path = EXPORT_DIR,
 ) -> tuple[Path, int]:
     """Exporta uma linha por vaga para o unico Parquet publicado no Kaggle."""
-    conn = sqlite3.connect(db_path)
-    vagas = pd.read_sql_query(
-        """
-        SELECT v.source, v.external_id, v.title, v.company,
-               (SELECT GROUP_CONCAT(nome, '; ')
-                  FROM (
-                       SELECT t.nome AS nome
-                         FROM vaga_tecnologia vt
-                         JOIN tecnologias t ON t.id = vt.tecnologia_id
-                        WHERE vt.vaga_id = v.id
-                        ORDER BY t.nome COLLATE NOCASE
-                  )) AS skills,
-               v.area, v.seniority, v.workplace_type, v.location,
-               v.regiao, v.polo, v.published_date, v.description, v.url,
-               v.search_term, v.enrich_encerrada
-          FROM vagas v
-         ORDER BY v.id
-        """,
-        conn,
-    )
-    conn.close()
+    with closing(connect_sqlite(db_path, read_only=True)) as conn:
+        vagas = pd.read_sql_query(
+            """
+            SELECT v.source, v.external_id, v.title, v.company,
+                   (SELECT GROUP_CONCAT(nome, '; ')
+                      FROM (
+                           SELECT t.nome AS nome
+                             FROM vaga_tecnologia vt
+                             JOIN tecnologias t ON t.id = vt.tecnologia_id
+                            WHERE vt.vaga_id = v.id
+                            ORDER BY t.nome COLLATE NOCASE
+                      )) AS skills,
+                   v.area, v.seniority, v.workplace_type, v.location,
+                   v.regiao, v.polo, v.published_date, v.description, v.url,
+                   v.search_term, v.enrich_encerrada
+              FROM vagas v
+             ORDER BY v.id
+            """,
+            conn,
+        )
 
     vagas = _aplicar_tipos_vagas(vagas)
 
-    export_dir.mkdir(exist_ok=True)
+    export_dir.mkdir(parents=True, exist_ok=True)
     for nome in ARQUIVOS_PARQUET_OBSOLETOS:
         (export_dir / nome).unlink(missing_ok=True)
 
@@ -180,6 +186,7 @@ def _reaplicar_metadata() -> None:
             ],
             capture_output=True,
             text=True,
+            timeout=120,
         )
         if resultado.returncode != 0:
             logger.warning(
@@ -196,6 +203,7 @@ def _status_dataset() -> dict[str, object] | None:
         ["kaggle", "datasets", "status", HANDLE, "--format", "json"],
         capture_output=True,
         text=True,
+        timeout=60,
     )
     if resultado.returncode != 0:
         logger.warning("Nao foi possivel consultar o status do Kaggle: %s", resultado.stderr.strip())
@@ -217,8 +225,23 @@ def _versao_atual(status: dict[str, object] | None) -> int | None:
         return None
 
 
-def _aguardar_confirmacao(versao_anterior: int | None) -> bool:
-    """Confirma se uma versao nova apareceu apos erro de conexao."""
+def _arquivo_confirmado(versao: int, expected_sha256: str) -> bool:
+    import kagglehub
+
+    try:
+        with tempfile.TemporaryDirectory(prefix="tech-skills-kaggle-confirm-") as temporary:
+            path = kagglehub.dataset_download(
+                f"{HANDLE}/versions/{versao}", path="vagas.parquet",
+                force_download=True, output_dir=temporary,
+            )
+            return sha256(Path(path)) == expected_sha256
+    except Exception as exc:
+        logger.warning("Nao foi possivel conferir o arquivo da versao %s: %s", versao, exc)
+        return False
+
+
+def _aguardar_confirmacao(versao_anterior: int | None, expected_sha256: str) -> bool:
+    """Uma versao nova so confirma o envio se contem o mesmo Parquet."""
     if versao_anterior is None:
         logger.warning("Versao anterior indisponivel; nao ha como confirmar o upload com seguranca.")
         return False
@@ -226,11 +249,15 @@ def _aguardar_confirmacao(versao_anterior: int | None) -> bool:
     for espera in _ESPERAS_CONFIRMACAO:
         if espera:
             time.sleep(espera)
-        status = _status_dataset()
+        try:
+            status = _status_dataset()
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            logger.warning("Consulta ao Kaggle sem confirmacao: %s", exc)
+            continue
         versao = _versao_atual(status)
-        if versao is not None and versao > versao_anterior:
+        if versao is not None and versao > versao_anterior and _arquivo_confirmado(versao, expected_sha256):
             logger.info(
-                "Kaggle confirmou a versao %d apos erro de conexao (status: %s).",
+                "Kaggle confirmou a versao %d com o mesmo Parquet (status: %s).",
                 versao,
                 status.get("status", "desconhecido") if status else "desconhecido",
             )
@@ -238,30 +265,49 @@ def _aguardar_confirmacao(versao_anterior: int | None) -> bool:
     return False
 
 
-def subir(notas: str | None = None) -> None:
+def subir(notas: str | None = None, *, db_path: Path | str | None = None, export_dir: Path = EXPORT_DIR) -> None:
+    from scraper.config import _load_dotenv
+
+    _load_dotenv()
     if not os.getenv("KAGGLE_API_TOKEN"):
         raise SystemExit("KAGGLE_API_TOKEN nao definido no ambiente")
 
-    _, n_vagas = exportar()
+    path, n_vagas = exportar(db_path, export_dir)
+    expected_sha256 = sha256(path)
     import kagglehub
 
-    notas = notas or _nota_padrao(n_vagas)
+    notas = (notas or _nota_padrao(n_vagas)) + f" · parquet sha256:{expected_sha256}"
     versao_anterior = _versao_atual(_status_dataset())
+    if versao_anterior is None:
+        raise RuntimeError("Status do Kaggle indisponivel; envio adiado para evitar uma versao sem confirmacao.")
+    if _arquivo_confirmado(versao_anterior, expected_sha256):
+        logger.info("O Kaggle ja contem este Parquet; nenhuma versao duplicada sera criada.")
+        _reaplicar_metadata()
+        return
     try:
         kagglehub.dataset_upload(
             handle=HANDLE,
-            local_dataset_dir=str(EXPORT_DIR),
+            local_dataset_dir=str(export_dir),
             version_notes=notas,
         )
         logger.info("Versao enviada para o Kaggle: %s", HANDLE)
     except Exception as exc:
         logger.warning("Upload sem confirmacao (%s); aguardando o Kaggle processar a versao.", exc)
-        if not _aguardar_confirmacao(versao_anterior):
-            raise RuntimeError("Kaggle nao confirmou uma nova versao apos o upload.") from exc
+    if not _aguardar_confirmacao(versao_anterior, expected_sha256):
+        raise RuntimeError("Kaggle nao confirmou o mesmo Parquet apos o upload.")
 
     _reaplicar_metadata()
 
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s  %(message)s")
-    subir()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--db", help="Arquivo SQLite; respeita DATABASE_URL e VAGAS_DB.")
+    parser.add_argument("--output-dir", type=Path, default=EXPORT_DIR)
+    parser.add_argument("--export-only", action="store_true", help="Gera o Parquet local sem publicar.")
+    args = parser.parse_args()
+    logger.info("Banco selecionado: %s", resolve_sqlite_path(args.db))
+    if args.export_only:
+        exportar(args.db, args.output_dir)
+    else:
+        subir(db_path=args.db, export_dir=args.output_dir)

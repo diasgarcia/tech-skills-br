@@ -24,7 +24,7 @@ jobs:
           cache: pip
 
       - name: Instalar cliente do Kaggle
-        run: python -m pip install --upgrade kaggle
+        run: python -m pip install -e '.[publish]'
 
       - name: Publicar e executar notebook
         run: kaggle kernels push --path notebooks/kaggle --timeout 900
