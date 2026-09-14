@@ -220,7 +220,7 @@ def chart_daily_jobs_and_skills(
     ax.tick_params(axis="x", pad=10)
     _hide_spines(ax)
 
-    fig.text(0.075, 0.91, "Vagas e habilidades por dia", fontsize=19, fontweight="bold")
+    fig.text(0.075, 0.91, "Vagas por data de publicação", fontsize=19, fontweight="bold")
     fig.text(
         0.075,
         0.835,
@@ -245,13 +245,13 @@ def chart_daily_jobs_and_skills(
         ha="right",
     )
     legend = [
-        Patch(facecolor=BLUE, alpha=0.48, label="Vagas coletadas"),
+        Patch(facecolor=BLUE, alpha=0.48, label="Vagas publicadas"),
         Line2D(
             [0],
             [0],
             color=PURPLE,
             linewidth=2.8,
-            label="Habilidades distintas identificadas",
+            label="Habilidades distintas dessas vagas",
         ),
     ]
     ax.legend(
@@ -269,7 +269,7 @@ def chart_daily_jobs_and_skills(
         0.075,
         0.055,
         f"Base: {_format_int(data.total_jobs)} vagas · "
-        f"atualizada em {data.last_date.strftime('%d/%m/%Y')}",
+        f"última publicação em {data.last_date.strftime('%d/%m/%Y')}",
         fontsize=8.7,
         color=MUTED,
     )

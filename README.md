@@ -8,7 +8,7 @@ O projeto acompanha anúncios de estágio, aprendiz, trainee e nível júnior. A
 
 ## Visão atual dos dados
 
-[![Gráfico de vagas coletadas e habilidades distintas identificadas nos últimos 30 dias](https://diasgarcia.github.io/tech-skills-br/assets/vagas-habilidades-30d.svg)](https://diasgarcia.github.io/tech-skills-br/)
+[![Vagas por data de publicação e habilidades distintas dessas vagas nos últimos 30 dias](https://diasgarcia.github.io/tech-skills-br/assets/vagas-habilidades-30d.svg)](https://diasgarcia.github.io/tech-skills-br/)
 
 [![Mapa de calor das seis maiores áreas e das seis habilidades mais citadas](https://diasgarcia.github.io/tech-skills-br/assets/areas-habilidades.svg)](https://www.kaggle.com/code/rafaeldiasgarcia/tech-skills-brasil-analise-diaria)
 
@@ -51,6 +51,7 @@ Detalhes sobre fontes, critérios, limitações e decisões estão na [wiki do p
 ## Execução local
 
 O guia de [execução rápida](docs/execucao-rapida.md) contém os comandos necessários para preparar o ambiente e consultar a base.
+Para contribuir com o código, consulte a [organização dos módulos e seus contratos](docs/arquitetura.md).
 
 ## Licença
 
