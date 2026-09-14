@@ -19,8 +19,8 @@ Dois modos, para evitar trabalho inutil:
 from __future__ import annotations
 
 import argparse
+from contextlib import closing
 import logging
-import sqlite3
 import sys
 from pathlib import Path
 
@@ -29,55 +29,41 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from scraper.classifier import default_classifier  # noqa: E402
+from api.database import connect_sqlite, resolve_sqlite_path  # noqa: E402
 
-logging.basicConfig(level=logging.INFO, format="%(levelname)-7s %(message)s")
 logger = logging.getLogger("reclassify_areas")
 
 
-def reclassificar(db_path: Path, todas: bool = False) -> dict:
+def reclassificar(db_path: Path | str | None = None, todas: bool = False) -> dict:
     clf = default_classifier()
     validas = set(clf.areas)
 
-    conn = sqlite3.connect(db_path)
-    c = conn.cursor()
-
-    if todas:
-        c.execute(
-            "SELECT id, title, area, area_score, area_matches, description "
-            "FROM vagas WHERE description IS NOT NULL AND description != ''"
-        )
-    else:
-        c.execute(
-            "SELECT id, title, area, area_score, area_matches, description "
-            "FROM vagas "
-            "WHERE (area IS NULL OR area = '' OR area = 'Outros/TI Geral') "
-            "  AND description IS NOT NULL AND description != ''"
-        )
-
     mudadas = 0
     analisadas = 0
-    for vid, title, area, score, matches, desc in c.fetchall():
-        analisadas += 1
-        pendente = not area or area == "Outros/TI Geral" or area not in validas
-        if not todas and not pendente:
-            continue
-        resultado = clf.classify(title, desc)
-        if resultado.area == (area or ""):
-            continue
-        c.execute(
-            "UPDATE vagas SET area = ?, area_score = ?, area_matches = ? "
-            "WHERE id = ?",
-            (
-                resultado.area,
-                resultado.score,
-                ", ".join(resultado.matches[:12]),
-                vid,
-            ),
+    with closing(connect_sqlite(db_path)) as conn, conn:
+        params = []
+        query = (
+            "SELECT id, title, area, area_score, area_matches, description "
+            "FROM vagas WHERE LENGTH(TRIM(COALESCE(description, ''))) > 0"
         )
-        mudadas += 1
-
-    conn.commit()
-    conn.close()
+        if not todas:
+            params = sorted(validas)
+            placeholders = ",".join("?" for _ in params)
+            query += (
+                " AND (area IS NULL OR area = '' OR area = 'Outros/TI Geral'"
+                f" OR area NOT IN ({placeholders}))"
+            )
+        for vid, title, area, score, matches, desc in conn.execute(query, params).fetchall():
+            analisadas += 1
+            resultado = clf.classify(title, desc)
+            if resultado.area == (area or ""):
+                continue
+            conn.execute(
+                "UPDATE vagas SET area = ?, area_score = ?, area_matches = ?, "
+                "updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                (resultado.area, resultado.score, ", ".join(resultado.matches[:12]), vid),
+            )
+            mudadas += 1
     logger.info("Reclassificacao: %d analisadas, %d mudadas.",
                 analisadas, mudadas)
     return {"analisadas": analisadas, "mudadas": mudadas, "validas": sorted(validas)}
@@ -97,11 +83,13 @@ def main(argv: list[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
 
-    db = Path(args.db) if args.db else (PROJECT_ROOT / "data" / "vagas.db")
+    db = resolve_sqlite_path(args.db)
+    logger.info("Banco: %s", db)
     resultado = reclassificar(db, todas=args.todas)
     print(f"Analisadas: {resultado['analisadas']} | Mudadas: {resultado['mudadas']}")
     return 0
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format="%(levelname)-7s %(message)s")
     raise SystemExit(main())

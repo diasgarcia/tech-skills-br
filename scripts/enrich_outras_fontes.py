@@ -25,9 +25,9 @@ banco e re-extrai as tecnologias com o skills.yml atual.
   pode ser bloqueio suave ou mudanca temporaria de layout. Somente HTTP
   404/410 real encerra a vaga.
 
-Vagas publicadas ha mais de 30 dias nao sao tentadas (anuncio quase
-certamente expirado). PoliteSession com delay/retry; o lock serializa os
-GETs para o delay valer de verdade.
+A janela de 30 dias se aplica apenas ao Trampos. Nas demais fontes, o
+criterio compartilhado seleciona registros ainda pendentes. O lock
+serializa os GETs para respeitar o intervalo entre chamadas.
 """
 
 from __future__ import annotations
@@ -38,9 +38,8 @@ import logging
 import sqlite3
 import sys
 import threading
-import time
-from collections import Counter
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from contextlib import closing
 from datetime import date
 from pathlib import Path
 from threading import Lock
@@ -52,117 +51,33 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
+from api.database import connect_sqlite, resolve_sqlite_path  # noqa: E402
+from api.enrichment_state import EnrichmentStatus, record_attempt  # noqa: E402
+from api.migrations import migrate_connection  # noqa: E402
 from scraper.config import RULES_DIR, USER_AGENT  # noqa: E402
+from scraper.consolidation import MIN_DATA_CORTE, canonical_company, consolidate_description  # noqa: E402
+from scraper.enrichment import (  # noqa: E402
+    BatchStopped, DetailResult, EnrichmentSummary, StopAwareSession, write_summary,
+)
+from scraper.enrichment_queries import (  # noqa: E402
+    JANELA_TENTATIVA_DIAS, MIN_DESCRICAO_INFOJOBS, MIN_DESCRICAO_TRAMPOS,
+    MIN_DESCRICAO_VAGAS_COM, QUERY_GEEKHUNTER_FORCADO, QUERY_GEEKHUNTER_PENDENTES,
+    QUERY_GUPY_FORCADO, QUERY_GUPY_PENDENTES, QUERY_INFOJOBS_FORCADO,
+    QUERY_INFOJOBS_PENDENTES, QUERY_TRAMPOS_PENDENTES, QUERY_VAGAS_PENDENTES,
+)
 from scraper.http_client import PoliteSession  # noqa: E402
 from scraper.models import strip_html  # noqa: E402
 from scraper.skills import SkillExtractor  # noqa: E402
-from scripts.import_csv import MIN_DATA_CORTE, _canonical_company  # noqa: E402
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)-7s %(message)s")
 logger = logging.getLogger("enrich_outras")
 
-JANELA_TENTATIVA_DIAS = 30
-
 TRAMPOS_API_URL = "https://trampos.co/api/v2/opportunities/{slug}"
-
-# O card do Vagas.com traz um snippet do portal (ate ~400 chars, as vezes
-# terminando com "..."), longe da descricao completa (1825+ chars quando
-# enriquecida). O corte precisa cobrir esses snippets: abaixo de 500 ou
-# terminando com "...". Sem janela de dias: pendente e tentada em toda
-# rodada ate dar certo ou 404 (encerrada), como no LinkedIn.
-MIN_DESCRICAO_VAGAS_COM = 500
-MIN_DESCRICAO_TRAMPOS = 100
-
-QUERY_VAGAS_PENDENTES = """
-    SELECT id, url, title FROM vagas
-    WHERE source = 'vagas'
-      AND COALESCE(enrich_encerrada, 0) = 0
-      AND (description IS NULL OR LENGTH(description) < ?
-           OR description LIKE '%...')
-"""
-
-QUERY_TRAMPOS_PENDENTES = """
-    SELECT id, url, title FROM vagas
-    WHERE source = 'trampos'
-      AND COALESCE(enrich_encerrada, 0) = 0
-      AND (description IS NULL OR LENGTH(description) < ?)
-      AND (published_date IS NULL OR published_date >= date('now', ?))
-"""
-
-# Gupy: toda vaga nova passa uma vez pelo detalhe. Alem de completar uma
-# eventual descricao truncada, isso substitui o `careerPageName` da busca
-# (que pode ser um slogan) pelo `hiringOrganization.name` declarado na vaga.
-# Sucesso e 404/410 saem da fila pelo flag; falhas temporarias permanecem.
-QUERY_GUPY_PENDENTES = """
-    SELECT id, url, title FROM vagas
-    WHERE source = 'gupy'
-      AND COALESCE(enrich_encerrada, 0) = 0
-      AND url LIKE '%://%.gupy.io/%'
-"""
-
-# GeekHunter: o card so traz um snippet; o detalhe tem a descricao
-# completa (Tarefas, Requisitos, Beneficios), o nome real da empresa
-# (o coletor grava o slug da URL) e a data de publicacao. Marca
-# pendente descricao curta, company ainda em formato de slug ou
-# published_date vazia.
-QUERY_GEEKHUNTER_PENDENTES = """
-    SELECT id, url, title FROM vagas
-    WHERE source = 'geekhunter'
-      AND COALESCE(enrich_encerrada, 0) = 0
-      AND (
-          description IS NULL OR LENGTH(description) < 300
-          OR company LIKE '%-%'
-          OR published_date IS NULL
-      )
-"""
-
-# Revisao manual do legado: revisita toda a Gupy para corrigir tambem as vagas
-# que ja haviam sido marcadas antes de o nome estruturado ser aproveitado.
-QUERY_GUPY_FORCADO = """
-    SELECT id, url, title FROM vagas
-    WHERE source = 'gupy'
-"""
-
-# Usado apenas por uma revisao manual: revisita toda a fonte, inclusive
-# vagas que ja tinham sido marcadas como resolvidas. Assim e possivel
-# recuperar descricoes quando a listagem mudou ou houve falha anterior.
-QUERY_GEEKHUNTER_FORCADO = """
-    SELECT id, url, title FROM vagas
-    WHERE source = 'geekhunter'
-"""
-
-# InfoJobs: o teaser da listagem tem exatos 153 caracteres e termina em
-# "..."; a descricao completa esta no detalhe. O corte cobre qualquer
-# teaser (menor que 160 ou terminando em "..."). Sem janela de dias:
-# pendente e tentada em toda rodada ate dar certo ou virar 404 (como no
-# Vagas.com e no LinkedIn).
-MIN_DESCRICAO_INFOJOBS = 160
 
 CHAVE_DIAGNOSTICO = "_diagnostico"
 CHAVE_DETALHES = "_detalhes"
 
-QUERY_INFOJOBS_PENDENTES = """
-    SELECT id, url, title FROM vagas
-    WHERE source = 'infojobs'
-      AND COALESCE(enrich_encerrada, 0) = 0
-      AND (description IS NULL OR LENGTH(description) < ?
-           OR description LIKE '%...')
-"""
 
-# Revisao manual das vagas que foram marcadas como resolvidas enquanto ainda
-# continham apenas o teaser da listagem. Ignora o flag antigo, mas mantem o
-# recorte estrito para nao revisitar descricoes completas sem necessidade.
-QUERY_INFOJOBS_FORCADO = """
-    SELECT id, url, title FROM vagas
-    WHERE source = 'infojobs'
-      AND (
-          description IS NULL OR LENGTH(description) <= ?
-          OR description LIKE '%...'
-      )
-"""
-
-
-def fetch_vagas_com(session: PoliteSession, lock: Lock, url: str) -> tuple[str, int | None]:
+def fetch_vagas_com(session: PoliteSession, lock: Lock, url: str) -> tuple[str | dict, int | None]:
     with lock:
         response = session.get(url)
         status = session.last_status_code
@@ -171,14 +86,11 @@ def fetch_vagas_com(session: PoliteSession, lock: Lock, url: str) -> tuple[str, 
     soup = BeautifulSoup(response.text, "html.parser")
     el = soup.select_one("div.job-description__text, div.texto")
     if el is None:
-        # Vaga removida: o portal responde 200 com uma pagina generica
-        # ("Vagas de emprego para <id>") sem o bloco de descricao. Tratar
-        # como 404 tira a vaga da fila de enriquecimento para sempre --
-        # senao ela fica pendente eternamente, gastando request a cada
-        # rodada sem nunca enriquecer.
+        # O portal tambem indica remocao por uma pagina generica. Mantem
+        # o criterio de encerramento sem inventar um codigo HTTP 404.
         titulo = soup.select_one("title")
         if titulo and "vagas de emprego para" in titulo.get_text(strip=True).lower():
-            return "", 404
+            return {CHAVE_DIAGNOSTICO: "pagina_generica_sem_anuncio", "_indisponivel": True}, status
     return (el.get_text(" ", strip=True) if el else ""), status
 
 
@@ -313,11 +225,10 @@ def fetch_geekhunter(session: PoliteSession, lock: Lock, url: str) -> tuple[dict
         dados["company"] = (org.get("name") or "").strip()
         dados["published_date"] = (data.get("datePosted") or "")[:10]
         break
-    # A GeekHunter responde 200 para uma pagina institucional quando o
-    # anuncio nao existe mais. Sem JSON-LD JobPosting, e o mesmo caso de
-    # um 404: nao deixe a vaga voltar para a fila em todas as rodadas.
+    # Mantem a decisao legada de indisponibilidade por conteudo, mas
+    # preserva o HTTP real para nao atribuir um 404 ao servidor.
     if not encontrou_vaga and status == 200:
-        return {}, 404
+        return {CHAVE_DIAGNOSTICO: "pagina_institucional_sem_anuncio", "_indisponivel": True}, status
     return dados, status
 
 
@@ -379,16 +290,19 @@ def _fetch_parando(parou: threading.Event, parar_em_429: bool, fetch):
 
     def wrapper(sess, lk, alvo):
         if parou.is_set():
-            return {CHAVE_DIAGNOSTICO: "lote_interrompido_apos_429"}, 429
-        resultado, status = fetch(sess, lk, alvo)
+            return DetailResult.stopped()
+        guarded_session = StopAwareSession(sess, parou, stop_on_429=parar_em_429)
+        try:
+            resultado, status = fetch(guarded_session, lk, alvo)
+        except BatchStopped:
+            return DetailResult.stopped()
         if status == 429 and parar_em_429:
-            if not parou.is_set():
-                parou.set()
-                logger.warning(
-                    "429 detectado: interrompendo o lote desta fonte "
-                    "(a fila continua na proxima rodada)"
-                )
-        return resultado, status
+            parou.set()
+            logger.warning(
+                "429 detectado: interrompendo o lote desta fonte "
+                "(a fila continua na proxima rodada)"
+            )
+        return DetailResult.from_response(resultado, status)
 
     return wrapper
 
@@ -404,47 +318,53 @@ def _enriquecer(
     fetch,
     parar_em_429: bool = False,
     fonte: str = "fonte",
+    max_workers: int = 3,
+    summaries: dict[str, EnrichmentSummary] | None = None,
 ) -> int:
+    migrate_connection(c.connection)
     c.execute(query, args)
     rows = c.fetchall()
-    total = 0
-    encerradas = 0
-    removidas = 0
-    pendentes = 0
-    falhas = 0
-    motivos_pendentes: Counter[str] = Counter()
+    summary = EnrichmentSummary(selected=len(rows))
     parou = threading.Event()
     fetch_com_parada = _fetch_parando(parou, parar_em_429, fetch)
 
-    with ThreadPoolExecutor(max_workers=3) as pool:
+    with ThreadPoolExecutor(max_workers=max_workers) as pool:
         futures = {
             pool.submit(fetch_com_parada, session, lock, alvo): (vid, title, alvo)
             for vid, alvo, title in rows
         }
         for future in as_completed(futures):
             vid, title, alvo = futures[future]
+            attempted = True
             try:
-                resultado, status = future.result()
-                if isinstance(resultado, str):
-                    # Fontes antigas devolvem (descricao, status).
-                    resultado = {"description": resultado}
-                diagnostico = str(resultado.get(CHAVE_DIAGNOSTICO) or "").strip()
-                detalhes = str(resultado.get(CHAVE_DETALHES) or "").strip()
+                result = future.result()
+                attempted = result.attempted
+                resultado, status = result.data, result.status
+                diagnostico, detalhes = result.reason, result.details
+                if not attempted:
+                    summary.leave_pending(diagnostico, skipped=True)
+                    logger.info(
+                        "%s: vaga %s nao tentada | motivo=%s | titulo=%r | url=%s",
+                        fonte, vid, diagnostico, title, alvo,
+                    )
+                    continue
                 desc = (resultado.get("description") or "").strip()
                 company = (resultado.get("company") or "").strip()
                 pub = (resultado.get("published_date") or "").strip()
                 if not desc and not company and not pub:
                     # 404/410 = anuncio encerrado na fonte: nada a fazer.
                     # A GeekHunter usa 410 em parte das vagas removidas.
-                    if status in (404, 410):
-                        c.execute(
-                            "UPDATE vagas SET enrich_encerrada = 1 WHERE id = ?",
-                            (vid,),
-                        )
-                        encerradas += 1
+                    if result.unavailable or status in (404, 410):
+                        with c.connection:
+                            c.execute(
+                                "UPDATE vagas SET enrich_encerrada = 1, "
+                                "updated_at = CURRENT_TIMESTAMP WHERE id = ?", (vid,),
+                            )
+                            record_attempt(c.connection, vid, EnrichmentStatus.UNAVAILABLE, diagnostico or f"http_{status}")
+                        summary.closed += 1
                         logger.info(
-                            "%s: vaga %s encerrada | http=%s | titulo=%r | url=%s",
-                            fonte, vid, status, title, alvo,
+                            "%s: vaga %s encerrada | http=%s | motivo=%s | titulo=%r | url=%s",
+                            fonte, vid, status, diagnostico or f"http_{status}", title, alvo,
                         )
                     else:
                         if diagnostico:
@@ -455,8 +375,9 @@ def _enriquecer(
                             motivo = f"http_{status}"
                         else:
                             motivo = "conteudo_sem_dados_utilizaveis"
-                        motivos_pendentes[motivo] += 1
-                        pendentes += 1
+                        summary.leave_pending(motivo)
+                        with c.connection:
+                            record_attempt(c.connection, vid, EnrichmentStatus.FAILED, motivo)
                         complemento = f" | {detalhes}" if detalhes else ""
                         logger.warning(
                             "%s: vaga %s permaneceu pendente | motivo=%s | "
@@ -464,84 +385,67 @@ def _enriquecer(
                             fonte, vid, motivo, status, title, alvo, complemento,
                         )
                     continue
-                if pub:
-                    # A data do JSON-LD (GeekHunter) chega aqui sem passar
-                    # pelo corte do import_csv. Vaga mais antiga que a
-                    # janela do projeto entra sem data no card e o detalhe
-                    # revela a data real: nesse caso ela nao deveria estar
-                    # na base. Remove antes de atualizar qualquer campo.
-                    try:
-                        pub_iso = date.fromisoformat(pub[:10])
-                    except ValueError:
-                        pub_iso = None
-                    if pub_iso is not None and pub_iso < MIN_DATA_CORTE:
-                        c.execute("DELETE FROM vagas WHERE id = ?", (vid,))
-                        removidas += 1
-                        logger.info(
-                            "%s: vaga %s removida por data anterior ao corte | "
-                            "data=%s | titulo=%r | url=%s",
-                            fonte, vid, pub, title, alvo,
-                        )
-                        continue
-                descricao_atual = c.execute(
-                    "SELECT description FROM vagas WHERE id = ?", (vid,)
-                ).fetchone()[0] or ""
-                # Nunca troca uma descricao ja salva por uma versao vazia ou
-                # menor. O detalhe ainda pode corrigir a empresa normalmente.
-                if desc and len(desc) > len(descricao_atual):
-                    c.execute(
-                        "UPDATE vagas SET description = ? WHERE id = ?", (desc, vid)
+                with c.connection:
+                    outcome = _save_other_detail(c, vid, title, desc, company, pub, extractor, tech_map)
+                    if outcome != "removed":
+                        record_attempt(c.connection, vid, EnrichmentStatus.SUCCEEDED)
+                if outcome == "removed":
+                    summary.removed += 1
+                    logger.info(
+                        "%s: vaga %s removida por data anterior ao corte | "
+                        "data=%s | titulo=%r | url=%s", fonte, vid, pub, title, alvo,
                     )
-                    descricao_final = desc
                 else:
-                    descricao_final = descricao_atual
-                if company:
-                    company = _canonical_company(company)
-                    c.execute(
-                        "UPDATE vagas SET company = ? WHERE id = ?", (company, vid)
-                    )
-                if pub:
-                    c.execute(
-                        "UPDATE vagas SET published_date = ? WHERE id = ?",
-                        (pub, vid),
-                    )
-                for s in extractor.extract(title, descricao_final):
-                    tid = tech_map.get(s.lower())
-                    if tid:
-                        c.execute(
-                            "INSERT OR IGNORE INTO vaga_tecnologia (vaga_id, tecnologia_id) VALUES (?, ?)",
-                            (vid, tid),
-                        )
-                total += 1
-                # Resolvida (descricao salva, mesmo curta): sai da fila.
-                c.execute(
-                    "UPDATE vagas SET enrich_encerrada = 1 WHERE id = ?",
-                    (vid,),
-                )
-                if total % 10 == 0:
-                    # Persiste o progresso em lote: abortar por rate limit
-                    # nao perde o que ja foi preenchido.
-                    c.connection.commit()
+                    summary.enriched += 1
             except Exception as exc:
-                falhas += 1
-                pendentes += 1
-                motivos_pendentes["erro_de_processamento"] += 1
-                logger.warning("Falha ao processar vaga %s: %s", vid, exc)
-    logger.info(
-        "Resumo enriquecimento %s: tentadas=%d | enriquecidas=%d | "
-        "encerradas=%d | removidas=%d | pendentes=%d | falhas=%d",
-        fonte, len(rows), total, encerradas, removidas, pendentes, falhas,
+                with c.connection:
+                    record_attempt(c.connection, vid, EnrichmentStatus.FAILED, "erro_de_processamento")
+                summary.leave_pending("erro_de_processamento", failed=True)
+                logger.warning(
+                    "%s: falha ao processar vaga %s | titulo=%r | url=%s | erro=%s",
+                    fonte, vid, title, alvo, exc,
+                )
+            finally:
+                summary.attempted += int(attempted)
+    summary.log(logger, fonte)
+    if summaries is not None:
+        summaries[fonte] = summary
+    return summary.enriched
+
+
+def _save_other_detail(c, vid, title, desc, company, pub, extractor, tech_map):
+    """Atualiza campos e skills na mesma transacao, sem contar antes do commit."""
+    try:
+        pub_iso = date.fromisoformat(pub[:10]) if pub else None
+    except ValueError:
+        pub_iso = None
+    if pub_iso is not None and pub_iso < MIN_DATA_CORTE:
+        c.execute("DELETE FROM vaga_tecnologia WHERE vaga_id = ?", (vid,))
+        c.execute("DELETE FROM vagas WHERE id = ?", (vid,))
+        return "removed"
+
+    descricao_atual = c.execute("SELECT description FROM vagas WHERE id = ?", (vid,)).fetchone()[0] or ""
+    descricao_final = consolidate_description(descricao_atual, desc, detail=True).text
+    if descricao_final != descricao_atual:
+        c.execute("UPDATE vagas SET description = ? WHERE id = ?", (descricao_final, vid))
+    if company:
+        company = canonical_company(company)
+        if company:
+            c.execute("UPDATE vagas SET company = ? WHERE id = ?", (company, vid))
+    if pub:
+        c.execute("UPDATE vagas SET published_date = ? WHERE id = ?", (pub, vid))
+    for skill in extractor.extract(title, descricao_final):
+        tid = tech_map.get(skill.lower())
+        if tid:
+            c.execute(
+                "INSERT OR IGNORE INTO vaga_tecnologia (vaga_id, tecnologia_id) VALUES (?, ?)",
+                (vid, tid),
+            )
+    c.execute(
+        "UPDATE vagas SET enrich_encerrada = 1, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+        (vid,),
     )
-    if motivos_pendentes:
-        logger.warning(
-            "Pendencias %s por motivo: %s",
-            fonte,
-            " | ".join(
-                f"{motivo}={quantidade}"
-                for motivo, quantidade in sorted(motivos_pendentes.items())
-            ),
-        )
-    return total
+    return "enriched"
 
 
 def enriquecer(
@@ -549,7 +453,9 @@ def enriquecer(
     janela_dias: int = JANELA_TENTATIVA_DIAS,
     fonte: str | None = None,
     forcar: bool = False,
-) -> None:
+    db_path: str | Path | None = None,
+    summary_path: str | Path | None = None,
+) -> dict[str, EnrichmentSummary]:
     """Enriquece as fontes pendentes ou uma fonte selecionada manualmente."""
     fontes = {"vagas", "trampos", "gupy", "geekhunter", "infojobs"}
     if fonte is not None and fonte not in fontes:
@@ -558,12 +464,26 @@ def enriquecer(
         raise ValueError(
             "--forcar so pode ser usado com --fonte geekhunter, gupy ou infojobs"
         )
+    if limit is not None and limit < 1:
+        raise ValueError("O limite deve ser maior que zero.")
+    if janela_dias < 0:
+        raise ValueError("A janela de dias nao pode ser negativa.")
 
     with open(RULES_DIR / "skills.yml", encoding="utf-8") as fh:
         rules = yaml.safe_load(fh) or {}
     extractor = SkillExtractor(rules)
 
-    conn = sqlite3.connect(PROJECT_ROOT / "data" / "vagas.db")
+    destino = resolve_sqlite_path(db_path)
+    logger.info("Banco selecionado: %s", destino)
+    with closing(connect_sqlite(destino)) as conn:
+        summaries = _enrich_other_connection(conn, extractor, limit, janela_dias, fonte, forcar)
+    if summary_path is not None:
+        write_summary(summary_path, summaries)
+    return summaries
+
+
+def _enrich_other_connection(conn, extractor, limit, janela_dias, fonte, forcar):
+    summaries: dict[str, EnrichmentSummary] = {}
     c = conn.cursor()
     c.execute("SELECT id, nome FROM tecnologias")
     tech_map = {nome.lower(): tid for tid, nome in c.fetchall()}
@@ -636,7 +556,7 @@ def enriquecer(
         c.execute(consulta_fonte, argumentos_fonte)
         ids_reabertos = [(row[0],) for row in c.fetchall()]
         c.executemany(
-            "UPDATE vagas SET enrich_encerrada = 0 WHERE id = ?",
+            "UPDATE vagas SET enrich_encerrada = 0, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
             ids_reabertos,
         )
         conn.commit()
@@ -682,6 +602,7 @@ def enriquecer(
             lambda sess, lk, url: fetch_vagas_com(sess, lk, url),
             parar_em_429=True,
             fonte="vagas.com",
+            summaries=summaries,
         )
 
         c.execute(query_trampos, args_trampos)
@@ -693,6 +614,7 @@ def enriquecer(
             ),
             parar_em_429=True,
             fonte="trampos",
+            summaries=summaries,
         )
 
         c.execute(query_gupy, args_gupy)
@@ -702,6 +624,7 @@ def enriquecer(
             lambda sess, lk, url: fetch_gupy(sess, lk, url),
             parar_em_429=True,
             fonte="gupy",
+            summaries=summaries,
         )
 
         c.execute(query_geekhunter, args_geekhunter)
@@ -712,6 +635,7 @@ def enriquecer(
             lambda sess, lk, url: fetch_geekhunter(sess, lk, url),
             parar_em_429=True,
             fonte="geekhunter",
+            summaries=summaries,
         )
 
         c.execute(query_infojobs, args_infojobs)
@@ -722,24 +646,28 @@ def enriquecer(
             lambda sess, lk, url: fetch_infojobs(sess, lk, url),
             parar_em_429=True,
             fonte="infojobs",
+            summaries=summaries,
         )
 
     conn.commit()
-    conn.close()
     logger.info(
         "Enriquecimento concluido: %d vagas.com, %d trampos, %d gupy, "
         "%d geekhunter e %d infojobs.",
         total_vagas, total_trampos, total_gupy, total_geekhunter, total_infojobs,
     )
+    return summaries
 
 
 if __name__ == "__main__":
     import argparse
 
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)-7s %(message)s")
     parser = argparse.ArgumentParser(
         description="Enriquece descricoes de Vagas.com, Trampos, Gupy, GeekHunter e InfoJobs."
     )
     parser.add_argument("--limit", type=int, default=None)
+    parser.add_argument("--db", type=Path, default=None, help="Banco SQLite a atualizar.")
+    parser.add_argument("--summary-json", type=Path, default=None, help="Grava contadores estruturados deste lote.")
     parser.add_argument("--janela", type=int, default=JANELA_TENTATIVA_DIAS,
                         help="Dias de janela de publicacao (padrao: 30).")
     parser.add_argument(
@@ -761,4 +689,6 @@ if __name__ == "__main__":
         janela_dias=args.janela,
         fonte=args.fonte,
         forcar=args.forcar,
+        db_path=args.db,
+        summary_path=args.summary_json,
     )
