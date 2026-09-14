@@ -3,7 +3,10 @@
 import csv
 from datetime import datetime, timedelta, timezone
 
+import pytest
+
 from scraper.config import Settings
+from scraper.checkpoints import JobCheckpoint
 from scraper.sources.abler import CHECKPOINT_NAME, AblerSource
 
 
@@ -141,7 +144,10 @@ class FakeSession:
         self.request_count += 1
         if not self._responses:
             return None
-        return self._responses.pop(0)
+        response = self._responses.pop(0)
+        if isinstance(response, BaseException):
+            raise response
+        return response
 
 
 def _source_com_sessao(tmp_path, responses, **kw):
@@ -168,14 +174,14 @@ def test_coleta_grava_checkpoint_ao_parar_no_body_vazio(tmp_path):
 
     assert len(jobs) == 1
     assert checkpoint.is_file()
-    assert [l["external_id"] for l in linhas] == ["134508"]
+    assert [linha["external_id"] for linha in linhas] == ["134508"]
 
 
 def test_coleta_retoma_do_checkpoint_e_nao_refaz_get(tmp_path):
     """Pagina ja no checkpoint nao gera novo request."""
     checkpoint = tmp_path / CHECKPOINT_NAME
-    with open(checkpoint, "w", encoding="utf-8-sig", newline="") as fh:
-        fh.write("external_id,title\n134508,ja coletada\n")
+    recovered = _source()._parse_page(VAGA_HTML, VAGA_URL)
+    JobCheckpoint(checkpoint, "abler").save([recovered])
 
     src = _source_com_sessao(
         tmp_path,
@@ -188,11 +194,12 @@ def test_coleta_retoma_do_checkpoint_e_nao_refaz_get(tmp_path):
     jobs = src._coletar()
 
     # 134508 pulado sem GET; so a segunda pagina foi buscada.
-    assert [j.external_id for j in jobs] == ["943244"]
+    assert [j.external_id for j in jobs] == ["134508", "943244"]
+    assert jobs[0] == recovered
     assert src.session.request_count == 2  # sitemap + 1 pagina
 
 
-def test_coleta_completa_remove_o_checkpoint(tmp_path):
+def test_coleta_completa_preserva_checkpoint_ate_exportacao(tmp_path):
     src = _source_com_sessao(
         tmp_path,
         [
@@ -206,4 +213,34 @@ def test_coleta_completa_remove_o_checkpoint(tmp_path):
 
     checkpoint_exists = (tmp_path / CHECKPOINT_NAME).exists()
 
-    assert not checkpoint_exists
+    assert checkpoint_exists
+
+
+def test_sitemap_indisponivel_nao_esconde_registros_do_checkpoint(tmp_path):
+    recovered = _source()._parse_page(VAGA_HTML, VAGA_URL)
+    JobCheckpoint(tmp_path / CHECKPOINT_NAME, "abler").save([recovered])
+    src = _source_com_sessao(tmp_path, [None])
+
+    jobs = src.fetch([])
+
+    assert jobs == [recovered]
+    assert src.stats.raw_jobs == 1
+
+
+def test_interrupcao_e_retomada_equivalem_a_coleta_completa(tmp_path):
+    interrupted = _source_com_sessao(
+        tmp_path, [FakeResponse(SITEMAP_XML), FakeResponse(VAGA_HTML), KeyboardInterrupt()],
+    )
+    resumed = _source_com_sessao(tmp_path, [FakeResponse(SITEMAP_XML), FakeResponse(VAGA_HTML)])
+    uninterrupted = _source_com_sessao(
+        tmp_path / "completa",
+        [FakeResponse(SITEMAP_XML), FakeResponse(VAGA_HTML), FakeResponse(VAGA_HTML)],
+    )
+
+    with pytest.raises(KeyboardInterrupt):
+        interrupted.fetch([])
+    restored_jobs = resumed.fetch([])
+    complete_jobs = uninterrupted.fetch([])
+
+    assert restored_jobs == complete_jobs
+    assert resumed.session.request_count == 2

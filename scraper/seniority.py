@@ -10,7 +10,7 @@ from pathlib import Path
 import yaml
 
 from .config import RULES_DIR
-from .models import Job, normalize
+from .models import Job
 
 _WS_RE = re.compile(r"\s+")
 _KEEP_RE = re.compile(r"[^a-z0-9. ]+")

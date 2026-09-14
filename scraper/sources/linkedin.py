@@ -59,6 +59,12 @@ _WS_RE = re.compile(r"\s+")
 DETAIL_API_URL = "https://www.linkedin.com/jobs-guest/jobs/api/jobPosting/{job_id}"
 
 
+def parse_linkedin_description(html: str) -> str:
+    soup = BeautifulSoup(html, "html.parser")
+    node = soup.select_one(".show-more-less-html__markup, .description__text")
+    return _WS_RE.sub(" ", node.get_text(" ", strip=True)).strip() if node else ""
+
+
 class LinkedInSource(JobSource):
 
     name = "linkedin"
@@ -104,24 +110,6 @@ class LinkedInSource(JobSource):
                 break  # a API comecou a repetir resultados
 
         return jobs
-
-    def _fetch_description(self, job_id: str) -> str:
-        """Busca a descricao completa da vaga no endpoint publico de detalhe do LinkedIn."""
-        if not self.session:
-            return ""
-        try:
-            url = DETAIL_API_URL.format(job_id=job_id)
-            resp = self.session.get(url)
-            if not resp or resp.status_code != 200:
-                return ""
-            soup = BeautifulSoup(resp.text, "html.parser")
-            desc_el = soup.select_one(".show-more-less-html__markup, .description__text")
-            if desc_el:
-                return self._text(desc_el)
-        except Exception as e:
-            logger.debug("[%s] Falha ao obter descricao da vaga %s: %s", self.name, job_id, e)
-        return ""
-
 
     def _parse_page(self, html: str, term: str) -> list[Job]:
         soup = BeautifulSoup(html, "html.parser")

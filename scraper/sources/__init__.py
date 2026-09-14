@@ -26,17 +26,7 @@ SOURCE_REGISTRY: dict[str, type[JobSource]] = {
 }
 
 AVAILABLE_SOURCES = list(SOURCE_REGISTRY)
-DEFAULT_SOURCES = [
-    "gupy",
-    "vagas",
-    "trampos",
-    "linkedin",
-    "solides",
-    "geekhunter",
-    "infojobs",
-    "abler",
-    "recrutei",
-]
+DEFAULT_SOURCES = list(SOURCE_REGISTRY)
 
 
 __all__ = [

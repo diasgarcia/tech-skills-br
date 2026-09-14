@@ -3,7 +3,10 @@
 import csv
 from datetime import datetime, timedelta, timezone
 
+import pytest
+
 from scraper.config import Settings
+from scraper.checkpoints import JobCheckpoint
 from scraper.sources.recrutei import CHECKPOINT_NAME, RecruteiSource, _vid_da_url
 
 
@@ -266,7 +269,10 @@ class FakeSession:
         self.request_count += 1
         if not self._responses:
             return None
-        return self._responses.pop(0)
+        response = self._responses.pop(0)
+        if isinstance(response, BaseException):
+            raise response
+        return response
 
 
 def _source_com_sessao(tmp_path, responses, **kw):
@@ -328,10 +334,10 @@ def test_checkpoint_grava_e_retoma(tmp_path):
 
     assert len(jobs) == 1
     assert checkpoint.is_file()
-    assert [l["external_id"] for l in linhas] == ["153211"]
+    assert [linha["external_id"] for linha in linhas] == ["153211"]
 
 
-def test_coleta_completa_remove_o_checkpoint(tmp_path):
+def test_coleta_completa_preserva_checkpoint_ate_exportacao(tmp_path):
     src = _source_com_sessao(
         tmp_path,
         [
@@ -347,4 +353,45 @@ def test_coleta_completa_remove_o_checkpoint(tmp_path):
 
     checkpoint_exists = (tmp_path / CHECKPOINT_NAME).exists()
 
-    assert not checkpoint_exists
+    assert checkpoint_exists
+
+
+def test_retomada_devolve_salvas_e_novas_sem_refazer_get(tmp_path):
+    recovered = _source()._parse_page(DETALHE_HTML, VAGA_URL)
+    JobCheckpoint(tmp_path / CHECKPOINT_NAME, "recrutei").save([recovered])
+    new_url = "https://empregos.recrutei.com.br/vaga/acme/999999-analista"
+    src = _source_com_sessao(tmp_path, [FakeResponse(DETALHE_CIDADE_HTML)])
+
+    jobs = src._coletar_detalhes([VAGA_URL, new_url, new_url])
+
+    assert [job.external_id for job in jobs] == ["153211", "999999"]
+    assert jobs[0] == recovered
+    assert src.session.request_count == 1
+
+
+def test_sitemap_indisponivel_nao_esconde_checkpoint(tmp_path):
+    recovered = _source()._parse_page(DETALHE_HTML, VAGA_URL)
+    JobCheckpoint(tmp_path / CHECKPOINT_NAME, "recrutei").save([recovered])
+    src = _source_com_sessao(tmp_path, [None])
+
+    jobs = src.fetch([])
+
+    assert jobs == [recovered]
+    assert src.stats.raw_jobs == 1
+
+
+def test_interrupcao_e_retomada_equivalem_a_coleta_completa(tmp_path):
+    targets = [VAGA_URL, "https://empregos.recrutei.com.br/vaga/acme/999999-analista"]
+    interrupted = _source_com_sessao(tmp_path, [FakeResponse(DETALHE_HTML), KeyboardInterrupt()])
+    resumed = _source_com_sessao(tmp_path, [FakeResponse(DETALHE_CIDADE_HTML)])
+    uninterrupted = _source_com_sessao(
+        tmp_path / "completa", [FakeResponse(DETALHE_HTML), FakeResponse(DETALHE_CIDADE_HTML)],
+    )
+
+    with pytest.raises(KeyboardInterrupt):
+        interrupted._coletar_detalhes(targets)
+    restored_jobs = resumed._coletar_detalhes(targets)
+    complete_jobs = uninterrupted._coletar_detalhes(targets)
+
+    assert restored_jobs == complete_jobs
+    assert resumed.session.request_count == 1

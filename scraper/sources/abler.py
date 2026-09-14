@@ -31,13 +31,13 @@ Detalhes descobertos testando ao vivo:
 
 from __future__ import annotations
 
-import csv
 import json
 import logging
 import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+from ..checkpoints import CHECKPOINT_NAMES, JobCheckpoint
 from ..models import Job
 from .base import JobSource
 
@@ -46,7 +46,7 @@ logger = logging.getLogger(__name__)
 PORTAL_URL = "https://candidatos.abler.com.br"
 SITEMAP_URL = f"{PORTAL_URL}/sitemap.xml"
 
-CHECKPOINT_NAME = "abler_partial.csv"
+CHECKPOINT_NAME = CHECKPOINT_NAMES["abler"]
 
 # O sitemap mistura todo tipo de vaga (advogado, vendedora, estoquista...).
 # A coleta so visita slugs com cara de tecnologia/entrada; o portao de
@@ -94,24 +94,20 @@ class AblerSource(JobSource):
     def _checkpoint_path(self) -> Path:
         return Path(self.settings.output_dir) / CHECKPOINT_NAME
 
-    def _ler_checkpoint(self) -> set[str]:
-        """Ids ja coletados em rodada anterior interrompida."""
-        path = self._checkpoint_path()
-        if not path.is_file():
-            return set()
-        ids: set[str] = set()
-        with open(path, encoding="utf-8-sig", newline="") as fh:
-            for linha in csv.DictReader(fh):
-                vid = (linha.get("external_id") or "").strip()
-                if vid:
-                    ids.add(vid)
-        return ids
-
     def _coletar(self) -> list[Job]:
+        checkpoint = JobCheckpoint(self._checkpoint_path(), self.name)
+        jobs = checkpoint.load()
+        seen = {job.external_id for job in jobs}
+        recovered_count = len(jobs)
+        if jobs and not self.settings.parallel_sources:
+            logger.info("[%s] retomando checkpoint com %d vagas ja coletadas",
+                        self.name, len(jobs))
         response = self.session.get(SITEMAP_URL)
         if response is None or not response.text.strip():
             logger.warning("[%s] sitemap inacessivel; abortando a coleta", self.name)
-            return []
+            self.stats.raw_jobs = len(jobs)
+            self.stats.requests_made = self.session.request_count
+            return jobs
 
         alvos = self._filtrar_sitemap(response.text)
         if self.settings.parallel_sources:
@@ -119,63 +115,33 @@ class AblerSource(JobSource):
         else:
             logger.info("[%s] sitemap: %d paginas dentro da janela", self.name, len(alvos))
 
-        checkpoint = self._checkpoint_path()
-        checkpoint.parent.mkdir(parents=True, exist_ok=True)
-        seen = self._ler_checkpoint()
-        if seen and not self.settings.parallel_sources:
-            logger.info("[%s] retomando checkpoint com %d vagas ja coletadas",
-                        self.name, len(seen))
-        novo_checkpoint = not checkpoint.is_file()
-
-        jobs: list[Job] = []
-        completou = False
-        try:
-            with open(checkpoint, "a", encoding="utf-8-sig", newline="") as fh:
-                writer = None
-                for idx, url in enumerate(alvos, 1):
-                    vid_url = url.rstrip("/").rsplit("-", 1)[-1]
-                    if vid_url.isdigit() and vid_url in seen:
-                        continue  # ja esta no checkpoint: nao refaz o GET
-                    page = self.session.get(url)
-                    if page is None:
-                        continue
-                    if not page.text.strip():
-                        # Bloqueio suave: para e mantem o checkpoint.
-                        logger.warning(
-                            "[%s] body vazio em %s; parando a coleta "
-                            "(o checkpoint fica para retomar)", self.name, url,
-                        )
-                        break
-                    job = self._parse_page(page.text, url)
-                    if job is None or job.external_id in seen:
-                        continue
-                    seen.add(job.external_id)
-                    jobs.append(job)
-                    if writer is None:
-                        writer = csv.DictWriter(fh, fieldnames=list(job.to_row()))
-                        if novo_checkpoint:
-                            writer.writeheader()
-                    writer.writerow(job.to_row())
-                    fh.flush()
-                    if len(jobs) % 25 == 0:
-                        if self.settings.parallel_sources:
-                            logger.debug("[%s] progresso: %d vagas novas",
-                                         self.name, len(jobs))
-                        else:
-                            logger.info("[%s] progresso: %d vagas novas",
-                                        self.name, len(jobs))
-                        self.report(
-                            len(jobs),
-                            current_term=f"{len(jobs)} vagas novas",
-                            progresso=idx / len(alvos),
-                        )
-                else:
-                    completou = True
-        finally:
-            if completou:
-                checkpoint.unlink(missing_ok=True)
-                logger.info("[%s] coleta completa; checkpoint removido", self.name) if not self.settings.parallel_sources else logger.debug(
-                    "[%s] coleta completa; checkpoint removido", self.name
+        for idx, url in enumerate(alvos, 1):
+            vid_url = url.rstrip("/").rsplit("-", 1)[-1]
+            if vid_url.isdigit() and vid_url in seen:
+                continue
+            page = self.session.get(url)
+            if page is None:
+                continue
+            if not page.text.strip():
+                logger.warning(
+                    "[%s] body vazio em %s; parando a coleta "
+                    "(o checkpoint fica para retomar)", self.name, url,
+                )
+                break
+            job = self._parse_page(page.text, url)
+            if job is None or job.external_id in seen:
+                continue
+            checkpoint.save([*jobs, job])
+            seen.add(job.external_id)
+            jobs.append(job)
+            new_count = len(jobs) - recovered_count
+            if new_count % 25 == 0:
+                log_progress = logger.debug if self.settings.parallel_sources else logger.info
+                log_progress("[%s] progresso: %d vagas novas", self.name, new_count)
+                self.report(
+                    len(jobs),
+                    current_term=f"{new_count} vagas novas",
+                    progresso=idx / len(alvos),
                 )
 
         self.stats.raw_jobs = len(jobs)

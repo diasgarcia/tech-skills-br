@@ -3,7 +3,6 @@
 import pytest
 
 from scraper.geo import (
-    GeoClassifier,
     attach_geo_info,
     default_geo_classifier,
 )
