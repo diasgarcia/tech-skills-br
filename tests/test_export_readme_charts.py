@@ -89,6 +89,7 @@ def test_deploy_estatico_nao_participa_do_fluxo_de_snapshots():
     content = PAGES_WORKFLOWS[1].read_text(encoding="utf-8")
 
     assert "gh release download latest --pattern 'vagas.db'" in content
+    assert "python scripts/export_pages_data.py --db data/vagas.db" in content
     assert "scripts/release_snapshot.py" not in content
     assert "pip install -r requirements.txt" not in content
 
