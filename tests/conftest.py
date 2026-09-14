@@ -1,4 +1,5 @@
 import csv
+import socket
 import sys
 from pathlib import Path
 
@@ -6,6 +7,16 @@ import pytest
 
 # Permite rodar `pytest` a partir da raiz do projeto sem instalar o pacote.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+
+@pytest.fixture(autouse=True)
+def bloquear_rede_real(monkeypatch):
+    def recusar_conexao(*args, **kwargs):
+        raise AssertionError("Teste tentou acessar a rede real; use um cliente simulado.")
+
+    monkeypatch.setattr(socket.socket, "connect", recusar_conexao)
+    monkeypatch.setattr(socket.socket, "connect_ex", recusar_conexao)
+    monkeypatch.setattr(socket, "create_connection", recusar_conexao)
 
 
 @pytest.fixture
