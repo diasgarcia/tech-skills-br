@@ -4,6 +4,7 @@ from pathlib import Path
 
 import pytest
 
+from api.database import init_db
 from scripts.export_readme_charts import export_pages_charts, load_chart_jobs
 from scripts.import_csv import importar
 
@@ -36,6 +37,7 @@ def test_export_pages_charts_carrega_banco_e_gera_svgs(
 
 def test_export_pages_charts_rejeita_banco_vazio(tmp_path):
     db_path = tmp_path / "vazio.db"
+    init_db(db_path=db_path)
 
     with pytest.raises(ValueError, match="nao contem vagas"):
         export_pages_charts(tmp_path / "assets", db_path)

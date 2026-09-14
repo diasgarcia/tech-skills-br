@@ -10,17 +10,15 @@ from __future__ import annotations
 
 import argparse
 import sys
-from collections import Counter
 from datetime import datetime
 from pathlib import Path
 
 
 from sqlalchemy import func, select
-from sqlalchemy.orm import Session
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from api.database import Base, database_url, make_engine, url_sem_senha
+from api.database import database_url, read_session, url_sem_senha
 from api.models import Tecnologia, Vaga, vaga_tecnologia
 from scraper.config import DEFAULT_OUTPUT_DIR, PROJECT_ROOT
 
@@ -37,13 +35,10 @@ def generate_db_report(
     db_path: Path | str | None = None,
     export_md: bool = True,
 ) -> str:
-    engine = make_engine(db_path)
-
-    Base.metadata.create_all(engine)
     lines: list[str] = []
 
 
-    with Session(engine) as session:
+    with read_session(db_path) as session:
         total_vagas = session.scalar(select(func.count(Vaga.id))) or 0
         if total_vagas == 0:
             print("O banco de dados está vazio. Nenhuma vaga cadastrada.")
@@ -216,7 +211,7 @@ def generate_db_report(
 
         report_path = output_dir / f"relatorio_banco_consolidado_{stamp}.md"
         report_path.write_text(md_content, encoding="utf-8")
-        print(f"\nArquivos gerados:")
+        print("\nArquivos gerados:")
         print(f"  - Relatório Markdown: {report_path}")
 
         docs_reports_dir = PROJECT_ROOT / "docs" / "relatorios"
@@ -245,12 +240,6 @@ def main(argv: list[str] | None = None) -> int:
         db_path=args.db,
         export_md=not args.no_export,
     )
-
-    try:
-        from scripts.export_pages_data import export_all_pages_data
-        export_all_pages_data()
-    except Exception as exc:
-        logging.warning(f"Nao foi possivel exportar endpoints estaticos do Pages: {exc}")
 
     return 0
 

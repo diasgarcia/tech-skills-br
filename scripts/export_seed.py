@@ -12,11 +12,10 @@ import sys
 from pathlib import Path
 
 from sqlalchemy import select
-from sqlalchemy.orm import Session
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from api.database import database_url, make_engine, url_sem_senha  # noqa: E402
+from api.database import database_url, read_session, url_sem_senha  # noqa: E402
 from api.models import Vaga  # noqa: E402
 from scraper.config import PROJECT_ROOT  # noqa: E402
 
@@ -58,49 +57,45 @@ def exportar_seed(
     )
     dest_path.parent.mkdir(parents=True, exist_ok=True)
 
-    engine = make_engine(database_url(db_path))
-    try:
-        with Session(engine) as db:
-            vagas = db.scalars(select(Vaga).order_by(Vaga.id.asc())).all()
+    with read_session(db_path) as db:
+        vagas = db.scalars(select(Vaga).order_by(Vaga.id.asc())).all()
 
-            with open(dest_path, "w", encoding="utf-8-sig", newline="") as fh:
-                writer = csv.DictWriter(fh, fieldnames=COLUNAS_EXPORTACAO)
-                writer.writeheader()
+        with open(dest_path, "w", encoding="utf-8-sig", newline="") as fh:
+            writer = csv.DictWriter(fh, fieldnames=COLUNAS_EXPORTACAO)
+            writer.writeheader()
 
-                for v in vagas:
-                    skills_str = ", ".join(
-                        sorted(t.nome for t in v.tecnologias if t.nome)
-                    )
-                    pub_date = (
-                        v.published_date.isoformat()
-                        if v.published_date
-                        else ""
-                    )
+            for v in vagas:
+                skills_str = ", ".join(
+                    sorted(t.nome for t in v.tecnologias if t.nome)
+                )
+                pub_date = (
+                    v.published_date.isoformat()
+                    if v.published_date
+                    else ""
+                )
 
-                    row = {
-                        "area": v.area or "Outros/TI Geral",
-                        "seniority": v.seniority or "",
-                        "title": v.title or "",
-                        "company": v.company or "",
-                        "source": v.source or "",
-                        "location": v.location or "",
-                        "workplace_type": v.workplace_type or "Não informado",
-                        "published_date": pub_date,
-                        "url": v.url or "",
-                        "skills": skills_str,
-                        "area_score": str(v.area_score) if v.area_score is not None else "",
-                        "area_matches": v.area_matches or "",
-                        "search_term": v.search_term or "",
-                        "external_id": v.external_id or "",
-                        "description": v.description or "",
-                        "regiao": v.regiao or "",
-                        "polo": v.polo or "",
-                        "enrich_encerrada": "1" if v.enrich_encerrada else "0",
-                        "db_id": str(v.id),
-                    }
-                    writer.writerow(row)
-    finally:
-        engine.dispose()
+                row = {
+                    "area": v.area or "Outros/TI Geral",
+                    "seniority": v.seniority or "",
+                    "title": v.title or "",
+                    "company": v.company or "",
+                    "source": v.source or "",
+                    "location": v.location or "",
+                    "workplace_type": v.workplace_type or "Não informado",
+                    "published_date": pub_date,
+                    "url": v.url or "",
+                    "skills": skills_str,
+                    "area_score": str(v.area_score) if v.area_score is not None else "",
+                    "area_matches": v.area_matches or "",
+                    "search_term": v.search_term or "",
+                    "external_id": v.external_id or "",
+                    "description": v.description or "",
+                    "regiao": v.regiao or "",
+                    "polo": v.polo or "",
+                    "enrich_encerrada": "1" if v.enrich_encerrada else "0",
+                    "db_id": str(v.id),
+                }
+                writer.writerow(row)
 
 
     logger.info("Snapshot exportado com sucesso: %d vagas em %s", len(vagas), dest_path)
