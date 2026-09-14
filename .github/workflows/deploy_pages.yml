@@ -49,7 +49,7 @@ jobs:
           mkdir -p data
           gh release download latest --pattern 'vagas.db' --dir data --clobber
           pip install --disable-pip-version-check 'SQLAlchemy==2.0.52'
-          python scripts/export_pages_data.py
+          python scripts/export_pages_data.py --db data/vagas.db
           python scripts/build_pages.py
           # Este deploy atualiza o site e a API, mas preserva os graficos.
           # Os SVGs sao recalculados na rodada 3 ou nas coletas manuais.
