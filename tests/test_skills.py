@@ -1,3 +1,5 @@
+import re
+
 import pytest
 
 from scraper.models import Job
@@ -182,6 +184,47 @@ def test_beneficios_no_fim_continuam_sendo_cortados(ext):
     found = ext.extract("Analista de Suporte", desc)
     assert "Hardware" in found
     assert "Inglês" not in found
+
+
+@pytest.mark.parametrize("section", ["Benefícios", "O que oferecemos", "Benefits"])
+@pytest.mark.parametrize("aliases", ["Go e pfSense", "golang e pfsense", "GOLANG e PFSENSE"])
+def test_aliases_com_caixa_diferente_nao_escapam_do_descarte(ext, section, aliases):
+    text = f"Requisitos: SQL. {section}: curso de {aliases}."
+
+    found = ext.extract(text)
+
+    assert found == ["SQL"]
+
+
+def test_contexto_de_empresa_descarta_alias_de_caixa_exata():
+    extractor = SkillExtractor(
+        {"grupo": {"Go": ["~Go"], "Firewall": ["pfSense"], "SQL": ["sql"]}},
+        secoes_descarte=[],
+        secoes_conteudo=[],
+        contextos_descarte={"empresa": [re.compile("empresa go pfsense")]},
+    )
+
+    found = extractor.extract("Empresa Go pfSense. Requisitos: SQL.")
+
+    assert found == ["SQL"]
+
+
+def test_requisitos_com_alias_de_caixa_exata_permanecem(ext):
+    text = "Benefícios: vale transporte. Requisitos: Go e pfSense. Benefícios: curso de Python."
+
+    found = ext.extract("Desenvolvedor Node-RED e n8n", text)
+
+    assert {"Go", "Firewall", "Node-RED", "n8n"} <= set(found)
+    assert "Node.js" not in found
+    assert "Python" not in found
+
+
+def test_descarte_preserva_indices_com_acentos_unicode_e_espacos(ext):
+    text = "Qualiﬁcações:\n  SQL e C++. Beneﬁ́cios: curso de Go e pfSense."
+
+    found = ext.extract(text)
+
+    assert set(found) == {"SQL", "C++"}
 
 
 def test_extrai_tecnologias_recentemente_adicionadas(ext):

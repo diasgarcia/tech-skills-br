@@ -7,48 +7,28 @@ fonte. Os workflows usam a saida como corpo do commit (`git commit -F`).
     python scripts/resumo_commit.py --brutas 12145 --elegiveis 1776 \
         --novas 45 --atualizadas 1672 --log /tmp/enrich.log
 
-Os criterios de "pendente" repetem de proposito os dos enriquecidores:
-veja `scripts/enrich_outras_fontes.py` e `scripts/enrich_descriptions.py`.
+Os criterios de "pendente" sao compartilhados com os enriquecedores.
 """
 
 from __future__ import annotations
 
 import argparse
 import re
-import sqlite3
 import sys
+from contextlib import closing
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
+from api.database import connect_sqlite  # noqa: E402
+from scraper.enrichment import read_summaries  # noqa: E402
+from scraper.enrichment_queries import pending_queries  # noqa: E402
+
 ORDEM_FONTES = ("linkedin", "solides", "gupy", "vagas", "geekhunter", "trampos", "infojobs", "abler", "recrutei")
 
-PENDENTES_POR_FONTE = {
-    "vagas.com": (
-        "source='vagas' AND (description LIKE '%...' "
-        "OR LENGTH(description) < 500)"
-    ),
-    "trampos": (
-        "source='trampos' AND (description IS NULL OR LENGTH(description) < 100) "
-        "AND (published_date IS NULL OR published_date >= date('now', '-30 days'))"
-    ),
-    "gupy": (
-        "source='gupy' AND url LIKE '%://%.gupy.io/%'"
-    ),
-    "geekhunter": (
-        "source='geekhunter' AND (description IS NULL OR LENGTH(description) < 300 "
-        "OR company LIKE '%-%' OR published_date IS NULL)"
-    ),
-    "linkedin": (
-        "source='linkedin' AND (description IS NULL OR LENGTH(description) < 30)"
-    ),
-    "infojobs": (
-        "source='infojobs' AND (description IS NULL OR LENGTH(description) < 160 "
-        "OR description LIKE '%...')"
-    ),
-}
+PENDENTES_POR_FONTE = pending_queries()
 
 
 def _parse_enriquecidas(log_path: Path | None):
@@ -80,16 +60,13 @@ def _parse_enriquecidas(log_path: Path | None):
 
 
 def resumir(args: argparse.Namespace) -> str:
-    conn = sqlite3.connect(PROJECT_ROOT / "data" / "vagas.db")
-    total = conn.execute("SELECT COUNT(*) FROM vagas").fetchone()[0]
-    por_fonte = dict(conn.execute("SELECT source, COUNT(*) FROM vagas GROUP BY source"))
-    pendentes = {}
-    for fonte, condicao in PENDENTES_POR_FONTE.items():
-        pendentes[fonte] = conn.execute(
-            "SELECT COUNT(*) FROM vagas "
-            f"WHERE COALESCE(enrich_encerrada, 0) = 0 AND {condicao}"
-        ).fetchone()[0]
-    conn.close()
+    with closing(connect_sqlite(getattr(args, "db", None), read_only=True)) as conn:
+        total = conn.execute("SELECT COUNT(*) FROM vagas").fetchone()[0]
+        por_fonte = dict(conn.execute("SELECT source, COUNT(*) FROM vagas GROUP BY source"))
+        pendentes = {
+            fonte: conn.execute(f"SELECT COUNT(*) FROM ({query})", parametros).fetchone()[0]
+            for fonte, (query, parametros) in PENDENTES_POR_FONTE.items()
+        }
 
     linhas: list[str] = []
 
@@ -112,7 +89,13 @@ def resumir(args: argparse.Namespace) -> str:
     fontes = ", ".join(f"{f} {por_fonte.get(f, 0)}" for f in ORDEM_FONTES)
     linhas.append(f"- Base: {total} vagas ({fontes})")
 
-    outras, linkedin = _parse_enriquecidas(args.log)
+    summary_paths = getattr(args, "summary_json", None)
+    if summary_paths:
+        counts = read_summaries(summary_paths)
+        outras = {source: summary["enriched"] for source, summary in counts.items() if source != "linkedin"}
+        linkedin = counts.get("linkedin", {}).get("enriched")
+    else:
+        outras, linkedin = _parse_enriquecidas(args.log)
     if outras or linkedin is not None:
         partes = [f"{f} {n}" for f, n in (outras or {}).items()]
         if linkedin is not None:
@@ -131,6 +114,11 @@ def main(argv: list[str] | None = None) -> int:
         description="Imprime o corpo da mensagem de commit com o resumo dos dados."
     )
     parser.add_argument("--brutas", type=int, default=None, help="Vagas brutas da coleta.")
+    parser.add_argument("--db", type=Path, default=None, help="Banco SQLite para leitura.")
+    parser.add_argument(
+        "--summary-json", type=Path, action="append", default=None,
+        help="Resumo estruturado de enriquecimento; repita para incluir outro arquivo.",
+    )
     parser.add_argument(
         "--elegiveis", type=int, default=None,
         help="Vagas elegiveis apos filtros (junior/estagio/trainee).",

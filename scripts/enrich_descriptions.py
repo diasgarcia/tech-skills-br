@@ -19,120 +19,119 @@ foi removido: descricoes reais com 500 chars ficavam na fila para sempre
 """
 
 import logging
-import sqlite3
 import sys
 import threading
-from collections import Counter
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from contextlib import closing
 from pathlib import Path
 from threading import Lock
 
-from bs4 import BeautifulSoup
 import yaml
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from api.database import SessionLocal, init_db  # noqa: E402
-from api.models import Tecnologia, Vaga, vaga_tecnologia  # noqa: E402
+from api.database import connect_sqlite, resolve_sqlite_path  # noqa: E402
+from api.enrichment_state import EnrichmentStatus, record_attempt  # noqa: E402
+from api.migrations import migrate_connection  # noqa: E402
 from scraper.classifier import default_classifier  # noqa: E402
 from scraper.config import RULES_DIR, USER_AGENT  # noqa: E402
+from scraper.consolidation import consolidate_description  # noqa: E402
+from scraper.enrichment import BatchStopped, DetailResult, EnrichmentSummary, write_summary  # noqa: E402
+from scraper.enrichment_queries import QUERY_LINKEDIN_PENDENTES as QUERY_PENDENTES  # noqa: E402
 from scraper.geo import default_geo_classifier  # noqa: E402
 from scraper.http_client import PoliteSession  # noqa: E402
 from scraper.models import NAO_INFORMADO, infer_workplace  # noqa: E402
 from scraper.skills import SkillExtractor  # noqa: E402
+from scraper.sources.linkedin import DETAIL_API_URL, parse_linkedin_description  # noqa: E402
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)-7s %(message)s")
 logger = logging.getLogger("enrich")
-
-DETAIL_API_URL = "https://www.linkedin.com/jobs-guest/jobs/api/jobPosting/{job_id}"
-
-QUERY_PENDENTES = """
-    SELECT id, external_id, title, url, location, workplace_type
-    FROM vagas
-    WHERE source = 'linkedin'
-      AND COALESCE(enrich_encerrada, 0) = 0
-      AND (description IS NULL OR LENGTH(description) < 30)
-"""
-
 
 def fetch_one_description(
     session: PoliteSession,
     lock: Lock,
     job_id: str,
     parou: threading.Event,
-) -> tuple[str, str, int | None]:
-    if parou.is_set():
-        return job_id, "", 429
+) -> DetailResult:
     url = DETAIL_API_URL.format(job_id=job_id)
     status = None
     try:
         with lock:
+            if parou.is_set():
+                return DetailResult.stopped()
             response = session.get(url)
             status = session.last_status_code
-        if status == 429:
-            if not parou.is_set():
+            if status == 429:
                 parou.set()
                 logger.warning(
                     "429 detectado: interrompendo o lote do LinkedIn "
                     "(a fila continua na proxima rodada)"
                 )
         if response is None:
-            return job_id, "", status
-        soup = BeautifulSoup(response.text, "html.parser")
-        el = soup.select_one(".show-more-less-html__markup, .description__text")
-        if el:
-            return job_id, el.get_text(" ", strip=True), status
+            return DetailResult(status=status, reason="sem_resposta")
+        description = parse_linkedin_description(response.text)
+        if description:
+            return DetailResult(data={"description": description}, status=status)
         logger.warning("[enrich] Descricao nao encontrada na vaga %s", job_id)
+    except BatchStopped:
+        return DetailResult.stopped()
     except Exception as e:
         logger.warning("[enrich] Falha ao buscar a vaga %s: %s", job_id, e)
-    return job_id, "", status
+        return DetailResult(status=status, reason="erro_de_busca", details=str(e))
+    return DetailResult(status=status, reason="descricao_ausente")
 
 
 def enrich_linkedin_jobs(
     limit: int | None = None,
     max_workers: int = 3,
     janela_dias: int | None = None,
+    db_path: str | Path | None = None,
+    summary_path: str | Path | None = None,
 ):
     del janela_dias  # mantido por compatibilidade; a janela foi removida
 
-    init_db()
+    if limit is not None and limit < 1:
+        raise ValueError("O limite deve ser maior que zero.")
+    if max_workers < 1:
+        raise ValueError("O numero de workers deve ser maior que zero.")
+    destino = resolve_sqlite_path(db_path)
+    logger.info("Banco selecionado: %s", destino)
     with open(RULES_DIR / "skills.yml", encoding="utf-8") as fh:
         rules = yaml.safe_load(fh) or {}
     extractor = SkillExtractor(rules)
     classifier = default_classifier()
     geo = default_geo_classifier()
 
-    conn = sqlite3.connect(PROJECT_ROOT / "data" / "vagas.db")
+    with closing(connect_sqlite(destino)) as conn:
+        summary = _enrich_linkedin_connection(conn, extractor, classifier, geo, limit, max_workers)
+    if summary_path is not None:
+        write_summary(summary_path, {"linkedin": summary})
+    return summary
+
+
+def _enrich_linkedin_connection(conn, extractor, classifier, geo, limit, max_workers):
+    migrate_connection(conn)
     c = conn.cursor()
 
     query = QUERY_PENDENTES
     args: list = []
     if limit:
-        query += f" LIMIT {limit}"
+        query += " LIMIT ?"
+        args.append(limit)
 
     c.execute(query, args)
     jobs_to_enrich = c.fetchall()
+    summary = EnrichmentSummary(selected=len(jobs_to_enrich))
     logger.info("Total de vagas do LinkedIn para enriquecer: %d", len(jobs_to_enrich))
 
     if not jobs_to_enrich:
         logger.info("Nenhuma vaga pendente de enriquecimento.")
-        logger.info(
-            "Resumo enriquecimento linkedin: tentadas=0 | enriquecidas=0 | "
-            "encerradas=0 | removidas=0 | pendentes=0 | falhas=0"
-        )
-        conn.close()
-        return
+        summary.log(logger, "linkedin")
+        return summary
 
     c.execute("SELECT id, nome FROM tecnologias")
     tech_map = {nome.lower(): tid for tid, nome in c.fetchall()}
-    enriched_count = 0
-    encerradas = 0
-    removidas = 0
-    pendentes = 0
-    falhas = 0
-    motivos_pendentes: Counter[str] = Counter()
     lock = Lock()
     parou = threading.Event()
 
@@ -153,114 +152,121 @@ def enrich_linkedin_jobs(
 
             for future in as_completed(futures):
                 db_id, ext_id, title, url, location, workplace = futures[future]
+                attempted = True
                 try:
-                    _, desc, status = future.result()
+                    result = future.result()
+                    attempted = result.attempted
+                    desc = result.data.get("description", "").strip()
+                    status = result.status
+                    if not attempted:
+                        summary.leave_pending(result.reason, skipped=True)
+                        logger.info(
+                            "linkedin: vaga %s nao tentada | motivo=%s | titulo=%r | url=%s",
+                            ext_id, result.reason, title, url,
+                        )
+                        continue
                     if desc:
-                        if not classifier.is_tech(title, desc):
-                            c.execute(
-                                "DELETE FROM vaga_tecnologia WHERE vaga_id = ?",
-                                (db_id,),
+                        with conn:
+                            outcome = _save_linkedin_detail(
+                                c, db_id, title, location, workplace, desc,
+                                extractor, classifier, geo, tech_map,
                             )
-                            c.execute("DELETE FROM vagas WHERE id = ?", (db_id,))
+                            if outcome != "removed":
+                                record_attempt(conn, db_id, EnrichmentStatus.SUCCEEDED)
+                        if outcome == "removed":
                             logger.info(
                                 "Vaga %s removida apos descricao confirmar "
                                 "contexto fora de TI.",
                                 ext_id,
                             )
-                            removidas += 1
+                            summary.removed += 1
                             continue
-                        c.execute("UPDATE vagas SET description = ? WHERE id = ?", (desc, db_id))
-
-                        # A descricao completa e mais confiavel que o palpite
-                        # de modalidade feito no card da busca.
-                        modalidade = infer_workplace(
-                            None, location=location, title=title, description=desc
-                        )
-                        if (
-                            modalidade
-                            and modalidade != NAO_INFORMADO
-                            and modalidade != (workplace or "")
-                        ):
-                            polo, regiao = geo.classify(location, modalidade)
-                            c.execute(
-                                "UPDATE vagas SET workplace_type = ?, polo = ?, regiao = ? WHERE id = ?",
-                                (modalidade, polo, regiao, db_id),
-                            )
-
-                        full_text = f"{title} {desc}"
-                        extracted_skills = extractor.extract(full_text)
-
-                        for s in extracted_skills:
-                            tid = tech_map.get(s.lower())
-                            if tid:
-                                c.execute(
-                                    "INSERT OR IGNORE INTO vaga_tecnologia (vaga_id, tecnologia_id) VALUES (?, ?)",
-                                    (db_id, tid),
-                                )
-
-                        enriched_count += 1
-                        # Resolvida: sai da fila (429 nao chega aqui).
-                        c.execute(
-                            "UPDATE vagas SET enrich_encerrada = 1 WHERE id = ?",
-                            (db_id,),
-                        )
-                        if enriched_count % 25 == 0:
-                            conn.commit()
-                            logger.info("Enriquecidas %d / %d vagas...", enriched_count, len(jobs_to_enrich))
-                    elif status == 404:
+                        summary.enriched += 1
+                        if summary.enriched % 25 == 0:
+                            logger.info("Enriquecidas %d / %d vagas...", summary.enriched, len(jobs_to_enrich))
+                    elif status in (404, 410):
                         # Anuncio encerrado: marca para nunca mais buscar.
-                        c.execute(
-                            "UPDATE vagas SET enrich_encerrada = 1 WHERE id = ?",
-                            (db_id,),
-                        )
-                        encerradas += 1
+                        with conn:
+                            c.execute(
+                                "UPDATE vagas SET enrich_encerrada = 1, "
+                                "updated_at = CURRENT_TIMESTAMP WHERE id = ?", (db_id,),
+                            )
+                            record_attempt(conn, db_id, EnrichmentStatus.UNAVAILABLE, f"http_{status}")
+                        summary.closed += 1
                         logger.info(
-                            "linkedin: vaga %s encerrada | http=404 | "
+                            "linkedin: vaga %s encerrada | http=%s | "
                             "titulo=%r | url=%s",
-                            ext_id, title, url,
+                            ext_id, status, title, url,
                         )
                     else:
-                        if status is None or status < 400:
-                            motivo = "descricao_ausente"
-                        else:
+                        if status is not None and status >= 400:
                             motivo = f"http_{status}"
-                        motivos_pendentes[motivo] += 1
-                        pendentes += 1
+                        else:
+                            motivo = result.reason or "descricao_ausente"
+                        summary.leave_pending(motivo, failed=result.reason == "erro_de_busca")
+                        with conn:
+                            record_attempt(conn, db_id, EnrichmentStatus.FAILED, motivo)
                         logger.warning(
                             "linkedin: vaga %s permaneceu pendente | "
-                            "motivo=%s | http=%s | titulo=%r | url=%s",
-                            ext_id, motivo, status, title, url,
+                            "motivo=%s | http=%s | titulo=%r | url=%s | detalhes=%s",
+                            ext_id, motivo, status, title, url, result.details,
                         )
                 except Exception as e:
-                    falhas += 1
-                    pendentes += 1
-                    motivos_pendentes["erro_de_processamento"] += 1
-                    logger.warning("Falha ao processar job %s: %s", ext_id, e)
+                    with conn:
+                        record_attempt(conn, db_id, EnrichmentStatus.FAILED, "erro_de_processamento")
+                    summary.leave_pending("erro_de_processamento", failed=True)
+                    logger.warning(
+                        "Falha ao processar job %s | titulo=%r | url=%s | erro=%s",
+                        ext_id, title, url, e,
+                    )
+                finally:
+                    summary.attempted += int(attempted)
 
-    conn.commit()
-    conn.close()
-    logger.info("Enriquecimento concluido com sucesso: %d vagas enriquecidas!", enriched_count)
-    logger.info(
-        "Resumo enriquecimento linkedin: tentadas=%d | enriquecidas=%d | "
-        "encerradas=%d | removidas=%d | pendentes=%d | falhas=%d",
-        len(jobs_to_enrich), enriched_count, encerradas, removidas, pendentes, falhas,
-    )
-    if motivos_pendentes:
-        logger.warning(
-            "Pendencias linkedin por motivo: %s",
-            " | ".join(
-                f"{motivo}={quantidade}"
-                for motivo, quantidade in sorted(motivos_pendentes.items())
-            ),
+    logger.info("Enriquecimento concluido com sucesso: %d vagas enriquecidas!", summary.enriched)
+    summary.log(logger, "linkedin")
+    return summary
+
+
+def _save_linkedin_detail(c, db_id, title, location, workplace, desc, extractor, classifier, geo, tech_map):
+    """Grava uma vaga dentro da transacao aberta pelo chamador."""
+    saved_description = c.execute("SELECT description FROM vagas WHERE id = ?", (db_id,)).fetchone()[0]
+    description = consolidate_description(saved_description, desc, detail=True).text
+    if not classifier.is_tech(title, description):
+        c.execute("DELETE FROM vaga_tecnologia WHERE vaga_id = ?", (db_id,))
+        c.execute("DELETE FROM vagas WHERE id = ?", (db_id,))
+        return "removed"
+
+    c.execute("UPDATE vagas SET description = ? WHERE id = ?", (description, db_id))
+    modalidade = infer_workplace(None, location=location, title=title, description=description)
+    if modalidade and modalidade != NAO_INFORMADO and modalidade != (workplace or ""):
+        polo, regiao = geo.classify(location, modalidade)
+        c.execute(
+            "UPDATE vagas SET workplace_type = ?, polo = ?, regiao = ? WHERE id = ?",
+            (modalidade, polo, regiao, db_id),
         )
+    for skill in extractor.extract(title, description):
+        tid = tech_map.get(skill.lower())
+        if tid:
+            c.execute(
+                "INSERT OR IGNORE INTO vaga_tecnologia (vaga_id, tecnologia_id) VALUES (?, ?)",
+                (db_id, tid),
+            )
+    c.execute(
+        "UPDATE vagas SET enrich_encerrada = 1, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+        (db_id,),
+    )
+    return "enriched"
 
 
 if __name__ == "__main__":
     import argparse
 
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)-7s %(message)s")
     parser = argparse.ArgumentParser(
         description="Enriquece descricoes de vagas do LinkedIn pendentes."
     )
     parser.add_argument("--limit", type=int, default=None)
+    parser.add_argument("--db", type=Path, default=None, help="Banco SQLite a atualizar.")
+    parser.add_argument("--summary-json", type=Path, default=None, help="Grava contadores estruturados deste lote.")
     args = parser.parse_args()
-    enrich_linkedin_jobs(limit=args.limit)
+    enrich_linkedin_jobs(limit=args.limit, db_path=args.db, summary_path=args.summary_json)

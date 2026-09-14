@@ -13,9 +13,10 @@ def db(tmp_path):
     conn = sqlite3.connect(caminho)
     conn.execute(
         "CREATE TABLE vagas (id INTEGER PRIMARY KEY, title TEXT, area TEXT, "
-        "area_score REAL, area_matches TEXT, description TEXT)"
+        "area_score REAL, area_matches TEXT, description TEXT, updated_at TEXT)"
     )
     conn.commit()
+    conn.close()
     return caminho
 
 
@@ -50,6 +51,15 @@ def test_pendente_com_descricao_e_reclassificada(db):
 
     assert resultado["mudadas"] >= 1
     assert area == "Infraestrutura / Redes"
+
+
+def test_pendentes_inclui_area_removida_do_vocabulario(db):
+    _inserir(db, 1, "Analista de Redes Jr", "Area antiga", "Configurar switches e roteadores.")
+
+    resultado = reclassificar(db)
+
+    assert resultado["analisadas"] == 1
+    assert resultado["mudadas"] == 1
 
 
 def test_area_boa_nao_e_tocada_no_modo_pendentes(db):

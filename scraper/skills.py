@@ -116,6 +116,28 @@ def normalize_tech(text: str | None) -> str:
     return _WS_RE.sub(" ", text).strip()
 
 
+def _normalized_offsets(raw: str) -> list[int]:
+    """Mapeia cada caractere normalizado para sua posicao no texto original.
+
+    NFKD pode expandir caracteres e a compactacao de espacos muda os indices.
+    O mapa permite aplicar os mesmos descartes sem perder a caixa dos aliases.
+    """
+    offsets: list[int] = []
+    pending_space: int | None = None
+    for index, original in enumerate(raw):
+        decomposed = unicodedata.normalize("NFKD", original)
+        characters = "".join(c for c in decomposed if not unicodedata.combining(c)).lower()
+        for char in characters:
+            if "a" <= char <= "z" or "0" <= char <= "9" or char in "#+":
+                if pending_space is not None:
+                    offsets.append(pending_space)
+                    pending_space = None
+                offsets.append(index)
+            elif offsets and pending_space is None:
+                pending_space = index
+    return offsets
+
+
 def _compile_alias(alias: str, suffixes: tuple[str, ...] = ()) -> re.Pattern:
     token = normalize_tech(alias)
     if not token:
@@ -217,29 +239,39 @@ class SkillExtractor:
                 limite = posicao
         fim = len(texto_normalizado)
         for secao in self.secoes_descarte:
-            posicao = texto_normalizado.find(secao)
+            posicao = texto_normalizado.find(secao, limite + 1)
             if posicao != -1 and posicao < fim and posicao > limite:
                 fim = posicao
         return texto_normalizado[:fim].strip()
 
-    def _recortar_contextos_descarte(self, texto_normalizado: str) -> str:
-        """Remove mencoes a empresa/setor que nao sao a skill (falsos positivos)."""
+    def _textos_permitidos(self, raw: str) -> tuple[str, str]:
+        """Aplica os mesmos trechos de descarte nas duas formas do texto."""
+        normalized = normalize_tech(raw)
+        retained = self._recortar_secoes_finais(normalized)
+        excluded = []
+        if len(retained) < len(normalized):
+            excluded.append((len(retained), len(normalized)))
         for padroes in self.contextos_descarte.values():
             for padrao in padroes:
-                texto_normalizado = padrao.sub(" ", texto_normalizado)
-        return texto_normalizado
+                excluded.extend(match.span() for match in padrao.finditer(retained))
+        if not excluded:
+            return raw, normalized
+        offsets = _normalized_offsets(raw)
+        raw_chars = list(raw)
+        normalized_chars = list(normalized)
+        for start, end in excluded:
+            if start == end:
+                continue
+            normalized_chars[start:end] = " " * (end - start)
+            raw_start, raw_end = offsets[start], offsets[end - 1] + 1
+            raw_chars[raw_start:raw_end] = " " * (raw_end - raw_start)
+        return "".join(raw_chars), "".join(normalized_chars)
 
     def extract(self, *texts: str) -> list[str]:
         """Tecnologias citadas nos textos, sem repetir, em ordem alfabetica."""
         raw = " ".join(t for t in texts if t)
-        haystack = normalize_tech(raw)
-        if not haystack:
-            return []
-        haystack = self._recortar_secoes_finais(haystack)
-        if not haystack:
-            return []
-        haystack = self._recortar_contextos_descarte(haystack)
-        if not haystack:
+        raw, haystack = self._textos_permitidos(raw)
+        if not haystack.strip():
             return []
         found = [
             name

@@ -16,9 +16,9 @@ from __future__ import annotations
 
 import argparse
 import csv
+from contextlib import closing
 import glob
 import logging
-import re
 import sys
 from datetime import date, datetime
 from pathlib import Path
@@ -37,10 +37,14 @@ from api.database import (  # noqa: E402
 )
 from api.dates import parse_published_date, reference_date_from_csv  # noqa: E402
 from api.models import Tecnologia, Vaga  # noqa: E402
+from api.migrations import migrate_connection  # noqa: E402
 from scraper.classifier import default_classifier  # noqa: E402
+from scraper.consolidation import (  # noqa: E402
+    MIN_DATA_CORTE, canonical_company as _canonical_company, consolidate_description,
+)
 from scraper.config import PROJECT_ROOT  # noqa: E402
 from scraper.geo import default_geo_classifier  # noqa: E402
-from scraper.models import infer_workplace, normalize  # noqa: E402
+from scraper.models import infer_workplace  # noqa: E402
 from scraper.skills import default_extractor  # noqa: E402
 
 
@@ -53,39 +57,6 @@ CAMPOS_TEXTO = [
     "url", "description", "area_matches", "search_term",
     "regiao", "polo",
 ]
-
-MIN_DATA_CORTE = date(2026, 1, 1)
-
-# A mesma empresa com grafias diferentes entre portais. A chave e o
-# nome normalizado; o valor e o rotulo canonico exibido no ranking.
-_EMPRESAS_CANONICAS = {
-    "venha ser sanguelaranja": "FCamara",
-    "randstad 1": "Randstad",
-    "randstad matriz": "Randstad",
-    "nava tech for business": "Nava Technology for Business",
-    "minsait brasil": "Minsait",
-    "minsait an indra company": "Minsait",
-}
-
-
-def _canonical_company(nome: str) -> str:
-    """Junta variantes de grafia de empresa numa forma unica.
-
-    Cada portal grafa a mesma coisa do seu jeito: "Empresa confidencial"
-    na Solides, "confidencial" no InfoJobs, "Confidencial430" na Gupy;
-    "Randstad - Matriz" no InfoJobs e "Randstad" no GeekHunter. Sem a
-    normalizacao, o ranking de empresas conta a mesma empresa como
-    entidades diferentes.
-    """
-    chave = normalize(nome)
-    if len(chave) <= 1:
-        return ""
-    if re.search(r"\bconfidencial\d*\b", chave):
-        return "Confidencial"
-    return _EMPRESAS_CANONICAS.get(chave, nome)
-
-
-
 
 def _data_iso(valor: str) -> date:
     """Valida --referencia no formato AAAA-MM-DD."""
@@ -129,23 +100,8 @@ def _float_ou_none(valor: str | None) -> float | None:
 
 
 def _garantir_colunas(engine) -> None:
-    """Garante que colunas novas (regiao, polo) existam em bancos pre-existentes."""
-    from sqlalchemy import inspect, text
-
-    inspector = inspect(engine)
-    if "vagas" not in inspector.get_table_names():
-        return
-    cols = {col["name"] for col in inspector.get_columns("vagas")}
-    with engine.connect() as conn:
-        if "regiao" not in cols:
-            conn.execute(text("ALTER TABLE vagas ADD COLUMN regiao VARCHAR(40)"))
-        if "polo" not in cols:
-            conn.execute(text("ALTER TABLE vagas ADD COLUMN polo VARCHAR(60)"))
-        if "enrich_encerrada" not in cols:
-            conn.execute(
-                text("ALTER TABLE vagas ADD COLUMN enrich_encerrada INTEGER DEFAULT 0")
-            )
-        conn.commit()
+    with closing(engine.raw_connection()) as conn:
+        migrate_connection(conn.driver_connection)
 
 
 def ler_csv(csv_path: Path):
@@ -161,6 +117,13 @@ def importar(
     data_minima: date | None = MIN_DATA_CORTE,
 ) -> dict:
     engine = make_engine(db_path)
+    try:
+        return _importar_com_engine(engine, csv_path, db_path, recriar, referencia, data_minima)
+    finally:
+        engine.dispose()
+
+
+def _importar_com_engine(engine, csv_path, db_path, recriar, referencia, data_minima) -> dict:
     if recriar:
         Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
@@ -206,7 +169,6 @@ def importar(
                 if limite_data and pub_date is not None and pub_date < limite_data:
                     continue
 
-                url_csv = (linha.get("url") or "").strip()
                 vaga = db.scalar(
                     select(Vaga).where(
                         Vaga.source == source, Vaga.external_id == external_id
@@ -241,9 +203,6 @@ def importar(
                         # apagar um nome valido que ja esteja consolidado.
                         if novo is None and vaga.company:
                             continue
-                    if campo == "description" and not novo and vaga.description:
-                        descricao_preservada = True
-                        continue
                     # Slug de URL como empresa (ex.: GeekHunter grava o
                     # segmento do caminho) nao regride um nome real ja
                     # corrigido pelo enriquecimento ("Code Group").
@@ -259,17 +218,10 @@ def importar(
                         continue
                     # Snippet novo nao regride descricao enriquecida: o
                     # card do Vagas.com traz ~400 chars (com ou sem "...").
-                    if campo == "description" and novo and vaga.description:
-                        velha_cheia = (
-                            len(vaga.description) >= 500
-                            and not vaga.description.endswith("...")
-                        )
-                        nova_snippet = (
-                            len(novo) < 500 or novo.endswith("...")
-                        )
-                        if velha_cheia and nova_snippet:
-                            descricao_preservada = True
-                            continue
+                    if campo == "description":
+                        decision = consolidate_description(vaga.description, novo)
+                        descricao_preservada = decision.preserved
+                        novo = decision.text or None
                     setattr(vaga, campo, novo)
 
                 # Marcacao de anúncio encerrado so liga, nunca desliga:
@@ -343,6 +295,8 @@ def importar(
                         for n in nomes
                         if n.lower() in conhecidas
                     ]
+                    if not ids_novas:
+                        continue  # nomes desconhecidos nao invalidam as relacoes existentes
                     db.flush()  # garante o id da vaga recem-criada
                     vid = vaga.id
                     db.execute(
@@ -451,12 +405,6 @@ def main(argv: list[str] | None = None) -> int:
     print(f"  Fora do escopo ... {resultado['nao_tech']}")
     print(f"  Total no banco ... {resultado['total']}")
     print(f"  Banco ............ {resultado['db']}")
-
-    try:
-        from scripts.export_pages_data import export_all_pages_data
-        export_all_pages_data()
-    except Exception as exc:
-        logging.warning(f"Nao foi possivel exportar endpoints estaticos do Pages: {exc}")
 
     return 0
 

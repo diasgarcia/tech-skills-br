@@ -1,10 +1,12 @@
 """Testes do enriquecedor de Vagas.com e Trampos, com sessao falsa."""
 
 import logging
+from contextlib import closing, contextmanager
 import sqlite3
 import threading
 from threading import Lock
 
+from scraper.enrichment import DetailResult
 from scraper.skills import SkillExtractor
 from scripts.enrich_outras_fontes import (
     CHAVE_DETALHES,
@@ -81,10 +83,11 @@ PLACEHOLDER_HTML = """
 def test_fetch_vagas_com_pagina_generica_conta_como_encerrada():
     session = FakeSession([FakeResponse(text=PLACEHOLDER_HTML)])
 
-    desc, status = fetch_vagas_com(session, Lock(), "http://x")
+    result, status = fetch_vagas_com(session, Lock(), "http://x")
 
-    assert desc == ""
-    assert status == 404
+    assert result["_indisponivel"] is True
+    assert result[CHAVE_DIAGNOSTICO] == "pagina_generica_sem_anuncio"
+    assert status is None
 
 
 def test_fetch_geekhunter_pagina_institucional_conta_como_encerrada():
@@ -98,8 +101,9 @@ def test_fetch_geekhunter_pagina_institucional_conta_como_encerrada():
 
     dados, status = fetch_geekhunter(session, Lock(), "https://www.geekhunter.com/pt/x")
 
-    assert dados == {}
-    assert status == 404
+    assert dados["_indisponivel"] is True
+    assert dados[CHAVE_DIAGNOSTICO] == "pagina_institucional_sem_anuncio"
+    assert status == 200
 
 
 INFOJOBS_DETAIL_HTML = """
@@ -291,184 +295,187 @@ def test_fetch_gupy_identifica_redirecionamento_para_login():
 def test_data_anterior_ao_corte_remove_a_vaga_em_vez_de_atualizar():
     # A GeekHunter traz data antiga no JSON-LD sem passar pelo corte do
     # import_csv: a vaga precisa sair da base, nao ganhar data de 2025.
-    conn = sqlite3.connect(":memory:")
-    c = conn.cursor()
-    c.execute(
-        """CREATE TABLE vagas (
-            id INTEGER PRIMARY KEY, url TEXT, title TEXT, description TEXT,
-            company TEXT, published_date TEXT, enrich_encerrada INTEGER DEFAULT 0)"""
-    )
-    c.execute(
-        "CREATE TABLE vaga_tecnologia (vaga_id INTEGER, tecnologia_id INTEGER)"
-    )
-    c.execute("INSERT INTO vagas (id, url, title) VALUES (1, 'http://velha', 'QA')")
-    c.execute("INSERT INTO vagas (id, url, title) VALUES (2, 'http://nova', 'Dev Python')")
-    conn.commit()
+    with closing(sqlite3.connect(":memory:")) as conn:
+        c = conn.cursor()
+        c.execute(
+            """CREATE TABLE vagas (
+                id INTEGER PRIMARY KEY, url TEXT, title TEXT, description TEXT,
+                company TEXT, published_date TEXT, enrich_encerrada INTEGER DEFAULT 0,
+                updated_at TEXT)"""
+        )
+        c.execute(
+            "CREATE TABLE vaga_tecnologia (vaga_id INTEGER, tecnologia_id INTEGER)"
+        )
+        c.execute("INSERT INTO vagas (id, url, title) VALUES (1, 'http://velha', 'QA')")
+        c.execute("INSERT INTO vagas (id, url, title) VALUES (2, 'http://nova', 'Dev Python')")
+        conn.commit()
 
-    extractor = SkillExtractor(
-        {"dev": {"Python": ["python"]}},
-        secoes_descarte=[],
-        secoes_conteudo=[],
-        contextos_descarte={},
-    )
-    tech_map = {"python": 1}
-    respostas = {
-        "http://velha": ({"description": "Vaga de 2025", "published_date": "2025-07-21", "company": "X"}, None),
-        "http://nova": ({"description": "Vaga com Python", "published_date": "2026-08-01", "company": "Randstad - Matriz"}, None),
-    }
+        extractor = SkillExtractor(
+            {"dev": {"Python": ["python"]}},
+            secoes_descarte=[],
+            secoes_conteudo=[],
+            contextos_descarte={},
+        )
+        tech_map = {"python": 1}
+        respostas = {
+            "http://velha": ({"description": "Vaga de 2025", "published_date": "2025-07-21", "company": "X"}, None),
+            "http://nova": ({"description": "Vaga com Python", "published_date": "2026-08-01", "company": "Randstad - Matriz"}, None),
+        }
 
-    def fake_fetch(session, lock, url):
-        return respostas[url]
+        def fake_fetch(session, lock, url):
+            return respostas[url]
 
-    total = _enriquecer(
-        c, None, Lock(), extractor, tech_map,
-        "SELECT id, url, title FROM vagas", [], fake_fetch,
-    )
-    sobreviventes = c.execute(
-        "SELECT id, published_date, company FROM vagas"
-    ).fetchall()
+        total = _enriquecer(
+            c, None, Lock(), extractor, tech_map,
+            "SELECT id, url, title FROM vagas", [], fake_fetch,
+        )
+        sobreviventes = c.execute(
+            "SELECT id, published_date, company FROM vagas"
+        ).fetchall()
 
-    assert total == 1
-    assert sobreviventes == [(2, "2026-08-01", "Randstad")]
+        assert total == 1
+        assert sobreviventes == [(2, "2026-08-01", "Randstad")]
 
 
 def test_parar_em_429_interrompe_o_lote_sem_marcar_encerrada():
-    conn = sqlite3.connect(":memory:")
-    c = conn.cursor()
-    c.execute(
-        """CREATE TABLE vagas (
-            id INTEGER PRIMARY KEY, url TEXT, title TEXT, description TEXT,
-            company TEXT, published_date TEXT, enrich_encerrada INTEGER DEFAULT 0)"""
-    )
-    c.execute(
-        "CREATE TABLE vaga_tecnologia (vaga_id INTEGER, tecnologia_id INTEGER)"
-    )
-    c.executemany(
-        "INSERT INTO vagas (id, url, title) VALUES (?, ?, ?)",
-        [(1, "http://um", "Vaga um"), (2, "http://dois", "Vaga dois")],
-    )
-    conn.commit()
+    with closing(sqlite3.connect(":memory:")) as conn:
+        c = conn.cursor()
+        c.execute(
+            """CREATE TABLE vagas (
+                id INTEGER PRIMARY KEY, url TEXT, title TEXT, description TEXT,
+                company TEXT, published_date TEXT, enrich_encerrada INTEGER DEFAULT 0,
+                updated_at TEXT)"""
+        )
+        c.execute(
+            "CREATE TABLE vaga_tecnologia (vaga_id INTEGER, tecnologia_id INTEGER)"
+        )
+        c.executemany(
+            "INSERT INTO vagas (id, url, title) VALUES (?, ?, ?)",
+            [(1, "http://um", "Vaga um"), (2, "http://dois", "Vaga dois")],
+        )
+        conn.commit()
 
-    extractor = SkillExtractor(
-        {}, secoes_descarte=[], secoes_conteudo=[], contextos_descarte={}
-    )
-    tech_map = {}
+        extractor = SkillExtractor(
+            {}, secoes_descarte=[], secoes_conteudo=[], contextos_descarte={}
+        )
+        tech_map = {}
 
-    def fake_fetch(session, lock, url):
-        # Primeiro pedido OK, segundo estoura rate limit.
-        if url == "http://um":
-            return {"description": "Rotina com Python"}, None
-        return {"description": ""}, 429
+        def fake_fetch(session, lock, url):
+            # Primeiro pedido OK, segundo estoura rate limit.
+            if url == "http://um":
+                return {"description": "Rotina com Python"}, None
+            return {"description": ""}, 429
 
-    total = _enriquecer(
-        c, None, Lock(), extractor, tech_map,
-        "SELECT id, url, title FROM vagas", [], fake_fetch,
-        parar_em_429=True,
-    )
-    descricao = c.execute(
-        "SELECT description FROM vagas WHERE id = 1"
-    ).fetchone()[0]
-    encerrada = c.execute(
-        "SELECT enrich_encerrada FROM vagas WHERE id = 2"
-    ).fetchone()[0]
+        total = _enriquecer(
+            c, None, Lock(), extractor, tech_map,
+            "SELECT id, url, title FROM vagas", [], fake_fetch,
+            parar_em_429=True,
+        )
+        descricao = c.execute(
+            "SELECT description FROM vagas WHERE id = 1"
+        ).fetchone()[0]
+        encerrada = c.execute(
+            "SELECT enrich_encerrada FROM vagas WHERE id = 2"
+        ).fetchone()[0]
 
-    assert total == 1
-    assert descricao == "Rotina com Python"
-    # 429 nao pode marcar como encerrada: fica pendente para a proxima rodada.
-    assert encerrada == 0
+        assert total == 1
+        assert descricao == "Rotina com Python"
+        # 429 nao pode marcar como encerrada: fica pendente para a proxima rodada.
+        assert encerrada == 0
 
 
 def test_sucesso_marca_a_vaga_como_resolvida():
     # Busca com sucesso tira a vaga da fila para sempre, mesmo que a
     # descricao do portal seja curta (< 500): sem o flag, vaga com
     # postagem curta era rebuscada toda rodada.
-    conn, c = _vagas_com_fixture()
-    c.execute(
-        "INSERT INTO vagas (id, url, title, description, enrich_encerrada) "
-        "VALUES (1, 'u1', 't', 'curta', 0)"
-    )
-    extractor = SkillExtractor(
-        {}, secoes_descarte=[], secoes_conteudo=[], contextos_descarte={}
-    )
+    with _vagas_com_fixture() as (conn, c):
+        c.execute(
+            "INSERT INTO vagas (id, url, title, description, enrich_encerrada) "
+            "VALUES (1, 'u1', 't', 'curta', 0)"
+        )
+        extractor = SkillExtractor(
+            {}, secoes_descarte=[], secoes_conteudo=[], contextos_descarte={}
+        )
 
-    def fake_fetch(session, lock, url):
-        return {"description": "descricao curta do portal"}, 200
+        def fake_fetch(session, lock, url):
+            return {"description": "descricao curta do portal"}, 200
 
-    total = _enriquecer(
-        c, None, Lock(), extractor, {},
-        "SELECT id, url, title FROM vagas", [], fake_fetch,
-    )
-    encerrada = c.execute(
-        "SELECT enrich_encerrada FROM vagas WHERE id = 1"
-    ).fetchone()[0]
+        conn.commit()
+        total = _enriquecer(
+            c, None, Lock(), extractor, {},
+            "SELECT id, url, title FROM vagas", [], fake_fetch,
+        )
+        encerrada = c.execute(
+            "SELECT enrich_encerrada FROM vagas WHERE id = 1"
+        ).fetchone()[0]
 
-    assert total == 1
-    assert encerrada == 1
+        assert total == 1
+        assert encerrada == 1
 
 
 def test_status_410_marca_a_vaga_como_encerrada():
-    conn, c = _vagas_com_fixture()
-    c.execute(
-        "INSERT INTO vagas (id, url, title, description, enrich_encerrada) "
-        "VALUES (1, 'u1', 't', 'descricao antiga', 0)"
-    )
-    extractor = SkillExtractor(
-        {}, secoes_descarte=[], secoes_conteudo=[], contextos_descarte={}
-    )
+    with _vagas_com_fixture() as (conn, c):
+        c.execute(
+            "INSERT INTO vagas (id, url, title, description, enrich_encerrada) "
+            "VALUES (1, 'u1', 't', 'descricao antiga', 0)"
+        )
+        extractor = SkillExtractor(
+            {}, secoes_descarte=[], secoes_conteudo=[], contextos_descarte={}
+        )
 
-    def fake_fetch(session, lock, url):
-        return {}, 410
+        def fake_fetch(session, lock, url):
+            return {}, 410
 
-    total = _enriquecer(
-        c, None, Lock(), extractor, {},
-        "SELECT id, url, title FROM vagas", [], fake_fetch,
-    )
-    encerrada = c.execute(
-        "SELECT enrich_encerrada FROM vagas WHERE id = 1"
-    ).fetchone()[0]
+        conn.commit()
+        total = _enriquecer(
+            c, None, Lock(), extractor, {},
+            "SELECT id, url, title FROM vagas", [], fake_fetch,
+        )
+        encerrada = c.execute(
+            "SELECT enrich_encerrada FROM vagas WHERE id = 1"
+        ).fetchone()[0]
 
-    assert total == 0
-    assert encerrada == 1
+        assert total == 0
+        assert encerrada == 1
 
 
 def test_descricao_menor_nao_substitui_atual_mas_empresa_e_corrigida():
-    conn, c = _vagas_com_fixture()
-    c.execute("ALTER TABLE vagas ADD COLUMN company TEXT")
-    descricao_atual = "Descrição completa com Python, Django e testes automatizados."
-    c.execute(
-        "INSERT INTO vagas "
-        "(id, url, title, description, company, enrich_encerrada) "
-        "VALUES (1, 'u1', 'Dev Python', ?, 'VENHA PARA NOSSO TIME', 0)",
-        (descricao_atual,),
-    )
-    c.execute(
-        "CREATE TABLE vaga_tecnologia (vaga_id INTEGER, tecnologia_id INTEGER)"
-    )
-    extractor = SkillExtractor(
-        {"linguagens": {"Python": ["python"]}},
-        secoes_descarte=[], secoes_conteudo=[], contextos_descarte={},
-    )
+    with _vagas_com_fixture() as (conn, c):
+        c.execute("ALTER TABLE vagas ADD COLUMN company TEXT")
+        descricao_atual = "Descrição completa com Python, Django e testes automatizados."
+        c.execute(
+            "INSERT INTO vagas "
+            "(id, url, title, description, company, enrich_encerrada) "
+            "VALUES (1, 'u1', 'Dev Python', ?, 'VENHA PARA NOSSO TIME', 0)",
+            (descricao_atual,),
+        )
+        c.execute(
+            "CREATE TABLE vaga_tecnologia (vaga_id INTEGER, tecnologia_id INTEGER)"
+        )
+        extractor = SkillExtractor(
+            {"linguagens": {"Python": ["python"]}},
+            secoes_descarte=[], secoes_conteudo=[], contextos_descarte={},
+        )
 
-    def fake_fetch(session, lock, url):
-        return {"description": "Descrição curta", "company": "FCamara"}, 200
+        def fake_fetch(session, lock, url):
+            return {"description": "Descrição curta", "company": "FCamara"}, 200
 
-    total = _enriquecer(
-        c, None, Lock(), extractor, {"python": 1},
-        "SELECT id, url, title FROM vagas", [], fake_fetch,
-    )
-    vaga = c.execute(
-        "SELECT description, company, enrich_encerrada FROM vagas WHERE id = 1"
-    ).fetchone()
-    skills = c.execute("SELECT * FROM vaga_tecnologia").fetchall()
+        conn.commit()
+        total = _enriquecer(
+            c, None, Lock(), extractor, {"python": 1},
+            "SELECT id, url, title FROM vagas", [], fake_fetch,
+        )
+        vaga = c.execute(
+            "SELECT description, company, enrich_encerrada FROM vagas WHERE id = 1"
+        ).fetchone()
+        skills = c.execute("SELECT * FROM vaga_tecnologia").fetchall()
 
-    assert total == 1
-    assert vaga == (descricao_atual, "FCamara", 1)
-    assert skills == [(1, 1)]
+        assert total == 1
+        assert vaga == (descricao_atual, "FCamara", 1)
+        assert skills == [(1, 1)]
 
 
 def test_fetch_parando_nao_chama_a_fonte_depois_do_429():
-    # Depois do primeiro 429 o lote para de fazer requests de verdade:
-    # as futures restantes devolvem 429 falso sem tocar na fonte.
     parou = threading.Event()
     chamadas = []
 
@@ -481,147 +488,146 @@ def test_fetch_parando_nao_chama_a_fonte_depois_do_429():
     segunda = wrapper(None, None, "http://dois")
     terceira = wrapper(None, None, "http://tres")
 
-    assert primeira == ({"description": ""}, 429)
-    esperado_interrompido = (
-        {CHAVE_DIAGNOSTICO: "lote_interrompido_apos_429"},
-        429,
-    )
-    assert segunda == esperado_interrompido
-    assert terceira == esperado_interrompido
+    assert primeira == DetailResult(data={"description": ""}, status=429)
+    assert segunda == DetailResult.stopped()
+    assert terceira == DetailResult.stopped()
+    assert segunda.status is None
     assert chamadas == ["http://um"]  # os demais nem chamaram a fonte
 
 
 def test_enriquecer_registra_diagnostico_da_pendencia(caplog):
-    conn, c = _vagas_com_fixture()
-    c.execute(
-        "INSERT INTO vagas (id, url, title, description, enrich_encerrada) "
-        "VALUES (1, 'http://vaga', 'Estagio em TI', 'teaser', 0)"
-    )
-    extractor = SkillExtractor(
-        {}, secoes_descarte=[], secoes_conteudo=[], contextos_descarte={}
-    )
-
-    def fake_fetch(session, lock, url):
-        return {
-            CHAVE_DIAGNOSTICO: "painel_da_vaga_ausente",
-            CHAVE_DETALHES: "url_final=http://vaga; corpo=100 caracteres",
-        }, 200
-
-    with caplog.at_level(logging.INFO, logger="enrich_outras"):
-        total = _enriquecer(
-            c, None, Lock(), extractor, {},
-            "SELECT id, url, title FROM vagas", [], fake_fetch,
-            fonte="infojobs",
+    with _vagas_com_fixture() as (conn, c):
+        c.execute(
+            "INSERT INTO vagas (id, url, title, description, enrich_encerrada) "
+            "VALUES (1, 'http://vaga', 'Estagio em TI', 'teaser', 0)"
+        )
+        extractor = SkillExtractor(
+            {}, secoes_descarte=[], secoes_conteudo=[], contextos_descarte={}
         )
 
-    assert total == 0
-    assert "motivo=painel_da_vaga_ausente" in caplog.text
-    assert "Resumo enriquecimento infojobs: tentadas=1" in caplog.text
-    assert (
-        "Pendencias infojobs por motivo: painel_da_vaga_ausente=1"
-        in caplog.text
-    )
+        def fake_fetch(session, lock, url):
+            return {
+                CHAVE_DIAGNOSTICO: "painel_da_vaga_ausente",
+                CHAVE_DETALHES: "url_final=http://vaga; corpo=100 caracteres",
+            }, 200
+
+        conn.commit()
+        with caplog.at_level(logging.INFO, logger="enrich_outras"):
+            total = _enriquecer(
+                c, None, Lock(), extractor, {},
+                "SELECT id, url, title FROM vagas", [], fake_fetch,
+                fonte="infojobs",
+            )
+
+        assert total == 0
+        assert "motivo=painel_da_vaga_ausente" in caplog.text
+        assert "Resumo enriquecimento infojobs: tentadas=1" in caplog.text
+        assert (
+            "Pendencias infojobs por motivo: painel_da_vaga_ausente=1"
+            in caplog.text
+        )
 
 
+@contextmanager
 def _vagas_com_fixture():
-    conn = sqlite3.connect(":memory:")
-    c = conn.cursor()
-    c.execute(
-        """CREATE TABLE vagas (
-            id INTEGER PRIMARY KEY, url TEXT, title TEXT, description TEXT,
-            source TEXT DEFAULT 'vagas',
-            enrich_encerrada INTEGER DEFAULT 0, published_date TEXT)"""
-    )
-    return conn, c
+    with closing(sqlite3.connect(":memory:")) as conn:
+        c = conn.cursor()
+        c.execute(
+            """CREATE TABLE vagas (
+                id INTEGER PRIMARY KEY, url TEXT, title TEXT, description TEXT,
+                source TEXT DEFAULT 'vagas',
+                enrich_encerrada INTEGER DEFAULT 0, published_date TEXT, updated_at TEXT)"""
+        )
+        yield conn, c
 
 
 def test_query_vagas_seleciona_snippet_truncado_do_portal():
     # O card do Vagas.com traz snippet do portal (ate ~400 chars, as vezes
     # com "...") que nao batia no corte de LENGTH < 300 e nunca recebia a
     # descricao completa. Sem janela de dias: vaga antiga ainda e tentada.
-    _, c = _vagas_com_fixture()
-    truncada = "x" * 380 + "..."
-    sem_reticencias = "x" * 342
-    completa = "descricao completa " * 200
-    c.executemany(
-        "INSERT INTO vagas (id, url, title, description, enrich_encerrada, published_date) VALUES (?, ?, ?, ?, ?, ?)",
-        [
-            (1, "u1", "t", truncada, 0, "2026-08-01"),     # snippet truncado -> pendente
-            (2, "u2", "t", completa, 0, "2026-08-01"),     # completa -> nao pendente
-            (3, "u3", "t", None, 0, "2026-08-01"),         # sem desc -> pendente
-            (4, "u4", "t", truncada, 1, "2026-08-01"),     # encerrada -> fora
-            (5, "u5", "t", "curta", 0, "2026-08-01"),      # < 500 -> pendente
-            (6, "u6", "t", sem_reticencias, 0, "2026-07-01"),  # 342 chars, antiga -> pendente
-        ],
-    )
-    ids = {r[0] for r in c.execute(QUERY_VAGAS_PENDENTES, (500,))}
-    assert ids == {1, 3, 5, 6}
+    with _vagas_com_fixture() as (conn, c):
+        truncada = "x" * 380 + "..."
+        sem_reticencias = "x" * 342
+        completa = "descricao completa " * 200
+        c.executemany(
+            "INSERT INTO vagas (id, url, title, description, enrich_encerrada, published_date) VALUES (?, ?, ?, ?, ?, ?)",
+            [
+                (1, "u1", "t", truncada, 0, "2026-08-01"),     # snippet truncado -> pendente
+                (2, "u2", "t", completa, 0, "2026-08-01"),     # completa -> nao pendente
+                (3, "u3", "t", None, 0, "2026-08-01"),         # sem desc -> pendente
+                (4, "u4", "t", truncada, 1, "2026-08-01"),     # encerrada -> fora
+                (5, "u5", "t", "curta", 0, "2026-08-01"),      # < 500 -> pendente
+                (6, "u6", "t", sem_reticencias, 0, "2026-07-01"),  # 342 chars, antiga -> pendente
+            ],
+        )
+        ids = {r[0] for r in c.execute(QUERY_VAGAS_PENDENTES, (500,))}
+        assert ids == {1, 3, 5, 6}
 
 
 def test_query_geekhunter_forcado_inclui_vagas_ja_resolvidas():
-    conn, c = _vagas_com_fixture()
-    c.executemany(
-        "INSERT INTO vagas (id, url, title, description, enrich_encerrada) "
-        "VALUES (?, ?, ?, ?, ?)",
-        [
-            (1, "u1", "t1", "descricao completa", 1),
-            (2, "u2", "t2", "outra descricao", 0),
-        ],
-    )
-    c.execute("UPDATE vagas SET source = 'geekhunter'")
-    conn.commit()
+    with _vagas_com_fixture() as (conn, c):
+        c.executemany(
+            "INSERT INTO vagas (id, url, title, description, enrich_encerrada) "
+            "VALUES (?, ?, ?, ?, ?)",
+            [
+                (1, "u1", "t1", "descricao completa", 1),
+                (2, "u2", "t2", "outra descricao", 0),
+            ],
+        )
+        c.execute("UPDATE vagas SET source = 'geekhunter'")
+        conn.commit()
 
-    ids = {r[0] for r in c.execute(QUERY_GEEKHUNTER_FORCADO)}
-    assert ids == {1, 2}
+        ids = {r[0] for r in c.execute(QUERY_GEEKHUNTER_FORCADO)}
+        assert ids == {1, 2}
 
 
 def test_query_gupy_pendente_inclui_toda_vaga_ainda_nao_conferida():
-    conn, c = _vagas_com_fixture()
-    c.executemany(
-        "INSERT INTO vagas (id, url, title, description, source, enrich_encerrada) "
-        "VALUES (?, ?, ?, ?, ?, ?)",
-        [
-            (1, "https://um.gupy.io/job/1", "t1", "descricao completa", "gupy", 0),
-            (2, "https://dois.gupy.io/job/2", "t2", "x" * 499, "gupy", 0),
-            (3, "https://tres.gupy.io/job/3", "t3", "descricao completa", "gupy", 1),
-            (4, "https://fora.example/4", "t4", "descricao completa", "vagas", 0),
-            (5, "https://vaga-ja.com/vagas/5", "t5", "descricao completa", "gupy", 0),
-        ],
-    )
+    with _vagas_com_fixture() as (conn, c):
+        c.executemany(
+            "INSERT INTO vagas (id, url, title, description, source, enrich_encerrada) "
+            "VALUES (?, ?, ?, ?, ?, ?)",
+            [
+                (1, "https://um.gupy.io/job/1", "t1", "descricao completa", "gupy", 0),
+                (2, "https://dois.gupy.io/job/2", "t2", "x" * 499, "gupy", 0),
+                (3, "https://tres.gupy.io/job/3", "t3", "descricao completa", "gupy", 1),
+                (4, "https://fora.example/4", "t4", "descricao completa", "vagas", 0),
+                (5, "https://vaga-ja.com/vagas/5", "t5", "descricao completa", "gupy", 0),
+            ],
+        )
 
-    ids = {r[0] for r in c.execute(QUERY_GUPY_PENDENTES)}
+        ids = {r[0] for r in c.execute(QUERY_GUPY_PENDENTES)}
 
-    assert ids == {1, 2}
+        assert ids == {1, 2}
 
 
 def test_query_gupy_forcado_inclui_todo_o_legado():
-    conn, c = _vagas_com_fixture()
-    c.executemany(
-        "INSERT INTO vagas (id, url, title, description, source, enrich_encerrada) "
-        "VALUES (?, ?, ?, ?, ?, ?)",
-        [
-            (1, "u1", "t1", "x" * 500, "gupy", 1),
-            (2, "u2", "t2", "x" * 499, "gupy", 0),
-            (3, "u3", "t3", "descricao completa", "gupy", 1),
-        ],
-    )
+    with _vagas_com_fixture() as (conn, c):
+        c.executemany(
+            "INSERT INTO vagas (id, url, title, description, source, enrich_encerrada) "
+            "VALUES (?, ?, ?, ?, ?, ?)",
+            [
+                (1, "u1", "t1", "x" * 500, "gupy", 1),
+                (2, "u2", "t2", "x" * 499, "gupy", 0),
+                (3, "u3", "t3", "descricao completa", "gupy", 1),
+            ],
+        )
 
-    ids = {r[0] for r in c.execute(QUERY_GUPY_FORCADO)}
+        ids = {r[0] for r in c.execute(QUERY_GUPY_FORCADO)}
 
-    assert ids == {1, 2, 3}
+        assert ids == {1, 2, 3}
 
 
 def test_query_infojobs_forcado_inclui_teaser_marcado_como_resolvido():
-    conn, c = _vagas_com_fixture()
-    c.executemany(
-        "INSERT INTO vagas (id, url, title, description, source, enrich_encerrada) "
-        "VALUES (?, ?, ?, ?, ?, ?)",
-        [
-            (1, "u1", "t1", "x" * 152, "infojobs", 1),
-            (2, "u2", "t2", "texto completo " * 100, "infojobs", 1),
-        ],
-    )
-    conn.commit()
+    with _vagas_com_fixture() as (conn, c):
+        c.executemany(
+            "INSERT INTO vagas (id, url, title, description, source, enrich_encerrada) "
+            "VALUES (?, ?, ?, ?, ?, ?)",
+            [
+                (1, "u1", "t1", "x" * 152, "infojobs", 1),
+                (2, "u2", "t2", "texto completo " * 100, "infojobs", 1),
+            ],
+        )
+        conn.commit()
 
-    ids = {r[0] for r in c.execute(QUERY_INFOJOBS_FORCADO, (160,))}
-    assert ids == {1}
+        ids = {r[0] for r in c.execute(QUERY_INFOJOBS_FORCADO, (160,))}
+        assert ids == {1}
