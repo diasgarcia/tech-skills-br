@@ -2,12 +2,14 @@
 
 from pathlib import Path
 
+from api.database import init_db
 from scripts.import_csv import importar
 from scripts.report_db import generate_db_report
 
 
 def test_generate_db_report_empty_db(tmp_path: Path):
     db_file = tmp_path / "vazio.db"
+    init_db(db_path=db_file)
 
     out = generate_db_report(db_path=db_file, export_md=False)
 

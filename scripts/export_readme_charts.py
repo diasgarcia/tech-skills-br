@@ -8,23 +8,19 @@ from collections import defaultdict
 from pathlib import Path
 
 from sqlalchemy import select
-from sqlalchemy.orm import Session
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
-from api.database import init_db, make_engine
+from api.database import read_session
 from api.models import Tecnologia, Vaga, vaga_tecnologia
 from scraper.charts import ChartJob, export_readme_charts
 
 
 def load_chart_jobs(db_path: str | Path | None = None) -> list[ChartJob]:
     """Carrega apenas os campos usados pelos graficos."""
-    engine = make_engine(db_path)
-    init_db(engine)
-
-    with Session(engine) as session:
+    with read_session(db_path) as session:
         vacancy_rows = session.execute(
             select(Vaga.id, Vaga.published_date, Vaga.area)
         ).all()

@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 import csv
+from contextlib import closing
 from datetime import date
 
 import pytest
 from sqlalchemy import func, select
-from sqlalchemy.orm import Session
 
 from api.dates import parse_published_date, reference_date_from_csv
-from api.database import make_engine
+from api.database import connect_sqlite, read_session
 from api.models import Tecnologia, Vaga
 from scripts.import_csv import _canonical_company, importar
 
@@ -101,7 +101,7 @@ def test_importa_e_vincula_tecnologias(tmp_path):
     csv_path = _escrever_csv(tmp_path, [_linha()])
 
     resultado = importar(csv_path, tmp_path / "t.db")
-    with Session(make_engine(tmp_path / "t.db")) as db:
+    with read_session(tmp_path / "t.db") as db:
         vaga = db.scalar(select(Vaga))
         title = vaga.title
         published_date = vaga.published_date
@@ -149,7 +149,7 @@ def test_import_canonicaliza_empresa_confidencial(tmp_path):
     csv_path = _escrever_csv(tmp_path, [_linha(company="Empresa confidencial")])
 
     importar(csv_path, tmp_path / "t.db")
-    with Session(make_engine(tmp_path / "t.db")) as db:
+    with read_session(tmp_path / "t.db") as db:
         company = db.scalar(select(Vaga)).company
 
     assert company == "Confidencial"
@@ -159,7 +159,7 @@ def test_import_descarta_empresa_com_uma_letra(tmp_path):
     csv_path = _escrever_csv(tmp_path, [_linha(company="E")])
 
     importar(csv_path, tmp_path / "t.db")
-    with Session(make_engine(tmp_path / "t.db")) as db:
+    with read_session(tmp_path / "t.db") as db:
         company = db.scalar(select(Vaga)).company
 
     assert company is None
@@ -180,7 +180,7 @@ def test_empresa_com_uma_letra_nao_apaga_nome_valido(tmp_path):
 
     importar(csv_nome, db_path)
     importar(csv_incompleto, db_path)
-    with Session(make_engine(db_path)) as db:
+    with read_session(db_path) as db:
         company = db.scalar(select(Vaga)).company
 
     assert company == "T-Systems do Brasil"
@@ -199,13 +199,11 @@ def test_import_canonicaliza_empresa_legada_ausente_do_csv_atual(tmp_path):
         nome="vagas_20260731_180000.csv",
     )
     importar(csv_antigo, db_path)
-    with Session(make_engine(db_path)) as db:
-        vaga = db.scalar(select(Vaga).where(Vaga.external_id == "1"))
-        vaga.company = "randstad-1"
-        db.commit()
+    with closing(connect_sqlite(db_path)) as conn, conn:
+        conn.execute("UPDATE vagas SET company = ? WHERE external_id = ?", ("randstad-1", "1"))
 
     importar(csv_novo, db_path)
-    with Session(make_engine(db_path)) as db:
+    with read_session(db_path) as db:
         company = db.scalar(
             select(Vaga.company).where(Vaga.external_id == "1")
         )
@@ -252,13 +250,13 @@ def test_db_id_do_seed_sobrevive_ao_banco_recriado(tmp_path):
     importar(caminho, db2)
     ids_por_banco = []
     for db in (db1, db2):
-        with Session(make_engine(db)) as s:
+        with read_session(db) as s:
             ids = {v.external_id: v.id for v in s.scalars(select(Vaga))}
         ids_por_banco.append(ids)
     # Vaga nova (CSV da rodada, sem db_id) continua ganhando autoincrement
     # depois do maior id importado.
     importar(csv_novo, db1)
-    with Session(make_engine(db1)) as s:
+    with read_session(db1) as s:
         v3_id = s.scalar(select(Vaga).where(Vaga.external_id == "3")).id
 
     assert ids_por_banco == [{"1": 42, "2": 7}, {"1": 42, "2": 7}]
@@ -280,7 +278,7 @@ def test_reimportacao_atualiza_campos_alterados(tmp_path):
 
     importar(csv_inicial, db_path)
     importar(csv_atualizado, db_path)
-    with Session(make_engine(db_path)) as db:
+    with read_session(db_path) as db:
         title = db.scalar(select(Vaga)).title
 
     assert title == "Cientista de Dados Pleno"
@@ -303,7 +301,7 @@ def test_snippet_nao_regride_descricao_enriquecida(tmp_path):
 
     importar(csv_completo, db_path)
     importar(csv_snippet, db_path)
-    with Session(make_engine(db_path)) as s:
+    with read_session(db_path) as s:
         description = s.scalar(select(Vaga)).description
 
     assert description == desc_cheia
@@ -336,7 +334,7 @@ def test_snippet_parcial_nao_apaga_skills_da_descricao_preservada(tmp_path):
 
     importar(csv_completo, db_path)
     importar(csv_snippet, db_path)
-    with Session(make_engine(db_path)) as db:
+    with read_session(db_path) as db:
         vaga = db.scalar(select(Vaga))
         description = vaga.description
         tecnologias = sorted(t.nome for t in vaga.tecnologias)
@@ -363,7 +361,7 @@ def test_descricao_completa_nova_pode_substituir_skills_antigas(tmp_path):
 
     importar(csv_antigo, db_path)
     importar(csv_novo, db_path)
-    with Session(make_engine(db_path)) as db:
+    with read_session(db_path) as db:
         vaga = db.scalar(select(Vaga))
         description = vaga.description
         tecnologias = [t.nome for t in vaga.tecnologias]
@@ -388,7 +386,7 @@ def test_slug_nao_regride_nome_de_empresa_corrigido(tmp_path):
 
     importar(csv_nome, db_path)
     importar(csv_slug, db_path)
-    with Session(make_engine(db_path)) as s:
+    with read_session(db_path) as s:
         company = s.scalar(select(Vaga)).company
 
     assert company == "Code Group"
@@ -420,7 +418,7 @@ def test_data_relativa_resolvida_pelo_nome_do_csv(tmp_path):
     csv_path = _escrever_csv(tmp_path, [_linha(published_date="Ontem")])
 
     importar(csv_path, tmp_path / "t.db")
-    with Session(make_engine(tmp_path / "t.db")) as db:
+    with read_session(tmp_path / "t.db") as db:
         published_date = db.scalar(select(Vaga)).published_date
 
     assert published_date == date(2026, 7, 30)
@@ -442,7 +440,7 @@ def test_tecnologia_fora_do_vocabulario_e_ignorada(tmp_path):
     csv_path = _escrever_csv(tmp_path, [_linha(skills="Python, Fortran-77")])
 
     importar(csv_path, tmp_path / "t.db")
-    with Session(make_engine(tmp_path / "t.db")) as db:
+    with read_session(tmp_path / "t.db") as db:
         tecnologias = [t.nome for t in db.scalar(select(Vaga)).tecnologias]
 
     assert tecnologias == ["Python"]
@@ -452,7 +450,7 @@ def test_campos_vazios_viram_null(tmp_path):
     csv_path = _escrever_csv(tmp_path, [_linha(company="", location="", skills="")])
 
     importar(csv_path, tmp_path / "t.db")
-    with Session(make_engine(tmp_path / "t.db")) as db:
+    with read_session(tmp_path / "t.db") as db:
         vaga = db.scalar(select(Vaga))
         result = (vaga.company, vaga.location, vaga.tecnologias)
 
@@ -476,7 +474,7 @@ def test_linha_sem_skills_nao_apaga_skills_do_banco(tmp_path):
 
     importar(csv_com_skills, db_path)
     importar(csv_sem_skills, db_path)
-    with Session(make_engine(db_path)) as db:
+    with read_session(db_path) as db:
         tecnologias = sorted(t.nome for t in db.scalar(select(Vaga)).tecnologias)
 
     assert tecnologias == ["Python", "SQL"]
@@ -490,7 +488,7 @@ def test_reimportar_com_as_mesmas_skills_nao_duplica_vinculos(tmp_path):
 
     importar(csv_path, db_path)
     importar(csv_path, db_path)
-    with Session(make_engine(db_path)) as db:
+    with read_session(db_path) as db:
         tecnologias = sorted(t.nome for t in db.scalar(select(Vaga)).tecnologias)
 
     assert tecnologias == ["Python", "SQL"]
@@ -501,7 +499,7 @@ def test_referencia_explicita_vence_o_nome_do_arquivo(tmp_path):
     csv_path = _escrever_csv(tmp_path, [_linha(published_date="Ontem")])
 
     importar(csv_path, tmp_path / "t.db", referencia=date(2020, 1, 10))
-    with Session(make_engine(tmp_path / "t.db")) as db:
+    with read_session(tmp_path / "t.db") as db:
         published_date = db.scalar(select(Vaga)).published_date
 
     assert published_date == date(2020, 1, 9)
@@ -513,7 +511,7 @@ def test_referencia_explicita_funciona_sem_timestamp_no_nome(tmp_path):
     )
 
     importar(csv_path, tmp_path / "t.db", referencia=date(2026, 7, 31))
-    with Session(make_engine(tmp_path / "t.db")) as db:
+    with read_session(tmp_path / "t.db") as db:
         published_date = db.scalar(select(Vaga)).published_date
 
     assert published_date == date(2026, 7, 28)
@@ -553,7 +551,7 @@ def test_linkedin_descricao_remota_corrige_palpite_de_cidade(tmp_path):
     )
 
     importar(csv_path, tmp_path / "t.db")
-    with Session(make_engine(tmp_path / "t.db")) as db:
+    with read_session(tmp_path / "t.db") as db:
         workplace_type = db.scalar(select(Vaga)).workplace_type
 
     assert workplace_type == "Remoto"
@@ -572,7 +570,7 @@ def test_linkedin_sem_sinal_de_modalidade_mantem_o_palpite(tmp_path):
     )
 
     importar(csv_path, tmp_path / "t.db")
-    with Session(make_engine(tmp_path / "t.db")) as db:
+    with read_session(tmp_path / "t.db") as db:
         workplace_type = db.scalar(select(Vaga)).workplace_type
 
     assert workplace_type == "Presencial"
@@ -604,7 +602,7 @@ def test_csv_sem_descricao_nao_rebaixa_area_nem_apaga_descricao(tmp_path):
 
     importar(csv_completo, db_path)
     importar(csv_sem_descricao, db_path)
-    with Session(make_engine(db_path)) as db:
+    with read_session(db_path) as db:
         vaga = db.scalar(select(Vaga))
         area = vaga.area
         description = vaga.description or ""

@@ -3,8 +3,8 @@
 Uma vaga guarda os mesmos campos que o CSV do scraper produz, com duas
 diferencas:
 
-  - `id` inteiro, gerado pelo banco, porque o CSV nao tem chave propria e a API
-    precisa de uma URL estavel (`/vagas/{id}`). A identidade real da vaga
+  - `id` inteiro, gerado pelo banco para relacionar vagas e tecnologias.
+    A identidade real da vaga
     continua sendo o par (source, external_id), que e UNIQUE.
   - as tecnologias saem da string "Excel, Python, SQL" e viram uma relacao
     muitos-para-muitos, que e o que permite filtrar e contar de verdade.
@@ -85,8 +85,13 @@ class Vaga(Base):
 
     regiao: Mapped[str | None] = mapped_column(String(40))
     polo: Mapped[str | None] = mapped_column(String(60))
-    # True = anuncio encerrado na fonte (404 no enriquecimento); nao tenta mais.
+    # Legado: tentativa resolvida (sucesso OU anuncio indisponivel). Nao prova expiracao.
     enrich_encerrada: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    enrichment_status: Mapped[str | None] = mapped_column(String(24), server_default="pending", deferred=True)
+    enrichment_reason: Mapped[str | None] = mapped_column(Text, deferred=True)
+    enrichment_attempted_at: Mapped[datetime | None] = mapped_column(DateTime, deferred=True)
+    # Disponibilidade da pagina de detalhe; nao indica se aceita candidaturas.
+    advertisement_status: Mapped[str | None] = mapped_column(String(24), server_default="unknown", deferred=True)
 
     area_score: Mapped[float | None] = mapped_column(Float)
     area_matches: Mapped[str | None] = mapped_column(Text)
