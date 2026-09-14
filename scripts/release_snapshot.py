@@ -25,7 +25,7 @@ if str(PROJECT_ROOT) not in sys.path:
 from api.database import connect_sqlite, resolve_sqlite_path
 from api.snapshots import (
     ARTIFACT_NAMES, MANIFEST_NAME, assert_current_parent, build_manifest,
-    sha256, validate_database, validate_sha256, verify_manifest,
+    sha256, validate_database, validate_sha256, validate_sqlite, verify_manifest,
 )
 from scripts.export_seed import exportar_seed
 
@@ -58,8 +58,13 @@ class GitHubRelease:
         if MANIFEST_NAME in names:
             verify_manifest(directory)
         else:
-            logger.warning("Snapshot legado sem manifesto: validando SQLite e registrando hash de origem.")
-            validate_database(directory / "vagas.db")
+            logger.warning("Snapshot legado sem manifesto: validando e normalizando a copia baixada.")
+            removidas = repair_legacy_database(directory / "vagas.db")
+            if removidas:
+                logger.warning(
+                    "Snapshot legado: %d relacoes orfas removidas da copia local.",
+                    removidas,
+                )
         return sha256(directory / "vagas.db")
 
     def upload(self, directory: Path) -> None:
@@ -69,6 +74,33 @@ class GitHubRelease:
             *(str(directory / name) for name in ARTIFACT_NAMES),
             str(directory / MANIFEST_NAME), "--clobber",
         )
+
+
+def repair_legacy_database(path: Path) -> int:
+    """Remove somente associacoes impossiveis de um snapshot sem manifesto."""
+    validate_sqlite(path)
+    with closing(connect_sqlite(path)) as conn:
+        violations = conn.execute("PRAGMA foreign_key_check").fetchall()
+        unsupported = [row for row in violations if row[0] != "vaga_tecnologia"]
+        if unsupported:
+            raise ValueError("Snapshot legado contem relacoes orfas fora de vaga_tecnologia.")
+        if not violations:
+            return 0
+        cursor = conn.execute(
+            """
+            DELETE FROM vaga_tecnologia
+            WHERE NOT EXISTS (
+                SELECT 1 FROM vagas WHERE vagas.id = vaga_tecnologia.vaga_id
+            ) OR NOT EXISTS (
+                SELECT 1 FROM tecnologias
+                WHERE tecnologias.id = vaga_tecnologia.tecnologia_id
+            )
+            """
+        )
+        conn.commit()
+        removed = cursor.rowcount
+    validate_database(path)
+    return removed
 
 
 def _atomic_copy(source: Path, destination: Path) -> None:

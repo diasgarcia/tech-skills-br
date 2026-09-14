@@ -139,6 +139,36 @@ def test_download_legado_exige_opt_in_e_registra_hash(tmp_path, remote_snapshot)
     assert json.loads(state.read_text())["parent_sha256"] == sha256(local)
 
 
+def test_download_legado_remove_somente_associacoes_orfas(tmp_path, remote_snapshot):
+    with closing(sqlite3.connect(remote_snapshot / "vagas.db")) as db:
+        tecnologia_id = db.execute(
+            "INSERT INTO tecnologias (nome, grupo) VALUES ('Python', 'linguagens')"
+        ).lastrowid
+        db.execute(
+            "INSERT INTO vaga_tecnologia (vaga_id, tecnologia_id) VALUES (?, ?)",
+            (999, tecnologia_id),
+        )
+        db.commit()
+    client = FakeGitHubRelease(remote_snapshot)
+    del client.assets[MANIFEST_NAME]
+    del client.assets["vagas.csv"]
+    local = tmp_path / "local.db"
+    state = tmp_path / "state.json"
+
+    release_snapshot.download_snapshot(client, local, state, allow_legacy=True)
+
+    with closing(sqlite3.connect(local)) as db:
+        violations = db.execute("PRAGMA foreign_key_check").fetchall()
+        vagas = db.execute("SELECT COUNT(*) FROM vagas").fetchone()[0]
+        tecnologias = db.execute("SELECT COUNT(*) FROM tecnologias").fetchone()[0]
+        associacoes = db.execute("SELECT COUNT(*) FROM vaga_tecnologia").fetchone()[0]
+    assert violations == []
+    assert vagas == 1
+    assert tecnologias == 1
+    assert associacoes == 0
+    assert json.loads(state.read_text())["parent_sha256"] == sha256(local)
+
+
 def test_release_com_manifesto_nao_aceita_artefato_faltante_com_opt_in(tmp_path, remote_snapshot):
     client = FakeGitHubRelease(remote_snapshot)
     del client.assets["vagas.csv"]
