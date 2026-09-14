@@ -30,6 +30,7 @@ data/
 
 # Saidas da coleta (dados gerados, nao versionar)
 output/
+/output-teste-rapido/
 *.csv
 *.xlsx
 
@@ -54,6 +55,7 @@ PLANO*.md
 
 # Exportacao do Kaggle (gerada em cada rodada; o dataset fica no Kaggle)
 /kaggle/
+/_site/
 
 !.env.example
 

@@ -19,12 +19,21 @@ jobs:
       with:
         python-version: "3.12"
         cache: 'pip'
+        cache-dependency-path: |
+          requirements.txt
+          pyproject.toml
+
+    - name: Configurar Node.js para testes da interface
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
 
     - name: Instalar dependencias
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt pandas pyarrow
+        pip install -e '.[dev,export]'
 
     - name: Executar suite de testes
       run: |
+        ruff check .
         pytest -v
