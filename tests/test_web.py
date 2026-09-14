@@ -1,8 +1,11 @@
 """Testes da pagina estatica publicada no GitHub Pages."""
 
 from pathlib import Path
+import shutil
+import subprocess
 
 from bs4 import BeautifulSoup
+import pytest
 
 
 INDEX_PATH = Path(__file__).resolve().parents[1] / ".github" / "web" / "index.html"
@@ -25,7 +28,7 @@ def test_footer_exibe_links_do_github_e_kaggle():
 
 
 def test_footer_mobile_oculta_rotulos_e_mantem_icones():
-    content = INDEX_PATH.read_text(encoding="utf-8")
+    content = INDEX_PATH.read_text(encoding="utf-8") + INDEX_PATH.with_name("styles.css").read_text(encoding="utf-8")
 
     assert ".footer-link-label { display: none; }" in content
     assert "padding: 3px;\n        color: var(--text-muted);" in content
@@ -33,8 +36,20 @@ def test_footer_mobile_oculta_rotulos_e_mantem_icones():
 
 
 def test_links_do_footer_usam_o_mesmo_destaque_azul():
-    content = INDEX_PATH.read_text(encoding="utf-8")
+    content = INDEX_PATH.with_name("styles.css").read_text(encoding="utf-8")
 
     assert ".footer-link:focus-visible" in content
     assert "color: var(--accent);" in content
     assert ".footer-link-kaggle:hover" not in content
+
+
+@pytest.mark.skipif(shutil.which("node") is None, reason="Node.js necessário para os testes offline do DOM")
+def test_renderizacao_interacao_e_recuperacao_sem_rede():
+    script = Path(__file__).with_name("web_runtime.cjs")
+
+    result = subprocess.run(
+        [shutil.which("node"), "--test", str(script)],
+        capture_output=True, text=True, encoding="utf-8", timeout=30,
+    )
+
+    assert result.returncode == 0, result.stdout + result.stderr

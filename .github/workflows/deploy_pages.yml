@@ -19,7 +19,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: 'pages'
+  group: vagas-snapshot-latest
   cancel-in-progress: false
 
 jobs:
@@ -34,6 +34,15 @@ jobs:
       - name: 1. Baixar repositorio
         uses: actions/checkout@v4
 
+      - name: Configurar Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            pyproject.toml
+
       - name: 2. Configurar GitHub Pages
         uses: actions/configure-pages@v5
 
@@ -41,14 +50,12 @@ jobs:
         run: |
           # Os JSONs nao sao commitados (#24): baixa o banco do release
           # e gera os JSONs antes de montar o _site.
-          gh release download latest --pattern 'vagas.db' --dir data --clobber
           pip install -r requirements.txt
+          python scripts/release_snapshot.py download --allow-legacy
           python scripts/export_pages_data.py
-          mkdir -p _site/api _site/assets
-          cp .github/web/index.html _site/
-          cp api/web/*.json _site/api/
+          python scripts/build_pages.py
           # Este deploy atualiza o site e a API, mas preserva os graficos.
-          # Os SVGs sao recalculados apenas na rodada 3 da coleta diaria.
+          # Os SVGs sao recalculados na rodada 3 ou nas coletas manuais.
           for arquivo in vagas-habilidades-30d.svg areas-habilidades.svg; do
             curl --fail --silent --show-error --location --retry 3 \
               "https://diasgarcia.github.io/tech-skills-br/assets/${arquivo}" \
