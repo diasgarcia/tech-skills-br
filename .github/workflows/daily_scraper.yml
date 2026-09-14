@@ -31,7 +31,7 @@ on:
         type: string
 
 concurrency:
-  group: coleta-diaria
+  group: vagas-snapshot-latest
   cancel-in-progress: false
 
 jobs:
@@ -87,7 +87,7 @@ jobs:
 
     - name: 6. Carregar historico, consolidar novas vagas e atualizar snapshot
       run: |
-        gh release download latest --pattern 'vagas.db' --dir data --clobber
+        python scripts/release_snapshot.py download --allow-legacy
         # Importa todos os CSVs da rodada, do mais antigo para o mais novo.
         OUT_RODADA=""
         for csv in $(ls -tr output/vagas_*.csv); do
@@ -99,8 +99,8 @@ jobs:
         echo "NOVAS=${NOVAS:-0}" >> "$GITHUB_ENV"
         echo "ATUALIZADAS=${ATUALIZADAS:-0}" >> "$GITHUB_ENV"
         HASH_ANTES=$(sha256sum data/vagas.db | cut -d' ' -f1)
-        python -u scripts/enrich_outras_fontes.py 2>&1 | tee /tmp/enrich.log
-        python -u scripts/enrich_descriptions.py 2>&1 | tee -a /tmp/enrich.log
+        python -u scripts/enrich_outras_fontes.py --summary-json data/enrich-outras.json 2>&1 | tee /tmp/enrich.log
+        python -u scripts/enrich_descriptions.py --summary-json data/enrich-linkedin.json 2>&1 | tee -a /tmp/enrich.log
         {
           echo "## Diagnostico do enriquecimento"
           echo
@@ -112,7 +112,7 @@ jobs:
         # A partir daqui o banco nao muda: vagas.db + vagas.csv (release) e
         # o parquet (Kaggle) precisam ser o MESMO snapshot da rodada.
         python scripts/export_seed.py
-        gh release upload latest data/vagas.db seed/vagas.csv --clobber
+        python scripts/release_snapshot.py publish --allow-legacy
         ORIGEM_INPUT="$ORIGEM"
         RODADA_INPUT="$RODADA"
         if [ "$ORIGEM_INPUT" = "cron" ] && { [ "$RODADA_INPUT" = "1" ] || [ "$RODADA_INPUT" = "2" ] || [ "$RODADA_INPUT" = "3" ]; }; then
@@ -142,7 +142,7 @@ jobs:
         HASH_DEPOIS=$(sha256sum data/vagas.db | cut -d' ' -f1)
         [ "$HASH_ANTES" != "$HASH_DEPOIS" ] && MUDOU=1
         if [ "$MUDOU" = "1" ]; then
-          pip install pandas pyarrow kagglehub kaggle
+          pip install -e '.[export,publish]'
           # A release e o estado operacional. O Kaggle e uma replica: se
           # ele nao confirmar a versao depois da espera do script, a coleta
           # continua e deixa um aviso visivel para retomar a publicacao.
@@ -164,7 +164,7 @@ jobs:
         python scripts/resumo_commit.py \
           --brutas "$BRUTAS" --elegiveis "$ELEGIVEIS" \
           --novas "$NOVAS" --atualizadas "$ATUALIZADAS" \
-          --log /tmp/enrich.log > /tmp/corpo_commit.txt
+          --summary-json data/enrich-outras.json --summary-json data/enrich-linkedin.json > /tmp/corpo_commit.txt
       env:
         PYTHONPATH: .
         KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
@@ -176,7 +176,7 @@ jobs:
       if: env.EXECUCAO == 'cron' && env.RODADA_EXECUCAO == '3' && env.KAGGLE_PRONTO == '1'
       continue-on-error: true
       run: |
-        python -m pip install --upgrade kaggle
+        python -m pip install -e '.[publish]'
         kaggle kernels push --path notebooks/kaggle --timeout 900
         for tentativa in {1..90}; do
           ESTADO=$(kaggle kernels status rafaeldiasgarcia/tech-skills-brasil-analise-diaria 2>&1)
@@ -252,9 +252,7 @@ jobs:
 
     - name: 9. Montar artefato do GitHub Pages
       run: |
-        mkdir -p _site/api _site/assets
-        cp .github/web/index.html _site/
-        cp api/web/*.json _site/api/
+        python scripts/build_pages.py
         if [ "$ATUALIZAR_RESUMOS" = "1" ]; then
           python scripts/export_readme_charts.py --output-dir _site/assets
         else
@@ -271,6 +269,18 @@ jobs:
       uses: actions/upload-pages-artifact@v3
       with:
         path: '_site'
+
+    - name: Preservar dados para recuperacao em caso de falha
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: recuperacao-coleta-${{ github.run_id }}
+        path: |
+          data/
+          output/*.csv
+          seed/vagas.csv
+        retention-days: 7
+        if-no-files-found: warn
 
   deploy-pages:
     # Deploy interno: o push do bot usa GITHUB_TOKEN e NAO dispara o

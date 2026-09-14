@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: enriquecimento-manual
+  group: vagas-snapshot-latest
   cancel-in-progress: false
 
 jobs:
@@ -41,12 +41,12 @@ jobs:
 
     - name: 4. Carregar historico no SQLite
       run: |
-        gh release download latest --pattern 'vagas.db' --dir data --clobber
+        python scripts/release_snapshot.py download --allow-legacy
 
     - name: 5. Enriquecer descricoes pendentes
       run: |
-        python -u scripts/enrich_outras_fontes.py 2>&1 | tee /tmp/enrich.log
-        python -u scripts/enrich_descriptions.py 2>&1 | tee -a /tmp/enrich.log
+        python -u scripts/enrich_outras_fontes.py --summary-json data/enrich-outras.json 2>&1 | tee /tmp/enrich.log
+        python -u scripts/enrich_descriptions.py --summary-json data/enrich-linkedin.json 2>&1 | tee -a /tmp/enrich.log
         {
           echo "## Diagnostico do enriquecimento"
           echo
@@ -68,8 +68,8 @@ jobs:
         python scripts/export_seed.py
         python scripts/report_db.py
         python scripts/export_pages_data.py
-        python scripts/resumo_commit.py --log /tmp/enrich.log > /tmp/corpo_commit.txt
-        gh release upload latest data/vagas.db seed/vagas.csv --clobber
+        python scripts/resumo_commit.py --summary-json data/enrich-outras.json --summary-json data/enrich-linkedin.json > /tmp/corpo_commit.txt
+        python scripts/release_snapshot.py publish --allow-legacy
       env:
         PYTHONPATH: .
 
@@ -105,15 +105,22 @@ jobs:
 
     - name: 9. Montar artefato do GitHub Pages
       run: |
-        mkdir -p _site/api _site/assets
-        cp .github/web/index.html _site/
-        cp api/web/*.json _site/api/
+        python scripts/build_pages.py
         python scripts/export_readme_charts.py --output-dir _site/assets
 
     - name: 10. Preparar artefato do GitHub Pages
       uses: actions/upload-pages-artifact@v3
       with:
         path: '_site'
+
+    - name: Preservar dados para recuperacao em caso de falha
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: recuperacao-enriquecimento-${{ github.run_id }}
+        path: data/
+        retention-days: 7
+        if-no-files-found: warn
 
   deploy-pages:
     # O push do bot usa GITHUB_TOKEN e nao dispara o deploy_pages.yml.
