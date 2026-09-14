@@ -23,10 +23,15 @@ def validate_sha256(value: str) -> str:
     return value
 
 
-def validate_database(path: Path) -> None:
+def validate_sqlite(path: Path) -> None:
     with closing(connect_sqlite(path, read_only=True)) as conn:
         if conn.execute("PRAGMA quick_check").fetchall() != [("ok",)]:
             raise ValueError("Snapshot SQLite com falha de integridade.")
+
+
+def validate_database(path: Path) -> None:
+    validate_sqlite(path)
+    with closing(connect_sqlite(path, read_only=True)) as conn:
         if conn.execute("PRAGMA foreign_key_check").fetchall():
             raise ValueError("Snapshot SQLite com relacoes orfas.")
 
