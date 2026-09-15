@@ -1,4 +1,4 @@
-name: Coleta Diaria de Vagas (projeto)
+name: Coleta Diaria de Vagas
 
 on:
   # Sem crons nativos: o agendador do GitHub atrasava/derrubava as runs

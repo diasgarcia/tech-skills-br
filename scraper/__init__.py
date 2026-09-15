@@ -1,4 +1,4 @@
-"""tech-skills-br -- Mapeamento de Skills em Tecnologia no Brasil (projeto)."""
+"""tech-skills-br -- Mapeamento de Skills em Tecnologia no Brasil."""
 
 __version__ = "1.0.0"
 

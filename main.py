@@ -1,4 +1,4 @@
-"""CLI do tech-skills-br - Mapeamento de Skills em Tecnologia no Brasil (projeto).
+"""CLI do tech-skills-br - Mapeamento de Skills em Tecnologia no Brasil.
 
 Exemplos:
     python main.py                          # coleta padrao gratuita (Gupy, LinkedIn, etc.)
@@ -23,7 +23,7 @@ from scraper.sources import AVAILABLE_SOURCES, DEFAULT_SOURCES
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="tech-skills-br",
-        description="Mineracao e mapeamento de habilidades tecnicas citadas em anuncios de vagas de tecnologia no Brasil (projeto).",
+        description="Mineracao e mapeamento de habilidades tecnicas citadas em anuncios de vagas de tecnologia no Brasil.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
