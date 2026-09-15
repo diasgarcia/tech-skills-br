@@ -18,7 +18,7 @@ Separei as fontes com cota da execução padrão. Adicionei a opção --start-pa
 
 ### 23/08/2026
 
-Criei o exportador de snapshot versionado. A base consolidada chegou a 1540 vagas. Atualizei os metadados da API para a projeto de dados. Reescrevi o README com foco público. Criei o manual de uso detalhado. Criei a especificação técnica da arquitetura.
+Criei o exportador de snapshot versionado. A base consolidada chegou a 1540 vagas. Atualizei os metadados da API e reescrevi o README. Criei o manual de uso detalhado. Criei a especificação técnica da arquitetura.
 
 ---
 

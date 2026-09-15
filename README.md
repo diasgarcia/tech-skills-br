@@ -14,12 +14,6 @@ O projeto acompanha anúncios de estágio, aprendiz, trainee e nível júnior. A
 
 Os gráficos são gerados com o banco consolidado. Eles mudam automaticamente quando uma área ou habilidade altera sua posição no ranking.
 
-## Objetivo do projeto
-
-> O projeto organiza dados sobre habilidades citadas em anúncios de vagas de entrada em tecnologia no Brasil.
-
-Os dados permitem analisar a frequência de menções nos anúncios coletados.
-
 ## Como os dados são produzidos
 
 1. A coleta localiza vagas de entrada em nove portais.
@@ -54,7 +48,5 @@ O guia de [execução rápida](docs/execucao-rapida.md) contém os comandos nece
 Para contribuir com o código, consulte a [organização dos módulos e seus contratos](docs/arquitetura.md).
 
 ## Licença
-
-Este projeto de dados é desenvolvido no instituição responsável. A professora responsável pelo projeto orienta o projeto.
 
 O código é distribuído sob a [licença MIT](LICENSE).

@@ -4,24 +4,20 @@ message: >-
   abaixo.
 title: tech-skills-br - Mapeamento de Skills em Tecnologia no Brasil
 abstract: >-
-  Projeto de dados (projeto de dados) que
-  mapeia as habilidades técnicas citadas em anúncios de vagas de nível de
-  entrada no mercado de tecnologia brasileiro: júnior, estágio,
-  trainee e aprendiz. A coleta multi-fonte alimenta um pipeline que
-  extrai as habilidades por taxonomia curada, deduplica os anúncios e
-  consolida a base em um dashboard público. Os dados são confrontados
-  com as referências públicas e os referenciais da
-  referências técnicas.
+  Software de coleta e organização de anúncios de vagas de nível de entrada
+  no mercado de tecnologia brasileiro: júnior, estágio, trainee e aprendiz.
+  A coleta multi-fonte alimenta um pipeline que extrai as habilidades por
+  taxonomia curada, deduplica os anúncios e consolida a base em um dashboard
+  público.
 authors:
   - family-names: Dias Garcia
     given-names: Rafael
-    email: 
 keywords:
   - habilidades técnicas
   - vagas de nível de entrada
   - mercado de trabalho brasileiro
-  - projeto de dados
-  - projeto
+  - dados abertos
+  - mineração de dados
   - ciência da computação
 license: MIT
 type: software
