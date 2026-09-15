@@ -56,8 +56,8 @@ METADATA = {
         "jobs and career",
         "science and technology",
         "brazil",
-        "education",
-        "research",
+        "open data",
+        "data mining",
     ],
     "expectedUpdateFrequency": "daily",
     "userSpecifiedSources": (
