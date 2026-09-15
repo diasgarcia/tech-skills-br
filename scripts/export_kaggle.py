@@ -47,8 +47,7 @@ METADATA = {
         "cobre os niveis junior, estagio, trainee e aprendiz. A coleta usa "
         "nove portais publicos brasileiros. Cada registro tem titulo, "
         "empresa, local, modalidade, senioridade, area e tecnologias. A base "
-        "e atualizada tres vezes por dia. Ela apoia o projeto projeto "
-        "'Mapeamento de Skills em Tecnologia no Brasil'.\n\n"
+        "e atualizada tres vezes por dia.\n\n"
         "Codigo e metodologia: https://github.com/diasgarcia/tech-skills-br  \n\n"
         "Dashboard: https://diasgarcia.github.io/tech-skills-br/"
     ),

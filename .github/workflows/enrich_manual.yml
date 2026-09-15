@@ -1,7 +1,7 @@
-name: Enriquecimento Manual de Vagas (projeto)
+name: Enriquecimento Manual de Vagas
 
 on:
-  # Roda so quando o responsável dispara pelo botao "Run workflow".
+  # Roda so quando o responsavel dispara pelo botao "Run workflow".
   # Usado para testar/limpar pendentes de descricao sem esperar a coleta
   # diaria: busca descricoes vazias, sinteticas ou truncadas (500 chars)
   # e re-extrai skills e areas.
