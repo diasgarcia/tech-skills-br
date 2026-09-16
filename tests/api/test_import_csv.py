@@ -576,6 +576,28 @@ def test_linkedin_sem_sinal_de_modalidade_mantem_o_palpite(tmp_path):
     assert workplace_type == "Presencial"
 
 
+def test_linkedin_suporte_remoto_nao_define_modalidade(tmp_path):
+    csv_path = _escrever_csv(
+        tmp_path,
+        [_linha(
+            source="linkedin",
+            workplace_type="Remoto",
+            location="Betim, MG",
+            title="Técnico de Suporte de TI",
+            description=(
+                "Atendimento e suporte técnico presencial e remoto. "
+                "Modalidade: Presencial."
+            ),
+        )],
+    )
+
+    importar(csv_path, tmp_path / "t.db")
+    with read_session(tmp_path / "t.db") as db:
+        workplace_type = db.scalar(select(Vaga)).workplace_type
+
+    assert workplace_type == "Presencial"
+
+
 def test_csv_sem_descricao_nao_rebaixa_area_nem_apaga_descricao(tmp_path):
     """O pipeline roda com --no-enrich: a linha da rodada vem com area de
     fallback e descricao vazia. Nao pode degradar a vaga ja classificada."""

@@ -87,8 +87,39 @@ def test_ranking_lista_vazia():
         ("", "São Paulo, SP", "Dev Júnior", "Atuação 100% presencial no escritório", "Presencial"),
         ("", "Curitiba, PR", "Estágio TI", "Modelo de trabalho híbrido com 2 dias presenciais", "Híbrido"),
         ("", "Recife, PE", "Dev Jr", "Vaga 100% Home Office", "Remoto"),
+        ("", "Brasil", "Junior Software Engineer (Remote)", "", "Remoto"),
         ("", "Goiânia, GO", "Dev Python Junior", "Modalidade 100% remota - trabalhe de qualquer lugar", "Remoto"),
         ("", "Goiânia, GO", "Dev Python Junior", "Time trabalhando remotamente em cargos globais", "Remoto"),
+        (
+            "", "Florianópolis, SC", "Estagiário de TI",
+            "Atuação em regime presencial. Conhecimento em ferramentas de suporte remoto.",
+            "Presencial",
+        ),
+        (
+            "", "Betim, MG", "Técnico de Suporte de TI",
+            "Atendimento e suporte técnico presencial e remoto. Modalidade: Presencial.",
+            "Presencial",
+        ),
+        (
+            "", "Rio de Janeiro e Região", "Analista de Suporte de T.I. Jr.",
+            "Prestar suporte técnico de Nível 2 presencial e remoto aos colaboradores.",
+            "Presencial",
+        ),
+        (
+            "", "São Paulo, SP", "Analista de Sistemas",
+            "Modelo de trabalho presencial e remoto, com dois dias no escritório.",
+            "Híbrido",
+        ),
+        (
+            "", "São Paulo, SP", "Analista de Suporte - Presencial",
+            "Texto institucional sobre o modelo híbrido da empresa.",
+            "Presencial",
+        ),
+        (
+            "", "São Paulo, SP", "Desenvolvedor Júnior - Remoto",
+            "O escritório também trabalha de forma híbrida.",
+            "Remoto",
+        ),
         ("", "", "Dev Jr", "", "Não informado"),
     ],
 )
