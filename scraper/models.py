@@ -58,11 +58,28 @@ _WORKPLACE_MAP = {
 _HIBRIDO_RE = re.compile(
     r"\b(hibrid[oa]|regime hibrido|modelo hibrido|trabalho hibrido|formato hibrido|escala hibrida|dias presenciais)\b"
 )
+_WORKPLACE_DECLARATION_RE = re.compile(
+    r"\b(?:modalidade|regime|modelo|formato|forma|modo|local|trabalho|atuacao|vaga)"
+    r"(?: de (?:trabalho|atuacao))?\s+(hibrid[oa]|remot[oa]|presencial)\b"
+)
+_MIXED_WORKPLACE_RE = re.compile(
+    r"\b(?:presencial\s+(?:e\s+)?remot[oa]"
+    r"|remot[oa]\s+(?:e\s+)?presencial)\b"
+)
+_OPERATIONAL_REMOTE_RE = re.compile(
+    r"\b(?:(?:acesso|atendimento|atender|chamados?|clientes?|implantacao|instalacao|"
+    r"manutencao|monitoramento|suporte|telefone|treinamentos?|usuarios?)"
+    r"(?:\s+[a-z0-9]+){0,12}\s+"
+    r"(?:presencial\s+(?:(?:e|ou)\s+)?remot[oa]"
+    r"|remot[oa]\s+(?:(?:e|ou)\s+)?presencial)"
+    r"|(?:ferramentas? de )?(?:suporte|acesso|atendimento|assistencia|monitoramento)"
+    r"(?: tecnico)? remot[oa])\b"
+)
 _REMOTO_RE = re.compile(
-    r"\b(100 remoto|100 remota|totalmente remoto|totalmente remota|remoto|remota|home office|trabalho remoto|modelo remoto|regime remoto|formato remoto|vaga remota|atuacao remota|teletrabalho|remotamente)\b"
+    r"\b(100 remoto|100 remota|totalmente remoto|totalmente remota|remoto|remota|remote|home office|trabalho remoto|modelo remoto|regime remoto|formato remoto|vaga remota|atuacao remota|teletrabalho|remotamente)\b"
 )
 _PRESENCIAL_RE = re.compile(
-    r"\b(100% presencial|totalmente presencial|presencial|regime presencial|modelo presencial|trabalho presencial|formato presencial|atuacao presencial|in loco)\b"
+    r"\b(100 presencial|totalmente presencial|presencial|regime presencial|modelo presencial|trabalho presencial|formato presencial|atuacao presencial|in loco)\b"
 )
 
 
@@ -89,19 +106,49 @@ def infer_workplace(
     description: str | None = None,
     source: str | None = None,
 ) -> str:
-    """Infere a modalidade combinando rotulo explicito, localizacao, titulo, descricao e fonte."""
+    """Infere a modalidade usando rotulo, titulo, descricao e localizacao."""
     norm = normalize_workplace(explicit)
     if norm != NAO_INFORMADO:
         return norm
 
-    full_text = normalize(f"{title or ''} {description or ''}")
+    title_text = normalize(title)
+    if title_text:
+        if _HIBRIDO_RE.search(title_text):
+            return HIBRIDO
+        title_remoto = _REMOTO_RE.search(title_text)
+        title_presencial = _PRESENCIAL_RE.search(title_text)
+        if title_remoto and not title_presencial:
+            return REMOTO
+        if title_presencial and not title_remoto:
+            return PRESENCIAL
+
+    description_text = _OPERATIONAL_REMOTE_RE.sub(" ", normalize(description))
+    full_text = f"{title_text} {description_text}".strip()
     if full_text:
-        # Hibrido tem prioridade: muitas vagas hibridas citam dias presenciais.
+        # Hibrido mantem a prioridade historica do projeto: seus anuncios
+        # frequentemente tambem citam dias ou atividades presenciais.
         if _HIBRIDO_RE.search(full_text):
             return HIBRIDO
-        if _REMOTO_RE.search(full_text):
+
+        # Fora de atividades como suporte/atendimento, a combinacao dos dois
+        # modos descreve um regime misto.
+        if _MIXED_WORKPLACE_RE.search(full_text):
+            return HIBRIDO
+
+        declaration = _WORKPLACE_DECLARATION_RE.search(full_text)
+        if declaration:
+            declared = declaration.group(1)
+            if declared.startswith("hibrid"):
+                return HIBRIDO
+            if declared.startswith("remot"):
+                return REMOTO
+            return PRESENCIAL
+
+        remoto = _REMOTO_RE.search(full_text)
+        presencial = _PRESENCIAL_RE.search(full_text)
+        if remoto and not presencial:
             return REMOTO
-        if _PRESENCIAL_RE.search(full_text):
+        if presencial and not remoto:
             return PRESENCIAL
 
     loc_norm = normalize(location)
@@ -113,8 +160,6 @@ def infer_workplace(
         if "cidades proximas" in loc_norm or "apenas candidaturas" in loc_norm:
             return PRESENCIAL
         if loc_norm in ("brasil", "brazil", "nacional"):
-            if source == "linkedin":
-                return REMOTO
             return NAO_INFORMADO
         return PRESENCIAL
 
