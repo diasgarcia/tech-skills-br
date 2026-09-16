@@ -36,6 +36,7 @@ from ..models import (
     REMOTO,
     Job,
     normalize,
+    normalize_workplace,
 )
 from .base import JobSource
 
@@ -135,6 +136,7 @@ class LinkedInSource(JobSource):
 
         location = self._text(card.select_one("span.job-search-card__location"))
         card_text = self._text(card)
+        workplace_label = self._workplace_label(card)
 
         return Job(
             source=self.name,
@@ -144,25 +146,41 @@ class LinkedInSource(JobSource):
             url=url,
             description="",  # o card da busca nao traz a descricao
             location=location,
-            workplace_type=self._modalidade(location, card_text, title),
+            workplace_type=self._modalidade(
+                location,
+                card_text,
+                title,
+                workplace_label=workplace_label,
+            ),
             published_date=publicada[:10],
             search_term=term,
         )
 
     @staticmethod
-    def _modalidade(location: str, card_text: str = "", title: str = "") -> str:
+    def _modalidade(
+        location: str,
+        card_text: str = "",
+        title: str = "",
+        *,
+        workplace_label: str = "",
+    ) -> str:
         """Infere a modalidade com base no padrao do LinkedIn.
 
+        - Campo de modalidade do card -> rotulo declarado pelo anunciante
         - Card/Local/Titulo contendo 'Híbrido'/'Hybrid' -> Híbrido
         - Card/Local/Titulo contendo 'Remoto'/'Remote' -> Remoto
-        - 'Brasil' / 'Brazil' / 'Nacional' -> Remoto (vagas de escopo nacional)
+        - 'Brasil' / 'Brazil' / 'Nacional' -> Não informado
         - Cidade física ('Rio de Janeiro e Região', 'Curitiba, PR') -> Presencial
         - Vazio -> Não informado
 
-        O titulo entra na analise porque o card da busca nao informa modalidade,
-        e anuncios remotos costumam dizer isso no titulo ("Trabalho Remoto")
-        enquanto a localizacao do card lista uma cidade qualquer.
+        A modalidade declarada no card tem prioridade sobre titulo, descricao
+        resumida e localizacao. O titulo ainda cobre anuncios que escrevem
+        "Trabalho Remoto" sem preencher o campo padrao.
         """
+        declared = normalize_workplace(workplace_label)
+        if declared != NAO_INFORMADO:
+            return declared
+
         full_text = normalize(f"{location} {card_text} {title}")
         if not full_text:
             return NAO_INFORMADO
@@ -172,10 +190,24 @@ class LinkedInSource(JobSource):
             return REMOTO
         loc_norm = normalize(location)
         if loc_norm in ("brasil", "brazil", "nacional"):
-            return REMOTO
+            return NAO_INFORMADO
         if loc_norm:
             return PRESENCIAL
         return NAO_INFORMADO
+
+    @classmethod
+    def _workplace_label(cls, card) -> str:
+        """Le o rotulo de modalidade que o LinkedIn inclui no card, quando ha."""
+        selectors = (
+            ".job-search-card__workplace-type",
+            ".job-search-card__metadata-item",
+            "[data-test*='workplace']",
+        )
+        for node in card.select(", ".join(selectors)):
+            label = cls._text(node)
+            if normalize_workplace(label) != NAO_INFORMADO:
+                return label
+        return ""
 
 
 
