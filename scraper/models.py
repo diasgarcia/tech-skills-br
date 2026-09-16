@@ -166,6 +166,25 @@ def infer_workplace(
     return NAO_INFORMADO
 
 
+def infer_linkedin_workplace(
+    current: str | None,
+    declared: bool,
+    *,
+    location: str | None = None,
+    title: str | None = None,
+    description: str | None = None,
+) -> str:
+    """Preserva o campo oficial do LinkedIn e usa o texto como fallback."""
+    explicit = current if declared else None
+    return infer_workplace(
+        explicit,
+        location=location,
+        title=title,
+        description=description,
+        source="linkedin",
+    )
+
+
 
 
 @dataclass
@@ -180,6 +199,7 @@ class Job:
     description: str = ""
     location: str = ""
     workplace_type: str = ""
+    workplace_declared: bool = False
     published_date: str = ""
     search_term: str = ""
     area: str = ""

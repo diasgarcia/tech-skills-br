@@ -74,6 +74,10 @@ class JobCheckpoint:
                     ):
                         raise ValueError(f"skills invalidas em {reader.line_num}")
                     row["area_score"] = float(row["area_score"])
+                    row["workplace_declared"] = (
+                        row["workplace_declared"].strip().lower()
+                        in {"1", "true", "sim", "yes"}
+                    )
                     job = Job(**row)
                     # A descricao ja e texto plano: nao remover tags literais
                     # ou decodificar entidades pela segunda vez ao retomar.

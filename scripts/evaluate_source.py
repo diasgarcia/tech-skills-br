@@ -55,6 +55,10 @@ def _ler_jobs(csv_path: Path) -> list:
                     description=linha.get("description") or "",
                     location=linha.get("location") or "",
                     workplace_type=linha.get("workplace_type") or "",
+                    workplace_declared=(
+                        (linha.get("workplace_declared") or "").strip().lower()
+                        in {"1", "true", "sim", "yes"}
+                    ),
                     published_date=linha.get("published_date") or "",
                     search_term=linha.get("search_term") or "",
                     area=linha.get("area") or "",

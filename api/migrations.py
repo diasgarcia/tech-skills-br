@@ -4,7 +4,7 @@ from contextlib import closing
 
 from api.database import connect_sqlite
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 ADDITIONAL_COLUMNS = {
     "regiao": "VARCHAR(40)",
     "polo": "VARCHAR(60)",
@@ -13,6 +13,7 @@ ADDITIONAL_COLUMNS = {
     "enrichment_reason": "TEXT",
     "enrichment_attempted_at": "DATETIME",
     "advertisement_status": "VARCHAR(24) DEFAULT 'unknown'",
+    "workplace_declared": "INTEGER NOT NULL DEFAULT 0",
 }
 
 

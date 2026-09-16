@@ -504,6 +504,7 @@ def test_linkedin_parse_mapeia_campos():
     assert job.location == "São Paulo, São Paulo, Brazil"
     assert job.published_date == "2026-08-01"
     assert job.search_term == "desenvolvedor junior"
+    assert job.workplace_declared is False
 
 
 def test_linkedin_url_perde_os_parametros_de_rastreio():
@@ -590,6 +591,7 @@ def test_linkedin_le_rotulo_padrao_do_card():
     job = source._parse_page(html, "x")[0]
 
     assert job.workplace_type == "Remoto"
+    assert job.workplace_declared is True
 
 
 def test_linkedin_pagina_vazia():

@@ -17,6 +17,7 @@ def test_query_pendentes_ignora_a_janela_de_dias():
             """CREATE TABLE vagas (
                 id INTEGER PRIMARY KEY, source TEXT, external_id TEXT,
                 title TEXT, url TEXT, location TEXT, workplace_type TEXT,
+                workplace_declared INTEGER NOT NULL DEFAULT 0,
                 description TEXT, enrich_encerrada INTEGER DEFAULT 0,
                 published_date TEXT)"""
         )

@@ -79,6 +79,9 @@ class Vaga(Base):
     seniority: Mapped[str | None] = mapped_column(String(20))
     location: Mapped[str | None] = mapped_column(String(200))
     workplace_type: Mapped[str | None] = mapped_column(String(20))
+    workplace_declared: Mapped[bool] = mapped_column(
+        Boolean, default=False, server_default="0", nullable=False,
+    )
     published_date: Mapped[date | None] = mapped_column(Date)
     url: Mapped[str | None] = mapped_column(Text)
     description: Mapped[str | None] = mapped_column(Text)
