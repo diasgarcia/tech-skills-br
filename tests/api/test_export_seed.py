@@ -31,6 +31,7 @@ def test_exportar_seed_gera_csv_corretamente():
                     company="Empresa X",
                     location="São Paulo, SP",
                     workplace_type="Presencial",
+                    workplace_declared=True,
                     area="Backend",
                     tecnologias=[t1, t2],
                 )
@@ -51,3 +52,4 @@ def test_exportar_seed_gera_csv_corretamente():
         assert reader[0]["title"] == "Dev Python Jr"
         assert reader[0]["skills"] == "Docker, Python"
         assert reader[0]["workplace_type"] == "Presencial"
+        assert reader[0]["workplace_declared"] == "1"

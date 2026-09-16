@@ -9,7 +9,8 @@ MIN_DESCRICAO_TRAMPOS = 100
 MIN_DESCRICAO_INFOJOBS = 160
 
 QUERY_LINKEDIN_PENDENTES = """
-    SELECT id, external_id, title, url, location, workplace_type
+    SELECT id, external_id, title, url, location, workplace_type,
+           workplace_declared
     FROM vagas
     WHERE source = 'linkedin'
       AND COALESCE(enrich_encerrada, 0) = 0

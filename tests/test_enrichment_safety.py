@@ -105,6 +105,28 @@ def test_linkedin_confirma_sucesso_so_depois_da_transacao(database_factory, monk
     assert summary.attempted == 2
 
 
+def test_linkedin_enriquecimento_preserva_modalidade_declarada(
+    database_factory, monkeypatch,
+):
+    path = database_factory(count=1)
+    with closing(connect_sqlite(path)) as conn, conn:
+        conn.execute(
+            "UPDATE vagas SET workplace_type = 'Híbrido', "
+            "workplace_declared = 1, location = 'João Pessoa, PB' WHERE id = 1"
+        )
+    description = "MODALIDADE: Home Office. Desenvolvimento de sistemas com Python."
+    session = FakeSession(text=f'<div class="description__text">{description}</div>')
+    monkeypatch.setattr(linkedin, "PoliteSession", lambda **kwargs: session)
+
+    linkedin.enrich_linkedin_jobs(db_path=path, max_workers=1)
+    with closing(connect_sqlite(path, read_only=True)) as conn:
+        workplace = conn.execute(
+            "SELECT workplace_type FROM vagas WHERE id = 1"
+        ).fetchone()[0]
+
+    assert workplace == "Híbrido"
+
+
 def test_outras_fontes_desfaz_campos_e_skills_da_vaga_com_falha(database_factory, caplog):
     path = database_factory(source="gupy")
     _fail_first_skill_insert(path)

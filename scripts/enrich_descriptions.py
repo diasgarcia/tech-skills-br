@@ -42,7 +42,7 @@ from scraper.enrichment import BatchStopped, DetailResult, EnrichmentSummary, wr
 from scraper.enrichment_queries import QUERY_LINKEDIN_PENDENTES as QUERY_PENDENTES  # noqa: E402
 from scraper.geo import default_geo_classifier  # noqa: E402
 from scraper.http_client import PoliteSession  # noqa: E402
-from scraper.models import NAO_INFORMADO, infer_workplace  # noqa: E402
+from scraper.models import NAO_INFORMADO, infer_linkedin_workplace  # noqa: E402
 from scraper.skills import SkillExtractor  # noqa: E402
 from scraper.sources.linkedin import DETAIL_API_URL, parse_linkedin_description  # noqa: E402
 
@@ -146,12 +146,16 @@ def _enrich_linkedin_connection(conn, extractor, classifier, geo, limit, max_wor
             futures = {
                 pool.submit(
                     fetch_one_description, session, lock, ext_id, parou
-                ): (db_id, ext_id, title, url, location, workplace)
-                for db_id, ext_id, title, url, location, workplace in jobs_to_enrich
+                ): (db_id, ext_id, title, url, location, workplace, workplace_declared)
+                for db_id, ext_id, title, url, location, workplace, workplace_declared
+                in jobs_to_enrich
             }
 
             for future in as_completed(futures):
-                db_id, ext_id, title, url, location, workplace = futures[future]
+                (
+                    db_id, ext_id, title, url, location, workplace,
+                    workplace_declared,
+                ) = futures[future]
                 attempted = True
                 try:
                     result = future.result()
@@ -168,7 +172,8 @@ def _enrich_linkedin_connection(conn, extractor, classifier, geo, limit, max_wor
                     if desc:
                         with conn:
                             outcome = _save_linkedin_detail(
-                                c, db_id, title, location, workplace, desc,
+                                c, db_id, title, location, workplace,
+                                workplace_declared, desc,
                                 extractor, classifier, geo, tech_map,
                             )
                             if outcome != "removed":
@@ -227,7 +232,10 @@ def _enrich_linkedin_connection(conn, extractor, classifier, geo, limit, max_wor
     return summary
 
 
-def _save_linkedin_detail(c, db_id, title, location, workplace, desc, extractor, classifier, geo, tech_map):
+def _save_linkedin_detail(
+    c, db_id, title, location, workplace, workplace_declared, desc,
+    extractor, classifier, geo, tech_map,
+):
     """Grava uma vaga dentro da transacao aberta pelo chamador."""
     saved_description = c.execute("SELECT description FROM vagas WHERE id = ?", (db_id,)).fetchone()[0]
     description = consolidate_description(saved_description, desc, detail=True).text
@@ -237,7 +245,13 @@ def _save_linkedin_detail(c, db_id, title, location, workplace, desc, extractor,
         return "removed"
 
     c.execute("UPDATE vagas SET description = ? WHERE id = ?", (description, db_id))
-    modalidade = infer_workplace(None, location=location, title=title, description=description)
+    modalidade = infer_linkedin_workplace(
+        workplace,
+        bool(workplace_declared),
+        location=location,
+        title=title,
+        description=description,
+    )
     if modalidade and modalidade != NAO_INFORMADO and modalidade != (workplace or ""):
         polo, regiao = geo.classify(location, modalidade)
         c.execute(

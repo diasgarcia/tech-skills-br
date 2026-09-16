@@ -152,6 +152,10 @@ class LinkedInSource(JobSource):
                 title,
                 workplace_label=workplace_label,
             ),
+            workplace_declared=bool(
+                workplace_label
+                and normalize_workplace(workplace_label) != NAO_INFORMADO
+            ),
             published_date=publicada[:10],
             search_term=term,
         )

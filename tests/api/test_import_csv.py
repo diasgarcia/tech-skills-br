@@ -72,7 +72,7 @@ def test_referencia_cai_para_mtime_sem_timestamp_no_nome(tmp_path):
 
 COLUNAS = [
     "area", "seniority", "title", "company", "source", "location",
-    "workplace_type", "published_date", "url", "skills", "area_score",
+    "workplace_type", "workplace_declared", "published_date", "url", "skills", "area_score",
     "area_matches", "search_term", "external_id", "description",
 ]
 
@@ -574,6 +574,27 @@ def test_linkedin_sem_sinal_de_modalidade_mantem_o_palpite(tmp_path):
         workplace_type = db.scalar(select(Vaga)).workplace_type
 
     assert workplace_type == "Presencial"
+
+
+def test_linkedin_rotulo_declarado_vence_descricao_conflitante(tmp_path):
+    csv_path = _escrever_csv(
+        tmp_path,
+        [_linha(
+            source="linkedin",
+            workplace_type="Híbrido",
+            workplace_declared="1",
+            location="João Pessoa, PB",
+            title="Estágio em Automação",
+            description="MODALIDADE: Home Office. Desenvolvimento de sistemas.",
+        )],
+    )
+
+    importar(csv_path, tmp_path / "t.db")
+    with read_session(tmp_path / "t.db") as db:
+        vaga = db.scalar(select(Vaga))
+
+    assert vaga.workplace_type == "Híbrido"
+    assert vaga.workplace_declared is True
 
 
 def test_linkedin_suporte_remoto_nao_define_modalidade(tmp_path):

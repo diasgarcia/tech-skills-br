@@ -44,7 +44,7 @@ from scraper.consolidation import (  # noqa: E402
 )
 from scraper.config import PROJECT_ROOT  # noqa: E402
 from scraper.geo import default_geo_classifier  # noqa: E402
-from scraper.models import infer_workplace  # noqa: E402
+from scraper.models import infer_linkedin_workplace, infer_workplace  # noqa: E402
 from scraper.skills import default_extractor  # noqa: E402
 
 
@@ -97,6 +97,10 @@ def _float_ou_none(valor: str | None) -> float | None:
         return float(valor) if valor not in (None, "") else None
     except ValueError:
         return None
+
+
+def _bool_csv(valor: str | None) -> bool:
+    return (valor or "").strip().lower() in {"1", "true", "sim", "yes"}
 
 
 def _garantir_colunas(engine) -> None:
@@ -229,6 +233,10 @@ def _importar_com_engine(engine, csv_path, db_path, recriar, referencia, data_mi
                 if (linha.get("enrich_encerrada") or "").strip() in ("1", "true", "True"):
                     vaga.enrich_encerrada = True
 
+                workplace_declared = linha.get("workplace_declared")
+                if workplace_declared not in (None, ""):
+                    vaga.workplace_declared = _bool_csv(workplace_declared)
+
                 vaga.title = (linha.get("title") or "").strip()
 
                 area_csv = (linha.get("area") or "").strip()
@@ -257,12 +265,21 @@ def _importar_com_engine(engine, csv_path, db_path, recriar, referencia, data_mi
                     sem_data += 1
 
 
-                vaga.workplace_type = infer_workplace(
-                    vaga.workplace_type,
-                    location=vaga.location,
-                    title=vaga.title,
-                    description=vaga.description,
-                )
+                if vaga.source == "linkedin":
+                    vaga.workplace_type = infer_linkedin_workplace(
+                        vaga.workplace_type,
+                        vaga.workplace_declared,
+                        location=vaga.location,
+                        title=vaga.title,
+                        description=vaga.description,
+                    )
+                else:
+                    vaga.workplace_type = infer_workplace(
+                        vaga.workplace_type,
+                        location=vaga.location,
+                        title=vaga.title,
+                        description=vaga.description,
+                    )
                 if not vaga.regiao or vaga.regiao == "Não informado":
                     polo, regiao = geo.classify(vaga.location, vaga.workplace_type)
                     vaga.polo = polo
@@ -322,12 +339,14 @@ def _importar_com_engine(engine, csv_path, db_path, recriar, referencia, data_mi
             if v.company:
                 v.company = _canonical_company(v.company)
 
-            # No LinkedIn o card nao informa modalidade: o palpite feito na
-            # coleta (cidade -> Presencial) pode contradizer a descricao
-            # completa ("Modalidade 100% remota"). A descricao e autoridade.
+            # A label oficial do LinkedIn e autoridade. Sem ela, a descricao
+            # completa pode corrigir o palpite feito pelo card/localizacao.
             if v.source == "linkedin" and v.description:
-                reavaliada = infer_workplace(
-                    None, location=v.location, title=v.title,
+                reavaliada = infer_linkedin_workplace(
+                    v.workplace_type,
+                    v.workplace_declared,
+                    location=v.location,
+                    title=v.title,
                     description=v.description,
                 )
                 if reavaliada and reavaliada != "Não informado" and reavaliada != v.workplace_type:

@@ -20,6 +20,7 @@ JOB_COLUMNS = [
     "polo",
     "location",
     "workplace_type",
+    "workplace_declared",
     "published_date",
     "url",
     "skills",
