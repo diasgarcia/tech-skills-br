@@ -532,8 +532,8 @@ def test_linkedin_usa_geoid_do_brasil():
         ("Brazil (Remote)", "Remoto"),
         ("São Paulo (Remoto)", "Remoto"),
         ("Curitiba (Híbrido)", "Híbrido"),
-        ("Brasil", "Remoto"),
-        ("Brazil", "Remoto"),
+        ("Brasil", "Não informado"),
+        ("Brazil", "Não informado"),
         ("", "Não informado"),
     ],
 )
@@ -567,6 +567,29 @@ def test_linkedin_titulo_com_remoto_vence_cidade_do_card():
 
     assert remoto == "Remoto"
     assert presencial == "Presencial"
+
+
+def test_linkedin_rotulo_padrao_tem_prioridade_sobre_titulo_e_localizacao():
+    modalidade = LinkedInSource._modalidade(
+        "São Paulo, SP",
+        title="Analista de Dados Júnior - Remoto",
+        workplace_label="On-site",
+    )
+
+    assert modalidade == "Presencial"
+
+
+def test_linkedin_le_rotulo_padrao_do_card():
+    html = LINKEDIN_HTML.replace(
+        '<span class="job-search-card__location">São Paulo, São Paulo, Brazil</span>',
+        '<span class="job-search-card__location">São Paulo, São Paulo, Brazil</span>'
+        '<span class="job-search-card__workplace-type">Remote</span>',
+    )
+    source = _source(LinkedInSource)
+
+    job = source._parse_page(html, "x")[0]
+
+    assert job.workplace_type == "Remoto"
 
 
 def test_linkedin_pagina_vazia():
