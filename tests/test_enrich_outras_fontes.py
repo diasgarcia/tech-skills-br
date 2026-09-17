@@ -258,6 +258,20 @@ def test_fetch_infojobs_teaser_curto_permanece_pendente():
     assert status is None
 
 
+def test_fetch_infojobs_descricao_curta_sem_reticencias_e_valida():
+    html = """
+    <div class="js_vacancyDataPanels">
+      <p class="text-break white-space-pre-line">Suporte aos usuários.</p>
+    </div>
+    """
+    session = FakeSession([FakeResponse(text=html)])
+
+    dados, status = fetch_infojobs(session, Lock(), "http://x")
+
+    assert dados == {"description": "Suporte aos usuários."}
+    assert status is None
+
+
 def test_fetch_gupy_job_removido_devolve_vazio():
     session = FakeSession([None])  # PoliteSession devolve None em 404
 

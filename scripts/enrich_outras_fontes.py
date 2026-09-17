@@ -270,9 +270,9 @@ def fetch_infojobs(session: PoliteSession, lock: Lock, url: str) -> tuple[dict, 
             CHAVE_DETALHES: detalhes,
         }, status
     descricao = el.get_text(" ", strip=True)
-    # Nunca marque o teaser como enriquecimento concluido. Se o portal
-    # devolver outro recorte curto, a vaga permanece para a proxima rodada.
-    if len(descricao) <= MIN_DESCRICAO_INFOJOBS or descricao.endswith("..."):
+    # O painel oficial tambem pode conter uma descricao completa e curta.
+    # Reticencias no fim ainda indicam o teaser incompleto da listagem.
+    if not descricao or descricao.endswith(("...", "…")):
         return {
             CHAVE_DIAGNOSTICO: "descricao_curta_ou_truncada",
             CHAVE_DETALHES: f"{detalhes}; descricao={len(descricao)} caracteres",
