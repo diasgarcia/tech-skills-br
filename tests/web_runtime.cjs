@@ -133,6 +133,23 @@ test("busca continua combinando tecnologia, área e modalidade", () => {
   assert.ok(app.get("#table-vagas tbody").textContent.includes("Backend"));
 });
 
+test("prefixo compartilhado por empresa e cidade pesquisa os dois campos", () => {
+  const app = runtime();
+  app.sandbox.fixture = [
+    { titulo: "Analista", empresa: "Americanas", localidade: "Rio de Janeiro, RJ", data_publicacao: today() },
+    { titulo: "Suporte", empresa: "Empresa Local", localidade: "Americana, SP", data_publicacao: today() },
+    { titulo: "Desenvolvedor", empresa: "Outra Empresa", localidade: "São Paulo, SP", data_publicacao: today() },
+  ];
+  app.get("search-vagas").value = "amer";
+
+  app.run("vagasData = fixture; renderVagasTable()");
+
+  const results = app.get("#table-vagas tbody");
+  assert.equal(results.childNodes.length, 2);
+  assert.ok(results.textContent.includes("Americanas"));
+  assert.ok(results.textContent.includes("Americana, SP"));
+});
+
 test("falha HTTP mostra recuperação e não tenta interpretar resposta de erro", async () => {
   let failed = true;
   let parsedError = false;
