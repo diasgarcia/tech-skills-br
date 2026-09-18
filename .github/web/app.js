@@ -36,7 +36,6 @@ async function loadData() {
     tecnologiasData = resTech;
     areasData = resAreas;
     vagasData = resVagas;
-    locVocabCache = null;
     currentArea = areasData.length ? areasData[0].area : null;
 
     initKPIs();
@@ -291,36 +290,6 @@ const SEARCH_STOPWORDS = new Set([
   "em", "na", "no", "nas", "nos", "para", "com", "um", "uma", "por"
 ]);
 
-// Vocabulario de lugares extraido dos proprios dados (polos, regioes e
-// cidades das localidades). Cacheado apos a primeira busca.
-let locVocabCache = null;
-
-function getLocVocab() {
-  if (locVocabCache) return locVocabCache;
-  const set = new Set();
-  (vagasData || []).forEach(v => {
-    const cidade = (v.localidade || "").split(",")[0].split("/")[0].trim();
-    [cidade, v.polo, v.regiao].filter(Boolean).forEach(c => {
-      const norm = normalizeSearchText(c).trim();
-      if (!norm || norm.length < 3) return;
-      if (norm.startsWith("estado/")) return;
-      if (["nao informado", "remoto", "nacional", "remoto nacional"].includes(norm)) return;
-      set.add(norm);
-    });
-  });
-  locVocabCache = Array.from(set).sort((a, b) => b.length - a.length);
-  return locVocabCache;
-}
-
-// Casamento por palavra inteira (evita "sul" dentro de "consulta" etc.).
-function matchWithBoundary(haystack, needle) {
-  const idx = haystack.indexOf(needle);
-  if (idx === -1) return false;
-  const before = idx === 0 ? "" : haystack[idx - 1];
-  const after = haystack[idx + needle.length] || "";
-  return !/[a-z0-9]/.test(before) && !/[a-z0-9]/.test(after);
-}
-
 // Prefixo no inicio de palavra: "suport" acha "suporte", "playw"
 // acha "playwright" etc. Permite buscar enquanto se digita.
 function matchWithBoundaryPrefix(haystack, needle) {
@@ -347,79 +316,26 @@ function renderVagasTable() {
     items = items.filter(v => v.modalidade === modFilter);
   }
   if (rawQuery) {
-    // Separa lugares (cidade, polo, regiao) do resto da busca. Funciona
-    // enquanto se digita: "sao p" ja entende como prefixo de "sao paulo".
-    // Tokens que nao formam prefixo de lugar viram palavras-chave que
-    // precisam casar TODAS (E logico) com titulo/empresa/area/tecnologias.
-    const vocab = getLocVocab();
-    const rawTokens = rawQuery.split(/\s+/).filter(Boolean);
-    const locPrefixes = [];
-    const keywords = [];
-    // 'pres' e prefixo de 'presencial' (modalidade) e de 'presidente
-    // prudente' (cidade): a modalidade vence para prefixos curtos, e a
-    // cidade continua achavel com o nome mais completo ('presidente...').
-    const isModalidadePrefix = t =>
-      ["presencial", "remoto", "hibrido"].some(m => m.startsWith(t));
-    // Prefixo de lugar so a partir de 4 letras: 'bet' e prefixo de
-    // 'betim' mas tambem quer dizer a empresa Start Bet. Excecoes:
-    // token exato de uma regiao curta ('sul', 'norte'), ou token de 3
-    // letras que se completa com a proxima palavra ('sao pa', 'rio de').
-    const eLugar = (t, idx) =>
-      t.length >= 4 && vocab.some(p => p.startsWith(t)) ||
-      t.length >= 3 && vocab.includes(t) ||
-      t.length >= 3 && idx + 1 < rawTokens.length &&
-        vocab.some(p => p.startsWith(t + " " + rawTokens[idx + 1]));
-    let i = 0;
-    while (i < rawTokens.length) {
-      let best = null;
-      let prefix = rawTokens[i];
-      let j = i;
-      if (eLugar(prefix, i) && !isModalidadePrefix(prefix)) {
-        best = prefix;
-        while (j + 1 < rawTokens.length) {
-          const longer = prefix + " " + rawTokens[j + 1];
-          if (vocab.some(p => p.startsWith(longer))) {
-            j++;
-            prefix = longer;
-            best = longer;
-          } else {
-            break;
-          }
-        }
-      }
-      if (best) {
-        locPrefixes.push(best);
-        i = j + 1;
-      } else {
-        if (!SEARCH_STOPWORDS.has(rawTokens[i])) keywords.push(rawTokens[i]);
-        i++;
-      }
-    }
+    const keywords = rawQuery.split(/\s+/)
+      .filter(token => token && !SEARCH_STOPWORDS.has(token));
 
     items = items.filter(v => {
-      if (locPrefixes.length) {
-        const locText = normalizeSearchText([v.localidade, v.polo, v.regiao].filter(Boolean).join(" "));
-        for (const lp of locPrefixes) {
-          const hit = vocab.some(p => p.startsWith(lp) && matchWithBoundary(locText, p));
-          if (!hit) return false;
-        }
-      }
-      if (keywords.length) {
-        const tecnologias = Array.isArray(v.tecnologias) ? v.tecnologias : [v.tecnologias];
-        const searchableFields = [v.titulo, v.empresa, v.area, v.modalidade, v.fonte, ...tecnologias];
-        // Alem do prefixo de palavra, tenta casar ignorando espacos:
-        // "startbet" encontra "Start Bet", "javascript" encontra
-        // "Java Script".
-        const semEspacos = s => s.replace(/\s+/g, "");
-        return keywords.every(kw =>
-          searchableFields.some(value => {
-            const norm = normalizeSearchText(value);
-            return matchWithBoundaryPrefix(norm, kw) ||
-              matchWithBoundaryPrefix(semEspacos(norm), semEspacos(kw));
-          })
-        );
-      }
-      return true;
+      const tecnologias = Array.isArray(v.tecnologias) ? v.tecnologias : [v.tecnologias];
+      const searchableFields = [
+        v.titulo, v.empresa, v.area, v.modalidade, v.fonte,
+        v.localidade, v.polo, v.regiao, ...tecnologias
+      ];
+      // Alem do prefixo de palavra, tenta casar ignorando espacos:
+      // "startbet" encontra "Start Bet", "javascript" encontra
+      // "Java Script".
+      const semEspacos = s => s.replace(/\s+/g, "");
+      return keywords.every(kw =>
+        searchableFields.some(value => {
+          const norm = normalizeSearchText(value);
+          return matchWithBoundaryPrefix(norm, kw) ||
+            matchWithBoundaryPrefix(semEspacos(norm), semEspacos(kw));
+        })
+      );
     });
   }
 
