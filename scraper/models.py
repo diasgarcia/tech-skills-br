@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import re
 import unicodedata
 from dataclasses import asdict, dataclass, field
@@ -218,12 +217,6 @@ class Job:
         self.title = _WS_RE.sub(" ", (self.title or "")).strip()
         self.company = _WS_RE.sub(" ", (self.company or "")).strip()
         self.description = strip_html(self.description)
-
-    @property
-    def fingerprint(self) -> str:
-        """Chave estavel para deduplicar a mesma vaga vinda de termos/portais diferentes."""
-        base = f"{normalize(self.title)}|{normalize(self.company)}"
-        return hashlib.sha1(base.encode("utf-8")).hexdigest()
 
     @property
     def source_key(self) -> str:

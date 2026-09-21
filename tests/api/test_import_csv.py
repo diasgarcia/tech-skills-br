@@ -414,6 +414,48 @@ def test_mesma_external_id_em_fontes_diferentes_sao_vagas_distintas(tmp_path):
     assert resultado["total"] == 2
 
 
+def test_importacao_funde_urls_com_o_mesmo_id_de_vaga(tmp_path):
+    csv_path = _escrever_csv(
+        tmp_path,
+        [
+            _linha(
+                source="linkedin",
+                external_id="4464615185",
+                url="https://br.linkedin.com/jobs/view/dev-jr-at-acme-4464615185",
+            ),
+            _linha(
+                source="agregador",
+                external_id="9",
+                url="https://www.linkedin.com/jobs/view/4464615185/?tracking=abc",
+            ),
+        ],
+    )
+
+    resultado = importar(csv_path, tmp_path / "t.db")
+    with read_session(tmp_path / "t.db") as db:
+        vagas = db.scalars(select(Vaga)).all()
+
+    assert resultado["total"] == 1
+    assert (resultado["criadas"], resultado["atualizadas"]) == (1, 1)
+    assert len(vagas) == 1
+
+
+def test_importacao_funde_url_exata_sem_id_extraivel(tmp_path):
+    url = "https://www.geekhunter.com/pt/acme/jobs/dev-junior-1"
+    csv_path = _escrever_csv(
+        tmp_path,
+        [
+            _linha(source="geekhunter", external_id="dev-junior-1", url=url),
+            _linha(source="agregador", external_id="9", url=url),
+        ],
+    )
+
+    resultado = importar(csv_path, tmp_path / "t.db")
+
+    assert resultado["total"] == 1
+    assert (resultado["criadas"], resultado["atualizadas"]) == (1, 1)
+
+
 def test_data_relativa_resolvida_pelo_nome_do_csv(tmp_path):
     csv_path = _escrever_csv(tmp_path, [_linha(published_date="Ontem")])
 
