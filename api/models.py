@@ -114,3 +114,21 @@ class Vaga(Base):
 
     def __repr__(self) -> str:  # pragma: no cover - conveniencia no shell
         return f"<Vaga {self.id} {self.title[:40]!r}>"
+
+
+class ColetaExecucao(Base):
+    __tablename__ = "coleta_execucoes"
+    __table_args__ = (
+        Index("ix_coleta_execucoes_coletada_em", "coletada_em"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    run_key: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
+    coletada_em: Mapped[datetime] = mapped_column(DateTime, nullable=False)
+    status: Mapped[str] = mapped_column(String(20), nullable=False)
+    escopo_completo: Mapped[bool] = mapped_column(Boolean, nullable=False)
+    vagas_brutas: Mapped[int] = mapped_column(Integer, nullable=False)
+    vagas_elegiveis: Mapped[int] = mapped_column(Integer, nullable=False)
+    requisicoes: Mapped[int] = mapped_column(Integer, nullable=False)
+    fontes_json: Mapped[str] = mapped_column(Text, nullable=False)
+    alertas_json: Mapped[str] = mapped_column(Text, nullable=False, default="[]")

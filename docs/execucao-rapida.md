@@ -75,6 +75,17 @@ A reextração global continua sendo uma manutenção deliberada. Ela não foi a
 python scripts/reextract_all_skills.py --db data/vagas.db --dry-run
 ```
 
+Quando a regra de modalidade do LinkedIn mudar, reavalie a base sem fazer chamadas:
+
+```powershell
+python scripts/reclassify_workplaces.py --db data/vagas.db
+```
+
+O workflow usa `--quality-gate`, compara `output/collection_metrics.json` com o
+histórico da release e só registra a rodada depois das validações. Não use
+`collection_health.py record` para uma correção manual: frescor representa uma
+coleta real.
+
 ## Gerar saídas locais
 
 ```powershell

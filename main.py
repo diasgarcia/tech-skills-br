@@ -106,6 +106,10 @@ def build_parser() -> argparse.ArgumentParser:
              "fica para scripts/enrich_descriptions.py, so para vagas pendentes).",
     )
     parser.add_argument(
+        "--quality-gate", action="store_true",
+        help="Ativa as protecoes de qualidade usadas pela coleta automatica.",
+    )
+    parser.add_argument(
         "-v", "--verbose", action="store_true", help="Log detalhado (DEBUG)."
     )
     return parser
@@ -163,6 +167,7 @@ def _settings_from_args(args, overrides) -> Settings:
         abler_days_back=args.abler_days,
         recrutei_full=args.recrutei_full,
         parallel_sources=not args.sequencial,
+        quality_gate=args.quality_gate,
         source_delays={
             **DELAYS_PADRAO,
             **overrides,
@@ -196,6 +201,18 @@ def _print_result(result, settings) -> int:
         print(f"\n  Avisos ({len(errors)}):")
         for err in errors[:10]:
             print(f"    ! {err}")
+
+    alerts = result.meta.get("quality_alerts", [])
+    if alerts:
+        print(f"\n  Qualidade ({len(alerts)} alerta(s)):")
+        for alert in alerts:
+            marker = "ERRO" if alert["severity"] == "high" else "AVISO"
+            print(f"    ! {marker}: {alert['message']}")
+
+    if result.meta.get("quality_gate") and any(
+        alert.get("severity") == "high" for alert in alerts
+    ):
+        return 1
 
     return 0
 

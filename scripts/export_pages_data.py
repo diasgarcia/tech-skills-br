@@ -20,10 +20,10 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
-from sqlalchemy import func, select
+from sqlalchemy import func, inspect, select
 
 from api.database import read_session
-from api.models import Tecnologia, Vaga, vaga_tecnologia
+from api.models import ColetaExecucao, Tecnologia, Vaga, vaga_tecnologia
 
 PAGES_API_DIR = ROOT_DIR / "api" / "web"
 
@@ -57,6 +57,26 @@ def export_all_pages_data(
 
         if total_vagas == 0:
             logger.warning("Nenhuma vaga encontrada no banco para exportar.")
+
+        ultima_coleta = None
+        estado_frescor = "sem_historico"
+        if inspect(db.get_bind()).has_table(ColetaExecucao.__tablename__):
+            execucao = db.scalar(
+                select(ColetaExecucao)
+                .where(ColetaExecucao.status.in_(("ok", "warning")))
+                .where(ColetaExecucao.escopo_completo.is_(True))
+                .order_by(ColetaExecucao.coletada_em.desc())
+                .limit(1)
+            )
+            if execucao is not None:
+                coleta_utc = execucao.coletada_em
+                if coleta_utc.tzinfo is None:
+                    coleta_utc = coleta_utc.replace(tzinfo=timezone.utc)
+                else:
+                    coleta_utc = coleta_utc.astimezone(timezone.utc)
+                ultima_coleta = coleta_utc.isoformat()
+                horas = (gerado_em - coleta_utc).total_seconds() / 3600
+                estado_frescor = "em_dia" if horas <= 24 else "atrasado"
 
 
         total_empresas = db.scalar(
@@ -194,6 +214,8 @@ def export_all_pages_data(
                 ),
                 "data_atualizacao": gerado_em.strftime("%d/%m/%Y"),
                 "gerado_em": gerado_em.isoformat(),
+                "ultima_coleta": ultima_coleta,
+                "estado_frescor": estado_frescor,
                 "endpoints_disponiveis": [
                     "/api/resumo.json",
                     "/api/vagas.json",

@@ -8,7 +8,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from .classifier import classify_jobs, default_classifier, filter_tech
-from .config import Settings
+from .config import Settings, load_search_terms
 from .dedupe import deduplicate
 from .export import build_ranking, export_all
 from .geo import attach_geo_info
@@ -19,7 +19,7 @@ from .progress import FONTES_LABELS, _BufferLog, _TabelaParalela
 
 from .seniority import SeniorityFilter, canonicalize_seniority, filter_entry_level
 from .skills import attach_skills
-from .sources import SOURCE_REGISTRY
+from .sources import DEFAULT_SOURCES, SOURCE_REGISTRY
 
 logger = logging.getLogger(__name__)
 
@@ -245,6 +245,7 @@ def run(
                 location=job.location,
                 title=job.title,
                 description=job.description,
+                source=job.source,
             )
 
     jobs = attach_geo_info(jobs)
@@ -263,7 +264,30 @@ def run(
         "requests": requests_made,
     }
 
+    from .quality import build_metrics, write_metrics
+
+    full_scope = (
+        settings.quality_gate
+        and set(settings.sources) == set(DEFAULT_SOURCES)
+        and settings.search_terms == load_search_terms()
+        and settings.start_page == 1
+        and settings.max_pages_per_term >= 100
+        and settings.only_junior
+    )
+    metrics = build_metrics(
+        jobs,
+        stats,
+        raw_jobs=len(raw_jobs),
+        requests=requests_made,
+        full_scope=full_scope,
+    )
+    meta["quality_alerts"] = metrics["alerts"]
+    meta["quality_gate"] = settings.quality_gate
+
     files = export_all(jobs, settings.ensure_output_dir(), meta)
+    files["collection_metrics"] = write_metrics(
+        metrics, settings.ensure_output_dir() / "collection_metrics.json"
+    )
     for receipt in receipts:
         if receipt.confirm():
             logger.info("Checkpoint confirmado apos exportacao: %s", receipt.path)
