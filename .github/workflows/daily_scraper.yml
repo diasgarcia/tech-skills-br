@@ -38,6 +38,7 @@ jobs:
   scrape-and-update:
     name: Mineracao e Consolidacao de Vagas
     runs-on: ubuntu-latest
+    timeout-minutes: 180
 
     permissions:
       contents: write  # Permite que o bot do GitHub commite as novas vagas
@@ -49,14 +50,14 @@ jobs:
 
     steps:
     - name: 1. Baixar repositorio
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: 2. Registrar data da rodada
       run: |
         echo "DATA_HOJE=$(TZ=America/Sao_Paulo date +'%d/%m/%Y')" >> "$GITHUB_ENV"
 
     - name: 3. Configurar Python 3.12
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v7
       with:
         python-version: "3.12"
         cache: 'pip'
@@ -75,7 +76,7 @@ jobs:
         # ligada e a matriz de delays por fonte (LinkedIn 1.0s; InfoJobs,
         # Vagas.com e Solides 2.0s; demais 1.0s - medido em 05/09, ver a
         # wiki "Limites e Bloqueios"). A CLI so passa o teto de paginas.
-        FLAGS="--max-pages 200 --no-enrich"
+        FLAGS="--max-pages 200 --no-enrich --quality-gate"
         if [ -n "${{ github.event.inputs.fontes }}" ]; then
           FLAGS="$FLAGS --sources ${{ github.event.inputs.fontes }}"
         fi
@@ -88,6 +89,7 @@ jobs:
     - name: 6. Carregar historico, consolidar novas vagas e atualizar snapshot
       run: |
         python scripts/release_snapshot.py download --allow-legacy
+        python scripts/collection_health.py check
         # Importa todos os CSVs da rodada, do mais antigo para o mais novo.
         OUT_RODADA=""
         for csv in $(ls -tr output/vagas_*.csv); do
@@ -109,6 +111,19 @@ jobs:
           echo '```'
         } >> "$GITHUB_STEP_SUMMARY"
         python scripts/reclassify_areas.py
+        HASH_DADOS_DEPOIS=$(sha256sum data/vagas.db | cut -d' ' -f1)
+        if [ "$HASH_ANTES" != "$HASH_DADOS_DEPOIS" ]; then
+          DADOS_MUDARAM=1
+        else
+          DADOS_MUDARAM=0
+        fi
+        python scripts/collection_health.py record
+        FRESCOR=$(python scripts/collection_health.py status --max-age-hours 24)
+        {
+          echo "## Frescor da coleta"
+          echo
+          echo "\`$FRESCOR\`"
+        } >> "$GITHUB_STEP_SUMMARY"
         # A partir daqui o banco nao muda: vagas.db + vagas.csv (release) e
         # o parquet (Kaggle) precisam ser o MESMO snapshot da rodada.
         python scripts/export_seed.py
@@ -139,8 +154,7 @@ jobs:
         MUDOU=0
         [ "${NOVAS:-0}" -gt 0 ] && MUDOU=1
         [ "${ATUALIZADAS:-0}" -gt 0 ] && MUDOU=1
-        HASH_DEPOIS=$(sha256sum data/vagas.db | cut -d' ' -f1)
-        [ "$HASH_ANTES" != "$HASH_DEPOIS" ] && MUDOU=1
+        [ "$DADOS_MUDARAM" = "1" ] && MUDOU=1
         if [ "$MUDOU" = "1" ]; then
           pip install -e '.[export,publish]'
           # A release e o estado operacional. O Kaggle e uma replica: se
@@ -266,13 +280,13 @@ jobs:
         fi
 
     - name: 10. Preparar artefato do GitHub Pages
-      uses: actions/upload-pages-artifact@v3
+      uses: actions/upload-pages-artifact@v5
       with:
         path: '_site'
 
     - name: Preservar dados para recuperacao em caso de falha
       if: failure()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: recuperacao-coleta-${{ github.run_id }}
         path: |
@@ -289,6 +303,7 @@ jobs:
     name: Publicar Dashboard no GitHub Pages
     needs: scrape-and-update
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       pages: write
       id-token: write
@@ -298,7 +313,7 @@ jobs:
     steps:
       - name: Deploy no GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
 
 

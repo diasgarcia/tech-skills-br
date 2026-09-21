@@ -15,6 +15,7 @@ jobs:
   enrich:
     name: Enriquecimento de Descricoes
     runs-on: ubuntu-latest
+    timeout-minutes: 120
 
     permissions:
       contents: write  # Permite que o bot do GitHub commite as vagas atualizadas
@@ -26,10 +27,10 @@ jobs:
 
     steps:
     - name: 1. Baixar repositorio
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: 2. Configurar Python 3.12
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v7
       with:
         python-version: "3.12"
         cache: 'pip'
@@ -109,13 +110,13 @@ jobs:
         python scripts/export_readme_charts.py --output-dir _site/assets
 
     - name: 10. Preparar artefato do GitHub Pages
-      uses: actions/upload-pages-artifact@v3
+      uses: actions/upload-pages-artifact@v5
       with:
         path: '_site'
 
     - name: Preservar dados para recuperacao em caso de falha
       if: failure()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: recuperacao-enriquecimento-${{ github.run_id }}
         path: data/
@@ -128,6 +129,7 @@ jobs:
     name: Publicar Dashboard no GitHub Pages
     needs: enrich
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       pages: write
       id-token: write
@@ -137,4 +139,4 @@ jobs:
     steps:
       - name: Deploy no GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
