@@ -43,6 +43,7 @@ from scraper.consolidation import (  # noqa: E402
     MIN_DATA_CORTE, canonical_company as _canonical_company, consolidate_description,
 )
 from scraper.config import PROJECT_ROOT  # noqa: E402
+from scraper.dedupe import identidade_no_link  # noqa: E402
 from scraper.geo import default_geo_classifier  # noqa: E402
 from scraper.models import infer_linkedin_workplace, infer_workplace  # noqa: E402
 from scraper.skills import default_extractor  # noqa: E402
@@ -151,6 +152,16 @@ def _importar_com_engine(engine, csv_path, db_path, recriar, referencia, data_mi
     with Session(engine) as db:
         tecnologias = semear_tecnologias(db)
         conhecidas = {n.lower(): t for n, t in tecnologias.items()}
+        por_url_exata: dict[str, Vaga] = {}
+        por_identidade_link: dict[str, Vaga] = {}
+        for existente in db.scalars(select(Vaga).where(Vaga.url.is_not(None))):
+            url_existente = (existente.url or "").strip()
+            if not url_existente:
+                continue
+            por_url_exata.setdefault(url_existente, existente)
+            identidade = identidade_no_link(url_existente)
+            if identidade:
+                por_identidade_link.setdefault(identidade, existente)
 
         with open(csv_path, encoding="utf-8-sig", newline="") as fh:
             for linha in csv.DictReader(fh):
@@ -178,6 +189,12 @@ def _importar_com_engine(engine, csv_path, db_path, recriar, referencia, data_mi
                         Vaga.source == source, Vaga.external_id == external_id
                     )
                 )
+                url_csv = (linha.get("url") or "").strip()
+                identidade_link = identidade_no_link(url_csv)
+                if vaga is None and url_csv:
+                    vaga = por_url_exata.get(url_csv)
+                if vaga is None and identidade_link:
+                    vaga = por_identidade_link.get(identidade_link)
 
 
                 if vaga is None:
@@ -192,6 +209,11 @@ def _importar_com_engine(engine, csv_path, db_path, recriar, referencia, data_mi
                     criadas += 1
                 else:
                     atualizadas += 1
+
+                if url_csv:
+                    por_url_exata.setdefault(url_csv, vaga)
+                if identidade_link:
+                    por_identidade_link.setdefault(identidade_link, vaga)
 
 
                 # Linha da rodada sem descricao nao pode apagar uma

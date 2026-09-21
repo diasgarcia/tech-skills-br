@@ -46,13 +46,12 @@ def test_job_limpa_titulo_e_descricao():
     assert "Java" in job.description
 
 
-def test_fingerprint_ignora_caixa_e_acento():
-    a = Job(source="gupy", external_id="1", title="Desenvolvedor Júnior", company="ACME")
-    b = Job(source="vagas", external_id="9", title="desenvolvedor junior", company="acme")
+def test_source_key_combina_fonte_e_id_externo():
+    job = Job(source="gupy", external_id="1", title="Desenvolvedor Júnior")
 
-    result = (a.fingerprint == b.fingerprint, a.source_key != b.source_key)
+    result = job.source_key
 
-    assert result == (True, True)
+    assert result == "gupy:1"
 
 
 def test_to_row_trunca_descricao():
