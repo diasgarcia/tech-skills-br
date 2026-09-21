@@ -42,7 +42,7 @@ from scraper.enrichment import BatchStopped, DetailResult, EnrichmentSummary, wr
 from scraper.enrichment_queries import QUERY_LINKEDIN_PENDENTES as QUERY_PENDENTES  # noqa: E402
 from scraper.geo import default_geo_classifier  # noqa: E402
 from scraper.http_client import PoliteSession  # noqa: E402
-from scraper.models import NAO_INFORMADO, infer_linkedin_workplace  # noqa: E402
+from scraper.models import infer_linkedin_workplace  # noqa: E402
 from scraper.skills import SkillExtractor  # noqa: E402
 from scraper.sources.linkedin import DETAIL_API_URL, parse_linkedin_description  # noqa: E402
 
@@ -252,7 +252,7 @@ def _save_linkedin_detail(
         title=title,
         description=description,
     )
-    if modalidade and modalidade != NAO_INFORMADO and modalidade != (workplace or ""):
+    if modalidade != (workplace or ""):
         polo, regiao = geo.classify(location, modalidade)
         c.execute(
             "UPDATE vagas SET workplace_type = ?, polo = ?, regiao = ? WHERE id = ?",

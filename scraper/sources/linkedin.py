@@ -171,11 +171,8 @@ class LinkedInSource(JobSource):
         """Infere a modalidade com base no padrao do LinkedIn.
 
         - Campo de modalidade do card -> rotulo declarado pelo anunciante
-        - Card/Local/Titulo contendo 'Híbrido'/'Hybrid' -> Híbrido
-        - Card/Local/Titulo contendo 'Remoto'/'Remote' -> Remoto
-        - 'Brasil' / 'Brazil' / 'Nacional' -> Não informado
-        - Cidade física ('Rio de Janeiro e Região', 'Curitiba, PR') -> Presencial
-        - Vazio -> Não informado
+        - Card/Local/Titulo contendo modalidade explicita -> modalidade indicada
+        - Cidade sem modalidade -> Não informado
 
         A modalidade declarada no card tem prioridade sobre titulo, descricao
         resumida e localizacao. O titulo ainda cobre anuncios que escrevem
@@ -192,10 +189,7 @@ class LinkedInSource(JobSource):
             return HIBRIDO
         if "remoto" in full_text or "remote" in full_text:
             return REMOTO
-        loc_norm = normalize(location)
-        if loc_norm in ("brasil", "brazil", "nacional"):
-            return NAO_INFORMADO
-        if loc_norm:
+        if "presencial" in full_text or "on site" in full_text or "onsite" in full_text:
             return PRESENCIAL
         return NAO_INFORMADO
 

@@ -557,7 +557,7 @@ def test_linkedin_descricao_remota_corrige_palpite_de_cidade(tmp_path):
     assert workplace_type == "Remoto"
 
 
-def test_linkedin_sem_sinal_de_modalidade_mantem_o_palpite(tmp_path):
+def test_linkedin_sem_sinal_de_modalidade_nao_inventa_presencial(tmp_path):
     csv_path = _escrever_csv(
         tmp_path,
         [_linha(
@@ -573,7 +573,7 @@ def test_linkedin_sem_sinal_de_modalidade_mantem_o_palpite(tmp_path):
     with read_session(tmp_path / "t.db") as db:
         workplace_type = db.scalar(select(Vaga)).workplace_type
 
-    assert workplace_type == "Presencial"
+    assert workplace_type == "Não informado"
 
 
 def test_linkedin_rotulo_declarado_vence_descricao_conflitante(tmp_path):
