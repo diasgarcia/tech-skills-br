@@ -4,7 +4,7 @@ from contextlib import closing
 
 from api.database import connect_sqlite
 
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
 ADDITIONAL_COLUMNS = {
     "regiao": "VARCHAR(40)",
     "polo": "VARCHAR(60)",
@@ -24,7 +24,17 @@ def migrate_connection(conn) -> None:
     current = conn.execute("PRAGMA user_version").fetchone()[0]
     if current > SCHEMA_VERSION:
         raise ValueError("O banco usa uma versao de esquema mais nova que este codigo.")
-    if current == SCHEMA_VERSION and set(ADDITIONAL_COLUMNS) <= columns:
+    tables = {
+        row[0]
+        for row in conn.execute(
+            "SELECT name FROM sqlite_master WHERE type = 'table'"
+        )
+    }
+    if (
+        current == SCHEMA_VERSION
+        and set(ADDITIONAL_COLUMNS) <= columns
+        and "coleta_execucoes" in tables
+    ):
         return
     if conn.in_transaction:
         raise ValueError("Conclua a transacao atual antes de migrar o esquema.")
@@ -38,6 +48,26 @@ def migrate_connection(conn) -> None:
                 "UPDATE vagas SET enrichment_status = 'legacy_resolved' "
                 "WHERE COALESCE(enrich_encerrada, 0) = 1"
             )
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS coleta_execucoes (
+                id INTEGER PRIMARY KEY,
+                run_key VARCHAR(120) NOT NULL UNIQUE,
+                coletada_em DATETIME NOT NULL,
+                status VARCHAR(20) NOT NULL,
+                escopo_completo BOOLEAN NOT NULL,
+                vagas_brutas INTEGER NOT NULL,
+                vagas_elegiveis INTEGER NOT NULL,
+                requisicoes INTEGER NOT NULL,
+                fontes_json TEXT NOT NULL,
+                alertas_json TEXT NOT NULL DEFAULT '[]'
+            )
+            """
+        )
+        conn.execute(
+            "CREATE INDEX IF NOT EXISTS ix_coleta_execucoes_coletada_em "
+            "ON coleta_execucoes (coletada_em)"
+        )
         conn.execute(f"PRAGMA user_version = {SCHEMA_VERSION}")
 
 

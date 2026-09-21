@@ -39,6 +39,7 @@ async function loadData() {
     currentArea = areasData.length ? areasData[0].area : null;
 
     initKPIs();
+    initFreshness();
     renderSummaryTables();
     renderSkillsTable();
     initAreaPills();
@@ -52,6 +53,29 @@ async function loadData() {
   } finally {
     dataLoading = false;
   }
+}
+
+function initFreshness() {
+  const node = document.getElementById("footer-freshness");
+  if (!node) return;
+  const meta = resumoData?.metadados || {};
+  if (!meta.ultima_coleta) return;
+
+  const collectedAt = new Date(meta.ultima_coleta);
+  if (Number.isNaN(collectedAt.getTime())) return;
+  const label = new Intl.DateTimeFormat("pt-BR", {
+    timeZone: "America/Sao_Paulo",
+    day: "2-digit",
+    month: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit"
+  }).format(collectedAt);
+  const stale = meta.estado_frescor === "atrasado";
+  node.textContent = stale ? `Dados atrasados: ${label}` : `Dados: ${label}`;
+  node.classList.toggle("footer-stale", stale);
+  node.title = stale
+    ? "A última coleta completa válida ocorreu há mais de 24 horas."
+    : "Data e hora da última coleta completa válida.";
 }
 
 document.addEventListener("DOMContentLoaded", loadData);

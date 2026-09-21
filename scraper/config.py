@@ -128,6 +128,7 @@ class Settings:
     # Coleta paralela entre fontes: cada fonte roda em thread propria
     # com sessao propria; o delay vale por dominio. Padrao da rodada.
     parallel_sources: bool = True
+    quality_gate: bool = False
 
     page_size: int = 100  # a API da Gupy rejeita limit > 100 (HTTP 400)
     start_page: int = 1

@@ -25,6 +25,10 @@ def test_migracao_preserva_legado_sem_inventar_expiracao(legacy):
     ).fetchall()
 
     assert rows == [(1, 1, "legacy_resolved", "unknown", None), (2, 0, "pending", "unknown", None)]
+    assert legacy.execute("PRAGMA user_version").fetchone()[0] == 3
+    assert legacy.execute(
+        "SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'coleta_execucoes'"
+    ).fetchone() == ("coleta_execucoes",)
 
 
 def test_tentativas_nao_se_confundem_com_disponibilidade_e_migracao_e_idempotente(legacy):
