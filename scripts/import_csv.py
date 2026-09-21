@@ -339,9 +339,10 @@ def _importar_com_engine(engine, csv_path, db_path, recriar, referencia, data_mi
             if v.company:
                 v.company = _canonical_company(v.company)
 
-            # A label oficial do LinkedIn e autoridade. Sem ela, a descricao
-            # completa pode corrigir o palpite feito pelo card/localizacao.
-            if v.source == "linkedin" and v.description:
+            # A label oficial do LinkedIn e autoridade. Sem ela, apenas texto
+            # explicito pode definir a modalidade; uma cidade nao prova que a
+            # vaga seja presencial.
+            if v.source == "linkedin":
                 reavaliada = infer_linkedin_workplace(
                     v.workplace_type,
                     v.workplace_declared,
@@ -349,7 +350,7 @@ def _importar_com_engine(engine, csv_path, db_path, recriar, referencia, data_mi
                     title=v.title,
                     description=v.description,
                 )
-                if reavaliada and reavaliada != "Não informado" and reavaliada != v.workplace_type:
+                if reavaliada != v.workplace_type:
                     v.workplace_type = reavaliada
                     v.polo, v.regiao = geo.classify(v.location, reavaliada)
 
@@ -359,6 +360,7 @@ def _importar_com_engine(engine, csv_path, db_path, recriar, referencia, data_mi
                     location=v.location,
                     title=v.title,
                     description=v.description,
+                    source=v.source,
                 )
 
             if not v.regiao or v.regiao == "Não informado":

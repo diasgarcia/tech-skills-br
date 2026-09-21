@@ -151,6 +151,9 @@ def infer_workplace(
         if presencial and not remoto:
             return PRESENCIAL
 
+    if source == "linkedin":
+        return NAO_INFORMADO
+
     loc_norm = normalize(location)
     if loc_norm:
         if "remoto" in loc_norm or "home office" in loc_norm:

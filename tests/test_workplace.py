@@ -1,7 +1,7 @@
 import pytest
 
 from scraper.export import build_workplace_ranking
-from scraper.models import Job, infer_workplace, normalize_workplace
+from scraper.models import Job, infer_linkedin_workplace, infer_workplace, normalize_workplace
 from scraper.sources.vagas_com import VagasComSource
 
 
@@ -127,4 +127,28 @@ def test_infer_workplace(explicit, location, title, description, esperado):
     result = infer_workplace(explicit, location, title, description)
 
     assert result == esperado
+
+
+def test_linkedin_sem_rotulo_nao_converte_cidade_em_presencial():
+    result = infer_linkedin_workplace(
+        "Presencial",
+        False,
+        location="São Paulo, SP",
+        title="Desenvolvedor Júnior",
+        description="Desenvolvimento de APIs.",
+    )
+
+    assert result == "Não informado"
+
+
+def test_linkedin_sem_rotulo_aceita_modalidade_explicita_no_texto():
+    result = infer_linkedin_workplace(
+        "Presencial",
+        False,
+        location="São Paulo, SP",
+        title="Desenvolvedor Júnior",
+        description="Modelo de trabalho híbrido.",
+    )
+
+    assert result == "Híbrido"
 

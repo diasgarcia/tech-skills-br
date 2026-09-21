@@ -504,6 +504,7 @@ def test_linkedin_parse_mapeia_campos():
     assert job.location == "São Paulo, São Paulo, Brazil"
     assert job.published_date == "2026-08-01"
     assert job.search_term == "desenvolvedor junior"
+    assert job.workplace_type == "Não informado"
     assert job.workplace_declared is False
 
 
@@ -528,8 +529,8 @@ def test_linkedin_usa_geoid_do_brasil():
 @pytest.mark.parametrize(
     "local,esperado",
     [
-        ("São Paulo, São Paulo, Brazil", "Presencial"),
-        ("Rio de Janeiro e Região", "Presencial"),
+        ("São Paulo, São Paulo, Brazil", "Não informado"),
+        ("Rio de Janeiro e Região", "Não informado"),
         ("Brazil (Remote)", "Remoto"),
         ("São Paulo (Remoto)", "Remoto"),
         ("Curitiba (Híbrido)", "Híbrido"),
@@ -562,12 +563,12 @@ def test_linkedin_titulo_com_remoto_vence_cidade_do_card():
     remoto = LinkedInSource._modalidade(
         "Goiânia, GO", title="Desenvolvedor Python Junior - Trabalho Remoto"
     )
-    presencial = LinkedInSource._modalidade(
+    nao_informado = LinkedInSource._modalidade(
         "Goiânia, GO", title="Desenvolvedor Python Junior"
     )
 
     assert remoto == "Remoto"
-    assert presencial == "Presencial"
+    assert nao_informado == "Não informado"
 
 
 def test_linkedin_rotulo_padrao_tem_prioridade_sobre_titulo_e_localizacao():
