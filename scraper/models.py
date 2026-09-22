@@ -80,6 +80,29 @@ _REMOTO_RE = re.compile(
 _PRESENCIAL_RE = re.compile(
     r"\b(100 presencial|totalmente presencial|presencial|regime presencial|modelo presencial|trabalho presencial|formato presencial|atuacao presencial|in loco)\b"
 )
+_LINKEDIN_WORK_MODEL_RE = re.compile(
+    r"\bwork model (onsite(?:onsite)?|hybrid(?:hybrid)?|remote(?:remote)?)\b"
+)
+_LINKEDIN_HYBRID_CONTEXT_RE = re.compile(
+    r"\b(?:hybrid work model|hybrid in office setting|in office presence in a hybrid capacity)\b"
+)
+_LINKEDIN_MIXED_SCHEDULE_RE = re.compile(
+    r"\b(?:[1-5]x(?: por semana)? home office e [1-5]x presencial"
+    r"|[1-5]x presencial [1-5]x home office"
+    r"|presencial no escritorio de segunda a sexta feira nos sabados e domingos home office)\b"
+)
+_LINKEDIN_ONSITE_CONTEXT_RE = re.compile(
+    r"\b(?:contrato efetivo presencial|(?:expect to|will) work in office monday friday)\b"
+)
+_LINKEDIN_ONSITE_ADVERB_RE = re.compile(
+    r"\b(?:atuar|trabalhar|estagiar|atuara|trabalhara) (?:100 )?presencialmente\b"
+)
+_LINKEDIN_PARTIAL_ONSITE_RE = re.compile(
+    r" (?:conforme necessidade|(?:e|ou|e ou) remotamente|[1-4](?:x| dias?| vezes?))\b"
+)
+_LINKEDIN_BENEFIT_HOME_OFFICE_RE = re.compile(
+    r"\bhome office para (?:maes|mamaes|pais|papais)\b"
+)
 
 
 def normalize_workplace(raw: str | None) -> str:
@@ -178,13 +201,43 @@ def infer_linkedin_workplace(
 ) -> str:
     """Preserva o campo oficial do LinkedIn e usa o texto como fallback."""
     explicit = current if declared else None
-    return infer_workplace(
+    text = normalize(description)
+    inferred = infer_workplace(
         explicit,
         location=location,
         title=title,
-        description=description,
+        description=text,
         source="linkedin",
     )
+    if not declared and inferred == REMOTO and _LINKEDIN_BENEFIT_HOME_OFFICE_RE.search(text):
+        without_benefit = _LINKEDIN_BENEFIT_HOME_OFFICE_RE.sub("", text)
+        if infer_workplace(
+            location=location, title=title, description=without_benefit,
+            source="linkedin",
+        ) != REMOTO:
+            inferred = NAO_INFORMADO
+    if inferred != NAO_INFORMADO or declared:
+        return inferred
+
+    # O detalhe publico por vezes inclui metadados do portal de origem. Outros
+    # termos (suporte remoto, beneficios do escritorio) descrevem atividades,
+    # nao o regime da vaga, e nao devem definir a modalidade sozinhos.
+    work_model = _LINKEDIN_WORK_MODEL_RE.search(text)
+    if work_model:
+        value = work_model.group(1)
+        if value.startswith("hybrid"):
+            return HIBRIDO
+        if value.startswith("remote"):
+            return REMOTO
+        return PRESENCIAL
+    if _LINKEDIN_HYBRID_CONTEXT_RE.search(text) or _LINKEDIN_MIXED_SCHEDULE_RE.search(text):
+        return HIBRIDO
+    if _LINKEDIN_ONSITE_CONTEXT_RE.search(text):
+        return PRESENCIAL
+    for match in _LINKEDIN_ONSITE_ADVERB_RE.finditer(text):
+        if not _LINKEDIN_PARTIAL_ONSITE_RE.match(text[match.end():]):
+            return PRESENCIAL
+    return NAO_INFORMADO
 
 
 

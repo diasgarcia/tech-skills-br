@@ -152,3 +152,56 @@ def test_linkedin_sem_rotulo_aceita_modalidade_explicita_no_texto():
 
     assert result == "Híbrido"
 
+
+@pytest.mark.parametrize(
+    "description,expected",
+    [
+        ("Work model: OnsiteOnsite. Job description: suporte remoto a usuários.", "Presencial"),
+        ("Work model: HybridHybrid. Job description: infraestrutura de nuvem.", "Híbrido"),
+        ("1x por semana Home Office e 4x presencial.", "Híbrido"),
+        ("Modelo de trabalho: 4x presencial, 1x Home Office.", "Híbrido"),
+        ("Atuação em um hybrid work model.", "Híbrido"),
+        ("Informações adicionais: contrato efetivo presencial. Suporte remoto a usuários.", "Presencial"),
+        ("Disponibilidade para trabalhar presencialmente na sede, 5x por semana.", "Presencial"),
+        ("Disponibilidade para estagiar presencialmente por 30 horas semanais.", "Presencial"),
+        ("A pessoa estagiária atuará presencialmente junto à equipe.", "Presencial"),
+        ("Interns should expect to work in office Monday-Friday.", "Presencial"),
+    ],
+)
+def test_linkedin_sem_rotulo_recupera_modalidade_em_declaracoes_claras(description, expected):
+    result = infer_linkedin_workplace(
+        "Não informado", False, title="Analista de TI Júnior", description=description,
+    )
+
+    assert result == expected
+
+
+@pytest.mark.parametrize(
+    "description",
+    [
+        "Atender usuários por telefone ou presencialmente.",
+        "Prestar suporte técnico presencial e remoto aos colaboradores.",
+        "Disponibilidade para atuar presencialmente 2 dias por semana.",
+        "Disponibilidade para atuar presencialmente 3 dias por semana.",
+        "Disponibilidade para atuar presencialmente conforme necessidade da operação.",
+        "Vale-transporte e frutas disponíveis no escritório.",
+        "Home Office para mães até 12 meses do bebê.",
+        "Prestar suporte técnico presencial aos usuários. Home Office para mamães até 12 meses.",
+        "Apoiar ambientes cloud privados, públicos e híbridos.",
+    ],
+)
+def test_linkedin_sem_rotulo_nao_confunde_atividade_ou_beneficio_com_regime(description):
+    result = infer_linkedin_workplace(
+        "Não informado", False, title="Analista de TI Júnior", description=description,
+    )
+
+    assert result == "Não informado"
+
+
+def test_linkedin_rotulo_declarado_prevalece_sobre_padrao_da_descricao():
+    result = infer_linkedin_workplace(
+        "Remoto", True, title="Analista de TI Júnior", description="Work model: OnsiteOnsite.",
+    )
+
+    assert result == "Remoto"
+
