@@ -16,6 +16,8 @@ Parametros descobertos testando o site ao vivo:
 - `Page=<n>` pagina de 20 em 20; pagina alem do fim devolve 200 com a
   lista vazia (seguro para parar). Nao ha teto artificial antes do fim
   natural (categoria=74 tem ~150 paginas; medido ate a ultima).
+- `Antiguedad=2` limita a busca aos ultimos 3 dias. A janela cobre a
+  virada do dia e da margem para uma rodada automatica que falhar.
 - A ordenacao padrao e por data decrescente (pagina 1 = mais recentes).
 
 Detalhes praticos descobertos testando ao vivo:
@@ -57,6 +59,7 @@ SEARCH_URL = f"{BASE_URL}/vagas-de-emprego.aspx"
 # As buscas textuais de junior ganham o recorte de area nativo do portal:
 # sem ele, termos como "assistente de ti" devolvem ruido de outras areas.
 CATEGORIA_TI = "74"
+FILTRO_ULTIMOS_3_DIAS = "2"
 
 # Palavras que indicam nivel coberto pelos filtros nativos: esses termos
 # nao precisam de busca textual (a deduplicacao juntaria as vagas, mas as
@@ -118,6 +121,7 @@ class InfoJobsSource(JobSource):
             params = dict(FILTROS_NIVEL_ENTRADA[term])
         else:
             params = {"Palabra": term, "categoria": CATEGORIA_TI}
+        params["Antiguedad"] = FILTRO_ULTIMOS_3_DIAS
 
         jobs: list[Job] = []
         seen: set[str] = set()

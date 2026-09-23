@@ -286,6 +286,7 @@ def test_infojobs_pagina_deduplica_e_para_em_repeticao():
     assert {j.external_id for j in jobs} == {"11985552", "11983931"}
     assert session.request_count == 2
     assert paginas == [1, 2]
+    assert all(p["Antiguedad"] == "2" for p in session.chamadas)
 
 
 def test_infojobs_para_em_pagina_vazia():
@@ -330,8 +331,9 @@ def test_infojobs_fetch_separa_termos_junior_dos_filtros_nativos():
 
     # 4 filtros nativos + 2 termos junior; estagio/trainee nao repetem.
     assert session.request_count == 6
-    assert chaves[0] == ["Page", "categoria", "tipocontrato"]  # Estágio
-    assert chaves[1] == ["Page", "categoria", "im"]            # Estagiário
-    assert chaves[4] == ["Page", "Palabra", "categoria"]       # termo junior
+    assert chaves[0] == ["Antiguedad", "Page", "categoria", "tipocontrato"]  # Estágio
+    assert chaves[1] == ["Antiguedad", "Page", "categoria", "im"]            # Estagiário
+    assert chaves[4] == ["Antiguedad", "Page", "Palabra", "categoria"]       # termo junior
+    assert all(p["Antiguedad"] == "2" for p in session.chamadas)
     assert session.chamadas[4]["Palabra"] == "desenvolvedor junior"
     assert session.chamadas[5]["Palabra"] == "devops junior"
