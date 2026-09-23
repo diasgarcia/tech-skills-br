@@ -1,7 +1,7 @@
 """Coletor do LinkedIn Jobs pela API de convidado (sem login).
 
     GET https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search
-        ?keywords=<termo>&geoId=106057199&start=<n>
+        ?keywords=<termo>&geoId=106057199&f_TPR=r86400&sortBy=DD&start=<n>
 
 E o endpoint que o proprio site chama para carregar mais resultados na busca
 publica. Devolve um fragmento HTML com 10 cards por chamada, e responde 200 ate
@@ -51,6 +51,12 @@ API_URL = (
 # nao filtra nada e traz vagas dos EUA sem qualquer aviso.
 GEO_ID_BRASIL = "106057199"
 
+# As rodadas regulares sao incrementais. Como o projeto coleta tres vezes ao
+# dia, 24 horas dao sobreposicao suficiente sem reler todo o historico em cada
+# termo. A base consolidada preserva as vagas encontradas em rodadas anteriores.
+FILTRO_ULTIMAS_24_HORAS = "r86400"
+ORDENACAO_MAIS_RECENTES = "DD"
+
 RESULTADOS_POR_PAGINA = 10
 
 _ID_RE = re.compile(r"(\d+)$")
@@ -87,6 +93,8 @@ class LinkedInSource(JobSource):
                 params={
                     "keywords": term,
                     "geoId": GEO_ID_BRASIL,
+                    "f_TPR": FILTRO_ULTIMAS_24_HORAS,
+                    "sortBy": ORDENACAO_MAIS_RECENTES,
                     "start": page * RESULTADOS_POR_PAGINA,
                 },
             )
