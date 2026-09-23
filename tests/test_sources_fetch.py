@@ -92,6 +92,8 @@ def test_linkedin_pagina_deduplica_e_para_em_repeticao():
     assert [j.external_id for j in jobs] == ["4422123289"]
     assert session.request_count == 2
     assert starts == [0, 10]
+    assert all(p["f_TPR"] == "r86400" for p in session.chamadas)
+    assert all(p["sortBy"] == "DD" for p in session.chamadas)
 
 
 def test_linkedin_para_em_pagina_vazia():
