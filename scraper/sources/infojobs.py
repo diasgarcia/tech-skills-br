@@ -91,6 +91,7 @@ PAGE_SIZE = 20  # a listagem devolve 20 cards por pagina, fixos
 class InfoJobsSource(JobSource):
     name = "infojobs"
     label = "InfoJobs"
+    COLLECTION_PROFILE = "last-3d-v1"
     # Categoria TI sozinha tem ~150 paginas, mas os filtros de nivel de
     # entrada e os termos junior devolvem conjuntos muito menores; 50
     # paginas (1000 vagas) e folga de sobra sem varreduras desnecessarias.

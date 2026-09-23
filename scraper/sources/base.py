@@ -32,6 +32,9 @@ class JobSource(ABC):
 
     name: str = "base"
     label: str = "Base"
+    # Deve mudar quando filtros ou escopo alterarem de forma material o
+    # volume esperado. O portao de qualidade compara apenas perfis iguais.
+    COLLECTION_PROFILE: str | None = None
 
     # Teto natural de paginas por termo nesta fonte, descoberto por
     # sondagem (ex.: Solides tem 115 paginas no filtro junior; GeekHunter
@@ -42,7 +45,10 @@ class JobSource(ABC):
     def __init__(self, session: PoliteSession, settings: Settings) -> None:
         self.session = session
         self.settings = settings
-        self.stats = SourceStats(source=self.name)
+        self.stats = SourceStats(
+            source=self.name,
+            collection_profile=self.COLLECTION_PROFILE,
+        )
         self.progress_callback = None
 
     def report(

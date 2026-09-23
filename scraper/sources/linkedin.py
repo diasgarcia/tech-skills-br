@@ -76,6 +76,7 @@ class LinkedInSource(JobSource):
 
     name = "linkedin"
     label = "LinkedIn Jobs"
+    COLLECTION_PROFILE = "last-24h-v1"
     # O portal entrega ate ~1.000 vagas por termo (medido: sem repeticao
     # pagina a pagina ate o start=990). O teto classico da busca guest.
     MAX_PAGES_PER_TERM = 100

@@ -295,3 +295,4 @@ class SourceStats:
     requests_made: int = 0
     raw_jobs: int = 0
     errors: list[str] = field(default_factory=list)
+    collection_profile: str | None = None
