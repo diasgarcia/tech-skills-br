@@ -131,20 +131,22 @@ def assess_history(metrics: dict, history: list[dict]) -> list[QualityAlert]:
 
     alerts: list[QualityAlert] = []
     current = {
-        row["source"]: int(row.get("raw_jobs", 0))
+        row["source"]: row
         for row in metrics.get("source_stats", [])
     }
-    previous: dict[str, list[int]] = {}
-    for run in history[:5]:
-        if not run.get("full_scope"):
-            continue
-        for row in run.get("source_stats", []):
-            previous.setdefault(row["source"], []).append(int(row.get("raw_jobs", 0)))
-
-    for source, value in current.items():
+    for source, current_row in current.items():
         if source in VOLATILE_SOURCES:
             continue
-        samples = previous.get(source, [])
+        value = int(current_row.get("raw_jobs", 0))
+        profile = current_row.get("collection_profile")
+        samples = [
+            int(row.get("raw_jobs", 0))
+            for run in history[:5]
+            if run.get("full_scope")
+            for row in run.get("source_stats", [])
+            if row.get("source") == source
+            and row.get("collection_profile") == profile
+        ]
         if len(samples) < 3:
             continue
         reference = median(samples)
@@ -180,6 +182,11 @@ def build_metrics(
                 "raw_jobs": stat.raw_jobs,
                 "requests": stat.requests_made,
                 "errors": list(stat.errors),
+                **(
+                    {"collection_profile": stat.collection_profile}
+                    if stat.collection_profile is not None
+                    else {}
+                ),
             }
             for stat in stats
         ],

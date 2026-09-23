@@ -66,6 +66,58 @@ def test_historico_detecta_queda_brusca_de_uma_fonte():
     assert alerts[0].severity == "high"
 
 
+def test_historico_ignora_referencia_de_outro_perfil():
+    metrics = {
+        "full_scope": True,
+        "source_stats": [
+            {
+                "source": "infojobs",
+                "raw_jobs": 20,
+                "collection_profile": "last-3d-v1",
+            }
+        ],
+    }
+    history = [
+        {"full_scope": True, "source_stats": [{"source": "infojobs", "raw_jobs": n}]}
+        for n in (100, 110, 90)
+    ]
+
+    alerts = assess_history(metrics, history)
+
+    assert alerts == []
+
+
+def test_historico_compara_execucoes_do_mesmo_perfil():
+    profile = "last-3d-v1"
+    metrics = {
+        "full_scope": True,
+        "source_stats": [
+            {
+                "source": "infojobs",
+                "raw_jobs": 20,
+                "collection_profile": profile,
+            }
+        ],
+    }
+    history = [
+        {
+            "full_scope": True,
+            "source_stats": [
+                {
+                    "source": "infojobs",
+                    "raw_jobs": n,
+                    "collection_profile": profile,
+                }
+            ],
+        }
+        for n in (100, 110, 90)
+    ]
+
+    alerts = assess_history(metrics, history)
+
+    assert [alert.rule for alert in alerts] == ["sharp_drop"]
+
+
 def test_metricas_guardam_contadores_e_alertas():
     metrics = build_metrics(
         [_job(workplace_type="fora-do-dominio")],
@@ -77,3 +129,22 @@ def test_metricas_guardam_contadores_e_alertas():
 
     assert metrics["source_stats"][0]["requests"] == 2
     assert has_high_alerts(metrics)
+
+
+def test_metricas_guardam_perfil_de_coleta_quando_declarado():
+    metrics = build_metrics(
+        [_job()],
+        [
+            SourceStats(
+                "infojobs",
+                raw_jobs=1,
+                requests_made=2,
+                collection_profile="last-3d-v1",
+            )
+        ],
+        raw_jobs=1,
+        requests=2,
+        full_scope=True,
+    )
+
+    assert metrics["source_stats"][0]["collection_profile"] == "last-3d-v1"

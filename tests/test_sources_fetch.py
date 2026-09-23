@@ -94,6 +94,7 @@ def test_linkedin_pagina_deduplica_e_para_em_repeticao():
     assert starts == [0, 10]
     assert all(p["f_TPR"] == "r86400" for p in session.chamadas)
     assert all(p["sortBy"] == "DD" for p in session.chamadas)
+    assert source.stats.collection_profile == "last-24h-v1"
 
 
 def test_linkedin_para_em_pagina_vazia():
@@ -287,6 +288,7 @@ def test_infojobs_pagina_deduplica_e_para_em_repeticao():
     assert session.request_count == 2
     assert paginas == [1, 2]
     assert all(p["Antiguedad"] == "2" for p in session.chamadas)
+    assert source.stats.collection_profile == "last-3d-v1"
 
 
 def test_infojobs_para_em_pagina_vazia():
