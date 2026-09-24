@@ -84,24 +84,103 @@ _LINKEDIN_WORK_MODEL_RE = re.compile(
     r"\bwork model (onsite(?:onsite)?|hybrid(?:hybrid)?|remote(?:remote)?)\b"
 )
 _LINKEDIN_HYBRID_CONTEXT_RE = re.compile(
-    r"\b(?:hybrid work model|hybrid in office setting|in office presence in a hybrid capacity)\b"
+    r"\b(?:hybrid work model|hybrid in office setting|in office presence in a hybrid capacity"
+    r"|hybrid (?:internship|job|position|role)"
+    r"|hibrid[oa]\s+[1-5](?:\s*x| dias?| vezes?)\s+(?:na|por) semana"
+    r"|hibrid[oa] com [1-5] dias? presenciais?"
+    r"|remote with [1-5] days? in (?:the )?office"
+    r"|[1-9][0-9]? remote work from)\b"
+)
+_LINKEDIN_HYBRID_DECLARATION_RE = re.compile(
+    r"\b(?:(?:modalidade|regime|modelo|formato)(?: de (?:trabalho|atuacao))?\s+"
+    r"(?:presencial\s+(?:e|ou|e ou)\s+remot[oa]"
+    r"|remot[oa]\s+(?:e|ou|e ou)\s+presencial)"
+    r"|(?:modalidade|regime|modelo(?: de trabalho)?|formato(?: de trabalho)?|jornada"
+    r"|posicao|oportunidade|localizacao|localidade(?: e modalidade)?"
+    r"|local(?: de (?:trabalho|atuacao))?)"
+    r"(?: [a-z0-9]+){0,8} (?:e |eh )?hibrid[oa])\b"
 )
 _LINKEDIN_MIXED_SCHEDULE_RE = re.compile(
     r"\b(?:[1-5]x(?: por semana)? home office e [1-5]x presencial"
     r"|[1-5]x presencial [1-5]x home office"
+    r"|[1-5] dias? presenciais?(?: na [a-z0-9 ]+)? e [1-5] dias? (?:de |em )?home office"
+    r"|[1-5] dias? (?:de |em )?home office e [1-5] dias? presenciais?"
+    r"|[1-5] (?:dias?|vezes?) presencia(?:l|is) e (?:[1-5]|um) "
+    r"(?:dias?|vezes?) (?:de )?home office"
+    r"|[1-5] dias? presenciais? (?:e )?(?:[1-5]|um) dias? (?:de )?home office"
+    r"|hibrid[oa] [1-5] dias? presencial [1-5] dias? home office"
     r"|presencial no escritorio de segunda a sexta feira nos sabados e domingos home office)\b"
 )
+_LINKEDIN_EXPLICIT_WORKPLACE_RE = re.compile(
+    r"\b(?:modalidade|regime|modelo|formato)(?: de (?:trabalho|atuacao))? "
+    r"(?P<value>hibrid[oa]|remot[oa]|presencial|home office)\b"
+    r"|\b(?:forma de (?:trabalho|atuacao)|trabalho|atuacao|vaga"
+    r"|local(?: de (?:trabalho|atuacao))?) "
+    r"(?P<direct>hibrid[oa]|remot[oa]|presencial|home office)\b"
+)
 _LINKEDIN_ONSITE_CONTEXT_RE = re.compile(
-    r"\b(?:contrato efetivo presencial|(?:expect to|will) work in office monday friday)\b"
+    r"\b(?:contrato(?: de trabalho)? "
+    r"(?:aprendiz |estagio |trainee |clt |pj |temporario |efetivo )?presencial"
+    r"|regime de contratacao presencial"
+    r"|tipo de contrato(?: clt)? presencial"
+    r"|modelo de trabalho (?<!\d)100 presencial"
+    r"|modelo de trabalho(?: [a-z0-9]+){1,12} presencial"
+    r"|modelo full presencial"
+    r"|(?<!\d)100 presencial"
+    r"|[1-9][0-9]h(?:rs|oras)? semanais presencial(?: em| no| na)?"
+    r"|(?:a )?vaga (?:e|eh|sera) presencial"
+    r"|atuacao (?:e|eh|sera) presencial"
+    r"|disponibilidade para (?:atuar|estagiar)(?: [a-z0-9]+){0,10} presencial(?: em| no| na)?"
+    r"|disponibilidade presencial para (?:atuar|estagiar|estagio)"
+    r"|disponibilidade para inicio imediato em rotina presencial"
+    r"|escala(?: [a-z0-9]+){0,12} presencial(?: em| no| na)?"
+    r"|(?:este e um )?cargo (?:e )?(?:full time |totalmente )?presencial"
+    r"|atividade presencial(?: das| de segunda)"
+    r"|estagio (?:e |remunerado )?presencial"
+    r"|vaga aberta(?: [a-z0-9]+){0,8} presencial"
+    r"|vaga efetiva e presencial(?! (?:e|ou|e ou) remot)"
+    r"|vaga para atuar presencial(?: em| no| na)?"
+    r"|(?:o )?trabalho sera presencial"
+    r"|local de trabalho [a-z0-9 /]{0,80} presencial"
+    r"|(?:horario|turno|jornada)(?: de trabalho)? [a-z0-9 /~]{0,80} presencial"
+    r"|estagio presencial(?: em| no| na| cidade)?"
+    r"|(?:expect to|will) work in office monday friday)\b"
 )
 _LINKEDIN_ONSITE_ADVERB_RE = re.compile(
-    r"\b(?:atuar|trabalhar|estagiar|atuara|trabalhara) (?:100 )?presencialmente\b"
+    r"\b(?:atuar|trabalhar|estagiar|atuara|trabalhara)"
+    r" (?:de maneira |de forma |em regime |100 )?presencial(?:mente)?\b"
 )
 _LINKEDIN_PARTIAL_ONSITE_RE = re.compile(
     r" (?:conforme necessidade|(?:e|ou|e ou) remotamente|[1-4](?:x| dias?| vezes?))\b"
 )
 _LINKEDIN_BENEFIT_HOME_OFFICE_RE = re.compile(
-    r"\bhome office para (?:maes|mamaes|pais|papais)\b"
+    r"\b(?:home office para (?:maes|mamaes|pais|papais)"
+    r"|(?:auxilio|ajuda de custo|kit|vale) (?:para |de )?home office"
+    r"(?: apenas para (?:as )?vagas (?<!\d)100 remot[oa]s?"
+    r"| para (?:contratos|modalidades) hibrid[oa]s? (?:e|ou) remot[oa]s?)?)\b"
+)
+_LINKEDIN_REMOTE_CONTEXT_RE = re.compile(
+    r"(?:\b|(?<!\d))(?:(?<!\d)100 remot(?:e|[oa])|(?<!\d)100 home office"
+    r"|totalmente remot[oa]|trabalho remot[oa]|modelo(?: de trabalho)? (?:100 )?home office"
+    r"|regime(?: clt)? remot[oa]|formato remot[oa]|modalidade home office"
+    r"|vaga remot[oa]|atuacao remot[oa]"
+    r"|local de trabalho home office|atuacao (?:e|eh) (?:100 )?home office"
+    r"|(?:horario|jornada)(?: de trabalho)? [a-z0-9 ]{0,80} home office"
+    r"|oportunidade (?:e|eh) remot[oa]|trabalh(?:a|e|ar|ando|ara) remotamente"
+    r"|atuar remotamente(?: [a-z0-9]+){0,8} em ambiente home office"
+    r"|jornada(?: [a-z0-9]+){0,8} de forma remota"
+    r"|para atuar em home office|^home office\b"
+    r"|fully remote|remote first|remote work model|workplace remote"
+    r"|remote (?:internship|job|position|role)"
+    r"|^clt [a-z ]{2,40} remote\b"
+    r"|work(?:ing)? remotely)\b"
+)
+_LINKEDIN_HYBRID_WORD_RE = re.compile(r"\b(?:hibrid[oa]|hybrid)\b")
+_LINKEDIN_TECHNICAL_HYBRID_RE = re.compile(
+    r"\b(?:(?:nuvem|cloud|ambientes?|arquitetura|infraestrutura|solucoes?"
+    r"|aplicacoes?|plataformas?|web|mobile|android|ios)(?: [a-z0-9]+){0,3} "
+    r"(?:hibrid[oa]|hybrid)|(?:hibrid[oa]|hybrid) "
+    r"(?:cloud|search|react|native|entre (?:codigo|plataformas?)))\b"
 )
 
 
@@ -200,29 +279,25 @@ def infer_linkedin_workplace(
     description: str | None = None,
 ) -> str:
     """Preserva o campo oficial do LinkedIn e usa o texto como fallback."""
-    explicit = current if declared else None
-    text = normalize(description)
-    inferred = infer_workplace(
-        explicit,
-        location=location,
-        title=title,
-        description=text,
-        source="linkedin",
-    )
-    if not declared and inferred == REMOTO and _LINKEDIN_BENEFIT_HOME_OFFICE_RE.search(text):
-        without_benefit = _LINKEDIN_BENEFIT_HOME_OFFICE_RE.sub("", text)
-        if infer_workplace(
-            location=location, title=title, description=without_benefit,
-            source="linkedin",
-        ) != REMOTO:
-            inferred = NAO_INFORMADO
-    if inferred != NAO_INFORMADO or declared:
-        return inferred
+    if declared:
+        return normalize_workplace(current)
 
-    # O detalhe publico por vezes inclui metadados do portal de origem. Outros
-    # termos (suporte remoto, beneficios do escritorio) descrevem atividades,
-    # nao o regime da vaga, e nao devem definir a modalidade sozinhos.
-    work_model = _LINKEDIN_WORK_MODEL_RE.search(text)
+    title_inferred = infer_workplace(title=title, source="linkedin")
+    if title_inferred != NAO_INFORMADO:
+        return title_inferred
+
+    location_inferred = normalize_workplace(location)
+    if location_inferred in (REMOTO, HIBRIDO):
+        return location_inferred
+    location_text = normalize(location)
+    if location_inferred == PRESENCIAL and any(
+        marker in location_text for marker in ("presencial", "on site", "onsite")
+    ):
+        return PRESENCIAL
+
+    text = normalize(description)
+    text_without_benefits = _LINKEDIN_BENEFIT_HOME_OFFICE_RE.sub("", text)
+    work_model = _LINKEDIN_WORK_MODEL_RE.search(text_without_benefits)
     if work_model:
         value = work_model.group(1)
         if value.startswith("hybrid"):
@@ -230,12 +305,36 @@ def infer_linkedin_workplace(
         if value.startswith("remote"):
             return REMOTO
         return PRESENCIAL
-    if _LINKEDIN_HYBRID_CONTEXT_RE.search(text) or _LINKEDIN_MIXED_SCHEDULE_RE.search(text):
+
+    if (
+        _LINKEDIN_HYBRID_CONTEXT_RE.search(text_without_benefits)
+        or _LINKEDIN_HYBRID_DECLARATION_RE.search(text_without_benefits)
+        or _LINKEDIN_MIXED_SCHEDULE_RE.search(text_without_benefits)
+    ):
         return HIBRIDO
-    if _LINKEDIN_ONSITE_CONTEXT_RE.search(text):
+
+    declaration = _LINKEDIN_EXPLICIT_WORKPLACE_RE.search(text_without_benefits)
+    if declaration:
+        value = declaration.group("value") or declaration.group("direct")
+        if value.startswith("hibrid"):
+            return HIBRIDO
+        if value.startswith("remot") or value == "home office":
+            return REMOTO
         return PRESENCIAL
-    for match in _LINKEDIN_ONSITE_ADVERB_RE.finditer(text):
-        if not _LINKEDIN_PARTIAL_ONSITE_RE.match(text[match.end():]):
+
+    for match in _LINKEDIN_HYBRID_WORD_RE.finditer(text_without_benefits):
+        context = text_without_benefits[
+            max(0, match.start() - 60):match.end() + 60
+        ]
+        if not _LINKEDIN_TECHNICAL_HYBRID_RE.search(context):
+            return HIBRIDO
+
+    if _LINKEDIN_REMOTE_CONTEXT_RE.search(text_without_benefits):
+        return REMOTO
+    if _LINKEDIN_ONSITE_CONTEXT_RE.search(text_without_benefits):
+        return PRESENCIAL
+    for match in _LINKEDIN_ONSITE_ADVERB_RE.finditer(text_without_benefits):
+        if not _LINKEDIN_PARTIAL_ONSITE_RE.match(text_without_benefits[match.end():]):
             return PRESENCIAL
     return NAO_INFORMADO
 
