@@ -639,6 +639,36 @@ def test_linkedin_rotulo_declarado_vence_descricao_conflitante(tmp_path):
     assert vaga.workplace_declared is True
 
 
+def test_linkedin_nao_apaga_rotulo_declarado_em_coleta_posterior(tmp_path):
+    db_path = tmp_path / "t.db"
+    csv_declarado = _escrever_csv(
+        tmp_path,
+        [_linha(
+            source="linkedin", external_id="9999999999",
+            workplace_type="Híbrido", workplace_declared="1",
+            location="São Paulo, SP", title="Estágio em TI",
+        )],
+        nome="vagas_20260731_170000.csv",
+    )
+    csv_sem_rotulo = _escrever_csv(
+        tmp_path,
+        [_linha(
+            source="linkedin", external_id="9999999999",
+            workplace_type="Não informado", workplace_declared="0",
+            location="São Paulo, SP", title="Estágio em TI",
+        )],
+        nome="vagas_20260731_180000.csv",
+    )
+
+    importar(csv_declarado, db_path)
+    importar(csv_sem_rotulo, db_path)
+    with read_session(db_path) as db:
+        vaga = db.scalar(select(Vaga))
+
+    assert vaga.workplace_type == "Híbrido"
+    assert vaga.workplace_declared is True
+
+
 def test_linkedin_suporte_remoto_nao_define_modalidade(tmp_path):
     csv_path = _escrever_csv(
         tmp_path,

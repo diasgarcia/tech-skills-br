@@ -595,6 +595,16 @@ def test_linkedin_le_rotulo_padrao_do_card():
     assert job.workplace_declared is True
 
 
+def test_linkedin_aplica_modalidade_curada_quando_card_omite_rotulo():
+    html = LINKEDIN_HTML.replace("4422123289", "4469639853")
+    source = _source(LinkedInSource)
+
+    job = source._parse_page(html, "x")[0]
+
+    assert job.workplace_type == "Presencial"
+    assert job.workplace_declared is True
+
+
 def test_linkedin_pagina_vazia():
     source = _source(LinkedInSource)
 

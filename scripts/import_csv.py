@@ -42,7 +42,7 @@ from scraper.classifier import default_classifier  # noqa: E402
 from scraper.consolidation import (  # noqa: E402
     MIN_DATA_CORTE, canonical_company as _canonical_company, consolidate_description,
 )
-from scraper.config import PROJECT_ROOT  # noqa: E402
+from scraper.config import PROJECT_ROOT, workplace_override  # noqa: E402
 from scraper.dedupe import identidade_no_link  # noqa: E402
 from scraper.geo import default_geo_classifier  # noqa: E402
 from scraper.models import infer_linkedin_workplace, infer_workplace  # noqa: E402
@@ -210,6 +210,10 @@ def _importar_com_engine(engine, csv_path, db_path, recriar, referencia, data_mi
                 else:
                     atualizadas += 1
 
+                declared_workplace_before = (
+                    vaga.workplace_type if vaga.workplace_declared else ""
+                )
+
                 if url_csv:
                     por_url_exata.setdefault(url_csv, vaga)
                 if identidade_link:
@@ -256,8 +260,20 @@ def _importar_com_engine(engine, csv_path, db_path, recriar, referencia, data_mi
                     vaga.enrich_encerrada = True
 
                 workplace_declared = linha.get("workplace_declared")
-                if workplace_declared not in (None, ""):
-                    vaga.workplace_declared = _bool_csv(workplace_declared)
+                incoming_declared = (
+                    workplace_declared not in (None, "")
+                    and _bool_csv(workplace_declared)
+                )
+                if incoming_declared:
+                    vaga.workplace_declared = True
+                elif declared_workplace_before:
+                    vaga.workplace_type = declared_workplace_before
+                    vaga.workplace_declared = True
+
+                curated_workplace = workplace_override(source, external_id)
+                if curated_workplace:
+                    vaga.workplace_type = curated_workplace
+                    vaga.workplace_declared = True
 
                 vaga.title = (linha.get("title") or "").strip()
 

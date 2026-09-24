@@ -14,6 +14,7 @@ if str(ROOT_DIR) not in sys.path:
 
 from api.database import connect_sqlite, resolve_sqlite_path  # noqa: E402
 from api.migrations import migrate_connection  # noqa: E402
+from scraper.config import workplace_override  # noqa: E402
 from scraper.geo import default_geo_classifier  # noqa: E402
 from scraper.models import infer_linkedin_workplace  # noqa: E402
 
@@ -28,26 +29,28 @@ def reclassify_linkedin_workplaces(db_path: str | Path | None = None) -> dict:
     with closing(connect_sqlite(db_path)) as conn:
         migrate_connection(conn)
         rows = conn.execute(
-            "SELECT id, title, location, workplace_type, workplace_declared, description "
+            "SELECT id, external_id, title, location, workplace_type, "
+            "workplace_declared, description "
             "FROM vagas WHERE source = 'linkedin'"
         ).fetchall()
         with conn:
-            for db_id, title, location, current, declared, description in rows:
+            for (
+                db_id, external_id, title, location, current, declared, description
+            ) in rows:
                 analyzed += 1
-                workplace = infer_linkedin_workplace(
-                    current,
-                    bool(declared),
-                    location=location,
-                    title=title,
-                    description=description,
+                curated_workplace = workplace_override("linkedin", external_id)
+                workplace = curated_workplace or infer_linkedin_workplace(
+                    current, bool(declared), location=location,
+                    title=title, description=description,
                 )
-                if workplace == (current or ""):
+                new_declared = bool(declared) or bool(curated_workplace)
+                if workplace == (current or "") and new_declared == bool(declared):
                     continue
                 polo, region = geo.classify(location, workplace)
                 conn.execute(
                     "UPDATE vagas SET workplace_type = ?, polo = ?, regiao = ?, "
-                    "updated_at = CURRENT_TIMESTAMP WHERE id = ?",
-                    (workplace, polo, region, db_id),
+                    "workplace_declared = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                    (workplace, polo, region, new_declared, db_id),
                 )
                 changed += 1
 

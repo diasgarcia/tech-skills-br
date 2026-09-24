@@ -29,6 +29,7 @@ import re
 
 from bs4 import BeautifulSoup
 
+from ..config import workplace_override
 from ..models import (
     HIBRIDO,
     NAO_INFORMADO,
@@ -145,11 +146,14 @@ class LinkedInSource(JobSource):
 
         location = self._text(card.select_one("span.job-search-card__location"))
         card_text = self._text(card)
-        workplace_label = self._workplace_label(card)
+        external_id = match.group(1)
+        workplace_label = self._workplace_label(card) or workplace_override(
+            self.name, external_id
+        )
 
         return Job(
             source=self.name,
-            external_id=match.group(1),
+            external_id=external_id,
             title=title,
             company=self._text(card.select_one("h4.base-search-card__subtitle")),
             url=url,
