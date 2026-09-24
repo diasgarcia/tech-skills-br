@@ -81,6 +81,27 @@ def load_term_match_rules() -> dict[str, list[str]]:
     }
 
 
+@lru_cache(maxsize=1)
+def load_workplace_overrides() -> dict[tuple[str, str], str]:
+    """Carrega modalidades conferidas no campo oficial do portal."""
+    with open(RULES_DIR / "workplace_overrides.yml", encoding="utf-8") as fh:
+        dados = yaml.safe_load(fh) or {}
+
+    return {
+        (str(source).strip().lower(), str(external_id).strip()): str(workplace).strip()
+        for source, jobs in dados.items()
+        for external_id, workplace in (jobs or {}).items()
+        if str(source).strip() and str(external_id).strip() and str(workplace).strip()
+    }
+
+
+def workplace_override(source: str, external_id: str) -> str:
+    return load_workplace_overrides().get(
+        ((source or "").strip().lower(), (external_id or "").strip()),
+        "",
+    )
+
+
 # Matriz de delays da rodada padrao, medida em 05/09 (wiki "Limites e
 # Bloqueios"). LinkedIn 1.0s (ponto doce; 0.5s sofre backpressure da
 # API), InfoJobs 2.0s (bloqueio suave), Vagas.com 2.0s (Cloudflare),
