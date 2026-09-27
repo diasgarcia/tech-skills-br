@@ -118,6 +118,73 @@ def test_historico_compara_execucoes_do_mesmo_perfil():
     assert [alert.rule for alert in alerts] == ["sharp_drop"]
 
 
+def test_historico_avisa_sem_bloquear_variacao_de_janela_de_24_horas():
+    profile = "last-24h-v1"
+    metrics = {
+        "full_scope": True,
+        "source_stats": [
+            {
+                "source": "linkedin",
+                "raw_jobs": 4_320,
+                "collection_profile": profile,
+            }
+        ],
+    }
+    history = [
+        {
+            "full_scope": True,
+            "source_stats": [
+                {
+                    "source": "linkedin",
+                    "raw_jobs": value,
+                    "collection_profile": profile,
+                }
+            ],
+        }
+        for value in (19_570, 19_661, 20_067)
+    ]
+
+    alerts = assess_history(metrics, history)
+
+    assert [(alert.rule, alert.severity) for alert in alerts] == [
+        ("sharp_drop", "warning")
+    ]
+    assert not has_high_alerts({"alerts": [alert.__dict__ for alert in alerts]})
+
+
+def test_historico_bloqueia_queda_quase_total_em_janela_de_24_horas():
+    profile = "last-24h-v1"
+    metrics = {
+        "full_scope": True,
+        "source_stats": [
+            {
+                "source": "linkedin",
+                "raw_jobs": 900,
+                "collection_profile": profile,
+            }
+        ],
+    }
+    history = [
+        {
+            "full_scope": True,
+            "source_stats": [
+                {
+                    "source": "linkedin",
+                    "raw_jobs": value,
+                    "collection_profile": profile,
+                }
+            ],
+        }
+        for value in (19_570, 19_661, 20_067)
+    ]
+
+    alerts = assess_history(metrics, history)
+
+    assert [(alert.rule, alert.severity) for alert in alerts] == [
+        ("sharp_drop", "high")
+    ]
+
+
 def test_metricas_guardam_contadores_e_alertas():
     metrics = build_metrics(
         [_job(workplace_type="fora-do-dominio")],

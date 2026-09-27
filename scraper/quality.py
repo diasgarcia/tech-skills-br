@@ -12,6 +12,8 @@ from statistics import median
 from .models import NAO_INFORMADO, WORKPLACE_ORDER, Job, SourceStats
 
 VOLATILE_SOURCES = frozenset({"abler", "recrutei"})
+SHARP_DROP_RATIO = 0.30
+ROLLING_24H_CRITICAL_RATIO = 0.10
 
 
 @dataclass(frozen=True)
@@ -150,10 +152,13 @@ def assess_history(metrics: dict, history: list[dict]) -> list[QualityAlert]:
         if len(samples) < 3:
             continue
         reference = median(samples)
-        limit = reference * 0.30
+        limit = reference * SHARP_DROP_RATIO
         if reference >= 30 and value < limit:
+            critical_limit = reference * ROLLING_24H_CRITICAL_RATIO
+            rolling_24h = bool(profile and profile.startswith("last-24h-"))
+            severity = "warning" if rolling_24h and value >= critical_limit else "high"
             alerts.append(QualityAlert(
-                "sharp_drop", "high",
+                "sharp_drop", severity,
                 f"{source}: {value} vagas brutas; referencia recente {reference:g}.",
                 source=source, value=value, limit=round(limit),
             ))
