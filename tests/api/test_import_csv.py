@@ -512,7 +512,7 @@ def test_importacao_reduz_aviso_de_cidades_proximas(tmp_path):
     with read_session(tmp_path / "t.db") as db:
         location = db.scalar(select(Vaga.location))
 
-    assert location == "Praia Grande / SP e cidades próximas"
+    assert location == "Praia Grande / SP e Região"
 
 
 def test_linha_sem_skills_nao_apaga_skills_do_banco(tmp_path):

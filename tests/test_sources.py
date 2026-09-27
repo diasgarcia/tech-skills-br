@@ -150,7 +150,7 @@ def test_vagas_parse_page_reduz_aviso_de_cidades_proximas():
 
     job = source._parse_page(html, "x")[0]
 
-    assert job.location == "Praia Grande / SP e cidades próximas"
+    assert job.location == "Praia Grande / SP e Região"
 
 
 def test_vagas_parse_page_vazia():
