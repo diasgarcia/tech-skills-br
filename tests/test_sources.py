@@ -141,6 +141,18 @@ def test_vagas_parse_page_detecta_home_office():
     assert job.location == "100% Home Office"
 
 
+def test_vagas_parse_page_reduz_aviso_de_cidades_proximas():
+    html = VAGAS_HTML.replace(
+        "Rio de Janeiro / RJ",
+        "Praia Grande / SP A empresa aceita candidaturas de Praia Grande e cidades próximas",
+    )
+    source = _source(VagasComSource)
+
+    job = source._parse_page(html, "x")[0]
+
+    assert job.location == "Praia Grande / SP e cidades próximas"
+
+
 def test_vagas_parse_page_vazia():
     source = _source(VagasComSource)
 
