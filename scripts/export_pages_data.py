@@ -24,6 +24,7 @@ from sqlalchemy import func, inspect, select
 
 from api.database import read_session
 from api.models import ColetaExecucao, Tecnologia, Vaga, vaga_tecnologia
+from scraper.models import normalize_location
 
 PAGES_API_DIR = ROOT_DIR / "api" / "web"
 
@@ -244,7 +245,7 @@ def export_all_pages_data(
                 "empresa": v.company or "Confidencial",
                 "area": v.area,
                 "senioridade": v.seniority or "Não informado",
-                "localidade": v.location or "Não informado",
+                "localidade": normalize_location(v.location) or "Não informado",
                 "polo": v.polo,
                 "regiao": v.regiao,
                 "modalidade": v.workplace_type or "Não informado",

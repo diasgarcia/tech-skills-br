@@ -45,7 +45,11 @@ from scraper.consolidation import (  # noqa: E402
 from scraper.config import PROJECT_ROOT, workplace_override  # noqa: E402
 from scraper.dedupe import identidade_no_link  # noqa: E402
 from scraper.geo import default_geo_classifier  # noqa: E402
-from scraper.models import infer_linkedin_workplace, infer_workplace  # noqa: E402
+from scraper.models import (  # noqa: E402
+    infer_linkedin_workplace,
+    infer_workplace,
+    normalize_location,
+)
 from scraper.skills import default_extractor  # noqa: E402
 
 
@@ -376,6 +380,8 @@ def _importar_com_engine(engine, csv_path, db_path, recriar, referencia, data_mi
         for v in todas_vagas:
             if v.company:
                 v.company = _canonical_company(v.company)
+            if v.location:
+                v.location = normalize_location(v.location)
 
             # A label oficial do LinkedIn e autoridade. Sem ela, apenas texto
             # explicito pode definir a modalidade; uma cidade nao prova que a

@@ -10,6 +10,11 @@ from typing import Any
 _TAG_RE = re.compile(r"<[^>]+>")
 _WS_RE = re.compile(r"\s+")
 _NON_ALNUM_RE = re.compile(r"[^a-z0-9 ]+")
+_NEARBY_CITIES_NOTICE_RE = re.compile(
+    r"^(?P<place>.+?)\s+a empresa aceita candidaturas de .+?"
+    r"\s+e cidades pr[oó]ximas\.?$",
+    re.IGNORECASE,
+)
 
 
 def strip_html(raw: str | None) -> str:
@@ -32,6 +37,15 @@ def normalize(text: str | None) -> str:
     text = text.lower()
     text = _NON_ALNUM_RE.sub(" ", text)
     return _WS_RE.sub(" ", text).strip()
+
+
+def normalize_location(text: str | None) -> str:
+    """Remove avisos redundantes do portal sem perder a abrangencia do local."""
+    location = _WS_RE.sub(" ", (text or "")).strip()
+    nearby = _NEARBY_CITIES_NOTICE_RE.match(location)
+    if nearby:
+        return f"{nearby.group('place')} e cidades próximas"
+    return location
 
 
 REMOTO = "Remoto"
@@ -369,6 +383,7 @@ class Job:
         self.title = _WS_RE.sub(" ", (self.title or "")).strip()
         self.company = _WS_RE.sub(" ", (self.company or "")).strip()
         self.description = strip_html(self.description)
+        self.location = normalize_location(self.location)
 
     @property
     def source_key(self) -> str:

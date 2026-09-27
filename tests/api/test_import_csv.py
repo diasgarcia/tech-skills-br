@@ -499,6 +499,22 @@ def test_campos_vazios_viram_null(tmp_path):
     assert result == (None, None, [])
 
 
+def test_importacao_reduz_aviso_de_cidades_proximas(tmp_path):
+    csv_path = _escrever_csv(tmp_path, [_linha(
+        source="vagas",
+        location=(
+            "Praia Grande / SP A empresa aceita candidaturas de "
+            "Praia Grande e cidades próximas"
+        ),
+    )])
+
+    importar(csv_path, tmp_path / "t.db")
+    with read_session(tmp_path / "t.db") as db:
+        location = db.scalar(select(Vaga.location))
+
+    assert location == "Praia Grande / SP e cidades próximas"
+
+
 def test_linha_sem_skills_nao_apaga_skills_do_banco(tmp_path):
     # O CSV da coleta roda com --no-enrich: vagas do LinkedIn re-coletadas
     # chegam SEM skills e nao podem sobrescrever o que o banco acumulou.

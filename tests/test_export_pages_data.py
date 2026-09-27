@@ -68,6 +68,32 @@ def test_exportacao_preserva_zero_e_campos_nao_informados(tmp_path):
     assert resumo["metadados"]["gerado_em"] == "2026-09-13T02:30:00+00:00"
 
 
+def test_exportacao_reduz_aviso_de_cidades_proximas(tmp_path):
+    db_path = tmp_path / "localidade.db"
+    engine = make_engine(db_path)
+    try:
+        init_db(engine)
+        with Session(engine) as db:
+            db.add(Vaga(
+                source="vagas",
+                external_id="1",
+                title="Assistente de Marketing",
+                area="Suporte Técnico",
+                location=(
+                    "Praia Grande / SP A empresa aceita candidaturas de "
+                    "Praia Grande e cidades próximas"
+                ),
+            ))
+            db.commit()
+    finally:
+        engine.dispose()
+
+    files = export_all_pages_data(tmp_path / "json", db_path)
+    vagas = json.loads(files["vagas"].read_text(encoding="utf-8"))
+
+    assert vagas[0]["localidade"] == "Praia Grande / SP e cidades próximas"
+
+
 def test_exportacao_calcula_bases_e_nao_confunde_publicacao_com_geracao(tmp_path):
     db_path = tmp_path / "percentuais.db"
     engine = make_engine(db_path)
