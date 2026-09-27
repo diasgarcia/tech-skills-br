@@ -91,7 +91,7 @@ def test_exportacao_reduz_aviso_de_cidades_proximas(tmp_path):
     files = export_all_pages_data(tmp_path / "json", db_path)
     vagas = json.loads(files["vagas"].read_text(encoding="utf-8"))
 
-    assert vagas[0]["localidade"] == "Praia Grande / SP e cidades próximas"
+    assert vagas[0]["localidade"] == "Praia Grande / SP e Região"
 
 
 def test_exportacao_calcula_bases_e_nao_confunde_publicacao_com_geracao(tmp_path):

@@ -44,7 +44,7 @@ def normalize_location(text: str | None) -> str:
     location = _WS_RE.sub(" ", (text or "")).strip()
     nearby = _NEARBY_CITIES_NOTICE_RE.match(location)
     if nearby:
-        return f"{nearby.group('place')} e cidades próximas"
+        return f"{nearby.group('place')} e Região"
     return location
 
 
