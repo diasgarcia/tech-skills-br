@@ -1,8 +1,8 @@
-# Relatório Consolidado da Base de Vagas (7026 vagas)
+# Relatório Consolidado da Base de Vagas (7027 vagas)
 
-- **Data de geração:** 27/09/2026 20:01
+- **Data de geração:** 27/09/2026 22:29
 - **Período coberto:** 03/01/2026 até 27/09/2026
-- **Total de vagas consolidadas:** 7026
+- **Total de vagas consolidadas:** 7027
 
 Os resultados descrevem os anúncios coletados. As menções identificadas não representam toda a demanda do mercado nem o número de contratações.
 
@@ -16,7 +16,7 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 | 4 | Data | 471 | 6.7% | #................... |
 | 5 | Service Desk / Help Desk | 442 | 6.3% | #................... |
 | 6 | Backend | 357 | 5.1% | #................... |
-| 7 | Outros/TI Geral | 296 | 4.2% | #................... |
+| 7 | Outros/TI Geral | 297 | 4.2% | #................... |
 | 8 | Field Service / Hardware | 227 | 3.2% | #................... |
 | 9 | QA | 223 | 3.2% | #................... |
 | 10 | Sistemas / ERP | 208 | 3.0% | #................... |
@@ -36,11 +36,11 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 | Sudeste | 3783 | 53.8% | ###########......... |
 | Sul | 1374 | 19.6% | ####................ |
 | Nordeste | 598 | 8.5% | ##.................. |
-| Centro-Oeste | 384 | 5.5% | #................... |
+| Centro-Oeste | 385 | 5.5% | #................... |
 | Nacional | 329 | 4.7% | #................... |
-| Remoto Nacional | 269 | 3.8% | #................... |
+| Remoto Nacional | 270 | 3.8% | #................... |
 | Norte | 176 | 2.5% | .................... |
-| Não informado | 113 | 1.6% | .................... |
+| Não informado | 112 | 1.6% | .................... |
 
 ## Top 10 Polos Tecnológicos Regionais
 
@@ -50,7 +50,7 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 | 2 | Belo Horizonte | 470 | 6.7% | #................... |
 | 3 | Rio de Janeiro | 379 | 5.4% | #................... |
 | 4 | Nacional | 329 | 4.7% | #................... |
-| 5 | Remoto | 269 | 3.8% | #................... |
+| 5 | Remoto | 270 | 3.8% | #................... |
 | 6 | Curitiba | 265 | 3.8% | #................... |
 | 7 | Porto Alegre | 263 | 3.7% | #................... |
 | 8 | Florianópolis | 198 | 2.8% | #................... |
@@ -61,17 +61,17 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 
 | Modalidade | Vagas | % | Gráfico |
 |---|---|---|---|
-| Presencial | 3161 | 45.0% | #########........... |
-| Não informado | 2239 | 31.9% | ######.............. |
+| Presencial | 3167 | 45.1% | #########........... |
+| Não informado | 2233 | 31.8% | ######.............. |
 | Híbrido | 878 | 12.5% | ##.................. |
-| Remoto | 748 | 10.6% | ##.................. |
+| Remoto | 749 | 10.7% | ##.................. |
 
 ## Distribuição por Nível de Entrada
 
 | Senioridade | Vagas | % |
 |---|---|---|
 | Júnior | 4905 | 69.8% |
-| Estágio | 1934 | 27.5% |
+| Estágio | 1935 | 27.5% |
 | Aprendiz | 111 | 1.6% |
 | Trainee | 76 | 1.1% |
 
@@ -84,7 +84,7 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 | infojobs | 669 | 9.5% |
 | gupy | 574 | 8.2% |
 | vagas | 150 | 2.1% |
-| abler | 128 | 1.8% |
+| abler | 129 | 1.8% |
 | recrutei | 111 | 1.6% |
 | geekhunter | 88 | 1.3% |
 | trampos | 6 | 0.1% |
@@ -95,7 +95,7 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 |---|---|---|
 | 1 | Hardware | 1729 |
 | 2 | Redes de Computadores | 1373 |
-| 3 | Banco de Dados | 1351 |
+| 3 | Banco de Dados | 1352 |
 | 4 | SQL | 1286 |
 | 5 | Windows | 1273 |
 | 6 | Inglês | 1258 |
