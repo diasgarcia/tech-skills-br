@@ -398,7 +398,10 @@ def _importar_com_engine(engine, csv_path, db_path, recriar, referencia, data_mi
                     v.workplace_type = reavaliada
                     v.polo, v.regiao = geo.classify(v.location, reavaliada)
 
-            if not v.workplace_type or v.workplace_type == "Não informado":
+            if (
+                v.source != "linkedin"
+                and (not v.workplace_type or v.workplace_type == "Não informado")
+            ):
                 v.workplace_type = infer_workplace(
                     v.workplace_type,
                     location=v.location,

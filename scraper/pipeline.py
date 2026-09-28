@@ -13,7 +13,13 @@ from .dedupe import deduplicate
 from .export import build_ranking, export_all
 from .geo import attach_geo_info
 from .http_client import PoliteSession
-from .models import NAO_INFORMADO, Job, SourceStats, infer_workplace
+from .models import (
+    NAO_INFORMADO,
+    Job,
+    SourceStats,
+    infer_linkedin_workplace,
+    infer_workplace,
+)
 from .progress import FONTES_LABELS, _BufferLog, _TabelaParalela
 
 
@@ -239,7 +245,15 @@ def run(
     jobs = classify_jobs(jobs, classifier)
     jobs = attach_skills(jobs)
     for job in jobs:
-        if not job.workplace_type or job.workplace_type == NAO_INFORMADO:
+        if job.source == "linkedin":
+            job.workplace_type = infer_linkedin_workplace(
+                job.workplace_type,
+                job.workplace_declared,
+                location=job.location,
+                title=job.title,
+                description=job.description,
+            )
+        elif not job.workplace_type or job.workplace_type == NAO_INFORMADO:
             job.workplace_type = infer_workplace(
                 job.workplace_type,
                 location=job.location,

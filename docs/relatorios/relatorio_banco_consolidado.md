@@ -1,6 +1,6 @@
 # Relatório Consolidado da Base de Vagas (7109 vagas)
 
-- **Data de geração:** 28/09/2026 19:07
+- **Data de geração:** 28/09/2026 17:16
 - **Período coberto:** 03/01/2026 até 28/09/2026
 - **Total de vagas consolidadas:** 7109
 
@@ -38,9 +38,9 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 | Nordeste | 604 | 8.5% | ##.................. |
 | Centro-Oeste | 386 | 5.4% | #................... |
 | Nacional | 333 | 4.7% | #................... |
-| Remoto Nacional | 280 | 3.9% | #................... |
+| Remoto Nacional | 272 | 3.8% | #................... |
 | Norte | 178 | 2.5% | .................... |
-| Não informado | 113 | 1.6% | .................... |
+| Não informado | 121 | 1.7% | .................... |
 
 ## Top 10 Polos Tecnológicos Regionais
 
@@ -50,7 +50,7 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 | 2 | Belo Horizonte | 476 | 6.7% | #................... |
 | 3 | Rio de Janeiro | 383 | 5.4% | #................... |
 | 4 | Nacional | 333 | 4.7% | #................... |
-| 5 | Remoto | 280 | 3.9% | #................... |
+| 5 | Remoto | 272 | 3.8% | #................... |
 | 6 | Curitiba | 267 | 3.8% | #................... |
 | 7 | Porto Alegre | 267 | 3.8% | #................... |
 | 8 | Florianópolis | 198 | 2.8% | #................... |
@@ -61,10 +61,10 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 
 | Modalidade | Vagas | % | Gráfico |
 |---|---|---|---|
-| Presencial | 3191 | 44.9% | #########........... |
-| Não informado | 2272 | 32.0% | ######.............. |
-| Híbrido | 885 | 12.4% | ##.................. |
-| Remoto | 761 | 10.7% | ##.................. |
+| Presencial | 3030 | 42.6% | #########........... |
+| Não informado | 2601 | 36.6% | #######............. |
+| Híbrido | 875 | 12.3% | ##.................. |
+| Remoto | 603 | 8.5% | ##.................. |
 
 ## Distribuição por Nível de Entrada
 
