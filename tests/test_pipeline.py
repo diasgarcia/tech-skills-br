@@ -295,6 +295,26 @@ def test_run_coleta_classifica_e_exporta(tmp_path, monkeypatch, sem_enriquecimen
     assert result.files["report_md"].exists()
 
 
+def test_run_linkedin_nao_confunde_suporte_remoto_com_modalidade(tmp_path, monkeypatch):
+    job = _vaga(
+        title="Assistente de TI Indústria Distrito Industrial",
+        location="Cuiabá, MT",
+        workplace_type="Remoto",
+        workplace_declared=False,
+        description=(
+            "Suporte remoto e presencial aos colaboradores. Atuar em conjunto "
+            "com o time de TI no atendimento aos incidentes, problemas e "
+            "requisições, tanto localmente na unidade de Cuiabá quanto "
+            "remotamente nas demais unidades."
+        ),
+    )
+    monkeypatch.setattr(pipeline, "collect", lambda settings: ([job], [], 0))
+
+    result = run(_settings(tmp_path, enrich_linkedin=False), keep_non_tech=True)
+
+    assert result.jobs[0].workplace_type == "Não informado"
+
+
 def test_run_descarta_vaga_nao_tech(tmp_path, monkeypatch, sem_enriquecimento):
     vagas = [
         _vaga(),

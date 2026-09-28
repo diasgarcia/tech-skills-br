@@ -707,6 +707,32 @@ def test_linkedin_suporte_remoto_nao_define_modalidade(tmp_path):
     assert workplace_type == "Presencial"
 
 
+def test_linkedin_suporte_remoto_sem_regime_fica_nao_informado(tmp_path):
+    csv_path = _escrever_csv(
+        tmp_path,
+        [_linha(
+            source="linkedin",
+            external_id="4470534157",
+            workplace_type="Remoto",
+            location="Cuiabá, MT",
+            title="Assistente de TI Indústria Distrito Industrial",
+            description=(
+                "Suporte remoto e presencial aos colaboradores. Atuar em conjunto "
+                "com o time de TI no atendimento aos incidentes, problemas e "
+                "requisições, tanto localmente na unidade de Cuiabá quanto "
+                "remotamente nas demais unidades."
+            ),
+        )],
+    )
+
+    importar(csv_path, tmp_path / "t.db")
+    with read_session(tmp_path / "t.db") as db:
+        vaga = db.scalar(select(Vaga))
+
+    assert vaga.workplace_type == "Não informado"
+    assert vaga.workplace_declared is False
+
+
 def test_csv_sem_descricao_nao_rebaixa_area_nem_apaga_descricao(tmp_path):
     """O pipeline roda com --no-enrich: a linha da rodada vem com area de
     fallback e descricao vazia. Nao pode degradar a vaga ja classificada."""
