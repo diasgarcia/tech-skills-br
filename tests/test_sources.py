@@ -141,16 +141,33 @@ def test_vagas_parse_page_detecta_home_office():
     assert job.location == "100% Home Office"
 
 
-def test_vagas_parse_page_reduz_aviso_de_cidades_proximas():
+@pytest.mark.parametrize(
+    "location,expected",
+    [
+        (
+            "Praia Grande / SP A empresa aceita candidaturas de Praia Grande e cidades próximas",
+            "Praia Grande / SP e Região",
+        ),
+        (
+            "Rio de Janeiro / RJ A empresa aceita candidaturas de qualquer cidade do Brasil",
+            "Rio de Janeiro / RJ",
+        ),
+        (
+            "Brasil A empresa aceita candidaturas de qualquer cidade do Brasil",
+            "Brasil",
+        ),
+    ],
+)
+def test_vagas_parse_page_reduz_aviso_de_candidaturas(location, expected):
     html = VAGAS_HTML.replace(
         "Rio de Janeiro / RJ",
-        "Praia Grande / SP A empresa aceita candidaturas de Praia Grande e cidades próximas",
+        location,
     )
     source = _source(VagasComSource)
 
     job = source._parse_page(html, "x")[0]
 
-    assert job.location == "Praia Grande / SP e Região"
+    assert job.location == expected
 
 
 def test_vagas_parse_page_vazia():

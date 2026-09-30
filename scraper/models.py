@@ -15,6 +15,10 @@ _NEARBY_CITIES_NOTICE_RE = re.compile(
     r"\s+e cidades pr[oó]ximas\.?$",
     re.IGNORECASE,
 )
+_NATIONAL_CANDIDACY_NOTICE_RE = re.compile(
+    r"\s+a empresa aceita candidaturas de qualquer cidade do brasil\.?$",
+    re.IGNORECASE,
+)
 
 
 def strip_html(raw: str | None) -> str:
@@ -40,8 +44,9 @@ def normalize(text: str | None) -> str:
 
 
 def normalize_location(text: str | None) -> str:
-    """Remove avisos redundantes do portal sem perder a abrangencia do local."""
+    """Mantem o local de trabalho e reduz avisos de abrangencia regional."""
     location = _WS_RE.sub(" ", (text or "")).strip()
+    location = _NATIONAL_CANDIDACY_NOTICE_RE.sub("", location)
     nearby = _NEARBY_CITIES_NOTICE_RE.match(location)
     if nearby:
         return f"{nearby.group('place')} e Região"
