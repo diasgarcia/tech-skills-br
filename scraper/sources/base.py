@@ -96,6 +96,7 @@ class JobSource(ABC):
         jobs: list[Job] = []
         total_terms = len(terms)
         for idx, term in enumerate(terms, 1):
+            errors_before = len(self.stats.errors)
             try:
                 found = self.fetch_term(term)
             except Exception as exc:  # nao derruba a coleta inteira
@@ -103,6 +104,11 @@ class JobSource(ABC):
                 logger.warning("Erro coletando %s", message)
                 self.stats.errors.append(message)
                 continue
+            status = getattr(self.session, "last_status_code", None)
+            if isinstance(status, int) and status >= 400 and len(self.stats.errors) == errors_before:
+                message = f"{self.name}/{term}: HTTP {status} durante a coleta."
+                logger.warning(message)
+                self.stats.errors.append(message)
             sinais = self.settings.term_match_rules.get(term, [])
             if sinais:
                 total_encontrado = len(found)

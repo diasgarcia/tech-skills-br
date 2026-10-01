@@ -2,7 +2,7 @@
 
 Endpoint usado: o mesmo JSON que o front do Portal Gupy chama no browser.
 
-    GET https://employability-portal.gupy.io/api/v1/jobs?jobName=<termo>&limit=<n>&offset=<n>
+    GET https://portal.gupy.io/api/job-search/jobs?jobName=<termo>&limit=<n>&offset=<n>
 
 Descoberto inspecionando a aba Network de https://portal.gupy.io/job-search/term=...
 Nao e a API oficial `api.gupy.io` (essa exige token de empresa); este endpoint e
@@ -26,7 +26,7 @@ from .base import JobSource
 
 logger = logging.getLogger(__name__)
 
-API_URL = "https://employability-portal.gupy.io/api/v1/jobs"
+API_URL = "https://portal.gupy.io/api/job-search/jobs"
 MAX_LIMIT = 100
 
 # Paginas de carreiras COMPARTILHADAS (holdings): o careerPageName rotula
@@ -80,10 +80,21 @@ class GupySource(JobSource):
                 params={"jobName": term, "limit": limit, "offset": offset},
             )
 
-            if not payload:
+            if payload is None:
+                status = getattr(self.session, "last_status_code", None)
+                motivo = f"HTTP {status}" if status and status >= 400 else "falha de rede ou resposta nao-JSON"
+                message = f"{self.name}/{term}: {motivo} (offset={offset})."
+                self.stats.errors.append(message)
+                logger.warning(message)
                 break
 
-            batch = payload.get("data") or []
+            if not isinstance(payload, dict) or not isinstance(payload.get("data"), list):
+                message = f"{self.name}/{term}: resposta fora do formato esperado (offset={offset})."
+                self.stats.errors.append(message)
+                logger.warning(message)
+                break
+
+            batch = payload["data"]
             if not batch:
                 break  # fim real da paginacao
 
