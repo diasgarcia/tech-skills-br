@@ -5,7 +5,7 @@ import pytest
 from scraper.config import Settings
 from scraper.models import Job
 from scraper.sources.base import JobSource
-from scraper.sources.gupy import GupySource
+from scraper.sources.gupy import API_URL, GupySource
 from scraper.sources.infojobs import InfoJobsSource
 from scraper.sources.linkedin import LinkedInSource
 from scraper.sources.trampos import TramposSource
@@ -74,6 +74,54 @@ def test_gupy_para_quando_api_falha():
 
     assert jobs == []
     assert session.request_count == 1
+    assert len(source.stats.errors) == 1
+
+
+def test_gupy_usa_rota_publica_do_portal():
+    assert API_URL == "https://portal.gupy.io/api/job-search/jobs"
+
+
+def test_gupy_registra_http_404_sem_confundir_com_pagina_vazia():
+    session = FakeSession([None])
+    session.last_status_code = 404
+    source = GupySource(session=session, settings=_settings())
+
+    jobs = source.fetch(["desenvolvedor junior"])
+
+    assert jobs == []
+    assert source.stats.raw_jobs == 0
+    assert source.stats.requests_made == 1
+    assert "HTTP 404" in source.stats.errors[0]
+
+
+def test_gupy_pagina_vazia_valida_nao_e_falha():
+    source = GupySource(session=FakeSession([{"data": []}]), settings=_settings())
+
+    jobs = source.fetch_term("x")
+
+    assert jobs == []
+    assert source.stats.errors == []
+
+
+@pytest.mark.parametrize("payload", [{}, [], {"data": None}, {"data": {"id": 1}}])
+def test_gupy_registra_resposta_fora_do_contrato(payload):
+    source = GupySource(session=FakeSession([payload]), settings=_settings())
+
+    jobs = source.fetch_term("x")
+
+    assert jobs == []
+    assert "formato esperado" in source.stats.errors[0]
+
+
+def test_gupy_preserva_paginas_validas_antes_da_falha():
+    session = FakeSession([{"data": [GUPY_JOB]}, None])
+    source = GupySource(session=session, settings=_settings(page_size=1))
+
+    jobs = source.fetch(["x"])
+
+    assert [job.external_id for job in jobs] == ["11617525"]
+    assert source.stats.raw_jobs == 1
+    assert source.stats.errors
 
 
 def test_linkedin_pagina_deduplica_e_para_em_repeticao():
@@ -122,6 +170,38 @@ def test_linkedin_para_quando_api_falha():
     jobs = source.fetch_term("x")
 
     assert jobs == []
+
+
+def test_fetch_registra_falha_http_sem_excecao():
+    session = FakeSession([None])
+    session.last_status_code = 403
+    source = LinkedInSource(session=session, settings=_settings())
+
+    jobs = source.fetch(["x"])
+
+    assert jobs == []
+    assert source.stats.errors == ["linkedin/x: HTTP 403 durante a coleta."]
+
+
+def test_fetch_preserva_resultados_antes_de_falha_http():
+    session = FakeSession([FakeHtmlResponse(LINKEDIN_HTML), None])
+    session.last_status_code = 429
+    source = LinkedInSource(session=session, settings=_settings())
+
+    jobs = source.fetch(["x"])
+
+    assert [job.external_id for job in jobs] == ["4422123289"]
+    assert "HTTP 429" in source.stats.errors[0]
+
+
+def test_fetch_nao_duplica_erro_ja_registrado_pela_fonte():
+    session = FakeSession([None])
+    session.last_status_code = 404
+    source = GupySource(session=session, settings=_settings())
+
+    source.fetch(["x"])
+
+    assert len(source.stats.errors) == 1
 
 
 def test_vagas_com_pagina_e_deduplica():
