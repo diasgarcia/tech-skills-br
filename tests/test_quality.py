@@ -215,3 +215,76 @@ def test_metricas_guardam_perfil_de_coleta_quando_declarado():
     )
 
     assert metrics["source_stats"][0]["collection_profile"] == "last-3d-v1"
+
+
+def test_falha_conhecida_permite_coleta_parcial_sem_renovar_escopo_completo():
+    metrics = build_metrics(
+        [_job(source="linkedin")],
+        [
+            SourceStats("gupy", errors=["HTTP 404"]),
+            SourceStats("linkedin", raw_jobs=1),
+        ],
+        raw_jobs=1, requests=2, full_scope=True,
+    )
+    history = [
+        {"full_scope": True, "source_stats": [{"source": "gupy", "raw_jobs": 300}]}
+        for _ in range(3)
+    ]
+
+    historical_alerts = assess_history(metrics, history)
+
+    assert not has_high_alerts(metrics)
+    assert metrics["requested_full_scope"] is True
+    assert metrics["full_scope"] is False
+    assert metrics["failed_sources"] == ["gupy"]
+    assert any(alert["rule"] == "partial_collection" for alert in metrics["alerts"])
+    assert historical_alerts == []
+
+
+def test_falha_conhecida_nao_libera_coleta_totalmente_vazia():
+    metrics = build_metrics(
+        [], [SourceStats("gupy", errors=["HTTP 404"])],
+        raw_jobs=0, requests=1, full_scope=True,
+    )
+
+    assert has_high_alerts(metrics)
+    assert any(alert["rule"] == "collection_empty" for alert in metrics["alerts"])
+
+
+def test_falha_conhecida_nao_oculta_outra_fonte_zerada_sem_erro():
+    metrics = build_metrics(
+        [_job(source="infojobs")],
+        [
+            SourceStats("gupy", errors=["HTTP 404"]),
+            SourceStats("linkedin", raw_jobs=0),
+            SourceStats("infojobs", raw_jobs=1),
+        ],
+        raw_jobs=1, requests=3, full_scope=True,
+    )
+
+    assert has_high_alerts(metrics)
+    assert any(
+        alert["rule"] == "source_empty" and alert["source"] == "linkedin"
+        for alert in metrics["alerts"]
+    )
+
+
+def test_coleta_parcial_ainda_bloqueia_queda_silenciosa_de_outra_fonte():
+    metrics = build_metrics(
+        [_job(source="linkedin")],
+        [
+            SourceStats("gupy", errors=["HTTP 404"]),
+            SourceStats("linkedin", raw_jobs=1),
+        ],
+        raw_jobs=1, requests=2, full_scope=True,
+    )
+    history = [
+        {"full_scope": True, "source_stats": [{"source": "linkedin", "raw_jobs": 100}]}
+        for _ in range(3)
+    ]
+
+    alerts = assess_history(metrics, history)
+
+    assert [(alert.rule, alert.source, alert.severity) for alert in alerts] == [
+        ("sharp_drop", "linkedin", "high")
+    ]

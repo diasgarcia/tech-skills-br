@@ -70,6 +70,7 @@ jobs:
 
     - name: 5. Coletar todas as fontes (limite natural de paginacao de cada uma)
       run: |
+        set -o pipefail
         # tee em vez de capturar em variavel: o log aparece ao vivo no
         # terminal da run (captura so exibiria no final).
         # Os defaults vivem no codigo (scraper/config.py): coleta paralela
@@ -88,6 +89,7 @@ jobs:
 
     - name: 6. Carregar historico, consolidar novas vagas e atualizar snapshot
       run: |
+        set -o pipefail
         python scripts/release_snapshot.py download --allow-legacy
         python scripts/collection_health.py check
         # Importa todos os CSVs da rodada, do mais antigo para o mais novo.
@@ -118,7 +120,9 @@ jobs:
           DADOS_MUDARAM=0
         fi
         python scripts/collection_health.py record
-        FRESCOR=$(python scripts/collection_health.py status --max-age-hours 24)
+        # Uma coleta parcial nao renova o frescor global. Isso e um aviso,
+        # nao um motivo para perder os resultados das fontes saudaveis.
+        FRESCOR=$(python scripts/collection_health.py status --max-age-hours 24 --warn-only)
         {
           echo "## Frescor da coleta"
           echo
@@ -292,6 +296,7 @@ jobs:
         path: |
           data/
           output/*.csv
+          output/collection_metrics.json
           seed/vagas.csv
         retention-days: 7
         if-no-files-found: warn

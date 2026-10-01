@@ -73,6 +73,12 @@ def print_alerts(metrics: dict) -> None:
     for alert in alerts:
         level = "ERROR" if alert.get("severity") == "high" else "WARNING"
         print(f"{level}: {alert.get('message', 'Alerta de qualidade')}")
+        if alert.get("rule") == "partial_collection" and os.getenv("GITHUB_ACTIONS") == "true":
+            print(f"::warning title=Coleta parcial::{alert['message']}")
+            summary_path = os.getenv("GITHUB_STEP_SUMMARY")
+            if summary_path:
+                with Path(summary_path).open("a", encoding="utf-8") as summary:
+                    summary.write(f"\n## Coleta parcial\n\n{alert['message']}\n")
 
 
 def record(metrics_path: Path, db_path: str | Path | None = None) -> None:
@@ -154,6 +160,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--metrics", type=Path, default=Path("output/collection_metrics.json"))
     parser.add_argument("--db", type=Path, default=None)
     parser.add_argument("--max-age-hours", type=float, default=24)
+    parser.add_argument("--warn-only", action="store_true", help="Frescor atrasado gera aviso, sem erro de saida.")
     args = parser.parse_args(argv)
     db_path = resolve_sqlite_path(args.db)
 
@@ -165,6 +172,13 @@ def main(argv: list[str] | None = None) -> int:
 
     result = freshness(db_path, max_age_hours=args.max_age_hours)
     print(json.dumps(result, ensure_ascii=False))
+    if args.warn_only and result["state"] != "current":
+        print(
+            "::warning title=Coleta completa atrasada::O frescor global nao foi renovado. "
+            "Veja os alertas de qualidade desta rodada.",
+            file=sys.stderr,
+        )
+        return 0
     return int(result["state"] != "current")
 
 
