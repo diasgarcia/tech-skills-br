@@ -137,3 +137,37 @@ def test_status_apenas_aviso_nao_oculta_erro_operacional(tmp_path, monkeypatch):
 
     with pytest.raises(RuntimeError, match="Banco indisponivel"):
         main(["status", "--db", str(tmp_path / "vagas.db"), "--warn-only"])
+
+
+@pytest.mark.parametrize("failed_sources", [[], ["gupy"], ["gupy", "linkedin"]])
+def test_validacao_exporta_falhas_sem_interromper_publicacoes(tmp_path, monkeypatch, failed_sources):
+    db_path = tmp_path / "vagas.db"
+    output_path = tmp_path / "github-output.txt"
+    init_db(db_path=db_path)
+    metrics = build_metrics(
+        [Job(source="infojobs", external_id="1", title="Desenvolvedor Junior")],
+        [
+            SourceStats(source, raw_jobs=0, errors=["HTTP 404"])
+            for source in failed_sources
+        ] + [SourceStats("infojobs", raw_jobs=1)],
+        raw_jobs=1, requests=1, full_scope=True,
+    )
+    metrics_path = write_metrics(metrics, tmp_path / "metrics.json")
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    monkeypatch.setenv("GITHUB_OUTPUT", str(output_path))
+
+    exit_code = main(["check", "--db", str(db_path), "--metrics", str(metrics_path)])
+    record(metrics_path, db_path)
+    outputs = dict(
+        line.split("=", 1) for line in output_path.read_text(encoding="utf-8").splitlines()
+    )
+
+    assert exit_code == 0
+    assert outputs["has_source_errors"] == str(bool(failed_sources)).lower()
+    assert json.loads(outputs["failed_sources"]) == failed_sources
+    with sqlite3.connect(db_path) as conn:
+        run_status, complete = conn.execute(
+            "SELECT status, escopo_completo FROM coleta_execucoes"
+        ).fetchone()
+    assert run_status == ("warning" if failed_sources else "ok")
+    assert bool(complete) is (not failed_sources)

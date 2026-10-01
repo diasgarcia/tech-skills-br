@@ -48,6 +48,10 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
 
+    outputs:
+      has_source_errors: ${{ steps.consolidation.outputs.has_source_errors }}
+      failed_sources: ${{ steps.consolidation.outputs.failed_sources }}
+
     steps:
     - name: 1. Baixar repositorio
       uses: actions/checkout@v7
@@ -88,6 +92,7 @@ jobs:
         PYTHONPATH: .
 
     - name: 6. Carregar historico, consolidar novas vagas e atualizar snapshot
+      id: consolidation
       run: |
         set -o pipefail
         python scripts/release_snapshot.py download --allow-legacy
@@ -289,7 +294,7 @@ jobs:
         path: '_site'
 
     - name: Preservar dados para recuperacao em caso de falha
-      if: failure()
+      if: failure() || steps.consolidation.outputs.has_source_errors == 'true'
       uses: actions/upload-artifact@v7
       with:
         name: recuperacao-coleta-${{ github.run_id }}
@@ -320,5 +325,30 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v5
 
-
-
+  report-source-errors:
+    name: Sinalizar falhas das fontes apos as publicacoes
+    needs: [scrape-and-update, deploy-pages]
+    # A falha intencional fica neste job, depois das entregas. Nao coloque
+    # exit 1 no coletor: isso impediria o job dependente de publicar o Pages.
+    if: >-
+      ${{ !cancelled() && needs.scrape-and-update.result == 'success'
+          && needs.scrape-and-update.outputs.has_source_errors == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+    env:
+      FAILED_SOURCES: ${{ needs.scrape-and-update.outputs.failed_sources }}
+    steps:
+      - name: Encerrar rodada parcial como falha
+        run: |
+          printf '::error title=Coleta parcial::Falha nas fontes: %s. As entregas dos dados validos foram processadas antes desta verificacao.\n' "$FAILED_SOURCES"
+          {
+            echo "## Rodada encerrada com erro de fonte"
+            echo
+            printf 'Fontes com falha: %s\n' "$FAILED_SOURCES"
+            echo
+            echo "Esta verificacao ocorre depois da consolidacao e das publicacoes."
+            echo "Ela nao desfaz os dados salvos nem as entregas que tiveram sucesso."
+            echo "Consulte os jobs anteriores para conferir cada entrega."
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit 1

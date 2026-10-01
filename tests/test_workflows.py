@@ -51,3 +51,26 @@ def test_coleta_diaria_preserva_metricas_e_nao_mascara_falhas_com_tee():
     assert content.count("set -o pipefail") == 2
     assert "output/collection_metrics.json" in content
     assert "status --max-age-hours 24 --warn-only)" in content
+
+
+def test_falha_de_fonte_so_encerra_workflow_depois_do_pages():
+    content = (WORKFLOW_DIR / "daily_scraper.yml").read_text(encoding="utf-8")
+    jobs = yaml.safe_load(content)["jobs"]
+    collection = jobs["scrape-and-update"]
+    final = jobs["report-source-errors"]
+    consolidation = next(step for step in collection["steps"] if step.get("id") == "consolidation")
+    recovery = next(step for step in collection["steps"] if step.get("if", "").startswith("failure()"))
+
+    assert jobs["deploy-pages"]["needs"] == "scrape-and-update"
+    assert final["needs"] == ["scrape-and-update", "deploy-pages"]
+    assert "!cancelled()" in final["if"]
+    assert "needs.scrape-and-update.result == 'success'" in final["if"]
+    assert "needs.scrape-and-update.outputs.has_source_errors == 'true'" in final["if"]
+    assert collection["outputs"]["has_source_errors"] == "${{ steps.consolidation.outputs.has_source_errors }}"
+    assert "scripts/collection_health.py check" in consolidation["run"]
+    assert "scripts/release_snapshot.py publish" in consolidation["run"]
+    assert "scripts/export_kaggle.py" in consolidation["run"]
+    assert "has_source_errors == 'true'" in recovery["if"]
+    assert "::error title=Coleta parcial::" in final["steps"][0]["run"]
+    assert final["steps"][0]["run"].rstrip().endswith("exit 1")
+    assert "continue-on-error" not in final["steps"][0]
