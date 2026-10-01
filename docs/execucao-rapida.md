@@ -89,6 +89,9 @@ coleta real.
 Se uma fonte registrar falha, a rodada pode publicar os resultados das demais
 fontes como coleta parcial. As vagas anteriores são preservadas. O aviso aparece
 no resumo do Actions, e o frescor global continua ligado à última coleta completa.
+Depois das etapas de publicação na release, no Kaggle e no Pages, um job final
+marca a rodada como falha se alguma fonte registrou erro. As entregas concluídas
+não são desfeitas. O artefato de recuperação também é guardado nas rodadas parciais.
 Uma fonte zerada sem erro ou outro alerta alto ainda impede a publicação.
 
 ## Gerar saídas locais

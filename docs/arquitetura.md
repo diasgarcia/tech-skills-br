@@ -98,8 +98,10 @@ móvel de 24 horas, portanto a redução pode ser normal mesmo sem falha do port
 
 Uma falha registrada em uma fonte permite publicar os resultados válidos das
 outras fontes como coleta parcial. O importador preserva as vagas anteriores da
-fonte que falhou. O Actions mostra um aviso. A rodada não renova o frescor da
-última coleta completa. Fonte zerada sem erro, coleta totalmente vazia e quedas
+fonte que falhou. O Actions mostra um aviso. Depois das etapas de publicação,
+um job final encerra a rodada como falha. Esse erro não desfaz os dados salvos
+nem as entregas concluídas. A rodada não renova o frescor da última coleta
+completa. Fonte zerada sem erro, coleta totalmente vazia e quedas
 anormais nas fontes sem erro continuam bloqueando a publicação.
 
 Testes locais não demonstram disponibilidade dos portais nem sucesso de uma publicação real. Não execute coleta, migração na base de trabalho ou publicação como efeito colateral de uma revisão.

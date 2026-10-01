@@ -66,6 +66,14 @@ def check(metrics_path: Path, db_path: str | Path | None = None) -> dict:
 
 
 def print_alerts(metrics: dict) -> None:
+    output_path = os.getenv("GITHUB_OUTPUT")
+    if os.getenv("GITHUB_ACTIONS") == "true" and output_path:
+        failed_sources = sorted({
+            row["source"] for row in metrics.get("source_stats", []) if row.get("errors")
+        })
+        with Path(output_path).open("a", encoding="utf-8") as output:
+            output.write(f"has_source_errors={str(bool(failed_sources)).lower()}\n")
+            output.write(f"failed_sources={json.dumps(failed_sources, ensure_ascii=True)}\n")
     alerts = metrics.get("alerts", [])
     if not alerts:
         print("Qualidade da coleta: nenhuma anomalia detectada.")
