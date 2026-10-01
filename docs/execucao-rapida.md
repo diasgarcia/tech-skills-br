@@ -86,6 +86,11 @@ histórico da release e só registra a rodada depois das validações. Não use
 `collection_health.py record` para uma correção manual: frescor representa uma
 coleta real.
 
+Se uma fonte registrar falha, a rodada pode publicar os resultados das demais
+fontes como coleta parcial. As vagas anteriores são preservadas. O aviso aparece
+no resumo do Actions, e o frescor global continua ligado à última coleta completa.
+Uma fonte zerada sem erro ou outro alerta alto ainda impede a publicação.
+
 ## Gerar saídas locais
 
 ```powershell
@@ -113,6 +118,9 @@ O primeiro comando prepara DB e CSV da mesma cópia consistente, verifica o hash
 Uma falha no Kaggle não desfaz a release. O workflow **Publicar Snapshot no Kaggle** repete somente essa entrega, sem nova coleta. A confirmação compara o Parquet de uma versão identificada, não apenas o número da versão.
 
 Se o upload da release falhar, preserve `data/snapshots/<hash>/`. Nos Actions, os arquivos disponíveis são guardados no artefato de recuperação por sete dias. Uma publicação confirmada remove somente sua cópia temporária de recuperação.
+
+O artefato também guarda `output/collection_metrics.json`. Use as métricas da
+rodada ao recuperar seu CSV. Não registre uma rodada parcial como coleta completa.
 
 O upload de vários assets não é atômico: uma interrupção pode deixar uma release incompleta. Nesse caso, não force uma nova coleta nem baixe por cima do banco de trabalho. Preserve a cópia de recuperação, pare os escritores e confira os hashes e a origem antes de restaurar os assets do mesmo snapshot. Se outro snapshot já foi publicado, reconcilie as mudanças; não restaure uma base antiga por cima dele.
 

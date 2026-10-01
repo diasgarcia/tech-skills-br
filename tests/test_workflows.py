@@ -43,3 +43,11 @@ def test_coleta_diaria_valida_qualidade_e_registra_frescor_antes_da_release():
     assert "python scripts/collection_health.py record" in content
     assert content.index("collection_health.py check") < content.index("scripts/import_csv.py")
     assert content.index("collection_health.py record") < content.index("release_snapshot.py publish")
+
+
+def test_coleta_diaria_preserva_metricas_e_nao_mascara_falhas_com_tee():
+    content = (WORKFLOW_DIR / "daily_scraper.yml").read_text(encoding="utf-8")
+
+    assert content.count("set -o pipefail") == 2
+    assert "output/collection_metrics.json" in content
+    assert "status --max-age-hours 24 --warn-only)" in content

@@ -128,7 +128,7 @@ def assess_current(
 
 
 def assess_history(metrics: dict, history: list[dict]) -> list[QualityAlert]:
-    if not metrics.get("full_scope"):
+    if not metrics.get("requested_full_scope", metrics.get("full_scope")):
         return []
 
     alerts: list[QualityAlert] = []
@@ -137,7 +137,7 @@ def assess_history(metrics: dict, history: list[dict]) -> list[QualityAlert]:
         for row in metrics.get("source_stats", [])
     }
     for source, current_row in current.items():
-        if source in VOLATILE_SOURCES:
+        if source in VOLATILE_SOURCES or current_row.get("errors"):
             continue
         value = int(current_row.get("raw_jobs", 0))
         profile = current_row.get("collection_profile")
@@ -148,6 +148,7 @@ def assess_history(metrics: dict, history: list[dict]) -> list[QualityAlert]:
             for row in run.get("source_stats", [])
             if row.get("source") == source
             and row.get("collection_profile") == profile
+            and not row.get("errors")
         ]
         if len(samples) < 3:
             continue
@@ -174,10 +175,20 @@ def build_metrics(
     full_scope: bool,
 ) -> dict:
     alerts = assess_current(jobs, stats, full_scope=full_scope)
+    failed_sources = sorted({stat.source for stat in stats if stat.errors})
+    if failed_sources:
+        alerts.append(QualityAlert(
+            "partial_collection", "warning",
+            "Coleta parcial: falha em " + ", ".join(failed_sources)
+            + ". As vagas anteriores dessas fontes serao preservadas.",
+            value=len(failed_sources), limit=0,
+        ))
     return {
         "schema_version": 1,
         "collected_at": datetime.now(timezone.utc).isoformat(),
-        "full_scope": full_scope,
+        "requested_full_scope": full_scope,
+        "full_scope": full_scope and not failed_sources,
+        "failed_sources": failed_sources,
         "raw_jobs": raw_jobs,
         "eligible_jobs": len(jobs),
         "requests": requests,
