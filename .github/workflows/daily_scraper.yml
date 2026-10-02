@@ -58,7 +58,7 @@ jobs:
 
     - name: 2. Registrar data da rodada
       run: |
-        echo "DATA_HOJE=$(TZ=America/Sao_Paulo date +'%d/%m/%Y')" >> "$GITHUB_ENV"
+        TZ=America/Sao_Paulo date +'DATA_HOJE=%d/%m/%Y%nDIA_RESUMO=%Y-%m-%d' >> "$GITHUB_ENV"
 
     - name: 3. Configurar Python 3.12
       uses: actions/setup-python@v7
@@ -154,7 +154,7 @@ jobs:
         # O relatorio e os graficos do README sao atualizados na rodada 3
         # (19:16 BRT) ou quando a coleta e tratada como manual.
         if [ "$EXECUCAO" = "manual" ] || [ "$RODADA_INPUT" = "3" ]; then
-          python scripts/report_db.py
+          python scripts/report_db.py --dia "$DIA_RESUMO"
           echo "ATUALIZAR_RESUMOS=1" >> "$GITHUB_ENV"
         else
           echo "ATUALIZAR_RESUMOS=0" >> "$GITHUB_ENV"
@@ -185,6 +185,7 @@ jobs:
           echo "KAGGLE_PRONTO=1" >> "$GITHUB_ENV"
         fi
         python scripts/resumo_commit.py \
+          --dia "$DIA_RESUMO" \
           --brutas "$BRUTAS" --elegiveis "$ELEGIVEIS" \
           --novas "$NOVAS" --atualizadas "$ATUALIZADAS" \
           --summary-json data/enrich-outras.json --summary-json data/enrich-linkedin.json > /tmp/corpo_commit.txt
@@ -245,8 +246,8 @@ jobs:
           N=$(git log --format='%s' | grep -c "coleta automatizada de vagas \[${DATA_HOJE}\] - manual" || true)
           MENSAGEM="chore(data): coleta automatizada de vagas [${DATA_HOJE}] - manual $((N + 1))"
         fi
-        # O corpo do commit traz o resumo da rodada (coleta, base,
-        # enriquecidas e pendentes), gerado no passo 6.
+        # O corpo destaca as vagas novas do dia e separa as contagens da
+        # ultima rodada (coleta, importacao e enriquecimento).
         { echo "${MENSAGEM}"; echo; cat /tmp/corpo_commit.txt; } > /tmp/commit_msg.txt
         # Sem [skip ci]: o push em api/web/** precisa disparar o
         # deploy_pages.yml (o marcador suprimiria todos os workflows do push).

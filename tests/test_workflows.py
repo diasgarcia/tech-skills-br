@@ -74,3 +74,13 @@ def test_falha_de_fonte_so_encerra_workflow_depois_do_pages():
     assert "::error title=Coleta parcial::" in final["steps"][0]["run"]
     assert final["steps"][0]["run"].rstrip().endswith("exit 1")
     assert "continue-on-error" not in final["steps"][0]
+
+
+def test_commit_diario_recebe_o_mesmo_dia_de_brasilia_usado_no_titulo():
+    content = (WORKFLOW_DIR / "daily_scraper.yml").read_text(encoding="utf-8")
+
+    assert "TZ=America/Sao_Paulo date +'DATA_HOJE=%d/%m/%Y%nDIA_RESUMO=%Y-%m-%d'" in content
+    assert '--dia "$DIA_RESUMO"' in content
+    assert 'python scripts/report_db.py --dia "$DIA_RESUMO"' in content
+    assert content.count('--dia "$DIA_RESUMO"') == 2
+    assert content.index("collection_health.py record") < content.index("scripts/resumo_commit.py")
