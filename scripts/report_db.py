@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import argparse
 import sys
-from datetime import datetime
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 
@@ -34,8 +34,12 @@ def _bar(percent: float, width: int = 20) -> str:
 def generate_db_report(
     db_path: Path | str | None = None,
     export_md: bool = True,
+    *,
+    dia: date | None = None,
 ) -> str:
     lines: list[str] = []
+    gerado_em = datetime.now(timezone(timedelta(hours=-3)))
+    dia = dia or gerado_em.date()
 
 
     with read_session(db_path) as session:
@@ -43,6 +47,12 @@ def generate_db_report(
         if total_vagas == 0:
             print("O banco de dados está vazio. Nenhuma vaga cadastrada.")
             return ""
+
+        novas_no_dia = session.scalar(
+            select(func.count(Vaga.id)).where(
+                func.date(Vaga.created_at, "-3 hours") == dia.isoformat()
+            )
+        ) or 0
 
         min_date = session.scalar(select(func.min(Vaga.published_date)))
         max_date = session.scalar(select(func.max(Vaga.published_date)))
@@ -106,11 +116,12 @@ def generate_db_report(
             .limit(10)
         ).all()
 
-    now_str = datetime.now().strftime("%d/%m/%Y %H:%M")
+    now_str = gerado_em.strftime("%d/%m/%Y %H:%M")
     header = (
         "=" * 68 + "\n"
         f"  RELATÓRIO CONSOLIDADO DO BANCO DE DADOS -- {total_vagas} VAGAS TOTAIS\n"
-        f"  Gerado em: {now_str} | Período: {periodo_str}\n"
+        f"  Gerado em: {now_str} (Brasília) | Período: {periodo_str}\n"
+        f"  Novas no dia ({dia:%d/%m/%Y}, Brasília): {novas_no_dia}\n"
         f"  Banco: {url_sem_senha(database_url(db_path))}\n"
         + "=" * 68
     )
@@ -118,9 +129,10 @@ def generate_db_report(
 
     lines.append(f"# Relatório Consolidado da Base de Vagas ({total_vagas} vagas)")
     lines.append("")
-    lines.append(f"- **Data de geração:** {now_str}")
+    lines.append(f"- **Data de geração:** {now_str} (Brasília)")
     lines.append(f"- **Período coberto:** {periodo_str}")
     lines.append(f"- **Total de vagas consolidadas:** {total_vagas}")
+    lines.append(f"- **Vagas novas no dia ({dia:%d/%m/%Y}, Brasília):** {novas_no_dia}")
     lines.append("")
     lines.append("Os resultados descrevem os anúncios coletados. As menções identificadas não representam toda a demanda do mercado nem o número de contratações.\n")
 
@@ -207,7 +219,7 @@ def generate_db_report(
     if export_md:
         output_dir = DEFAULT_OUTPUT_DIR
         output_dir.mkdir(parents=True, exist_ok=True)
-        stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        stamp = gerado_em.strftime("%Y%m%d_%H%M%S")
 
         report_path = output_dir / f"relatorio_banco_consolidado_{stamp}.md"
         report_path.write_text(md_content, encoding="utf-8")
@@ -232,6 +244,10 @@ def main(argv: list[str] | None = None) -> int:
         "--db", default=None, help="Caminho do SQLite."
     )
     parser.add_argument(
+        "--dia", type=date.fromisoformat, default=None, metavar="AAAA-MM-DD",
+        help="Dia para contar as vagas novas, no horario de Brasilia (padrao: hoje).",
+    )
+    parser.add_argument(
         "--no-export", action="store_true", help="Nao grava o arquivo Markdown em output/."
     )
     args = parser.parse_args(argv)
@@ -239,6 +255,7 @@ def main(argv: list[str] | None = None) -> int:
     generate_db_report(
         db_path=args.db,
         export_md=not args.no_export,
+        dia=args.dia,
     )
 
     return 0

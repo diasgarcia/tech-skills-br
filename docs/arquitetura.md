@@ -75,6 +75,13 @@ O GitHub é publicado antes da réplica no Kaggle. Uma falha da réplica deixa a
 
 ## Métricas e interface
 
+O corpo do commit diário e o relatório Markdown destacam as vagas novas que ainda
+estão na base e entraram naquele dia. Os dois recebem a mesma data do workflow.
+A contagem usa `created_at`, convertido de UTC para
+Brasília (UTC-3). Atualizações de vagas antigas não contam como novas. A data de
+publicação do anúncio não define esse total. Coleta, importação e enriquecimento
+da última rodada aparecem separados do acumulado diário.
+
 O gráfico mantém o histórico por **data de publicação**, por decisão do responsável. As colunas contam vagas publicadas nessa data; a linha conta as habilidades distintas atualmente relacionadas a essas vagas. Não é um registro de eventos de coleta ou extração. A atualização dos JSONs tem data de geração própria.
 
 Valores ausentes não são convertidos em Júnior, Presencial ou Brasil. Denominador zero produz percentual zero sem alterar a contagem publicada.

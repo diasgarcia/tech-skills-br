@@ -13,6 +13,7 @@ Os criterios de "pendente" sao compartilhados com os enriquecedores.
 from __future__ import annotations
 
 import argparse
+from datetime import date
 import re
 import sys
 from contextlib import closing
@@ -60,6 +61,7 @@ def _parse_enriquecidas(log_path: Path | None):
 
 
 def resumir(args: argparse.Namespace) -> str:
+    dia = getattr(args, "dia", None)
     with closing(connect_sqlite(getattr(args, "db", None), read_only=True)) as conn:
         total = conn.execute("SELECT COUNT(*) FROM vagas").fetchone()[0]
         por_fonte = dict(conn.execute("SELECT source, COUNT(*) FROM vagas GROUP BY source"))
@@ -67,8 +69,17 @@ def resumir(args: argparse.Namespace) -> str:
             fonte: conn.execute(f"SELECT COUNT(*) FROM ({query})", parametros).fetchone()[0]
             for fonte, (query, parametros) in PENDENTES_POR_FONTE.items()
         }
+        if dia is not None:
+            # created_at e UTC no SQLite; o dia do resumo usa Brasilia (UTC-3).
+            novas_no_dia = conn.execute(
+                "SELECT COUNT(*) FROM vagas WHERE date(created_at, '-3 hours') = ?",
+                (dia.isoformat(),),
+            ).fetchone()[0]
 
     linhas: list[str] = []
+    if dia is not None:
+        unidade = "vaga" if novas_no_dia == 1 else "vagas"
+        linhas.append(f"- Novas no dia ({dia:%d/%m/%Y}, Brasilia): {novas_no_dia} {unidade}")
 
     if args.brutas is not None or args.elegiveis is not None:
         partes = []
@@ -76,7 +87,8 @@ def resumir(args: argparse.Namespace) -> str:
             partes.append(f"{args.brutas} brutas")
         if args.elegiveis is not None:
             partes.append(f"{args.elegiveis} elegiveis (junior/estagio/trainee)")
-        linhas.append("- Coleta: " + " | ".join(partes))
+        rotulo = "Coleta da ultima rodada" if dia is not None else "Coleta"
+        linhas.append(f"- {rotulo}: " + " | ".join(partes))
 
     if args.novas is not None or args.atualizadas is not None:
         partes = []
@@ -84,7 +96,8 @@ def resumir(args: argparse.Namespace) -> str:
             partes.append(f"{args.novas} novas")
         if args.atualizadas is not None:
             partes.append(f"{args.atualizadas} atualizadas")
-        linhas.append("- Importacao: " + " | ".join(partes))
+        rotulo = "Importacao da ultima rodada" if dia is not None else "Importacao"
+        linhas.append(f"- {rotulo}: " + " | ".join(partes))
 
     fontes = ", ".join(f"{f} {por_fonte.get(f, 0)}" for f in ORDEM_FONTES)
     linhas.append(f"- Base: {total} vagas ({fontes})")
@@ -100,7 +113,8 @@ def resumir(args: argparse.Namespace) -> str:
         partes = [f"{f} {n}" for f, n in (outras or {}).items()]
         if linkedin is not None:
             partes.append(f"linkedin {linkedin}")
-        linhas.append("- Enriquecidas: " + " | ".join(partes))
+        rotulo = "Enriquecidas na ultima rodada" if dia is not None else "Enriquecidas"
+        linhas.append(f"- {rotulo}: " + " | ".join(partes))
 
     linhas.append(
         "- Pendentes: " + " | ".join(f"{f} {n}" for f, n in pendentes.items())
@@ -115,6 +129,10 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--brutas", type=int, default=None, help="Vagas brutas da coleta.")
     parser.add_argument("--db", type=Path, default=None, help="Banco SQLite para leitura.")
+    parser.add_argument(
+        "--dia", type=date.fromisoformat, default=None, metavar="AAAA-MM-DD",
+        help="Destaca as vagas novas na base neste dia, no horario de Brasilia.",
+    )
     parser.add_argument(
         "--summary-json", type=Path, action="append", default=None,
         help="Resumo estruturado de enriquecimento; repita para incluir outro arquivo.",
