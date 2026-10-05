@@ -139,6 +139,9 @@ tech_gate:
     - suporte comercial
     - sistemas eletricos
     - sistemas de purificacao de agua
+    # Redes de encanamento nao sao redes de computadores.
+    - encanador
+    - encanadora
     - inspetor de solda
     - programador de carga
     - programador de oficina

@@ -145,12 +145,39 @@ def test_tech_gate_descarta_vagas_fora_de_tecnologia(clf, title):
         "Analista de Gestão de Contratos Jr - Telecomunicações",
         "Aprendiz - Monitoração Redes Clientes",
         "Operador de Programação Logística I",
+        "Auxiliar de Encanador de Redes (Serviços Comerciais)",
+        "Encanadora de Redes Júnior",
     ],
 )
 def test_tech_gate_exclui_contextos_nao_tech(clf, title):
     result = clf.is_tech(title)
 
     assert result is False
+
+
+@pytest.mark.parametrize(
+    "description",
+    [
+        "",
+        "Instalação de hidrômetros, manutenção de redes e conexões hidráulicas.",
+        "Registrar ordens de serviço no software e prestar suporte técnico às equipes de campo.",
+    ],
+)
+def test_tech_gate_descarta_encanador_mesmo_com_termos_tecnicos(clf, description):
+    title = "Auxiliar de Encanador de Redes (Serviços Comerciais)"
+
+    result = clf.is_tech(title, description)
+
+    assert result is False
+
+
+def test_tech_gate_mantem_redes_de_ti_em_empresa_de_saneamento(clf):
+    title = "Analista de Redes Júnior - GS Inima Brasil"
+    description = "Configurar roteadores e redes de computadores usadas pelas equipes de encanadores."
+
+    result = clf.is_tech(title, description)
+
+    assert result is True
 
 
 @pytest.mark.parametrize(

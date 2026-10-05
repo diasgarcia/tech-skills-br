@@ -404,6 +404,21 @@ def test_vaga_fora_do_escopo_tech_nao_entra(tmp_path):
     assert resultado["total"] == 0
 
 
+def test_importacao_descarta_encanador_de_redes_sem_descricao(tmp_path):
+    db_path = tmp_path / "t.db"
+    csv_path = _escrever_csv(tmp_path, [_linha(
+        source="linkedin", external_id="4473171135",
+        title="Auxiliar de Encanador de Redes (Serviços Comerciais)",
+        company="GS Inima Brasil", location="Ourinhos, SP", description="", skills="",
+    )])
+
+    resultado = importar(csv_path, db_path)
+
+    assert resultado["criadas"] == 0
+    assert resultado["nao_tech"] == 1
+    assert resultado["total"] == 0
+
+
 def test_mesma_external_id_em_fontes_diferentes_sao_vagas_distintas(tmp_path):
     csv_path = _escrever_csv(
         tmp_path, [_linha(source="gupy"), _linha(source="vagas")]
