@@ -92,7 +92,7 @@ def _hide_spines(ax) -> None:
 
 
 def build_daily_activity(
-    jobs: list[ChartJob], days: int = 30
+    jobs: list[ChartJob], days: int = 30, *, reference_date: date | None = None,
 ) -> DailyActivity:
     """Agrupa vagas e habilidades distintas pela data de publicacao."""
     if days < 1:
@@ -103,6 +103,8 @@ def build_daily_activity(
         raise ValueError("Nenhuma vaga com data de publicacao.")
 
     last_date = max(job.published_date for job in dated_jobs if job.published_date)
+    if reference_date is not None:
+        last_date = min(last_date, reference_date)
     first_date = last_date - timedelta(days=days - 1)
     dates = tuple(first_date + timedelta(days=offset) for offset in range(days))
     jobs_by_date: Counter[date] = Counter()
@@ -182,10 +184,10 @@ def build_area_skill_matrix(
 
 
 def chart_daily_jobs_and_skills(
-    jobs: list[ChartJob], output_path: Path, days: int = 30
+    jobs: list[ChartJob], output_path: Path, days: int = 30, *, reference_date: date | None = None,
 ) -> Path:
     """Colunas de vagas e linha de habilidades distintas por dia."""
-    data = build_daily_activity(jobs, days=days)
+    data = build_daily_activity(jobs, days=days, reference_date=reference_date)
     _style()
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -269,7 +271,7 @@ def chart_daily_jobs_and_skills(
         0.075,
         0.055,
         f"Base: {_format_int(data.total_jobs)} vagas · "
-        f"última publicação em {data.last_date.strftime('%d/%m/%Y')}",
+        f"publicações até {data.last_date.strftime('%d/%m/%Y')}",
         fontsize=8.7,
         color=MUTED,
     )
@@ -353,7 +355,7 @@ def chart_area_skill_heatmap(
 
 
 def export_readme_charts(
-    jobs: list[ChartJob], output_dir: Path
+    jobs: list[ChartJob], output_dir: Path, *, reference_date: date | None = None,
 ) -> dict[str, Path]:
     """Gera os dois SVGs estaveis publicados pelo GitHub Pages."""
     if not jobs:
@@ -361,7 +363,7 @@ def export_readme_charts(
     output_dir.mkdir(parents=True, exist_ok=True)
     return {
         "daily": chart_daily_jobs_and_skills(
-            jobs, output_dir / "vagas-habilidades-30d.svg"
+            jobs, output_dir / "vagas-habilidades-30d.svg", reference_date=reference_date,
         ),
         "heatmap": chart_area_skill_heatmap(
             jobs, output_dir / "areas-habilidades.svg"

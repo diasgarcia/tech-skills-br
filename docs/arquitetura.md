@@ -84,6 +84,10 @@ da última rodada aparecem separados do acumulado diário.
 
 O gráfico mantém o histórico por **data de publicação**, por decisão do responsável. As colunas contam vagas publicadas nessa data; a linha conta as habilidades distintas atualmente relacionadas a essas vagas. Não é um registro de eventos de coleta ou extração. A atualização dos JSONs tem data de geração própria.
 
+O timestamp dos CSVs e a referência das datas relativas usam Brasília (UTC-3).
+Datas explícitas dos portais são preservadas. O gráfico não avança além do dia
+da rodada, mesmo quando algum anúncio informa uma data de publicação futura.
+
 Valores ausentes não são convertidos em Júnior, Presencial ou Brasil. Denominador zero produz percentual zero sem alterar a contagem publicada.
 
 No LinkedIn, uma cidade informa localização, não modalidade. O projeto usa o rótulo

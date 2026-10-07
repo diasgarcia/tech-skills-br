@@ -278,7 +278,7 @@ jobs:
       run: |
         python scripts/build_pages.py
         if [ "$ATUALIZAR_RESUMOS" = "1" ]; then
-          python scripts/export_readme_charts.py --output-dir _site/assets
+          python scripts/export_readme_charts.py --output-dir _site/assets --dia "$DIA_RESUMO"
         else
           # O Pages e publicado em toda rodada para atualizar a API JSON.
           # Preserve os graficos publicados ate a rodada 3.

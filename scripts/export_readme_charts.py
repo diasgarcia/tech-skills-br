@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import sys
 from collections import defaultdict
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 from sqlalchemy import select
@@ -46,11 +47,12 @@ def load_chart_jobs(db_path: str | Path | None = None) -> list[ChartJob]:
 
 
 def export_pages_charts(
-    output_dir: Path, db_path: str | Path | None = None
+    output_dir: Path, db_path: str | Path | None = None, *, dia: date | None = None,
 ) -> dict[str, Path]:
     """Exporta os dois SVGs estaveis usados pelo README."""
     jobs = load_chart_jobs(db_path)
-    files = export_readme_charts(jobs, output_dir)
+    dia = dia or datetime.now(timezone(timedelta(hours=-3))).date()
+    files = export_readme_charts(jobs, output_dir, reference_date=dia)
     if not files:
         raise ValueError("O banco nao contem vagas para gerar os graficos.")
     return files
@@ -67,9 +69,13 @@ def main(argv: list[str] | None = None) -> int:
         help="Diretorio que recebera os SVGs.",
     )
     parser.add_argument("--db", type=Path, default=None, help="Caminho do SQLite.")
+    parser.add_argument(
+        "--dia", type=date.fromisoformat, default=None, metavar="AAAA-MM-DD",
+        help="Dia limite do grafico, em Brasilia (padrao: hoje).",
+    )
     args = parser.parse_args(argv)
 
-    files = export_pages_charts(args.output_dir, args.db)
+    files = export_pages_charts(args.output_dir, args.db, dia=args.dia)
     for path in files.values():
         print(path)
     return 0

@@ -82,5 +82,5 @@ def test_commit_diario_recebe_o_mesmo_dia_de_brasilia_usado_no_titulo():
     assert "TZ=America/Sao_Paulo date +'DATA_HOJE=%d/%m/%Y%nDIA_RESUMO=%Y-%m-%d'" in content
     assert '--dia "$DIA_RESUMO"' in content
     assert 'python scripts/report_db.py --dia "$DIA_RESUMO"' in content
-    assert content.count('--dia "$DIA_RESUMO"') == 2
+    assert content.count('--dia "$DIA_RESUMO"') == 3
     assert content.index("collection_health.py record") < content.index("scripts/resumo_commit.py")

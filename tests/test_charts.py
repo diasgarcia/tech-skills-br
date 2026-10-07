@@ -45,6 +45,35 @@ def test_build_daily_activity_rejeita_periodo_invalido():
         build_daily_activity(jobs, days=0)
 
 
+def test_build_daily_activity_data_futura_nao_adianta_dia_da_rodada():
+    jobs = [
+        _job(date(2026, 10, 5), "Backend", "Python"),
+        _job(date(2026, 10, 6), "Data", "SQL"),
+        _job(date(2026, 10, 7), "Frontend", "React"),
+    ]
+
+    result = build_daily_activity(jobs, days=2, reference_date=date(2026, 10, 6))
+
+    assert result.dates == (date(2026, 10, 5), date(2026, 10, 6))
+    assert result.jobs == (1, 1)
+    assert result.skills == (1, 1)
+    assert result.total_jobs == 3
+    assert result.period_jobs == 2
+    assert result.period_skills == 2
+    assert jobs[-1].published_date == date(2026, 10, 7)
+
+
+def test_build_daily_activity_so_datas_futuras_nao_contam_no_periodo():
+    jobs = [_job(date(2026, 10, 7), "Backend", "Python")]
+
+    result = build_daily_activity(jobs, days=2, reference_date=date(2026, 10, 6))
+
+    assert result.last_date == date(2026, 10, 6)
+    assert result.jobs == (0, 0)
+    assert result.skills == (0, 0)
+    assert result.total_jobs == 1
+
+
 def test_build_daily_activity_rejeita_base_sem_datas():
     jobs = [_job(None, "Backend", "Python")]
 

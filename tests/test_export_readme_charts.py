@@ -1,10 +1,14 @@
 """Testes da publicacao dos graficos usados no README."""
 
+from contextlib import closing
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 import pytest
 
-from api.database import init_db
+from api.database import connect_sqlite, init_db
+from scraper.charts import ChartJob
+from scripts import export_readme_charts
 from scripts.export_readme_charts import export_pages_charts, load_chart_jobs
 from scripts.import_csv import importar
 
@@ -43,6 +47,51 @@ def test_export_pages_charts_rejeita_banco_vazio(tmp_path):
         export_pages_charts(tmp_path / "assets", db_path)
 
 
+def test_cli_grafico_respeita_dia_da_rodada_sem_alterar_banco(tmp_path, csv_vagas_minimo):
+    db_path = tmp_path / "vagas.db"
+    output_dir = tmp_path / "assets"
+    importar(csv_vagas_minimo, db_path=db_path)
+    with closing(connect_sqlite(db_path)) as conn, conn:
+        conn.execute("UPDATE vagas SET published_date = '2026-10-06'")
+        conn.execute(
+            "INSERT INTO vagas (source,external_id,title,area,published_date,enrich_encerrada) "
+            "VALUES ('linkedin','future','Dev Junior','Backend','2026-10-07',0)"
+        )
+    before = db_path.read_bytes()
+
+    exit_code = export_readme_charts.main([
+        "--db", str(db_path), "--output-dir", str(output_dir), "--dia", "2026-10-06",
+    ])
+    svg = (output_dir / "vagas-habilidades-30d.svg").read_text(encoding="utf-8")
+
+    assert exit_code == 0
+    assert "publicações até 06/10/2026" in svg
+    assert "Base: 2 vagas" in svg
+    assert db_path.read_bytes() == before
+
+
+def test_grafico_padrao_usa_dia_de_brasilia(monkeypatch, tmp_path):
+    instante = datetime(2026, 10, 7, 0, 35, tzinfo=timezone.utc)
+    references = []
+
+    class DataFixa(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return instante.astimezone(tz) if tz else instante.replace(tzinfo=None)
+
+    def exportar(jobs, output_dir, *, reference_date):
+        references.append(reference_date)
+        return {"daily": output_dir / "daily.svg"}
+
+    monkeypatch.setattr(export_readme_charts, "datetime", DataFixa)
+    monkeypatch.setattr(export_readme_charts, "load_chart_jobs", lambda path: [ChartJob(None, "Backend")])
+    monkeypatch.setattr(export_readme_charts, "export_readme_charts", exportar)
+
+    export_pages_charts(tmp_path)
+
+    assert references == [date(2026, 10, 6)]
+
+
 @pytest.mark.parametrize("workflow", PAGES_WORKFLOWS)
 def test_todo_deploy_do_pages_inclui_os_graficos(workflow):
     content = workflow.read_text(encoding="utf-8")
@@ -66,6 +115,7 @@ def test_rodada_3_e_coleta_manual_atualizam_relatorio_e_graficos():
     assert content.count(
         "python scripts/export_readme_charts.py --output-dir _site/assets"
     ) == 1
+    assert 'python scripts/export_readme_charts.py --output-dir _site/assets --dia "$DIA_RESUMO"' in content
 
 
 def test_cron_sem_rodada_valida_e_tratado_como_manual():
