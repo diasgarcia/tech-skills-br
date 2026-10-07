@@ -15,7 +15,7 @@ datas que produziria no dia da coleta.
 from __future__ import annotations
 
 import re
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 _STAMP_RE = re.compile(r"(\d{8})_(\d{6})")
@@ -37,7 +37,8 @@ _RELATIVE_DAYS = (
 def reference_date_from_csv(path: str | Path) -> date:
     """Data de geracao do CSV, tirada do timestamp no nome do arquivo.
 
-    Se o nome nao tiver timestamp, cai para a data de modificacao do arquivo.
+    O timestamp do exportador usa Brasilia. Sem timestamp, usa a data de
+    modificacao do arquivo no mesmo fuso.
     """
     path = Path(path)
     match = _STAMP_RE.search(path.name)
@@ -46,7 +47,7 @@ def reference_date_from_csv(path: str | Path) -> date:
             return datetime.strptime(match.group(1), "%Y%m%d").date()
         except ValueError:
             pass
-    return datetime.fromtimestamp(path.stat().st_mtime).date()
+    return datetime.fromtimestamp(path.stat().st_mtime, timezone(timedelta(hours=-3))).date()
 
 
 def parse_published_date(raw: str | None, reference: date) -> date | None:

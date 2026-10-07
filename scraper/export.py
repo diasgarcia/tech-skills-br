@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import csv
 from collections import Counter
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from .checkpoints import atomic_csv_file
@@ -35,7 +35,7 @@ RANKING_COLUMNS = ["posicao", "area", "vagas", "percentual"]
 
 
 def _timestamp() -> str:
-    return datetime.now().strftime("%Y%m%d_%H%M%S")
+    return datetime.now(timezone(timedelta(hours=-3))).strftime("%Y%m%d_%H%M%S")
 
 
 def export_jobs_csv(jobs: list[Job], output_dir: Path, stamp: str | None = None) -> Path:
@@ -147,7 +147,8 @@ def export_report_md(
     lines: list[str] = []
     lines.append("# Vagas tech junior no Brasil - ranking por area")
     lines.append("")
-    lines.append(f"Coleta em **{datetime.now().strftime('%d/%m/%Y %H:%M')}**.")
+    coletado_em = datetime.now(timezone(timedelta(hours=-3)))
+    lines.append(f"Coleta em **{coletado_em:%d/%m/%Y %H:%M} (Brasília)**.")
     lines.append("")
     lines.append(f"- Vagas de nivel de entrada encontradas: **{total}**")
     lines.append(f"- Portais consultados: {', '.join(meta.get('sources', []))}")

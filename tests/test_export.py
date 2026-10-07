@@ -1,5 +1,8 @@
 import csv
+from datetime import date, datetime, timezone
 
+from api.dates import reference_date_from_csv
+from scraper import export
 from scraper.export import build_ranking, export_all
 from scraper.models import Job
 
@@ -56,3 +59,21 @@ def test_export_all_gera_arquivos_tabulares_e_relatorio(tmp_path):
     assert ranking[0]["vagas"] == "2"
     assert "Ranking de areas" in report
     assert "Backend" in report
+
+
+def test_exportacao_usa_brasilia_quando_utc_ja_virou_o_dia(tmp_path, monkeypatch):
+    instante = datetime(2026, 10, 7, 0, 35, 30, tzinfo=timezone.utc)
+
+    class DataFixa(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return instante.astimezone(tz) if tz else instante.replace(tzinfo=None)
+
+    monkeypatch.setattr(export, "datetime", DataFixa)
+
+    files = export_all(_jobs(), tmp_path, meta={})
+
+    assert files["jobs_csv"].name == "vagas_20261006_213530.csv"
+    assert all("20261006_213530" in path.name for path in files.values())
+    assert reference_date_from_csv(files["jobs_csv"]) == date(2026, 10, 6)
+    assert "06/10/2026 21:35 (Brasília)" in files["report_md"].read_text(encoding="utf-8")

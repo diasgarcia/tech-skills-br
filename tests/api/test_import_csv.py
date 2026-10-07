@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import csv
+import os
 from contextlib import closing
-from datetime import date
+from datetime import date, datetime, timezone
 
 import pytest
 from sqlalchemy import func, select
@@ -68,6 +69,17 @@ def test_referencia_cai_para_mtime_sem_timestamp_no_nome(tmp_path):
     result = reference_date_from_csv(arquivo)
 
     assert isinstance(result, date)
+
+
+def test_referencia_sem_timestamp_converte_mtime_utc_para_brasilia(tmp_path):
+    arquivo = tmp_path / "vagas.csv"
+    arquivo.write_text("x", encoding="utf-8")
+    instante = datetime(2026, 10, 7, 0, 35, tzinfo=timezone.utc).timestamp()
+    os.utime(arquivo, (instante, instante))
+
+    result = reference_date_from_csv(arquivo)
+
+    assert result == date(2026, 10, 6)
 
 
 COLUNAS = [
@@ -588,6 +600,30 @@ def test_referencia_explicita_funciona_sem_timestamp_no_nome(tmp_path):
         published_date = db.scalar(select(Vaga)).published_date
 
     assert published_date == date(2026, 7, 28)
+
+
+@pytest.mark.parametrize(
+    "raw,expected",
+    [
+        ("Hoje", date(2026, 10, 6)),
+        ("Ontem", date(2026, 10, 5)),
+        ("Há 4 dias", date(2026, 10, 2)),
+        ("Atualizada há 3 horas", date(2026, 10, 6)),
+        ("2026-10-07", date(2026, 10, 7)),
+        ("07/10/2026", date(2026, 10, 7)),
+    ],
+)
+def test_importacao_usa_dia_brasilia_do_csv_sem_mudar_datas_explicitas(tmp_path, raw, expected):
+    db_path = tmp_path / "vagas.db"
+    csv_path = _escrever_csv(
+        tmp_path, [_linha(published_date=raw)], nome="vagas_20261006_213530.csv",
+    )
+
+    importar(csv_path, db_path)
+    with read_session(db_path) as db:
+        published_date = db.scalar(select(Vaga)).published_date
+
+    assert published_date == expected
 
 
 def test_recriar_limpa_o_banco(tmp_path):
