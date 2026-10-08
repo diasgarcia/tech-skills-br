@@ -227,6 +227,153 @@ def test_descarte_preserva_indices_com_acentos_unicode_e_espacos(ext):
     assert set(found) == {"SQL", "C++"}
 
 
+@pytest.mark.parametrize(
+    "texto,esperadas",
+    [
+        (
+            "Ambiente descentralizado e repleto de benefícios para colaboradores. "
+            "Esperamos que você projete pipelines ETL com Spark. "
+            "É importante que você conheça Python e SQL. "
+            "É legal que você tenha Azure e Power BI. Benefícios: curso de Go.",
+            {"ETL", "Spark", "Python", "SQL", "Azure", "Power BI"},
+        ),
+        (
+            "O que você pode esperar do seu dia com a gente? Aplicar ITIL e metodologia ágil. "
+            "O que você precisa ter ou saber? Pacote Office, Inglês e Espanhol. "
+            "Benefícios: curso de Python.",
+            {"ITIL", "Metodologias Ágeis", "Pacote Office", "Inglês", "Espanhol"},
+        ),
+        (
+            "Informações Adicionais: bolsa e transporte. Cursando Design Gráfico; "
+            "Conhecimento em ferramentas de edição gráfica: Canva, Photoshop e Illustrator.",
+            {"Canva", "Photoshop", "Illustrator"},
+        ),
+        (
+            "CLT | R$ 2.500 + benefícios Buscamos profissional para atuar com Help Desk.",
+            {"Help Desk"},
+        ),
+        (
+            "Oferecemos benefícios como plano de saúde. Sobre a vaga: analisar certificados "
+            "digitais. Para se destacar nessa posição: conhecimentos básicos de hardware.",
+            {"Hardware", "Certificados Digitais"},
+        ),
+    ],
+)
+def test_preserva_requisitos_dos_anuncios_revisados(ext, texto, esperadas):
+    found = set(ext.extract(texto))
+
+    assert esperadas <= found
+    assert "Go" not in found
+
+
+@pytest.mark.parametrize(
+    "texto",
+    [
+        "Requisitos: SQL. Benefícios: curso de Python.",
+        "Requisitos: SQL. Benefícios Curso de Python.",
+        "Requisitos: SQL.\nbenefícios\nCurso de Python.",
+        "Requisitos: SQL. Benefícios para colaboradores. Benefícios: curso de Python.",
+        "Requisitos: SQL. benefícios: curso de Python.",
+        "Requisitos: SQL. Informações adicionais ✔️ Convênio com Open English.",
+        "Requisitos: SQL. Informações adicionaisVale refeição. Curso de Python.",
+    ],
+)
+def test_corta_titulos_de_beneficios_sem_confundir_prosa(ext, texto):
+    found = ext.extract(texto)
+
+    assert found == ["SQL"]
+
+
+@pytest.mark.parametrize(
+    "texto,esperadas",
+    [
+        ("Gerenciar o sistema Moodle.", {"Moodle"}),
+        ("Conceder acessos no One Drive.", {"OneDrive"}),
+        ("Evoluir o e-commerce na VTEX usando DECO. Integrar APIs.", {"VTEX", "deco.cx", "APIs"}),
+        ("Estagiário Desenvolvimento Genesys", {"Genesys"}),
+        ("Input de informações no ALM/Octane.", {"ALM/Octane"}),
+        ("Conhecimento em SIP Trunk, SBC e Softswitch.", {"SIP", "SBC (Session Border Controller)", "Softswitch"}),
+        ("Certificação AZ-900 e plataformas APM.", {"AZ-900 (Azure Fundamentals)", "APM (Monitoramento de Aplicações)"}),
+        ("Conhecer certificado digital e sistemas de chamado no Qcertifica.", {"Certificados Digitais", "Gestão de Chamados", "Qcertifica"}),
+        ("Atuar na rede corporativa e infraestrutura de tecnologia da informação.", {"Redes de Computadores", "Infraestrutura de TI"}),
+        ("Instalação de computadores, equipamentos e periféricos.", {"Hardware"}),
+        ("Teste / manutenção computadores e notebooks.", {"Montagem e Manutenção de PCs"}),
+    ],
+)
+def test_extrai_tecnologias_e_variacoes_confirmadas_na_revisao(ext, texto, esperadas):
+    found = set(ext.extract(texto))
+
+    assert esperadas <= found
+
+
+def test_novos_aliases_nao_transformam_texto_generico_em_skill(ext):
+    texto = "Suporte aos sistemas e máquinas. Trabalho home office. Conversar com Deco."
+
+    found = ext.extract(texto)
+
+    assert found == []
+
+
+def test_novas_tecnologias_em_beneficios_nao_contam_como_requisitos(ext):
+    texto = "Requisitos: SQL. Benefícios: cursos de Moodle, VTEX, Genesys e AZ-900."
+
+    found = ext.extract(texto)
+
+    assert found == ["SQL"]
+
+
+def test_novos_acronimos_nao_confundem_empresa_e_produto_com_protocolo(ext):
+    texto = (
+        "Empresa SBC Soluções em Impressões. Os produtos do grupo são a SIP e a HYU. "
+        "A empresa é parceira global da VTEX."
+    )
+
+    found = ext.extract(texto)
+
+    assert found == []
+
+
+def test_contextos_de_empresa_nao_apagam_uso_real_da_tecnologia(ext):
+    texto = (
+        "Empresa SBC Soluções em Impressões. Requisitos: SIP Trunk e SBC Oracle. "
+        "A empresa é parceira global da VTEX. Atividades: integrar com a plataforma VTEX."
+    )
+
+    found = set(ext.extract(texto))
+
+    assert {"SIP", "SBC (Session Border Controller)", "VTEX"} <= found
+
+
+def test_url_nao_vira_tecnologia_ao_preservar_requisitos(ext):
+    texto = (
+        "Conhecimento em HTML. Saiba mais em https://empresa.net/cursos/python.html "
+        "e WWW.EXEMPLO.COM/azure. Currículos: rh@empresa.net."
+    )
+
+    found = ext.extract(texto)
+
+    assert found == ["HTML"]
+
+
+def test_corte_separa_habilidade_do_titulo_colado_pelo_html(ext):
+    texto = "Requisitos: Power BI e ITILInformações adicionaisBenefícios: curso de Python."
+
+    found = set(ext.extract(texto))
+
+    assert found == {"Power BI", "ITIL"}
+
+
+def test_competencias_tecnicas_apos_beneficios_sao_preservadas(ext):
+    texto = (
+        "Benefícios: vale refeição. Competências Técnicas Essenciais: React e AWS. "
+        "Competências Técnicas Desejáveis: Docker. Benefícios: curso de Go."
+    )
+
+    found = set(ext.extract(texto))
+
+    assert found == {"React", "AWS", "Docker"}
+
+
 def test_extrai_tecnologias_recentemente_adicionadas(ext):
     desc = (
         "Noções de Kubernetes e Argo CD, Temporal.io, Camunda, Retool e WireMock. "
@@ -465,3 +612,40 @@ def test_contextos_descarte_mantem_menção_legitima(ext):
     found = ext.extract('Tecnico', texto)
 
     assert 'Hardware' in found
+
+
+@pytest.mark.parametrize("cabecalho", [
+    "Benefícios para você", "Benefícios oferecidos", "Conheça os benefícios",
+])
+def test_idioma_em_beneficio_nao_e_requisito(ext, cabecalho):
+    texto = f"Requisitos: SQL. {cabecalho}: desconto em curso de inglês."
+
+    found = ext.extract(texto)
+
+    assert "SQL" in found
+    assert "Inglês" not in found
+
+
+@pytest.mark.parametrize("aviso", [
+    "Dados usados exclusivamente para fins do processo seletivo, respeitando a LGPD.",
+    "Você concorda com nossa Política de Proteção de Dados da LGPD.",
+    "Você concorda com nossa Política de Proteção de Dados – LGPD.",
+])
+def test_aviso_de_privacidade_nao_vira_requisito_lgpd(ext, aviso):
+    texto = f"Requisitos: SQL. {aviso}"
+
+    found = ext.extract(texto)
+
+    assert "SQL" in found
+    assert "LGPD" not in found
+
+
+def test_aviso_de_privacidade_preserva_requisito_lgpd(ext):
+    texto = (
+        "Requisitos: conhecimento da LGPD. "
+        "Você concorda com nossa Política de Proteção de Dados – LGPD."
+    )
+
+    found = ext.extract(texto)
+
+    assert "LGPD" in found

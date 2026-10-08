@@ -21,6 +21,9 @@ from .config import RULES_DIR
 from .models import Job
 
 _WS_RE = re.compile(r"\s+")
+_URL_RE = re.compile(
+    r"(?:https?://|www\.)\S+|\b[\w.+-]+@[\w.-]+\.[a-z]{2,}\b", re.IGNORECASE,
+)
 _KEEP_RE = re.compile(r"[^a-z0-9#+ ]+")
 _BOUNDARY = r"[a-z0-9#+]"
 _CASE_BOUNDARY = r"[A-Za-z0-9#+]"
@@ -223,7 +226,24 @@ class SkillExtractor:
         with open(path, encoding="utf-8") as fh:
             return cls(yaml.safe_load(fh) or {})
 
-    def _recortar_secoes_finais(self, texto_normalizado: str) -> str:
+    @staticmethod
+    def _e_titulo_de_secao(raw: str, inicio: int, fim: int) -> bool:
+        """Distingue cabecalho de uma palavra no meio de uma frase."""
+        antes = raw[:inicio].rstrip(" \t")
+        depois = raw[fim:].lstrip(" \t")
+        inicio_de_linha = not antes or antes.endswith(("\n", "\r"))
+        rotulo = raw[inicio:fim]
+        titulo = rotulo[:1].isupper()
+        delimitado = depois.startswith((":", "\n", "\r", "|", "-", "–"))
+        # Os portais frequentemente achatam o HTML: "Benefícios Vale transporte".
+        proxima_letra = re.search(r"[^\W\d_]", depois)
+        proximo_titulo = bool(proxima_letra and proxima_letra[0].isupper())
+        titulo_composto = titulo and len(rotulo.split()) > 1
+        return inicio_de_linha or delimitado or (titulo and proximo_titulo) or titulo_composto
+
+    def _recortar_secoes_finais(
+        self, texto_normalizado: str, raw: str,
+    ) -> tuple[str, list[int] | None]:
         """Corta na primeira secao de beneficios/termos que vier DEPOIS do
         ultimo marcador de conteudo (requisitos/atividades).
 
@@ -238,16 +258,27 @@ class SkillExtractor:
             if posicao > limite:
                 limite = posicao
         fim = len(texto_normalizado)
+        offsets = None
         for secao in self.secoes_descarte:
-            posicao = texto_normalizado.find(secao, limite + 1)
-            if posicao != -1 and posicao < fim and posicao > limite:
-                fim = posicao
-        return texto_normalizado[:fim].strip()
+            # O HTML pode colar "ITILInformações adicionaisBenefícios".
+            # A validacao no texto original distingue cabecalho de prosa.
+            pattern = re.compile(re.escape(normalize_tech(secao)))
+            for match in pattern.finditer(texto_normalizado, limite + 1):
+                if match.start() >= fim:
+                    break
+                if offsets is None:
+                    offsets = _normalized_offsets(raw)
+                if self._e_titulo_de_secao(
+                    raw, offsets[match.start()], offsets[match.end() - 1] + 1,
+                ):
+                    fim = match.start()
+                    break
+        return texto_normalizado[:fim].strip(), offsets
 
     def _textos_permitidos(self, raw: str) -> tuple[str, str]:
         """Aplica os mesmos trechos de descarte nas duas formas do texto."""
         normalized = normalize_tech(raw)
-        retained = self._recortar_secoes_finais(normalized)
+        retained, offsets = self._recortar_secoes_finais(normalized, raw)
         excluded = []
         if len(retained) < len(normalized):
             excluded.append((len(retained), len(normalized)))
@@ -256,7 +287,8 @@ class SkillExtractor:
                 excluded.extend(match.span() for match in padrao.finditer(retained))
         if not excluded:
             return raw, normalized
-        offsets = _normalized_offsets(raw)
+        if offsets is None:
+            offsets = _normalized_offsets(raw)
         raw_chars = list(raw)
         normalized_chars = list(normalized)
         for start, end in excluded:
@@ -269,7 +301,7 @@ class SkillExtractor:
 
     def extract(self, *texts: str) -> list[str]:
         """Tecnologias citadas nos textos, sem repetir, em ordem alfabetica."""
-        raw = " ".join(t for t in texts if t)
+        raw = _URL_RE.sub(" ", " ".join(t for t in texts if t))
         raw, haystack = self._textos_permitidos(raw)
         if not haystack.strip():
             return []

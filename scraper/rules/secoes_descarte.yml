@@ -1,6 +1,6 @@
 # Secoes finais tipicas de beneficios/termos nas descricoes de vagas.
 #
-# O texto a partir do inicio de qualquer uma dessas secao e ignorado NA
+# O texto a partir do titulo de qualquer uma dessas secoes e ignorado NA
 # EXTRACAO DE SKILLS: o que vem ali nao e requisito e costuma gerar falso
 # positivo ("Open English" em parcerias, "hardware para trabalhar em casa"
 # em beneficios, clausulas de privacidade).
@@ -25,6 +25,11 @@ secoes_descarte:
   - remuneracao e beneficios
   - etapas do processo
   - sobre o processo seletivo
+  - e os beneficios
+  - conheca nossos beneficios
+  - conheca os beneficios
+  - beneficios para voce
+  - beneficios oferecidos
 
 # Secoes de conteudo (requisitos/atividades). Usadas so para decidir se
 # uma secao de descarte pode ou nao cortar o texto: se houver marcador de
@@ -32,6 +37,8 @@ secoes_descarte:
 # "parceria com"/"parcerias com" sairam do descarte: aparecem em boilerplate
 # de empresa ("atuar em parceria com o time") e cortavam texto ANTES dos
 # requisitos (ex.: vaga 18 do BTG perdia Java/C#/Python/AWS; 24 vagas no total).
+# Uma palavra em uma frase ("repleto de beneficios para colaboradores")
+# nao e um titulo. O extrator verifica delimitadores/caixa no texto original.
 secoes_conteudo:
   - requisitos
   - qualificacoes
@@ -44,6 +51,17 @@ secoes_conteudo:
   - o que esperamos de voce
   - o que buscamos
   - o que procuramos
+  - o que voce precisa ter ou saber
+  - esperamos que voce
+  - e importante que voce
+  - e legal que voce
+  - sobre a vaga
+  - para se destacar nessa posicao
+  - buscamos profissional
+  - conhecimento em ferramentas
+  - competencias tecnicas essenciais
+  - competencias tecnicas desejaveis
+  - o que voce pode esperar do seu dia
   - requisitos e qualificacoes
   - requisitos obrigatorios
   - requisitos desejaveis
