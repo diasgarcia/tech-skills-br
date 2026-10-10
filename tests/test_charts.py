@@ -106,6 +106,47 @@ def test_build_area_skill_matrix_rejeita_base_sem_skills():
         build_area_skill_matrix(jobs)
 
 
+def test_heatmap_padrao_mostra_dez_areas_e_habilidades(tmp_path):
+    jobs = [
+        _job(date(2026, 10, 10), f"Área {index:02}", f"Skill {index:02}")
+        for index in range(12)
+    ]
+    output_path = tmp_path / "heatmap.svg"
+
+    matrix = build_area_skill_matrix(jobs)
+    chart_area_skill_heatmap(jobs, output_path)
+    svg = output_path.read_text(encoding="utf-8")
+
+    assert len(matrix.areas) == len(matrix.skills) == 10
+    assert "10 maiores áreas × 10 habilidades" in svg
+    assert "Área 09" in svg and "Skill 09" in svg
+    assert "Área 10" not in svg and "Skill 10" not in svg
+
+
+def test_heatmap_rotula_dimensoes_reais_em_base_pequena(tmp_path):
+    jobs = [_job(date(2026, 10, 10), "Backend", "Python", "SQL")]
+    output_path = tmp_path / "heatmap.svg"
+
+    chart_area_skill_heatmap(jobs, output_path)
+    svg = output_path.read_text(encoding="utf-8")
+
+    assert "1 maior área × 2 habilidades" in svg
+
+
+def test_heatmap_mostra_zero_percentual_sem_travessao(tmp_path):
+    jobs = [
+        _job(date(2026, 10, 10), "Backend", "Python"),
+        _job(date(2026, 10, 10), "Data", "SQL"),
+    ]
+    output_path = tmp_path / "heatmap.svg"
+
+    chart_area_skill_heatmap(jobs, output_path)
+    svg = output_path.read_text(encoding="utf-8")
+
+    assert svg.count(">0,0%</text>") == 2
+    assert "—" not in svg
+
+
 def test_funcoes_de_grafico_rejeitam_lista_vazia(tmp_path):
     daily_path = tmp_path / "daily.svg"
     heatmap_path = tmp_path / "heatmap.svg"

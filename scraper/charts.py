@@ -132,7 +132,7 @@ def build_daily_activity(
 
 
 def build_area_skill_matrix(
-    jobs: list[ChartJob], top_areas: int = 6, top_skills: int = 6
+    jobs: list[ChartJob], top_areas: int = 10, top_skills: int = 10
 ) -> AreaSkillMatrix:
     """Seleciona e cruza dinamicamente as areas e habilidades mais frequentes."""
     if not jobs:
@@ -282,7 +282,7 @@ def chart_daily_jobs_and_skills(
 
 
 def chart_area_skill_heatmap(
-    jobs: list[ChartJob], output_path: Path, top_n: int = 6
+    jobs: list[ChartJob], output_path: Path, top_n: int = 10
 ) -> Path:
     """Heatmap das areas e habilidades mais citadas na base."""
     data = build_area_skill_matrix(jobs, top_areas=top_n, top_skills=top_n)
@@ -293,14 +293,21 @@ def chart_area_skill_heatmap(
     cmap = LinearSegmentedColormap.from_list(
         "tech_skills_heatmap", [PANEL, "#193b66", BLUE, PURPLE]
     )
-    fig, ax = plt.subplots(figsize=(12, 6.2), dpi=180)
-    fig.subplots_adjust(left=0.23, right=0.9, bottom=0.21, top=0.74)
+    height = max(6.2, 3.4 + 0.5 * len(data.areas))
+    fig, ax = plt.subplots(figsize=(12, height), dpi=180)
+    fig.subplots_adjust(left=0.26, right=0.9, bottom=0.23, top=0.8)
     image = ax.imshow(values, aspect="auto", cmap=cmap, vmin=0, vmax=values.max())
 
     ax.set_xticks(range(len(data.skills)))
     ax.set_xticklabels(
-        ["\n".join(textwrap.wrap(skill, 14)) for skill in data.skills],
-        fontsize=9.5,
+        [
+            skill if len(data.skills) > 6 else "\n".join(textwrap.wrap(skill, 14))
+            for skill in data.skills
+        ],
+        fontsize=10.5,
+        rotation=45 if len(data.skills) > 6 else 0,
+        ha="right" if len(data.skills) > 6 else "center",
+        rotation_mode="anchor",
     )
     ax.set_yticks(range(len(data.areas)))
     ax.set_yticklabels(
@@ -308,7 +315,7 @@ def chart_area_skill_heatmap(
             f"{area}  ·  {_format_int(size)}"
             for area, size in zip(data.areas, data.area_sizes)
         ],
-        fontsize=9.5,
+        fontsize=10.5,
     )
     ax.tick_params(axis="x", length=0, pad=12)
     ax.tick_params(axis="y", length=0, pad=12)
@@ -321,10 +328,10 @@ def chart_area_skill_heatmap(
             ax.text(
                 column,
                 row,
-                "—" if value == 0 else _format_pct(value),
+                _format_pct(value),
                 ha="center",
                 va="center",
-                fontsize=10,
+                fontsize=10.5,
                 fontweight="bold" if value >= threshold else "normal",
                 color=TEXT if value >= threshold else "#c7d1dc",
             )
@@ -336,15 +343,16 @@ def chart_area_skill_heatmap(
 
     fig.text(
         0.08,
-        0.92,
+        0.94,
         "Onde as habilidades mais citadas aparecem",
         fontsize=19,
         fontweight="bold",
     )
     fig.text(
         0.08,
-        0.85,
-        f"{top_n} maiores áreas × {top_n} habilidades mais citadas na base",
+        0.885,
+        f"{len(data.areas)} {'maior área' if len(data.areas) == 1 else 'maiores áreas'} × "
+        f"{len(data.skills)} {'habilidade mais citada' if len(data.skills) == 1 else 'habilidades mais citadas'} na base",
         fontsize=10.5,
         color=MUTED,
     )

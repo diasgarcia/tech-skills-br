@@ -10,7 +10,7 @@ O projeto acompanha anúncios de estágio, aprendiz, trainee e nível júnior. A
 
 [![Vagas por data de publicação e habilidades distintas dessas vagas nos últimos 30 dias](https://diasgarcia.github.io/tech-skills-br/assets/vagas-habilidades-30d.svg)](https://diasgarcia.github.io/tech-skills-br/)
 
-[![Mapa de calor das seis maiores áreas e das seis habilidades mais citadas](https://diasgarcia.github.io/tech-skills-br/assets/areas-habilidades.svg)](https://www.kaggle.com/code/rafaeldiasgarcia/tech-skills-brasil-analise-diaria)
+[![Mapa de calor das dez maiores áreas e das dez habilidades mais citadas](https://diasgarcia.github.io/tech-skills-br/assets/areas-habilidades.svg)](https://www.kaggle.com/code/rafaeldiasgarcia/tech-skills-brasil-analise-diaria)
 
 Os gráficos são gerados com o banco consolidado. Eles mudam automaticamente quando uma área ou habilidade altera sua posição no ranking.
 
