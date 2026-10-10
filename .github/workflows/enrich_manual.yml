@@ -7,13 +7,12 @@ on:
   # e re-extrai skills e areas.
   workflow_dispatch:
 
-concurrency:
-  group: vagas-snapshot-latest
-  cancel-in-progress: false
-
 jobs:
   enrich:
     name: Enriquecimento de Descricoes
+    concurrency:
+      group: vagas-snapshot-latest
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 120
 
@@ -24,6 +23,9 @@ jobs:
 
     env:
       GH_TOKEN: ${{ github.token }}
+
+    outputs:
+      snapshot_id: ${{ steps.snapshot.outputs.snapshot_id }}
 
     steps:
     - name: 1. Baixar repositorio
@@ -65,12 +67,14 @@ jobs:
         PYTHONPATH: .
 
     - name: 7. Exportar snapshot, relatorio e JSON do Pages
+      id: snapshot
       run: |
         python scripts/export_seed.py
         python scripts/report_db.py
         python scripts/export_pages_data.py
         python scripts/resumo_commit.py --summary-json data/enrich-outras.json --summary-json data/enrich-linkedin.json > /tmp/corpo_commit.txt
         python scripts/release_snapshot.py publish --allow-legacy
+        echo "snapshot_id=$(jq -r '.parent_sha256' data/snapshot-base.json)" >> "$GITHUB_OUTPUT"
       env:
         PYTHONPATH: .
 
@@ -128,15 +132,39 @@ jobs:
     # Por isso a publicacao acontece dentro deste mesmo workflow.
     name: Publicar Dashboard no GitHub Pages
     needs: enrich
+    concurrency:
+      group: vagas-pages-deploy
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
+      contents: read
       pages: write
       id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Conferir se o snapshot ainda e atual
+        id: snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SNAPSHOT_ESPERADO: ${{ needs.enrich.outputs.snapshot_id }}
+        run: |
+          if [[ ! "$SNAPSHOT_ESPERADO" =~ ^[0-9a-f]{64}$ ]]; then
+            echo "::error::O artefato nao informou um snapshot valido."
+            exit 1
+          fi
+          gh release download latest --repo "$GITHUB_REPOSITORY" --pattern snapshot.json --dir "$RUNNER_TEMP/pages-snapshot"
+          SNAPSHOT_ATUAL=$(jq -er '.snapshot_id | select(type == "string" and test("^[0-9a-f]{64}$"))' "$RUNNER_TEMP/pages-snapshot/snapshot.json")
+          if [ "$SNAPSHOT_ESPERADO" = "$SNAPSHOT_ATUAL" ]; then
+            echo "atual=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "atual=false" >> "$GITHUB_OUTPUT"
+            echo "::notice title=Deploy antigo ignorado::A release mudou desde a montagem deste artefato. O snapshot antigo nao sera publicado."
+            echo "## Pages: artefato antigo ignorado; a release ja recebeu outro snapshot." >> "$GITHUB_STEP_SUMMARY"
+          fi
       - name: Deploy no GitHub Pages
         id: deployment
+        if: steps.snapshot.outputs.atual == 'true'
         uses: actions/deploy-pages@v5

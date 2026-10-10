@@ -18,19 +18,18 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: vagas-snapshot-latest
-  cancel-in-progress: false
-
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
+    name: Montar site com o snapshot atual
+    concurrency:
+      group: vagas-snapshot-latest
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
       GH_TOKEN: ${{ github.token }}
+    outputs:
+      snapshot_id: ${{ steps.snapshot.outputs.snapshot_id }}
     steps:
       - name: 1. Baixar repositorio
         uses: actions/checkout@v7
@@ -46,11 +45,13 @@ jobs:
         uses: actions/configure-pages@v6
 
       - name: 3. Montar artefato do Pages
+        id: snapshot
         run: |
           # O Pages publica somente arquivos estaticos. Ele usa o banco do
           # release como entrada, sem participar do fluxo de snapshots.
           mkdir -p data
           gh release download latest --pattern 'vagas.db' --dir data --clobber
+          echo "snapshot_id=$(sha256sum data/vagas.db | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
           pip install --disable-pip-version-check 'SQLAlchemy==2.0.52'
           python scripts/export_pages_data.py --db data/vagas.db
           python scripts/build_pages.py
@@ -67,6 +68,38 @@ jobs:
         with:
           path: '_site'
 
+  deploy:
+    name: Publicar site no GitHub Pages
+    needs: build
+    concurrency:
+      group: vagas-pages-deploy
+      cancel-in-progress: false
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Conferir se o snapshot ainda e atual
+        id: snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SNAPSHOT_ESPERADO: ${{ needs.build.outputs.snapshot_id }}
+        run: |
+          if [[ ! "$SNAPSHOT_ESPERADO" =~ ^[0-9a-f]{64}$ ]]; then
+            echo "::error::O artefato nao informou um snapshot valido."
+            exit 1
+          fi
+          gh release download latest --repo "$GITHUB_REPOSITORY" --pattern snapshot.json --dir "$RUNNER_TEMP/pages-snapshot"
+          SNAPSHOT_ATUAL=$(jq -er '.snapshot_id | select(type == "string" and test("^[0-9a-f]{64}$"))' "$RUNNER_TEMP/pages-snapshot/snapshot.json")
+          if [ "$SNAPSHOT_ESPERADO" = "$SNAPSHOT_ATUAL" ]; then
+            echo "atual=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "atual=false" >> "$GITHUB_OUTPUT"
+            echo "::notice title=Deploy antigo ignorado::A release mudou desde a montagem deste artefato. O snapshot antigo nao sera publicado."
+            echo "## Pages: artefato antigo ignorado; a release ja recebeu outro snapshot." >> "$GITHUB_STEP_SUMMARY"
+          fi
       - name: 5. Publicar no GitHub Pages
         id: deployment
+        if: steps.snapshot.outputs.atual == 'true'
         uses: actions/deploy-pages@v5

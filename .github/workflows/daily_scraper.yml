@@ -30,13 +30,13 @@ on:
         default: ''
         type: string
 
-concurrency:
-  group: vagas-snapshot-latest
-  cancel-in-progress: false
-
 jobs:
   scrape-and-update:
     name: Mineracao e Consolidacao de Vagas
+    # Libera o banco ao terminar este job, mesmo se o Pages ficar esperando.
+    concurrency:
+      group: vagas-snapshot-latest
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 180
 
@@ -49,6 +49,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
 
     outputs:
+      snapshot_id: ${{ steps.consolidation.outputs.snapshot_id }}
       has_source_errors: ${{ steps.consolidation.outputs.has_source_errors }}
       failed_sources: ${{ steps.consolidation.outputs.failed_sources }}
 
@@ -137,6 +138,7 @@ jobs:
         # o parquet (Kaggle) precisam ser o MESMO snapshot da rodada.
         python scripts/export_seed.py
         python scripts/release_snapshot.py publish --allow-legacy
+        echo "snapshot_id=$(jq -r '.parent_sha256' data/snapshot-base.json)" >> "$GITHUB_OUTPUT"
         ORIGEM_INPUT="$ORIGEM"
         RODADA_INPUT="$RODADA"
         if [ "$ORIGEM_INPUT" = "cron" ] && { [ "$RODADA_INPUT" = "1" ] || [ "$RODADA_INPUT" = "2" ] || [ "$RODADA_INPUT" = "3" ]; }; then
@@ -313,17 +315,41 @@ jobs:
     # entao a publicacao precisa acontecer aqui, no mesmo run.
     name: Publicar Dashboard no GitHub Pages
     needs: scrape-and-update
+    concurrency:
+      group: vagas-pages-deploy
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
+      contents: read
       pages: write
       id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Conferir se o snapshot ainda e atual
+        id: snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SNAPSHOT_ESPERADO: ${{ needs.scrape-and-update.outputs.snapshot_id }}
+        run: |
+          if [[ ! "$SNAPSHOT_ESPERADO" =~ ^[0-9a-f]{64}$ ]]; then
+            echo "::error::O artefato nao informou um snapshot valido."
+            exit 1
+          fi
+          gh release download latest --repo "$GITHUB_REPOSITORY" --pattern snapshot.json --dir "$RUNNER_TEMP/pages-snapshot"
+          SNAPSHOT_ATUAL=$(jq -er '.snapshot_id | select(type == "string" and test("^[0-9a-f]{64}$"))' "$RUNNER_TEMP/pages-snapshot/snapshot.json")
+          if [ "$SNAPSHOT_ESPERADO" = "$SNAPSHOT_ATUAL" ]; then
+            echo "atual=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "atual=false" >> "$GITHUB_OUTPUT"
+            echo "::notice title=Deploy antigo ignorado::A release mudou desde a montagem deste artefato. O snapshot antigo nao sera publicado."
+            echo "## Pages: artefato antigo ignorado; a release ja recebeu outro snapshot." >> "$GITHUB_STEP_SUMMARY"
+          fi
       - name: Deploy no GitHub Pages
         id: deployment
+        if: steps.snapshot.outputs.atual == 'true'
         uses: actions/deploy-pages@v5
 
   report-source-errors:

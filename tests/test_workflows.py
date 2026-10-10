@@ -1,10 +1,19 @@
 from pathlib import Path
+import os
+import shutil
+import subprocess
 
+import pytest
 import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW_DIR = ROOT / ".github" / "workflows"
+PAGES_JOBS = [
+    ("daily_scraper.yml", "scrape-and-update", "deploy-pages", "consolidation"),
+    ("enrich_manual.yml", "enrich", "deploy-pages", "snapshot"),
+    ("deploy_pages.yml", "build", "deploy", "snapshot"),
+]
 
 
 def test_workflows_sao_yaml_validos():
@@ -84,3 +93,85 @@ def test_commit_diario_recebe_o_mesmo_dia_de_brasilia_usado_no_titulo():
     assert 'python scripts/report_db.py --dia "$DIA_RESUMO"' in content
     assert content.count('--dia "$DIA_RESUMO"') == 3
     assert content.index("collection_health.py record") < content.index("scripts/resumo_commit.py")
+
+
+@pytest.mark.parametrize("workflow,producer_id,deploy_id,step_id", PAGES_JOBS)
+def test_pages_nao_mantem_o_banco_bloqueado(workflow, producer_id, deploy_id, step_id):
+    payload = yaml.safe_load((WORKFLOW_DIR / workflow).read_text(encoding="utf-8"))
+    producer = payload["jobs"][producer_id]
+    deploy = payload["jobs"][deploy_id]
+
+    assert "concurrency" not in payload
+    assert producer["concurrency"] == {"group": "vagas-snapshot-latest", "cancel-in-progress": False}
+    assert "environment" not in producer
+    assert deploy["needs"] == producer_id
+    assert deploy["concurrency"] == {"group": "vagas-pages-deploy", "cancel-in-progress": False}
+    assert deploy["environment"]["name"] == "github-pages"
+    assert producer["outputs"]["snapshot_id"] == f"${{{{ steps.{step_id}.outputs.snapshot_id }}}}"
+
+
+@pytest.mark.parametrize("workflow,producer_id,deploy_id,step_id", PAGES_JOBS)
+def test_pages_confere_snapshot_antes_de_publicar(workflow, producer_id, deploy_id, step_id):
+    payload = yaml.safe_load((WORKFLOW_DIR / workflow).read_text(encoding="utf-8"))
+    producer = payload["jobs"][producer_id]
+    deploy = payload["jobs"][deploy_id]
+    capture = next(step for step in producer["steps"] if step.get("id") == step_id)
+    guard = next(step for step in deploy["steps"] if step.get("id") == "snapshot")
+    publication = next(step for step in deploy["steps"] if step.get("id") == "deployment")
+
+    assert 'echo "snapshot_id=' in capture["run"]
+    assert guard["env"]["SNAPSHOT_ESPERADO"] == f"${{{{ needs.{producer_id}.outputs.snapshot_id }}}}"
+    assert '--repo "$GITHUB_REPOSITORY" --pattern snapshot.json' in guard["run"]
+    assert "jq -er" in guard["run"]
+    assert "^[0-9a-f]{64}$" in guard["run"]
+    assert publication["if"] == "steps.snapshot.outputs.atual == 'true'"
+    assert publication["uses"] == "actions/deploy-pages@v5"
+    assert "continue-on-error" not in guard
+    assert "continue-on-error" not in publication
+    assert deploy.get("permissions", payload.get("permissions"))["contents"] == "read"
+
+
+def test_publicacao_kaggle_continua_coordenada_com_o_banco():
+    payload = yaml.safe_load((WORKFLOW_DIR / "publish_kaggle.yml").read_text(encoding="utf-8"))
+
+    assert payload["concurrency"] == {"group": "vagas-snapshot-latest", "cancel-in-progress": False}
+
+
+@pytest.mark.parametrize(
+    "expected,current,gh_status,jq_status,result,output",
+    [
+        ("a" * 64, "a" * 64, 0, 0, 0, "atual=true\n"),
+        ("a" * 64, "b" * 64, 0, 0, 0, "atual=false\n"),
+        ("", "a" * 64, 0, 0, 1, ""),
+        ("a" * 64, "a" * 64, 1, 0, 1, ""),
+        ("a" * 64, "", 0, 1, 1, ""),
+    ],
+)
+def test_verificacao_pages_nao_mascara_falhas(tmp_path, expected, current, gh_status, jq_status, result, output):
+    git_bash = Path("C:/Program Files/Git/bin/bash.exe")
+    bash = str(git_bash) if os.name == "nt" and git_bash.exists() else shutil.which("bash")
+    if bash is None:
+        pytest.skip("Bash indisponivel para validar o passo do runner Linux.")
+    payload = yaml.safe_load((WORKFLOW_DIR / "deploy_pages.yml").read_text(encoding="utf-8"))
+    guard = next(step for step in payload["jobs"]["deploy"]["steps"] if step.get("id") == "snapshot")
+    output_path = tmp_path / "output"
+    env = {
+        **os.environ,
+        "SNAPSHOT_ESPERADO": expected,
+        "SNAPSHOT_TESTE": current,
+        "GH_STATUS": str(gh_status),
+        "JQ_STATUS": str(jq_status),
+        "GITHUB_REPOSITORY": "teste/repo",
+        "RUNNER_TEMP": tmp_path.as_posix(),
+        "GITHUB_OUTPUT": output_path.as_posix(),
+        "GITHUB_STEP_SUMMARY": (tmp_path / "summary").as_posix(),
+    }
+    mocks = 'gh() { return "$GH_STATUS"; }\njq() { echo "$SNAPSHOT_TESTE"; return "$JQ_STATUS"; }\n'
+
+    completed = subprocess.run(
+        [bash, "--noprofile", "--norc", "-e", "-o", "pipefail"],
+        input=mocks + guard["run"], env=env, text=True, capture_output=True, timeout=10,
+    )
+
+    assert completed.returncode == result, completed.stderr
+    assert (output_path.read_text(encoding="utf-8") if output_path.exists() else "") == output

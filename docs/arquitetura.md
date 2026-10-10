@@ -69,7 +69,7 @@ e informar a data real da última coleta, sem duplicar vagas ou descrições.
 
 O manifesto relaciona o hash da base anterior aos hashes do DB e CSV preparados. Os leitores recusam artefatos incompletos ou divergentes. A comparação antes do upload detecta uma base já desatualizada; ela **não é uma trava remota atômica**.
 
-Os workflows que usam a release compartilham um grupo de concorrência e não cancelam a execução ativa. Esse grupo não é uma fila durável de todas as solicitações: o GitHub pode substituir uma execução pendente. Publicações locais precisam ser coordenadas separadamente.
+Os jobs que atualizam o banco, replicam o snapshot no Kaggle ou montam o site usam o grupo `vagas-snapshot-latest`. A publicação no Pages usa outro grupo, `vagas-pages-deploy`. Nenhum deles cancela a execução ativa. Assim, uma espera no ambiente do Pages não mantém o banco bloqueado. Antes do deploy, o job compara o hash do artefato com o snapshot da release e ignora um artefato antigo se a base já mudou. Os grupos não são filas duráveis de todas as solicitações: o GitHub pode substituir uma execução pendente. Publicações locais precisam ser coordenadas separadamente.
 
 O GitHub é publicado antes da réplica no Kaggle. Uma falha da réplica deixa aviso e permite nova tentativa sem coleta. A entrega compara o arquivo de uma versão específica; não aceita qualquer versão posterior como prova de sucesso.
 
