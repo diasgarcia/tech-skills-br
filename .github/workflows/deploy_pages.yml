@@ -12,6 +12,11 @@ on:
       - 'scripts/export_readme_charts.py'
       - '.github/workflows/deploy_pages.yml'
   workflow_dispatch:
+    inputs:
+      atualizar_graficos:
+        description: 'Regerar os graficos com o banco da release, sem coletar vagas'
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -46,6 +51,8 @@ jobs:
 
       - name: 3. Montar artefato do Pages
         id: snapshot
+        env:
+          ATUALIZAR_GRAFICOS: ${{ inputs.atualizar_graficos }}
         run: |
           # O Pages publica somente arquivos estaticos. Ele usa o banco do
           # release como entrada, sem participar do fluxo de snapshots.
@@ -55,13 +62,17 @@ jobs:
           pip install --disable-pip-version-check 'SQLAlchemy==2.0.52'
           python scripts/export_pages_data.py --db data/vagas.db
           python scripts/build_pages.py
-          # Este deploy atualiza o site e a API, mas preserva os graficos.
-          # Os SVGs sao recalculados na rodada 3 ou nas coletas manuais.
-          for arquivo in vagas-habilidades-30d.svg areas-habilidades.svg; do
-            curl --fail --silent --show-error --location --retry 3 \
-              "https://diasgarcia.github.io/tech-skills-br/assets/${arquivo}" \
-              --output "_site/assets/${arquivo}"
-          done
+          if [ "$ATUALIZAR_GRAFICOS" = "true" ]; then
+            pip install --disable-pip-version-check 'matplotlib==3.11.1'
+            python scripts/export_readme_charts.py --output-dir _site/assets --db data/vagas.db
+          else
+            # Pushes de codigo preservam os graficos da ultima rodada.
+            for arquivo in vagas-habilidades-30d.svg areas-habilidades.svg; do
+              curl --fail --silent --show-error --location --retry 3 \
+                "https://diasgarcia.github.io/tech-skills-br/assets/${arquivo}" \
+                --output "_site/assets/${arquivo}"
+            done
+          fi
 
       - name: 4. Preparar artefato do Pages (_site)
         uses: actions/upload-pages-artifact@v5

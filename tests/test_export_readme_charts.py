@@ -5,6 +5,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 
 import pytest
+import yaml
 
 from api.database import connect_sqlite, init_db
 from scraper.charts import ChartJob
@@ -131,8 +132,27 @@ def test_deploy_de_codigo_preserva_graficos_publicados():
     workflow = PAGES_WORKFLOWS[1]
     content = workflow.read_text(encoding="utf-8")
 
-    assert "python scripts/export_readme_charts.py" not in content
+    assert 'if [ "$ATUALIZAR_GRAFICOS" = "true" ]; then' in content
+    assert "else\n" in content
     assert "https://diasgarcia.github.io/tech-skills-br/assets/${arquivo}" in content
+
+
+def test_deploy_permite_regerar_graficos_sem_coleta():
+    content = PAGES_WORKFLOWS[1].read_text(encoding="utf-8")
+    workflow = yaml.safe_load(content)
+    option = workflow[True]["workflow_dispatch"]["inputs"]["atualizar_graficos"]
+    build = next(step for step in workflow["jobs"]["build"]["steps"] if step.get("id") == "snapshot")
+    generation, preservation = build["run"].split("else\n", 1)
+
+    assert option["type"] == "boolean"
+    assert option["default"] is False
+    assert build["env"]["ATUALIZAR_GRAFICOS"] == "${{ inputs.atualizar_graficos }}"
+    assert "'matplotlib==3.11.1'" in generation
+    assert "python scripts/export_readme_charts.py --output-dir _site/assets --db data/vagas.db" in generation
+    assert "curl --fail" in preservation
+    assert "python main.py" not in content
+    assert "scripts/import_csv.py" not in content
+    assert "scripts/export_kaggle.py" not in content
 
 
 def test_deploy_estatico_nao_participa_do_fluxo_de_snapshots():
