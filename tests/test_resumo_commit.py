@@ -76,6 +76,17 @@ def test_resumo_diario_mostra_zero_quando_nao_entraram_vagas(tmp_path):
     assert "- Novas no dia (01/10/2026, Brasilia): 0 vagas" in text
 
 
+def test_resumo_inclui_vagas_da_jobbol_na_base(tmp_path):
+    path = _banco(tmp_path, ["2026-10-01 12:00:00"])
+    with closing(connect_sqlite(path)) as conn, conn:
+        conn.execute("UPDATE vagas SET source = 'jobbol'")
+
+    text = resumir(_args(path))
+
+    assert "- Base: 1 vagas" in text
+    assert "jobbol 1" in text
+
+
 def test_resumo_sem_dia_preserva_formato_das_execucoes_manuais(tmp_path):
     path = _banco(tmp_path, ["2026-10-01 12:00:00"])
 

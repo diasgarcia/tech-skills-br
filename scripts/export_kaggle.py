@@ -45,7 +45,7 @@ METADATA = {
     "description": (
         "Esta base registra vagas de entrada em tecnologia no Brasil. Ela "
         "cobre os niveis junior, estagio, trainee e aprendiz. A coleta usa "
-        "nove portais publicos brasileiros. Cada registro tem titulo, "
+        "dez portais publicos brasileiros. Cada registro tem titulo, "
         "empresa, local, modalidade, senioridade, area e tecnologias. A base "
         "e atualizada tres vezes por dia.\n\n"
         "Codigo e metodologia: https://github.com/diasgarcia/tech-skills-br  \n\n"
@@ -61,9 +61,9 @@ METADATA = {
     ],
     "expectedUpdateFrequency": "daily",
     "userSpecifiedSources": (
-        "Os dados sao coletados automaticamente de nove portais publicos de "
+        "Os dados sao coletados automaticamente de dez portais publicos de "
         "empregos no Brasil: LinkedIn, Gupy, Solides, InfoJobs, Vagas.com, "
-        "GeekHunter, Abler, Recrutei e Trampos. A coleta roda tres vezes por "
+        "GeekHunter, Abler, Recrutei, Trampos e Jobbol. A coleta roda tres vezes por "
         "dia (09:16, 14:16 e 19:16, horario de Brasilia) e mantem apenas "
         "vagas de nivel de entrada: junior, estagio, trainee e aprendiz."
     ),

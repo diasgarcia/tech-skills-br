@@ -4,7 +4,7 @@ Dados sobre as habilidades citadas em anúncios de vagas de entrada em tecnologi
 
 [Explorar o painel](https://diasgarcia.github.io/tech-skills-br/) · [Analisar no Kaggle](https://www.kaggle.com/code/rafaeldiasgarcia/tech-skills-brasil-analise-diaria) · [Baixar o dataset](https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br) · [Consultar a metodologia](https://github.com/diasgarcia/tech-skills-br/wiki)
 
-O projeto acompanha anúncios de estágio, aprendiz, trainee e nível júnior. A coleta consulta nove portais três vezes por dia. O processo organiza as vagas por área e identifica as habilidades citadas em cada anúncio.
+O projeto acompanha anúncios de estágio, aprendiz, trainee e nível júnior. A coleta consulta dez portais três vezes por dia. O processo organiza as vagas por área e identifica as habilidades citadas em cada anúncio.
 
 ## Visão atual dos dados
 
@@ -16,7 +16,7 @@ Os gráficos são gerados com o banco consolidado. Eles mudam automaticamente qu
 
 ## Como os dados são produzidos
 
-1. A coleta localiza vagas de entrada em nove portais.
+1. A coleta localiza vagas de entrada em dez portais.
 2. Os filtros removem duplicidades e anúncios fora do escopo.
 3. Cada vaga recebe uma área técnica, uma modalidade e uma região.
 4. Uma taxonomia curada identifica as habilidades presentes na descrição.

@@ -42,6 +42,22 @@ python main.py --sources gupy --terms "desenvolvedor junior" --max-pages 1 --pag
 
 Este comando faz chamadas reais à Gupy. Limita a busca a um termo e uma página, mas não garante um tempo máximo. Os filtros podem remover parte dos resultados. A saída fica separada da coleta normal. O comando não importa vagas no SQLite nem publica arquivos. `--no-enrich` desativa os detalhes do LinkedIn; não é um bloqueio geral de rede.
 
+## Jobbol e anunciantes intermediários
+
+A Jobbol está entre as fontes padrão. A coleta consulta sua listagem JSON e busca a descrição completa nas páginas públicas, sem login ou navegador. A janela padrão é de três dias. Anúncios antigos promovidos não encerram a paginação. O teto de `--max-pages` ainda limita a cobertura da listagem.
+
+Para um teste curto, sem importar no banco nem publicar:
+
+```powershell
+python main.py --sources jobbol --terms "desenvolvedor junior" --max-pages 1 --page-size 5 --jobbol-days 30 --no-enrich --output output/test-jobbol
+```
+
+Para ampliar a janela na carga inicial, use `--jobbol-days 365`. A listagem contém anúncios ativos; esse comando não recupera anúncios encerrados. A descrição já entra na coleta, inclusive a seção técnica `Observações`; `--no-enrich` não desativa os detalhes da Jobbol.
+
+Em `scraper/rules/coletores.yml`, `linkedin.anunciantes_ignorados` associa o nome exato do anunciante à sua fonte própria. A lista inclui Jobbol, Abler (também `abler Vagas`), Sólides, Vagas.com, InfoJobs, GeekHunter, trampos (também `trampos.co`), Gupy e Recrutei. A comparação ignora diferenças de caixa e acentos, mas não bloqueia trechos de nomes. Só há exclusão quando a fonte própria está selecionada na rodada. Uma coleta só de LinkedIn mantém esses anúncios. BuscarVagas, Jobgether e demais anunciantes sem fonte própria ficam fora da lista. Os registros históricos não são removidos.
+
+O filtro não garante cobertura idêntica entre portais: uma falha na fonte própria pode deixar anúncios sem coleta naquela rodada. Falhas de listagem ou de detalhes são registradas como erros, não como respostas vazias válidas. Confira os diagnósticos antes de decidir remover qualquer registro antigo.
+
 ## Baixar a base de trabalho
 
 O banco não está no Git. `git pull` atualiza o código, não os dados. Antes de baixar a base, feche o DBeaver e preserve qualquer alteração local ainda não publicada: o download substitui o arquivo de destino.

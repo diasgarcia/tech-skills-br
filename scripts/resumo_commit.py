@@ -27,7 +27,9 @@ from api.database import connect_sqlite  # noqa: E402
 from scraper.enrichment import read_summaries  # noqa: E402
 from scraper.enrichment_queries import pending_queries  # noqa: E402
 
-ORDEM_FONTES = ("linkedin", "solides", "gupy", "vagas", "geekhunter", "trampos", "infojobs", "abler", "recrutei")
+ORDEM_FONTES = (
+    "linkedin", "solides", "gupy", "vagas", "geekhunter", "trampos", "infojobs", "abler", "recrutei", "jobbol",
+)
 
 PENDENTES_POR_FONTE = pending_queries()
 
