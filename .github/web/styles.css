@@ -82,6 +82,55 @@
     .badge-green { color: var(--green); border-color: rgba(63, 185, 80, 0.4); }
     .badge-accent { color: var(--accent); border-color: rgba(88, 166, 255, 0.4); }
 
+    .job-title {
+      background: none;
+      border: 0;
+      color: var(--text-bright);
+      font: inherit;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+      overflow-wrap: anywhere;
+    }
+    .job-title:hover { color: var(--accent); }
+    .job-title:focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
+    .job-company { color: var(--text-muted); font-size: 11px; margin-top: 2px; }
+    html:has(#job-details:modal), body:has(#job-details:modal) { overflow: hidden; }
+    .job-details {
+      position: fixed;
+      margin: 0;
+      width: min(430px, calc(100% - 24px));
+      max-height: calc(100dvh - 24px);
+      overflow: auto;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--card-bg);
+      color: var(--text);
+      font: inherit;
+      font-size: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      z-index: 30;
+    }
+    .job-details:modal { inset: 0; margin: auto; }
+    .job-details::backdrop { background: rgba(0, 0, 0, 0.6); }
+    .job-details-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .job-details-close { padding: 0 6px; font-size: 20px; line-height: 1.2; }
+    .job-details h2 { font-size: 14px; color: var(--text-bright); margin: 8px 0 4px; overflow-wrap: anywhere; }
+    #job-details-company { color: var(--text-muted); overflow-wrap: anywhere; }
+    #job-details-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+    #job-details-fields > div { display: grid; grid-template-columns: 95px 1fr; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--border); }
+    #job-details-fields dt { color: var(--text-muted); }
+    #job-details-fields dd { text-align: right; overflow-wrap: anywhere; }
+    .job-details-skills { margin-top: 12px; }
+    .job-details h3 { font-size: 12px; font-weight: 600; margin-bottom: 7px; }
+    #job-details-skills { display: flex; flex-wrap: wrap; gap: 5px; max-height: 110px; overflow: auto; }
+    .job-details-note { font-size: 11px; color: var(--text-muted); }
+    p.job-details-note { margin: 14px 0 12px; }
+    #job-details-link { display: flex; justify-content: flex-end; }
+    .nav-btn.job-details-source { display: inline-block; color: var(--accent); border-color: var(--accent); }
+    .nav-btn.job-details-source:hover { color: var(--accent); text-decoration: none; }
+
     .nav-tabs {
       display: flex;
       flex-wrap: wrap;

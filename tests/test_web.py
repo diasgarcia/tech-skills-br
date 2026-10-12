@@ -43,6 +43,16 @@ def test_links_do_footer_usam_o_mesmo_destaque_azul():
     assert ".footer-link-kaggle:hover" not in content
 
 
+def test_detalhes_da_vaga_usam_dialog_com_titulo_e_botao_de_fechar():
+    page = BeautifulSoup(INDEX_PATH.read_text(encoding="utf-8"), "html.parser")
+
+    dialog = page.find("dialog", id="job-details")
+
+    assert dialog["aria-labelledby"] == "job-details-title"
+    assert dialog.find("h2", id="job-details-title") is not None
+    assert dialog.find("button", attrs={"aria-label": "Fechar detalhes"}) is not None
+
+
 @pytest.mark.skipif(shutil.which("node") is None, reason="Node.js necessário para os testes offline do DOM")
 def test_renderizacao_interacao_e_recuperacao_sem_rede():
     script = Path(__file__).with_name("web_runtime.cjs")

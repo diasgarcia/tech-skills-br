@@ -16,6 +16,8 @@ class Element {
     this.className = "";
     this.value = "";
     this.hidden = false;
+    this.open = false;
+    this.attributes = {};
     this._text = "";
   }
   set innerHTML(_) { throw new Error("Não interpretar conteúdo como HTML"); }
@@ -25,7 +27,11 @@ class Element {
   get innerText() { return this.textContent; }
   appendChild(node) { assert.equal(node.nodeType, 1); this.childNodes.push(node); return node; }
   replaceChildren(...nodes) { this._text = ""; this.childNodes = nodes; }
-  getBoundingClientRect() { return { top: 800 }; }
+  setAttribute(name, value) { this.attributes[name] = value; }
+  show() { this.open = true; this.modal = false; }
+  showModal() { this.open = true; this.modal = true; }
+  close() { this.open = false; if (this.onclose) this.onclose(); }
+  getBoundingClientRect() { return { top: 100, bottom: 130, left: 10, right: 440, width: 430, height: 430 }; }
 }
 
 const source = fs.readFileSync(path.join(__dirname, "../.github/web/app.js"), "utf8");
@@ -39,9 +45,11 @@ function runtime(fetch = () => { throw new Error("Rede não autorizada no teste"
   };
   const sandbox = {
     URL,
+    setTimeout,
+    clearTimeout,
     fetch,
     console: { error() {} },
-    window: { addEventListener() {}, innerHeight: 900 },
+    window: { addEventListener() {}, innerHeight: 900, innerWidth: 1200, matchMedia: () => ({ matches: true }) },
     document: {
       createElement: tag => new Element(tag),
       getElementById: get,
@@ -77,13 +85,13 @@ test("anúncios são texto literal; links inseguros não viram âncoras", () => 
   assert.equal(rows.length, 2);
   assert.ok(rows[0].textContent.includes(injected));
   assert.equal(walk(rows[0]).filter(node => ["IMG", "SCRIPT", "A"].includes(node.tagName)).length, 0);
-  assert.equal(links.length, 2);
+  assert.equal(links.length, 1);
   assert.ok(links.every(link => link.href.startsWith("https://example.test/")));
   assert.ok(links.every(link => link.rel === "noopener noreferrer"));
   assert.ok(links.every(link => !link.onmouseover));
 });
 
-test("URLs aceitas são absolutas HTTP(S), inclusive no título mobile", () => {
+test("URLs aceitas são absolutas HTTP(S), inclusive nos detalhes", () => {
   const app = runtime();
   for (const url of ["javascript:alert(1)", "data:text/html,test", "//example.test", "/vaga", "https://", "file:///tmp/test", "java\nscript:alert(1)"]) {
     app.sandbox.url = url;
@@ -91,6 +99,80 @@ test("URLs aceitas são absolutas HTTP(S), inclusive no título mobile", () => {
   }
   app.sandbox.url = " HTTPS://example.test/vaga ";
   assert.equal(app.run("jobLink(url, 'Vaga').href"), "https://example.test/vaga");
+});
+
+test("hover mostra dados literais sem bloquear a página; clique abre modal", () => {
+  const app = runtime();
+  const injected = '<img src=x onerror="alert(1)">';
+  app.sandbox.fixture = {
+    titulo: injected, empresa: "Empresa", area: "Backend", senioridade: "Júnior",
+    localidade: "São Paulo, SP", modalidade: "Remoto", regiao: "Sudeste", polo: "São Paulo",
+    fonte: "jobbol", tecnologias: [injected, "Python"], url: "https://example.test/vaga",
+    data_publicacao: today()
+  };
+  app.run("vagasData = [fixture]; renderVagasTable()");
+  const trigger = walk(app.get("#table-vagas tbody")).find(node => node.className === "job-title");
+
+  trigger.onpointerenter({ pointerType: "mouse" });
+  const hoverOpened = app.get("job-details").open && !app.get("job-details").modal;
+  const hoverLeft = parseFloat(app.get("job-details").style.left);
+  trigger.onclick();
+  const modalOpened = app.get("job-details").modal;
+  app.run("closeJobDetails()");
+
+  assert.equal(hoverOpened, true);
+  assert.ok(hoverLeft >= trigger.getBoundingClientRect().right + 8);
+  assert.equal(modalOpened, true);
+  assert.equal(app.get("job-details-title").textContent, injected);
+  assert.ok(app.get("job-details-fields").textContent.includes("Sudeste / São Paulo"));
+  assert.ok(app.get("job-details-skills").textContent.includes("Python"));
+  assert.equal(walk(app.get("job-details-skills")).filter(node => node.tagName === "IMG").length, 0);
+  assert.equal(app.get("job-details-link").childNodes[0].rel, "noopener noreferrer");
+  assert.equal(app.get("job-details").open, false);
+  assert.equal(trigger.attributes["aria-expanded"], "false");
+});
+
+test("sem espaço nas laterais o hover fica fora dos limites do título", () => {
+  const app = runtime();
+  app.sandbox.window.innerWidth = 500;
+  app.sandbox.window.innerHeight = 500;
+  app.sandbox.fixture = { titulo: "Vaga", data_publicacao: today() };
+  app.run("vagasData = [fixture]; renderVagasTable()");
+  const trigger = walk(app.get("#table-vagas tbody")).find(node => node.className === "job-title");
+
+  trigger.onpointerenter({ pointerType: "mouse" });
+
+  assert.ok(parseFloat(app.get("job-details").style.top) > trigger.getBoundingClientRect().bottom);
+  assert.ok(parseFloat(app.get("job-details").style.maxHeight) <= 350);
+});
+
+test("toque não abre hover; detalhes vazios e URL insegura têm fallback", () => {
+  const app = runtime();
+  app.sandbox.fixture = { titulo: "Vaga", url: "javascript:alert(1)", data_publicacao: today() };
+  app.run("vagasData = [fixture]; renderVagasTable()");
+  const trigger = walk(app.get("#table-vagas tbody")).find(node => node.className === "job-title");
+
+  trigger.onpointerenter({ pointerType: "touch" });
+  const openedOnTouchHover = app.get("job-details").open;
+  trigger.onclick();
+
+  assert.equal(openedOnTouchHover, false);
+  assert.equal(app.get("job-details").modal, true);
+  assert.ok(app.get("job-details-fields").textContent.includes("Não informado"));
+  assert.ok(app.get("job-details-skills").textContent.includes("Nenhuma habilidade"));
+  assert.equal(walk(app.get("job-details-link")).filter(node => node.tagName === "A").length, 0);
+});
+
+test("filtrar fecha os detalhes para não manter anúncio fora da lista", () => {
+  const app = runtime();
+  app.sandbox.fixture = { titulo: "Vaga", data_publicacao: today() };
+  app.run("vagasData = [fixture]; renderVagasTable()");
+  const trigger = walk(app.get("#table-vagas tbody")).find(node => node.className === "job-title");
+  trigger.onclick();
+
+  app.run("renderVagasTable()");
+
+  assert.equal(app.get("job-details").open, false);
 });
 
 test("resumos, ranking, pills e detalhes não interpretam os dados como HTML ou CSS", () => {

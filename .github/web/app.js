@@ -119,6 +119,7 @@ function jobLink(url, text, styles = {}) {
 
 
 function setTab(tabId) {
+  closeJobDetails();
   const isTableTab = ["skills", "areas", "vagas"].includes(tabId);
   document.documentElement.classList.toggle("table-tab-active", isTableTab);
   document.body.classList.toggle("table-tab-active", isTableTab);
@@ -328,6 +329,7 @@ function matchWithBoundaryPrefix(haystack, needle) {
 }
 
 function renderVagasTable() {
+  closeJobDetails();
   const rawQuery = normalizeSearchText(document.getElementById("search-vagas").value).trim();
   const modFilter = (document.getElementById("filter-modalidade").value || "").trim();
   const tbody = document.querySelector("#table-vagas tbody");
@@ -369,15 +371,20 @@ function renderVagasTable() {
   items.forEach(v => {
     const tr = document.createElement("tr");
     const title = cell(tr, "");
-    const mobile = element("div", null, "show-mobile");
-    const mobileLink = jobLink(v.url, v.titulo, { color: "var(--accent)", fontWeight: "700", textDecoration: "none" });
-    if (mobileLink) mobileLink.appendChild(element("span", " ↗", "", { fontSize: "11px", opacity: "0.8" }));
-    mobile.appendChild(mobileLink || element("strong", v.titulo));
-    mobile.appendChild(element("div", v.empresa, "", { color: "var(--text-muted)", fontSize: "11px", marginTop: "2px" }));
-    const desktop = element("div", null, "hide-mobile");
-    desktop.appendChild(element("strong", v.titulo));
-    title.appendChild(mobile);
-    title.appendChild(desktop);
+    const trigger = element("button", v.titulo, "job-title");
+    trigger.type = "button";
+    trigger.setAttribute("aria-haspopup", "dialog");
+    trigger.setAttribute("aria-controls", "job-details");
+    trigger.setAttribute("aria-expanded", "false");
+    trigger.onclick = () => showJobDetails(v, trigger, true);
+    trigger.onpointerenter = event => {
+      if (event.pointerType !== "touch" && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        showJobDetails(v, trigger, false);
+      }
+    };
+    trigger.onpointerleave = scheduleCloseJobDetails;
+    title.appendChild(trigger);
+    title.appendChild(element("div", v.empresa, "show-mobile job-company"));
     cell(tr, v.empresa, "hide-mobile");
     cell(tr, element("span", v.area, "badge"), "hide-mobile", { textAlign: "center" });
 
@@ -396,3 +403,111 @@ function renderVagasTable() {
     tbody.appendChild(tr);
   });
 }
+
+let jobDetailsTrigger = null;
+let jobDetailsModal = false;
+let jobDetailsCloseTimer = null;
+
+function cancelCloseJobDetails() {
+  clearTimeout(jobDetailsCloseTimer);
+}
+
+function scheduleCloseJobDetails() {
+  if (jobDetailsModal) return;
+  cancelCloseJobDetails();
+  jobDetailsCloseTimer = setTimeout(closeJobDetails, 200);
+}
+
+function resetJobDetails() {
+  cancelCloseJobDetails();
+  if (jobDetailsTrigger) jobDetailsTrigger.setAttribute("aria-expanded", "false");
+  jobDetailsTrigger = null;
+  jobDetailsModal = false;
+}
+
+function closeJobDetails() {
+  const dialog = document.getElementById("job-details");
+  if (dialog?.open) dialog.close();
+  resetJobDetails();
+}
+
+function showJobDetails(vaga, trigger, modal) {
+  const dialog = document.getElementById("job-details");
+  if (dialog.open && jobDetailsModal && !modal) return;
+  closeJobDetails();
+  jobDetailsTrigger = trigger;
+  jobDetailsModal = modal;
+  trigger.setAttribute("aria-expanded", "true");
+  document.getElementById("job-details-title").textContent = vaga.titulo || "Vaga";
+  document.getElementById("job-details-company").textContent = vaga.empresa || "Confidencial";
+  const tags = document.getElementById("job-details-tags");
+  tags.replaceChildren(...[vaga.senioridade, vaga.modalidade].filter(Boolean).map(text => element("span", text, "badge")));
+  const fields = document.getElementById("job-details-fields");
+  fields.replaceChildren();
+  for (const [label, value] of [
+    ["Área", vaga.area], ["Localidade", vaga.localidade],
+    ["Região / polo", [vaga.regiao, vaga.polo].filter(Boolean).join(" / ")],
+    ["Publicação", vaga.data_publicacao], ["Fonte", vaga.fonte]
+  ]) {
+    const row = element("div");
+    row.appendChild(element("dt", label));
+    row.appendChild(element("dd", value || "Não informado"));
+    fields.appendChild(row);
+  }
+  const skills = document.getElementById("job-details-skills");
+  const technologies = Array.isArray(vaga.tecnologias) ? vaga.tecnologias : [];
+  skills.replaceChildren(...technologies.map(text => element("span", text, "badge badge-accent")));
+  if (!technologies.length) skills.appendChild(element("span", "Nenhuma habilidade identificada.", "job-details-note"));
+  const link = jobLink(vaga.url, "Abrir na fonte ↗");
+  if (link) link.className = "nav-btn job-details-source";
+  document.getElementById("job-details-link").replaceChildren(link || element("span", "Link indisponível.", "job-details-note"));
+  dialog.style.left = "";
+  dialog.style.top = "";
+  dialog.style.maxHeight = "";
+  if (modal) {
+    dialog.showModal();
+  } else {
+    const previousFocus = document.activeElement;
+    dialog.show();
+    const anchor = trigger.getBoundingClientRect();
+    const panel = dialog.getBoundingClientRect();
+    const roomRight = anchor.right + 8 + panel.width <= window.innerWidth - 12;
+    const roomLeft = anchor.left - panel.width - 8 >= 12;
+    let left, top;
+    if (roomRight || roomLeft) {
+      left = roomRight ? anchor.right + 8 : anchor.left - panel.width - 8;
+      top = Math.max(12, Math.min(anchor.top, window.innerHeight - panel.height - 12));
+    } else {
+      const below = window.innerHeight - anchor.bottom - 20;
+      const above = anchor.top - 20;
+      const height = Math.min(panel.height, Math.max(below, above));
+      dialog.style.maxHeight = height + "px";
+      left = Math.max(12, Math.min(anchor.left, window.innerWidth - panel.width - 12));
+      top = below >= above ? anchor.bottom + 8 : anchor.top - height - 8;
+    }
+    dialog.style.left = left + "px";
+    dialog.style.top = top + "px";
+    // O hover não move o foco do teclado para o painel temporário.
+    previousFocus?.focus({ preventScroll: true });
+    if (document.activeElement?.closest("#job-details")) document.activeElement.blur();
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const dialog = document.getElementById("job-details");
+  dialog.onpointerenter = cancelCloseJobDetails;
+  dialog.onpointerleave = scheduleCloseJobDetails;
+  dialog.onclose = () => { if (!dialog.open) resetJobDetails(); };
+  dialog.onclick = event => {
+    if (jobDetailsModal && event.target === dialog) {
+      const bounds = dialog.getBoundingClientRect();
+      if (event.clientX < bounds.left || event.clientX > bounds.right ||
+          event.clientY < bounds.top || event.clientY > bounds.bottom) closeJobDetails();
+    }
+  };
+  document.querySelector("#table-vagas").closest(".scroll-table").addEventListener("scroll", () => {
+    if (!jobDetailsModal) closeJobDetails();
+  });
+});
+document.addEventListener("keydown", event => { if (event.key === "Escape") closeJobDetails(); });
+window.addEventListener("resize", closeJobDetails);

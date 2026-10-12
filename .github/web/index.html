@@ -251,6 +251,23 @@
   </footer>
 </div>
 
+<dialog id="job-details" class="job-details" aria-labelledby="job-details-title">
+  <div class="job-details-heading">
+    <div class="card-title">Anúncio da amostra</div>
+    <button class="job-details-close nav-btn" type="button" aria-label="Fechar detalhes" onclick="closeJobDetails()">×</button>
+  </div>
+  <h2 id="job-details-title"></h2>
+  <p id="job-details-company"></p>
+  <div id="job-details-tags"></div>
+  <dl id="job-details-fields"></dl>
+  <div class="job-details-skills">
+    <h3>Habilidades identificadas</h3>
+    <div id="job-details-skills"></div>
+  </div>
+  <p class="job-details-note">Consulte a descrição completa e a disponibilidade da vaga no portal de origem.</p>
+  <div id="job-details-link"></div>
+</dialog>
+
 <!-- JAVASCRIPT ROOTS -->
 <script src="app.js"></script>
 
