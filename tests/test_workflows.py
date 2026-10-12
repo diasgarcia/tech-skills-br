@@ -44,6 +44,13 @@ def test_ci_mantem_apenas_python_312():
     assert "matrix.python-version" not in content
 
 
+def test_pages_mantem_nome_e_ambiente_originais():
+    payload = yaml.safe_load((WORKFLOW_DIR / "deploy_pages.yml").read_text(encoding="utf-8"))
+
+    assert payload["name"] == "Deploy GitHub Pages"
+    assert payload["jobs"]["deploy"]["environment"]["name"] == "github-pages"
+
+
 def test_coleta_diaria_valida_qualidade_e_registra_frescor_antes_da_release():
     content = (WORKFLOW_DIR / "daily_scraper.yml").read_text(encoding="utf-8")
 
@@ -105,7 +112,7 @@ def test_pages_nao_mantem_o_banco_bloqueado(workflow, producer_id, deploy_id, st
     assert producer["concurrency"] == {"group": "vagas-snapshot-latest", "cancel-in-progress": False}
     assert "environment" not in producer
     assert deploy["needs"] == producer_id
-    assert deploy["concurrency"] == {"group": "vagas-pages-deploy", "cancel-in-progress": False}
+    assert deploy["concurrency"] == {"group": "vagas-pages-deploy", "cancel-in-progress": True}
     assert deploy["environment"]["name"] == "github-pages"
     assert producer["outputs"]["snapshot_id"] == f"${{{{ steps.{step_id}.outputs.snapshot_id }}}}"
 

@@ -133,8 +133,9 @@ jobs:
     name: Publicar Dashboard no GitHub Pages
     needs: enrich
     concurrency:
+      # Substitui somente o deploy anterior; o snapshot ja foi salvo.
       group: vagas-pages-deploy
-      cancel-in-progress: false
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
