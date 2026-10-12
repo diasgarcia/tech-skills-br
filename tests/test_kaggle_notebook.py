@@ -134,5 +134,44 @@ def test_celulas_executam_com_parquet_categorico_nulos_e_caminhos_kaggle(tmp_pat
     ranking = namespace["ranking_skills"].set_index("skill")
     assert ranking.loc["Python", "vagas"] == 2
     assert ranking.loc["Python", "frequencia_%"] == 100
+    presenca = namespace["presenca_entre_areas"].set_index("skill")
+    assert presenca.loc["Python", "areas"] == 2
+    assert presenca.loc["Python", "total_areas"] == 3
+    assert presenca.loc["Python", "media_%"] == pytest.approx(200 / 3)
+    assert namespace["percentuais_por_area"].loc["Python", "Frontend"] == 0
     assert "Não informada" in namespace["distribuicao_areas"]["área"].values
     assert len(rendered) >= 4
+
+
+@pytest.mark.parametrize("skills,areas,expected", [
+    (["Hardware; Inglês", "Hardware; Inglês", "Hardware", "Hardware", "Inglês", None],
+     ["Suporte"] * 4 + ["Backend", "Frontend"], ("Inglês", 2, 3, 50)),
+    (["B; C; A", "A", None, None, "B; C", None, None, None],
+     ["Backend"] * 4 + ["Frontend"] * 4, ("B", 2, 2, 25)),
+    ([None, None], ["Backend", "Frontend"], None),
+    ([], [], None),
+])
+def test_notebook_presenca_pondera_areas_igualmente_e_trata_vazios(skills, areas, expected):
+    import pandas as pd
+
+    notebook = json.loads(NOTEBOOK_PATH.read_text(encoding="utf-8"))
+    cell = next(cell for cell in notebook["cells"]
+                if cell["cell_type"] == "code" and "base_por_area =" in "".join(cell["source"]))
+    vagas = pd.DataFrame({"skills": pd.Series(skills, dtype="string"), "area": pd.Categorical(areas, categories=["Suporte", "Backend", "Frontend", "Ausente"])})
+    analise = vagas.loc[vagas["skills"].notna()].copy()
+    analise["skill"] = analise["skills"].str.split(";")
+    analise = analise.explode("skill", ignore_index=True)
+    analise["skill"] = analise["skill"].str.strip()
+    namespace = {"vagas": vagas, "analise_skills": analise, "pd": pd, "display": lambda _: None}
+
+    exec(compile("".join(cell["source"]), "presenca-notebook", "exec"), namespace)
+    ranking = namespace["presenca_entre_areas"]
+
+    if expected is None:
+        assert ranking.empty
+    else:
+        nome, cobertura, total, media = expected
+        assert ranking.iloc[0]["skill"] == nome
+        assert ranking.iloc[0]["areas"] == cobertura
+        assert ranking.iloc[0]["total_areas"] == total
+        assert ranking.iloc[0]["media_%"] == pytest.approx(media)
