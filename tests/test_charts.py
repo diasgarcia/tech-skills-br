@@ -106,21 +106,23 @@ def test_build_area_skill_matrix_rejeita_base_sem_skills():
         build_area_skill_matrix(jobs)
 
 
-def test_heatmap_padrao_mostra_dez_areas_e_habilidades(tmp_path):
+def test_heatmap_padrao_mostra_dez_areas_e_quinze_habilidades(tmp_path):
     jobs = [
         _job(date(2026, 10, 10), f"Área {index:02}", f"Skill {index:02}")
-        for index in range(12)
+        for index in range(18)
     ]
     output_path = tmp_path / "heatmap.svg"
 
-    matrix = build_area_skill_matrix(jobs)
+    matrix = build_area_skill_matrix(jobs, top_areas=10, top_skills=15)
     chart_area_skill_heatmap(jobs, output_path)
     svg = output_path.read_text(encoding="utf-8")
 
-    assert len(matrix.areas) == len(matrix.skills) == 10
-    assert "10 maiores áreas × 10 habilidades" in svg
-    assert "Área 09" in svg and "Skill 09" in svg
-    assert "Área 10" not in svg and "Skill 10" not in svg
+    assert len(matrix.areas) == 10
+    assert len(matrix.skills) == 15
+    assert "10 maiores áreas × 15 habilidades" in svg
+    assert "Área 09" in svg and "Skill 14" in svg
+    assert "Área 10" not in svg and "Skill 15" not in svg
+    assert 'width="1152pt"' in svg
 
 
 def test_heatmap_rotula_dimensoes_reais_em_base_pequena(tmp_path):

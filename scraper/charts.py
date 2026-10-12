@@ -282,10 +282,10 @@ def chart_daily_jobs_and_skills(
 
 
 def chart_area_skill_heatmap(
-    jobs: list[ChartJob], output_path: Path, top_n: int = 10
+    jobs: list[ChartJob], output_path: Path, top_areas: int = 10, top_skills: int = 15
 ) -> Path:
     """Heatmap das areas e habilidades mais citadas na base."""
-    data = build_area_skill_matrix(jobs, top_areas=top_n, top_skills=top_n)
+    data = build_area_skill_matrix(jobs, top_areas=top_areas, top_skills=top_skills)
     _style()
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -294,7 +294,8 @@ def chart_area_skill_heatmap(
         "tech_skills_heatmap", [PANEL, "#193b66", BLUE, PURPLE]
     )
     height = max(6.2, 3.4 + 0.5 * len(data.areas))
-    fig, ax = plt.subplots(figsize=(12, height), dpi=180)
+    width = 16 if len(data.skills) > 10 else 12
+    fig, ax = plt.subplots(figsize=(width, height), dpi=180)
     fig.subplots_adjust(left=0.26, right=0.9, bottom=0.23, top=0.8)
     image = ax.imshow(values, aspect="auto", cmap=cmap, vmin=0, vmax=values.max())
 
