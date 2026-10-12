@@ -91,10 +91,13 @@
       text-align: left;
       cursor: pointer;
       overflow-wrap: anywhere;
+      min-width: 0;
     }
     .job-title:hover { color: var(--accent); }
     .job-title:focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
     .job-company { color: var(--text-muted); font-size: 11px; margin-top: 2px; }
+    .job-link-col { width: 45px; text-align: center; }
+    .job-direct-link { display: inline-flex; align-items: center; justify-content: center; min-width: 24px; min-height: 24px; font-size: 14px; }
     html:has(#job-details:modal), body:has(#job-details:modal) { overflow: hidden; }
     .job-details {
       position: fixed;
@@ -434,8 +437,9 @@
       #table-areas-summary tbody tr:nth-child(n + 11) { display: none; }
 
       #table-vagas { table-layout: fixed; }
-      #table-vagas th:first-child, #table-vagas td:first-child { width: 66%; }
+      #table-vagas th:first-child, #table-vagas td:first-child { width: 60%; }
       #table-vagas th, #table-vagas td { vertical-align: top; }
+      #table-vagas .job-link-col { width: 32px; padding-left: 2px; padding-right: 2px; vertical-align: middle; }
       footer {
         position: fixed;
         right: 0;

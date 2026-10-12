@@ -399,7 +399,12 @@ function renderVagasTable() {
     if (exibePolo) local.appendChild(element("span", polo, "job-place"));
     if (modalidade) local.appendChild(element("em", modalidade, "job-mode"));
     if (!local.childNodes.length) local.textContent = "-";
-    cell(tr, jobLink(v.url, "↗", { fontSize: "14px", textDecoration: "none" }) || "-", "hide-mobile", { textAlign: "center" });
+    const directLink = jobLink(v.url, "↗");
+    if (directLink) {
+      directLink.className = "job-direct-link";
+      directLink.setAttribute("aria-label", "Abrir vaga na fonte");
+    }
+    cell(tr, directLink || "-", "job-link-col");
     tbody.appendChild(tr);
   });
 }

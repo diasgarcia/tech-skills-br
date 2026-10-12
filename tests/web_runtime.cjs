@@ -86,6 +86,11 @@ test("anúncios são texto literal; links inseguros não viram âncoras", () => 
   assert.ok(rows[0].textContent.includes(injected));
   assert.equal(walk(rows[0]).filter(node => ["IMG", "SCRIPT", "A"].includes(node.tagName)).length, 0);
   assert.equal(links.length, 1);
+  const directLink = links.find(link => link.className === "job-direct-link");
+  assert.equal(directLink.attributes["aria-label"], "Abrir vaga na fonte");
+  assert.equal(directLink.onclick, undefined);
+  assert.equal(rows[1].childNodes.at(-1).className, "job-link-col");
+  assert.equal(rows[1].childNodes.at(-1).childNodes[0], directLink);
   assert.ok(links.every(link => link.href.startsWith("https://example.test/")));
   assert.ok(links.every(link => link.rel === "noopener noreferrer"));
   assert.ok(links.every(link => !link.onmouseover));

@@ -59,6 +59,17 @@ def test_detalhes_ocultam_fechar_apenas_no_hover():
     assert ".job-details:not(:modal) .job-details-close { display: none; }" in content
 
 
+def test_link_das_vagas_fica_na_ultima_coluna_tambem_no_mobile():
+    page = BeautifulSoup(INDEX_PATH.read_text(encoding="utf-8"), "html.parser")
+
+    headers = page.find("table", id="table-vagas").find_all("th")
+
+    assert headers[-2].get_text() == "Local / Mod."
+    assert headers[-1].get_text() == "Link"
+    assert "job-link-col" in headers[-1]["class"]
+    assert "hide-mobile" not in headers[-1]["class"]
+
+
 @pytest.mark.skipif(shutil.which("node") is None, reason="Node.js necessário para os testes offline do DOM")
 def test_renderizacao_interacao_e_recuperacao_sem_rede():
     script = Path(__file__).with_name("web_runtime.cjs")
