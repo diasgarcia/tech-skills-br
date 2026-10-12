@@ -21,6 +21,15 @@ def test_settings_defaults_do_projeto():
     assert s.source_delays["vagas"] == 2.0
     assert s.source_delays["solides"] == 2.0
     assert s.source_delays["gupy"] == 1.0
+    assert s.source_delays["jobbol"] == 1.5
+    assert "jobbol" in s.sources
+    assert s.jobbol_days_back == 3
+    assert s.linkedin_advertiser_exclusions == {
+        "Jobbol": "jobbol", "Abler": "abler", "abler Vagas": "abler",
+        "Sólides": "solides", "Vagas.com": "vagas", "InfoJobs": "infojobs",
+        "GeekHunter": "geekhunter", "trampos": "trampos", "trampos.co": "trampos",
+        "Gupy": "gupy", "Recrutei": "recrutei",
+    }
     assert {"mainframe", "cobol"} <= set(
         s.term_match_rules["mainframe junior"]
     )

@@ -49,7 +49,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     parser.add_argument(
         "--page-size", type=int, default=100,
-        help="Vagas por pagina; a Gupy aceita no maximo 100 (padrao: 100).",
+        help="Vagas por pagina (padrao: 100); Gupy limita a 100 e Jobbol a 50.",
     )
 
     parser.add_argument(
@@ -63,6 +63,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="Recrutei: coleta completa via paginacao SSR da listagem "
              "(todas as vagas ativas). Sem a flag, o padrao diario usa o "
              "sitemap das ultimas 24h.",
+    )
+
+    parser.add_argument(
+        "--jobbol-days", type=int, default=3,
+        help="Jobbol: janela de publicacao em dias (padrao: 3). "
+             "Use um valor maior para a carga inicial dos anuncios ativos.",
     )
 
     parser.add_argument(
@@ -119,7 +125,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
     _load_dotenv()
-    for name in ("start_page", "max_pages", "page_size", "abler_days"):
+    for name in ("start_page", "max_pages", "page_size", "abler_days", "jobbol_days"):
         if getattr(args, name) < 1:
             parser.error(f"--{name.replace('_', '-')} deve ser maior que zero.")
     overrides = {}
@@ -166,6 +172,7 @@ def _settings_from_args(args, overrides) -> Settings:
         enrich_linkedin=not args.no_enrich,
         abler_days_back=args.abler_days,
         recrutei_full=args.recrutei_full,
+        jobbol_days_back=args.jobbol_days,
         parallel_sources=not args.sequencial,
         quality_gate=args.quality_gate,
         source_delays={

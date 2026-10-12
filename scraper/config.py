@@ -81,6 +81,17 @@ def load_term_match_rules() -> dict[str, list[str]]:
     }
 
 
+def load_linkedin_advertiser_exclusions() -> dict[str, str]:
+    """Anunciantes excluidos somente quando a fonte propria esta na rodada."""
+    regras = (_collector_rules().get("linkedin") or {}).get("anunciantes_ignorados") or {}
+    return {str(empresa).strip(): str(fonte).strip() for empresa, fonte in regras.items()}
+
+
+def load_jobbol_searches() -> dict[str, dict[str, str]]:
+    """Buscas nativas que cobrem TI e as categorias separadas de entrada."""
+    return (_collector_rules().get("jobbol") or {}).get("buscas") or {}
+
+
 @lru_cache(maxsize=1)
 def load_workplace_overrides() -> dict[tuple[str, str], str]:
     """Carrega modalidades conferidas no campo oficial do portal."""
@@ -116,6 +127,7 @@ DELAYS_PADRAO: dict[str, float] = {
     "geekhunter": 1.0,
     "abler": 1.0,
     "recrutei": 1.0,
+    "jobbol": 1.5,
 }
 
 
@@ -126,6 +138,7 @@ class Settings:
 
     search_terms: list[str] = field(default_factory=load_search_terms)
     term_match_rules: dict[str, list[str]] = field(default_factory=load_term_match_rules)
+    linkedin_advertiser_exclusions: dict[str, str] = field(default_factory=load_linkedin_advertiser_exclusions)
     sources: list[str] = field(default_factory=lambda: default_sources())
 
     output_dir: Path = DEFAULT_OUTPUT_DIR
@@ -167,6 +180,11 @@ class Settings:
     recrutei_days_back: int = 1
     recrutei_full: bool = False
 
+    # Jobbol: a listagem nao tem filtro de dias verificado. O coletor aplica
+    # este recorte antes de buscar os detalhes, sem parar em anuncios antigos
+    # promovidos. Um valor maior permite uma carga inicial do historico ativo.
+    jobbol_days_back: int = 3
+
     only_junior: bool = True
 
     # Se False, o pipeline nao busca descricoes do LinkedIn durante a coleta.
@@ -175,7 +193,8 @@ class Settings:
     enrich_linkedin: bool = True
 
     def __post_init__(self) -> None:
-        for name in ("page_size", "start_page", "max_pages_per_term", "abler_days_back", "recrutei_days_back"):
+        for name in ("page_size", "start_page", "max_pages_per_term", "abler_days_back", "recrutei_days_back",
+                     "jobbol_days_back"):
             if getattr(self, name) < 1:
                 raise ValueError(f"{name} deve ser maior que zero.")
         if self.page_size > 100:
