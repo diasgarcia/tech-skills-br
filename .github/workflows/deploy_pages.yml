@@ -1,4 +1,4 @@
-﻿name: Deploy GitHub Pages
+name: Deploy GitHub Pages
 
 on:
   push:
@@ -83,7 +83,7 @@ jobs:
     name: Publicar site no GitHub Pages
     needs: build
     concurrency:
-      group: vagas-pages-deploy
+      group: vagas-pages-deploy-v2
       cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 10

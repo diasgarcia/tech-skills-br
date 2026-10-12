@@ -316,7 +316,7 @@ jobs:
     name: Publicar Dashboard no GitHub Pages
     needs: scrape-and-update
     concurrency:
-      group: vagas-pages-deploy
+      group: vagas-pages-deploy-v2
       cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 10
