@@ -293,10 +293,9 @@ def chart_area_skill_heatmap(
     cmap = LinearSegmentedColormap.from_list(
         "tech_skills_heatmap", [PANEL, "#193b66", BLUE, PURPLE]
     )
-    height = max(6.2, 3.4 + 0.5 * len(data.areas))
-    width = 16 if len(data.skills) > 10 else 12
-    fig, ax = plt.subplots(figsize=(width, height), dpi=180)
-    fig.subplots_adjust(left=0.26, right=0.9, bottom=0.23, top=0.8)
+    height = max(6.2, 3.4 + 0.65 * len(data.areas))
+    fig, ax = plt.subplots(figsize=(12, height), dpi=180)
+    fig.subplots_adjust(left=0.245, right=0.94, bottom=0.24, top=0.85)
     image = ax.imshow(values, aspect="auto", cmap=cmap, vmin=0, vmax=values.max())
 
     ax.set_xticks(range(len(data.skills)))
@@ -305,7 +304,7 @@ def chart_area_skill_heatmap(
             skill if len(data.skills) > 6 else "\n".join(textwrap.wrap(skill, 14))
             for skill in data.skills
         ],
-        fontsize=10.5,
+        fontsize=11.5,
         rotation=45 if len(data.skills) > 6 else 0,
         ha="right" if len(data.skills) > 6 else "center",
         rotation_mode="anchor",
@@ -316,7 +315,7 @@ def chart_area_skill_heatmap(
             f"{area}  ·  {_format_int(size)}"
             for area, size in zip(data.areas, data.area_sizes)
         ],
-        fontsize=10.5,
+        fontsize=11.5,
     )
     ax.tick_params(axis="x", length=0, pad=12)
     ax.tick_params(axis="y", length=0, pad=12)
@@ -332,29 +331,29 @@ def chart_area_skill_heatmap(
                 _format_pct(value),
                 ha="center",
                 va="center",
-                fontsize=10.5,
+                fontsize=11.5,
                 fontweight="bold" if value >= threshold else "normal",
                 color=TEXT if value >= threshold else "#c7d1dc",
             )
 
     colorbar = fig.colorbar(image, ax=ax, fraction=0.03, pad=0.035)
-    colorbar.ax.tick_params(length=0, labelsize=8.5, colors=MUTED)
+    colorbar.ax.tick_params(length=0, labelsize=10, colors=MUTED)
     colorbar.outline.set_visible(False)
     colorbar.set_label("Percentual das vagas da área", color=MUTED, labelpad=12)
 
     fig.text(
         0.08,
-        0.94,
+        0.95,
         "Onde as habilidades mais citadas aparecem",
         fontsize=19,
         fontweight="bold",
     )
     fig.text(
         0.08,
-        0.885,
+        0.915,
         f"{len(data.areas)} {'maior área' if len(data.areas) == 1 else 'maiores áreas'} × "
         f"{len(data.skills)} {'habilidade mais citada' if len(data.skills) == 1 else 'habilidades mais citadas'} na base",
-        fontsize=10.5,
+        fontsize=11.5,
         color=MUTED,
     )
 

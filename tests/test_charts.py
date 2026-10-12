@@ -122,7 +122,8 @@ def test_heatmap_padrao_mostra_dez_areas_e_quinze_habilidades(tmp_path):
     assert "10 maiores áreas × 15 habilidades" in svg
     assert "Área 09" in svg and "Skill 14" in svg
     assert "Área 10" not in svg and "Skill 15" not in svg
-    assert 'width="1152pt"' in svg
+    assert 'width="864pt"' in svg
+    assert 'height="712.8pt"' in svg
 
 
 def test_heatmap_rotula_dimensoes_reais_em_base_pequena(tmp_path):
