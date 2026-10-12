@@ -172,8 +172,11 @@ function initKPIs() {
   const skillCount = document.getElementById("kpi-top-skill-count");
   if (presenca) {
     document.getElementById("kpi-top-skill").textContent = presenca.nome;
-    skillCount.textContent = `Aparece em ${presenca.areas} de ${presenca.total_areas} áreas`;
-    skillCount.title = `Maior média de presença por área: ${presenca.media_percentual.toLocaleString("pt-BR")}% das vagas. Cada área tem o mesmo peso, incluindo áreas sem menção e vagas sem habilidades.`;
+    const media = presenca.media_percentual.toLocaleString("pt-BR", {
+      minimumFractionDigits: 1, maximumFractionDigits: 1
+    });
+    skillCount.textContent = `Presença média por área: ${media}%`;
+    skillCount.title = `Aparece em ${presenca.areas} de ${presenca.total_areas} áreas. Cada área tem o mesmo peso na média, incluindo áreas sem menção e vagas sem habilidades. Não é o percentual da base inteira.`;
   } else {
     document.getElementById("kpi-top-skill").textContent = "--";
     skillCount.textContent = "--";

@@ -75,8 +75,18 @@ test("KPI mostra a presença entre áreas, não o total de citações", () => {
   app.run("resumoData = { habilidade_entre_areas: fixture }; tecnologiasData = [{ nome: 'Hardware', vagas: 2218 }]; initKPIs()");
 
   assert.equal(app.get("kpi-top-skill").textContent, "Inglês");
-  assert.equal(app.get("kpi-top-skill-count").textContent, "Aparece em 18 de 18 áreas");
-  assert.ok(app.get("kpi-top-skill-count").title.includes("22%"));
+  assert.equal(app.get("kpi-top-skill-count").textContent, "Presença média por área: 22,0%");
+  assert.ok(app.get("kpi-top-skill-count").title.includes("18 de 18 áreas"));
+  assert.ok(app.get("kpi-top-skill-count").title.includes("Não é o percentual da base inteira"));
+});
+
+test("presença média mantém zero com uma casa decimal", () => {
+  const app = runtime();
+  app.sandbox.fixture = { nome: "Skill", areas: 1, total_areas: 18, media_percentual: 0 };
+
+  app.run("resumoData = { habilidade_entre_areas: fixture }; initKPIs()");
+
+  assert.equal(app.get("kpi-top-skill-count").textContent, "Presença média por área: 0,0%");
 });
 
 test("KPI sem habilidades limpa dados e explicação anteriores", () => {

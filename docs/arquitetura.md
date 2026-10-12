@@ -168,9 +168,11 @@ O quadrinho **Skill com maior presença** usa outro indicador: calcula a média
 dos percentuais de presença da habilidade em cada área. Todas as áreas têm
 o mesmo peso. A base inclui vagas sem habilidades e áreas sem menção entram
 com zero. Empates usam a quantidade de áreas com menção, depois o nome.
-O texto mostra “Aparece em X de Y áreas”; essa cobertura não é o critério
-principal do ranking. O notebook preserva o ranking de citações e apresenta
-também o ranking por presença entre áreas.
+O texto mostra “Presença média por área: X,X%”, com uma casa decimal.
+Não é o percentual da base inteira. A cobertura em quantidade de áreas fica
+na explicação ao passar o ponteiro e no notebook, mas não é o critério principal
+do ranking. O notebook preserva o ranking de citações e apresenta também o
+ranking por presença entre áreas.
 
 ### Calendário e formatos
 

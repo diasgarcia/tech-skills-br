@@ -320,6 +320,8 @@ Ampliei o mapa de calor para dez áreas e quinze habilidades. Aumentei a altura 
 
 Adicionei o indicador Skill com maior presença no site e um ranking por presença entre áreas no notebook. O cálculo usa a média dos percentuais em cada área, com o mesmo peso para todas. Áreas sem menção entram com zero e a base inclui vagas sem habilidades. O quadrinho mostra a quantidade de áreas com menção. Mantive o ranking por total de citações.
 
+Depois, troquei o texto do quadrinho por Presença média por área, com percentual e uma casa decimal. A quantidade de áreas ficou na explicação ao passar o ponteiro e no notebook. O cálculo não mudou.
+
 Documentei o indicador na página Site e indicadores da wiki. Comparei o site e o notebook com a base local: ambos apontaram Inglês, presente nas 18 áreas. Os 985 testes passaram e o lint não apontou problemas. A validação não alterou o banco.
 
 Revisei a wiki e os documentos locais de arquitetura e execução. Completei este histórico com as mudanças registradas nos commits. Atualizei o relatório consolidado com a base local de 8.771 vagas, sem executar uma coleta.
