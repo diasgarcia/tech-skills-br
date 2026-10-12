@@ -18,9 +18,33 @@ O projeto usa funções para regras e transformações. Classes encapsulam conex
 | Estados internos de enriquecimento | `api/enrichment_state.py` |
 | Validação e entrega de snapshots | `api/snapshots.py`, `scripts/release_snapshot.py` |
 | Exportação e publicação do Parquet | `scripts/export_kaggle.py` |
+| Dados do site, relatório e gráficos | `scripts/export_pages_data.py`, `scripts/report_db.py`, `scripts/export_readme_charts.py` |
 | Interface e montagem do Pages | `.github/web/`, `scripts/build_pages.py` |
 
 Os scripts de importação e enriquecimento ainda coordenam parte das regras e da persistência. A separação é incremental; não foi criada uma camada genérica de serviços ou repositórios.
+
+## Fontes e recortes
+
+A rodada padrão consulta dez fontes: Gupy, LinkedIn, Vagas.com, trampos.co,
+Sólides, GeekHunter, InfoJobs, Abler, Recrutei e Jobbol. Os termos e filtros
+nativos ficam em `scraper/rules/coletores.yml`.
+
+LinkedIn limita a busca às últimas 24 horas e pede ordem pelas mais recentes.
+InfoJobs usa os últimos três dias. Abler e Recrutei usam a recência do sitemap
+no modo diário. Essas janelas, os termos e os tetos de paginação limitam a
+cobertura; não garantem observar todos os anúncios.
+
+Jobbol usa uma listagem JSON e o JSON-LD das páginas públicas de detalhe.
+A janela padrão é de três dias, com corte local antes de buscar a descrição.
+A listagem pede ordem decrescente de data. Anúncios promovidos podem ficar
+fora dessa ordem; uma vaga antiga não encerra a paginação. As quatro buscas
+padrão cobrem TI, estágio, trainee e aprendiz. Requisitos técnicos da seção
+Observações são preservados antes dos benefícios.
+
+A lista de anunciantes intermediários do LinkedIn compara nomes inteiros,
+sem distinguir caixa ou acentos. Só exclui o anunciante quando sua fonte
+própria está selecionada. Uma rodada apenas de LinkedIn mantém esses anúncios.
+A regra não remove o histórico nem garante cobertura igual entre portais.
 
 ## Contratos de persistência
 
@@ -88,13 +112,86 @@ O timestamp dos CSVs e a referência das datas relativas usam Brasília (UTC-3).
 Datas explícitas dos portais são preservadas. O gráfico não avança além do dia
 da rodada, mesmo quando algum anúncio informa uma data de publicação futura.
 
-Valores ausentes não são convertidos em Júnior, Presencial ou Brasil. Denominador zero produz percentual zero sem alterar a contagem publicada.
+Senioridade e região ausentes não são convertidas em Júnior ou Brasil. A inferência de modalidade segue as regras por fonte descritas abaixo. Denominador zero produz percentual zero sem alterar a contagem publicada.
 
 No LinkedIn, uma cidade informa localização, não modalidade. O projeto usa o rótulo
 do portal quando ele aparece no HTML e aceita texto explícito no título ou na
 descrição. Sem esses sinais, a modalidade fica como `Não informado`.
 
+`workplace_declared` distingue o campo oficial de uma inferência. Correções
+conferidas por vaga ficam em `workplace_overrides.yml`. O HTML público pode
+omitir o rótulo que aparece na página autenticada. Atividades como suporte
+remoto e presencial não definem o regime do trabalhador.
+
+Esse tratamento conservador da cidade é específico do LinkedIn. Nas demais
+fontes, o fallback geral ainda pode inferir Presencial a partir de uma cidade.
+Essa inferência não equivale a uma confirmação do portal.
+
+Avisos do Vagas.com sobre candidaturas de cidades próximas viram
+`Cidade / UF e Região`. Um aviso de candidaturas nacionais não muda o local
+de trabalho para Brasil nem define modalidade remota.
+
 O frontend usa texto do DOM para conteúdo dos anúncios e aceita apenas links HTTP(S). HTML, CSS e JavaScript ficam separados, sem framework novo. Os testes executam o JavaScript em um DOM simulado; a aparência em navegadores reais ainda requer conferência visual.
+
+### Detalhes dos anúncios
+
+O explorador mostra anúncios dos últimos 30 dias pela data de publicação.
+A busca combina termos com AND e considera título, empresa, área, habilidades,
+modalidade, fonte e dados geográficos.
+
+Um único `dialog` apresenta os dados da vaga. No computador, o hover abre um
+painel sem X, posicionado sem cobrir o título. Clique, teclado ou toque abrem
+um modal com X, Escape e fechamento pelo fundo. Os dados já estão no JSON;
+abrir os detalhes não faz uma consulta ao portal.
+
+O painel mostra metadados, habilidades e link de origem, não a descrição
+completa. A seta de link direto permanece na última coluna, depois de
+Local / Mod., inclusive no celular.
+
+### Gráficos e percentuais
+
+O mapa de calor usa as dez áreas com mais anúncios e as quinze habilidades
+mais citadas em toda a base. Os rankings são recalculados automaticamente.
+Cada célula divide os anúncios com a habilidade pelo total de anúncios da
+área, inclusive os sem habilidades. Zero aparece como `0,0%`.
+
+O SVG tem mais altura e fontes maiores para manter a leitura na largura
+limitada do README. Aumentar apenas a largura do arquivo faz o GitHub reduzir
+também os textos.
+
+O ranking geral de habilidades usa anúncios com ao menos uma habilidade.
+O explorador por área usa anúncios daquela área com habilidades. Esses
+denominadores são diferentes do mapa de calor. Uma vaga pode ter vários
+vínculos, então os percentuais de habilidades não precisam somar 100%.
+
+O quadrinho **Skill com maior presença** usa outro indicador: calcula a média
+dos percentuais de presença da habilidade em cada área. Todas as áreas têm
+o mesmo peso. A base inclui vagas sem habilidades e áreas sem menção entram
+com zero. Empates usam a quantidade de áreas com menção, depois o nome.
+O texto mostra “Aparece em X de Y áreas”; essa cobertura não é o critério
+principal do ranking. O notebook preserva o ranking de citações e apresenta
+também o ranking por presença entre áreas.
+
+### Calendário e formatos
+
+As três rodadas publicadas atualizam o banco e os JSON. O dataset recebe nova
+versão quando os dados mudam. Relatório e gráficos são atualizados na rodada 3,
+às 19:16 de Brasília, ou em uma coleta tratada como manual.
+
+O notebook automático é reenviado apenas na rodada 3 com origem cron e
+dataset confirmado. A coleta manual não dispara esse notebook. Há um workflow
+separado para publicá-lo. Seu código permanece versionado em
+`notebooks/kaggle/`; não é editado a cada execução.
+
+O Kaggle recebe um único `vagas.parquet`, com uma linha por anúncio e 16 colunas.
+`skills` é texto separado por `; `, não uma lista aninhada. `published_date`
+é data, `enrich_encerrada` é booleano e os vocabulários controlados usam
+codificação de categorias. `external_id` continua texto para aceitar IDs
+numéricos, UUIDs e outros códigos.
+
+`gerado_em` informa a geração dos JSON; `ultima_coleta` informa a última
+coleta completa válida registrada. Uma manutenção ou exportação não renova,
+por si só, o frescor.
 
 ## Validação
 

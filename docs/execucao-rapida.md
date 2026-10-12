@@ -85,6 +85,10 @@ python scripts/reclassify_areas.py
 
 O importador sem `--csv` usa o CSV mais recente em `output`. Para importar um arquivo específico, use `--csv caminho.csv`. Importação e enriquecimento aplicam as migrações internas quando necessário. Faça a primeira migração em uma cópia antes de adotá-la na base de trabalho. A importação não regenera os JSONs automaticamente; use o exportador explícito abaixo.
 
+Se também houver saídas de testes em `output`, informe o CSV exato para não
+importar uma rodada diferente. Não use `--recriar` para atualizar o banco:
+essa opção apaga as tabelas, e o CSV não guarda todos os estados internos.
+
 A reextração global continua sendo uma manutenção deliberada. Ela não foi adicionada à rotina diária. Para avaliar mudanças sem gravar:
 
 ```powershell
@@ -116,12 +120,37 @@ Uma fonte zerada sem erro ou outro alerta alto ainda impede a publicação.
 python scripts/export_seed.py
 python scripts/report_db.py
 python scripts/export_pages_data.py
-python scripts/export_readme_charts.py --output-dir _site/assets
 python scripts/build_pages.py
+python scripts/export_readme_charts.py --output-dir _site/assets
 python scripts/export_kaggle.py --export-only
 ```
 
 Estes comandos não publicam nada. Os leitores exigem um banco existente. Os comandos de banco aceitam `--db`; sem ele, usam `DATABASE_URL`, depois `VAGAS_DB` e, por fim, `data/vagas.db`.
+
+O relatório consolida a base em Markdown. Ele não gera os gráficos nem exporta
+JSON. Para definir o dia da contagem de vagas novas, use
+`python scripts/report_db.py --dia AAAA-MM-DD`, substituindo a data.
+Essa contagem usa a entrada no banco, no horário de Brasília, não a publicação
+do anúncio.
+
+O gráfico de 30 dias usa a data de publicação: barras de anúncios e linha de
+habilidades distintas desses anúncios. O mapa de calor usa dez áreas e quinze
+habilidades, com ordem dinâmica. Os SVG ficam em `_site/assets`; não entram
+no Git.
+
+### Calendário das saídas automáticas
+
+- Rodadas 1 e 2: publicam banco, JSON e site; preservam relatório e gráficos.
+- Rodada 3, às 19:16 de Brasília: também atualiza relatório e gráficos.
+- Coleta manual: também atualiza relatório e gráficos.
+- Dataset no Kaggle: recebe uma versão quando os dados mudam.
+- Notebook no Kaggle: roda automaticamente apenas na rodada 3 com origem
+  cron e dataset confirmado. Para executar fora desse fluxo, use o workflow
+  **Publicar Notebook de Analise no Kaggle**.
+
+Uma execução com `origem=cron` e rodada vazia ou inválida usa o fluxo manual.
+Atualizar o dataset não executa o notebook sozinho. As atualizações automáticas
+não alteram o código versionado do notebook.
 
 ## Publicar e recuperar falhas
 
@@ -135,6 +164,25 @@ python scripts/export_kaggle.py
 O primeiro comando prepara DB e CSV da mesma cópia consistente, verifica o hash da base remota e confirma os artefatos após o envio. Não use `gh release upload --clobber` no fluxo normal, pois ele ignora essas verificações. Para usar outra base, passe também um `--state` separado nos comandos de download e publicação.
 
 Uma falha no Kaggle não desfaz a release. O workflow **Publicar Snapshot no Kaggle** repete somente essa entrega, sem nova coleta. A confirmação compara o Parquet de uma versão identificada, não apenas o número da versão.
+
+### Atualizar gráficos sem coletar
+
+Depois de subir uma alteração no gerador, execute:
+
+```powershell
+gh workflow run deploy_pages.yml --ref main -f atualizar_graficos=true
+```
+
+Esse comando publica o site e regenera os dois gráficos com o banco da release.
+Ele não coleta vagas, não substitui a base, não envia o Kaggle e não regenera
+o relatório Markdown. Um deploy comum preserva os SVG publicados.
+
+O GitHub pode continuar mostrando uma imagem antiga no README pelo cache do
+Camo. Confira primeiro o SVG no Pages e o resultado do deploy. Limpar o cache
+da imagem não exige nova coleta. O procedimento está na
+[documentação do GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-anonymized-urls#removing-an-image-from-camos-cache).
+
+### Recuperar uma publicação
 
 Se o upload da release falhar, preserve `data/snapshots/<hash>/`. Nos Actions, os arquivos disponíveis são guardados no artefato de recuperação por sete dias. Uma publicação confirmada remove somente sua cópia temporária de recuperação.
 

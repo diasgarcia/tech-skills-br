@@ -204,12 +204,131 @@ Atualizei o relatório consolidado com 4.992 vagas. Adicionei testes para os gr�
 
 ---
 
-### Pendências para o artigo
+### 13/09/2026
 
-- Medir a contribuição marginal de cada fonte com o avaliador.
-- Documentar a metodologia de deduplicação entre portais.
-- Documentar o portão de relevância e o filtro de senioridade.
-- Documentar a taxonomia de skills com mais de 200 tecnologias.
-- Descrever a classificação por área com pesos.
-- Descrever a estratificação geográfica por polos.
-- Registrar as decisões metodológicas: fontes públicas, sem contorno de bloqueio.
+Separei responsabilidades de coleta, persistência, enriquecimento e publicação. Centralizei conexões e migrações do SQLite. Reforcei os testes de retomada, transações e validação dos snapshots. Documentei a arquitetura e a operação local.
+
+Separei a montagem do site estático da configuração usada na coleta. Corrigi dependências que impediam o deploy no GitHub Pages.
+
+---
+
+### 15/09/2026
+
+Revisei a apresentação pública do projeto e os metadados. Mantive o foco nos anúncios coletados e nas habilidades identificadas. Preservei as tags do dataset no Kaggle.
+
+---
+
+### 16/09/2026
+
+Ajustei a classificação da modalidade de trabalho. O campo declarado pelo LinkedIn passou a ter prioridade sobre a inferência do texto. Adicionei sua persistência no banco para preservar essa informação nas próximas atualizações.
+
+Corrigi o espaço da visão geral para evitar rolagem da página.
+
+---
+
+### 17/09/2026
+
+Corrigi o enriquecimento do InfoJobs para aceitar descrições curtas que contêm informação útil. Ampliei o diagnóstico das tentativas e das pendências, com motivos por fonte.
+
+---
+
+### 18/09/2026
+
+Unifiquei a busca do explorador de vagas. Os termos passaram a considerar também empresa e localização, sem limitar a pesquisa à lista de sugestões.
+
+---
+
+### 21/09/2026
+
+Reforcei a deduplicação entre fontes. A comparação textual passou a exigir título e empresa compatíveis, a mesma cidade e datas próximas. Mantive identificadores e links como evidências mais fortes.
+
+Adicionei controles de qualidade e de frescor da coleta. Reforcei a proteção dos workflows e atualizei os ambientes das ações.
+
+---
+
+### 23/09/2026
+
+Limitei a busca diária do LinkedIn às últimas 24 horas. Configurei o InfoJobs para os últimos três dias. Mantive os tetos de paginação e ajustei a referência de qualidade ao perfil da coleta.
+
+---
+
+### 24/09/2026
+
+Refinei os sinais explícitos de modalidade. Menções a suporte remoto, benefícios ou atividades presenciais não bastam para definir o regime de trabalho. Preservei modalidades já confirmadas. Sem evidência suficiente no LinkedIn, o valor fica como Não informado.
+
+---
+
+### 27/09/2026
+
+Compactei os avisos de localidades próximas do Vagas.com. O local passou a usar o formato Cidade / UF e Região. Ajustei os controles de qualidade para a variação da janela diária e removi outra dependência desnecessária do deploy estático.
+
+---
+
+### 30/09/2026
+
+Corrigi o endpoint público da Gupy e o tratamento de erros HTTP. A publicação passou a preservar os dados válidos das fontes que concluíram, mesmo quando outra fonte falha. Adicionei recuperação para saídas de coleta parcial.
+
+Avisos de candidaturas nacionais deixaram de alterar o local de trabalho da vaga.
+
+---
+
+### 01/10/2026
+
+Ajustei o encerramento do workflow. Os dados válidos são publicados primeiro. Depois, uma falha de fonte deixa a execução com erro. Assim, a entrega parcial não oculta o problema.
+
+---
+
+### 02/10/2026
+
+Mudei a contagem do relatório e da mensagem do commit diário. Eles passaram a destacar as vagas novas do dia, e não apenas as da última rodada. A contagem usa a entrada no banco no horário de Brasília.
+
+---
+
+### 05/10/2026
+
+Bloqueei funções de encanamento que entravam por termos ligados a redes. Retirei a vaga fora do recorte e regenerei o relatório.
+
+---
+
+### 07/10/2026
+
+Padronizei o horário dos arquivos e a interpretação de datas relativas em Brasília. O gráfico passou a respeitar a data de referência da rodada, sem avançar por causa de anúncios com data futura.
+
+---
+
+### 08/10/2026
+
+Revisei anúncios sem habilidades identificadas e ampliei as regras a partir dos casos observados. Preservei trechos de requisitos. Evitei extrair habilidades de benefícios e links sem relação com os requisitos da vaga.
+
+---
+
+### 10/10/2026
+
+Ampliei o mapa de calor para as dez principais áreas e habilidades. Separei a trava de publicação do Pages da trava do snapshot. Uma espera no deploy deixou de bloquear a atualização do banco.
+
+Adicionei uma opção para regenerar os gráficos no Pages sem executar outra coleta.
+
+---
+
+### 12/10/2026
+
+Adicionei a coleta direta da Jobbol. Ela usa páginas públicas, uma janela de três dias e buscas para TI, estágio, trainee e aprendiz. Incluí uma lista de anunciantes intermediários do LinkedIn. A exclusão só ocorre quando a fonte direta também está selecionada.
+
+Adicionei um painel simples de detalhes no explorador de vagas. No computador, o ponteiro abre uma prévia sem botão de fechar. Clique ou toque abre o modal. O painel não cobre o título e usa os dados já carregados. Mantive o link direto na última coluna, também no celular.
+
+Ampliei o mapa de calor para dez áreas e quinze habilidades. Aumentei a altura e as fontes para melhorar a leitura no README. Os rankings continuam dinâmicos e as células sem ocorrência mostram 0,0%.
+
+Adicionei o indicador Skill com maior presença no site e um ranking por presença entre áreas no notebook. O cálculo usa a média dos percentuais em cada área, com o mesmo peso para todas. Áreas sem menção entram com zero e a base inclui vagas sem habilidades. O quadrinho mostra a quantidade de áreas com menção. Mantive o ranking por total de citações.
+
+Documentei o indicador na página Site e indicadores da wiki. Comparei o site e o notebook com a base local: ambos apontaram Inglês, presente nas 18 áreas. Os 985 testes passaram e o lint não apontou problemas. A validação não alterou o banco.
+
+Revisei a wiki e os documentos locais de arquitetura e execução. Completei este histórico com as mudanças registradas nos commits. Atualizei o relatório consolidado com a base local de 8.771 vagas, sem executar uma coleta.
+
+---
+
+### Pontos a avaliar
+
+- Definir uma validação quantitativa com uma amostra e revisão humana independente.
+- Avaliar a cobertura das fontes, as duplicatas e o efeito das descrições ausentes.
+- Revisar regras a partir de casos observados, sem tratar esses ajustes como prova de precisão global.
+- Manter os limites dos indicadores claros: eles descrevem a amostra coletada, não todas as vagas ou contratações do mercado.
