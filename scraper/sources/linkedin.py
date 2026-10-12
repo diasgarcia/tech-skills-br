@@ -77,7 +77,7 @@ class LinkedInSource(JobSource):
 
     name = "linkedin"
     label = "LinkedIn Jobs"
-    COLLECTION_PROFILE = "last-24h-v1"
+    COLLECTION_PROFILE = "last-24h-advertiser-exclusions-v2"
     # O portal entrega ate ~1.000 vagas por termo (medido: sem repeticao
     # pagina a pagina ate o start=990). O teto classico da busca guest.
     MAX_PAGES_PER_TERM = 100
@@ -85,6 +85,12 @@ class LinkedInSource(JobSource):
     def fetch_term(self, term: str) -> list[Job]:
         jobs: list[Job] = []
         seen: set[str] = set()
+        ignorados = {
+            normalize(empresa)
+            for empresa, fonte in self.settings.linkedin_advertiser_exclusions.items()
+            if fonte in self.settings.sources
+        }
+        descartados = 0
 
         start_page = max(0, self.settings.start_page - 1)
         end_page = max(start_page + 1, self.page_limit())
@@ -113,13 +119,19 @@ class LinkedInSource(JobSource):
                 if job.external_id in seen:
                     continue
                 seen.add(job.external_id)
-                jobs.append(job)
                 novos += 1
+                if normalize(job.company) in ignorados:
+                    descartados += 1
+                    continue
+                jobs.append(job)
 
 
             if novos == 0:
                 break  # a API comecou a repetir resultados
 
+        if descartados:
+            logger.info("[%s] '%s': %d anuncios ignorados pela lista de intermediarios",
+                        self.name, term, descartados)
         return jobs
 
     def _parse_page(self, html: str, term: str) -> list[Job]:
