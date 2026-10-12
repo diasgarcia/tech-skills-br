@@ -168,14 +168,16 @@ function initKPIs() {
   document.getElementById("kpi-periodo").textContent = meta.periodo ? `Período: ${meta.periodo}` : "";
   document.getElementById("kpi-empresas").textContent = (meta.total_empresas || 0).toLocaleString("pt-BR");
 
-  // Top 1 Tecnologia Dinâmica (ordenação vinda da base)
-  const topTech = (tecnologiasData && tecnologiasData.length > 0) ? tecnologiasData[0] : null;
-  if (topTech) {
-    document.getElementById("kpi-top-skill").textContent = topTech.nome;
-    document.getElementById("kpi-top-skill-count").textContent = `${topTech.vagas} citações (${topTech.percentual_total}% da base)`;
+  const presenca = resumoData.habilidade_entre_areas;
+  const skillCount = document.getElementById("kpi-top-skill-count");
+  if (presenca) {
+    document.getElementById("kpi-top-skill").textContent = presenca.nome;
+    skillCount.textContent = `Aparece em ${presenca.areas} de ${presenca.total_areas} áreas`;
+    skillCount.title = `Maior média de presença por área: ${presenca.media_percentual.toLocaleString("pt-BR")}% das vagas. Cada área tem o mesmo peso, incluindo áreas sem menção e vagas sem habilidades.`;
   } else {
     document.getElementById("kpi-top-skill").textContent = "--";
-    document.getElementById("kpi-top-skill-count").textContent = "--";
+    skillCount.textContent = "--";
+    skillCount.title = "";
   }
 
   // Modalidade Dominante Dinâmica (pega a maior da lista)

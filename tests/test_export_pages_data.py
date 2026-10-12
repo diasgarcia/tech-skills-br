@@ -56,6 +56,7 @@ def test_exportacao_preserva_zero_e_campos_nao_informados(tmp_path):
     assert resumo["skills_by_area"]["Backend"] == {
         "total_vagas": 1, "vagas_com_tech": 0, "skills": []
     }
+    assert resumo["habilidade_entre_areas"] is None
     assert techs[0]["vagas"] == 0
     assert techs[0]["percentual_total"] == 0
     assert techs[0]["percentual_base_tech"] == 0
@@ -146,7 +147,66 @@ def test_exportacao_vazia_substitui_arquivos_sem_dados_obsoletos(tmp_path):
     assert len(files) == 4
     assert resumo["metadados"]["total_vagas"] == 0
     assert resumo["skills_by_area"] == {}
+    assert resumo["habilidade_entre_areas"] is None
     assert json.loads(files["vagas"].read_text(encoding="utf-8")) == []
     assert json.loads(files["areas"].read_text(encoding="utf-8")) == []
     assert tech["percentual_total"] == 0
     assert tech["percentual_base_tech"] == 0
+
+
+def test_presenca_entre_areas_nao_confunde_volume_com_media(tmp_path):
+    db_path = tmp_path / "presenca.db"
+    engine = make_engine(db_path)
+    try:
+        init_db(engine)
+        with Session(engine) as db:
+            hardware = Tecnologia(nome="Hardware", grupo="suporte")
+            ingles = Tecnologia(nome="Inglês", grupo="idiomas")
+            db.add_all([
+                Vaga(source="teste", external_id=str(index), title="Suporte", area="Suporte Técnico",
+                     tecnologias=[hardware, ingles] if index < 2 else [hardware])
+                for index in range(4)
+            ])
+            db.add_all([
+                Vaga(source="teste", external_id="4", title="Dev", area="Backend", tecnologias=[ingles]),
+                Vaga(source="teste", external_id="5", title="Sem skill", area="Frontend"),
+            ])
+            db.commit()
+    finally:
+        engine.dispose()
+
+    files = export_all_pages_data(tmp_path / "json", db_path)
+    resumo = json.loads(files["resumo"].read_text(encoding="utf-8"))
+    techs = json.loads(files["tecnologias"].read_text(encoding="utf-8"))
+
+    assert techs[0]["nome"] == "Hardware"
+    assert resumo["habilidade_entre_areas"] == {
+        "nome": "Inglês", "areas": 2, "total_areas": 3, "media_percentual": 50.0,
+    }
+
+
+def test_presenca_desempata_por_cobertura_e_nome(tmp_path):
+    db_path = tmp_path / "empate.db"
+    engine = make_engine(db_path)
+    try:
+        init_db(engine)
+        with Session(engine) as db:
+            concentrada = Tecnologia(nome="A concentrada", grupo="teste")
+            espalhada = Tecnologia(nome="B espalhada", grupo="teste")
+            empate = Tecnologia(nome="C espalhada", grupo="teste")
+            db.add_all([
+                Vaga(source="teste", external_id=f"{area}-{index}", title="Vaga", area=area,
+                     tecnologias=([espalhada, empate] if index == 0 else []) +
+                     ([concentrada] if area == "Backend" and index < 2 else []))
+                for area in ("Backend", "Frontend") for index in range(4)
+            ])
+            db.commit()
+    finally:
+        engine.dispose()
+
+    files = export_all_pages_data(tmp_path / "json", db_path)
+    resumo = json.loads(files["resumo"].read_text(encoding="utf-8"))
+
+    assert resumo["habilidade_entre_areas"] == {
+        "nome": "B espalhada", "areas": 2, "total_areas": 2, "media_percentual": 25.0,
+    }

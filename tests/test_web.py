@@ -27,6 +27,14 @@ def test_footer_exibe_links_do_github_e_kaggle():
     assert kaggle.get("aria-label") == "Abrir o dataset no Kaggle"
 
 
+def test_kpi_identifica_a_skill_com_maior_presenca():
+    page = BeautifulSoup(INDEX_PATH.read_text(encoding="utf-8"), "html.parser")
+
+    card = page.find(id="kpi-top-skill").parent
+
+    assert card.find(class_="card-title").get_text() == "Skill com maior presença"
+
+
 def test_footer_mobile_oculta_rotulos_e_mantem_icones():
     content = INDEX_PATH.read_text(encoding="utf-8") + INDEX_PATH.with_name("styles.css").read_text(encoding="utf-8")
 

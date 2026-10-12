@@ -68,6 +68,28 @@ function today() {
   return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 }
 
+test("KPI mostra a presença entre áreas, não o total de citações", () => {
+  const app = runtime();
+  app.sandbox.fixture = { nome: "Inglês", areas: 18, total_areas: 18, media_percentual: 22 };
+
+  app.run("resumoData = { habilidade_entre_areas: fixture }; tecnologiasData = [{ nome: 'Hardware', vagas: 2218 }]; initKPIs()");
+
+  assert.equal(app.get("kpi-top-skill").textContent, "Inglês");
+  assert.equal(app.get("kpi-top-skill-count").textContent, "Aparece em 18 de 18 áreas");
+  assert.ok(app.get("kpi-top-skill-count").title.includes("22%"));
+});
+
+test("KPI sem habilidades limpa dados e explicação anteriores", () => {
+  const app = runtime();
+  app.run("resumoData = { habilidade_entre_areas: { nome: 'Inglês', areas: 1, total_areas: 2, media_percentual: 10 } }; initKPIs()");
+
+  app.run("resumoData = { habilidade_entre_areas: null }; initKPIs()");
+
+  assert.equal(app.get("kpi-top-skill").textContent, "--");
+  assert.equal(app.get("kpi-top-skill-count").textContent, "--");
+  assert.equal(app.get("kpi-top-skill-count").title, "");
+});
+
 test("anúncios são texto literal; links inseguros não viram âncoras", () => {
   const app = runtime();
   const injected = '<img src=x onerror="alert(1)">';

@@ -170,6 +170,7 @@ def export_all_pages_data(
         ]
 
         skills_by_area = {}
+        presenca_por_skill = {}
         for area_info in areas_payload:
             area_name = area_info["area"]
             area_tech_rows = db.execute(
@@ -191,6 +192,15 @@ def export_all_pages_data(
                 .where(Vaga.area == area_name)
             ) or 0
 
+            for nome, _, quantidade in area_tech_rows:
+                presenca = presenca_por_skill.setdefault(
+                    nome, {"nome": nome, "areas": 0, "media_percentual": 0.0}
+                )
+                presenca["areas"] += 1
+                presenca["media_percentual"] += (
+                    100.0 * quantidade / area_info["vagas"] / len(areas_payload)
+                )
+
             skills_by_area[area_name] = {
                 "total_vagas": area_info["vagas"],
                 "vagas_com_tech": area_base_tech,
@@ -203,6 +213,18 @@ def export_all_pages_data(
                     }
                     for nome, grupo, c in area_tech_rows
                 ]
+            }
+
+        habilidade_entre_areas = None
+        if presenca_por_skill:
+            habilidade_entre_areas = min(
+                presenca_por_skill.values(),
+                key=lambda skill: (-skill["media_percentual"], -skill["areas"], skill["nome"]),
+            )
+            habilidade_entre_areas = {
+                **habilidade_entre_areas,
+                "total_areas": len(areas_payload),
+                "media_percentual": round(habilidade_entre_areas["media_percentual"], 1),
             }
 
         resumo_payload = {
@@ -229,6 +251,7 @@ def export_all_pages_data(
             "regioes": regioes,
             "polos": polos,
             "skills_by_area": skills_by_area,
+            "habilidade_entre_areas": habilidade_entre_areas,
         }
 
 
