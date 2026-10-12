@@ -326,6 +326,8 @@ Documentei o indicador na página Site e indicadores da wiki. Comparei o site e 
 
 Revisei a wiki e os documentos locais de arquitetura e execução. Completei este histórico com as mudanças registradas nos commits. Atualizei o relatório consolidado com a base local de 8.771 vagas, sem executar uma coleta.
 
+Corrigi a fila de publicação do Pages nos três workflows. Mantive o nome Deploy GitHub Pages, o ambiente github-pages e o grupo original. Um novo deploy passa a cancelar somente o deploy anterior. A coleta e a atualização do banco continuam sem cancelamento automático. Atualizei os testes e a documentação dessa regra. Os 986 testes passaram e o lint não apontou problemas.
+
 ---
 
 ### Pontos a avaliar
