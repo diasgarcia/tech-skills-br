@@ -116,6 +116,7 @@
     .job-details::backdrop { background: rgba(0, 0, 0, 0.6); }
     .job-details-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     .job-details-close { padding: 0 6px; font-size: 20px; line-height: 1.2; }
+    .job-details:not(:modal) .job-details-close { display: none; }
     .job-details h2 { font-size: 14px; color: var(--text-bright); margin: 8px 0 4px; overflow-wrap: anywhere; }
     #job-details-company { color: var(--text-muted); overflow-wrap: anywhere; }
     #job-details-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }

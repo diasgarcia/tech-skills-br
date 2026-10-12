@@ -53,6 +53,12 @@ def test_detalhes_da_vaga_usam_dialog_com_titulo_e_botao_de_fechar():
     assert dialog.find("button", attrs={"aria-label": "Fechar detalhes"}) is not None
 
 
+def test_detalhes_ocultam_fechar_apenas_no_hover():
+    content = INDEX_PATH.with_name("styles.css").read_text(encoding="utf-8")
+
+    assert ".job-details:not(:modal) .job-details-close { display: none; }" in content
+
+
 @pytest.mark.skipif(shutil.which("node") is None, reason="Node.js necessário para os testes offline do DOM")
 def test_renderizacao_interacao_e_recuperacao_sem_rede():
     script = Path(__file__).with_name("web_runtime.cjs")
