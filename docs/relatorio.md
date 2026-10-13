@@ -356,6 +356,8 @@ Os 1.138 testes passaram e o lint não apontou problemas. Validei o caso de Info
 
 Enxuguei a página de escopo e limitações da wiki. Mantive a validação manual pendente, os termos fora do vocabulário e os rótulos indisponíveis. Retirei repetições e referências a issues. Separei correções já feitas de limites atuais e esclareci que salvamos a descrição obtida sem truncamento. Mantive uma ressalva curta sobre cobertura e duplicatas. Não alterei código nem dados.
 
+Depois, simplifiquei o alerta de queda de volume. A comparação passou a usar a última rodada anterior da mesma fonte e perfil, sem erro de consulta nessa fonte. Menos de 10% do volume bruto anterior gera erro depois das publicações. Resultados de fontes sem erro podem servir de referência mesmo em rodadas parciais. Mantive os demais controles de qualidade e o registro separado do frescor global. Atualizei a documentação e os testes. Os 1.153 testes passaram e o lint não apontou problemas. Não executei coleta real nem alterei o banco de trabalho.
+
 ---
 
 ### Pontos a avaliar

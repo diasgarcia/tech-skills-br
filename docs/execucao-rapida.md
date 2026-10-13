@@ -115,8 +115,10 @@ Depois das etapas de publicação na release, no Kaggle e no Pages, um job final
 marca a rodada como falha se alguma fonte registrou erro ou anomalia alta de volume. As entregas concluídas
 não são desfeitas. O artefato de recuperação também é guardado nas rodadas parciais.
 Fonte zerada sem erro e queda anormal de volume também seguem esse fluxo parcial.
-O aviso mostra a fonte e os valores observados. A rodada não entra no histórico
-de coletas completas usado como referência. Coleta totalmente vazia, modalidade
+O aviso mostra a fonte e os valores observados. A queda usa a última rodada
+anterior da mesma fonte e perfil, sem erro de consulta nessa fonte. Só um volume
+abaixo de 10% do anterior gera alerta de queda. A referência pode vir de uma
+rodada parcial; isso não a transforma em coleta completa. Coleta totalmente vazia, modalidade
 inválida e outros alertas altos continuam impedindo a publicação.
 
 ## Gerar saídas locais

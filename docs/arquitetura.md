@@ -219,8 +219,10 @@ Esses testes não medem a precisão da classificação em anúncios reais. Falta
 
 A coleta automática também verifica fonte zerada, queda em relação às rodadas
 anteriores, modalidade inválida, URL inválida, data futura, excesso de fallback e
-empresa ausente. Alertas altos de dados inválidos impedem a publicação daquele snapshot. A comparação
-histórica começa depois de três coletas completas registradas.
+empresa ausente. Alertas altos de dados inválidos impedem a publicação daquele snapshot.
+A queda de volume usa a última rodada anterior da mesma fonte e perfil, sem
+erro de consulta nessa fonte. Menos de 10% do volume anterior gera alerta alto;
+10% ou mais não gera alerta de queda. Não há média de várias rodadas.
 Abler e Recrutei ficam fora das regras de zero e queda: elas consultam uma janela
 móvel de 24 horas, portanto a redução pode ser normal mesmo sem falha do portal.
 
@@ -232,7 +234,8 @@ nem as entregas concluídas. A rodada não renova o frescor da última coleta
 completa. Fonte zerada sem erro e queda anormal de volume seguem o mesmo fluxo
 parcial: o aviso informa a fonte e os valores observados, as publicações são
 tentadas e o erro fica no job final. Esses alertas mantêm a severidade alta,
-mas não entram como coleta completa no histórico de referência.
+mas não são registradas como coleta completa. Resultados de fontes sem erro de
+consulta podem servir de referência mesmo quando a rodada anterior foi parcial.
 Coleta totalmente vazia, modalidade fora do vocabulário e outros alertas altos
 continuam bloqueando a publicação antes da importação.
 
