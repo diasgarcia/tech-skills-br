@@ -54,7 +54,9 @@ python main.py --sources jobbol --terms "desenvolvedor junior" --max-pages 1 --p
 
 Para ampliar a janela na carga inicial, use `--jobbol-days 365`. A listagem contém anúncios ativos; esse comando não recupera anúncios encerrados. A descrição já entra na coleta, inclusive a seção técnica `Observações`; `--no-enrich` não desativa os detalhes da Jobbol.
 
-Em `scraper/rules/coletores.yml`, `linkedin.anunciantes_ignorados` associa o nome exato do anunciante à sua fonte própria. A lista inclui Jobbol, Abler (também `abler Vagas`), Sólides, Vagas.com, InfoJobs, GeekHunter, trampos (também `trampos.co`), Gupy e Recrutei. A comparação ignora diferenças de caixa e acentos, mas não bloqueia trechos de nomes. Só há exclusão quando a fonte própria está selecionada na rodada. Uma coleta só de LinkedIn mantém esses anúncios. BuscarVagas, Jobgether e demais anunciantes sem fonte própria ficam fora da lista. Os registros históricos não são removidos.
+Em `scraper/rules/coletores.yml`, `anunciantes_intermediarios` associa o nome exato do anunciante à sua fonte própria. A lista vale para todas as fontes e inclui Jobbol, Abler (também `abler Vagas`), Sólides, Vagas.com, InfoJobs, GeekHunter, trampos (também `trampos.co`), Gupy e Recrutei. A comparação ignora diferenças de caixa e acentos, mas não bloqueia trechos de nomes, menções ou links na descrição.
+
+O fluxo comum exclui a republicação antes do enriquecimento e da exportação, somente quando a fonte própria também está selecionada. Assim, uma vaga da Abler coletada pela Jobbol é excluída numa rodada com as duas fontes. Uma rodada apenas de Jobbol mantém esse anúncio. Anúncios coletados na própria fonte também são mantidos. BuscarVagas, Jobgether e demais anunciantes sem fonte própria ficam fora da lista. Os logs e o relatório informam os descartes. Os registros históricos não são removidos.
 
 O filtro não garante cobertura idêntica entre portais: uma falha na fonte própria pode deixar anúncios sem coleta naquela rodada. Falhas de listagem ou de detalhes são registradas como erros, não como respostas vazias válidas. Confira os diagnósticos antes de decidir remover qualquer registro antigo.
 

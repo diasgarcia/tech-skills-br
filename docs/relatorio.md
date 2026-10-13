@@ -340,6 +340,10 @@ Ampliei o terceiro gráfico do README para vinte habilidades e movi a legenda pa
 
 Incluí os três gráficos do README no notebook do Kaggle. Eles são calculados com o dataset da execução. Mantive as tabelas e os gráficos anteriores. A mudança não altera o banco nem o calendário de atualização.
 
+Ampliei o filtro de anunciantes intermediários para todas as fontes. A lista passou ao fluxo comum, antes do enriquecimento e da exportação. Mantive a comparação pelo nome inteiro e a exigência de selecionar a fonte própria. Os anúncios da própria fonte são preservados. Incluí os descartes nos logs e no relatório da coleta. Baixei e validei a release com 8.778 vagas e identifiquei 13 anúncios da Abler na Jobbol, sem apagar o histórico. Os 1.120 testes passaram e o lint não apontou problemas. Não executei uma coleta real.
+
+Depois, apliquei a regra ao histórico autorizado. Removi 307 anúncios de intermediários: 13 da Abler na Jobbol e 294 no LinkedIn. O banco ficou com 8.471 vagas. Preservei um backup local do banco anterior e atualizei o relatório consolidado. Conferi a integridade e os vínculos do SQLite e a exportação do Parquet. Não fiz novas chamadas de coleta nem alterei o esquema do banco.
+
 ---
 
 ### Pontos a avaliar

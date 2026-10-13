@@ -41,10 +41,16 @@ fora dessa ordem; uma vaga antiga não encerra a paginação. As quatro buscas
 padrão cobrem TI, estágio, trainee e aprendiz. Requisitos técnicos da seção
 Observações são preservados antes dos benefícios.
 
-A lista de anunciantes intermediários do LinkedIn compara nomes inteiros,
-sem distinguir caixa ou acentos. Só exclui o anunciante quando sua fonte
-própria está selecionada. Uma rodada apenas de LinkedIn mantém esses anúncios.
-A regra não remove o histórico nem garante cobertura igual entre portais.
+A lista `anunciantes_intermediarios`, em `coletores.yml`, vale para todas as
+fontes. Ela compara nomes inteiros, sem distinguir caixa ou acentos. O fluxo
+comum aplica o filtro antes do enriquecimento e da exportação. Uma menção ou
+link de portal na descrição não causa exclusão.
+
+O filtro mantém anúncios coletados na própria fonte. Só exclui republicações
+quando a fonte própria também está selecionada. Por exemplo, uma vaga da Abler
+na Jobbol é excluída quando Abler participa da rodada. Uma rodada apenas de
+Jobbol mantém esse anúncio. A regra não remove o histórico nem garante cobertura
+igual entre portais. Os logs e o relatório da coleta informam os descartes.
 
 ## Contratos de persistência
 
