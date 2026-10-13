@@ -354,6 +354,8 @@ Essas rodadas são registradas como parciais. Elas não renovam o frescor global
 
 Os 1.138 testes passaram e o lint não apontou problemas. Validei o caso de InfoJobs com uma cópia dos arquivos da run que falhou: 41 vagas brutas e referência de 245. A validação permitiu seguir como parcial e preservou o frescor anterior. Não executei uma coleta real nem alterei a base de trabalho.
 
+Enxuguei a página de escopo e limitações da wiki. Mantive a validação manual pendente, os termos fora do vocabulário e os rótulos indisponíveis. Retirei repetições e referências a issues. Separei correções já feitas de limites atuais e esclareci que salvamos a descrição obtida sem truncamento. Mantive uma ressalva curta sobre cobertura e duplicatas. Não alterei código nem dados.
+
 ---
 
 ### Pontos a avaliar

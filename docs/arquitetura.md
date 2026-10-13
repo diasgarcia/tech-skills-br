@@ -215,6 +215,8 @@ por si só, o frescor.
 
 Testes de falha usam clientes simulados e SQLite temporário. Há cenários de rollback, retomada, confirmação de publicação, categorias e nulos no Parquet, além de execução das células do notebook com dados pequenos. As instruções estão no [guia local](execucao-rapida.md).
 
+Esses testes não medem a precisão da classificação em anúncios reais. Falta avaliar uma amostra independente com revisão humana. Termos fora do vocabulário e rótulos oficiais ausentes continuam sendo limites do processamento. A descrição obtida é salva sem truncamento; falhas de acesso podem impedir a recuperação do conteúdo completo da fonte. Os detalhes estão em [Escopo e Limitações](https://github.com/diasgarcia/tech-skills-br/wiki/Escopo-e-Limitacoes).
+
 A coleta automática também verifica fonte zerada, queda em relação às rodadas
 anteriores, modalidade inválida, URL inválida, data futura, excesso de fallback e
 empresa ausente. Alertas altos de dados inválidos impedem a publicação daquele snapshot. A comparação
