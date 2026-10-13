@@ -7,13 +7,11 @@ from dataclasses import asdict, dataclass
 from datetime import date, datetime, timezone
 import json
 from pathlib import Path
-from statistics import median
 
 from .models import NAO_INFORMADO, WORKPLACE_ORDER, Job, SourceStats
 
 VOLATILE_SOURCES = frozenset({"abler", "recrutei"})
-SHARP_DROP_RATIO = 0.30
-ROLLING_24H_CRITICAL_RATIO = 0.10
+SHARP_DROP_RATIO = 0.10
 SOURCE_ANOMALY_RULES = frozenset({"source_empty", "sharp_drop"})
 
 
@@ -142,27 +140,24 @@ def assess_history(metrics: dict, history: list[dict]) -> list[QualityAlert]:
             continue
         value = int(current_row.get("raw_jobs", 0))
         profile = current_row.get("collection_profile")
-        samples = [
-            int(row.get("raw_jobs", 0))
-            for run in history[:5]
-            if run.get("full_scope")
+        previous = next((
+            row
+            for run in history
             for row in run.get("source_stats", [])
             if row.get("source") == source
             and row.get("collection_profile") == profile
             and not row.get("errors")
-        ]
-        if len(samples) < 3:
+        ), None)
+        if previous is None:
             continue
-        reference = median(samples)
+        reference = int(previous.get("raw_jobs", 0))
         limit = reference * SHARP_DROP_RATIO
-        if reference >= 30 and value < limit:
-            critical_limit = reference * ROLLING_24H_CRITICAL_RATIO
-            rolling_24h = bool(profile and profile.startswith("last-24h-"))
-            severity = "warning" if rolling_24h and value >= critical_limit else "high"
+        if reference > 0 and value < limit:
             alerts.append(QualityAlert(
-                "sharp_drop", severity,
-                f"{source}: {value} vagas brutas; referencia recente {reference:g}.",
-                source=source, value=value, limit=round(limit),
+                "sharp_drop", "high",
+                f"{source}: {value} vagas brutas; ultima coleta comparavel {reference}; "
+                f"volume abaixo de {SHARP_DROP_RATIO:.0%} da coleta anterior.",
+                source=source, value=value, limit=limit,
             ))
     return alerts
 

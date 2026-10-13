@@ -31,12 +31,12 @@ def load_metrics(path: Path) -> dict:
     return metrics
 
 
-def load_history(conn, limit: int = 5) -> list[dict]:
+def load_history(conn, limit: int = 5, *, before: str | None = None) -> list[dict]:
     rows = conn.execute(
         "SELECT escopo_completo, fontes_json FROM coleta_execucoes "
-        "WHERE status IN ('ok', 'warning') AND escopo_completo = 1 "
+        "WHERE status IN ('ok', 'warning') AND (? IS NULL OR coletada_em < ?) "
         "ORDER BY coletada_em DESC LIMIT ?",
-        (limit,),
+        (before, before, limit),
     ).fetchall()
     return [
         {
@@ -49,21 +49,23 @@ def load_history(conn, limit: int = 5) -> list[dict]:
 
 def check(metrics_path: Path, db_path: str | Path | None = None) -> dict:
     metrics = load_metrics(metrics_path)
+    collected = datetime.fromisoformat(metrics["collected_at"])
+    if collected.tzinfo is None:
+        raise ValueError("collected_at deve incluir fuso horario.")
+    before = collected.astimezone(timezone.utc).replace(tzinfo=None).isoformat(sep=" ")
     with closing(connect_sqlite(db_path)) as conn:
         migrate_connection(conn)
-        historical_alerts = assess_history(metrics, load_history(conn))
+        historical_alerts = assess_history(metrics, load_history(conn, before=before))
 
-    existing = {
-        (alert.get("rule"), alert.get("source"))
-        for alert in metrics.get("alerts", [])
-    }
-    metrics.setdefault("alerts", []).extend(
-        alert.__dict__
-        for alert in historical_alerts
-        if (alert.rule, alert.source) not in existing
-    )
+    metrics["alerts"] = [
+        alert for alert in metrics.get("alerts", []) if alert.get("rule") != "sharp_drop"
+    ]
+
+    metrics["alerts"].extend(alert.__dict__ for alert in historical_alerts)
     metrics["failed_sources"] = affected_sources(metrics)
-    metrics["full_scope"] = bool(metrics.get("full_scope")) and not metrics["failed_sources"]
+    metrics["full_scope"] = bool(
+        metrics.get("requested_full_scope", metrics.get("full_scope"))
+    ) and not metrics["failed_sources"]
     metrics_path.write_text(
         json.dumps(metrics, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",

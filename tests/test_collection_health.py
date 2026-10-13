@@ -192,8 +192,8 @@ def test_queda_infojobs_avisa_publica_e_nao_renova_frescor(tmp_path, monkeypatch
         write_metrics(metrics, metrics_path)
         record(metrics_path, db_path)
     metrics["collected_at"] = datetime.now(timezone.utc).isoformat()
-    metrics["source_stats"][0]["raw_jobs"] = 41
-    metrics["raw_jobs"] = 41
+    metrics["source_stats"][0]["raw_jobs"] = 24
+    metrics["raw_jobs"] = 24
     write_metrics(metrics, metrics_path)
     monkeypatch.setenv("GITHUB_RUN_ID", "infojobs-drop")
     monkeypatch.setenv("GITHUB_ACTIONS", "true")
@@ -222,10 +222,10 @@ def test_queda_infojobs_avisa_publica_e_nao_renova_frescor(tmp_path, monkeypatch
     assert [(alert["rule"], alert["severity"]) for alert in checked["alerts"]] == [
         ("sharp_drop", "high")
     ]
-    assert "::warning title=Anomalia de volume::infojobs: 41 vagas brutas; referencia recente 245." in capsys.readouterr().out
+    assert "::warning title=Anomalia de volume::infojobs: 24 vagas brutas; ultima coleta comparavel 245;" in capsys.readouterr().out
     assert "o erro sera sinalizado apos as publicacoes" in summary_path.read_text(encoding="utf-8")
     assert partial == ("warning", 0)
-    assert len(history) == 3
+    assert len(history) == 4
     assert status["state"] == "stale"
     assert status["last_collection"] == last_complete
 
@@ -266,3 +266,114 @@ def test_anomalia_de_fonte_nao_libera_outro_alerta_bloqueante(tmp_path, rule):
         record(metrics_path, db_path)
     with sqlite3.connect(db_path) as conn:
         assert conn.execute("SELECT COUNT(*) FROM coleta_execucoes").fetchone()[0] == 0
+
+
+def test_infojobs_41_de_245_nao_e_queda_critica(tmp_path, monkeypatch):
+    db_path = tmp_path / "vagas.db"
+    metrics_path = tmp_path / "metrics.json"
+    init_db(db_path=db_path)
+    metrics = build_metrics(
+        [Job(source="infojobs", external_id="1", title="Desenvolvedor Junior")],
+        [SourceStats("infojobs", raw_jobs=245, collection_profile="last-3d-v1")],
+        raw_jobs=245, requests=55, full_scope=True,
+    )
+    metrics["collected_at"] = (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()
+    write_metrics(metrics, metrics_path)
+    monkeypatch.setenv("GITHUB_RUN_ID", "previous-245")
+    record(metrics_path, db_path)
+    metrics["collected_at"] = datetime.now(timezone.utc).isoformat()
+    metrics["source_stats"][0]["raw_jobs"] = 41
+    metrics["raw_jobs"] = 41
+    metrics["full_scope"] = False
+    metrics["alerts"] = [{"rule": "sharp_drop", "severity": "high", "source": "infojobs"}]
+    write_metrics(metrics, metrics_path)
+    monkeypatch.setenv("GITHUB_RUN_ID", "current-41")
+
+    checked = check(metrics_path, db_path)
+    record(metrics_path, db_path)
+
+    assert checked["alerts"] == []
+    assert checked["failed_sources"] == []
+    assert checked["full_scope"] is True
+    with sqlite3.connect(db_path) as conn:
+        assert conn.execute(
+            "SELECT status, escopo_completo FROM coleta_execucoes WHERE run_key = 'current-41'"
+        ).fetchone() == ("ok", 1)
+
+
+def test_revalidar_run_nao_usa_ela_mesma_como_referencia(tmp_path, monkeypatch):
+    db_path = tmp_path / "vagas.db"
+    metrics_path = tmp_path / "metrics.json"
+    init_db(db_path=db_path)
+    _metrics(metrics_path, collected_at=(datetime.now(timezone.utc) - timedelta(hours=1)).isoformat())
+    monkeypatch.setenv("GITHUB_RUN_ID", "previous-100")
+    record(metrics_path, db_path)
+    metrics = build_metrics(
+        [Job(source="gupy", external_id="1", title="Desenvolvedor Junior")],
+        [SourceStats("gupy", raw_jobs=9)],
+        raw_jobs=9, requests=2, full_scope=True,
+    )
+    write_metrics(metrics, metrics_path)
+    monkeypatch.setenv("GITHUB_RUN_ID", "current-9")
+
+    checked = check(metrics_path, db_path)
+    record(metrics_path, db_path)
+    rechecked = check(metrics_path, db_path)
+
+    assert checked["alerts"] == rechecked["alerts"]
+    assert len(rechecked["alerts"]) == 1
+    assert "ultima coleta comparavel 100" in rechecked["alerts"][0]["message"]
+    assert rechecked["full_scope"] is False
+
+
+def test_fonte_sem_erro_em_run_parcial_pode_ser_referencia(tmp_path, monkeypatch):
+    db_path = tmp_path / "vagas.db"
+    metrics_path = tmp_path / "metrics.json"
+    output_path = tmp_path / "github-output.txt"
+    init_db(db_path=db_path)
+    metrics = build_metrics(
+        [Job(source="infojobs", external_id="1", title="Desenvolvedor Junior")],
+        [SourceStats("infojobs", raw_jobs=41), SourceStats("linkedin", errors=["HTTP 429"])],
+        raw_jobs=41, requests=55, full_scope=True,
+    )
+    metrics["collected_at"] = (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()
+    write_metrics(metrics, metrics_path)
+    monkeypatch.setenv("GITHUB_RUN_ID", "previous-partial")
+    record(metrics_path, db_path)
+    metrics = build_metrics(
+        [Job(source="infojobs", external_id="1", title="Desenvolvedor Junior")],
+        [SourceStats("infojobs", raw_jobs=41), SourceStats("linkedin", raw_jobs=1)],
+        raw_jobs=42, requests=55, full_scope=True,
+    )
+    write_metrics(metrics, metrics_path)
+    monkeypatch.setenv("GITHUB_RUN_ID", "current-complete")
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    monkeypatch.setenv("GITHUB_OUTPUT", str(output_path))
+
+    checked = check(metrics_path, db_path)
+    record(metrics_path, db_path)
+
+    assert checked["alerts"] == []
+    assert checked["full_scope"] is True
+    assert "has_source_errors=false" in output_path.read_text(encoding="utf-8")
+
+
+def test_erro_http_continua_sinalizado_mesmo_sem_queda_de_volume(tmp_path, monkeypatch):
+    db_path = tmp_path / "vagas.db"
+    metrics_path = tmp_path / "metrics.json"
+    output_path = tmp_path / "github-output.txt"
+    init_db(db_path=db_path)
+    metrics = build_metrics(
+        [Job(source="infojobs", external_id="1", title="Desenvolvedor Junior")],
+        [SourceStats("infojobs", raw_jobs=100, errors=["HTTP 429"])],
+        raw_jobs=100, requests=55, full_scope=True,
+    )
+    write_metrics(metrics, metrics_path)
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    monkeypatch.setenv("GITHUB_OUTPUT", str(output_path))
+
+    checked = check(metrics_path, db_path)
+
+    assert checked["failed_sources"] == ["infojobs"]
+    assert checked["full_scope"] is False
+    assert "has_source_errors=true" in output_path.read_text(encoding="utf-8")

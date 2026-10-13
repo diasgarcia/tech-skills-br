@@ -61,7 +61,7 @@ def test_fonte_de_janela_diaria_pode_retornar_zero():
 def test_historico_detecta_queda_brusca_de_uma_fonte():
     metrics = {
         "full_scope": True,
-        "source_stats": [{"source": "linkedin", "raw_jobs": 20}],
+        "source_stats": [{"source": "linkedin", "raw_jobs": 9}],
     }
     history = [
         {"full_scope": True, "source_stats": [{"source": "linkedin", "raw_jobs": n}]}
@@ -103,7 +103,7 @@ def test_historico_compara_execucoes_do_mesmo_perfil():
         "source_stats": [
             {
                 "source": "infojobs",
-                "raw_jobs": 20,
+                "raw_jobs": 9,
                 "collection_profile": profile,
             }
         ],
@@ -127,7 +127,7 @@ def test_historico_compara_execucoes_do_mesmo_perfil():
     assert [alert.rule for alert in alerts] == ["sharp_drop"]
 
 
-def test_historico_avisa_sem_bloquear_variacao_de_janela_de_24_horas():
+def test_historico_aceita_variacao_acima_de_dez_porcento():
     profile = "last-24h-v1"
     metrics = {
         "full_scope": True,
@@ -155,9 +155,7 @@ def test_historico_avisa_sem_bloquear_variacao_de_janela_de_24_horas():
 
     alerts = assess_history(metrics, history)
 
-    assert [(alert.rule, alert.severity) for alert in alerts] == [
-        ("sharp_drop", "warning")
-    ]
+    assert alerts == []
     assert not has_high_alerts({"alerts": [alert.__dict__ for alert in alerts]})
 
 
@@ -346,3 +344,85 @@ def test_fonte_zerada_sem_erro_marca_rodada_parcial():
     assert metrics["requested_full_scope"] is True
     assert metrics["failed_sources"] == ["infojobs"]
     assert all(not row["errors"] for row in metrics["source_stats"])
+
+
+@pytest.mark.parametrize("current,expected", [(9, True), (10, False), (11, False), (41, False)])
+def test_queda_compara_limite_estrito_de_dez_porcento(current, expected):
+    metrics = {
+        "full_scope": True,
+        "source_stats": [{"source": "infojobs", "raw_jobs": current}],
+    }
+    history = [{"source_stats": [{"source": "infojobs", "raw_jobs": 100}]}]
+
+    alerts = assess_history(metrics, history)
+
+    assert bool(alerts) is expected
+    if expected:
+        assert alerts[0].severity == "high"
+        assert alerts[0].limit == 10
+        assert "ultima coleta comparavel 100" in alerts[0].message
+
+
+def test_queda_usa_ultima_run_em_vez_da_media_do_historico():
+    metrics = {
+        "full_scope": True,
+        "source_stats": [{"source": "infojobs", "raw_jobs": 41}],
+    }
+    history = [
+        {"full_scope": False, "source_stats": [{"source": "infojobs", "raw_jobs": n}]}
+        for n in (41, 245, 245, 245)
+    ]
+
+    alerts = assess_history(metrics, history)
+
+    assert alerts == []
+
+
+def test_queda_ignora_erro_na_fonte_anterior_e_perfil_diferente():
+    metrics = {
+        "full_scope": True,
+        "source_stats": [{"source": "infojobs", "raw_jobs": 4, "collection_profile": "last-3d-v1"}],
+    }
+    history = [
+        {"source_stats": [{"source": "infojobs", "raw_jobs": 1, "errors": ["HTTP 429"], "collection_profile": "last-3d-v1"}]},
+        {"source_stats": [{"source": "infojobs", "raw_jobs": 1, "collection_profile": "outro-perfil"}]},
+        {"full_scope": False, "source_stats": [{"source": "infojobs", "raw_jobs": 41, "collection_profile": "last-3d-v1"}]},
+    ]
+
+    alerts = assess_history(metrics, history)
+
+    assert len(alerts) == 1
+    assert "ultima coleta comparavel 41" in alerts[0].message
+    assert alerts[0].limit == pytest.approx(4.1)
+
+
+@pytest.mark.parametrize("history", [[], [{"source_stats": [{"source": "infojobs", "raw_jobs": 0}]}]])
+def test_queda_sem_referencia_positiva_nao_compara(history):
+    metrics = {"full_scope": True, "source_stats": [{"source": "infojobs", "raw_jobs": 4}]}
+
+    alerts = assess_history(metrics, history)
+
+    assert alerts == []
+
+
+@pytest.mark.parametrize("source", ["abler", "recrutei"])
+def test_fonte_volatil_continua_fora_da_comparacao(source):
+    metrics = {"full_scope": True, "source_stats": [{"source": source, "raw_jobs": 1}]}
+    history = [{"source_stats": [{"source": source, "raw_jobs": 100}]}]
+
+    alerts = assess_history(metrics, history)
+
+    assert alerts == []
+
+
+def test_coleta_de_escopo_reduzido_nao_compara_volume():
+    metrics = {
+        "requested_full_scope": False,
+        "full_scope": False,
+        "source_stats": [{"source": "infojobs", "raw_jobs": 1}],
+    }
+    history = [{"source_stats": [{"source": "infojobs", "raw_jobs": 100}]}]
+
+    alerts = assess_history(metrics, history)
+
+    assert alerts == []
