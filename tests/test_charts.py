@@ -1,6 +1,7 @@
 """Testes dos graficos SVG publicados no README."""
 
 from datetime import date
+from xml.etree import ElementTree
 
 import pytest
 from matplotlib.backends.backend_agg import FigureCanvasAgg
@@ -127,7 +128,23 @@ def test_heatmap_padrao_mostra_dez_areas_e_quinze_habilidades(tmp_path):
     assert "Área 09" in svg and "Skill 14" in svg
     assert "Área 10" not in svg and "Skill 15" not in svg
     assert 'width="864pt"' in svg
-    assert 'height="712.8pt"' in svg
+    assert float(ElementTree.fromstring(svg).attrib["height"].removesuffix("pt")) < 712.8
+
+
+def test_heatmap_corte_inferior_se_adapta_ao_nome_mais_longo(tmp_path):
+    heights = []
+    longest = "Segurança da Informação e Redes de Computadores"
+
+    for name in ("Git", longest):
+        jobs = [_job(None, "Backend", "A", "B", "C", "D", "E", "F", name)]
+        output_path = tmp_path / f"heatmap-{len(name)}.svg"
+        chart_area_skill_heatmap(jobs, output_path)
+        svg = ElementTree.fromstring(output_path.read_text(encoding="utf-8"))
+        heights.append(float(svg.attrib["height"].removesuffix("pt")))
+
+    assert heights[1] > heights[0]
+    assert svg.attrib["width"] == "864pt"
+    assert longest in "".join(svg.itertext())
 
 
 def test_heatmap_rotula_dimensoes_reais_em_base_pequena(tmp_path):

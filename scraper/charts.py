@@ -20,6 +20,7 @@ from matplotlib.colors import LinearSegmentedColormap  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 from matplotlib.patches import Patch  # noqa: E402
 from matplotlib.ticker import FuncFormatter, MaxNLocator  # noqa: E402
+from matplotlib.transforms import Bbox  # noqa: E402
 
 
 BACKGROUND = "#0d1117"
@@ -387,7 +388,10 @@ def chart_area_skill_heatmap(
         color=MUTED,
     )
 
-    fig.savefig(output_path, facecolor=BACKGROUND)
+    # Preserve a largura e o topo; corte so a sobra abaixo dos nomes.
+    bottom = fig.get_tightbbox().y0 - 0.12
+    bounds = Bbox.from_extents(0, bottom, fig.get_figwidth(), fig.get_figheight())
+    fig.savefig(output_path, facecolor=BACKGROUND, bbox_inches=bounds)
     plt.close(fig)
     return output_path
 

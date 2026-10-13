@@ -334,6 +334,8 @@ Validei os três gráficos com a base local, sem alterar o banco. Os 1.000 teste
 
 Ajustei o espaço entre o mapa de calor e o terceiro gráfico. Troquei o título por Quais habilidades têm maior presença entre áreas e movi a legenda de colunas e linha para baixo do gráfico. O cálculo e o calendário de atualização não mudaram.
 
+Deixei o corte inferior do mapa de calor automático. A imagem termina após o nome mais comprido, com uma pequena margem. A largura, as fontes e os dados não mudaram.
+
 ---
 
 ### Pontos a avaliar
