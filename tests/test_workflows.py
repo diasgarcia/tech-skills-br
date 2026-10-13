@@ -69,7 +69,7 @@ def test_coleta_diaria_preserva_metricas_e_nao_mascara_falhas_com_tee():
     assert "status --max-age-hours 24 --warn-only)" in content
 
 
-def test_falha_de_fonte_so_encerra_workflow_depois_do_pages():
+def test_falha_ou_anomalia_de_fonte_so_encerra_workflow_depois_do_pages():
     content = (WORKFLOW_DIR / "daily_scraper.yml").read_text(encoding="utf-8")
     jobs = yaml.safe_load(content)["jobs"]
     collection = jobs["scrape-and-update"]
@@ -88,6 +88,7 @@ def test_falha_de_fonte_so_encerra_workflow_depois_do_pages():
     assert "scripts/export_kaggle.py" in consolidation["run"]
     assert "has_source_errors == 'true'" in recovery["if"]
     assert "::error title=Coleta parcial::" in final["steps"][0]["run"]
+    assert "Falha ou anomalia nas fontes" in final["steps"][0]["run"]
     assert final["steps"][0]["run"].rstrip().endswith("exit 1")
     assert "continue-on-error" not in final["steps"][0]
 

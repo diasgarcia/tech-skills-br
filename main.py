@@ -17,6 +17,7 @@ from pathlib import Path
 
 from scraper.config import DELAYS_PADRAO, Settings, _load_dotenv, load_search_terms
 from scraper.pipeline import run
+from scraper.quality import has_blocking_alerts
 from scraper.sources import AVAILABLE_SOURCES, DEFAULT_SOURCES
 
 
@@ -216,9 +217,7 @@ def _print_result(result, settings) -> int:
             marker = "ERRO" if alert["severity"] == "high" else "AVISO"
             print(f"    ! {marker}: {alert['message']}")
 
-    if result.meta.get("quality_gate") and any(
-        alert.get("severity") == "high" for alert in alerts
-    ):
+    if result.meta.get("quality_gate") and has_blocking_alerts({"alerts": alerts}):
         return 1
 
     return 0

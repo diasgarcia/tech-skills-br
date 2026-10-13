@@ -16,7 +16,12 @@ if str(ROOT_DIR) not in sys.path:
 
 from api.database import connect_sqlite, resolve_sqlite_path  # noqa: E402
 from api.migrations import migrate_connection  # noqa: E402
-from scraper.quality import assess_history, has_high_alerts  # noqa: E402
+from scraper.quality import (  # noqa: E402
+    affected_sources,
+    assess_history,
+    has_blocking_alerts,
+    is_source_anomaly,
+)
 
 
 def load_metrics(path: Path) -> dict:
@@ -57,6 +62,8 @@ def check(metrics_path: Path, db_path: str | Path | None = None) -> dict:
         for alert in historical_alerts
         if (alert.rule, alert.source) not in existing
     )
+    metrics["failed_sources"] = affected_sources(metrics)
+    metrics["full_scope"] = bool(metrics.get("full_scope")) and not metrics["failed_sources"]
     metrics_path.write_text(
         json.dumps(metrics, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
@@ -68,9 +75,7 @@ def check(metrics_path: Path, db_path: str | Path | None = None) -> dict:
 def print_alerts(metrics: dict) -> None:
     output_path = os.getenv("GITHUB_OUTPUT")
     if os.getenv("GITHUB_ACTIONS") == "true" and output_path:
-        failed_sources = sorted({
-            row["source"] for row in metrics.get("source_stats", []) if row.get("errors")
-        })
+        failed_sources = affected_sources(metrics)
         with Path(output_path).open("a", encoding="utf-8") as output:
             output.write(f"has_source_errors={str(bool(failed_sources)).lower()}\n")
             output.write(f"failed_sources={json.dumps(failed_sources, ensure_ascii=True)}\n")
@@ -81,18 +86,24 @@ def print_alerts(metrics: dict) -> None:
     for alert in alerts:
         level = "ERROR" if alert.get("severity") == "high" else "WARNING"
         print(f"{level}: {alert.get('message', 'Alerta de qualidade')}")
-        if alert.get("rule") == "partial_collection" and os.getenv("GITHUB_ACTIONS") == "true":
-            print(f"::warning title=Coleta parcial::{alert['message']}")
+        if (
+            alert.get("rule") == "partial_collection" or is_source_anomaly(alert)
+        ) and os.getenv("GITHUB_ACTIONS") == "true":
+            title = "Anomalia de volume" if is_source_anomaly(alert) else "Coleta parcial"
+            message = alert["message"]
+            if is_source_anomaly(alert):
+                message += " A rodada segue como parcial; o erro sera sinalizado apos as publicacoes."
+            print(f"::warning title={title}::{message}")
             summary_path = os.getenv("GITHUB_STEP_SUMMARY")
             if summary_path:
                 with Path(summary_path).open("a", encoding="utf-8") as summary:
-                    summary.write(f"\n## Coleta parcial\n\n{alert['message']}\n")
+                    summary.write(f"\n## {title}\n\n{message}\n")
 
 
 def record(metrics_path: Path, db_path: str | Path | None = None) -> None:
     metrics = load_metrics(metrics_path)
-    if has_high_alerts(metrics):
-        raise ValueError("Coleta com alerta alto nao pode ser registrada como valida.")
+    if has_blocking_alerts(metrics):
+        raise ValueError("Coleta com alerta bloqueante nao pode ser registrada como valida.")
 
     collected = datetime.fromisoformat(metrics["collected_at"])
     if collected.tzinfo is None:
@@ -125,7 +136,7 @@ def record(metrics_path: Path, db_path: str | Path | None = None) -> None:
                     run_key,
                     collected.isoformat(sep=" "),
                     status,
-                    int(bool(metrics.get("full_scope"))),
+                    int(bool(metrics.get("full_scope")) and not affected_sources(metrics)),
                     int(metrics.get("raw_jobs", 0)),
                     int(metrics.get("eligible_jobs", 0)),
                     int(metrics.get("requests", 0)),
@@ -173,7 +184,7 @@ def main(argv: list[str] | None = None) -> int:
     db_path = resolve_sqlite_path(args.db)
 
     if args.command == "check":
-        return int(has_high_alerts(check(args.metrics, db_path)))
+        return int(has_blocking_alerts(check(args.metrics, db_path)))
     if args.command == "record":
         record(args.metrics, db_path)
         return 0

@@ -5,7 +5,7 @@ import sqlite3
 import pytest
 
 from api.database import init_db
-from scripts.collection_health import check, freshness, main, record
+from scripts.collection_health import check, freshness, load_history, main, record
 from scraper.models import Job, SourceStats
 from scraper.quality import build_metrics, write_metrics
 
@@ -171,3 +171,98 @@ def test_validacao_exporta_falhas_sem_interromper_publicacoes(tmp_path, monkeypa
         ).fetchone()
     assert run_status == ("warning" if failed_sources else "ok")
     assert bool(complete) is (not failed_sources)
+
+
+def test_queda_infojobs_avisa_publica_e_nao_renova_frescor(tmp_path, monkeypatch, capsys):
+    db_path = tmp_path / "vagas.db"
+    metrics_path = tmp_path / "metrics.json"
+    output_path = tmp_path / "github-output.txt"
+    summary_path = tmp_path / "summary.md"
+    init_db(db_path=db_path)
+    last_complete = None
+    for hours in (32, 31, 30):
+        monkeypatch.setenv("GITHUB_RUN_ID", f"complete-{hours}")
+        metrics = build_metrics(
+            [Job(source="infojobs", external_id="1", title="Desenvolvedor Junior")],
+            [SourceStats("infojobs", raw_jobs=245, collection_profile="last-3d-v1")],
+            raw_jobs=245, requests=55, full_scope=True,
+        )
+        last_complete = (datetime.now(timezone.utc) - timedelta(hours=hours)).isoformat()
+        metrics["collected_at"] = last_complete
+        write_metrics(metrics, metrics_path)
+        record(metrics_path, db_path)
+    metrics["collected_at"] = datetime.now(timezone.utc).isoformat()
+    metrics["source_stats"][0]["raw_jobs"] = 41
+    metrics["raw_jobs"] = 41
+    write_metrics(metrics, metrics_path)
+    monkeypatch.setenv("GITHUB_RUN_ID", "infojobs-drop")
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    monkeypatch.setenv("GITHUB_OUTPUT", str(output_path))
+    monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(summary_path))
+
+    exit_code = main(["check", "--db", str(db_path), "--metrics", str(metrics_path)])
+    checked = check(metrics_path, db_path)
+    record(metrics_path, db_path)
+    status = freshness(db_path)
+
+    outputs = dict(
+        line.split("=", 1) for line in output_path.read_text(encoding="utf-8").splitlines()
+    )
+    with sqlite3.connect(db_path) as conn:
+        partial = conn.execute(
+            "SELECT status, escopo_completo FROM coleta_execucoes WHERE run_key = 'infojobs-drop'"
+        ).fetchone()
+        history = load_history(conn)
+    assert exit_code == 0
+    assert outputs["has_source_errors"] == "true"
+    assert json.loads(outputs["failed_sources"]) == ["infojobs"]
+    assert checked["full_scope"] is False
+    assert checked["failed_sources"] == ["infojobs"]
+    assert checked["source_stats"][0]["errors"] == []
+    assert [(alert["rule"], alert["severity"]) for alert in checked["alerts"]] == [
+        ("sharp_drop", "high")
+    ]
+    assert "::warning title=Anomalia de volume::infojobs: 41 vagas brutas; referencia recente 245." in capsys.readouterr().out
+    assert "o erro sera sinalizado apos as publicacoes" in summary_path.read_text(encoding="utf-8")
+    assert partial == ("warning", 0)
+    assert len(history) == 3
+    assert status["state"] == "stale"
+    assert status["last_collection"] == last_complete
+
+
+def test_registro_de_anomalia_sem_check_tambem_nao_renova_frescor(tmp_path):
+    db_path = tmp_path / "vagas.db"
+    metrics_path = _metrics(tmp_path / "metrics.json")
+    metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
+    metrics["alerts"] = [{"rule": "source_empty", "severity": "high", "source": "gupy"}]
+    write_metrics(metrics, metrics_path)
+    init_db(db_path=db_path)
+
+    record(metrics_path, db_path)
+    status = freshness(db_path)
+
+    with sqlite3.connect(db_path) as conn:
+        partial = conn.execute("SELECT status, escopo_completo FROM coleta_execucoes").fetchone()
+    assert partial == ("warning", 0)
+    assert status["state"] == "no_history"
+
+
+@pytest.mark.parametrize("rule", ["collection_empty", "invalid_workplace", "unknown_rule"])
+def test_anomalia_de_fonte_nao_libera_outro_alerta_bloqueante(tmp_path, rule):
+    db_path = tmp_path / "vagas.db"
+    metrics_path = _metrics(tmp_path / "metrics.json")
+    metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
+    metrics["alerts"] = [
+        {"rule": "sharp_drop", "severity": "high", "source": "infojobs", "message": "Volume baixo"},
+        {"rule": rule, "severity": "high", "message": "Dados invalidos"},
+    ]
+    write_metrics(metrics, metrics_path)
+    init_db(db_path=db_path)
+
+    exit_code = main(["check", "--db", str(db_path), "--metrics", str(metrics_path)])
+
+    assert exit_code == 1
+    with pytest.raises(ValueError, match="alerta bloqueante"):
+        record(metrics_path, db_path)
+    with sqlite3.connect(db_path) as conn:
+        assert conn.execute("SELECT COUNT(*) FROM coleta_execucoes").fetchone()[0] == 0

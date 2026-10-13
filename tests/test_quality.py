@@ -1,5 +1,14 @@
+import pytest
+
 from scraper.models import Job, SourceStats
-from scraper.quality import assess_current, assess_history, build_metrics, has_high_alerts
+from scraper.quality import (
+    affected_sources,
+    assess_current,
+    assess_history,
+    build_metrics,
+    has_blocking_alerts,
+    has_high_alerts,
+)
 
 
 def _job(**changes):
@@ -152,7 +161,7 @@ def test_historico_avisa_sem_bloquear_variacao_de_janela_de_24_horas():
     assert not has_high_alerts({"alerts": [alert.__dict__ for alert in alerts]})
 
 
-def test_historico_bloqueia_queda_quase_total_em_janela_de_24_horas():
+def test_historico_sinaliza_queda_quase_total_em_janela_de_24_horas():
     profile = "last-24h-v1"
     metrics = {
         "full_scope": True,
@@ -183,6 +192,7 @@ def test_historico_bloqueia_queda_quase_total_em_janela_de_24_horas():
     assert [(alert.rule, alert.severity) for alert in alerts] == [
         ("sharp_drop", "high")
     ]
+    assert not has_blocking_alerts({"alerts": [alert.__dict__ for alert in alerts]})
 
 
 def test_metricas_guardam_contadores_e_alertas():
@@ -196,6 +206,7 @@ def test_metricas_guardam_contadores_e_alertas():
 
     assert metrics["source_stats"][0]["requests"] == 2
     assert has_high_alerts(metrics)
+    assert has_blocking_alerts(metrics)
 
 
 def test_metricas_guardam_perfil_de_coleta_quando_declarado():
@@ -248,6 +259,7 @@ def test_falha_conhecida_nao_libera_coleta_totalmente_vazia():
     )
 
     assert has_high_alerts(metrics)
+    assert has_blocking_alerts(metrics)
     assert any(alert["rule"] == "collection_empty" for alert in metrics["alerts"])
 
 
@@ -263,13 +275,15 @@ def test_falha_conhecida_nao_oculta_outra_fonte_zerada_sem_erro():
     )
 
     assert has_high_alerts(metrics)
+    assert not has_blocking_alerts(metrics)
+    assert metrics["failed_sources"] == ["gupy", "linkedin"]
     assert any(
         alert["rule"] == "source_empty" and alert["source"] == "linkedin"
         for alert in metrics["alerts"]
     )
 
 
-def test_coleta_parcial_ainda_bloqueia_queda_silenciosa_de_outra_fonte():
+def test_coleta_parcial_ainda_sinaliza_queda_silenciosa_de_outra_fonte():
     metrics = build_metrics(
         [_job(source="linkedin")],
         [
@@ -288,3 +302,47 @@ def test_coleta_parcial_ainda_bloqueia_queda_silenciosa_de_outra_fonte():
     assert [(alert.rule, alert.source, alert.severity) for alert in alerts] == [
         ("sharp_drop", "linkedin", "high")
     ]
+
+
+@pytest.mark.parametrize("rule", ["source_empty", "sharp_drop"])
+def test_anomalia_de_fonte_alta_preserva_alerta_sem_bloquear_publicacoes(rule):
+    metrics = {
+        "source_stats": [{"source": "gupy", "errors": ["HTTP 404"]}],
+        "alerts": [{"rule": rule, "source": "infojobs", "severity": "high"}],
+    }
+
+    blocking = has_blocking_alerts(metrics)
+    sources = affected_sources(metrics)
+
+    assert not blocking
+    assert has_high_alerts(metrics)
+    assert sources == ["gupy", "infojobs"]
+
+
+@pytest.mark.parametrize("alert", [
+    {"rule": "collection_empty", "severity": "high"},
+    {"rule": "invalid_workplace", "source": "infojobs", "severity": "high"},
+    {"rule": "unknown_rule", "source": "infojobs", "severity": "high"},
+    {"rule": "sharp_drop", "severity": "high"},
+    {"rule": "source_empty", "source": "", "severity": "high"},
+])
+def test_outros_alertas_altos_continuam_bloqueantes(alert):
+    metrics = {"alerts": [alert]}
+
+    blocking = has_blocking_alerts(metrics)
+
+    assert blocking
+    assert affected_sources(metrics) == []
+
+
+def test_fonte_zerada_sem_erro_marca_rodada_parcial():
+    stats = [SourceStats("gupy", raw_jobs=1), SourceStats("infojobs", raw_jobs=0)]
+
+    metrics = build_metrics([_job()], stats, raw_jobs=1, requests=2, full_scope=True)
+
+    assert has_high_alerts(metrics)
+    assert not has_blocking_alerts(metrics)
+    assert metrics["full_scope"] is False
+    assert metrics["requested_full_scope"] is True
+    assert metrics["failed_sources"] == ["infojobs"]
+    assert all(not row["errors"] for row in metrics["source_stats"])

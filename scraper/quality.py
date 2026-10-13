@@ -14,6 +14,7 @@ from .models import NAO_INFORMADO, WORKPLACE_ORDER, Job, SourceStats
 VOLATILE_SOURCES = frozenset({"abler", "recrutei"})
 SHARP_DROP_RATIO = 0.30
 ROLLING_24H_CRITICAL_RATIO = 0.10
+SOURCE_ANOMALY_RULES = frozenset({"source_empty", "sharp_drop"})
 
 
 @dataclass(frozen=True)
@@ -183,7 +184,7 @@ def build_metrics(
             + ". As vagas anteriores dessas fontes serao preservadas.",
             value=len(failed_sources), limit=0,
         ))
-    return {
+    metrics = {
         "schema_version": 1,
         "collected_at": datetime.now(timezone.utc).isoformat(),
         "requested_full_scope": full_scope,
@@ -208,6 +209,9 @@ def build_metrics(
         ],
         "alerts": [asdict(alert) for alert in alerts],
     }
+    metrics["failed_sources"] = affected_sources(metrics)
+    metrics["full_scope"] = full_scope and not metrics["failed_sources"]
+    return metrics
 
 
 def write_metrics(metrics: dict, path: Path) -> Path:
@@ -221,3 +225,29 @@ def write_metrics(metrics: dict, path: Path) -> Path:
 
 def has_high_alerts(metrics: dict) -> bool:
     return any(alert.get("severity") == "high" for alert in metrics.get("alerts", []))
+
+
+def is_source_anomaly(alert: dict) -> bool:
+    """Anomalia de volume que deve falhar somente depois das publicacoes."""
+    return (
+        alert.get("severity") == "high"
+        and alert.get("rule") in SOURCE_ANOMALY_RULES
+        and bool(alert.get("source"))
+    )
+
+
+def affected_sources(metrics: dict) -> list[str]:
+    sources = {
+        row["source"] for row in metrics.get("source_stats", []) if row.get("errors")
+    }
+    sources.update(
+        alert["source"] for alert in metrics.get("alerts", []) if is_source_anomaly(alert)
+    )
+    return sorted(sources)
+
+
+def has_blocking_alerts(metrics: dict) -> bool:
+    return any(
+        alert.get("severity") == "high" and not is_source_anomaly(alert)
+        for alert in metrics.get("alerts", [])
+    )

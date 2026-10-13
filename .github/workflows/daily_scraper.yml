@@ -361,7 +361,7 @@ jobs:
         uses: actions/deploy-pages@v5
 
   report-source-errors:
-    name: Sinalizar falhas das fontes apos as publicacoes
+    name: Sinalizar falhas e anomalias das fontes apos as publicacoes
     needs: [scrape-and-update, deploy-pages]
     # A falha intencional fica neste job, depois das entregas. Nao coloque
     # exit 1 no coletor: isso impediria o job dependente de publicar o Pages.
@@ -376,11 +376,11 @@ jobs:
     steps:
       - name: Encerrar rodada parcial como falha
         run: |
-          printf '::error title=Coleta parcial::Falha nas fontes: %s. As entregas dos dados validos foram processadas antes desta verificacao.\n' "$FAILED_SOURCES"
+          printf '::error title=Coleta parcial::Falha ou anomalia nas fontes: %s. As entregas dos dados validos foram processadas antes desta verificacao.\n' "$FAILED_SOURCES"
           {
-            echo "## Rodada encerrada com erro de fonte"
+            echo "## Rodada encerrada com falha ou anomalia de fonte"
             echo
-            printf 'Fontes com falha: %s\n' "$FAILED_SOURCES"
+            printf 'Fontes com falha ou anomalia: %s\n' "$FAILED_SOURCES"
             echo
             echo "Esta verificacao ocorre depois da consolidacao e das publicacoes."
             echo "Ela nao desfaz os dados salvos nem as entregas que tiveram sucesso."

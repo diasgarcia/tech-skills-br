@@ -3,6 +3,9 @@ from unittest.mock import Mock
 import pytest
 
 import main
+from scraper.config import Settings
+from scraper.models import Job
+from scraper.pipeline import PipelineResult
 
 
 @pytest.mark.parametrize("args", [
@@ -34,3 +37,26 @@ def test_jobbol_pode_ser_selecionada_com_janela_maior():
 
     assert settings.sources == ["jobbol"]
     assert settings.jobbol_days_back == 365
+
+
+@pytest.mark.parametrize("rule,source,expected", [
+    ("source_empty", "infojobs", 0),
+    ("sharp_drop", "infojobs", 0),
+    ("invalid_workplace", None, 1),
+    ("unknown_rule", "infojobs", 1),
+    ("sharp_drop", None, 1),
+])
+def test_cli_so_bloqueia_alertas_que_nao_sao_anomalias_de_fonte(rule, source, expected, capsys):
+    result = PipelineResult(
+        jobs=[Job(source="gupy", external_id="1", title="Desenvolvedor Junior")],
+        ranking=[],
+        meta={
+            "quality_gate": True,
+            "quality_alerts": [{"rule": rule, "source": source, "severity": "high", "message": "Anomalia"}],
+        },
+    )
+
+    exit_code = main._print_result(result, Settings())
+
+    assert exit_code == expected
+    assert "ERRO: Anomalia" in capsys.readouterr().out
