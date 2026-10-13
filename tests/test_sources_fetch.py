@@ -2,7 +2,7 @@
 
 import pytest
 
-from scraper.config import Settings, load_linkedin_advertiser_exclusions
+from scraper.config import Settings
 from scraper.models import Job
 from scraper.sources.base import JobSource
 from scraper.sources.gupy import API_URL, GupySource
@@ -142,10 +142,10 @@ def test_linkedin_pagina_deduplica_e_para_em_repeticao():
     assert starts == [0, 10]
     assert all(p["f_TPR"] == "r86400" for p in session.chamadas)
     assert all(p["sortBy"] == "DD" for p in session.chamadas)
-    assert source.stats.collection_profile == "last-24h-advertiser-exclusions-v2"
+    assert source.stats.collection_profile == "last-24h-v3"
 
 
-def test_linkedin_lista_de_intermediarios_nao_encerra_paginacao():
+def test_linkedin_anunciantes_intermediarios_nao_encerram_paginacao():
     blocked = LINKEDIN_HTML.replace("ACME Tecnologia", "Jobbol")
     allowed = LINKEDIN_HTML.replace("4422123289", "9999999")
     session = FakeSession([FakeHtmlResponse(blocked), FakeHtmlResponse(allowed), FakeHtmlResponse("")])
@@ -153,50 +153,8 @@ def test_linkedin_lista_de_intermediarios_nao_encerra_paginacao():
 
     jobs = source.fetch_term("desenvolvedor junior")
 
-    assert [job.external_id for job in jobs] == ["9999999"]
+    assert [job.external_id for job in jobs] == ["4422123289", "9999999"]
     assert session.request_count == 3
-
-
-@pytest.mark.parametrize("company, sources, expected", [
-    ("Jobbol", ["linkedin", "jobbol"], 0),
-    ("JOBBOL", ["linkedin", "jobbol"], 0),
-    ("Jobbol", ["linkedin"], 1),
-    ("Jobbol Tecnologia", ["linkedin", "jobbol"], 1),
-    ("Vagas.com", ["linkedin", "jobbol", "vagas"], 0),
-    ("Vagas.com", ["linkedin", "jobbol"], 1),
-    ("Sólides Tecnologia", ["linkedin", "solides"], 1),
-    ("BuscarVagas - Empregos Brasil", Settings().sources, 1),
-    ("Jobgether", Settings().sources, 1),
-])
-def test_linkedin_ignora_so_anunciante_escolhido_com_fonte_ativa(company, sources, expected):
-    html = LINKEDIN_HTML.replace("ACME Tecnologia", company)
-    source = LinkedInSource(session=FakeSession([FakeHtmlResponse(html)]), settings=_settings(sources=sources))
-
-    jobs = source.fetch_term("desenvolvedor junior")
-
-    assert len(jobs) == expected
-
-
-@pytest.mark.parametrize("company, source_name", list(load_linkedin_advertiser_exclusions().items()))
-@pytest.mark.parametrize("native_source_active", [True, False])
-def test_linkedin_lista_de_portais_exige_fonte_propria_ativa(company, source_name, native_source_active):
-    html = LINKEDIN_HTML.replace("ACME Tecnologia", company.upper())
-    sources = ["linkedin", source_name] if native_source_active else ["linkedin"]
-    source = LinkedInSource(session=FakeSession([FakeHtmlResponse(html)]), settings=_settings(sources=sources))
-
-    jobs = source.fetch_term("desenvolvedor junior")
-
-    assert len(jobs) == (0 if native_source_active else 1)
-
-
-def test_linkedin_permite_escolher_outro_anunciante():
-    html = LINKEDIN_HTML.replace("ACME Tecnologia", "Vagas.com")
-    settings = _settings(sources=["linkedin", "vagas"], linkedin_advertiser_exclusions={"Vagas.com": "vagas"})
-    source = LinkedInSource(session=FakeSession([FakeHtmlResponse(html)]), settings=settings)
-
-    jobs = source.fetch_term("desenvolvedor junior")
-
-    assert jobs == []
 
 
 def test_linkedin_para_em_pagina_vazia():

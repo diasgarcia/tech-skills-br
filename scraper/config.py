@@ -81,9 +81,9 @@ def load_term_match_rules() -> dict[str, list[str]]:
     }
 
 
-def load_linkedin_advertiser_exclusions() -> dict[str, str]:
+def load_advertiser_exclusions() -> dict[str, str]:
     """Anunciantes excluidos somente quando a fonte propria esta na rodada."""
-    regras = (_collector_rules().get("linkedin") or {}).get("anunciantes_ignorados") or {}
+    regras = _collector_rules().get("anunciantes_intermediarios") or {}
     return {str(empresa).strip(): str(fonte).strip() for empresa, fonte in regras.items()}
 
 
@@ -138,7 +138,7 @@ class Settings:
 
     search_terms: list[str] = field(default_factory=load_search_terms)
     term_match_rules: dict[str, list[str]] = field(default_factory=load_term_match_rules)
-    linkedin_advertiser_exclusions: dict[str, str] = field(default_factory=load_linkedin_advertiser_exclusions)
+    advertiser_exclusions: dict[str, str] = field(default_factory=load_advertiser_exclusions)
     sources: list[str] = field(default_factory=lambda: default_sources())
 
     output_dir: Path = DEFAULT_OUTPUT_DIR

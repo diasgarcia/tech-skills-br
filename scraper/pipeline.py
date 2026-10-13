@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import re
+from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -19,6 +20,7 @@ from .models import (
     SourceStats,
     infer_linkedin_workplace,
     infer_workplace,
+    normalize,
 )
 from .progress import FONTES_LABELS, _BufferLog, _TabelaParalela
 
@@ -200,6 +202,26 @@ def collect(settings: Settings) -> tuple[list[Job], list[SourceStats], int]:
 
 
 
+def _filter_intermediary_ads(jobs: list[Job], settings: Settings) -> tuple[list[Job], int]:
+    """Exclui republicacoes de anunciantes com fonte propria selecionada."""
+    advertisers = {
+        normalize(company): source
+        for company, source in settings.advertiser_exclusions.items()
+        if normalize(company) and source in settings.sources
+    }
+    kept = []
+    discarded = Counter()
+    for job in jobs:
+        native_source = advertisers.get(normalize(job.company))
+        if native_source and native_source != job.source:
+            discarded[job.source] += 1
+        else:
+            kept.append(job)
+    for source, count in discarded.items():
+        logger.info("[%s] %d anuncios ignorados pela lista de intermediarios", source, count)
+    return kept, sum(discarded.values())
+
+
 def run(
     settings: Settings,
     strict_seniority: bool = False,
@@ -211,13 +233,15 @@ def run(
     raw_jobs, stats, requests_made = collect(settings)
     receipts = checkpoint_receipts(raw_jobs, Path(settings.output_dir))
     logger.info("Total bruto: %d vagas", len(raw_jobs))
+    jobs, dropped_intermediaries = _filter_intermediary_ads(raw_jobs, settings)
+    logger.info("Apos filtro de anunciantes: %d vagas (-%d)", len(jobs), dropped_intermediaries)
 
     if settings.only_junior:
         seniority_filter = SeniorityFilter.from_file(strict=strict_seniority)
-        jobs = filter_entry_level(raw_jobs, seniority_filter)
-        dropped_seniority = len(raw_jobs) - len(jobs)
+        before_seniority = len(jobs)
+        jobs = filter_entry_level(jobs, seniority_filter)
+        dropped_seniority = before_seniority - len(jobs)
     else:
-        jobs = raw_jobs
         for job in jobs:
             job.seniority = (
                 canonicalize_seniority(job.seniority) if job.seniority else "Não filtrado"
@@ -272,6 +296,7 @@ def run(
                     if s in SOURCE_REGISTRY],
         "terms_count": len(settings.search_terms),
         "raw_jobs": len(raw_jobs),
+        "dropped_intermediaries": dropped_intermediaries,
         "dropped_seniority": dropped_seniority,
         "dropped_non_tech": dropped_non_tech,
         "duplicates": duplicates,

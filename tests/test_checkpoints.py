@@ -124,6 +124,22 @@ def test_pipeline_confirma_checkpoint_somente_depois_de_exportar(tmp_path, monke
 
 
 @pytest.mark.parametrize("source", ["abler", "recrutei"])
+def test_pipeline_confirma_checkpoint_com_anuncio_intermediario_descartado(tmp_path, monkeypatch, source):
+    original = Job(source=source, external_id="7", title="Desenvolvedor Python Júnior", company="Jobbol")
+    checkpoint = JobCheckpoint(tmp_path / f"{source}_partial.csv", source)
+    checkpoint.save([original])
+    monkeypatch.setattr(pipeline, "collect", lambda settings: (checkpoint.load(), [], 0))
+    settings = Settings(output_dir=tmp_path, sources=[source, "jobbol"], enrich_linkedin=False)
+
+    result = pipeline.run(settings)
+
+    assert result.jobs == []
+    assert result.meta["dropped_intermediaries"] == 1
+    assert not checkpoint.path.exists()
+    assert result.files["jobs_csv"].exists()
+
+
+@pytest.mark.parametrize("source", ["abler", "recrutei"])
 def test_falha_na_exportacao_mantem_dados_para_retomar(tmp_path, monkeypatch, source):
     original = _job(source=source)
     checkpoint = JobCheckpoint(tmp_path / f"{source}_partial.csv", source)

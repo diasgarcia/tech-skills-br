@@ -154,6 +154,7 @@ def export_report_md(
     lines.append(f"- Portais consultados: {', '.join(meta.get('sources', []))}")
     lines.append(f"- Termos de busca: {meta.get('terms_count', 0)}")
     lines.append(f"- Vagas brutas coletadas: {meta.get('raw_jobs', 0)}")
+    lines.append(f"- Descartadas por anunciante intermediário: {meta.get('dropped_intermediaries', 0)}")
     lines.append(f"- Descartadas por senioridade: {meta.get('dropped_seniority', 0)}")
     lines.append(f"- Descartadas por nao serem de tecnologia: "
                  f"{meta.get('dropped_non_tech', 0)}")

@@ -3,9 +3,10 @@
 import pytest
 
 import scraper.pipeline as pipeline
-from scraper.config import Settings
+from scraper.config import Settings, load_advertiser_exclusions
 from scraper.models import Job
 from scraper.pipeline import PipelineResult, _enrich_linkedin_parallel, run
+from scraper.sources import DEFAULT_SOURCES
 
 
 def _settings(tmp_path, **kw):
@@ -34,6 +35,65 @@ def _vaga(**kw):
     )
     base.update(kw)
     return Job(**base)
+
+
+@pytest.mark.parametrize("source", DEFAULT_SOURCES)
+@pytest.mark.parametrize("company,native_source", list(load_advertiser_exclusions().items()))
+def test_filtro_de_intermediarios_vale_para_todas_as_fontes(source, company, native_source):
+    job = _vaga(source=source, company=company.upper())
+    settings = Settings(sources=list(dict.fromkeys([source, native_source])))
+
+    jobs, discarded = pipeline._filter_intermediary_ads([job], settings)
+
+    assert jobs == ([job] if source == native_source else [])
+    assert discarded == (0 if source == native_source else 1)
+
+
+@pytest.mark.parametrize("company,native_source", list(load_advertiser_exclusions().items()))
+def test_filtro_mantem_intermediario_quando_fonte_propria_nao_participa(company, native_source):
+    job = _vaga(company=company)
+    settings = Settings(sources=["linkedin"])
+
+    jobs, discarded = pipeline._filter_intermediary_ads([job], settings)
+
+    assert jobs == [job]
+    assert discarded == 0
+
+
+@pytest.mark.parametrize("company", [
+    "Jobbol Tecnologia", "Sólides Tecnologia", "BuscarVagas - Empregos Brasil", "Jobgether", "",
+])
+def test_filtro_de_intermediarios_nao_bloqueia_trechos_ou_outros_anunciantes(company):
+    job = _vaga(company=company, description="Candidatura pela Abler, Gupy e Jobbol.")
+
+    jobs, discarded = pipeline._filter_intermediary_ads([job], Settings())
+
+    assert jobs == [job]
+    assert discarded == 0
+
+
+def test_filtro_de_intermediarios_permite_configurar_outro_anunciante():
+    job = _vaga(source="jobbol", company="Outro portal")
+    settings = Settings(sources=["jobbol", "abler"], advertiser_exclusions={"Outro portal": "abler"})
+
+    jobs, discarded = pipeline._filter_intermediary_ads([job], settings)
+
+    assert jobs == []
+    assert discarded == 1
+
+
+def test_filtro_de_intermediarios_ignora_acentos_e_preserva_ordem():
+    jobs = [
+        _vaga(source="jobbol", external_id="1", company="Acme"),
+        _vaga(source="jobbol", external_id="2", company=" SOLIDES "),
+        _vaga(source="jobbol", external_id="3", company="Outra empresa"),
+    ]
+    settings = Settings(sources=["jobbol", "solides"])
+
+    kept, discarded = pipeline._filter_intermediary_ads(jobs, settings)
+
+    assert kept == [jobs[0], jobs[2]]
+    assert discarded == 1
 
 
 def test_collect_paralelo_equivale_ao_sequencial(monkeypatch):
@@ -293,6 +353,35 @@ def test_run_coleta_classifica_e_exporta(tmp_path, monkeypatch, sem_enriquecimen
     assert result.files["ranking_csv"].exists()
     assert result.files["skills_csv"].exists()
     assert result.files["report_md"].exists()
+
+
+@pytest.mark.parametrize("source", DEFAULT_SOURCES)
+@pytest.mark.parametrize("only_junior", [True, False])
+def test_run_filtra_anunciantes_antes_do_enriquecimento_em_qualquer_fonte(
+    tmp_path, monkeypatch, source, only_junior, caplog,
+):
+    company, native_source = ("Jobbol", "jobbol") if source != "jobbol" else ("Abler", "abler")
+    blocked = _vaga(source=source, company=company)
+    allowed = _vaga(source=source, external_id="2", company="ACME")
+    enrichment_calls = []
+    monkeypatch.setattr(pipeline, "collect", lambda settings: ([blocked, allowed], [], 2))
+    monkeypatch.setattr(
+        pipeline, "_enrich_linkedin_parallel",
+        lambda jobs, **kwargs: enrichment_calls.extend(jobs) or 0,
+    )
+    settings = _settings(tmp_path, sources=[source, native_source], only_junior=only_junior)
+    caplog.set_level("INFO")
+
+    result = run(settings)
+
+    assert result.jobs == [allowed]
+    assert enrichment_calls == ([allowed] if source == "linkedin" else [])
+    assert result.meta["raw_jobs"] == 2
+    assert result.meta["dropped_intermediaries"] == 1
+    assert result.meta["dropped_seniority"] == 0
+    assert result.meta["duplicates"] == 0
+    assert "1 anuncios ignorados pela lista de intermediarios" in caplog.text
+    assert "Descartadas por anunciante intermediário: 1" in result.files["report_md"].read_text(encoding="utf-8")
 
 
 def test_run_linkedin_nao_confunde_suporte_remoto_com_modalidade(tmp_path, monkeypatch):
