@@ -217,7 +217,7 @@ Testes de falha usam clientes simulados e SQLite temporário. Há cenários de r
 
 A coleta automática também verifica fonte zerada, queda em relação às rodadas
 anteriores, modalidade inválida, URL inválida, data futura, excesso de fallback e
-empresa ausente. Um alerta alto impede a publicação daquele snapshot. A comparação
+empresa ausente. Alertas altos de dados inválidos impedem a publicação daquele snapshot. A comparação
 histórica começa depois de três coletas completas registradas.
 Abler e Recrutei ficam fora das regras de zero e queda: elas consultam uma janela
 móvel de 24 horas, portanto a redução pode ser normal mesmo sem falha do portal.
@@ -227,7 +227,11 @@ outras fontes como coleta parcial. O importador preserva as vagas anteriores da
 fonte que falhou. O Actions mostra um aviso. Depois das etapas de publicação,
 um job final encerra a rodada como falha. Esse erro não desfaz os dados salvos
 nem as entregas concluídas. A rodada não renova o frescor da última coleta
-completa. Fonte zerada sem erro, coleta totalmente vazia e quedas
-anormais nas fontes sem erro continuam bloqueando a publicação.
+completa. Fonte zerada sem erro e queda anormal de volume seguem o mesmo fluxo
+parcial: o aviso informa a fonte e os valores observados, as publicações são
+tentadas e o erro fica no job final. Esses alertas mantêm a severidade alta,
+mas não entram como coleta completa no histórico de referência.
+Coleta totalmente vazia, modalidade fora do vocabulário e outros alertas altos
+continuam bloqueando a publicação antes da importação.
 
 Testes locais não demonstram disponibilidade dos portais nem sucesso de uma publicação real. Não execute coleta, migração na base de trabalho ou publicação como efeito colateral de uma revisão.

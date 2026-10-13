@@ -346,6 +346,16 @@ Depois, apliquei a regra ao histórico autorizado. Removi 307 anúncios de inter
 
 ---
 
+### 13/10/2026
+
+Ajustei o fluxo de anomalias de volume. Fonte zerada sem erro e queda anormal de vagas passaram a seguir o caminho das falhas de fonte: mostram um aviso, permitem tentar as publicações dos dados válidos e encerram a rodada com erro no job final. Mantive o bloqueio para coleta totalmente vazia, modalidade inválida e outros alertas altos.
+
+Essas rodadas são registradas como parciais. Elas não renovam o frescor global nem entram no histórico de coletas completas usado como referência. Atualizei os testes, o guia de execução, a arquitetura e a página de automação da wiki.
+
+Os 1.138 testes passaram e o lint não apontou problemas. Validei o caso de InfoJobs com uma cópia dos arquivos da run que falhou: 41 vagas brutas e referência de 245. A validação permitiu seguir como parcial e preservou o frescor anterior. Não executei uma coleta real nem alterei a base de trabalho.
+
+---
+
 ### Pontos a avaliar
 
 - Definir uma validação quantitativa com uma amostra e revisão humana independente.
