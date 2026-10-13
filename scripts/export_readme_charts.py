@@ -49,7 +49,7 @@ def load_chart_jobs(db_path: str | Path | None = None) -> list[ChartJob]:
 def export_pages_charts(
     output_dir: Path, db_path: str | Path | None = None, *, dia: date | None = None,
 ) -> dict[str, Path]:
-    """Exporta os dois SVGs estaveis usados pelo README."""
+    """Exporta os tres SVGs estaveis usados pelo README."""
     jobs = load_chart_jobs(db_path)
     dia = dia or datetime.now(timezone(timedelta(hours=-3))).date()
     files = export_readme_charts(jobs, output_dir, reference_date=dia)

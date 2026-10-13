@@ -67,10 +67,19 @@ jobs:
             python scripts/export_readme_charts.py --output-dir _site/assets --db data/vagas.db
           else
             # Pushes de codigo preservam os graficos da ultima rodada.
-            for arquivo in vagas-habilidades-30d.svg areas-habilidades.svg; do
-              curl --fail --silent --show-error --location --retry 3 \
+            for arquivo in vagas-habilidades-30d.svg areas-habilidades.svg skills-presenca-vagas.svg; do
+              if ! curl --fail --silent --show-error --location --retry 3 \
                 "https://diasgarcia.github.io/tech-skills-br/assets/${arquivo}" \
-                --output "_site/assets/${arquivo}"
+                --output "_site/assets/${arquivo}"; then
+                # O terceiro grafico ainda nao existe no primeiro deploy.
+                # Inclua somente o arquivo novo, sem trocar os outros dois.
+                if [ "$arquivo" != "skills-presenca-vagas.svg" ]; then
+                  exit 1
+                fi
+                pip install --disable-pip-version-check 'matplotlib==3.11.1'
+                python scripts/export_readme_charts.py --output-dir "$RUNNER_TEMP/readme-charts" --db data/vagas.db
+                cp "$RUNNER_TEMP/readme-charts/${arquivo}" "_site/assets/${arquivo}"
+              fi
             done
           fi
 

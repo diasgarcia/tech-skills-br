@@ -284,10 +284,17 @@ jobs:
         else
           # O Pages e publicado em toda rodada para atualizar a API JSON.
           # Preserve os graficos publicados ate a rodada 3.
-          for arquivo in vagas-habilidades-30d.svg areas-habilidades.svg; do
-            curl --fail --silent --show-error --location --retry 3 \
+          for arquivo in vagas-habilidades-30d.svg areas-habilidades.svg skills-presenca-vagas.svg; do
+            if ! curl --fail --silent --show-error --location --retry 3 \
               "https://diasgarcia.github.io/tech-skills-br/assets/${arquivo}" \
-              --output "_site/assets/${arquivo}"
+              --output "_site/assets/${arquivo}"; then
+              # O terceiro grafico pode ainda nao ter sido publicado.
+              if [ "$arquivo" != "skills-presenca-vagas.svg" ]; then
+                exit 1
+              fi
+              python scripts/export_readme_charts.py --output-dir "$RUNNER_TEMP/readme-charts" --dia "$DIA_RESUMO"
+              cp "$RUNNER_TEMP/readme-charts/${arquivo}" "_site/assets/${arquivo}"
+            fi
           done
         fi
 

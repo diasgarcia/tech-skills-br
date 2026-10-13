@@ -19,7 +19,7 @@ import numpy as np  # noqa: E402
 from matplotlib.colors import LinearSegmentedColormap  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 from matplotlib.patches import Patch  # noqa: E402
-from matplotlib.ticker import MaxNLocator  # noqa: E402
+from matplotlib.ticker import FuncFormatter, MaxNLocator  # noqa: E402
 
 
 BACKGROUND = "#0d1117"
@@ -58,6 +58,13 @@ class AreaSkillMatrix:
     area_sizes: tuple[int, ...]
     skills: tuple[str, ...]
     percentages: tuple[tuple[float, ...], ...]
+
+
+@dataclass(frozen=True)
+class SkillPresence:
+    name: str
+    jobs: int
+    mean_percent: float
 
 
 def _style() -> None:
@@ -181,6 +188,29 @@ def build_area_skill_matrix(
         skills=skills,
         percentages=percentages,
     )
+
+
+def build_skill_presence(jobs: list[ChartJob], top_skills: int = 15) -> list[SkillPresence]:
+    """Ordena as habilidades mais citadas pela presenca media em todas as areas."""
+    area_count = len({job.area for job in jobs if job.area})
+    matrix = build_area_skill_matrix(jobs, top_areas=area_count, top_skills=top_skills)
+    skill_counts = Counter(skill for job in jobs for skill in set(job.skills) if skill)
+    rows = [
+        SkillPresence(
+            name=skill,
+            jobs=skill_counts[skill],
+            mean_percent=sum(row[column] for row in matrix.percentages) / len(matrix.areas),
+        )
+        for column, skill in enumerate(matrix.skills)
+    ]
+    return sorted(rows, key=lambda row: (-row.mean_percent, row.name.casefold()))
+
+
+def _automatic_scale(ax, maximum: float, *, percentage: bool = False) -> None:
+    locator = MaxNLocator(nbins=10, steps=[1, 2, 2.5, 5, 10], integer=not percentage)
+    upper = locator.tick_values(0, max(1, maximum * 1.1))[-1]
+    ax.set_ylim(0, min(100, upper) if percentage else upper)
+    ax.yaxis.set_major_locator(locator)
 
 
 def chart_daily_jobs_and_skills(
@@ -362,10 +392,72 @@ def chart_area_skill_heatmap(
     return output_path
 
 
+def chart_skill_presence(jobs: list[ChartJob], output_path: Path, top_skills: int = 15) -> Path:
+    """Colunas de presenca media por area e linha de vagas com a habilidade."""
+    rows = build_skill_presence(jobs, top_skills=top_skills)
+    _style()
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    fig, ax = plt.subplots(figsize=(12, 8), dpi=180)
+    fig.subplots_adjust(left=0.095, right=0.90, bottom=0.32, top=0.735)
+    line_ax = ax.twinx()
+    positions = range(len(rows))
+    ax.bar(
+        positions, [row.mean_percent for row in rows], width=0.64,
+        color=BLUE, alpha=0.48, linewidth=0, zorder=2,
+    )
+    line_ax.plot(
+        positions, [row.jobs for row in rows], color=PURPLE,
+        linewidth=2.7, marker="o", markersize=5, solid_capstyle="round", zorder=4,
+    )
+    ax.set_xlim(-0.65, len(rows) - 0.35)
+    _automatic_scale(ax, max(row.mean_percent for row in rows), percentage=True)
+    _automatic_scale(line_ax, max(row.jobs for row in rows))
+    ax.yaxis.set_major_formatter(FuncFormatter(lambda value, _: f"{value:g}%".replace(".", ",")))
+    line_ax.yaxis.set_major_formatter(FuncFormatter(lambda value, _: _format_int(int(value))))
+    ax.set_xticks(positions)
+    ax.set_xticklabels(
+        [row.name for row in rows], rotation=55, ha="right",
+        rotation_mode="anchor", fontsize=12,
+    )
+    ax.tick_params(axis="x", length=0, pad=13)
+    ax.tick_params(axis="y", length=0, labelsize=12, pad=9)
+    line_ax.tick_params(axis="y", length=0, labelsize=12, pad=9, colors=PURPLE)
+    ax.set_ylabel("Presença média por área (%)", fontsize=13, color=BLUE, labelpad=15)
+    line_ax.set_ylabel("Vagas com a skill", fontsize=13, color=PURPLE, labelpad=14)
+    ax.grid(axis="y", color=GRID, linewidth=0.8, alpha=0.7, zorder=0)
+    ax.grid(axis="x", visible=False)
+    _hide_spines(ax)
+    _hide_spines(line_ax)
+
+    fig.text(0.095, 0.94, "Habilidades: volume e presença", fontsize=22, fontweight="bold")
+    fig.text(
+        0.095, 0.88,
+        f"{len(rows)} skills mais citadas · {_format_int(len(jobs))} vagas · ordenadas pela presença média",
+        fontsize=12, color=MUTED,
+    )
+    ax.legend(
+        handles=[
+            Patch(facecolor=BLUE, alpha=0.48, label="Presença média por área"),
+            Line2D([0], [0], color=PURPLE, linewidth=2.7, marker="o", markersize=5, label="Vagas com a skill"),
+        ],
+        loc="upper left", bbox_to_anchor=(0, 1.23), frameon=False,
+        ncol=2, fontsize=11.5, labelcolor=MUTED, columnspacing=2,
+    )
+    fig.text(
+        0.095, 0.042,
+        "A presença usa a média dos percentuais em todas as áreas, com o mesmo peso. Sem menção = zero.",
+        fontsize=10.5, color=MUTED,
+    )
+    fig.savefig(output_path, facecolor=BACKGROUND)
+    plt.close(fig)
+    return output_path
+
+
 def export_readme_charts(
     jobs: list[ChartJob], output_dir: Path, *, reference_date: date | None = None,
 ) -> dict[str, Path]:
-    """Gera os dois SVGs estaveis publicados pelo GitHub Pages."""
+    """Gera os tres SVGs estaveis publicados pelo GitHub Pages."""
     if not jobs:
         return {}
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -376,4 +468,5 @@ def export_readme_charts(
         "heatmap": chart_area_skill_heatmap(
             jobs, output_dir / "areas-habilidades.svg"
         ),
+        "presence": chart_skill_presence(jobs, output_dir / "skills-presenca-vagas.svg"),
     }

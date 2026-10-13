@@ -34,9 +34,10 @@ def test_export_pages_charts_carrega_banco_e_gera_svgs(
     files = export_pages_charts(output_dir, db_path)
 
     assert len(jobs) == 1
-    assert set(files) == {"daily", "heatmap"}
+    assert set(files) == {"daily", "heatmap", "presence"}
     assert files["daily"] == output_dir / "vagas-habilidades-30d.svg"
     assert files["heatmap"] == output_dir / "areas-habilidades.svg"
+    assert files["presence"] == output_dir / "skills-presenca-vagas.svg"
     assert all(path.exists() and path.stat().st_size > 0 for path in files.values())
 
 
@@ -137,6 +138,16 @@ def test_deploy_de_codigo_preserva_graficos_publicados():
     assert "https://diasgarcia.github.io/tech-skills-br/assets/${arquivo}" in content
 
 
+@pytest.mark.parametrize("workflow", PAGES_WORKFLOWS[:2])
+def test_preservacao_inclui_terceiro_grafico_e_primeira_publicacao(workflow):
+    content = workflow.read_text(encoding="utf-8")
+
+    assert "for arquivo in vagas-habilidades-30d.svg areas-habilidades.svg skills-presenca-vagas.svg; do" in content
+    assert 'if [ "$arquivo" != "skills-presenca-vagas.svg" ]; then' in content
+    assert 'python scripts/export_readme_charts.py --output-dir "$RUNNER_TEMP/readme-charts"' in content
+    assert 'cp "$RUNNER_TEMP/readme-charts/${arquivo}" "_site/assets/${arquivo}"' in content
+
+
 def test_deploy_permite_regerar_graficos_sem_coleta():
     content = PAGES_WORKFLOWS[1].read_text(encoding="utf-8")
     workflow = yaml.safe_load(content)
@@ -177,3 +188,13 @@ def test_readme_referencia_os_assets_estaveis():
 
     assert "/assets/vagas-habilidades-30d.svg" in content
     assert "/assets/areas-habilidades.svg" in content
+    assert "/assets/skills-presenca-vagas.svg" in content
+
+
+def test_terceiro_grafico_do_readme_nao_tem_link_de_destino():
+    content = (ROOT / "README.md").read_text(encoding="utf-8")
+    line = next(line for line in content.splitlines() if "/assets/skills-presenca-vagas.svg" in line)
+
+    assert line.startswith("![")
+    assert line.endswith("/assets/skills-presenca-vagas.svg)")
+    assert content.index("/assets/areas-habilidades.svg") < content.index("/assets/skills-presenca-vagas.svg")
