@@ -3,6 +3,7 @@
 from datetime import date
 
 import pytest
+from matplotlib.backends.backend_agg import FigureCanvasAgg
 
 from scraper import charts
 from scraper.charts import (
@@ -246,17 +247,22 @@ def test_escalas_adaptam_limites_e_divisoes(maximum, percentage, expected):
 
 
 def test_presenca_gera_svg_sem_anotacoes_e_com_nomes_em_uma_linha(tmp_path, monkeypatch):
-    jobs = [_job(None, "Backend", "Inglês", "Banco de Dados")]
+    jobs = [_job(None, "Backend", "Inglês", "Banco de Dados", "Segurança da Informação")]
     output_path = tmp_path / "presence.svg"
-    fig, ax = charts.plt.subplots()
+    fig, ax = charts.plt.subplots(figsize=(12, 8), dpi=180)
     monkeypatch.setattr(charts.plt, "subplots", lambda **kwargs: (fig, ax))
 
     chart_skill_presence(jobs, output_path)
     svg = output_path.read_text(encoding="utf-8")
+    canvas = FigureCanvasAgg(fig)
+    canvas.draw()
+    renderer = canvas.get_renderer()
+    lowest_label = min(label.get_window_extent(renderer).y0 for label in ax.get_xticklabels())
 
-    assert "Habilidades: volume e presença" in svg
-    assert "2 skills mais citadas" in svg
+    assert "Quais habilidades têm maior presença entre áreas" in svg
+    assert "3 skills mais citadas" in svg
     assert "Banco de Dados" in svg and "Inglês" in svg
     assert "Presença média por área" in svg and "Vagas com a skill" in svg
     assert all(not axis.texts for axis in fig.axes)
     assert all("\n" not in label.get_text() for label in ax.get_xticklabels())
+    assert fig.legends[0].get_window_extent(renderer).y1 < lowest_label

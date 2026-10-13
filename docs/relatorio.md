@@ -332,6 +332,8 @@ Adicionei um terceiro gráfico ao README, sem link de destino. As colunas mostra
 
 Validei os três gráficos com a base local, sem alterar o banco. Os 1.000 testes passaram, o lint não apontou problemas e a sintaxe dos workflows foi conferida. A validação não executou uma coleta.
 
+Ajustei o espaço entre o mapa de calor e o terceiro gráfico. Troquei o título por Quais habilidades têm maior presença entre áreas e movi a legenda de colunas e linha para baixo do gráfico. O cálculo e o calendário de atualização não mudaram.
+
 ---
 
 ### Pontos a avaliar

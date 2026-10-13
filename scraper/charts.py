@@ -325,7 +325,7 @@ def chart_area_skill_heatmap(
     )
     height = max(6.2, 3.4 + 0.65 * len(data.areas))
     fig, ax = plt.subplots(figsize=(12, height), dpi=180)
-    fig.subplots_adjust(left=0.245, right=0.94, bottom=0.24, top=0.85)
+    fig.subplots_adjust(left=0.245, right=0.94, bottom=0.18, top=0.85)
     image = ax.imshow(values, aspect="auto", cmap=cmap, vmin=0, vmax=values.max())
 
     ax.set_xticks(range(len(data.skills)))
@@ -399,7 +399,7 @@ def chart_skill_presence(jobs: list[ChartJob], output_path: Path, top_skills: in
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     fig, ax = plt.subplots(figsize=(12, 8), dpi=180)
-    fig.subplots_adjust(left=0.095, right=0.90, bottom=0.32, top=0.735)
+    fig.subplots_adjust(left=0.095, right=0.90, bottom=0.34, top=0.85)
     line_ax = ax.twinx()
     positions = range(len(rows))
     ax.bar(
@@ -430,18 +430,18 @@ def chart_skill_presence(jobs: list[ChartJob], output_path: Path, top_skills: in
     _hide_spines(ax)
     _hide_spines(line_ax)
 
-    fig.text(0.095, 0.94, "Habilidades: volume e presença", fontsize=22, fontweight="bold")
+    fig.text(0.095, 0.95, "Quais habilidades têm maior presença entre áreas", fontsize=19, fontweight="bold")
     fig.text(
-        0.095, 0.88,
+        0.095, 0.915,
         f"{len(rows)} skills mais citadas · {_format_int(len(jobs))} vagas · ordenadas pela presença média",
-        fontsize=12, color=MUTED,
+        fontsize=11.5, color=MUTED,
     )
-    ax.legend(
+    fig.legend(
         handles=[
             Patch(facecolor=BLUE, alpha=0.48, label="Presença média por área"),
             Line2D([0], [0], color=PURPLE, linewidth=2.7, marker="o", markersize=5, label="Vagas com a skill"),
         ],
-        loc="upper left", bbox_to_anchor=(0, 1.23), frameon=False,
+        loc="lower left", bbox_to_anchor=(0.085, 0.055), frameon=False,
         ncol=2, fontsize=11.5, labelcolor=MUTED, columnspacing=2,
     )
     fig.text(
