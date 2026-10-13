@@ -135,8 +135,10 @@ do anúncio.
 
 O gráfico de 30 dias usa a data de publicação: barras de anúncios e linha de
 habilidades distintas desses anúncios. O mapa de calor usa dez áreas e quinze
-habilidades, com ordem dinâmica. Os SVG ficam em `_site/assets`; não entram
-no Git.
+habilidades, com ordem dinâmica. O terceiro gráfico usa as quinze habilidades
+mais citadas, ordenadas pela presença média em todas as áreas. As colunas
+mostram a média; a linha mostra vagas com a habilidade. As escalas se ajustam
+aos valores. Os três SVG ficam em `_site/assets`; não entram no Git.
 
 ### Calendário das saídas automáticas
 
@@ -173,7 +175,7 @@ Depois de subir uma alteração no gerador, execute:
 gh workflow run deploy_pages.yml --ref main -f atualizar_graficos=true
 ```
 
-Esse comando publica o site e regenera os dois gráficos com o banco da release.
+Esse comando publica o site e regenera os três gráficos com o banco da release.
 Ele não coleta vagas, não substitui a base, não envia o Kaggle e não regenera
 o relatório Markdown. Um deploy comum preserva os SVG publicados.
 

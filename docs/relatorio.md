@@ -328,6 +328,10 @@ Revisei a wiki e os documentos locais de arquitetura e execução. Completei est
 
 Corrigi a fila de publicação do Pages nos três workflows. Mantive o nome Deploy GitHub Pages, o ambiente github-pages e o grupo original. Um novo deploy passa a cancelar somente o deploy anterior. A coleta e a atualização do banco continuam sem cancelamento automático. Atualizei os testes e a documentação dessa regra. Os 986 testes passaram e o lint não apontou problemas.
 
+Adicionei um terceiro gráfico ao README, sem link de destino. As colunas mostram a presença média por área das quinze habilidades mais citadas. A linha mostra vagas com cada habilidade. A ordem, os valores e as escalas mudam com a base. Mantive os nomes em uma linha e retirei valores de dentro do gráfico. Integrei a geração e a preservação do novo SVG ao calendário existente. Os arquivos gerados continuam fora do Git.
+
+Validei os três gráficos com a base local, sem alterar o banco. Os 1.000 testes passaram, o lint não apontou problemas e a sintaxe dos workflows foi conferida. A validação não executou uma coleta.
+
 ---
 
 ### Pontos a avaliar

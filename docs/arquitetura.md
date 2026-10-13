@@ -159,6 +159,12 @@ O SVG tem mais altura e fontes maiores para manter a leitura na largura
 limitada do README. Aumentar apenas a largura do arquivo faz o GitHub reduzir
 também os textos.
 
+O terceiro gráfico seleciona as quinze habilidades mais citadas e ordena esse
+conjunto pela presença média em todas as áreas. As colunas mostram essa média;
+a linha mostra a quantidade de vagas com a habilidade. A base inclui vagas
+sem habilidades e áreas sem menção entram com zero. Cada escala usa seu maior
+valor, uma margem e divisões automáticas. O percentual não passa de 100%.
+
 O ranking geral de habilidades usa anúncios com ao menos uma habilidade.
 O explorador por área usa anúncios daquela área com habilidades. Esses
 denominadores são diferentes do mapa de calor. Uma vaga pode ter vários
