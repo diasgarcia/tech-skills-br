@@ -180,6 +180,10 @@ na explicação ao passar o ponteiro e no notebook, mas não é o critério prin
 do ranking. O notebook preserva o ranking de citações e apresenta também o
 ranking por presença entre áreas.
 
+O notebook também calcula os três gráficos do README com o dataset vinculado
+à execução. Mantém as tabelas e os gráficos anteriores; não carrega imagens
+prontas do site.
+
 ### Calendário e formatos
 
 As três rodadas publicadas atualizam o banco e os JSON. O dataset recebe nova

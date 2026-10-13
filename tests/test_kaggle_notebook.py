@@ -139,8 +139,32 @@ def test_celulas_executam_com_parquet_categorico_nulos_e_caminhos_kaggle(tmp_pat
     assert presenca.loc["Python", "total_areas"] == 3
     assert presenca.loc["Python", "media_%"] == pytest.approx(200 / 3)
     assert namespace["percentuais_por_area"].loc["Python", "Frontend"] == 0
+    assert namespace["vagas_por_dia"].sum() == 2
+    assert namespace["habilidades_por_dia"].max() == 2
+    assert namespace["habilidades_periodo"] == 2
+    assert len(namespace["periodo"]) == 30
+    assert namespace["mapa_percentuais"].loc["Frontend", "Python"] == 0
+    top_presenca = namespace["top_presenca"]
+    assert top_presenca["skill"].tolist() == ["Python", "SQL"]
+    assert top_presenca["vagas"].tolist() == [2, 1]
+    assert top_presenca["media_%"].tolist() == pytest.approx([200 / 3, 100 / 3])
+    assert len(namespace["eixo_vagas"].lines) == 1
     assert "Não informada" in namespace["distribuicao_areas"]["área"].values
     assert len(rendered) >= 4
+
+
+def test_notebook_inclui_tres_graficos_do_readme_e_preserva_os_anteriores():
+    notebook = json.loads(NOTEBOOK_PATH.read_text(encoding="utf-8"))
+    code = "\n".join("".join(cell["source"]) for cell in notebook["cells"]
+                     if cell["cell_type"] == "code")
+
+    assert "Vagas por data de publicação" in code
+    assert "Onde as habilidades mais citadas aparecem" in code
+    assert "Quais habilidades têm maior presença entre áreas" in code
+    assert 'ranking_skills.head(15)["skill"]' in code
+    assert 'ranking_skills.head(20)[["skill", "vagas"]]' in code
+    assert 'ax.barh(top_skills["skill"], top_skills["vagas"]' in code
+    assert 'ax.barh(top_areas["área"], top_areas["vagas"]' in code
 
 
 @pytest.mark.parametrize("skills,areas,expected", [

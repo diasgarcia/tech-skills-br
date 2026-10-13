@@ -338,6 +338,8 @@ Deixei o corte inferior do mapa de calor automático. A imagem termina após o n
 
 Ampliei o terceiro gráfico do README para vinte habilidades e movi a legenda para perto do topo do gráfico. Mantive a seleção por total de citações e a ordem por presença média. O mapa de calor continua com quinze habilidades.
 
+Incluí os três gráficos do README no notebook do Kaggle. Eles são calculados com o dataset da execução. Mantive as tabelas e os gráficos anteriores. A mudança não altera o banco nem o calendário de atualização.
+
 ---
 
 ### Pontos a avaliar
