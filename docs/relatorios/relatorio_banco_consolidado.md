@@ -1,9 +1,9 @@
-# Relatório Consolidado da Base de Vagas (8776 vagas)
+# Relatório Consolidado da Base de Vagas (8778 vagas)
 
-- **Data de geração:** 12/10/2026 19:42 (Brasília)
+- **Data de geração:** 12/10/2026 22:33 (Brasília)
 - **Período coberto:** 03/01/2026 até 12/10/2026
-- **Total de vagas consolidadas:** 8776
-- **Vagas novas no dia (12/10/2026, Brasília):** 32
+- **Total de vagas consolidadas:** 8778
+- **Vagas novas no dia (12/10/2026, Brasília):** 34
 
 Os resultados descrevem os anúncios coletados. As menções identificadas não representam toda a demanda do mercado nem o número de contratações.
 
@@ -11,12 +11,12 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 
 | Posição | Área | Vagas | % | Gráfico |
 |---|---|---|---|---|
-| 1 | Suporte Técnico | 2749 | 31.3% | ######.............. |
+| 1 | Suporte Técnico | 2750 | 31.3% | ######.............. |
 | 2 | Engenharia de Software | 1312 | 14.9% | ###................. |
 | 3 | Infraestrutura / Redes | 777 | 8.9% | ##.................. |
 | 4 | Data | 579 | 6.6% | #................... |
 | 5 | Service Desk / Help Desk | 563 | 6.4% | #................... |
-| 6 | Backend | 444 | 5.1% | #................... |
+| 6 | Backend | 445 | 5.1% | #................... |
 | 7 | Outros/TI Geral | 393 | 4.5% | #................... |
 | 8 | Field Service / Hardware | 296 | 3.4% | #................... |
 | 9 | QA | 258 | 2.9% | #................... |
@@ -34,8 +34,8 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 
 | Região | Vagas | % | Gráfico |
 |---|---|---|---|
-| Sudeste | 4672 | 53.2% | ###########......... |
-| Sul | 1735 | 19.8% | ####................ |
+| Sudeste | 4673 | 53.2% | ###########......... |
+| Sul | 1736 | 19.8% | ####................ |
 | Nordeste | 758 | 8.6% | ##.................. |
 | Centro-Oeste | 493 | 5.6% | #................... |
 | Nacional | 442 | 5.0% | #................... |
@@ -47,8 +47,8 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 
 | Posição | Polo | Vagas | % | Gráfico |
 |---|---|---|---|---|
-| 1 | São Paulo | 2295 | 26.2% | #####............... |
-| 2 | Belo Horizonte | 597 | 6.8% | #................... |
+| 1 | São Paulo | 2295 | 26.1% | #####............... |
+| 2 | Belo Horizonte | 598 | 6.8% | #................... |
 | 3 | Rio de Janeiro | 483 | 5.5% | #................... |
 | 4 | Nacional | 442 | 5.0% | #................... |
 | 5 | Porto Alegre | 363 | 4.1% | #................... |
@@ -62,7 +62,7 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 
 | Modalidade | Vagas | % | Gráfico |
 |---|---|---|---|
-| Presencial | 3683 | 42.0% | ########............ |
+| Presencial | 3685 | 42.0% | ########............ |
 | Não informado | 3281 | 37.4% | #######............. |
 | Híbrido | 1042 | 11.9% | ##.................. |
 | Remoto | 770 | 8.8% | ##.................. |
@@ -71,7 +71,7 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 
 | Senioridade | Vagas | % |
 |---|---|---|
-| Júnior | 6133 | 69.9% |
+| Júnior | 6135 | 69.9% |
 | Estágio | 2401 | 27.4% |
 | Aprendiz | 131 | 1.5% |
 | Trainee | 111 | 1.3% |
@@ -81,11 +81,11 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 | Portal | Vagas | % |
 |---|---|---|
 | linkedin | 5542 | 63.1% |
-| solides | 949 | 10.8% |
+| solides | 950 | 10.8% |
 | infojobs | 836 | 9.5% |
 | gupy | 688 | 7.8% |
 | vagas | 180 | 2.1% |
-| jobbol | 168 | 1.9% |
+| jobbol | 169 | 1.9% |
 | abler | 161 | 1.8% |
 | recrutei | 148 | 1.7% |
 | geekhunter | 97 | 1.1% |
@@ -95,21 +95,21 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 
 | Posição | Tecnologia | Anúncios com menção identificada |
 |---|---|---|
-| 1 | Hardware | 2219 |
-| 2 | Redes de Computadores | 1763 |
-| 3 | Banco de Dados | 1664 |
+| 1 | Hardware | 2220 |
+| 2 | Redes de Computadores | 1764 |
+| 3 | Banco de Dados | 1665 |
 | 4 | SQL | 1573 |
 | 5 | Inglês | 1570 |
 | 6 | Windows | 1560 |
 | 7 | Pacote Office | 1514 |
 | 8 | Sistemas Operacionais | 1415 |
 | 9 | Gestão de Chamados | 1263 |
-| 10 | Git | 1161 |
+| 10 | Git | 1162 |
 | 11 | Inteligência Artificial | 1095 |
 | 12 | Python | 1083 |
-| 13 | Excel | 1065 |
+| 13 | Excel | 1066 |
 | 14 | Segurança da Informação | 981 |
-| 15 | JavaScript | 902 |
+| 15 | JavaScript | 903 |
 | 16 | Linux | 787 |
 | 17 | Análise de Dados | 749 |
 | 18 | Manutenção Preventiva | 742 |
