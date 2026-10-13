@@ -191,7 +191,7 @@ def build_area_skill_matrix(
     )
 
 
-def build_skill_presence(jobs: list[ChartJob], top_skills: int = 15) -> list[SkillPresence]:
+def build_skill_presence(jobs: list[ChartJob], top_skills: int = 20) -> list[SkillPresence]:
     """Ordena as habilidades mais citadas pela presenca media em todas as areas."""
     area_count = len({job.area for job in jobs if job.area})
     matrix = build_area_skill_matrix(jobs, top_areas=area_count, top_skills=top_skills)
@@ -396,14 +396,14 @@ def chart_area_skill_heatmap(
     return output_path
 
 
-def chart_skill_presence(jobs: list[ChartJob], output_path: Path, top_skills: int = 15) -> Path:
+def chart_skill_presence(jobs: list[ChartJob], output_path: Path, top_skills: int = 20) -> Path:
     """Colunas de presenca media por area e linha de vagas com a habilidade."""
     rows = build_skill_presence(jobs, top_skills=top_skills)
     _style()
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     fig, ax = plt.subplots(figsize=(12, 8), dpi=180)
-    fig.subplots_adjust(left=0.095, right=0.90, bottom=0.34, top=0.85)
+    fig.subplots_adjust(left=0.095, right=0.90, bottom=0.34, top=0.83)
     line_ax = ax.twinx()
     positions = range(len(rows))
     ax.bar(
@@ -445,7 +445,7 @@ def chart_skill_presence(jobs: list[ChartJob], output_path: Path, top_skills: in
             Patch(facecolor=BLUE, alpha=0.48, label="Presença média por área"),
             Line2D([0], [0], color=PURPLE, linewidth=2.7, marker="o", markersize=5, label="Vagas com a skill"),
         ],
-        loc="lower left", bbox_to_anchor=(0.085, 0.055), frameon=False,
+        loc="lower left", bbox_to_anchor=(0.085, 0.84), frameon=False,
         ncol=2, fontsize=11.5, labelcolor=MUTED, columnspacing=2,
     )
     fig.text(

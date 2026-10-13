@@ -336,6 +336,8 @@ Ajustei o espaço entre o mapa de calor e o terceiro gráfico. Troquei o título
 
 Deixei o corte inferior do mapa de calor automático. A imagem termina após o nome mais comprido, com uma pequena margem. A largura, as fontes e os dados não mudaram.
 
+Ampliei o terceiro gráfico do README para vinte habilidades e movi a legenda para perto do topo do gráfico. Mantive a seleção por total de citações e a ordem por presença média. O mapa de calor continua com quinze habilidades.
+
 ---
 
 ### Pontos a avaliar

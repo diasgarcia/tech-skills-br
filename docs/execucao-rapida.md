@@ -135,7 +135,7 @@ do anúncio.
 
 O gráfico de 30 dias usa a data de publicação: barras de anúncios e linha de
 habilidades distintas desses anúncios. O mapa de calor usa dez áreas e quinze
-habilidades, com ordem dinâmica. O terceiro gráfico usa as quinze habilidades
+habilidades, com ordem dinâmica. O terceiro gráfico usa as vinte habilidades
 mais citadas, ordenadas pela presença média em todas as áreas. As colunas
 mostram a média; a linha mostra vagas com a habilidade. As escalas se ajustam
 aos valores. Os três SVG ficam em `_site/assets`; não entram no Git.

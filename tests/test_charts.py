@@ -222,16 +222,16 @@ def test_presenca_media_inclui_todas_as_areas_e_vagas_sem_skills():
     assert [row.mean_percent for row in rows] == pytest.approx([125 / 3, 25])
 
 
-def test_presenca_seleciona_quinze_mais_citadas_antes_de_ordenar_por_media():
+def test_presenca_seleciona_vinte_mais_citadas_antes_de_ordenar_por_media():
     jobs = [
-        _job(None, "Grande", *(f"Skill {index:02}" for index in range(16)))
+        _job(None, "Grande", *(f"Skill {index:02}" for index in range(21)))
         for _ in range(3)
     ] + [_job(None, "Pequena", "Rara")]
 
     rows = build_skill_presence(jobs)
 
-    assert len(rows) == 15
-    assert [row.name for row in rows] == [f"Skill {index:02}" for index in range(15)]
+    assert len(rows) == 20
+    assert [row.name for row in rows] == [f"Skill {index:02}" for index in range(20)]
     assert all(row.jobs == 3 and row.mean_percent == 50 for row in rows)
 
 
@@ -274,7 +274,7 @@ def test_presenca_gera_svg_sem_anotacoes_e_com_nomes_em_uma_linha(tmp_path, monk
     canvas = FigureCanvasAgg(fig)
     canvas.draw()
     renderer = canvas.get_renderer()
-    lowest_label = min(label.get_window_extent(renderer).y0 for label in ax.get_xticklabels())
+    legend_bounds = fig.legends[0].get_window_extent(renderer)
 
     assert "Quais habilidades têm maior presença entre áreas" in svg
     assert "3 skills mais citadas" in svg
@@ -282,4 +282,5 @@ def test_presenca_gera_svg_sem_anotacoes_e_com_nomes_em_uma_linha(tmp_path, monk
     assert "Presença média por área" in svg and "Vagas com a skill" in svg
     assert all(not axis.texts for axis in fig.axes)
     assert all("\n" not in label.get_text() for label in ax.get_xticklabels())
-    assert fig.legends[0].get_window_extent(renderer).y1 < lowest_label
+    assert legend_bounds.y0 > ax.get_window_extent(renderer).y1
+    assert legend_bounds.y1 < fig.texts[1].get_window_extent(renderer).y0
