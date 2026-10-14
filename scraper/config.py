@@ -67,6 +67,12 @@ def load_search_terms() -> list[str]:
     return [str(t).strip() for t in termos if str(t).strip()]
 
 
+def load_source_term_exclusions(source: str) -> set[str]:
+    """Termos omitidos apenas na fonte indicada."""
+    termos = (_collector_rules().get(source) or {}).get("termos_excluidos") or []
+    return {str(term).strip() for term in termos if str(term).strip()}
+
+
 def load_term_match_rules() -> dict[str, list[str]]:
     """Sinais exigidos nos resultados de buscas textuais muito especificas."""
     dados = _collector_rules()

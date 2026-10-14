@@ -87,6 +87,10 @@ termos:
   - trainee tecnologia
   - trainee ti
 
+linkedin:
+  termos_excluidos:
+    - analista de integracoes junior
+
 # Alguns portais, em especial o LinkedIn, tratam buscas especificas como uma
 # sugestao e devolvem cargos sem relacao com o termo. Para estas funcoes, o
 # resultado so segue no pipeline quando o titulo ou a descricao contem um dos

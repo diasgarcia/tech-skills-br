@@ -142,7 +142,56 @@ def test_linkedin_pagina_deduplica_e_para_em_repeticao():
     assert starts == [0, 10]
     assert all(p["f_TPR"] == "r86400" for p in session.chamadas)
     assert all(p["sortBy"] == "DD" for p in session.chamadas)
-    assert source.stats.collection_profile == "last-24h-v3"
+    assert source.stats.collection_profile == "last-24h-v4"
+
+
+def test_linkedin_exclui_plural_e_preserva_singular_sem_mudar_lista_global(monkeypatch):
+    terms = ["analista de integracoes junior", "analista de integracao junior", "desenvolvedor junior"]
+    source = LinkedInSource(session=FakeSession([]), settings=_settings())
+    fetched = []
+    progress = []
+
+    def fetch_term(term):
+        fetched.append(term)
+        return [Job(source="linkedin", external_id=term, title="Analista de Integração Júnior")]
+
+    monkeypatch.setattr(source, "fetch_term", fetch_term)
+    source.progress_callback = lambda *args: progress.append(args)
+
+    jobs = source.fetch(terms)
+
+    assert fetched == ["analista de integracao junior", "desenvolvedor junior"]
+    assert len(jobs) == 2
+    assert source.stats.raw_jobs == 2
+    assert terms == ["analista de integracoes junior", "analista de integracao junior", "desenvolvedor junior"]
+    assert progress[-1][1] == "[2/2] desenvolvedor junior"
+    assert progress[-1][-1] == 1
+
+
+def test_linkedin_nao_faz_chamadas_para_termo_excluido():
+    session = FakeSession([FakeHtmlResponse(LINKEDIN_HTML)])
+    source = LinkedInSource(session=session, settings=_settings())
+
+    jobs = source.fetch(["analista de integracoes junior"])
+
+    assert jobs == []
+    assert session.request_count == 0
+    assert source.stats.errors == []
+
+
+def test_exclusao_linkedin_nao_remove_busca_da_gupy(monkeypatch):
+    source = GupySource(session=FakeSession([]), settings=_settings())
+    fetched = []
+
+    def fetch_term(term):
+        fetched.append(term)
+        return []
+
+    monkeypatch.setattr(source, "fetch_term", fetch_term)
+
+    source.fetch(["analista de integracoes junior"])
+
+    assert fetched == ["analista de integracoes junior"]
 
 
 def test_linkedin_anunciantes_intermediarios_nao_encerram_paginacao():

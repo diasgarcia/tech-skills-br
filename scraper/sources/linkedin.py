@@ -29,7 +29,7 @@ import re
 
 from bs4 import BeautifulSoup
 
-from ..config import workplace_override
+from ..config import load_source_term_exclusions, workplace_override
 from ..models import (
     HIBRIDO,
     NAO_INFORMADO,
@@ -77,10 +77,14 @@ class LinkedInSource(JobSource):
 
     name = "linkedin"
     label = "LinkedIn Jobs"
-    COLLECTION_PROFILE = "last-24h-v3"
+    COLLECTION_PROFILE = "last-24h-v4"
     # O portal entrega ate ~1.000 vagas por termo (medido: sem repeticao
     # pagina a pagina ate o start=990). O teto classico da busca guest.
     MAX_PAGES_PER_TERM = 100
+
+    def fetch(self, terms: list[str]) -> list[Job]:
+        excluded = load_source_term_exclusions(self.name)
+        return super().fetch([term for term in terms if term not in excluded])
 
     def fetch_term(self, term: str) -> list[Job]:
         jobs: list[Job] = []

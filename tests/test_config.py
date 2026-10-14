@@ -3,7 +3,7 @@
 import os
 from pathlib import Path
 
-from scraper.config import DELAYS_PADRAO, Settings, _load_dotenv
+from scraper.config import DELAYS_PADRAO, Settings, _load_dotenv, load_source_term_exclusions
 
 
 def test_settings_defaults_do_projeto():
@@ -45,6 +45,18 @@ def test_ensure_output_dir_cria_diretorio(tmp_path):
     assert not existed_before
     assert result == output_dir
     assert output_dir.is_dir()
+
+
+def test_termo_plural_continua_global_mas_so_e_excluido_no_linkedin():
+    settings = Settings()
+
+    linkedin_exclusions = load_source_term_exclusions("linkedin")
+    gupy_exclusions = load_source_term_exclusions("gupy")
+
+    assert "analista de integracoes junior" in settings.search_terms
+    assert "analista de integracao junior" in settings.search_terms
+    assert linkedin_exclusions == {"analista de integracoes junior"}
+    assert gupy_exclusions == set()
 
 
 def test_load_dotenv_sem_arquivo_devolve_nada():
