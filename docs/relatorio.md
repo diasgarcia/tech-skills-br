@@ -358,6 +358,8 @@ Enxuguei a página de escopo e limitações da wiki. Mantive a validação manua
 
 Depois, simplifiquei o alerta de queda de volume. A comparação passou a usar a última rodada anterior da mesma fonte e perfil, sem erro de consulta nessa fonte. Menos de 10% do volume bruto anterior gera erro depois das publicações. Resultados de fontes sem erro podem servir de referência mesmo em rodadas parciais. Mantive os demais controles de qualidade e o registro separado do frescor global. Atualizei a documentação e os testes. Os 1.153 testes passaram e o lint não apontou problemas. Não executei coleta real nem alterei o banco de trabalho.
 
+Retirei a busca analista de integracoes junior apenas do LinkedIn. Mantive a variante no singular e a lista das outras fontes. A exclusão fica no YAML dos coletores. Atualizei o perfil de coleta para separar o novo conjunto de buscas na comparação de volume. Os testes simulados confirmaram a exclusão sem chamadas reais e a preservação da busca na Gupy. Atualizei a arquitetura e a página de limites da wiki. Os 1.157 testes passaram e o lint não apontou problemas. Não alterei o banco.
+
 ---
 
 ### Pontos a avaliar

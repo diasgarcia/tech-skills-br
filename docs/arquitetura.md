@@ -30,6 +30,8 @@ Sólides, GeekHunter, InfoJobs, Abler, Recrutei e Jobbol. Os termos e filtros
 nativos ficam em `scraper/rules/coletores.yml`.
 
 LinkedIn limita a busca às últimas 24 horas e pede ordem pelas mais recentes.
+Sua lista `linkedin.termos_excluidos` omite `analista de integracoes junior`,
+mantendo `analista de integracao junior`. A lista global das outras fontes não muda.
 InfoJobs usa os últimos três dias. Abler e Recrutei usam a recência do sitemap
 no modo diário. Essas janelas, os termos e os tetos de paginação limitam a
 cobertura; não garantem observar todos os anúncios.
