@@ -80,7 +80,7 @@ def test_gupy_parse_mapeia_campos():
     assert job.title == "Desenvolvedor de Sistema Junior"
     assert job.company == "Minsait"
     assert job.url == "https://minsait.gupy.io/job/abc123"
-    assert job.location == "São Paulo, São Paulo"
+    assert job.location == "São Paulo, SP"
     assert job.workplace_type == "Híbrido"
     assert job.published_date == "2026-07-31"
     assert job.search_term == "desenvolvedor junior"
@@ -125,7 +125,7 @@ def test_vagas_parse_page():
     assert job.title == "Desenvolvedor de Software Jr"
     assert job.company == "HStern"
     assert job.url == "https://www.vagas.com.br/vagas/v2824782/desenvolvedor-de-software-jr"
-    assert job.location == "Rio de Janeiro / RJ"
+    assert job.location == "Rio de Janeiro, RJ"
     assert job.published_date == "09/07/2026"
     # "Júnior/Trainee" (span.nivelVaga) e senioridade, nao modalidade de trabalho.
     assert job.workplace_type == "Não informado"
@@ -138,7 +138,7 @@ def test_vagas_parse_page_detecta_home_office():
     job = source._parse_page(html, "x")[0]
 
     assert job.workplace_type == "Remoto"
-    assert job.location == "100% Home Office"
+    assert job.location == "Remoto"
 
 
 @pytest.mark.parametrize(
@@ -146,11 +146,11 @@ def test_vagas_parse_page_detecta_home_office():
     [
         (
             "Praia Grande / SP A empresa aceita candidaturas de Praia Grande e cidades próximas",
-            "Praia Grande / SP e Região",
+            "Praia Grande, SP e Região",
         ),
         (
             "Rio de Janeiro / RJ A empresa aceita candidaturas de qualquer cidade do Brasil",
-            "Rio de Janeiro / RJ",
+            "Rio de Janeiro, RJ",
         ),
         (
             "Brasil A empresa aceita candidaturas de qualquer cidade do Brasil",
@@ -331,7 +331,7 @@ def test_solides_parse_mapeia_campos():
     assert job.external_id == "911953"
     assert job.title.startswith("Desenvolvedor(a) Júnior")
     assert job.company == "Empresa Tech S.A."
-    assert job.location == "FRANCA, São Paulo"
+    assert job.location == "FRANCA, SP"
     assert job.workplace_type == "Presencial"
     assert job.published_date == "2026-08-29"
     assert job.seniority == "Júnior"
@@ -415,7 +415,7 @@ def test_geekhunter_parse_mapeia_campos():
     assert job.title == "Desenvolvedor(a) Fullstack Java Júnior"
     assert job.company == "nava-technology-for-business-1"
     assert job.workplace_type == "Híbrido"
-    assert job.location == "São Paulo, SP, Brasil"
+    assert job.location == "São Paulo, SP"
     assert job.seniority == "Júnior"
     assert "Fullstack Java Júnior" in job.description
     assert job.url.startswith("https://www.geekhunter.com/pt/")
@@ -530,7 +530,7 @@ def test_linkedin_parse_mapeia_campos():
     assert job.external_id == "4422123289"
     assert job.title == "Desenvolvedor Back-end Júnior"
     assert job.company == "ACME Tecnologia"
-    assert job.location == "São Paulo, São Paulo, Brazil"
+    assert job.location == "São Paulo, SP"
     assert job.published_date == "2026-08-01"
     assert job.search_term == "desenvolvedor junior"
     assert job.workplace_type == "Não informado"
@@ -728,7 +728,7 @@ def test_infojobs_parse_page_mapeia_campos():
         "https://www.infojobs.com.br/vaga-de-desenvolvedor-devops-backend-"
         "senior-em-__11985552.aspx"
     )
-    assert job.location == "Todo Brasil"
+    assert job.location == "Brasil"
     assert job.workplace_type == "Híbrido"
     assert job.published_date == "2026-09-03"
     assert "DevOps Back-End" in job.description
@@ -740,7 +740,7 @@ def test_infojobs_empresa_com_link_e_local_sem_km():
     job = source._parse_page(INFOJOBS_HTML, "x")[1]
 
     assert job.company == "GAFOR"
-    assert job.location == "Guarulhos - SP"
+    assert job.location == "Guarulhos, SP"
     assert job.workplace_type == "Presencial"
 
 

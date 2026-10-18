@@ -19,6 +19,19 @@ _NATIONAL_CANDIDACY_NOTICE_RE = re.compile(
     r"\s+a empresa aceita candidaturas de qualquer cidade do brasil\.?$",
     re.IGNORECASE,
 )
+_LOCATION_COUNTRY_RE = re.compile(r"\s*[,/]\s*(?:brasil|brazil|br)$", re.IGNORECASE)
+_LOCATION_REGION_RE = re.compile(r"\s+e regi[aã]o$", re.IGNORECASE)
+_LOCATION_STATE_RE = re.compile(r"^(.+?)\s*[,/–-]\s*([^,/–-]+)$")
+_STATE_UFS = {
+    "acre": "AC", "alagoas": "AL", "amapa": "AP", "amazonas": "AM",
+    "bahia": "BA", "ceara": "CE", "distrito federal": "DF",
+    "espirito santo": "ES", "goias": "GO", "maranhao": "MA",
+    "mato grosso": "MT", "mato grosso do sul": "MS", "minas gerais": "MG",
+    "para": "PA", "paraiba": "PB", "parana": "PR", "pernambuco": "PE",
+    "piaui": "PI", "rio de janeiro": "RJ", "rio grande do norte": "RN",
+    "rio grande do sul": "RS", "rondonia": "RO", "roraima": "RR",
+    "santa catarina": "SC", "sao paulo": "SP", "sergipe": "SE", "tocantins": "TO",
+}
 
 
 def strip_html(raw: str | None) -> str:
@@ -44,13 +57,40 @@ def normalize(text: str | None) -> str:
 
 
 def normalize_location(text: str | None) -> str:
-    """Mantem o local de trabalho e reduz avisos de abrangencia regional."""
+    """Padroniza cidade/UF e abrangencia, sem inferir estados pela cidade."""
     location = _WS_RE.sub(" ", (text or "")).strip()
     location = _NATIONAL_CANDIDACY_NOTICE_RE.sub("", location)
     nearby = _NEARBY_CITIES_NOTICE_RE.match(location)
     if nearby:
-        return f"{nearby.group('place')} e Região"
-    return location
+        location = f"{nearby.group('place')} e Região"
+
+    regional = bool(_LOCATION_REGION_RE.search(location))
+    location = _LOCATION_REGION_RE.sub("", location)
+    has_country = bool(_LOCATION_COUNTRY_RE.search(location))
+    location = _LOCATION_COUNTRY_RE.sub("", location).strip()
+    normalized = normalize(location)
+    if normalized in {"brasil", "brazil", "br", "nacional", "todo brasil", "todo o brasil"}:
+        location = "Brasil"
+    elif re.fullmatch(
+        r"(?:100 |totalmente )?(?:remot[oa]|remote|home office)(?: 100)?"
+        r"(?: (?:remot[oa]|remote|home office))*", normalized,
+    ):
+        location = "Remoto"
+    else:
+        state = _LOCATION_STATE_RE.match(location)
+        if state:
+            city, raw_state = state.groups()
+            uf = _STATE_UFS.get(normalize(raw_state), raw_state.upper())
+            if uf in _STATE_UFS.values():
+                location = f"{city.strip()}, {uf}"
+            elif has_country:
+                location += ", Brasil"
+        elif location.upper() in _STATE_UFS.values():
+            location = location.upper()
+        elif has_country:
+            location += ", Brasil"
+
+    return location + (" e Região" if regional else "")
 
 
 REMOTO = "Remoto"

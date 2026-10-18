@@ -155,7 +155,7 @@ def test_parse_page_le_cidade_do_header():
 
     assert job is not None
     assert job.workplace_type == "Presencial"
-    assert job.location == "Brasília, DF, Brasil"
+    assert job.location == "Brasília, DF"
 
 
 def test_parse_page_modalidade_do_header_prevalece_sobre_cidade_do_jsonld():
@@ -186,7 +186,7 @@ def test_parse_page_cidade_no_header_com_hibrido_no_titulo():
 
     assert job is not None
     assert job.workplace_type == "Híbrido"
-    assert job.location == "Brasília, DF, Brasil"
+    assert job.location == "Brasília, DF"
 
 
 def test_parse_page_modalidade_explicita_na_descricao():
@@ -200,7 +200,7 @@ def test_parse_page_modalidade_explicita_na_descricao():
 
     assert job is not None
     assert job.workplace_type == "Híbrido"
-    assert job.location == "Brasília, DF, Brasil"
+    assert job.location == "Brasília, DF"
 
 
 def test_parse_page_modalidade_em_modelo_de_trabalho():
@@ -240,7 +240,7 @@ def test_parse_page_ignora_mencoes_soltas_de_home_office_na_descricao():
 
     assert job is not None
     assert job.workplace_type == "Presencial"
-    assert job.location == "Brasília, DF, Brasil"
+    assert job.location == "Brasília, DF"
 
 
 def test_vid_da_url_aceita_numerico_e_uuid():

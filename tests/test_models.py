@@ -1,6 +1,6 @@
 import pytest
 
-from scraper.models import Job, normalize, strip_html
+from scraper.models import Job, normalize, normalize_location, strip_html
 
 
 @pytest.mark.parametrize(
@@ -15,6 +15,56 @@ def test_normalize_remove_acentos_e_pontuacao(raw, expected):
     result = normalize(raw)
 
     assert result == expected
+
+
+@pytest.mark.parametrize(
+    "raw,expected",
+    [
+        (None, ""), ("", ""), ("Não informado", "Não informado"),
+        ("Ourinhos, São Paulo", "Ourinhos, SP"),
+        ("Ourinhos, SP", "Ourinhos, SP"),
+        ("Ourinhos / sp", "Ourinhos, SP"),
+        ("Ourinhos-SP", "Ourinhos, SP"),
+        ("Ourinhos, Brasil", "Ourinhos, Brasil"),
+        ("São Paulo, São Paulo", "São Paulo, SP"),
+        ("São Paulo, Brasil", "São Paulo, Brasil"),
+        ("Rio de Janeiro, Rio de Janeiro, Brazil", "Rio de Janeiro, RJ"),
+        ("Belo Horizonte, Minas Gerais", "Belo Horizonte, MG"),
+        ("Florianópolis / Santa Catarina", "Florianópolis, SC"),
+        ("Campo Grande - Mato Grosso do Sul", "Campo Grande, MS"),
+        ("Brasília, Distrito Federal", "Brasília, DF"),
+        ("Mogi-Mirim - SP, Brasil", "Mogi-Mirim, SP"),
+        ("Embu-Guaçu, São Paulo", "Embu-Guaçu, SP"),
+        ("Praia Grande / SP e Região", "Praia Grande, SP e Região"),
+        ("São Paulo e Região", "São Paulo e Região"),
+        ("São Paulo", "São Paulo"), ("Santa Maria", "Santa Maria"),
+        ("Adamantina", "Adamantina"),
+        ("Adamantina, Brasil", "Adamantina, Brasil"),
+        ("Minas Gerais, Brasil", "Minas Gerais, Brasil"),
+        ("Porto, Portugal", "Porto, Portugal"),
+        ("Lisboa, Lisboa, Portugal", "Lisboa, Lisboa, Portugal"),
+        ("Nacional", "Brasil"), ("Brazil", "Brasil"),
+        ("Todo Brasil", "Brasil"), ("Todo o Brasil", "Brasil"),
+        ("Remoto", "Remoto"), ("100% Remoto", "Remoto"),
+        ("remoto 100%", "Remoto"), ("100% Home Office", "Remoto"),
+        ("Totalmente remota", "Remoto"), ("remoto, remoto", "Remoto"),
+        ("  Campinas  -  sp , Brasil ", "Campinas, SP"),
+    ],
+)
+def test_normalize_location_padroniza_sem_adivinhar_estado(raw, expected):
+    result = normalize_location(raw)
+
+    assert result == expected
+    assert normalize_location(result) == result
+
+
+def test_job_padroniza_local_sem_mudar_modalidade_declarada():
+    job = Job(source="t", external_id="1", title="Dev", location="100% Home Office",
+              workplace_type="Híbrido", workplace_declared=True)
+
+    assert job.location == "Remoto"
+    assert job.workplace_type == "Híbrido"
+    assert job.workplace_declared is True
 
 
 @pytest.mark.parametrize(
