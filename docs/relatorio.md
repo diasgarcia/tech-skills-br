@@ -370,6 +370,12 @@ Adicionei eventos de uso das abas e cliques em links de vagas, GitHub e Kaggle, 
 
 Os 1.159 testes passaram e o lint não apontou problemas. Conferi a interface no computador e no celular, sem erros de JavaScript ou rolagem horizontal. Na prévia local, aceitar não carregou a tag do Google. Não enviei dados de teste ao Analytics nem alterei o banco.
 
+Padronizei as localidades no normalizador comum. Cidade e estado explícitos passam a usar Cidade, UF. Mantive a indicação e Região. Variações como 100% Home Office viram Remoto, e abrangência nacional usa Brasil. Sem UF, preservei a cidade e o país informado, sem adivinhar estado. A lista do site mantém Brasil em vez de trocar pelo polo Nacional. Não mudei as regras de modalidade.
+
+Validei a mudança em uma cópia da release mais recente, com 9.148 vagas. A normalização alterou a escrita de 2.784 localidades e preservou todos os outros campos, IDs e vínculos. Gerei uma prévia do site e do Parquet. Os 1.197 testes passaram e o lint não apontou problemas. Atualizei a arquitetura e a cópia local da wiki. Não alterei o banco principal, não executei coleta real e não publiquei os ajustes.
+
+Depois da autorização, baixei novamente o snapshot verificado e apliquei a normalização no banco principal. Mantive as 9.148 vagas e alterei somente o texto de 2.784 localidades. Preservei um backup do banco local anterior. Publiquei o banco e o CSV na release latest, com manifesto e confirmação do snapshot. Repeti os testes focados: 218 passaram e o lint não apontou problemas. O envio ao Kaggle segue pelo workflow diário. Não executei uma coleta local.
+
 ---
 
 ### Pontos a avaliar

@@ -107,6 +107,8 @@ O GitHub é publicado antes da réplica no Kaggle. Uma falha da réplica deixa a
 
 ## Métricas e interface
 
+As localidades usam o normalizador comum na coleta, na importação e na exportação JSON. Quando o estado está explícito, o formato é `Cidade, UF`, inclusive para estados escritos por extenso. País redundante é removido somente quando a UF foi identificada. Sem UF, a cidade e o país informado são preservados. Não inferimos estado pelo nome da cidade ou pelo polo. Variações de local remoto viram `Remoto` e de abrangência nacional viram `Brasil`, sem mudar a classificação de modalidade.
+
 O site carrega `.github/web/analytics.js`, incluído pelo build do Pages. O Google Analytics só é ativado no endereço publicado e após o aceite do visitante. O botão Privacidade permite rever a escolha. Os eventos próprios registram abas e cliques em links, sem enviar texto de buscas ou dados de anúncios. Localhost não envia estatísticas. A medição de acessos é separada do banco e das métricas de coleta.
 
 O corpo do commit diário e o relatório Markdown destacam as vagas novas que ainda
