@@ -107,6 +107,8 @@ O GitHub é publicado antes da réplica no Kaggle. Uma falha da réplica deixa a
 
 ## Métricas e interface
 
+O site carrega `.github/web/analytics.js`, incluído pelo build do Pages. O Google Analytics só é ativado no endereço publicado e após o aceite do visitante. O botão Privacidade permite rever a escolha. Os eventos próprios registram abas e cliques em links, sem enviar texto de buscas ou dados de anúncios. Localhost não envia estatísticas. A medição de acessos é separada do banco e das métricas de coleta.
+
 O corpo do commit diário e o relatório Markdown destacam as vagas novas que ainda
 estão na base e entraram naquele dia. Os dois recebem a mesma data do workflow.
 A contagem usa `created_at`, convertido de UTC para

@@ -362,6 +362,16 @@ Retirei a busca analista de integracoes junior apenas do LinkedIn. Mantive a var
 
 ---
 
+### 18/10/2026
+
+Preparei a integração do Google Analytics no site. A tag só carrega após o aceite. Incluí as opções Aceitar e Recusar e o botão Privacidade no rodapé. A escolha fica salva por até 180 dias. Ao revogar, a integração bloqueia eventos, remove seus cookies e recarrega a página. Os cookies usam escopo próprio para não misturar o projeto com o portfólio.
+
+Adicionei eventos de uso das abas e cliques em links de vagas, GitHub e Kaggle, sem texto das buscas ou dados dos anúncios. Desativei a medição no localhost e fora do endereço publicado. O build passou a incluir o script de analytics. Atualizei a arquitetura e a página do site na wiki.
+
+Os 1.159 testes passaram e o lint não apontou problemas. Conferi a interface no computador e no celular, sem erros de JavaScript ou rolagem horizontal. Na prévia local, aceitar não carregou a tag do Google. Não enviei dados de teste ao Analytics nem alterei o banco.
+
+---
+
 ### Pontos a avaliar
 
 - Definir uma validação quantitativa com uma amostra e revisão humana independente.
