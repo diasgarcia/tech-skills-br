@@ -395,11 +395,11 @@ function renderVagasTable() {
     cell(tr, v.empresa, "hide-mobile");
     cell(tr, element("span", v.area, "badge"), "hide-mobile", { textAlign: "center" });
 
-    // Mostra a cidade quando a localidade traz uma de verdade; o polo
-    // regional ("Interior Paulista Ocidental") vira fallback.
+    // Preserva a localidade, inclusive Brasil quando a abrangência é nacional.
+    // Usa o polo somente quando o anúncio não informou o local.
     const locNorm = normalizeSearchText(v.localidade || "");
-    const cidade = locNorm && !["brasil", "nao informado"].includes(locNorm) ? v.localidade : "";
-    const polo = cidade || v.polo || "";
+    const localidade = locNorm && locNorm !== "nao informado" ? v.localidade : "";
+    const polo = localidade || v.polo || "";
     const modalidade = v.modalidade || "";
     const exibePolo = polo && polo.toLowerCase() !== modalidade.toLowerCase();
     const local = cell(tr, "", "job-location-cell");

@@ -139,6 +139,23 @@ test("URLs aceitas são absolutas HTTP(S), inclusive nos detalhes", () => {
   assert.equal(app.run("jobLink(url, 'Vaga').href"), "https://example.test/vaga");
 });
 
+
+test("local nacional preserva Brasil e remoto não duplica a modalidade", () => {
+  const app = runtime();
+  app.sandbox.fixture = [
+    { titulo: "Nacional", localidade: "Brasil", polo: "Nacional", modalidade: "Remoto", data_publicacao: today() },
+    { titulo: "Sem cidade", localidade: "Remoto", polo: "Remoto", modalidade: "Remoto", data_publicacao: today() },
+    { titulo: "Cidade", localidade: "Ourinhos, SP", polo: "Interior Paulista Ocidental", modalidade: "Remoto", data_publicacao: today() },
+  ];
+
+  app.run("vagasData = fixture; renderVagasTable()");
+  const places = app.get("#table-vagas tbody").childNodes.map(row =>
+    walk(row).filter(node => node.className === "job-place").map(node => node.textContent)
+  );
+
+  assert.deepEqual(places, [["Brasil"], [], ["Ourinhos, SP"]]);
+});
+
 test("hover mostra dados literais sem bloquear a página; clique abre modal", () => {
   const app = runtime();
   const injected = '<img src=x onerror="alert(1)">';
