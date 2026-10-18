@@ -235,13 +235,19 @@
       <span class="show-mobile">Tech Skills Brasil &middot; 2026</span>
     </div>
     <div class="footer-links" aria-label="Links do projeto">
-      <a class="footer-link" href="https://github.com/diasgarcia/tech-skills-br" target="_blank" rel="noopener noreferrer" aria-label="Abrir o projeto no GitHub" title="GitHub">
+      <button class="footer-link footer-privacy" id="analytics-preferences" type="button" aria-label="Preferências de privacidade" title="Privacidade" aria-haspopup="dialog">
+        <svg class="privacy-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+        <span class="footer-link-label">Privacidade</span>
+      </button>
+      <a class="footer-link" href="https://github.com/diasgarcia/tech-skills-br" target="_blank" rel="noopener noreferrer" aria-label="Abrir o projeto no GitHub" title="GitHub" data-analytics-link="github">
         <svg class="footer-icon" viewBox="-0.5 -0.5 17 17" aria-hidden="true">
           <path fill="currentColor" d="M8 0C3.58 0 0 3.64 0 8.13c0 3.59 2.29 6.64 5.47 7.71.4.07.55-.18.55-.39 0-.19-.01-.83-.01-1.51-2.01.38-2.53-.5-2.69-.96-.09-.23-.48-.96-.82-1.15-.28-.15-.68-.52-.01-.53.63-.01 1.08.59 1.23.83.72 1.23 1.87.88 2.33.67.07-.53.28-.88.51-1.08-1.78-.21-3.64-.91-3.64-4.02 0-.89.31-1.62.82-2.19-.08-.2-.36-1.04.08-2.16 0 0 .67-.22 2.2.84A7.4 7.4 0 0 1 8 3.87a7.4 7.4 0 0 1 2 .27c1.53-1.06 2.2-.84 2.2-.84.44 1.12.16 1.96.08 2.16.51.57.82 1.3.82 2.19 0 3.12-1.87 3.81-3.65 4.02.29.25.54.74.54 1.5 0 1.08-.01 1.95-.01 2.22 0 .21.15.47.55.39A8.16 8.16 0 0 0 16 8.13C16 3.64 12.42 0 8 0Z"/>
         </svg>
         <span class="footer-link-label">GitHub</span>
       </a>
-      <a class="footer-link footer-link-kaggle" href="https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br" target="_blank" rel="noopener noreferrer" aria-label="Abrir o dataset no Kaggle" title="Dataset no Kaggle">
+      <a class="footer-link footer-link-kaggle" href="https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br" target="_blank" rel="noopener noreferrer" aria-label="Abrir o dataset no Kaggle" title="Dataset no Kaggle" data-analytics-link="kaggle">
         <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M6.5 3v18M17.5 3 7 13.5M10.8 9.7 18 21" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -269,6 +275,22 @@
 </dialog>
 
 <!-- JAVASCRIPT ROOTS -->
+<dialog id="analytics-consent" class="analytics-consent" aria-labelledby="analytics-title" aria-describedby="analytics-description">
+  <h2 id="analytics-title">Medição de acessos</h2>
+  <p id="analytics-description">Podemos usar o Google Analytics para medir acessos, uso das abas e cliques em links? A medição só começa se você aceitar. O site funciona sem ela.</p>
+  <details>
+    <summary>Sobre os dados</summary>
+    <p>O Google recebe dados de navegação e do dispositivo e pode estimar a localização. A medição usa cookies, sem recursos de publicidade. Não enviamos o texto digitado nas buscas nos eventos do site.</p>
+    <p>Sua escolha fica salva neste navegador por até 180 dias. Você pode mudar em Privacidade, no rodapé. Ao revogar, removemos os cookies desta integração e recarregamos a página para interromper a medição.</p>
+    <a href="https://policies.google.com/privacy?hl=pt-BR" target="_blank" rel="noopener noreferrer">Política de privacidade do Google ↗</a>
+  </details>
+  <p id="analytics-local-note" hidden>Prévia local: nenhum dado de uso é enviado.</p>
+  <div class="analytics-actions">
+    <button class="nav-btn" id="analytics-reject" type="button">Recusar</button>
+    <button class="nav-btn" id="analytics-accept" type="button">Aceitar</button>
+  </div>
+</dialog>
+<script src="analytics.js"></script>
 <script src="app.js"></script>
 
 </body>

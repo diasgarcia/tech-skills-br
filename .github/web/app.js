@@ -114,6 +114,7 @@ function jobLink(url, text, styles = {}) {
   link.target = "_blank";
   link.rel = "noopener noreferrer";
   link.title = "Abrir vaga";
+  link.setAttribute("data-analytics-link", "job_source");
   return link;
 }
 
@@ -141,6 +142,7 @@ function setTab(tabId) {
   }
 
   ajustaAlturaScrollTables();
+  window.siteAnalytics?.selectTab(tabId);
 }
 
 function ajustaAlturaScrollTables() {

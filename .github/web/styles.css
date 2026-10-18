@@ -321,6 +321,36 @@
       overflow: visible;
     }
     .footer-stale { color: var(--amber); }
+    .footer-privacy { border: 0; background: none; font: inherit; cursor: pointer; }
+    .privacy-icon { width: 16px; height: 16px; flex: 0 0 auto; }
+    .analytics-consent {
+      position: fixed;
+      inset: auto 16px 58px auto;
+      margin: 0;
+      width: min(430px, calc(100% - 24px));
+      max-height: calc(100dvh - 90px);
+      overflow: auto;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--card-bg);
+      color: var(--text);
+      font: inherit;
+      font-size: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      z-index: 40;
+    }
+    .analytics-consent:modal { inset: 0; margin: auto; }
+    .analytics-consent::backdrop { background: rgba(0, 0, 0, 0.6); }
+    .analytics-consent h2 { color: var(--text-bright); font-size: 13px; margin-bottom: 8px; }
+    .analytics-consent details { margin-top: 10px; color: var(--text-muted); }
+    .analytics-consent summary { cursor: pointer; }
+    .analytics-consent details p { margin: 8px 0; }
+    #analytics-local-note { margin-top: 10px; color: var(--text-muted); }
+    .analytics-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; }
+    .analytics-actions .nav-btn { color: var(--text); }
+    .analytics-actions .nav-btn:hover,
+    .analytics-actions .nav-btn:focus-visible { color: var(--accent); border-color: var(--accent); }
 
     @media (min-width: 769px) {
       body { padding-bottom: 46px; }

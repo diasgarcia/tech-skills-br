@@ -5,7 +5,7 @@ from pathlib import Path
 import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
-WEB_FILES = ("index.html", "styles.css", "app.js")
+WEB_FILES = ("index.html", "styles.css", "analytics.js", "app.js")
 API_FILES = ("resumo.json", "areas.json", "tecnologias.json", "vagas.json")
 
 
