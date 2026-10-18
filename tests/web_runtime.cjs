@@ -120,6 +120,7 @@ test("anúncios são texto literal; links inseguros não viram âncoras", () => 
   assert.equal(links.length, 1);
   const directLink = links.find(link => link.className === "job-direct-link");
   assert.equal(directLink.attributes["aria-label"], "Abrir vaga na fonte");
+  assert.equal(directLink.attributes["data-analytics-link"], "job_source");
   assert.equal(directLink.onclick, undefined);
   assert.equal(rows[1].childNodes.at(-1).className, "job-link-col");
   assert.equal(rows[1].childNodes.at(-1).childNodes[0], directLink);

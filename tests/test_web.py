@@ -79,8 +79,9 @@ def test_link_das_vagas_fica_na_ultima_coluna_tambem_no_mobile():
 
 
 @pytest.mark.skipif(shutil.which("node") is None, reason="Node.js necessário para os testes offline do DOM")
-def test_renderizacao_interacao_e_recuperacao_sem_rede():
-    script = Path(__file__).with_name("web_runtime.cjs")
+@pytest.mark.parametrize("filename", ["web_runtime.cjs", "analytics_runtime.cjs"])
+def test_renderizacao_interacao_e_recuperacao_sem_rede(filename):
+    script = Path(__file__).with_name(filename)
 
     result = subprocess.run(
         [shutil.which("node"), "--test", str(script)],
@@ -88,3 +89,17 @@ def test_renderizacao_interacao_e_recuperacao_sem_rede():
     )
 
     assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_analytics_tem_consentimento_e_preferencias_sem_tag_remota_no_html():
+    page = BeautifulSoup(INDEX_PATH.read_text(encoding="utf-8"), "html.parser")
+
+    panel = page.find("dialog", id="analytics-consent")
+    scripts = [script.get("src") for script in page.find_all("script")]
+
+    assert panel["aria-labelledby"] == "analytics-title"
+    assert panel.find("button", id="analytics-accept") is not None
+    assert panel.find("button", id="analytics-reject") is not None
+    assert page.find("footer").find("button", id="analytics-preferences") is not None
+    assert scripts == ["analytics.js", "app.js"]
+    assert "googletagmanager.com" not in INDEX_PATH.read_text(encoding="utf-8")
