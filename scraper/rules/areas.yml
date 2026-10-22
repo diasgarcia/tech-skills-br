@@ -137,6 +137,7 @@ tech_gate:
     - administrativo ti
     - suporte na area administrativa
     - suporte comercial
+    - suporte administrativo comercial
     - sistemas eletricos
     - sistemas de purificacao de agua
     # Redes de encanamento nao sao redes de computadores.
@@ -233,10 +234,124 @@ tech_gate:
     - analista de gestao de contratos
     - aprendiz monitoracao redes clientes
     - operador de programacao logistica
+    # Casos confirmados na revisão de outubro: termos como desenvolvimento,
+    # sistemas, suporte e N1 aparecem também em funções fora de TI.
+    - inspetor de qualidade
+    - inspecao solda
+    - tecnico eletromecanico
+    - tecnico quimico
+    - tecnica quimica
+    - farmacotecnico
+    - farmacotecnica
+    - sous chef
+    - psicologo
+    - psicologa
+    - estagio em educacao fisica
+    - academia de musculacao
+    - assistente de sif
+    - analista de seguranca de alimentos
+    - estagiario de rh
+    - estagio rh
+    - trainee rh
+    - analista de recrutamento e selecao
+    - estagio em comunicacao e marketing
+    - analista de pr
+    - estagio juridico
+    - estagiario a juridico
+    - estagio em direito
+    - assistente juridico operacional
+    - estagiario comercial
+    - analista comercial
+    - assistente financeiro
+    - analista administrativo financeiro
+    - assistente administrativo para imobiliaria
+    - assistente administrativo desenvolvimento agronomico
+    - trainee em desenvolvimento imobiliario
+    - jovem aprendiz desenvolvimento imobiliario
+    - jovem aprendiz administrativo desenvolvimento imobiliario
+    - engenharia desenvolvimento cabines
+    - sistemas mecanicos de instalacoes
+    - assistente tecnico de campo especialidade mecanica
+    - condutor sistemas manufatura
+    - programacao de ferramentas
+    - programador de producao
+    - operador programacao logistica
+    - programacao de veiculos
+    - auxiliar de sistema de biogas
+    - assistente de projetos e vendas
+    - auxiliar de qualidade satisfacao do cliente
+    - estagiario de projetos fabrica
+    - estagio administrativo de infraestrutura
+    - estagiario na area de engenharia de producao
 
   # Alguns titulos tambem nomeiam funcoes validas de TI. Nesses casos, a vaga
   # so e bloqueada quando a descricao confirma o contexto fora do recorte.
   excluir_contextos:
+    # Não excluir "suporte administrativo" por título: há vagas válidas de
+    # help desk, infraestrutura e gestão de acessos com esse nome.
+    - titulo:
+        - suporte administrativo
+      descricao:
+        - suporte em processos administrativos
+        - processos financeiros relacionados a pagamentos
+    - titulo:
+        - analista de suporte operacional
+      descricao:
+        - preservacao dos bens patrimoniais
+    - titulo:
+        - analista de engenharia
+      descricao:
+        - centrais de gas
+    - titulo:
+        - analista de programacao
+      descricao:
+        - programacao de materiais
+    - titulo:
+        - desenvolvimento em cad
+      descricao:
+        - processos de usinagem
+    - titulo:
+        - estagio em comunicacao
+      descricao:
+        - relacoes publicas
+    - titulo:
+        - controlador operacao de sistema
+        - controlador a operacao de sistema
+      descricao:
+        - operar o sistema eletrico de potencia
+    - titulo:
+        - estagio em suporte a producao melhoria continua
+      descricao:
+        - processos de usinagem
+    - titulo:
+        - estagio de sistema de gestao
+        - estagiario de sistema de gestao
+        - sistema de gestao integrada
+        - sistema gestao integrada
+        - integrated management system
+      descricao:
+        - rotinas do sistema de gestao industrial
+        - gerenciamento dos residuos da unidade
+        - informacoes relacionadas a produtos quimicos
+        - engenharia todas as modalidades farmacia ou quimica
+    - titulo:
+        - analista de qualidade e melhoria continua
+        - estagiario na area de qualidade
+      descricao:
+        - fecula de mandioca
+        - testes das materias primas
+    - titulo:
+        - estagiario na area de administracao de empresas
+      descricao:
+        - publicacao de anuncios nos marketplaces
+    - titulo:
+        - estagiario na area de arquitetura
+      descricao:
+        - zoneamento e legislacao urbana
+    - titulo:
+        - assistente administrativo
+      descricao:
+        - demandas da assessoria juridica
     - titulo:
         - analista de expansao de redes
       descricao:
