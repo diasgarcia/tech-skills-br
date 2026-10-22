@@ -181,6 +181,137 @@ def test_tech_gate_mantem_redes_de_ti_em_empresa_de_saneamento(clf):
 
 
 @pytest.mark.parametrize(
+    "description",
+    [
+        "",
+        "Apoiar propostas comerciais, cotações e atendimento. Requisitos: "
+        "Administração ou Sistemas de Informação, Pacote Office, CRM e ERP.",
+        "A empresa desenvolve software, usa SQL e banco de dados. "
+        "A função apoia o time de vendas com propostas e cotações.",
+    ],
+)
+def test_tech_gate_bloqueia_suporte_administrativo_comercial(clf, description):
+    title = "Estágio em Suporte Administrativo Comercial - Presencial Petrópolis"
+
+    result = clf.is_tech(title, description)
+
+    assert result is False
+
+
+@pytest.mark.parametrize(
+    "title",
+    [
+        "Inspetor de Qualidade N1 - Uberlândia/MG",
+        "EXAMINADOR(A) I (INSPEÇÃO SOLDA N1)",
+        "TÉCNICO ELETROMECÂNICO N1",
+        "Técnico Químico JR - Engenharia e Tecnologia",
+        "Analista de Desenvolvimento Farmacotécnico Júnior",
+        "Sous Chef de Desenvolvimento Jr",
+        "Psicólogo Júnior",
+        "Psicóloga Júnior",
+        "Estágio em Educação Física e Esporte",
+        "Estágio para academia de musculação",
+        "Assistente de SIF Nível 1",
+        "Analista de Segurança de Alimentos Jr",
+        "Estagiário de RH",
+        "Estágio RH (Recrutamento e Seleção)",
+        "Trainee RH Generalista | Desenvolvimento para Coordenação de RH",
+        "Analista de Recrutamento e Seleção Junior",
+        "Estágio em Comunicação e Marketing",
+        "Pessoa Analista de PR Junior - Tecnologia",
+        "Estágio Jurídico (Cível e Consumidor)",
+        "Estagiário/a Jurídico | Tecnologia Privacidade e Proteção de Dados",
+        "Estágio em Direito",
+        "Assistente Jurídico-Operacional com Inteligência Artificial",
+        "Estagiário Comercial - Travel Tech & Educação",
+        "Analista Comercial Junior – Consultoria de TI",
+        "Assistente Financeiro Sênior - Restaurante",
+        "Analista Administrativo Financeiro Jr | Desenvolvimento Imobiliário",
+        "Assistente administrativo para imobiliaria com conhecimento sistema nido",
+        "Assistente Administrativo - Desenvolvimento Agronômico",
+        "Trainee em Desenvolvimento Imobiliário",
+        "Jovem Aprendiz | Desenvolvimento Imobiliário",
+        "Jovem Aprendiz Administrativo | Desenvolvimento Imobiliário",
+        "Estágio em Engenharia Desenvolvimento Cabines",
+        "Trainee de Engenharia (Sistemas Mecânicos de Instalações)",
+        "Assistente Técnico de Campo – Especialidade Mecânica",
+        "CONDUTOR SISTEMAS MANUFATURA I",
+        "Planejador Processo Jr - Programação de Ferramentas",
+        "Programador de Produção Junior",
+        "Operador Programação Logística I",
+        "Analista de Transportes JR | Programação de Veículos",
+        "Auxiliar de Sistema de Biogás",
+        "Assistente de Projetos e Vendas",
+        "Auxiliar de Qualidade (Satisfação do cliente) - Telecomunicações",
+        "Estagiário de Projetos (Fábrica)",
+        "Estágio Administrativo de Infraestrutura",
+        "Estagiário na área de Engenharia de Produção",
+    ],
+)
+def test_tech_gate_descarta_funcoes_nao_tech_observadas_em_outubro(clf, title):
+    description = "A empresa usa banco de dados e presta suporte técnico."
+
+    result = clf.is_tech(title, description)
+
+    assert result is False
+
+
+@pytest.mark.parametrize(
+    "title,description",
+    [
+        ("Estágio em Suporte Administrativo", "Suporte em processos administrativos e pedidos de compra."),
+        ("Analista de Suporte Administrativo JR", "Apoiar processos financeiros relacionados a pagamentos e contratos."),
+        ("Analista de Suporte Operacional Júnior", "Atuar na preservação dos bens patrimoniais da empresa."),
+        ("Analista de Engenharia Jr", "Elaborar projetos de centrais de gás e acompanhar instalações."),
+        ("Analista de Programação Júnior", "Planejar estoques e programação de materiais para a produção."),
+        ("Analista de Produto JR (Desenvolvimento em CAD)", "Projetar componentes para processos de usinagem."),
+        ("Estágio em Comunicação | Tecnologia", "Apoiar a equipe de relações públicas na comunicação das marcas."),
+        ("Controlador(a) Operação de Sistema I", "Operar o sistema elétrico de potência do estado."),
+        ("Estágio em suporte à produção - Melhoria contínua", "Melhorar processos de usinagem e medir tempos de ciclo."),
+        ("Estágio de Sistema de Gestão", "Apoiar rotinas do sistema de gestão industrial e reuniões de produção."),
+        ("Estágio em Integrated Management System (Quality Assurance)", "Engenharia (todas as modalidades), Farmácia ou Química."),
+        ("Analista de Sistema de Gestão Integrada I", "Realizar o gerenciamento dos resíduos da unidade."),
+        ("Pessoa Auxiliar de Sistema Gestão Integrada", "Controlar informações relacionadas a produtos químicos."),
+        ("Analista de Qualidade e Melhoria Contínua", "Realizar análises de fécula de mandioca no laboratório."),
+        ("Estagiário na área de Qualidade", "Realizar testes das matérias-primas e acompanhar a fábrica."),
+        ("Estagiário na área de Administração de Empresas", "Realizar publicação de anúncios nos marketplaces."),
+        ("Estagiário na área de Arquitetura", "Pesquisar zoneamento e legislação urbana para terrenos."),
+        ("Assistente Administrativo", "Registrar demandas da Assessoria Jurídica e organizar documentos."),
+    ],
+)
+def test_tech_gate_descarta_contextos_nao_tech_observados_em_outubro(clf, title, description):
+    result = clf.is_tech(title, description)
+
+    assert result is False
+
+
+@pytest.mark.parametrize(
+    "title,description",
+    [
+        ("Analista de Suporte Administrativo JR - PCD", "Suporte a infraestrutura e periféricos, gestão de acessos e help desk nível 1."),
+        ("Assistente administrativo de TI", "Configurar Wi-Fi, redes, computadores e dispositivos móveis."),
+        ("Auxiliar Administrativo - Suporte Técnico", "Instalar drivers e equipamentos e prestar suporte remoto aos usuários do ERP."),
+        ("Estágio em Suporte Operacional", "Monitorar redes de computadores, TCP/IP e GPON."),
+        ("Assistente Fiscal de Tecnologia", "Parametrizar SAP Business One, configurar addons e testar melhorias para usuários."),
+        ("Assistente de Sistemas da Controladoria Jurídica", "Administrar sistemas, desenvolver relatórios com SQL e automatizar rotinas com Python."),
+        ("Assistente de Qualidade de Software | QA", "Executar testes de software e registrar defeitos."),
+        ("Analista de Qualidade e Processos JR", "Criar dashboards em Power BI e automações no ServiceNow."),
+        ("Analista em Sistemas de Saúde e Segurança I", "Integrar sistemas, tratar dados com SQL e desenvolver automações."),
+        ("Auxiliar de Remanufatura", "Diagnosticar hardware e reparar equipamentos de tecnologia da informação."),
+        ("Estágio Setor Patrimônio", "Atualizar firmware e testar equipamentos de redes de computadores."),
+        ("Estágio em TI aplicada à Automação Industrial", "Criar APIs com Python, Node.js e interfaces React para CLPs."),
+        ("Desenvolvedor de Sistemas de RH Júnior", "Desenvolver software de recrutamento com Python e SQL."),
+        ("Estágio em Comunicação de Dados", "Configurar redes de computadores e roteadores TCP/IP."),
+        ("Estágio em Desenvolvimento em CAD para Eletrônica", "Projetar placas de circuito impresso e hardware embarcado."),
+    ],
+)
+def test_tech_gate_preserva_funcoes_tech_com_titulos_ambiguos(clf, title, description):
+    result = clf.is_tech(title, description)
+
+    assert result is True
+
+
+@pytest.mark.parametrize(
     "title,description",
     [
         (
