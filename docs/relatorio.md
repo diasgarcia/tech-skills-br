@@ -378,6 +378,22 @@ Depois da autorização, baixei novamente o snapshot verificado e apliquei a nor
 
 ---
 
+### 22/10/2026
+
+Atualizei o código e a cópia local da wiki. Baixei a release verificada com 9.678 vagas e sincronizei o banco local, preservando um backup. Fiz uma triagem das 1.499 vagas que entraram de 9 a 22 de outubro, pela data de criação no banco. Li os casos suspeitos e separei 84 anúncios para exclusão: 82 cobertos pelas novas regras, um já recusado pelo filtro anterior e um reservado para decisão pontual. Mantive os casos mistos ou com informação insuficiente, sem descartá-los só pelo título.
+
+Incluí exclusões específicas no YAML para suporte administrativo/comercial e outras funções fora de TI observadas na revisão. Nos títulos ambíguos, a descrição precisa confirmar o contexto. Preservei suporte de TI com nome administrativo, configuração de SAP, qualidade de software e manutenção de hardware. Adicionei testes de classificação e importação. Os 1.279 testes passaram e o lint não apontou problemas.
+
+Atualizei a cópia local da página de classificação da wiki com essa distinção. Corrigi também o trecho de localidade que ainda mostrava o separador antigo, sem mudar as regras já implantadas.
+
+Salvei a revisão detalhada em data/auditoria-escopo-20261022, fora do Git. Não apaguei vagas, não executei coleta real e não fiz commit ou publicação. Esta triagem não substitui uma validação independente da classificação.
+
+Depois da autorização, removi os 84 anúncios revisados e seus 182 vínculos de habilidades. A base passou de 9.678 para 9.594 vagas. Preservei um backup anterior à limpeza. Comparei as tabelas e confirmei que os demais registros não mudaram, sem vínculos órfãos ou falhas de integridade. Atualizei os dados locais do site e publiquei o novo snapshot na release, com confirmação dos arquivos enviados. Não executei uma nova coleta.
+
+Validei o Parquet local com as mesmas 9.594 vagas do SQLite, sem os anúncios excluídos. Acionei a publicação no Kaggle pelo workflow existente e a atualização do site e dos gráficos com a nova release. Publiquei a revisão da página de classificação da wiki. Separei as regras, os testes e este registro em commits distintos.
+
+---
+
 ### Pontos a avaliar
 
 - Definir uma validação quantitativa com uma amostra e revisão humana independente.
