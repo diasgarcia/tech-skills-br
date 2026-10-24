@@ -1,3 +1,4 @@
+import json
 import sys
 from types import SimpleNamespace
 from unittest.mock import Mock
@@ -6,6 +7,74 @@ import pytest
 
 from api.snapshots import sha256
 from scripts import export_kaggle as kaggle
+
+
+AVISO_VERSAO = (
+    "Warning: Looks like you're using an outdated `kaggle` version "
+    "(installed: 2.2.4), please consider upgrading to the latest version (2.2.5)"
+)
+STATUS = {"status": "ready", "current_version_number": 178}
+
+
+@pytest.mark.parametrize(
+    "stdout",
+    [
+        json.dumps(STATUS),
+        json.dumps(STATUS, indent=2),
+        AVISO_VERSAO + "\n" + json.dumps(STATUS),
+        "\n" + AVISO_VERSAO + "\nWarning: outro aviso do cliente\n" + json.dumps(STATUS, indent=2) + "\n",
+    ],
+)
+def test_status_dataset_aceita_json_com_avisos_antes_da_resposta(monkeypatch, stdout):
+    command = Mock(return_value=SimpleNamespace(returncode=0, stdout=stdout, stderr=""))
+    monkeypatch.setattr(kaggle.subprocess, "run", command)
+
+    result = kaggle._status_dataset()
+
+    assert result == STATUS
+    command.assert_called_once_with(
+        ["kaggle", "datasets", "status", kaggle.HANDLE, "--format", "json"],
+        capture_output=True, text=True, timeout=60,
+    )
+
+
+def test_status_dataset_registra_aviso_do_cliente(monkeypatch, caplog):
+    response = SimpleNamespace(returncode=0, stdout=AVISO_VERSAO + "\n" + json.dumps(STATUS), stderr="")
+    monkeypatch.setattr(kaggle.subprocess, "run", Mock(return_value=response))
+
+    result = kaggle._status_dataset()
+
+    assert result == STATUS
+    assert AVISO_VERSAO in caplog.text
+
+
+@pytest.mark.parametrize(
+    "stdout",
+    [
+        "", "resposta invalida", "{", "[]", "null",
+        AVISO_VERSAO,
+        AVISO_VERSAO + '\n{"status":',
+        "Error: acesso negado\n" + json.dumps(STATUS),
+        json.dumps(STATUS) + "\n" + json.dumps(STATUS),
+    ],
+)
+def test_status_dataset_nao_aceita_resposta_invalida(monkeypatch, stdout):
+    response = SimpleNamespace(returncode=0, stdout=stdout, stderr="")
+    monkeypatch.setattr(kaggle.subprocess, "run", Mock(return_value=response))
+
+    result = kaggle._status_dataset()
+
+    assert result is None
+
+
+def test_status_dataset_nao_ignora_falha_do_comando(monkeypatch, caplog):
+    response = SimpleNamespace(returncode=1, stdout=json.dumps(STATUS), stderr="acesso negado")
+    monkeypatch.setattr(kaggle.subprocess, "run", Mock(return_value=response))
+
+    result = kaggle._status_dataset()
+
+    assert result is None
+    assert "acesso negado" in caplog.text
 
 
 @pytest.fixture

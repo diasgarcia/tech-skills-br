@@ -207,8 +207,13 @@ def _status_dataset() -> dict[str, object] | None:
     if resultado.returncode != 0:
         logger.warning("Nao foi possivel consultar o status do Kaggle: %s", resultado.stderr.strip())
         return None
+    # O CLI escreve avisos de versao no stdout, mesmo com --format json.
+    # Aceitar apenas os avisos iniciais; a resposta restante deve ser um JSON completo.
+    linhas = resultado.stdout.strip().splitlines()
+    while linhas and linhas[0].startswith("Warning:"):
+        logger.warning("Aviso do CLI Kaggle: %s", linhas.pop(0))
     try:
-        dados = json.loads(resultado.stdout)
+        dados = json.loads("\n".join(linhas))
     except json.JSONDecodeError:
         logger.warning("Status do Kaggle nao retornou JSON valido: %s", resultado.stdout.strip())
         return None
