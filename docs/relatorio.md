@@ -394,6 +394,16 @@ Validei o Parquet local com as mesmas 9.594 vagas do SQLite, sem os anúncios ex
 
 ---
 
+### 24/10/2026
+
+Corrigi a leitura do status do Kaggle. O cliente passou a escrever um aviso de versão antes do JSON, e isso impedia o envio do dataset. O script agora separa apenas os avisos iniciais, registra cada aviso no log e valida a resposta restante como JSON completo. Falhas do comando e respostas inválidas continuam bloqueadas. Mantive a confirmação da versão pelo hash do Parquet.
+
+Adicionei testes para o aviso observado, vários avisos iniciais, JSON formatado, resposta inválida e erro do comando. Os 23 testes focados e os 1.294 testes da suíte completa passaram. O lint não apontou problemas. Publiquei a correção e acionei o workflow de réplica da release para o Kaggle, sem executar coleta nem alterar o banco.
+
+O Kaggle confirmou a versão 179 com as 9.821 vagas da release. O arquivo baixado dessa versão teve o mesmo hash do Parquet enviado. Os metadados e as tags foram reaplicados. O workflow terminou com sucesso, mesmo com o aviso de versão do cliente.
+
+---
+
 ### Pontos a avaliar
 
 - Definir uma validação quantitativa com uma amostra e revisão humana independente.
