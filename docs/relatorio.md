@@ -404,6 +404,22 @@ O Kaggle confirmou a versão 179 com as 9.821 vagas da release. O arquivo baixad
 
 ---
 
+### 25/10/2026
+
+Atualizei o código, a cópia local da wiki e o banco a partir da release verificada com 9.849 vagas. Preservei um backup do banco local anterior. Revisei a issue 23 com os resultados das coletas já feitas, sem iniciar outra coleta.
+
+Completei as variantes de embarcados e tecnologia embarcada no YAML. Sustentação de sistemas e aplicações passou a ter evidência própria de título para Suporte Técnico, inclusive sem descrição. Mantive essa regra fora dos sinais da descrição, para não alterar a área de vagas de desenvolvimento que citam sustentação nas atividades. Uma área específica, como Backend, continua com prioridade no título.
+
+Adicionei testes de título puro para as funções aprovadas na issue e testes de proteção contra mudanças indevidas em desenvolvimento. Atualizei a cópia local da página de classificação da wiki. Não fiz commit, push ou publicação dos ajustes.
+
+Os 1.313 testes passaram e o lint não apontou problemas. Comparei as regras com a versão anterior nos 13 registros candidatos da release e encontrei quatro mudanças de área, sem mudança de aceite no filtro de TI. Li as quatro descrições. Não apliquei essas mudanças ao banco; ele permanece com os dados da release. A comparação não mede a cobertura completa da coleta.
+
+Atualizei a conclusão da issue 23 com as contagens observadas, as decisões de escopo e os limites da análise. Fechei a issue por autorização do responsável, pela entrega funcional. Registrei que os últimos ajustes estão somente locais e dependem de autorização para publicação.
+
+Depois da autorização para publicar, preservei outro backup e apliquei somente as quatro mudanças de área revisadas. Mantive as 9.849 vagas, os vínculos de habilidades, o histórico de coletas e os demais campos. Validei a integridade e comparei os registros antes e depois. Publiquei e confirmei o snapshot da release, atualizei os dados locais do site e gerei novamente o relatório consolidado. Acionei o workflow de réplica no Kaggle e publiquei a página de classificação da wiki. Separei regras, testes, dados e este registro em commits distintos. Os 242 testes focados passaram novamente e o lint não apontou problemas. Não executei coleta nem reextração de habilidades.
+
+---
+
 ### Pontos a avaliar
 
 - Definir uma validação quantitativa com uma amostra e revisão humana independente.
