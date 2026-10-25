@@ -42,6 +42,64 @@ def test_classifica_pelo_titulo(clf, title, expected):
     assert result.area == expected
 
 
+@pytest.mark.parametrize(
+    "title,expected",
+    [
+        ("DBA Júnior", "Data"),
+        ("Analista de RPA Júnior", "Backend"),
+        ("Analista de Telecom Júnior", "Infraestrutura / Redes"),
+        ("Desenvolvedor de Jogos Júnior", "Engenharia de Software"),
+        ("Desenvolvedor Mainframe Júnior", "Engenharia de Software"),
+        ("Desenvolvedor Embarcados Júnior", "Hardware / Eletrônica"),
+        ("Estágio em Tecnologia Embarcada", "Hardware / Eletrônica"),
+        ("Estágio em Tecnologias Embarcadas", "Hardware / Eletrônica"),
+        ("Suporte de Aplicações Júnior", "Suporte Técnico"),
+        ("Analista de Sustentação de Sistemas Júnior", "Suporte Técnico"),
+        ("Assistente de Sustentação de Sistemas", "Suporte Técnico"),
+        ("Estagiário(a) de Sustentação de Sistemas Corporativos", "Suporte Técnico"),
+        ("Analista de Sustentação de Aplicações Júnior", "Suporte Técnico"),
+        ("Analista de Integração de Sistemas Júnior", "Engenharia de Software"),
+    ],
+)
+def test_funcoes_aprovadas_na_issue_23_passam_sem_descricao(clf, title, expected):
+    accepted = clf.is_tech(title)
+    result = clf.classify(title)
+
+    assert accepted is True
+    assert result.area == expected
+    assert result.title_strong is True
+    assert result.title_score > clf.min_score
+
+
+@pytest.mark.parametrize("phrase", ["sustentação de sistemas", "sustentação de aplicações"])
+def test_sustentacao_so_na_descricao_nao_cria_sinal_de_suporte(clf, phrase):
+    title = "Desenvolvedor Backend Júnior"
+    description = f"Desenvolver serviços em Java e Spring Boot. Participar da {phrase}."
+
+    scores = {score.area: score for score in clf.score_all(title, description)}
+    result = clf.classify(title, description)
+
+    assert result.area == "Backend"
+    assert "Suporte Técnico" not in scores
+
+
+def test_backend_no_titulo_vence_sustentacao_generica(clf):
+    result = clf.classify("Desenvolvedor Backend Júnior - Sustentação de Sistemas")
+
+    assert result.area == "Backend"
+
+
+@pytest.mark.parametrize(
+    "title", ["Analista de Sustentação Ambiental Júnior", "Analista de Sustentação Operacional Júnior"]
+)
+def test_sustentacao_sem_sistemas_ou_aplicacoes_nao_implica_ti(clf, title):
+    accepted = clf.is_tech(title)
+    result = clf.classify(title)
+
+    assert accepted is False
+    assert result.area == clf.fallback_area
+
+
 def test_titulo_vale_mais_que_descricao(clf):
     result = clf.classify(
         "Desenvolvedor Front-End Júnior",
