@@ -72,6 +72,10 @@ class AreaClassifier:
                 self.gate_context_exclude.append((title_patterns, body_patterns))
 
         self.strong_weight: float = self.tiers.get("peso_alto", 4.0)
+        self._support_title_patterns = [
+            (_compile_keyword(keyword), keyword)
+            for keyword in sorted(self._SUPORTE_TITULO_SUSTENTACAO, key=len, reverse=True)
+        ]
 
         self.areas: dict[str, list[tuple[re.Pattern, float, str]]] = {}
         for area, tiers in (rules.get("areas") or {}).items():
@@ -151,6 +155,16 @@ class AreaClassifier:
                     usados_corpo.append(no_corpo)
                     total += weight
                     matches.append(raw_kw)
+            if area == "Suporte Técnico":
+                for pattern, raw_kw in self._support_title_patterns:
+                    no_titulo = self._primeiro_livre(pattern, title_text, usados_titulo)
+                    if no_titulo is not None:
+                        usados_titulo.append(no_titulo)
+                        total += self.strong_weight * self.title_boost
+                        title_total += self.strong_weight * self.title_boost
+                        matches.append(f"{raw_kw}(t)")
+                        title_strong = True
+
             if total > 0:
                 results.append(
                     AreaScore(
@@ -196,6 +210,8 @@ class AreaClassifier:
             return False
         if any(p.search(title_text) for p in self.gate_title):
             return True
+        if any(pattern.search(title_text) for pattern, _ in self._support_title_patterns):
+            return True
         if any(p.search(title_text) for p in self._strong_patterns()):
             return True
 
@@ -226,7 +242,6 @@ class AreaClassifier:
     # derrubavam vaga de dev cuja descricao cita sustentacao de passagem.
     _SUPORTE_TITULO_SUSTENTACAO = (
         "sustentacao de sistemas",
-        "analista de sustentacao",
         "sustentacao de aplicacoes",
     )
 
@@ -308,7 +323,7 @@ class AreaClassifier:
         titulo_norm = normalize(title)
 
         caminho_generico = bool(titulo_eng) and titulo_eng <= self._SUPORTE_TITULOS_GENERICOS
-        caminho_sustentacao = any(
+        caminho_sustentacao = "analista de sustentacao" in titulo_norm or any(
             sinal in titulo_norm for sinal in self._SUPORTE_TITULO_SUSTENTACAO
         )
         if not caminho_generico and not caminho_sustentacao:
