@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tech-skills-br"
-version = "0.1.0"
+version = "2026.10.27"
 description = "Mapeamento de habilidades em anuncios de vagas de tecnologia no Brasil"
 requires-python = ">=3.12"
 dynamic = ["dependencies"]

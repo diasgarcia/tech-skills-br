@@ -3,6 +3,8 @@ message: >-
   Se você usa este software ou os dados gerados por ele, cite conforme
   abaixo.
 title: tech-skills-br - Mapeamento de Skills em Tecnologia no Brasil
+version: "2026.10.27"
+date-released: "2026-10-27"
 abstract: >-
   Software de coleta e organização de anúncios de vagas de nível de entrada
   no mercado de tecnologia brasileiro: júnior, estágio, trainee e aprendiz.
@@ -22,4 +24,5 @@ keywords:
 license: MIT
 type: software
 repository-code: https://github.com/diasgarcia/tech-skills-br
+repository-artifact: https://github.com/diasgarcia/tech-skills-br/releases/tag/v2026.10.27
 url: https://diasgarcia.github.io/tech-skills-br/
