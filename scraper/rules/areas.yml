@@ -287,6 +287,21 @@ tech_gate:
   # Alguns titulos tambem nomeiam funcoes validas de TI. Nesses casos, a vaga
   # so e bloqueada quando a descricao confirma o contexto fora do recorte.
   excluir_contextos:
+    # Recuperacao da Jobbol: apoio administrativo e engenharia industrial
+    # nao viram TI por citar a area de TI, suporte tecnico ou um curso.
+    - titulo:
+        - estagiario na area de administracao
+      descricao:
+        - controlar estoques de materiais equipamentos epis e uniformes
+        - entregas transportes e solicitacoes de plotagem
+    - titulo:
+        - estagiario na area de engenharia mecanica
+      descricao:
+        - suporte tecnico a produtos lubrificantes e equipamentos
+    - titulo:
+        - estagiario na area de engenharia eletrica
+      descricao:
+        - desenvolvimento de chicotes diagramas e modelamento 3d e 2d
     # Não excluir "suporte administrativo" por título: há vagas válidas de
     # help desk, infraestrutura e gestão de acessos com esse nome.
     - titulo:

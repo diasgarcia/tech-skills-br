@@ -373,6 +373,55 @@ def test_tech_gate_preserva_funcoes_tech_com_titulos_ambiguos(clf, title, descri
     "title,description",
     [
         (
+            "Estagiário na área de Administração",
+            "Controlar estoques de materiais, equipamentos, EPIs e uniformes. "
+            "Apoiar demandas administrativas relacionadas à área de Tecnologia da Informação.",
+        ),
+        (
+            "Estagiário na área de Engenharia Mecânica",
+            "Auxiliar no suporte técnico a produtos, lubrificantes e equipamentos. "
+            "Organizar pipelines de projetos e usar o Pacote Office.",
+        ),
+        (
+            "Estagiário na área de Engenharia Elétrica",
+            "Desenvolvimento de chicotes, diagramas e modelamento 3D e 2D. "
+            "Cursando Engenharia Eletrônica e conhecimento em AutoCAD.",
+        ),
+    ],
+)
+def test_tech_gate_exclui_contextos_nao_tech_da_recuperacao_jobbol(clf, title, description):
+    result = clf.is_tech(title, description)
+
+    assert result is False
+
+
+@pytest.mark.parametrize(
+    "title,description",
+    [
+        (
+            "Estagiário na área de Administração",
+            "Configurar redes de computadores, instalar sistemas operacionais e automatizar rotinas em Python.",
+        ),
+        (
+            "Estagiário na área de Engenharia Mecânica",
+            "Desenvolver firmware para sistemas embarcados e programar microcontroladores.",
+        ),
+        (
+            "Estagiário na área de Engenharia Elétrica",
+            "Desenvolver firmware para microcontroladores e projetar hardware embarcado.",
+        ),
+    ],
+)
+def test_tech_gate_preserva_ti_e_embarcados_nos_mesmos_cursos(clf, title, description):
+    result = clf.is_tech(title, description)
+
+    assert result is True
+
+
+@pytest.mark.parametrize(
+    "title,description",
+    [
+        (
             "Analista de Expansão de Redes Jr",
             "Prospecção e expansão comercial da carteira de clientes.",
         ),
