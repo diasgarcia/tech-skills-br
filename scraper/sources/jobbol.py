@@ -10,7 +10,9 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 from datetime import datetime, timedelta, timezone
+from urllib.parse import urlsplit
 
 from bs4 import BeautifulSoup
 
@@ -63,6 +65,25 @@ def _descricao(raw: str) -> str:
         for node in section:
             benefits.insert_before(node.extract())
     return soup.get_text(" ", strip=True)
+
+
+def _mesma_vaga(posting: dict, response, job_id: str, title: str) -> bool:
+    identifier = posting.get("identifier") or {}
+    if not isinstance(identifier, dict) or str(identifier.get("value", job_id)) == job_id:
+        return True
+
+    # O ID antigo redireciona para /vaga/{novo_id}-{slug}, cujo JSON-LD usa v{novo_id}.
+    final = urlsplit(getattr(response, "url", "") or "")
+    match = re.fullmatch(r"/vaga/([0-9]+)-[^/]+/?", final.path)
+    if final.scheme != "https" or final.netloc != urlsplit(SITE_URL).netloc or match is None:
+        return False
+    if str(identifier.get("value")) != f"v{match.group(1)}":
+        return False
+    posting_title = posting.get("title")
+    if not isinstance(posting_title, str) or normalize(posting_title) != normalize(title):
+        return False
+    history = getattr(response, "history", None) or []
+    return bool(history) and getattr(history[0], "url", "") == f"{SITE_URL}/vaga/{job_id}"
 
 
 class JobbolSource(JobSource):
@@ -153,9 +174,11 @@ class JobbolSource(JobSource):
         if posting is None or not isinstance(posting.get("description"), str) or not posting["description"].strip():
             self._erro(f"{job_id}: detalhe indisponivel ou sem descricao JobPosting")
             return None
-        identifier = posting.get("identifier") or {}
-        if isinstance(identifier, dict) and str(identifier.get("value", job_id)) != job_id:
-            self._erro(f"{job_id}: detalhe retornou outro ID")
+        if not _mesma_vaga(posting, response, job_id, raw["CARGO"]):
+            self._erro(
+                f"{job_id}: identidade divergente no detalhe "
+                f"(identifier={posting.get('identifier')!r}; url={getattr(response, 'url', url)!r})"
+            )
             return None
         org = posting.get("hiringOrganization") or {}
         company = org.get("name", "") if isinstance(org, dict) else ""
