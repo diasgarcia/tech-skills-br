@@ -11,7 +11,8 @@ dynamic = ["dependencies"]
 
 [project.optional-dependencies]
 export = ["pandas==3.0.3", "pyarrow==24.0.0"]
-publish = ["kagglehub==1.0.2", "kaggle==2.2.4"]
+# O CLI do Kaggle importa six, mas nao o declara entre suas dependencias.
+publish = ["kagglehub==1.0.2", "kaggle==2.2.4", "six==1.17.0"]
 dev = ["pytest==9.1.1", "pytest-cov==7.1.0", "ruff==0.15.17", "Jinja2==3.1.6"]
 
 [project.scripts]
