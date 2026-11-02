@@ -448,6 +448,37 @@ def test_importacao_descarta_suporte_administrativo_comercial(tmp_path):
     assert resultado["total"] == 0
 
 
+@pytest.mark.parametrize(
+    "title,description",
+    [
+        (
+            "Estagiário na área de Administração",
+            "Controlar estoques de materiais, equipamentos, EPIs e uniformes. Apoio à Tecnologia da Informação.",
+        ),
+        (
+            "Estagiário na área de Engenharia Mecânica",
+            "Suporte técnico a produtos, lubrificantes e equipamentos.",
+        ),
+        (
+            "Estagiário na área de Engenharia Elétrica",
+            "Desenvolvimento de chicotes, diagramas e modelamento 3D e 2D. Curso de Engenharia Eletrônica.",
+        ),
+    ],
+)
+def test_importacao_recusa_contextos_nao_tech_recuperados_da_jobbol(tmp_path, title, description):
+    db_path = tmp_path / "t.db"
+    csv_path = _escrever_csv(tmp_path, [_linha(
+        source="jobbol", external_id="123", title=title, description=description,
+        skills="Excel, Pacote Office",
+    )])
+
+    resultado = importar(csv_path, db_path)
+
+    assert resultado["criadas"] == 0
+    assert resultado["nao_tech"] == 1
+    assert resultado["total"] == 0
+
+
 def test_mesma_external_id_em_fontes_diferentes_sao_vagas_distintas(tmp_path):
     csv_path = _escrever_csv(
         tmp_path, [_linha(source="gupy"), _linha(source="vagas")]

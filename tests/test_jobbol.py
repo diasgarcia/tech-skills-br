@@ -59,6 +59,16 @@ def detail(job_id="123", **changes):
     return SimpleNamespace(text=f'<script type="application/ld+json">{json.dumps(posting)}</script>')
 
 
+def redirected_detail(
+    job_id="123", page_id="145231", title="Desenvolvedor Júnior", *,
+    final_url=None, history=None, **changes,
+):
+    response = detail(identifier={"@type": "PropertyValue", "value": f"v{page_id}"}, title=title, **changes)
+    response.url = final_url or f"{jobbol.SITE_URL}/vaga/{page_id}-desenvolvedor-junior?cidade=4006"
+    response.history = [SimpleNamespace(url=f"{jobbol.SITE_URL}/vaga/{job_id}")] if history is None else history
+    return response
+
+
 def source(session, **settings):
     return JobbolSource(session, Settings(sources=["jobbol"], **settings))
 
@@ -243,3 +253,61 @@ def test_jsonld_aceita_array_e_graph(shape):
     jobs = collector.fetch_term("junior")
 
     assert jobs[0].description == "Requisitos: SQL."
+
+
+@pytest.mark.parametrize(
+    "title", ["Desenvolvedor Júnior", "DESENVOLVEDOR JUNIOR", "Desenvolvedor  Júnior"]
+)
+def test_redirect_migrado_preserva_identidade_da_listagem_e_skills(title):
+    session = FakeSession({"vagas": [row()], "total": 1}, redirected_detail(title=title))
+    collector = source(session)
+
+    jobs = collector.fetch_term("junior")
+
+    assert len(jobs) == 1
+    assert jobs[0].external_id == "123"
+    assert jobs[0].url == f"{jobbol.SITE_URL}/vaga/123"
+    assert jobs[0].title == "Desenvolvedor Júnior"
+    assert set(default_extractor().extract(jobs[0].description)) == {"SQL", "Python", "Docker"}
+    assert collector.stats.errors == []
+    assert session.request_count == 2
+
+
+@pytest.mark.parametrize(
+    "response",
+    [
+        redirected_detail(page_id="999", final_url=f"{jobbol.SITE_URL}/vaga/145231-desenvolvedor-junior"),
+        redirected_detail(final_url="https://outro.example/vaga/145231-desenvolvedor-junior"),
+        redirected_detail(final_url="https://candidatos.jobbol.com.br.evil.example/vaga/145231-dev"),
+        redirected_detail(final_url="http://candidatos.jobbol.com.br/vaga/145231-dev"),
+        redirected_detail(final_url=f"{jobbol.SITE_URL}/outra/145231-dev"),
+        redirected_detail(final_url=f"{jobbol.SITE_URL}/vaga/145231"),
+        redirected_detail(page_id="145abc"),
+        redirected_detail(title="Analista de Suporte Júnior"),
+        redirected_detail(title=""),
+        redirected_detail(title=None),
+        redirected_detail(history=[]),
+        redirected_detail(history=[SimpleNamespace(url=f"{jobbol.SITE_URL}/vaga/999")]),
+    ],
+)
+def test_redirect_migrado_rejeita_detalhe_sem_vinculo_com_a_vaga(response):
+    collector = source(FakeSession({"vagas": [row()], "total": 1}, response))
+
+    jobs = collector.fetch_term("junior")
+
+    assert jobs == []
+    assert collector.stats.errors
+    assert response.url in collector.stats.errors[0]
+
+
+def test_redirect_migrado_reutiliza_detalhe_entre_buscas():
+    session = FakeSession(
+        {"vagas": [row()], "total": 1}, redirected_detail(), {"vagas": [row()], "total": 1}
+    )
+    collector = source(session)
+
+    jobs = collector.fetch(["junior", "desenvolvedor"])
+
+    assert [job.external_id for job in jobs] == ["123", "123"]
+    assert session.request_count == 3
+    assert collector.stats.errors == []
