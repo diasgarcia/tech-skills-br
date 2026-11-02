@@ -420,6 +420,26 @@ Depois da autorização para publicar, preservei outro backup e apliquei somente
 
 ---
 
+### 02/11/2026
+
+Corrigi a validação dos detalhes da Jobbol após a migração das páginas. A listagem mantém o ID antigo, mas o detalhe redireciona para outra URL e usa um novo ID no JSON-LD. O coletor agora valida esse vínculo pelo domínio, HTTPS, ID da URL final, título equivalente e histórico do redirecionamento. O ID salvo continua sendo o da listagem, para preservar a identidade dos anúncios existentes. Detalhes divergentes continuam bloqueados; o diagnóstico informa o ID e a URL recebidos.
+
+Adicionei testes simulados para os formatos antigo e migrado, IDs divergentes, domínio externo, título incorreto, ausência de redirecionamento e reutilização do detalhe entre buscas. Os testes também conferem a preservação da descrição e das habilidades. Não executei coleta nem fiz chamadas reais à Jobbol nesta implementação.
+
+Os 1.329 testes passaram e o lint não apontou problemas. Validei o comando de recuperação no parser da aplicação e o cálculo de dias em PowerShell, sem executar o coletor. Esses testes verificam a lógica com respostas simuladas; a coleta de recuperação fará a conferência real do portal.
+
+Atualizei a arquitetura e a cópia local da página de arquitetura da wiki. Preparei o comando de recuperação desde 30/10/2026, com janela arredondada para cobrir o dia inteiro. O comando consulta apenas anúncios ainda disponíveis e grava a saída em uma pasta separada, sem importar no banco nem publicar. Nesta etapa inicial, não alterei o banco nem publiquei os ajustes.
+
+O responsável executou a recuperação da Jobbol. A coleta retornou 186 registros, 153 após deduplicação e 12 após o filtro de TI. Houve um detalhe indisponível com HTTP 404; o resultado foi registrado como parcial. Revisei as descrições e acrescentei três exclusões por título e contexto: apoio administrativo com EPIs e plotagens, suporte a lubrificantes e desenho de chicotes. Preservei atividades técnicas nos mesmos cursos e adicionei testes de classificação e importação.
+
+Para a consolidação, mantive o recorte solicitado a partir de 30/10. Separei quatro anúncios de 29/10 que vieram na margem da janela, três fora de TI e uma republicação da Abler, conforme o filtro existente de fontes próprias. Restaram quatro anúncios: três já presentes na release verificada com 10.525 vagas e um novo. Identifiquei também na base a vaga de Engenharia Mecânica fora do recorte. Preparei uma branch separada para revisão por PR, sem iniciar outra coleta.
+
+Importei os quatro anúncios revisados numa cópia da release: uma inclusão e três atualizações. Removi a vaga de Engenharia Mecânica já confirmada como fora do recorte e seus três vínculos de habilidades. A base permaneceu com 10.525 vagas. Preservei a release anterior como backup e confirmei que os registros não relacionados, o vocabulário e o histórico de coletas completas não mudaram. Publiquei e verifiquei o novo snapshot da release, sincronizei a base local e atualizei o relatório, os dados e os gráficos do site. O CSV original foi preservado.
+
+Os 1.338 testes passaram e o lint não apontou problemas. O primeiro envio ao Kaggle falhou porque o cliente não encontrou a dependência six numa instalação limpa. Declarei essa dependência no grupo publish, em commit separado. Testei uma instalação Python 3.12 apenas com export e publish: pip check e a ajuda do CLI passaram. Acionei novamente a réplica pelo workflow da branch de recuperação. As alterações foram separadas em commits na branch codex/jobbol-recovery-20261030; não fiz merge na main. A atualização da wiki está preparada localmente para acompanhar a correção após o merge.
+
+---
+
 ### Pontos a avaliar
 
 - Definir uma validação quantitativa com uma amostra e revisão humana independente.

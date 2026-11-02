@@ -43,6 +43,19 @@ fora dessa ordem; uma vaga antiga não encerra a paginação. As quatro buscas
 padrão cobrem TI, estágio, trainee e aprendiz. Requisitos técnicos da seção
 Observações são preservados antes dos benefícios.
 
+O identificador persistido da Jobbol continua sendo o `jobkey` da listagem.
+Na migração das páginas, o detalhe pode redirecionar para `/vaga/{novo_id}-{slug}`
+e declarar `v{novo_id}` no JSON-LD. Esse formato exige HTTPS no domínio da
+Jobbol, ID compatível com a URL final, título equivalente ao da listagem e
+histórico de redirecionamento iniciado no endereço solicitado. Divergências
+são registradas com o identificador e a URL recebidos, sem aceitar o detalhe.
+
+O filtro de relevância combina título e descrição nos casos ambíguos de
+Administração e Engenharia. Apoio administrativo com EPIs e plotagens,
+suporte a lubrificantes e desenho de chicotes não entram por mencionar TI,
+suporte técnico ou um curso de Eletrônica. Atividades de software, redes e
+firmware nos mesmos cursos continuam sujeitas às regras técnicas existentes.
+
 A lista `anunciantes_intermediarios`, em `coletores.yml`, vale para todas as
 fontes. Ela compara nomes inteiros, sem distinguir caixa ou acentos. O fluxo
 comum aplica o filtro antes do enriquecimento e da exportação. Uma menção ou
