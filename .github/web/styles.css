@@ -163,6 +163,8 @@
       border-color: var(--accent);
     }
 
+    #vagas-more { margin: 10px; }
+
     .grid-kpi {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

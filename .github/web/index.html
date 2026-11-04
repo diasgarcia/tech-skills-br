@@ -152,13 +152,15 @@
       </div>
 
 
-      <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;" id="vagas-count-info"></p>
+      <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;" id="vagas-count-info" role="status"></p>
+      <button class="nav-btn" id="vagas-retry" onclick="loadVagasData()" hidden>Tentar novamente</button>
 
-      <div class="scroll-table">
+      <div class="scroll-table" id="vagas-scroll">
         <table id="table-vagas">
           <thead><tr><th>Título da Vaga</th><th class="hide-mobile">Empresa</th><th class="hide-mobile" style="text-align: center;">Área</th><th>Local / Mod.</th><th class="job-link-col">Link</th></tr></thead>
           <tbody></tbody>
         </table>
+        <button class="nav-btn" id="vagas-more" onclick="appendVagasRows()" hidden>Mostrar mais vagas</button>
       </div>
 
 
@@ -194,8 +196,13 @@
           </tr>
           <tr>
             <td><code>GET /api/vagas.json</code></td>
-            <td class="hide-mobile">Base completa e estruturada com todas as vagas ativas catalogadas</td>
+            <td class="hide-mobile">Base completa com todos os anúncios catalogados</td>
             <td style="text-align: center;"><a href="api/vagas.json" target="_blank" rel="noopener noreferrer" title="Abrir JSON" style="font-size: 14px; text-decoration: none;">↗</a></td>
+          </tr>
+          <tr>
+            <td><code>GET /api/vagas-recentes.json</code></td>
+            <td class="hide-mobile">Anúncios publicados nos últimos 30 dias, no momento da geração</td>
+            <td style="text-align: center;"><a href="api/vagas-recentes.json" target="_blank" rel="noopener noreferrer" title="Abrir JSON" style="font-size: 14px; text-decoration: none;">↗</a></td>
           </tr>
         </tbody>
       </table>

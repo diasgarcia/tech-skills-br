@@ -1,7 +1,11 @@
 let resumoData = null;
 let tecnologiasData = [];
 let areasData = [];
-let vagasData = [];
+let vagasData = null;
+let vagasLoading = false;
+let vagasFiltradas = [];
+let vagasRendered = 0;
+const VAGAS_BATCH_SIZE = 50;
 let currentArea = null;
 let dataLoading = false;
 
@@ -21,21 +25,19 @@ async function loadData() {
   message.textContent = "Carregando dados...";
   retry.hidden = true;
   try {
-    const [resResumo, resTech, resAreas, resVagas] = await Promise.all([
+    const [resResumo, resTech, resAreas] = await Promise.all([
       fetchJson("api/resumo.json"),
       fetchJson("api/tecnologias.json"),
-      fetchJson("api/areas.json"),
-      fetchJson("api/vagas.json")
+      fetchJson("api/areas.json")
     ]);
     if (!resResumo || typeof resResumo !== "object" || Array.isArray(resResumo) ||
-        ![resTech, resAreas, resVagas].every(Array.isArray)) {
+        ![resTech, resAreas].every(Array.isArray)) {
       throw new Error("Formato inválido nos dados da API estática");
     }
 
     resumoData = resResumo;
     tecnologiasData = resTech;
     areasData = resAreas;
-    vagasData = resVagas;
     currentArea = areasData.length ? areasData[0].area : null;
 
     initKPIs();
@@ -43,7 +45,6 @@ async function loadData() {
     renderSummaryTables();
     renderSkillsTable();
     initAreaPills();
-    renderVagasTable();
     status.hidden = true;
     ajustaAlturaScrollTables();
   } catch (err) {
@@ -52,6 +53,31 @@ async function loadData() {
     retry.hidden = false;
   } finally {
     dataLoading = false;
+  }
+}
+
+async function loadVagasData() {
+  if (vagasData !== null || vagasLoading) return;
+  vagasLoading = true;
+  const message = document.getElementById("vagas-count-info");
+  const retry = document.getElementById("vagas-retry");
+  const table = document.getElementById("table-vagas");
+  message.textContent = "Carregando vagas recentes...";
+  retry.hidden = true;
+  table.setAttribute("aria-busy", "true");
+  try {
+    const data = await fetchJson("api/vagas-recentes.json");
+    if (!Array.isArray(data)) throw new Error("Formato inválido nas vagas recentes");
+    vagasData = data;
+    renderVagasTable();
+  } catch (err) {
+    console.error("Erro ao carregar vagas recentes:", err);
+    message.textContent = "Não foi possível carregar as vagas. Tente novamente.";
+    retry.hidden = false;
+  } finally {
+    vagasLoading = false;
+    table.setAttribute("aria-busy", "false");
+    ajustaAlturaScrollTables();
   }
 }
 
@@ -142,6 +168,7 @@ function setTab(tabId) {
   }
 
   ajustaAlturaScrollTables();
+  if (tabId === "vagas") loadVagasData();
   window.siteAnalytics?.selectTab(tabId);
 }
 
@@ -293,21 +320,6 @@ function renderAreaDetail() {
   });
 }
 
-function parsePtBrDate(str) {
-  if (!str) return null;
-  const parts = str.split("/");
-  if (parts.length !== 3) return null;
-  return new Date(parseInt(parts[2], 10), parseInt(parts[1], 10) - 1, parseInt(parts[0], 10));
-}
-
-function getDaysAgo(dateStr) {
-  const d = parsePtBrDate(dateStr);
-  if (!d) return 999;
-  const now = new Date();
-  const diffTime = now - d;
-  return Math.max(0, Math.floor(diffTime / (1000 * 60 * 60 * 24)));
-}
-
 function normalizeSearchText(value) {
   return String(value || "")
     .normalize("NFD")
@@ -336,14 +348,14 @@ function matchWithBoundaryPrefix(haystack, needle) {
 }
 
 function renderVagasTable() {
+  if (vagasData === null) return;
   closeJobDetails();
   const rawQuery = normalizeSearchText(document.getElementById("search-vagas").value).trim();
   const modFilter = (document.getElementById("filter-modalidade").value || "").trim();
   const tbody = document.querySelector("#table-vagas tbody");
   tbody.replaceChildren();
 
-  // Exibe apenas vagas recentes publicadas nos últimos 30 dias
-  let items = (vagasData || []).filter(v => getDaysAgo(v.data_publicacao) <= 30);
+  let items = vagasData;
 
   if (modFilter) {
     items = items.filter(v => v.modalidade === modFilter);
@@ -373,9 +385,16 @@ function renderVagasTable() {
   }
 
   document.getElementById("vagas-count-info").textContent = `Exibindo ${items.length} vagas recentes encontradas`;
+  vagasFiltradas = items;
+  vagasRendered = 0;
+  document.getElementById("vagas-scroll").scrollTop = 0;
+  appendVagasRows();
+}
 
-
-  items.forEach(v => {
+function appendVagasRows() {
+  const tbody = document.querySelector("#table-vagas tbody");
+  const batch = vagasFiltradas.slice(vagasRendered, vagasRendered + VAGAS_BATCH_SIZE);
+  batch.forEach(v => {
     const tr = document.createElement("tr");
     const title = cell(tr, "");
     const trigger = element("button", v.titulo, "job-title");
@@ -414,6 +433,14 @@ function renderVagasTable() {
     cell(tr, directLink || "-", "job-link-col");
     tbody.appendChild(tr);
   });
+  vagasRendered += batch.length;
+  document.getElementById("vagas-more").hidden = vagasRendered >= vagasFiltradas.length;
+}
+
+function onVagasScroll() {
+  if (!jobDetailsModal) closeJobDetails();
+  const scroll = document.getElementById("vagas-scroll");
+  if (scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight <= 200) appendVagasRows();
 }
 
 let jobDetailsTrigger = null;
@@ -517,9 +544,7 @@ document.addEventListener("DOMContentLoaded", () => {
           event.clientY < bounds.top || event.clientY > bounds.bottom) closeJobDetails();
     }
   };
-  document.querySelector("#table-vagas").closest(".scroll-table").addEventListener("scroll", () => {
-    if (!jobDetailsModal) closeJobDetails();
-  });
+  document.getElementById("vagas-scroll").addEventListener("scroll", onVagasScroll);
 });
 document.addEventListener("keydown", event => { if (event.key === "Escape") closeJobDetails(); });
 window.addEventListener("resize", closeJobDetails);
