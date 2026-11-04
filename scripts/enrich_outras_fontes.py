@@ -52,6 +52,8 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from api.database import connect_sqlite, resolve_sqlite_path  # noqa: E402
+from scraper.classifier import default_classifier  # noqa: E402
+from scraper.seniority import default_filter  # noqa: E402
 from api.enrichment_state import EnrichmentStatus, record_attempt  # noqa: E402
 from api.migrations import migrate_connection  # noqa: E402
 from scraper.config import RULES_DIR, USER_AGENT  # noqa: E402
@@ -387,13 +389,13 @@ def _enriquecer(
                     continue
                 with c.connection:
                     outcome = _save_other_detail(c, vid, title, desc, company, pub, extractor, tech_map)
-                    if outcome != "removed":
+                    if outcome == "enriched":
                         record_attempt(c.connection, vid, EnrichmentStatus.SUCCEEDED)
-                if outcome == "removed":
+                if outcome != "enriched":
                     summary.removed += 1
                     logger.info(
-                        "%s: vaga %s removida por data anterior ao corte | "
-                        "data=%s | titulo=%r | url=%s", fonte, vid, pub, title, alvo,
+                        "%s: vaga %s removida | motivo=%s | data=%s | titulo=%r | url=%s",
+                        fonte, vid, outcome, pub, title, alvo,
                     )
                 else:
                     summary.enriched += 1
@@ -419,13 +421,20 @@ def _save_other_detail(c, vid, title, desc, company, pub, extractor, tech_map):
         pub_iso = date.fromisoformat(pub[:10]) if pub else None
     except ValueError:
         pub_iso = None
-    if pub_iso is not None and pub_iso < MIN_DATA_CORTE:
-        c.execute("DELETE FROM vaga_tecnologia WHERE vaga_id = ?", (vid,))
-        c.execute("DELETE FROM vagas WHERE id = ?", (vid,))
-        return "removed"
-
     descricao_atual = c.execute("SELECT description FROM vagas WHERE id = ?", (vid,)).fetchone()[0] or ""
     descricao_final = consolidate_description(descricao_atual, desc, detail=True).text
+    reason = None
+    if pub_iso is not None and pub_iso < MIN_DATA_CORTE:
+        reason = "data_anterior_ao_corte"
+    elif default_classifier().is_excluded(title, descricao_final):
+        reason = "fora_de_ti"
+    elif default_filter().blocks_entry(title, descricao_final):
+        reason = "fora_da_senioridade"
+    if reason:
+        c.execute("DELETE FROM vaga_tecnologia WHERE vaga_id = ?", (vid,))
+        c.execute("DELETE FROM vagas WHERE id = ?", (vid,))
+        return reason
+
     if descricao_final != descricao_atual:
         c.execute("UPDATE vagas SET description = ? WHERE id = ?", (descricao_final, vid))
     if company:

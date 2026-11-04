@@ -229,6 +229,25 @@ def test_outras_fontes_remove_relacoes_junto_da_vaga_antiga(database_factory):
     assert violations == []
 
 
+def test_outras_fontes_remove_vaga_quando_detalhe_confirma_contexto_fora_de_ti(database_factory):
+    path = database_factory(source="gupy", count=1)
+    title = "Técnico de Campo Jr"
+    with closing(connect_sqlite(path)) as conn, conn:
+        conn.execute("UPDATE vagas SET title = ?", (title,))
+        conn.execute("INSERT INTO vaga_tecnologia VALUES (1, 1)")
+
+    with closing(connect_sqlite(path)) as conn, conn:
+        outcome = outras._save_other_detail(
+            conn.cursor(), 1, title, "Executar manutenção de empilhadeiras a combustão.",
+            None, None, _extractor(), {"python": 1},
+        )
+        jobs = conn.execute("SELECT id FROM vagas").fetchall()
+        links = conn.execute("SELECT vaga_id FROM vaga_tecnologia").fetchall()
+
+    assert outcome == "fora_de_ti"
+    assert jobs == links == []
+
+
 def test_linkedin_429_distingue_nao_tentadas_de_http_real(database_factory, monkeypatch):
     path = database_factory(count=5)
     session = FakeSession(status=429)

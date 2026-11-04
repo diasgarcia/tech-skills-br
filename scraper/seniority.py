@@ -14,6 +14,7 @@ from .models import Job
 
 _WS_RE = re.compile(r"\s+")
 _KEEP_RE = re.compile(r"[^a-z0-9. ]+")
+_PLI_RE = re.compile(r"\bpl\s*/\s*i\b", re.IGNORECASE)
 
 
 def _normalize_seniority(text: str | None) -> str:
@@ -27,6 +28,8 @@ def _normalize_seniority(text: str | None) -> str:
         return ""
     text = unicodedata.normalize("NFKD", text)
     text = "".join(c for c in text if not unicodedata.combining(c))
+    # PL/I é uma linguagem de mainframe, não a senioridade PL nem o nível I.
+    text = _PLI_RE.sub("pli", text)
     text = _KEEP_RE.sub(" ", text.lower())
     return _WS_RE.sub(" ", text).strip()
 
@@ -51,6 +54,9 @@ class SeniorityFilter:
         self.exclude: list[re.Pattern] = [
             re.compile(p) for p in (rules.get("exclude") or [])
         ]
+        self.explicit_above = [re.compile(p) for p in rules.get("acima_explicito", [])]
+        self.description_above = [re.compile(p) for p in rules.get("descricao_acima", [])]
+        self.inferred_junior = [re.compile(p) for p in rules.get("inferir_junior", [])]
 
     @classmethod
     def from_file(cls, path: Path | None = None, strict: bool = False) -> "SeniorityFilter":
@@ -61,7 +67,25 @@ class SeniorityFilter:
     def has_senior_signal(self, title: str) -> bool:
         """Titulo cita explicitamente um nivel acima de junior."""
         text = _normalize_seniority(title)
-        return any(p.search(text) for p in self.exclude)
+        return any(p.search(text) for p in (*self.explicit_above, *self.exclude))
+
+    def _explicit_entry(self, text: str) -> str | None:
+        for label, patterns in self.include.items():
+            if any(p.search(text) for p in patterns):
+                return label
+        return None
+
+    def explicit_entry_label(self, title: str) -> str | None:
+        """Devolve apenas o nível declarado no título."""
+        return self._explicit_entry(_normalize_seniority(title))
+
+    def blocks_entry(self, title: str, description: str = "") -> bool:
+        """Reconhece nível acima do recorte mesmo com N1 ou filtro do portal."""
+        text = _normalize_seniority(title)
+        if any(p.search(text) for p in self.explicit_above) and not self._explicit_entry(text):
+            return True
+        body = _normalize_seniority(description)
+        return any(p.search(body) for p in self.description_above)
 
     def label(self, title: str) -> str | None:
         """Devolve o rotulo de senioridade ("Júnior", "Estágio", ...) ou None."""
@@ -69,12 +93,14 @@ class SeniorityFilter:
         if not text:
             return None
 
-        for label, patterns in self.include.items():
-            if any(p.search(text) for p in patterns):
-                if self.strict and self.has_senior_signal(title):
-                    return None
-                return label
-        return None
+        if self.strict and self.has_senior_signal(title):
+            return None
+        explicit = self._explicit_entry(text)
+        if explicit is not None:
+            return explicit
+        if any(p.search(text) for p in self.explicit_above):
+            return None
+        return "Júnior" if any(p.search(text) for p in self.inferred_junior) else None
 
     def is_entry_level(self, title: str) -> bool:
         return self.label(title) is not None
@@ -102,22 +128,21 @@ def canonicalize_seniority(label: str, flt: SeniorityFilter | None = None) -> st
 def filter_entry_level(jobs: list[Job], flt: SeniorityFilter | None = None) -> list[Job]:
     """Mantem apenas vagas de entrada, preenchendo `job.seniority`.
 
-    Se a fonte ja informou o nivel, ele e respeitado e o titulo nao e
-    consultado. Portais como a Solides (filtro nativo de junior) declaram
-    a senioridade num campo proprio, que e mais confiavel do que adivinhar
-    pelo titulo -- "Programador(a) PHP" nao tem marca nenhuma de nivel,
-    mas o portal a classifica como Junior. Coletores que nao sabem o
-    nivel deixam o campo vazio e caem no regex. O rotulo da fonte passa
-    pela canonicalizacao (variantes viram a categoria unica do projeto).
+    O título explícito prevalece sobre o filtro da fonte. Na ausência dele,
+    respeita o nível informado pela fonte e, por último, infere pelo título.
     """
     flt = flt or default_filter()
     kept = []
     for job in jobs:
-        if job.seniority:
-            job.seniority = canonicalize_seniority(job.seniority, flt)
-            kept.append(job)
+        if flt.blocks_entry(job.title, job.description) or (
+            flt.strict and flt.has_senior_signal(job.title)
+        ):
             continue
-        label = flt.label(job.title)
+        label = (
+            flt.explicit_entry_label(job.title)
+            or canonicalize_seniority(job.seniority, flt)
+            or flt.label(job.title)
+        )
         if label:
             job.seniority = label
             kept.append(job)
