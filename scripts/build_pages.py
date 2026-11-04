@@ -6,7 +6,7 @@ import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
 WEB_FILES = ("index.html", "styles.css", "analytics.js", "app.js")
-API_FILES = ("resumo.json", "areas.json", "tecnologias.json", "vagas.json")
+API_FILES = ("resumo.json", "areas.json", "tecnologias.json", "vagas.json", "vagas-recentes.json")
 
 
 def build_pages(output: Path, *, web_dir: Path = ROOT / ".github/web", api_dir: Path = ROOT / "api/web") -> None:

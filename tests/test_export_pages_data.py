@@ -25,7 +25,7 @@ def test_export_all_pages_data_cria_endpoints_validos(tmp_path: Path, csv_vagas_
     resumo = conteudos["resumo"]
     vagas = conteudos["vagas"]
 
-    assert {"resumo", "areas", "tecnologias", "vagas"}.issubset(arquivos)
+    assert {"resumo", "areas", "tecnologias", "vagas", "vagas_recentes"} == set(arquivos)
     assert all(path.is_file() for path in arquivos.values())
     assert all(dados is not None for dados in conteudos.values())
     assert resumo["metadados"]["total_vagas"] > 0
@@ -139,19 +139,60 @@ def test_exportacao_vazia_substitui_arquivos_sem_dados_obsoletos(tmp_path):
     out_dir = tmp_path / "json"
     out_dir.mkdir()
     (out_dir / "vagas.json").write_text('[{"id": 123}]', encoding="utf-8")
+    (out_dir / "vagas-recentes.json").write_text('[{"id": 123}]', encoding="utf-8")
 
     files = export_all_pages_data(out_dir, db_path)
     resumo = json.loads(files["resumo"].read_text(encoding="utf-8"))
     tech = json.loads(files["tecnologias"].read_text(encoding="utf-8"))[0]
 
-    assert len(files) == 4
+    assert len(files) == 5
     assert resumo["metadados"]["total_vagas"] == 0
     assert resumo["skills_by_area"] == {}
     assert resumo["habilidade_entre_areas"] is None
     assert json.loads(files["vagas"].read_text(encoding="utf-8")) == []
+    assert json.loads(files["vagas_recentes"].read_text(encoding="utf-8")) == []
     assert json.loads(files["areas"].read_text(encoding="utf-8")) == []
     assert tech["percentual_total"] == 0
     assert tech["percentual_base_tech"] == 0
+
+
+def test_vagas_recentes_recorta_30_datas_em_brasilia_sem_alterar_base_completa(tmp_path):
+    db_path = tmp_path / "recencia.db"
+    engine = make_engine(db_path)
+    try:
+        init_db(engine)
+        with Session(engine) as db:
+            python = Tecnologia(nome="Python", grupo="linguagens")
+            db.add_all([
+                Vaga(source="teste", external_id=str(index), title=title, area="Backend",
+                     published_date=published, tecnologias=[python], url="https://example.test/vaga")
+                for index, (title, published) in enumerate([
+                    ("Sem data", None),
+                    ("Antiga", date(2026, 10, 4)),
+                    ("Primeiro dia", date(2026, 10, 5)),
+                    ("Ultimo dia", date(2026, 11, 3)),
+                    ("Futura", date(2026, 11, 4)),
+                ])
+            ])
+            db.commit()
+    finally:
+        engine.dispose()
+
+    files = export_all_pages_data(
+        tmp_path / "json", db_path,
+        generated_at=datetime(2026, 11, 4, 2, 30, tzinfo=timezone.utc),
+    )
+    recentes = json.loads(files["vagas_recentes"].read_text(encoding="utf-8"))
+    todas = json.loads(files["vagas"].read_text(encoding="utf-8"))
+    resumo = json.loads(files["resumo"].read_text(encoding="utf-8"))
+
+    assert [v["titulo"] for v in recentes] == ["Ultimo dia", "Primeiro dia"]
+    assert [v["titulo"] for v in todas] == ["Futura", "Ultimo dia", "Primeiro dia", "Antiga", "Sem data"]
+    assert recentes == [v for v in todas if v["titulo"] in ("Primeiro dia", "Ultimo dia")]
+    assert recentes[0]["tecnologias"] == ["Python"]
+    assert recentes[0]["url"] == "https://example.test/vaga"
+    assert resumo["metadados"]["total_vagas"] == 5
+    assert "/api/vagas-recentes.json" in resumo["metadados"]["endpoints_disponiveis"]
 
 
 def test_presenca_entre_areas_nao_confunde_volume_com_media(tmp_path):
