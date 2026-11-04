@@ -22,4 +22,5 @@ def test_artefato_contem_recursos_referenciados_e_preserva_graficos(tmp_path):
         assert not Path(relative).is_absolute()
         assert (output / relative).is_file()
     assert (output / "assets" / "grafico.svg").is_file()
+    assert (output / "api" / "vagas-recentes.json").is_file()
     assert set(path.name for path in (output / "api").iterdir()) == set(API_FILES)

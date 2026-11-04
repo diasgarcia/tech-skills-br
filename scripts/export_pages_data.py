@@ -3,6 +3,7 @@
 Gera os endpoints estaticos JSON que alimentam o site e funcionam como uma API publica:
   - `api/web/resumo.json`      -> Metadados gerais, KPIs e distribuicoes
   - `api/web/vagas.json`       -> Lista consolidada de todas as vagas
+  - `api/web/vagas-recentes.json` -> Anuncios publicados nos ultimos 30 dias
   - `api/web/areas.json`       -> Ranking das areas tecnicas
   - `api/web/tecnologias.json`  -> Ranking de tecnologias citadas nos anuncios
 """
@@ -13,7 +14,7 @@ import argparse
 import json
 import logging
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
@@ -50,6 +51,8 @@ def export_all_pages_data(
     if gerado_em.tzinfo is None:
         raise ValueError("generated_at deve incluir o fuso horário")
     gerado_em = gerado_em.astimezone(timezone.utc)
+    hoje = gerado_em.astimezone(timezone(timedelta(hours=-3))).date()
+    inicio_recentes = hoje - timedelta(days=29)
 
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -242,6 +245,7 @@ def export_all_pages_data(
                 "endpoints_disponiveis": [
                     "/api/resumo.json",
                     "/api/vagas.json",
+                    "/api/vagas-recentes.json",
                     "/api/areas.json",
                     "/api/tecnologias.json"
                 ]
@@ -260,9 +264,10 @@ def export_all_pages_data(
         ).scalars().all()
 
         vagas_payload = []
+        vagas_recentes_payload = []
         for v in vagas_db:
             techs = sorted(t.nome for t in v.tecnologias)
-            vagas_payload.append({
+            vaga = {
                 "id": v.id,
                 "titulo": v.title,
                 "empresa": v.company or "Confidencial",
@@ -276,13 +281,17 @@ def export_all_pages_data(
                 "fonte": v.source,
                 "url": v.url,
                 "tecnologias": techs
-            })
+            }
+            vagas_payload.append(vaga)
+            if v.published_date and inicio_recentes <= v.published_date <= hoje:
+                vagas_recentes_payload.append(vaga)
 
         files = {
             "resumo": out_dir / "resumo.json",
             "areas": out_dir / "areas.json",
             "tecnologias": out_dir / "tecnologias.json",
-            "vagas": out_dir / "vagas.json"
+            "vagas": out_dir / "vagas.json",
+            "vagas_recentes": out_dir / "vagas-recentes.json",
         }
 
         with open(files["resumo"], "w", encoding="utf-8") as f:
@@ -296,6 +305,9 @@ def export_all_pages_data(
 
         with open(files["vagas"], "w", encoding="utf-8") as f:
             json.dump(vagas_payload, f, ensure_ascii=False, indent=2)
+
+        with open(files["vagas_recentes"], "w", encoding="utf-8") as f:
+            json.dump(vagas_recentes_payload, f, ensure_ascii=False, separators=(",", ":"))
 
         logger.info(f"Endpoints da API estática exportados em: {out_dir}")
         return files
