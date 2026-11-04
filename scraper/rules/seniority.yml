@@ -15,19 +15,6 @@
 # Os valores sao expressoes regulares Python.
 
 include:
-  Júnior:
-    - \bjunior\b
-    - \bjr\b
-    - \bjunior?es\b
-    - \bnivel 1\b(?!\.\d)
-    - \bnivel i\b
-    - \bn1\b(?!\.\d)
-    - \btier 1\b
-    - \bentry level\b
-    - \biniciante\b
-    - \bassistente\b
-    - \bauxiliar\b
-    - \bi\b$          # "Desenvolvedor I"
   Estágio:
     - \bestagio\b
     - \bestagiario\b
@@ -36,18 +23,43 @@ include:
     - \binternship\b
   Trainee:
     - \btrainee\b
+    - \btrainne\b
     - \bprograma de trainee\b
   Aprendiz:
     - \baprendiz\b
     - \bjovem aprendiz\b
+  Júnior:
+    - \bjunior\b
+    - \bjr\b
+    - \bjunior?es\b
+    - \bentry level\b
+    - \bespecialista e auxiliar\b  # Anuncia as duas funções.
 
-exclude:
+inferir_junior:
+  - \bnivel 1\b(?!\.\d)
+  - \bnivel i\b
+  - \bn1\b(?!\.\d)
+  - \btier 1\b
+  - \biniciante\b
+  - \bassistente\b
+  - \bauxiliar\b
+  - \bi\b$          # "Desenvolvedor I"
+
+# Níveis declarados têm prioridade sobre N1, assistente e nível I.
+# Títulos que também declaram Júnior continuam elegíveis no modo padrão.
+acima_explicito:
   - \bsenior\b
   - \bsr\b
   - \bpleno\b
   - \bpl\b
+  - \bmid level\b
   - \bespecialista\b
   - \bexpert\b
+
+descricao_acima:
+  - \b(?:vaga|oportunidade) (?:e )?especial para profissionais pleno senior\b
+
+exclude:
   - \btech lead\b
   - \bteam lead\b
   - \blider\b

@@ -601,3 +601,30 @@ def test_score_all_ordena_por_pontuacao(clf):
     ranked = clf.score_all("Desenvolvedor Fullstack React e Node Júnior")
     assert ranked[0].score >= ranked[-1].score
     assert ranked[0].area == "Fullstack"
+
+
+@pytest.mark.parametrize(("titulo", "descricao", "esperado"), [
+    ("Técnico de Campo Jr", "Executar manutenção de empilhadeiras.", False),
+    ("Técnico de Campo Jr", "Prestar suporte técnico e configurar computadores.", True),
+    ("Assistente RH - Help Desk", "Atender solicitações de férias e benefícios.", False),
+    ("Analista de Suporte Júnior", "Realizar verificações cadastrais e documentais.", False),
+    ("Analista de Suporte Júnior", "Diagnosticar incidentes de rede e orientar usuários.", True),
+    ("Analista Telecom Júnior", "Avaliação de projetos executivos de civil, elétrica, ar condicionado.", False),
+    ("Analista Telecom Júnior", "Monitorar ativos de rede e investigar falhas de conectividade.", True),
+])
+def test_escopo_considera_a_atividade_principal(clf, titulo, descricao, esperado):
+    result = clf.is_tech(titulo, descricao)
+
+    assert result is esperado
+
+
+def test_devops_com_atividades_explicitas_de_conformidade_e_seguranca(clf):
+    title = "DevOps JR"
+    description = (
+        "Apoiar a operação dos processos de conformidade e segurança da informação. "
+        "Manter o inventário de controles PCI."
+    )
+
+    result = clf.classify(title, description)
+
+    assert result.area == "Segurança"

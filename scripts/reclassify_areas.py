@@ -2,11 +2,9 @@
 
 Dois modos, para evitar trabalho inutil:
 
-- padrao (sem --todas): reclassifica apenas as vagas que ainda podem
-  melhorar -- area vazia, invalida ou "Outros/TI Geral" -- e que tenham
-  descricao. E o que roda no fluxo diario, DEPOIS do enriquecimento:
-  vagas do LinkedIn classificadas so pelo titulo ganham a area correta
-  na mesma run, sem esperar a rodada seguinte.
+- padrao (sem --todas): reclassifica vagas com area vazia, invalida ou
+  "Outros/TI Geral" e aplica as excecoes explicitas de titulo e descricao.
+  Roda no fluxo diario depois do enriquecimento.
 
 - --todas: reclassifica TODAS as vagas com descricao, atualizando apenas
   as que mudarem (sem UPDATE desnecessario). Uso manual, quando as
@@ -41,21 +39,18 @@ def reclassificar(db_path: Path | str | None = None, todas: bool = False) -> dic
     mudadas = 0
     analisadas = 0
     with closing(connect_sqlite(db_path)) as conn, conn:
-        params = []
         query = (
-            "SELECT id, title, area, area_score, area_matches, description "
+            "SELECT id, title, area, description "
             "FROM vagas WHERE LENGTH(TRIM(COALESCE(description, ''))) > 0"
         )
-        if not todas:
-            params = sorted(validas)
-            placeholders = ",".join("?" for _ in params)
-            query += (
-                " AND (area IS NULL OR area = '' OR area = 'Outros/TI Geral'"
-                f" OR area NOT IN ({placeholders}))"
-            )
-        for vid, title, area, score, matches, desc in conn.execute(query, params).fetchall():
+        for vid, title, area, desc in conn.execute(query).fetchall():
+            if todas or area not in validas:
+                resultado = clf.classify(title, desc)
+            else:
+                resultado = clf.description_override(title, desc)
+                if resultado is None:
+                    continue
             analisadas += 1
-            resultado = clf.classify(title, desc)
             if resultado.area == (area or ""):
                 continue
             conn.execute(

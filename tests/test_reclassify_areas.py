@@ -71,6 +71,25 @@ def test_area_boa_nao_e_tocada_no_modo_pendentes(db):
     assert resultado["analisadas"] == 0
 
 
+def test_descricao_enriquecida_corrige_backend_quando_as_atividades_sao_de_qa(db):
+    _inserir(
+        db, 1, "Estágio Backend", "Backend",
+        "Foco em Qualidade de Software. Desenvolver e executar testes automatizados. "
+        "Criar cenários de testes funcionais, de integração e de regressão.",
+    )
+    _inserir(
+        db, 2, "Estágio Backend", "Backend",
+        "Desenvolver APIs em Java e executar testes automatizados.",
+    )
+
+    resultado = reclassificar(db)
+    with sqlite3.connect(db) as conn:
+        areas = conn.execute("SELECT area FROM vagas ORDER BY id").fetchall()
+
+    assert resultado["mudadas"] == 1
+    assert areas == [("QA",), ("Backend",)]
+
+
 def test_todas_reclassifica_mas_so_grava_quando_muda(db):
     _inserir(db, 1, "Analista de Redes Jr", "Infraestrutura / Redes",
              "Configurar switches e roteadores.")

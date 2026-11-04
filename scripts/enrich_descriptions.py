@@ -43,6 +43,7 @@ from scraper.enrichment_queries import QUERY_LINKEDIN_PENDENTES as QUERY_PENDENT
 from scraper.geo import default_geo_classifier  # noqa: E402
 from scraper.http_client import PoliteSession  # noqa: E402
 from scraper.models import infer_linkedin_workplace  # noqa: E402
+from scraper.seniority import default_filter  # noqa: E402
 from scraper.skills import SkillExtractor  # noqa: E402
 from scraper.sources.linkedin import DETAIL_API_URL, parse_linkedin_description  # noqa: E402
 
@@ -176,13 +177,12 @@ def _enrich_linkedin_connection(conn, extractor, classifier, geo, limit, max_wor
                                 workplace_declared, desc,
                                 extractor, classifier, geo, tech_map,
                             )
-                            if outcome != "removed":
+                            if outcome == "enriched":
                                 record_attempt(conn, db_id, EnrichmentStatus.SUCCEEDED)
-                        if outcome == "removed":
+                        if outcome != "enriched":
                             logger.info(
-                                "Vaga %s removida apos descricao confirmar "
-                                "contexto fora de TI.",
-                                ext_id,
+                                "linkedin: vaga %s removida | motivo=%s | titulo=%r | url=%s",
+                                ext_id, outcome, title, url,
                             )
                             summary.removed += 1
                             continue
@@ -239,10 +239,15 @@ def _save_linkedin_detail(
     """Grava uma vaga dentro da transacao aberta pelo chamador."""
     saved_description = c.execute("SELECT description FROM vagas WHERE id = ?", (db_id,)).fetchone()[0]
     description = consolidate_description(saved_description, desc, detail=True).text
+    reason = None
     if not classifier.is_tech(title, description):
+        reason = "fora_de_ti"
+    elif default_filter().blocks_entry(title, description):
+        reason = "fora_da_senioridade"
+    if reason:
         c.execute("DELETE FROM vaga_tecnologia WHERE vaga_id = ?", (db_id,))
         c.execute("DELETE FROM vagas WHERE id = ?", (db_id,))
-        return "removed"
+        return reason
 
     c.execute("UPDATE vagas SET description = ? WHERE id = ?", (description, db_id))
     modalidade = infer_linkedin_workplace(

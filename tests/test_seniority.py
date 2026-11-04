@@ -143,3 +143,52 @@ def test_filter_entry_level_canonicaliza_rotulo_da_fonte():
 
     assert len(kept) == 1
     assert kept[0].seniority == "Estágio"
+
+
+def test_nivel_explicito_prevalece_sobre_indicio_e_filtro_da_fonte():
+    jobs = [
+        Job(source="linkedin", external_id="1", title="Service Desk Tier 1 Intern"),
+        Job(source="solides", external_id="2", title="Analista de Monitoramento Trainee", seniority="Júnior"),
+        Job(source="solides", external_id="3", title="Analista de Suporte Pleno I", seniority="Júnior"),
+        Job(source="linkedin", external_id="4", title="Mid-level Analista de Suporte N1/N2"),
+        Job(source="linkedin", external_id="5", title="Pessoa Desenvolvedora Backend Especialista I"),
+        Job(source="infojobs", external_id="6", title="Estágio Para T.I", seniority="Júnior"),
+        Job(source="linkedin", external_id="7", title="Analista de Suporte N1/N2 Pleno"),
+    ]
+
+    kept = filter_entry_level(jobs)
+
+    assert [(job.external_id, job.seniority) for job in kept] == [
+        ("1", "Estágio"), ("2", "Trainee"), ("6", "Estágio"),
+    ]
+
+
+def test_descricao_que_declara_nivel_alto_prevalece_sem_confundir_mentoria():
+    jobs = [
+        Job(
+            source="geekhunter", external_id="1", title="Analista de Redes Jr",
+            description="Por que esta vaga é especial para profissionais pleno/sênior?",
+        ),
+        Job(
+            source="linkedin", external_id="2", title="Analista de Redes Jr",
+            description="Você terá apoio de profissionais pleno/sênior.",
+        ),
+    ]
+
+    kept = filter_entry_level(jobs)
+
+    assert [job.external_id for job in kept] == ["2"]
+
+
+def test_preserva_pl_i_e_anuncio_que_oferece_uma_vaga_de_auxiliar():
+    jobs = [
+        Job(source="solides", external_id="1", title="Desenvolvedor Mainframe PL/I", seniority="Júnior"),
+        Job(source="infojobs", external_id="2", title="Técnico de Impressoras - Especialista e Auxiliar"),
+        Job(source="infojobs", external_id="3", title="Estagiário de TI e Automação Júnior"),
+    ]
+
+    kept = filter_entry_level(jobs)
+
+    assert [(job.external_id, job.seniority) for job in kept] == [
+        ("1", "Júnior"), ("2", "Júnior"), ("3", "Estágio"),
+    ]

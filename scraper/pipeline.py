@@ -265,6 +265,13 @@ def run(
     if settings.enrich_linkedin and linkedin_to_enrich:
         logger.info("Enriquecendo descricoes de %d vagas unicas do LinkedIn em paralelo...", len(linkedin_to_enrich))
         requests_made += _enrich_linkedin_parallel(linkedin_to_enrich, settings=settings) or 0
+        if settings.only_junior:
+            eligible = filter_entry_level(jobs, seniority_filter)
+            dropped_seniority += len(jobs) - len(eligible)
+            jobs = eligible
+        if not keep_non_tech:
+            jobs, non_tech = filter_tech(jobs, classifier)
+            dropped_non_tech += len(non_tech)
 
     jobs = classify_jobs(jobs, classifier)
     jobs = attach_skills(jobs)

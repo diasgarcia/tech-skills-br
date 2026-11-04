@@ -283,10 +283,95 @@ tech_gate:
     - estagiario de projetos fabrica
     - estagio administrativo de infraestrutura
     - estagiario na area de engenharia de producao
+    - programador de manutencao
+    - programadora de manutencao
+    - assistente rh help desk
+    - helpdesk rh
+    - help desk de rh
+    - help desk rh
+    - gestao de contratos de ti
+    - estagio em revisao de texto
+    - estagio em edicao e criacao de videos
+    - aprendiz administrativo em tecnologia
 
   # Alguns titulos tambem nomeiam funcoes validas de TI. Nesses casos, a vaga
   # so e bloqueada quando a descricao confirma o contexto fora do recorte.
   excluir_contextos:
+    # Casos da revisão da release de 27/10. A combinação protege anúncios
+    # com o mesmo título que descrevem uma atividade técnica.
+    - titulo:
+        - estagio superior computacao ou afins
+      descricao:
+        - direcionar as demandas registradas
+        - apoiar o analista da area em rotinas administrativas
+    - titulo:
+        - designer grafico
+        - assistente de designer grafico
+      descricao:
+        - artes graficas para redes sociais
+        - fechamento tecnico de arquivos para grafica
+        - pecas graficas para midias digitais e impressas
+        - campanhas promocionais
+        - campanhas de midia paga
+        - produzir anuncios para meta ads
+        - pecas para instagram
+    - titulo:
+        - desenvolvimento se e equipamentos
+        - desenvolvimento de linhas de transmissao
+      descricao:
+        - subestacoes
+        - ensaios mecanicos e eletricos de alta tensao
+    - titulo:
+        - aprendiz ti
+        - aprendiz t i
+        - estagio analise e desenvolvimento de sistemas
+      descricao:
+        - fazer o arquivo de documentos
+        - auxiliar em outras atividades administrativas correlatas
+        - apoiar as rotinas administrativas da equipe de ti
+        - encaminhamento de documentos e solicitacoes aos responsaveis
+    - titulo:
+        - tecnico de campo
+      descricao:
+        - manutencao de empilhadeiras
+        - manutencoes preventivas e corretivas em empilhadeiras
+    - titulo:
+        - estagio engenharia eletrica
+        - tecnico em eletronica
+      descricao:
+        - auxiliar na elaboracao de propostas e documentos tecnicos
+        - levantamento de informacoes materiais precos e prazos
+    - titulo:
+        - gerente de negocios
+      descricao:
+        - ciclo de vendas de solucoes de software
+        - gerenciar e expandir uma carteira de clientes corporativos
+    - titulo:
+        - analista de suporte
+      descricao:
+        - realizar verificacoes cadastrais e documentais
+        - analise de novos cadastros
+        - analisar novos cadastros e direcionar para aprovacao ou correcao
+    - titulo:
+        - analista de programacao logistica
+      descricao:
+        - disponibilidade de veiculos e das janelas de atendimento
+        - programacao diaria de atendimento aos clientes
+    - titulo:
+        - assistente de atendimento tecnico
+      descricao:
+        - ensaio de proficiencia
+        - experiencia em laboratorios de analises clinicas
+    - titulo:
+        - analista telecom
+      descricao:
+        - projetos executivos de civil eletrica ar condicionado
+    - titulo:
+        - assistente tecnologia de aplicacao
+        - assistente de tecnologia de aplicacao
+      descricao:
+        - calibracao de pulverizadores
+        - tecnologia de aplicacao e adjuvantes
     # Recuperacao da Jobbol: apoio administrativo e engenharia industrial
     # nao viram TI por citar a area de TI, suporte tecnico ou um curso.
     - titulo:
@@ -404,6 +489,24 @@ tech_gate:
     - tecnologia da informacao
     - suporte tecnico
     - help desk
+
+# Exceções à precedência do título. Exigem um sinal no título e todos os
+# trechos de atividade da regra na descrição.
+classificar_contextos:
+  - area: QA
+    titulo:
+      - backend
+      - back end
+    descricao:
+      - foco em qualidade de software
+      - executar testes automatizados
+      - cenarios de testes funcionais
+  - area: Segurança
+    titulo:
+      - devops
+    descricao:
+      - processos de conformidade e seguranca da informacao
+      - inventario de controles pci
 
 areas:
   Data:
