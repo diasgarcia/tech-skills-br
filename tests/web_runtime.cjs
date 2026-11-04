@@ -18,6 +18,7 @@ class Element {
     this.hidden = false;
     this.open = false;
     this.attributes = {};
+    this.classList = { add() {}, remove() {}, toggle() {} };
     this._text = "";
   }
   set innerHTML(_) { throw new Error("Não interpretar conteúdo como HTML"); }
@@ -49,8 +50,10 @@ function runtime(fetch = () => { throw new Error("Rede não autorizada no teste"
     clearTimeout,
     fetch,
     console: { error() {} },
-    window: { addEventListener() {}, innerHeight: 900, innerWidth: 1200, matchMedia: () => ({ matches: true }) },
+    window: { addEventListener() {}, scrollTo() {}, innerHeight: 900, innerWidth: 1200, matchMedia: () => ({ matches: true }) },
     document: {
+      documentElement: new Element("html"),
+      body: new Element("body"),
       createElement: tag => new Element(tag),
       getElementById: get,
       querySelector: get,
@@ -325,4 +328,119 @@ test("carregamento rejeita estrutura inválida sem atribuir dados parciais", asy
 
   assert.equal(app.run("resumoData"), null);
   assert.equal(app.get("data-retry").hidden, false);
+});
+
+test("inicio e outras abas nao baixam vagas; explorador carrega uma vez", async () => {
+  const requests = [];
+  const app = runtime(async path => {
+    requests.push(path);
+    return { ok: true, json: async () => path.endsWith("resumo.json") ? { metadados: {} } : [] };
+  });
+
+  await app.run("loadData()");
+  app.run("setTab('skills'); setTab('areas')");
+  const initialRequests = [...requests];
+  app.run("setTab('vagas'); setTab('vagas')");
+  await new Promise(resolve => setImmediate(resolve));
+  app.run("setTab('resumo'); setTab('vagas')");
+
+  assert.deepEqual(initialRequests, ["api/resumo.json", "api/tecnologias.json", "api/areas.json"]);
+  assert.deepEqual(requests, [...initialRequests, "api/vagas-recentes.json"]);
+  assert.equal(app.get("vagas-count-info").textContent, "Exibindo 0 vagas recentes encontradas");
+  assert.equal(app.get("table-vagas").attributes["aria-busy"], "false");
+});
+
+test("falha das vagas permite nova tentativa sem recarregar os outros dados", async () => {
+  let failed = true;
+  const requests = [];
+  const app = runtime(async path => {
+    requests.push(path);
+    if (path.endsWith("vagas-recentes.json")) {
+      return failed ? { ok: false, status: 503 } : { ok: true, json: async () => [{ titulo: "Recuperada" }] };
+    }
+    return { ok: true, json: async () => path.endsWith("resumo.json") ? { metadados: {} } : [] };
+  });
+  await app.run("loadData()");
+
+  await app.run("loadVagasData()");
+  const retryVisible = !app.get("vagas-retry").hidden;
+  const failureMessage = app.get("vagas-count-info").textContent;
+  failed = false;
+  await app.run("loadVagasData()");
+
+  assert.equal(retryVisible, true);
+  assert.match(failureMessage, /Não foi possível/);
+  assert.equal(app.get("data-status").hidden, true);
+  assert.equal(app.get("vagas-retry").hidden, true);
+  assert.ok(app.get("#table-vagas tbody").textContent.includes("Recuperada"));
+  assert.equal(requests.filter(path => path === "api/resumo.json").length, 1);
+  assert.equal(requests.filter(path => path === "api/vagas-recentes.json").length, 2);
+});
+
+test("JSON invalido das vagas nao entra no cache e pode ser recuperado", async () => {
+  let payload = { invalido: true };
+  const app = runtime(async () => ({ ok: true, json: async () => payload }));
+
+  await app.run("loadVagasData()");
+  const cachedAfterFailure = app.run("vagasData");
+  const retryVisible = !app.get("vagas-retry").hidden;
+  payload = [];
+  await app.run("loadVagasData()");
+
+  assert.equal(cachedAfterFailure, null);
+  assert.equal(retryVisible, true);
+  assert.equal(app.get("vagas-retry").hidden, true);
+  assert.equal(app.get("vagas-more").hidden, true);
+});
+
+test("rolagem acrescenta lotes sem duplicar linhas e detalhes funcionam no ultimo lote", () => {
+  const app = runtime();
+  app.sandbox.fixture = Array.from({ length: 125 }, (_, id) => ({ id, titulo: `Vaga ${id}` }));
+  Object.assign(app.get("vagas-scroll"), { scrollTop: 0, clientHeight: 600, scrollHeight: 3000 });
+  app.run("vagasData = fixture; renderVagasTable()");
+  const initialCount = app.get("#table-vagas tbody").childNodes.length;
+
+  app.run("onVagasScroll()");
+  const beforeBottom = app.get("#table-vagas tbody").childNodes.length;
+  app.get("vagas-scroll").scrollTop = 2300;
+  app.run("onVagasScroll()");
+  const secondCount = app.get("#table-vagas tbody").childNodes.length;
+  app.run("onVagasScroll(); onVagasScroll()");
+  const rows = app.get("#table-vagas tbody").childNodes;
+  walk(rows.at(-1)).find(node => node.className === "job-title").onclick();
+
+  assert.equal(initialCount, 50);
+  assert.equal(beforeBottom, 50);
+  assert.equal(secondCount, 100);
+  assert.equal(rows.length, 125);
+  assert.equal(new Set(rows.map(row => row.childNodes[0].textContent)).size, 125);
+  assert.equal(app.get("vagas-more").hidden, true);
+  assert.equal(app.get("vagas-count-info").textContent, "Exibindo 125 vagas recentes encontradas");
+  assert.equal(app.get("job-details-title").textContent, "Vaga 124");
+  assert.equal(app.get("job-details").modal, true);
+});
+
+test("busca abrange linhas ainda nao montadas e filtros reiniciam lista e rolagem", () => {
+  const app = runtime();
+  app.sandbox.fixture = Array.from({ length: 125 }, (_, id) => ({
+    id, titulo: `Vaga ${id}`, empresa: id === 124 ? "Americanas" : "Outra",
+    tecnologias: ["Python"], modalidade: id === 124 ? "Remoto" : "Presencial",
+  }));
+  app.run("vagasData = fixture; renderVagasTable(); appendVagasRows()");
+  app.get("vagas-scroll").scrollTop = 2000;
+  app.get("search-vagas").value = "amer python";
+  app.get("filter-modalidade").value = "Remoto";
+
+  app.run("renderVagasTable()");
+  const filteredText = app.get("#table-vagas tbody").textContent;
+  const filteredCount = app.get("#table-vagas tbody").childNodes.length;
+  app.get("search-vagas").value = "";
+  app.get("filter-modalidade").value = "";
+  app.run("renderVagasTable()");
+
+  assert.equal(filteredCount, 1);
+  assert.ok(filteredText.includes("Vaga 124"));
+  assert.equal(app.get("vagas-scroll").scrollTop, 0);
+  assert.equal(app.get("#table-vagas tbody").childNodes.length, 50);
+  assert.equal(app.get("vagas-more").hidden, false);
 });
