@@ -440,9 +440,14 @@ Os 1.338 testes passaram e o lint não apontou problemas. O primeiro envio ao Ka
 
 ---
 
+### 04/11/2026
+
+Registrei o resultado da revisão manual de 370 anúncios da release de 10 mil vagas. A revisão encontrou 11 anúncios com erro (2,97%) nos critérios de escopo de TI e registro de habilidades. O método e as fichas estão no [documento de validação](validacao/validacao.md).
+
+---
+
 ### Pontos a avaliar
 
-- Definir uma validação quantitativa com uma amostra e revisão humana independente.
 - Avaliar a cobertura das fontes, as duplicatas e o efeito das descrições ausentes.
 - Revisar regras a partir de casos observados, sem tratar esses ajustes como prova de precisão global.
 - Manter os limites dos indicadores claros: eles descrevem a amostra coletada, não todas as vagas ou contratações do mercado.
