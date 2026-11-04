@@ -72,6 +72,14 @@ class AreaClassifier:
                 self.gate_context_exclude.append((title_patterns, body_patterns))
 
         self.strong_weight: float = self.tiers.get("peso_alto", 4.0)
+        self.description_overrides = [
+            (
+                rule["area"],
+                [_compile_keyword(kw) for kw in rule["titulo"]],
+                [(kw, _compile_keyword(kw)) for kw in rule["descricao"]],
+            )
+            for rule in rules.get("classificar_contextos") or []
+        ]
         self._support_title_patterns = [
             (_compile_keyword(keyword), keyword)
             for keyword in sorted(self._SUPORTE_TITULO_SUSTENTACAO, key=len, reverse=True)
@@ -199,14 +207,8 @@ class AreaClassifier:
         porque a descricao curta do Vagas.com e cheia de palavra generica.
         """
         title_text = normalize(title)
-        if any(p.search(title_text) for p in self.gate_exclude):
-            return False
         body_text = normalize(description)
-        if any(
-            any(pattern.search(title_text) for pattern in title_patterns)
-            and any(pattern.search(body_text) for pattern in body_patterns)
-            for title_patterns, body_patterns in self.gate_context_exclude
-        ):
+        if self._is_excluded(title_text, body_text):
             return False
         if any(p.search(title_text) for p in self.gate_title):
             return True
@@ -220,6 +222,30 @@ class AreaClassifier:
         if any(p.search(body_text) for p in self.gate_body):
             return True
         return any(p.search(body_text) for p in self._strong_patterns())
+
+    def is_excluded(self, title: str, description: str = "") -> bool:
+        """Identifica um contexto explicitamente fora do recorte de TI."""
+        return self._is_excluded(normalize(title), normalize(description))
+
+    def _is_excluded(self, title_text: str, body_text: str) -> bool:
+        if any(p.search(title_text) for p in self.gate_exclude):
+            return True
+        return any(
+            any(pattern.search(title_text) for pattern in title_patterns)
+            and any(pattern.search(body_text) for pattern in body_patterns)
+            for title_patterns, body_patterns in self.gate_context_exclude
+        )
+
+    def description_override(self, title: str, description: str) -> AreaScore | None:
+        """Aplica exceções com mais de uma evidência de atividade na descrição."""
+        title_text = normalize(title)
+        for area, titles, evidence in self.description_overrides:
+            if not any(pattern.search(title_text) for pattern in titles):
+                continue
+            body_text = normalize(description)
+            if evidence and all(pattern.search(body_text) for _, pattern in evidence):
+                return AreaScore(area, self.strong_weight * len(evidence), [kw for kw, _ in evidence])
+        return None
 
     # Areas "genericas" na precedencia de titulo: quando outra area casa
     # keyword de peso alto no titulo, ela vence estas ("Analista de
@@ -274,6 +300,10 @@ class AreaClassifier:
         alto no titulo vence as genericas ("Estagio em Desenvolvimento de
         Software - Android" vai para Mobile, nao para Engenharia de Software).
         """
+        override = self.description_override(title, description)
+        if override is not None:
+            return override
+
         ranked = self.score_all(title, description)
         if not ranked:
             return AreaScore(self.fallback_area, 0.0, [])
