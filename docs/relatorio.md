@@ -443,3 +443,9 @@ Os 1.338 testes passaram e o lint não apontou problemas. O primeiro envio ao Ka
 ### 04/11/2026
 
 Registrei o resultado da revisão manual de 370 anúncios da release de 10 mil vagas. A revisão encontrou 11 anúncios com erro (2,97%) nos critérios de escopo de TI e registro de habilidades. O método e as fichas estão no [documento de validação](validacao/validacao.md).
+
+Separei os anúncios recentes em vagas-recentes.json, gerado junto com os demais arquivos do site. O recorte inclui o dia da geração em Brasília e os 29 dias anteriores, pela data de publicação. Preservei vagas.json com a base completa. O explorador carrega o arquivo recente apenas ao abrir a aba e monta a tabela em lotes de 50 linhas durante a rolagem. A busca consulta todos os anúncios do recorte. Adicionei nova tentativa em caso de falha no carregamento e um botão para mostrar mais linhas pelo teclado.
+
+Os 1.354 testes passaram e o lint não apontou problemas. Conferi no navegador a carga sob demanda, o cache, os filtros, os detalhes e a rolagem em computador e celular. A página permaneceu sem rolagem externa nas telas verificadas. Três verificações HTTP locais também passaram. Atualizei a arquitetura e a cópia local das páginas de arquitetura e uso da wiki. Não executei coleta, não alterei o banco nem fiz commit ou publicação.
+
+Depois da autorização, separei a geração do recorte e o carregamento do explorador nas branches codex/api-vagas-recentes e codex/performance-explorador-vagas. Os commits incluem as descrições e os testes de cada mudança. A segunda branch depende da primeira. Separei a documentação em outro commit e registrei a revisão da wiki em uma branch local própria. Não fiz push nem publiquei dados ou o site.

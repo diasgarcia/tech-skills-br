@@ -160,9 +160,24 @@ O frontend usa texto do DOM para conteúdo dos anúncios e aceita apenas links H
 
 ### Detalhes dos anúncios
 
-O explorador mostra anúncios dos últimos 30 dias pela data de publicação.
+O explorador carrega `api/vagas-recentes.json` apenas ao abrir a aba pela
+primeira vez. Os dados ficam em memória até recarregar a página. Uma falha
+oferece nova tentativa na própria aba, sem bloquear os rankings e resumos.
+
+O exportador gera esse arquivo em cada montagem do site. O recorte usa a
+data de publicação: inclui o dia da geração em Brasília e os 29 dias
+anteriores. Anúncios sem data ou com data futura ficam fora desse arquivo.
+`api/vagas.json` mantém a base completa no mesmo endereço, com os mesmos
+campos. Ambos ordenam por publicação decrescente, depois por ID decrescente;
+datas ausentes ficam no fim da base completa. Cada arquivo contém uma lista
+de objetos, sem parâmetros nem paginação no servidor.
+
 A busca combina termos com AND e considera título, empresa, área, habilidades,
-modalidade, fonte e dados geográficos.
+modalidade, fonte e dados geográficos. Ela consulta todo o recorte recente.
+A tabela monta 50 linhas por vez e acrescenta outro lote ao se aproximar do
+fim da rolagem. O botão “Mostrar mais vagas” também permite avançar pelo
+teclado. Mudar um filtro reinicia as linhas e a rolagem; a contagem informa
+todos os resultados encontrados.
 
 Um único `dialog` apresenta os dados da vaga. No computador, o hover abre um
 painel sem X, posicionado sem cobrir o título. Clique, teclado ou toque abrem
