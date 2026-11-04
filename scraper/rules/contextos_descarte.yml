@@ -16,12 +16,23 @@
 # Excecoes que valem somente para um alias de uma tecnologia. Elas evitam
 # ambiguidades sem remover o termo completo das outras tecnologias.
 aliases_contextuais:
+  Azure:
+    azure:
+      nao_seguido_por:
+        - devops
+    microsoft azure:
+      nao_seguido_por:
+        - devops
   Node.js:
     node:
       nao_seguido_por:
         - red
 
 descartar:
+  Salesforce:
+    - "parceiro oficial credenciado salesforce e mulesoft"
+  Inteligência Artificial:
+    - "que incorporam a inteligencia artificial por completo"
   LGPD:
     - "exclusivamente para fins do processo seletivo respeitando a lgpd"
     - "voce concorda com nossa politica de protecao de dados da lgpd"

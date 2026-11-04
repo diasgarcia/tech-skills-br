@@ -649,3 +649,27 @@ def test_aviso_de_privacidade_preserva_requisito_lgpd(ext):
     found = ext.extract(texto)
 
     assert "LGPD" in found
+
+
+def test_variantes_de_chamados_e_manutencao_sem_fila_de_estrutura_de_dados(ext):
+    texto = (
+        "Monitoramento de redes, registro de chamados e controle de filas. "
+        "Instalação e manutenção em PC e notebooks."
+    )
+
+    found = ext.extract(texto)
+
+    assert {"Gestão de Chamados", "Redes de Computadores", "Montagem e Manutenção de PCs"} <= set(found)
+    assert "Estrutura de Dados" not in found
+
+
+def test_extrai_design_pattern_sem_contar_parceria_comercial_ou_confundir_azure_devops(ext):
+    texto = (
+        "Parceiro oficial credenciado Salesforce e Mulesoft. "
+        "Requisitos: conhecimento de design pattern e Azure DevOps."
+    )
+
+    found = ext.extract(texto)
+
+    assert {"Design Patterns", "Azure DevOps"} <= set(found)
+    assert {"Salesforce", "Azure"}.isdisjoint(found)
