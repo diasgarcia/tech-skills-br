@@ -3,6 +3,7 @@
 import json
 from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
+from unittest.mock import Mock
 
 import pytest
 
@@ -63,7 +64,8 @@ def redirected_detail(
     job_id="123", page_id="145231", title="Desenvolvedor Júnior", *,
     final_url=None, history=None, **changes,
 ):
-    response = detail(identifier={"@type": "PropertyValue", "value": f"v{page_id}"}, title=title, **changes)
+    identifier = changes.pop("identifier", {"@type": "PropertyValue", "value": f"v{page_id}"})
+    response = detail(identifier=identifier, title=title, **changes)
     response.url = final_url or f"{jobbol.SITE_URL}/vaga/{page_id}-desenvolvedor-junior?cidade=4006"
     response.history = [SimpleNamespace(url=f"{jobbol.SITE_URL}/vaga/{job_id}")] if history is None else history
     return response
@@ -453,3 +455,89 @@ def test_jsonld_tem_prioridade_sobre_html_do_mesmo_detalhe():
     assert jobs[0].company == "Acme"
     assert jobs[0].description == "Requisitos: Java."
     assert collector.stats.errors == []
+
+
+@pytest.mark.parametrize("response", [redirected_detail(history=[]), html_detail(history=[])])
+@pytest.mark.parametrize("link", [
+    "/vaga/145231-desenvolvedor-junior",
+    f"{jobbol.SITE_URL}/vaga/145231-desenvolvedor-junior",
+])
+def test_usa_link_migrado_da_listagem_com_id_estavel_e_cidade(response, link):
+    listing = row(link=link, id_vaga="145231", id_cidade="4006")
+    session = FakeSession({"vagas": [listing], "total": 1}, response)
+    collector = source(session)
+
+    jobs = collector.fetch(["junior"])
+
+    assert session.calls[1][0] == f"{jobbol.SITE_URL}/vaga/145231-desenvolvedor-junior?cidade=4006"
+    assert jobs[0].external_id == "123"
+    assert jobs[0].url == session.calls[1][0]
+    assert set(default_extractor().extract(jobs[0].description)) == {"SQL", "Python", "Docker"}
+    assert collector.stats.errors == []
+
+
+def test_link_da_listagem_e_reutilizado_entre_buscas():
+    listing = row(link="/vaga/145231-desenvolvedor-junior?cidade=4006", id_vaga=145231)
+    session = FakeSession(
+        {"vagas": [listing], "total": 1}, redirected_detail(history=[]),
+        {"vagas": [listing], "total": 1},
+    )
+    collector = source(session)
+
+    jobs = collector.fetch(["junior", "desenvolvedor"])
+
+    assert [job.external_id for job in jobs] == ["123", "123"]
+    assert session.request_count == 3
+    assert collector.stats.errors == []
+
+
+@pytest.mark.parametrize("link, page_id", [
+    ("https://outro.example/vaga/145231-desenvolvedor-junior", "145231"),
+    ("//outro.example/vaga/145231-desenvolvedor-junior", "145231"),
+    ("http://candidatos.jobbol.com.br/vaga/145231-desenvolvedor-junior", "145231"),
+    ("/vaga/999-desenvolvedor-junior", "145231"),
+    ("/vaga/145231-desenvolvedor-junior", None),
+    ("/outra/145231-desenvolvedor-junior", "145231"),
+    ("/vaga/999", "999"),
+    (123, "145231"),
+])
+def test_link_invalido_da_listagem_e_reportado_antes_da_chamada(link, page_id):
+    session = FakeSession({"vagas": [row(link=link, id_vaga=page_id)], "total": 1})
+    collector = source(session)
+
+    jobs = collector.fetch(["junior"])
+
+    assert jobs == []
+    assert session.request_count == 1
+    assert collector.stats.errors
+
+
+@pytest.mark.parametrize("response", [
+    redirected_detail(page_id="999", history=[]),
+    redirected_detail(title="Outra vaga", history=[]),
+    redirected_detail(final_url="https://outro.example/vaga/145231-desenvolvedor-junior", history=[]),
+    redirected_detail(identifier={"value": "123"}, history=[]),
+])
+def test_link_da_listagem_rejeita_detalhe_de_outra_identidade(response):
+    listing = row(link="/vaga/145231-desenvolvedor-junior", id_vaga="145231")
+    collector = source(FakeSession({"vagas": [listing], "total": 1}, response))
+
+    jobs = collector.fetch(["junior"])
+
+    assert jobs == []
+    assert collector.stats.errors
+
+
+def test_404_no_link_da_listagem_continua_com_erro_sem_repeticao():
+    listing = row(link="/vaga/145231-desenvolvedor-junior", id_vaga="145231")
+    session = FakeSession({"vagas": [listing], "total": 1}, None)
+    session.last_status_code = 404
+    session.get = Mock(wraps=session.get)
+    collector = source(session)
+
+    jobs = collector.fetch(["junior"])
+
+    assert jobs == []
+    assert session.get.call_count == 1
+    assert len(collector.stats.errors) == 1
+    assert "http=404" in collector.stats.errors[0]

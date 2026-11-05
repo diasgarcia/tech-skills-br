@@ -107,8 +107,10 @@ class PoliteSession:
                     return response
                 if response.status_code not in RETRYABLE_STATUSES or attempt >= retry_limit:
                     logger.warning(
-                        "HTTP %s em %s (params=%s, resp=%s)",
-                        response.status_code, url, kwargs.get("params"), response.text[:200],
+                        "HTTP %s em %s (url_final=%s, redirecionamentos=%s, params=%s, resp=%s)",
+                        response.status_code, url, response.url,
+                        [(step.status_code, step.url) for step in response.history],
+                        kwargs.get("params"), response.text[:200],
                     )
                     return None
             backoff = self.backoff_factor * (2**attempt)

@@ -41,6 +41,25 @@ def test_get_erro_http_guarda_o_status(polite):
     assert polite.last_status_code == 404
 
 
+def test_erro_http_informa_url_final_e_redirecionamentos(polite, caplog):
+    response = requests.Response()
+    response.status_code = 404
+    response.url = "https://exemplo.com/vaga/nova"
+    response._content = b"Pagina nao encontrada"
+    redirect = requests.Response()
+    redirect.status_code = 301
+    redirect.url = "https://exemplo.com/vaga/antiga"
+    response.history = [redirect]
+    polite.session.get = MagicMock(return_value=response)
+
+    result = polite.get("https://exemplo.com/vaga/antiga")
+
+    assert result is None
+    assert polite.session.get.call_count == 1
+    assert "url_final=https://exemplo.com/vaga/nova" in caplog.text
+    assert "(301, 'https://exemplo.com/vaga/antiga')" in caplog.text
+
+
 def test_get_repassa_timeout_padrao(polite):
     resposta = MagicMock()
     resposta.status_code = 200
