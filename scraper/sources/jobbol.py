@@ -1,4 +1,4 @@
-"""Jobbol: listagem JSON anonima e detalhes em JSON-LD, sem navegador.
+"""Jobbol: listagem JSON anonima e detalhes em JSON-LD ou HTML, sem navegador.
 
 A listagem nao traz a descricao. Cada candidato de entrada dentro da janela
 recebe uma chamada de detalhe; IDs repetidos reutilizam o detalhe da rodada.
@@ -47,6 +47,49 @@ def _jobposting(html: str) -> dict | None:
                 if isinstance(item, dict) and item.get("@type") == "JobPosting":
                     return item
     return None
+
+
+def _html_posting(html: str) -> dict | None:
+    """Le o detalhe das vagas proprias que nao publicam JobPosting."""
+    soup = BeautifulSoup(html, "html.parser")
+    body = soup.select_one("#vagaContainer .jb-vaga-corpo")
+    title = soup.select_one("#vagaContainer h1.pl-manchete-titulo")
+    canonical = soup.select_one('link[rel="canonical"]')
+    if body is None or title is None or canonical is None:
+        return None
+    url = urlsplit(canonical.get("href", ""))
+    match = re.fullmatch(r"/vaga/([0-9]+)-[^/]+/?", url.path)
+    if url.scheme != "https" or url.netloc != urlsplit(SITE_URL).netloc or match is None:
+        return None
+
+    sections = []
+    has_description = False
+    for heading in body.select("h2.jb-vaga-secao"):
+        label = heading.get_text(" ", strip=True)
+        section = normalize(label)
+        if section not in {"atividades", "requisitos", "observacoes", "beneficios"}:
+            continue
+        paragraphs = []
+        for sibling in heading.next_siblings:
+            if getattr(sibling, "name", None) is None:
+                continue
+            if sibling.name not in {"p", "ul", "ol"}:
+                break
+            if sibling.get_text(" ", strip=True):
+                paragraphs.append(str(sibling))
+        if paragraphs:
+            sections.append(f"<p><strong>{label}</strong></p>" + "".join(paragraphs))
+            has_description = has_description or section != "beneficios"
+    if not has_description:
+        return None
+
+    company = body.select_one(".jb-empresa-nome")
+    return {
+        "title": title.get_text(" ", strip=True),
+        "identifier": {"value": f"v{match.group(1)}"},
+        "description": "".join(sections),
+        "hiringOrganization": {"name": company.get_text(" ", strip=True) if company else ""},
+    }
 
 
 def _descricao(raw: str) -> str:
@@ -170,9 +213,18 @@ class JobbolSource(JobSource):
         job_id = str(raw["jobkey"])
         url = f"{SITE_URL}/vaga/{job_id}"
         response = self.session.get(url)
-        posting = _jobposting(response.text) if response is not None else None
+        if response is None:
+            self._erro(
+                f"{job_id}: detalhe indisponivel "
+                f"(http={getattr(self.session, 'last_status_code', None)}; url={url})"
+            )
+            return None
+        posting = _jobposting(response.text) or _html_posting(response.text)
         if posting is None or not isinstance(posting.get("description"), str) or not posting["description"].strip():
-            self._erro(f"{job_id}: detalhe indisponivel ou sem descricao JobPosting")
+            self._erro(
+                f"{job_id}: detalhe sem descricao valida em JSON-LD ou HTML "
+                f"(url={getattr(response, 'url', url)})"
+            )
             return None
         if not _mesma_vaga(posting, response, job_id, raw["CARGO"]):
             self._erro(
