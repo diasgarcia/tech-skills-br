@@ -58,6 +58,11 @@ redirecionamento. A leitura fica restrita ao corpo do anúncio. Os requisitos
 das observações são posicionados antes dos benefícios para a extração de
 habilidades. O anúncio lido segue para os filtros normais de TI e nível.
 
+Quando o detalhe retorna HTTP 404, a Jobbol recebe uma única nova tentativa,
+com o intervalo normal da sessão HTTP. Uma recuperação permite processar o
+anúncio. Se a segunda tentativa falhar, o diagnóstico informa o status final
+e a fonte continua marcada como parcial.
+
 O filtro de relevância combina título e descrição nos casos ambíguos de
 Administração e Engenharia. Apoio administrativo com EPIs e plotagens,
 suporte a lubrificantes e desenho de chicotes não entram por mencionar TI,
