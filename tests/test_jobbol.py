@@ -69,6 +69,33 @@ def redirected_detail(
     return response
 
 
+def html_detail(**changes):
+    response = redirected_detail(**changes)
+    response.text = """
+        <link rel="canonical" href="https://candidatos.jobbol.com.br/vaga/145231-desenvolvedor-junior">
+        <script type="application/ld+json">{"@type": "BreadcrumbList"}</script>
+        <div id="vagaContainer">
+          <header><h1 class="pl-manchete-titulo">Desenvolvedor Júnior</h1></header>
+          <div class="jb-vaga-corpo">
+            <h2 class="jb-vaga-secao">Sobre a empresa</h2>
+            <div class="jb-empresa"><p class="jb-empresa-nome">Empresa do detalhe</p>
+              <p>A empresa usa Java.</p></div>
+            <h2 class="jb-vaga-secao"><i></i> Atividades</h2>
+            <p class="fs-6">Desenvolver sistemas e consultar SQL.</p>
+            <h2 class="jb-vaga-secao">Benefícios</h2>
+            <ul class="fs-6 jb-vaga-beneficios"><li>Curso de Inglês.</li></ul>
+            <h2 class="jb-vaga-secao">Observações</h2>
+            <p class="fs-6">Conhecimento em Python e Docker.</p>
+            <div class="jb-vaga-saida"><a>Quero me candidatar</a></div>
+            <section><p>Receber alertas de AWS.</p></section>
+            <p>Publicidade de Azure.</p>
+          </div>
+        </div>
+        <h2 class="jb-secao-titulo">Vagas relacionadas</h2><p>Analista de Redes.</p>
+    """
+    return response
+
+
 def source(session, **settings):
     return JobbolSource(session, Settings(sources=["jobbol"], **settings))
 
@@ -310,4 +337,119 @@ def test_redirect_migrado_reutiliza_detalhe_entre_buscas():
 
     assert [job.external_id for job in jobs] == ["123", "123"]
     assert session.request_count == 3
+    assert collector.stats.errors == []
+
+
+def test_html_sem_jobposting_extrai_secoes_da_vaga_e_preserva_identidade():
+    collector = source(FakeSession({"vagas": [row()], "total": 1}, html_detail()))
+
+    jobs = collector.fetch(["junior"])
+    job = jobs[0]
+
+    assert len(jobs) == 1
+    assert job.external_id == "123"
+    assert job.title == "Desenvolvedor Júnior"
+    assert job.url == f"{jobbol.SITE_URL}/vaga/123"
+    assert job.company == "Empresa do detalhe"
+    assert job.location == "São Paulo, SP"
+    assert set(default_extractor().extract(job.description)) == {"SQL", "Python", "Docker"}
+    assert "Curso de Inglês" in job.description
+    assert "A empresa usa Java" not in job.description
+    assert "alertas" not in job.description
+    assert "Publicidade" not in job.description
+    assert "relacionadas" not in job.description
+    assert collector.stats.errors == []
+
+
+def test_html_sem_empresa_usa_o_nome_da_listagem():
+    response = html_detail()
+    response.text = response.text.replace("Empresa do detalhe", "")
+    collector = source(FakeSession({"vagas": [row()], "total": 1}, response))
+
+    jobs = collector.fetch(["junior"])
+
+    assert jobs[0].company == "Acme"
+    assert collector.stats.errors == []
+
+
+def test_html_aceita_requisitos_em_lista():
+    response = html_detail()
+    response.text = response.text.replace(
+        '<p class="fs-6">Conhecimento em Python e Docker.</p>',
+        "<ul><li>Conhecimento em Python e Docker.</li></ul>",
+    )
+    collector = source(FakeSession({"vagas": [row()], "total": 1}, response))
+
+    jobs = collector.fetch(["junior"])
+
+    assert set(default_extractor().extract(jobs[0].description)) == {"SQL", "Python", "Docker"}
+    assert collector.stats.errors == []
+
+
+@pytest.mark.parametrize("replacement", [
+    ("pl-manchete-titulo", "outro-titulo"),
+    ("Desenvolvedor Júnior</h1>", "Analista de Suporte Júnior</h1>"),
+    ('id="vagaContainer"', 'id="outroContainer"'),
+    ("jb-vaga-corpo", "outra-secao"),
+    ('rel="canonical"', 'rel="alternate"'),
+    ("/vaga/145231-desenvolvedor-junior", "/vaga/999-desenvolvedor-junior"),
+    ("https://candidatos.jobbol.com.br/vaga/145231", "https://outro.example/vaga/145231"),
+])
+def test_html_incompleto_ou_divergente_continua_com_falha(replacement):
+    response = html_detail()
+    response.text = response.text.replace(*replacement)
+    collector = source(FakeSession({"vagas": [row()], "total": 1}, response))
+
+    jobs = collector.fetch(["junior"])
+
+    assert jobs == []
+    assert collector.stats.errors
+
+
+def test_html_com_apenas_beneficios_continua_com_falha():
+    response = html_detail()
+    response.text = response.text.replace("Desenvolver sistemas e consultar SQL.", "")
+    response.text = response.text.replace("Conhecimento em Python e Docker.", "")
+    collector = source(FakeSession({"vagas": [row()], "total": 1}, response))
+
+    jobs = collector.fetch(["junior"])
+
+    assert jobs == []
+    assert collector.stats.errors
+
+
+@pytest.mark.parametrize("changes", [
+    {"history": []},
+    {"history": [SimpleNamespace(url=f"{jobbol.SITE_URL}/vaga/999")]},
+    {"final_url": "https://outro.example/vaga/145231-desenvolvedor-junior"},
+])
+def test_html_rejeita_redirecionamento_sem_vinculo_com_a_listagem(changes):
+    collector = source(FakeSession({"vagas": [row()], "total": 1}, html_detail(**changes)))
+
+    jobs = collector.fetch(["junior"])
+
+    assert jobs == []
+    assert collector.stats.errors
+
+
+def test_html_reutiliza_detalhe_entre_buscas():
+    session = FakeSession({"vagas": [row()], "total": 1}, html_detail(), {"vagas": [row()], "total": 1})
+    collector = source(session)
+
+    jobs = collector.fetch(["junior", "desenvolvedor"])
+
+    assert [job.external_id for job in jobs] == ["123", "123"]
+    assert session.request_count == 3
+    assert collector.stats.errors == []
+
+
+def test_jsonld_tem_prioridade_sobre_html_do_mesmo_detalhe():
+    response = html_detail()
+    response.text += detail(description="Requisitos: Java.").text
+    collector = source(FakeSession({"vagas": [row()], "total": 1}, response))
+
+    jobs = collector.fetch(["junior"])
+
+    assert jobs[0].company == "Acme"
+    assert jobs[0].description == "Requisitos: Java."
     assert collector.stats.errors == []
