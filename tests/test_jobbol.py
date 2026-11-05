@@ -16,14 +16,17 @@ NOW = datetime(2026, 10, 12, 12, tzinfo=timezone.utc)
 
 
 class FakeSession:
-    def __init__(self, *responses):
+    def __init__(self, *responses, statuses=None):
         self.responses = iter(responses)
+        self.statuses = iter(statuses) if statuses is not None else None
+        self.last_status_code = None
         self.request_count = 0
         self.calls = []
 
     def get(self, url, params=None):
         self.calls.append((url, dict(params) if params else None))
         self.request_count += 1
+        self.last_status_code = next(self.statuses) if self.statuses is not None else None
         return next(self.responses, None)
 
     get_json = get
@@ -453,3 +456,58 @@ def test_jsonld_tem_prioridade_sobre_html_do_mesmo_detalhe():
     assert jobs[0].company == "Acme"
     assert jobs[0].description == "Requisitos: Java."
     assert collector.stats.errors == []
+
+
+@pytest.mark.parametrize("response", [detail(), html_detail()])
+def test_detalhe_404_transitorio_e_recuperado_e_reutilizado(response):
+    session = FakeSession(
+        {"vagas": [row()], "total": 1}, None, response,
+        {"vagas": [row()], "total": 1}, statuses=[200, 404, 200, 200],
+    )
+    collector = source(session)
+
+    jobs = collector.fetch(["junior", "desenvolvedor"])
+
+    assert [job.external_id for job in jobs] == ["123", "123"]
+    assert set(default_extractor().extract(jobs[0].description)) == {"SQL", "Python", "Docker"}
+    assert session.request_count == 4
+    assert collector.stats.errors == []
+
+
+def test_detalhe_404_persistente_para_na_segunda_tentativa_e_preserva_outros_anuncios():
+    session = FakeSession(
+        {"vagas": [row("1"), row()], "total": 2}, None, None, detail(),
+        statuses=[200, 404, 404, 200],
+    )
+    collector = source(session)
+
+    jobs = collector.fetch(["junior"])
+
+    assert [job.external_id for job in jobs] == ["123"]
+    assert session.request_count == 4
+    assert len(collector.stats.errors) == 1
+    assert "http=404" in collector.stats.errors[0]
+
+
+@pytest.mark.parametrize("status", [None, 403, 429, 500])
+def test_detalhe_com_outro_erro_nao_recebe_repeticao_extra(status):
+    session = FakeSession({"vagas": [row()], "total": 1}, None, statuses=[200, status])
+    collector = source(session)
+
+    jobs = collector.fetch(["junior"])
+
+    assert jobs == []
+    assert session.request_count == 2
+    assert len(collector.stats.errors) == 1
+
+
+def test_erro_da_segunda_tentativa_e_registrado_com_status_final():
+    session = FakeSession({"vagas": [row()], "total": 1}, None, None, statuses=[200, 404, 403])
+    collector = source(session)
+
+    jobs = collector.fetch(["junior"])
+
+    assert jobs == []
+    assert session.request_count == 3
+    assert len(collector.stats.errors) == 1
+    assert "http=403" in collector.stats.errors[0]

@@ -213,6 +213,9 @@ class JobbolSource(JobSource):
         job_id = str(raw["jobkey"])
         url = f"{SITE_URL}/vaga/{job_id}"
         response = self.session.get(url)
+        if response is None and getattr(self.session, "last_status_code", None) == 404:
+            logger.info("jobbol: %s: HTTP 404 no detalhe; repetindo uma vez", job_id)
+            response = self.session.get(url)
         if response is None:
             self._erro(
                 f"{job_id}: detalhe indisponivel "
