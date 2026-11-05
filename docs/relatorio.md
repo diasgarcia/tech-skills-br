@@ -461,3 +461,9 @@ Conferi a página e o registro da listagem do anúncio 29387174287. Reproduzi a 
 Os 1.370 testes passaram e o lint não apontou problemas. A correção está local na branch codex/jobbol-detalhe-html. Não executei uma coleta completa nem alterei o banco. Os ajustes ainda não foram commitados ou publicados.
 
 Depois da autorização, registrei a correção e seus testes em um commit na branch codex/jobbol-detalhe-html. Separei a arquitetura e este relatório em outro commit para revisão por PR. A revisão da wiki recebeu um commit em sua própria branch de mesmo nome.
+
+Investiguei os HTTP 404 dos anúncios 29387177006 e 29387176985 na coleta manual. Na consulta de diagnóstico, a API forneceu links atuais com IDs 149513 e 149490, enquanto o coletor construía os endereços antigos usando o jobkey. Corrigi a consulta para usar o link da listagem, conferindo domínio, HTTPS, id_vaga e título, e incluindo a cidade indicada pelo portal. O jobkey continua identificando o registro salvo. Os dois links atuais responderam HTTP 200 no teste local, com uma chamada de detalhe por anúncio e descrições extraídas.
+
+Retirei a tentativa extra de 404 proposta inicialmente. Os logs antigos não guardam a URL final nem os redirecionamentos, então não permitem identificar a causa interna da resposta recebida no runner. Acrescentei esses dados ao diagnóstico de erros HTTP. Atualizei a arquitetura e a cópia local da página afetada na wiki.
+
+Os 1.389 testes passaram e o lint não apontou problemas. A revisão da PR 32 passou a tratar o endereço de consulta e o diagnóstico HTTP, com preservação do erro quando a resposta é 404. A conferência real ficou restrita aos dois anúncios investigados, sem coleta completa ou alteração do banco.

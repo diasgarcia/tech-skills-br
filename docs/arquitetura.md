@@ -44,11 +44,17 @@ padrão cobrem TI, estágio, trainee e aprendiz. Requisitos técnicos da seção
 Observações são preservados antes dos benefícios.
 
 O identificador persistido da Jobbol continua sendo o `jobkey` da listagem.
-Na migração das páginas, o detalhe pode redirecionar para `/vaga/{novo_id}-{slug}`
-e declarar `v{novo_id}` no JSON-LD. Esse formato exige HTTPS no domínio da
-Jobbol, ID compatível com a URL final, título equivalente ao da listagem e
-histórico de redirecionamento iniciado no endereço solicitado. Divergências
-são registradas com o identificador e a URL recebidos, sem aceitar o detalhe.
+O coletor usa o `link` informado pela API, conferindo HTTPS, domínio e
+compatibilidade com `id_vaga`. O parâmetro de cidade usa `id_cidade` quando
+o link atual ainda não tem query. O detalhe precisa confirmar o ID e o
+título da listagem. Assim, o endereço de consulta pode usar o novo ID sem
+mudar a identidade do registro salvo.
+
+Quando o link está ausente no formato legado, a consulta usa `/vaga/{jobkey}`.
+Nesse caso, uma migração para `/vaga/{novo_id}-{slug}` exige também o histórico
+de redirecionamento iniciado no endereço solicitado. Divergências geram
+diagnóstico do identificador e da URL. Falhas HTTP registram a URL final e a
+cadeia de redirecionamentos para permitir a investigação do caminho recebido.
 
 Algumas vagas próprias publicam apenas a navegação no JSON-LD. Quando o
 `JobPosting` está ausente, o coletor lê o título, a empresa e as seções de
