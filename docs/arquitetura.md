@@ -36,7 +36,7 @@ InfoJobs usa os últimos três dias. Abler e Recrutei usam a recência do sitema
 no modo diário. Essas janelas, os termos e os tetos de paginação limitam a
 cobertura; não garantem observar todos os anúncios.
 
-Jobbol usa uma listagem JSON e o JSON-LD das páginas públicas de detalhe.
+Jobbol usa uma listagem JSON e lê JSON-LD ou HTML nas páginas públicas de detalhe.
 A janela padrão é de três dias, com corte local antes de buscar a descrição.
 A listagem pede ordem decrescente de data. Anúncios promovidos podem ficar
 fora dessa ordem; uma vaga antiga não encerra a paginação. As quatro buscas
@@ -49,6 +49,14 @@ e declarar `v{novo_id}` no JSON-LD. Esse formato exige HTTPS no domínio da
 Jobbol, ID compatível com a URL final, título equivalente ao da listagem e
 histórico de redirecionamento iniciado no endereço solicitado. Divergências
 são registradas com o identificador e a URL recebidos, sem aceitar o detalhe.
+
+Algumas vagas próprias publicam apenas a navegação no JSON-LD. Quando o
+`JobPosting` está ausente, o coletor lê o título, a empresa e as seções de
+atividades, requisitos, observações e benefícios no HTML da vaga. O ID da
+URL canônica passa pelas mesmas verificações de identidade, título e
+redirecionamento. A leitura fica restrita ao corpo do anúncio. Os requisitos
+das observações são posicionados antes dos benefícios para a extração de
+habilidades. O anúncio lido segue para os filtros normais de TI e nível.
 
 O filtro de relevância combina título e descrição nos casos ambíguos de
 Administração e Engenharia. Apoio administrativo com EPIs e plotagens,

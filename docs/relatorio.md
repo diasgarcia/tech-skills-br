@@ -449,3 +449,15 @@ Separei os anúncios recentes em vagas-recentes.json, gerado junto com os demais
 Os 1.354 testes passaram e o lint não apontou problemas. Conferi no navegador a carga sob demanda, o cache, os filtros, os detalhes e a rolagem em computador e celular. A página permaneceu sem rolagem externa nas telas verificadas. Três verificações HTTP locais também passaram. Atualizei a arquitetura e a cópia local das páginas de arquitetura e uso da wiki. Não executei coleta, não alterei o banco nem fiz commit ou publicação.
 
 Depois da autorização, separei a geração do recorte e o carregamento do explorador nas branches codex/api-vagas-recentes e codex/performance-explorador-vagas. Os commits incluem as descrições e os testes de cada mudança. A segunda branch depende da primeira. Separei a documentação em outro commit e registrei a revisão da wiki em uma branch local própria. Não fiz push nem publiquei dados ou o site.
+
+---
+
+### 05/11/2026
+
+Corrigi a leitura dos detalhes da Jobbol que exibem os dados no HTML e publicam apenas a navegação no JSON-LD. O coletor agora lê título, empresa e seções da descrição nesse formato. A URL canônica, o título e o redirecionamento precisam confirmar o vínculo com a vaga solicitada. As observações técnicas continuam antes dos benefícios na extração de habilidades. O diagnóstico passou a distinguir falha da requisição de ausência de descrição válida.
+
+Conferi a página e o registro da listagem do anúncio 29387174287. Reproduzi a coleta desse registro com a resposta salva, sem nova chamada durante a reprodução. A leitura recuperou empresa, atividades e benefícios, e o filtro normal descartou o anúncio por ser de atendimento fora de TI. Adicionei testes para o HTML, extração de habilidades, identidade divergente, conteúdo incompleto e reutilização dos detalhes entre buscas. Atualizei a arquitetura e a cópia local da página de arquitetura da wiki.
+
+Os 1.370 testes passaram e o lint não apontou problemas. A correção está local na branch codex/jobbol-detalhe-html. Não executei uma coleta completa nem alterei o banco. Os ajustes ainda não foram commitados ou publicados.
+
+Depois da autorização, registrei a correção e seus testes em um commit na branch codex/jobbol-detalhe-html. Separei a arquitetura e este relatório em outro commit para revisão por PR. A revisão da wiki recebeu um commit em sua própria branch de mesmo nome.
