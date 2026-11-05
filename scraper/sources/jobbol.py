@@ -12,7 +12,7 @@ import json
 import logging
 import re
 from datetime import datetime, timedelta, timezone
-from urllib.parse import urlsplit
+from urllib.parse import urlencode, urljoin, urlsplit, urlunsplit
 
 from bs4 import BeautifulSoup
 
@@ -110,10 +110,16 @@ def _descricao(raw: str) -> str:
     return soup.get_text(" ", strip=True)
 
 
-def _mesma_vaga(posting: dict, response, job_id: str, title: str) -> bool:
+def _mesma_vaga(
+    posting: dict, response, job_id: str, title: str, listed_url: str | None = None,
+) -> bool:
     identifier = posting.get("identifier") or {}
-    if not isinstance(identifier, dict) or str(identifier.get("value", job_id)) == job_id:
+    if listed_url is None and (
+        not isinstance(identifier, dict) or str(identifier.get("value", job_id)) == job_id
+    ):
         return True
+    if not isinstance(identifier, dict):
+        return False
 
     # O ID antigo redireciona para /vaga/{novo_id}-{slug}, cujo JSON-LD usa v{novo_id}.
     final = urlsplit(getattr(response, "url", "") or "")
@@ -125,6 +131,9 @@ def _mesma_vaga(posting: dict, response, job_id: str, title: str) -> bool:
     posting_title = posting.get("title")
     if not isinstance(posting_title, str) or normalize(posting_title) != normalize(title):
         return False
+    if listed_url is not None:
+        listed = re.fullmatch(r"/vaga/([0-9]+)-[^/]+/?", urlsplit(listed_url).path)
+        return listed is not None and listed.group(1) == match.group(1)
     history = getattr(response, "history", None) or []
     return bool(history) and getattr(history[0], "url", "") == f"{SITE_URL}/vaga/{job_id}"
 
@@ -212,6 +221,27 @@ class JobbolSource(JobSource):
     def _detalhe(self, raw: dict, published: datetime, term: str) -> Job | None:
         job_id = str(raw["jobkey"])
         url = f"{SITE_URL}/vaga/{job_id}"
+        listed_url = None
+        link = raw.get("link")
+        if link:
+            if not isinstance(link, str):
+                self._erro(f"{job_id}: link da listagem fora do formato esperado")
+                return None
+            parsed = urlsplit(urljoin(SITE_URL, link))
+            migrated = re.fullmatch(r"/vaga/([0-9]+)-[^/]+/?", parsed.path)
+            valid_path = parsed.path == f"/vaga/{job_id}" or (
+                migrated is not None and migrated.group(1) == str(raw.get("id_vaga"))
+            )
+            if parsed.scheme != "https" or parsed.netloc != urlsplit(SITE_URL).netloc or not valid_path:
+                self._erro(f"{job_id}: link da listagem divergente (link={link!r})")
+                return None
+            if migrated is not None:
+                city_id = str(raw.get("id_cidade") or "")
+                query = parsed.query
+                if not query and city_id.isdigit():
+                    query = urlencode({"cidade": city_id})
+                url = urlunsplit((parsed.scheme, parsed.netloc, parsed.path, query, ""))
+                listed_url = url
         response = self.session.get(url)
         if response is None:
             self._erro(
@@ -226,7 +256,7 @@ class JobbolSource(JobSource):
                 f"(url={getattr(response, 'url', url)})"
             )
             return None
-        if not _mesma_vaga(posting, response, job_id, raw["CARGO"]):
+        if not _mesma_vaga(posting, response, job_id, raw["CARGO"], listed_url):
             self._erro(
                 f"{job_id}: identidade divergente no detalhe "
                 f"(identifier={posting.get('identifier')!r}; url={getattr(response, 'url', url)!r})"
