@@ -461,9 +461,3 @@ Conferi a página e o registro da listagem do anúncio 29387174287. Reproduzi a 
 Os 1.370 testes passaram e o lint não apontou problemas. A correção está local na branch codex/jobbol-detalhe-html. Não executei uma coleta completa nem alterei o banco. Os ajustes ainda não foram commitados ou publicados.
 
 Depois da autorização, registrei a correção e seus testes em um commit na branch codex/jobbol-detalhe-html. Separei a arquitetura e este relatório em outro commit para revisão por PR. A revisão da wiki recebeu um commit em sua própria branch de mesmo nome.
-
-Investiguei dois HTTP 404 na coleta manual da Jobbol. Os anúncios 29387177006 e 29387176985 retornaram HTTP 200 na consulta local posterior, com os cabeçalhos do coletor e detalhes válidos após redirecionamento. Os logs confirmam os 404 recebidos pelo runner, mas não permitem determinar se a diferença dependeu do horário ou da origem da requisição.
-
-Adicionei uma única nova tentativa de detalhe após HTTP 404, com o intervalo normal entre chamadas. Uma falha persistente continua registrada com o status da última resposta. Os 117 testes focados da Jobbol e do cliente HTTP passaram, e o lint dos arquivos alterados não apontou problemas. Reproduzi a recuperação dos dois anúncios com suas páginas salvas e um 404 inicial simulado por anúncio. Atualizei a arquitetura e sua cópia local na wiki. Os ajustes estão locais na branch codex/jobbol-retry-404, sem coleta completa ou alteração do banco.
-
-Depois da autorização, sincronizei a branch com o último commit de dados da main e registrei a correção com seus testes. Separei a documentação em outro commit para revisão por PR. A wiki recebeu um commit em sua branch de revisão.
