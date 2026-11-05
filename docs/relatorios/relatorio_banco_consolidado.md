@@ -1,9 +1,9 @@
-# Relatório Consolidado da Base de Vagas (10949 vagas)
+# Relatório Consolidado da Base de Vagas (10950 vagas)
 
-- **Data de geração:** 05/11/2026 15:38 (Brasília)
+- **Data de geração:** 05/11/2026 17:32 (Brasília)
 - **Período coberto:** 01/01/2026 até 05/11/2026
-- **Total de vagas consolidadas:** 10949
-- **Vagas novas no dia (05/11/2026, Brasília):** 143
+- **Total de vagas consolidadas:** 10950
+- **Vagas novas no dia (05/11/2026, Brasília):** 144
 
 Os resultados descrevem os anúncios coletados. As menções identificadas não representam toda a demanda do mercado nem o número de contratações.
 
@@ -13,7 +13,7 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 |---|---|---|---|---|
 | 1 | Suporte Técnico | 3403 | 31.1% | ######.............. |
 | 2 | Engenharia de Software | 1529 | 14.0% | ###................. |
-| 3 | Infraestrutura / Redes | 980 | 9.0% | ##.................. |
+| 3 | Infraestrutura / Redes | 980 | 8.9% | ##.................. |
 | 4 | Service Desk / Help Desk | 762 | 7.0% | #................... |
 | 5 | Data | 703 | 6.4% | #................... |
 | 6 | Backend | 580 | 5.3% | #................... |
@@ -25,7 +25,7 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 | 12 | Hardware / Eletrônica | 272 | 2.5% | .................... |
 | 13 | Fullstack | 263 | 2.4% | .................... |
 | 14 | Frontend | 164 | 1.5% | .................... |
-| 15 | DevOps | 153 | 1.4% | .................... |
+| 15 | DevOps | 154 | 1.4% | .................... |
 | 16 | Design / UI / UX | 126 | 1.2% | .................... |
 | 17 | Inteligência Artificial | 99 | 0.9% | .................... |
 | 18 | Mobile | 71 | 0.6% | .................... |
@@ -34,7 +34,7 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 
 | Região | Vagas | % | Gráfico |
 |---|---|---|---|
-| Sudeste | 5921 | 54.1% | ###########......... |
+| Sudeste | 5922 | 54.1% | ###########......... |
 | Sul | 2160 | 19.7% | ####................ |
 | Nordeste | 902 | 8.2% | ##.................. |
 | Centro-Oeste | 637 | 5.8% | #................... |
@@ -47,7 +47,7 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 
 | Posição | Polo | Vagas | % | Gráfico |
 |---|---|---|---|---|
-| 1 | São Paulo | 2851 | 26.0% | #####............... |
+| 1 | São Paulo | 2852 | 26.0% | #####............... |
 | 2 | Belo Horizonte | 749 | 6.8% | #................... |
 | 3 | Nacional | 595 | 5.4% | #................... |
 | 4 | Rio de Janeiro | 574 | 5.2% | #................... |
@@ -63,15 +63,15 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 | Modalidade | Vagas | % | Gráfico |
 |---|---|---|---|
 | Presencial | 4491 | 41.0% | ########............ |
-| Não informado | 4199 | 38.4% | ########............ |
+| Não informado | 4199 | 38.3% | ########............ |
 | Híbrido | 1271 | 11.6% | ##.................. |
-| Remoto | 988 | 9.0% | ##.................. |
+| Remoto | 989 | 9.0% | ##.................. |
 
 ## Distribuição por Nível de Entrada
 
 | Senioridade | Vagas | % |
 |---|---|---|
-| Júnior | 7730 | 70.6% |
+| Júnior | 7731 | 70.6% |
 | Estágio | 2935 | 26.8% |
 | Aprendiz | 155 | 1.4% |
 | Trainee | 129 | 1.2% |
@@ -84,7 +84,7 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 | solides | 1127 | 10.3% |
 | infojobs | 1083 | 9.9% |
 | gupy | 835 | 7.6% |
-| jobbol | 337 | 3.1% |
+| jobbol | 338 | 3.1% |
 | vagas | 220 | 2.0% |
 | abler | 193 | 1.8% |
 | recrutei | 192 | 1.8% |
@@ -96,21 +96,21 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 | Posição | Tecnologia | Anúncios com menção identificada |
 |---|---|---|
 | 1 | Hardware | 2761 |
-| 2 | Redes de Computadores | 2214 |
-| 3 | Inglês | 2077 |
+| 2 | Redes de Computadores | 2215 |
+| 3 | Inglês | 2078 |
 | 4 | Banco de Dados | 2053 |
 | 5 | SQL | 1999 |
-| 6 | Windows | 1990 |
+| 6 | Windows | 1991 |
 | 7 | Pacote Office | 1859 |
-| 8 | Sistemas Operacionais | 1814 |
+| 8 | Sistemas Operacionais | 1815 |
 | 9 | Gestão de Chamados | 1667 |
-| 10 | Git | 1510 |
+| 10 | Git | 1511 |
 | 11 | Inteligência Artificial | 1397 |
-| 12 | Python | 1376 |
+| 12 | Python | 1377 |
 | 13 | Excel | 1363 |
 | 14 | Segurança da Informação | 1229 |
 | 15 | JavaScript | 1118 |
-| 16 | Linux | 1024 |
+| 16 | Linux | 1025 |
 | 17 | Manutenção Preventiva | 934 |
 | 18 | Análise de Dados | 926 |
 | 19 | Montagem e Manutenção de PCs | 881 |
