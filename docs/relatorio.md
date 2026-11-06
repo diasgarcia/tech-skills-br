@@ -481,3 +481,5 @@ Confirmei o cadastro do dataset público e do secret de escrita. Configurei o en
 Os 1.390 testes passaram. O lint de Python e o actionlint passaram. O teste com Git LFS local verificou a atualização da branch principal, a preservação da tag, a repetição sem mudança e a recusa de um snapshot antigo. A simulação HTTP confirmou a verificação dos bytes e a rejeição de hash divergente e resposta 404. Atualizei a documentação e preparei a revisão das páginas de automação e fluxo da wiki.
 
 Publiquei a tag v2026.10.27 e confirmei o SHA-256 do Parquet remoto. O primeiro envio da branch principal parou ao consultar o manifesto da release. Corrigi a consulta para usar o repositório explícito e baixar o manifesto em um diretório temporário, conforme o fluxo do Pages. O erro do comando de consulta agora fica visível no log.
+
+Confirmei que a branch principal do Hugging Face recebeu as 11.049 vagas e o mesmo Parquet da versão 216 do Kaggle. Integrei o envio automático na PR 33. Adicionei o link do dataset ao README, à página inicial da wiki e à página sobre o modelo de dados.

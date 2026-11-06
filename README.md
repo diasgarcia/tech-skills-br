@@ -2,7 +2,7 @@
 
 Dados sobre as habilidades citadas em anúncios de vagas de entrada em tecnologia no Brasil.
 
-[Explorar o painel](https://diasgarcia.github.io/tech-skills-br/) · [Analisar no Kaggle](https://www.kaggle.com/code/rafaeldiasgarcia/tech-skills-brasil-analise-diaria) · [Baixar o dataset](https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br) · [Consultar a metodologia](https://github.com/diasgarcia/tech-skills-br/wiki)
+[Explorar o painel](https://diasgarcia.github.io/tech-skills-br/) · [Analisar no Kaggle](https://www.kaggle.com/code/rafaeldiasgarcia/tech-skills-brasil-analise-diaria) · [Dataset no Kaggle](https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br) · [Dataset no Hugging Face](https://huggingface.co/datasets/diasgarcia/tech-skills-br) · [Consultar a metodologia](https://github.com/diasgarcia/tech-skills-br/wiki)
 
 O projeto acompanha anúncios de estágio, aprendiz, trainee e nível júnior. A coleta consulta dez portais três vezes por dia. O processo organiza as vagas por área e identifica as habilidades citadas em cada anúncio.
 
@@ -33,6 +33,7 @@ Detalhes sobre fontes, critérios, limitações e decisões estão na [wiki do p
 | [Painel público](https://diasgarcia.github.io/tech-skills-br/) | Visão geral, rankings e exploradores de vagas e áreas |
 | [Notebook no Kaggle](https://www.kaggle.com/code/rafaeldiasgarcia/tech-skills-brasil-analise-diaria) | Análise atualizada da base |
 | [Dataset no Kaggle](https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br) | Snapshot em Parquet para análise e reutilização |
+| [Dataset no Hugging Face](https://huggingface.co/datasets/diasgarcia/tech-skills-br) | Base atual em Parquet e versões fixas para citação |
 | [API JSON](https://diasgarcia.github.io/tech-skills-br/api/resumo.json) | Dados estáticos usados pelo painel |
 | [Relatório consolidado](docs/relatorios/relatorio_banco_consolidado.md) | Resumo textual mais recente |
 
