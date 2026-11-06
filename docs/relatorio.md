@@ -491,3 +491,5 @@ Integrei os links e o ícone na PR 34. Conferi as duas execuções recentes com 
 Limitei as chamadas de uma sessão após dois HTTP 429 seguidos. Uma espera informada acima de 30 segundos interrompe já na primeira resposta. A coleta preserva as vagas recebidas, registra o erro e deixa as outras fontes continuarem. Os termos restantes da fonte bloqueada aparecem como não tentados no log.
 
 Os 1.403 testes passaram e o lint não apontou problemas. A simulação HTTP local confirmou a preservação de resultados e a continuidade da outra fonte nos modos sequencial e paralelo. Também conferiu as esperas longas e a recuperação de um 429 isolado nos dois transportes HTTP.
+
+Troquei o nome do conjunto exibido no Hugging Face de train para vagas. A configuração versionada passa a usar esse nome nas publicações seguintes.
