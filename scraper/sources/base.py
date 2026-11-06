@@ -96,6 +96,12 @@ class JobSource(ABC):
         jobs: list[Job] = []
         total_terms = len(terms)
         for idx, term in enumerate(terms, 1):
+            if getattr(self.session, "rate_limited", False):
+                logger.warning(
+                    "[%s] coleta interrompida por HTTP 429; %d termos nao tentados.",
+                    self.name, total_terms - idx + 1,
+                )
+                break
             errors_before = len(self.stats.errors)
             try:
                 found = self.fetch_term(term)

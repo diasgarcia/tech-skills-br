@@ -196,6 +196,31 @@ def test_falha_de_fonte_preserva_diagnostico_e_contagem_sem_parar_as_demais(monk
     assert requests == 4
 
 
+def test_fonte_sem_busca_por_termos_tambem_registra_bloqueio_429(monkeypatch):
+    from scraper.sources.base import JobSource
+
+    class Source(JobSource):
+        name = "source"
+
+        def fetch_term(self, term):
+            return []
+
+        def fetch(self, terms):
+            self.session.rate_limited = True
+            self.session.last_status_code = 429
+            return [_vaga(source=self.name)]
+
+    monkeypatch.setattr(pipeline, "SOURCE_REGISTRY", {"source": Source})
+    settings = Settings(sources=["source"])
+
+    _, jobs, stats, _, status = pipeline._collect_source("source", settings)
+
+    assert len(jobs) == 1
+    assert stats.raw_jobs == 1
+    assert stats.errors == ["source: coleta interrompida por bloqueio HTTP 429."]
+    assert status == 429
+
+
 @pytest.mark.parametrize("parallel", [False, True])
 def test_falha_na_construcao_de_fonte_tambem_gera_estatistica(monkeypatch, parallel):
     def failed_collect(*args):

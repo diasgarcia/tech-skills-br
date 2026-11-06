@@ -104,6 +104,8 @@ def _collect_source(
                     stats.errors.append(f"{source_name}/checkpoint: {checkpoint_error}")
         requests = session.request_count
         ultimo_status = session.last_status_code
+        if getattr(session, "rate_limited", False):
+            stats.errors.append(f"{source_name}: coleta interrompida por bloqueio HTTP 429.")
         stats.raw_jobs = len(jobs)
         stats.requests_made = requests
 

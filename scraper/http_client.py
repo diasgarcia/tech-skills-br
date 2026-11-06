@@ -8,10 +8,12 @@ import time
 
 import requests
 from requests.adapters import HTTPAdapter
+from urllib3.exceptions import InvalidHeader
 from urllib3.util.retry import Retry
 
 logger = logging.getLogger(__name__)
 RETRYABLE_STATUSES = frozenset({429, 500, 502, 503, 504})
+MAX_RETRY_AFTER_SECONDS = 30
 
 
 class PoliteSession:
@@ -39,6 +41,8 @@ class PoliteSession:
         self.request_count = 0
         self.attempt_count = 0
         self.last_status_code: int | None = None
+        self.rate_limited = False
+        self._consecutive_429 = 0
         self._network_errors = (requests.RequestException,)
 
         cabecalhos = {
@@ -82,8 +86,10 @@ class PoliteSession:
 
         `request_count` mantem a contagem historica de chamadas logicas.
         `attempt_count` inclui repeticoes feitas aqui, nao redirecionamentos
-        internos do transporte. Retry-After nao altera o limite de espera.
+        internos do transporte. Dois 429 seguidos encerram a sessao da fonte.
         """
+        if self.rate_limited:
+            return None
         kwargs.setdefault("timeout", self.timeout_seconds)
         self.request_count += 1
         self.last_status_code = None
@@ -92,6 +98,7 @@ class PoliteSession:
         # de idempotencia, o cliente nao repete essa operacao automaticamente.
         retry_limit = self.max_retries if method == "get" else 0
         for attempt in range(retry_limit + 1):
+            retry_after = 0
             self._wait_turn()
             self.attempt_count += 1
             self.last_status_code = None
@@ -103,9 +110,25 @@ class PoliteSession:
                     return None
             else:
                 self.last_status_code = response.status_code
+                if response.status_code == 429:
+                    self._consecutive_429 += 1
+                    header = response.headers.get("Retry-After")
+                    if isinstance(header, str):
+                        try:
+                            retry_after = Retry().parse_retry_after(header)
+                        except InvalidHeader:
+                            logger.warning("Retry-After invalido em %s: %r", url, header)
+                    self.rate_limited = self._consecutive_429 >= 2 or retry_after > MAX_RETRY_AFTER_SECONDS
+                    if self.rate_limited:
+                        logger.warning(
+                            "HTTP 429 em %s: sessao interrompida (%d respostas seguidas, Retry-After=%ss).",
+                            url, self._consecutive_429, retry_after,
+                        )
+                else:
+                    self._consecutive_429 = 0
                 if response.status_code < 400:
                     return response
-                if response.status_code not in RETRYABLE_STATUSES or attempt >= retry_limit:
+                if self.rate_limited or response.status_code not in RETRYABLE_STATUSES or attempt >= retry_limit:
                     logger.warning(
                         "HTTP %s em %s (url_final=%s, redirecionamentos=%s, params=%s, resp=%s)",
                         response.status_code, url, response.url,
@@ -113,7 +136,7 @@ class PoliteSession:
                         kwargs.get("params"), response.text[:200],
                     )
                     return None
-            backoff = self.backoff_factor * (2**attempt)
+            backoff = max(self.backoff_factor * (2**attempt), retry_after)
             if backoff > 0:
                 time.sleep(backoff)
         return None

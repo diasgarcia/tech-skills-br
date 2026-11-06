@@ -1,9 +1,11 @@
 """Testes das funcoes de paginacao/coleta das fontes, com sessao falsa (offline)."""
 
 import pytest
+from unittest.mock import MagicMock
 
 from scraper.config import Settings
 from scraper.models import Job
+from scraper.http_client import PoliteSession
 from scraper.sources.base import JobSource
 from scraper.sources.gupy import API_URL, GupySource
 from scraper.sources.infojobs import InfoJobsSource
@@ -253,6 +255,24 @@ def test_fetch_preserva_resultados_antes_de_falha_http():
 
     assert [job.external_id for job in jobs] == ["4422123289"]
     assert "HTTP 429" in source.stats.errors[0]
+
+
+def test_linkedin_preserva_vagas_e_para_os_demais_termos_apos_bloqueio(caplog):
+    with PoliteSession(user_agent="t", delay_seconds=0, backoff_factor=0, max_retries=3) as session:
+        session.session.get = MagicMock(side_effect=[
+            MagicMock(status_code=200, text=LINKEDIN_HTML),
+            MagicMock(status_code=429, text="limite", headers={}),
+            MagicMock(status_code=429, text="limite", headers={}),
+        ])
+        source = LinkedInSource(session=session, settings=_settings())
+
+        jobs = source.fetch(["primeiro", "segundo", "terceiro"])
+
+        assert [job.external_id for job in jobs] == ["4422123289"]
+        assert session.session.get.call_count == 3
+        assert session.rate_limited
+        assert "HTTP 429" in source.stats.errors[0]
+        assert "2 termos nao tentados" in caplog.text
 
 
 def test_fetch_nao_duplica_erro_ja_registrado_pela_fonte():

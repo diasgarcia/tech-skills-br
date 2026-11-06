@@ -116,6 +116,8 @@ class AblerSource(JobSource):
             logger.info("[%s] sitemap: %d paginas dentro da janela", self.name, len(alvos))
 
         for idx, url in enumerate(alvos, 1):
+            if getattr(self.session, "rate_limited", False):
+                break
             vid_url = url.rstrip("/").rsplit("-", 1)[-1]
             if vid_url.isdigit() and vid_url in seen:
                 continue

@@ -168,6 +168,8 @@ class RecruteiSource(JobSource):
             logger.info("[%s] retomando checkpoint com %d vagas ja coletadas",
                         self.name, len(seen))
         for idx, url in enumerate(alvos, 1):
+            if getattr(self.session, "rate_limited", False):
+                break
             if _vid_da_url(url) in seen:
                 continue
             page = self.session.get(url)
