@@ -125,7 +125,7 @@ def test_cron_sem_rodada_valida_e_tratado_como_manual():
 
     assert 'EXECUCAO="manual"' in content
     assert 'RODADA_EXECUCAO="manual"' in content
-    assert 'export RODADA="manual"' in content
+    assert 'echo "RODADA=manual" >> "$GITHUB_ENV"' in content
     assert 'if [ "$EXECUCAO" = "cron" ]; then' in content
 
 

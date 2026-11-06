@@ -66,7 +66,7 @@ def test_workflows_usam_slug_sem_acentos_e_rodada_3_atualiza_notebook() -> None:
     assert slug in readme
     assert old_slug not in daily + manual + readme
     assert "env.RODADA_EXECUCAO == '3'" in daily
-    assert "env.KAGGLE_PRONTO == '1'" in daily
+    assert "steps.consolidation.outputs.mudou == '0' || steps.kaggle.outcome == 'success'" in daily
     assert "kaggle kernels push --path notebooks/kaggle --timeout 900" in daily
 
 

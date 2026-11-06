@@ -135,7 +135,7 @@ jobs:
           echo "\`$FRESCOR\`"
         } >> "$GITHUB_STEP_SUMMARY"
         # A partir daqui o banco nao muda: vagas.db + vagas.csv (release) e
-        # o parquet (Kaggle) precisam ser o MESMO snapshot da rodada.
+        # o Parquet das replicas precisam ser o mesmo snapshot da rodada.
         python scripts/export_seed.py
         python scripts/release_snapshot.py publish --allow-legacy
         echo "snapshot_id=$(jq -r '.parent_sha256' data/snapshot-base.json)" >> "$GITHUB_OUTPUT"
@@ -144,11 +144,11 @@ jobs:
         if [ "$ORIGEM_INPUT" = "cron" ] && { [ "$RODADA_INPUT" = "1" ] || [ "$RODADA_INPUT" = "2" ] || [ "$RODADA_INPUT" = "3" ]; }; then
           EXECUCAO="cron"
           RODADA_EXECUCAO="$RODADA_INPUT"
-          export RODADA="$RODADA_INPUT"
+          echo "RODADA=$RODADA_INPUT" >> "$GITHUB_ENV"
         else
           EXECUCAO="manual"
           RODADA_EXECUCAO="manual"
-          export RODADA="manual"
+          echo "RODADA=manual" >> "$GITHUB_ENV"
         fi
         echo "EXECUCAO=$EXECUCAO" >> "$GITHUB_ENV"
         echo "RODADA_EXECUCAO=$RODADA_EXECUCAO" >> "$GITHUB_ENV"
@@ -166,26 +166,7 @@ jobs:
         [ "${NOVAS:-0}" -gt 0 ] && MUDOU=1
         [ "${ATUALIZADAS:-0}" -gt 0 ] && MUDOU=1
         [ "$DADOS_MUDARAM" = "1" ] && MUDOU=1
-        if [ "$MUDOU" = "1" ]; then
-          pip install -e '.[export,publish]'
-          # A release e o estado operacional. O Kaggle e uma replica: se
-          # ele nao confirmar a versao depois da espera do script, a coleta
-          # continua e deixa um aviso visivel para retomar a publicacao.
-          if ! python scripts/export_kaggle.py; then
-            echo "KAGGLE_PRONTO=0" >> "$GITHUB_ENV"
-            echo "::warning title=Kaggle nao confirmado::A release foi atualizada, mas o Kaggle nao confirmou a nova versao. Execute o workflow Publicar Snapshot no Kaggle para tentar de novo."
-            {
-              echo "## Aviso: Kaggle nao confirmado"
-              echo "A release latest foi atualizada. O Kaggle nao confirmou a nova versao apos a espera automatica."
-              echo "Use o workflow **Publicar Snapshot no Kaggle** para repetir apenas a replica."
-            } >> "$GITHUB_STEP_SUMMARY"
-          else
-            echo "KAGGLE_PRONTO=1" >> "$GITHUB_ENV"
-          fi
-        else
-          echo "Kaggle: nada mudou nesta rodada; nenhuma versao nova."
-          echo "KAGGLE_PRONTO=1" >> "$GITHUB_ENV"
-        fi
+        echo "mudou=$MUDOU" >> "$GITHUB_OUTPUT"
         python scripts/resumo_commit.py \
           --dia "$DIA_RESUMO" \
           --brutas "$BRUTAS" --elegiveis "$ELEGIVEIS" \
@@ -193,13 +174,49 @@ jobs:
           --summary-json data/enrich-outras.json --summary-json data/enrich-linkedin.json > /tmp/corpo_commit.txt
       env:
         PYTHONPATH: .
-        KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
         ORIGEM: ${{ github.event.inputs.origem }}
         RODADA: ${{ github.event.inputs.rodada }}
         DATA_HOJE: ${{ env.DATA_HOJE }}
 
+    - name: Exportar Parquet compartilhado
+      id: export_parquet
+      if: steps.consolidation.outputs.mudou == '1'
+      continue-on-error: true
+      run: |
+        python -m pip install -e '.[export]'
+        python scripts/export_dataset.py
+
+    - name: Publicar snapshot no Hugging Face
+      id: huggingface
+      if: steps.export_parquet.outcome == 'success' && vars.HF_REPO_ID != ''
+      continue-on-error: true
+      timeout-minutes: 6
+      env:
+        HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        HF_REPO_ID: ${{ vars.HF_REPO_ID }}
+        SNAPSHOT_ID: ${{ steps.consolidation.outputs.snapshot_id }}
+      run: python scripts/publish_huggingface.py kaggle/vagas.parquet --snapshot-id "$SNAPSHOT_ID"
+
+    - name: Publicar snapshot no Kaggle
+      id: kaggle
+      if: steps.export_parquet.outcome == 'success'
+      continue-on-error: true
+      timeout-minutes: 12
+      env:
+        KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+      run: |
+        python -m pip install -e '.[publish]'
+        python scripts/export_kaggle.py --publish-only
+
+    - name: Registrar falhas nas réplicas
+      if: steps.export_parquet.outcome == 'failure' || steps.huggingface.outcome == 'failure' || steps.kaggle.outcome == 'failure'
+      run: |
+        MENSAGEM="A release latest foi atualizada. Uma réplica não foi confirmada. Use o workflow Publicar Snapshot no Kaggle e Hugging Face para tentar de novo sem coleta."
+        echo "::warning title=Publicação de Parquet::$MENSAGEM"
+        echo "$MENSAGEM" >> "$GITHUB_STEP_SUMMARY"
+
     - name: 7. Atualizar notebook diario no Kaggle
-      if: env.EXECUCAO == 'cron' && env.RODADA_EXECUCAO == '3' && env.KAGGLE_PRONTO == '1'
+      if: env.EXECUCAO == 'cron' && env.RODADA_EXECUCAO == '3' && (steps.consolidation.outputs.mudou == '0' || steps.kaggle.outcome == 'success')
       continue-on-error: true
       run: |
         python -m pip install -e '.[publish]'

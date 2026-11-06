@@ -1,7 +1,17 @@
-name: Publicar Snapshot no Kaggle
+name: Publicar Snapshot no Kaggle e Hugging Face
 
 on:
   workflow_dispatch:
+    inputs:
+      destino:
+        description: Destino da publicação
+        type: choice
+        default: ambos
+        options:
+          - ambos
+          - kaggle
+          - hugging-face
+          - hugging-face-v2026.10.27
 
 concurrency:
   group: vagas-snapshot-latest
@@ -9,7 +19,7 @@ concurrency:
 
 jobs:
   publish:
-    name: Exportar release para o Kaggle
+    name: Replicar o snapshot atual
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -17,7 +27,6 @@ jobs:
 
     env:
       GH_TOKEN: ${{ github.token }}
-      KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
       PYTHONPATH: .
 
     steps:
@@ -35,13 +44,72 @@ jobs:
       - name: Instalar dependências
         run: |
           python -m pip install --upgrade pip
-          pip install -e '.[export,publish]'
+          pip install -e '.[export]'
 
       - name: Baixar snapshot da release
+        if: inputs.destino != 'hugging-face-v2026.10.27'
         run: python scripts/release_snapshot.py download --allow-legacy
 
       - name: Definir data da versão no Brasil
+        if: inputs.destino != 'hugging-face-v2026.10.27'
         run: echo "DATA_HOJE=$(TZ=America/Sao_Paulo date +'%d/%m/%Y')" >> "$GITHUB_ENV"
 
+      - name: Exportar Parquet compartilhado
+        id: export_parquet
+        if: inputs.destino != 'hugging-face-v2026.10.27'
+        run: python scripts/export_dataset.py
+
+      - name: Publicar snapshot no Hugging Face
+        if: inputs.destino == 'hugging-face' || (inputs.destino == 'ambos' && vars.HF_REPO_ID != '')
+        timeout-minutes: 6
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_REPO_ID: ${{ vars.HF_REPO_ID }}
+        run: |
+          SNAPSHOT_ID=$(jq -er '.parent_sha256' data/snapshot-base.json)
+          python scripts/publish_huggingface.py kaggle/vagas.parquet --snapshot-id "$SNAPSHOT_ID"
+
       - name: Publicar snapshot no Kaggle
-        run: python scripts/export_kaggle.py
+        if: ${{ !cancelled() && steps.export_parquet.outcome == 'success' && inputs.destino != 'hugging-face' }}
+        timeout-minutes: 12
+        env:
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+        run: |
+          python -m pip install -e '.[publish]'
+          python scripts/export_kaggle.py --publish-only
+
+      - name: Preservar a release de 10 mil vagas no Hugging Face
+        if: inputs.destino == 'hugging-face-v2026.10.27'
+        timeout-minutes: 10
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_REPO_ID: ${{ vars.HF_REPO_ID }}
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+        run: |
+          python -m pip install -e '.[publish]'
+          python - <<'PY'
+          from pathlib import Path
+          import os
+          import kagglehub
+          from api.snapshots import sha256
+
+          archive = Path(os.environ["RUNNER_TEMP"]) / "release-2026-10-27"
+          archive.mkdir()
+          parquet = Path(kagglehub.dataset_download(
+              "rafaeldiasgarcia/tech-skills-br/versions/191", path="vagas.parquet", output_dir=archive,
+          ))
+          digest = sha256(parquet)
+          if digest != "0a1ab444d24649ccb73e7aae482174edee85f43727a7531fedb8095c1c830b6c":
+              raise SystemExit("O Parquet da versão 191 difere do arquivo validado.")
+          card = Path("docs/huggingface-dataset.md").read_text(encoding="utf-8")
+          card += (
+              "\n## Snapshot v2026.10.27\n\n"
+              "Este snapshot contém 10.099 vagas publicadas entre 01/01/2026 e 27/10/2026.\n\n"
+              "- [Release no GitHub](https://github.com/diasgarcia/tech-skills-br/releases/tag/v2026.10.27)\n"
+              "- [Origem no Kaggle, versão 191](https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br/versions/191)\n"
+              f"- SHA-256 do Parquet: `{digest}`\n"
+          )
+          (archive / "README.md").write_text(card, encoding="utf-8")
+          PY
+          python scripts/publish_huggingface.py "$RUNNER_TEMP/release-2026-10-27/vagas.parquet" \
+            --tag v2026.10.27 --card "$RUNNER_TEMP/release-2026-10-27/README.md"
