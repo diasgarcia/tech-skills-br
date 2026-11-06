@@ -485,3 +485,9 @@ Publiquei a tag v2026.10.27 e confirmei o SHA-256 do Parquet remoto. O primeiro 
 Confirmei que a branch principal do Hugging Face recebeu as 11.049 vagas e o mesmo Parquet da versão 216 do Kaggle. Integrei o envio automático na PR 33. Adicionei o link do dataset ao README, à página inicial da wiki e à página sobre o modelo de dados.
 
 Adicionei o ícone do Hugging Face ao rodapé do site. O link usa o mesmo estilo do Kaggle e tem um rótulo acessível. O site registra o clique quando a pessoa aceita a análise de uso. Conferi o rodapé no navegador em quatro larguras e os dez testes do site passaram.
+
+Integrei os links e o ícone na PR 34. Conferi as duas execuções recentes com falha. Uma era a consulta ao manifesto do Hugging Face já corrigida; a repetição publicou o arquivo. A outra sinalizou os bloqueios do LinkedIn depois de concluir a release, o Kaggle e o Pages.
+
+Limitei as chamadas de uma sessão após dois HTTP 429 seguidos. Uma espera informada acima de 30 segundos interrompe já na primeira resposta. A coleta preserva as vagas recebidas, registra o erro e deixa as outras fontes continuarem. Os termos restantes da fonte bloqueada aparecem como não tentados no log.
+
+Os 1.403 testes passaram e o lint não apontou problemas. A simulação HTTP local confirmou a preservação de resultados e a continuidade da outra fonte nos modos sequencial e paralelo. Também conferiu as esperas longas e a recuperação de um 429 isolado nos dois transportes HTTP.
