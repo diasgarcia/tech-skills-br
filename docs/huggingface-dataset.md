@@ -10,7 +10,7 @@ tags:
 configs:
 - config_name: default
   data_files:
-  - split: train
+  - split: vagas
     path: vagas.parquet
 ---
 
