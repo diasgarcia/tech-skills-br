@@ -85,7 +85,14 @@ def test_falha_ou_anomalia_de_fonte_so_encerra_workflow_depois_do_pages():
     assert collection["outputs"]["has_source_errors"] == "${{ steps.consolidation.outputs.has_source_errors }}"
     assert "scripts/collection_health.py check" in consolidation["run"]
     assert "scripts/release_snapshot.py publish" in consolidation["run"]
-    assert "scripts/export_kaggle.py" in consolidation["run"]
+    exporter = next(step for step in collection["steps"] if step.get("id") == "export_parquet")
+    kaggle = next(step for step in collection["steps"] if step.get("id") == "kaggle")
+    hf = next(step for step in collection["steps"] if "scripts/publish_huggingface.py" in step.get("run", ""))
+    assert collection["steps"].index(consolidation) < collection["steps"].index(exporter)
+    assert "scripts/export_dataset.py" in exporter["run"]
+    assert "scripts/export_kaggle.py --publish-only" in kaggle["run"]
+    assert all(step["continue-on-error"] for step in (exporter, kaggle, hf))
+    assert all("steps.export_parquet.outcome == 'success'" in step["if"] for step in (kaggle, hf))
     assert "has_source_errors == 'true'" in recovery["if"]
     assert "::error title=Coleta parcial::" in final["steps"][0]["run"]
     assert "Falha ou anomalia nas fontes" in final["steps"][0]["run"]
@@ -142,7 +149,10 @@ def test_pages_confere_snapshot_antes_de_publicar(workflow, producer_id, deploy_
 def test_publicacao_kaggle_continua_coordenada_com_o_banco():
     payload = yaml.safe_load((WORKFLOW_DIR / "publish_kaggle.yml").read_text(encoding="utf-8"))
 
-    assert payload["concurrency"] == {"group": "vagas-snapshot-latest", "cancel-in-progress": False}
+    assert payload["concurrency"]["group"] == (
+        "${{ inputs.destino == 'hugging-face-v2026.10.27' && 'vagas-hf-v2026.10.27' || 'vagas-snapshot-latest' }}"
+    )
+    assert payload["concurrency"]["cancel-in-progress"] is False
 
 
 @pytest.mark.parametrize(

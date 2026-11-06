@@ -111,7 +111,7 @@ coleta real.
 Se uma fonte registrar falha, a rodada pode publicar os resultados das demais
 fontes como coleta parcial. As vagas anteriores são preservadas. O aviso aparece
 no resumo do Actions, e o frescor global continua ligado à última coleta completa.
-Depois das etapas de publicação na release, no Kaggle e no Pages, um job final
+Depois das etapas de publicação na release, nas réplicas e no Pages, um job final
 marca a rodada como falha se alguma fonte registrou erro ou anomalia alta de volume. As entregas concluídas
 não são desfeitas. O artefato de recuperação também é guardado nas rodadas parciais.
 Fonte zerada sem erro e queda anormal de volume também seguem esse fluxo parcial.
@@ -152,7 +152,7 @@ aos valores. Os três SVG ficam em `_site/assets`; não entram no Git.
 - Rodadas 1 e 2: publicam banco, JSON e site; preservam relatório e gráficos.
 - Rodada 3, às 19:16 de Brasília: também atualiza relatório e gráficos.
 - Coleta manual: também atualiza relatório e gráficos.
-- Dataset no Kaggle: recebe uma versão quando os dados mudam.
+- Kaggle e Hugging Face: recebem o mesmo Parquet quando os dados mudam.
 - Notebook no Kaggle: roda automaticamente apenas na rodada 3 com origem
   cron e dataset confirmado. Para executar fora desse fluxo, use o workflow
   **Publicar Notebook de Analise no Kaggle**.
@@ -172,7 +172,7 @@ python scripts/export_kaggle.py
 
 O primeiro comando prepara DB e CSV da mesma cópia consistente, verifica o hash da base remota e confirma os artefatos após o envio. Não use `gh release upload --clobber` no fluxo normal, pois ele ignora essas verificações. Para usar outra base, passe também um `--state` separado nos comandos de download e publicação.
 
-Uma falha no Kaggle não desfaz a release. O workflow **Publicar Snapshot no Kaggle** repete somente essa entrega, sem nova coleta. A confirmação compara o Parquet de uma versão identificada, não apenas o número da versão.
+O workflow **Publicar Snapshot no Kaggle e Hugging Face** permite repetir cada entrega sem nova coleta. Uma falha em uma réplica preserva a release e permite o envio à outra. Cada destino confirma o SHA-256 do Parquet publicado. Use o destino `hugging-face-v2026.10.27` para publicar a versão fixa de 10.099 vagas.
 
 ### Atualizar gráficos sem coletar
 
