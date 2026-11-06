@@ -467,3 +467,13 @@ Investiguei os HTTP 404 dos anúncios 29387177006 e 29387176985 na coleta manual
 Retirei a tentativa extra de 404 proposta inicialmente. Os logs antigos não guardam a URL final nem os redirecionamentos, então não permitem identificar a causa interna da resposta recebida no runner. Acrescentei esses dados ao diagnóstico de erros HTTP. Atualizei a arquitetura e a cópia local da página afetada na wiki.
 
 Os 1.389 testes passaram e o lint não apontou problemas. A revisão da PR 32 passou a tratar o endereço de consulta e o diagnóstico HTTP, com preservação do erro quando a resposta é 404. A conferência real ficou restrita aos dois anúncios investigados, sem coleta completa ou alteração do banco.
+
+---
+
+### 06/11/2026
+
+Separei a exportação do Parquet das etapas de publicação. As três rodadas usam o mesmo arquivo para o Kaggle e o Hugging Face quando os dados mudam. A release continua a ser publicada primeiro. A rotina do Hugging Face confere a release atual, mantém um commit na branch principal e verifica o SHA-256 depois do envio.
+
+Conferi as 10.099 vagas e as 16 colunas da versão 191 do Kaggle com o SQLite da release de 27/10. Preparei o envio do arquivo original como a tag v2026.10.27, com a origem e o hash no Dataset Card. A publicação no Hugging Face ainda depende da configuração do dataset e do token de escrita.
+
+Os 1.390 testes passaram. O lint de Python e o actionlint passaram. O teste com Git LFS local verificou a atualização da branch principal, a preservação da tag, a repetição sem mudança e a recusa de um snapshot antigo. A simulação HTTP confirmou a verificação dos bytes e a rejeição de hash divergente e resposta 404. Atualizei a documentação e preparei a revisão das páginas de automação e fluxo da wiki.

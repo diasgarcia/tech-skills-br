@@ -128,9 +128,11 @@ e informar a data real da última coleta, sem duplicar vagas ou descrições.
 
 O manifesto relaciona o hash da base anterior aos hashes do DB e CSV preparados. Os leitores recusam artefatos incompletos ou divergentes. A comparação antes do upload detecta uma base já desatualizada; ela **não é uma trava remota atômica**.
 
-Os jobs que atualizam o banco, replicam o snapshot no Kaggle ou montam o site usam o grupo `vagas-snapshot-latest`, sem cancelar a execução ativa. A publicação no Pages usa outro grupo, `vagas-pages-deploy`, compartilhado pelos três workflows que publicam o site. Um novo deploy cancela o deploy anterior, sem cancelar a coleta, o enriquecimento ou a atualização do banco. Assim, uma espera no ambiente do Pages não mantém o banco bloqueado. Antes do deploy, o job compara o hash do artefato com o snapshot da release e ignora um artefato antigo se a base já mudou. Os grupos não são filas duráveis de todas as solicitações: o GitHub pode substituir uma execução pendente. Publicações locais precisam ser coordenadas separadamente.
+Os jobs que atualizam o banco, replicam o snapshot ou montam o site usam o grupo `vagas-snapshot-latest`, sem cancelar a execução ativa. A publicação no Pages usa outro grupo, `vagas-pages-deploy`, compartilhado pelos três workflows que publicam o site. Um novo deploy cancela o deploy anterior, sem cancelar a coleta, o enriquecimento ou a atualização do banco. Assim, uma espera no ambiente do Pages não mantém o banco bloqueado. Antes do deploy, o job compara o hash do artefato com o snapshot da release e ignora um artefato antigo se a base já mudou. Os grupos não são filas duráveis de todas as solicitações: o GitHub pode substituir uma execução pendente. Publicações locais precisam ser coordenadas separadamente.
 
-O GitHub é publicado antes da réplica no Kaggle. Uma falha da réplica deixa aviso e permite nova tentativa sem coleta. A entrega compara o arquivo de uma versão específica; não aceita qualquer versão posterior como prova de sucesso.
+A release `latest` é publicada antes das réplicas. A exportação gera um único Parquet para o Kaggle e o Hugging Face. Os dois envios são independentes. Cada um confirma a revisão publicada pelo SHA-256 do arquivo. O workflow **Publicar Snapshot no Kaggle e Hugging Face** permite repetir a entrega sem coleta.
+
+O Hugging Face usa a variável `HF_REPO_ID` no formato `usuário/dataset` e o secret `HF_TOKEN` com acesso de escrita ao dataset. Nas três rodadas, a rotina usa Git LFS, verifica se o snapshot ainda é o atual e substitui o único commit da branch `main` com `--force-with-lease`. As versões citáveis usam tags fixas. A opção `hugging-face-v2026.10.27` publica a tag de 10.099 vagas a partir do arquivo validado da versão 191 do Kaggle.
 
 ## Métricas e interface
 
@@ -249,7 +251,7 @@ dataset confirmado. A coleta manual não dispara esse notebook. Há um workflow
 separado para publicá-lo. Seu código permanece versionado em
 `notebooks/kaggle/`; não é editado a cada execução.
 
-O Kaggle recebe um único `vagas.parquet`, com uma linha por anúncio e 16 colunas.
+O Kaggle e o Hugging Face recebem o mesmo `vagas.parquet`, com uma linha por anúncio e 16 colunas.
 `skills` é texto separado por `; `, não uma lista aninhada. `published_date`
 é data, `enrich_encerrada` é booleano e os vocabulários controlados usam
 codificação de categorias. `external_id` continua texto para aceitar IDs
