@@ -479,3 +479,5 @@ Conferi as 10.099 vagas e as 16 colunas da versão 191 do Kaggle com o SQLite da
 Confirmei o cadastro do dataset público e do secret de escrita. Configurei o endereço da réplica no Actions. Separei a trava da tag histórica da trava da base atual, pois a tag usa um arquivo validado da versão 191 e pode ser publicada durante uma coleta.
 
 Os 1.390 testes passaram. O lint de Python e o actionlint passaram. O teste com Git LFS local verificou a atualização da branch principal, a preservação da tag, a repetição sem mudança e a recusa de um snapshot antigo. A simulação HTTP confirmou a verificação dos bytes e a rejeição de hash divergente e resposta 404. Atualizei a documentação e preparei a revisão das páginas de automação e fluxo da wiki.
+
+Publiquei a tag v2026.10.27 e confirmei o SHA-256 do Parquet remoto. O primeiro envio da branch principal parou ao consultar o manifesto da release. Corrigi a consulta para usar o repositório explícito e baixar o manifesto em um diretório temporário, conforme o fluxo do Pages. O erro do comando de consulta agora fica visível no log.

@@ -20,7 +20,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from api.snapshots import sha256
+from api.snapshots import MANIFEST_NAME, sha256, validate_sha256
 
 CARD = PROJECT_ROOT / "docs" / "huggingface-dataset.md"
 PARQUET_NAME = "vagas.parquet"
@@ -28,15 +28,18 @@ logger = logging.getLogger(__name__)
 
 
 def snapshot_atual(snapshot_id: str) -> bool:
-    if not re.fullmatch(r"[0-9a-f]{64}", snapshot_id):
-        raise ValueError("Snapshot esperado invalido.")
-    manifest = subprocess.run(
-        ["gh", "release", "download", "latest", "--pattern", "snapshot.json", "--output", "-"],
-        cwd=PROJECT_ROOT, check=True, capture_output=True, timeout=60,
-    )
-    atual = json.loads(manifest.stdout)["snapshot_id"]
-    if not isinstance(atual, str) or not re.fullmatch(r"[0-9a-f]{64}", atual):
-        raise ValueError("Snapshot da release latest invalido.")
+    validate_sha256(snapshot_id)
+    with TemporaryDirectory(prefix="tech-skills-hf-manifest-") as directory:
+        subprocess.run(
+            [
+                "gh", "release", "download", "latest", "--repo",
+                os.getenv("GITHUB_REPOSITORY", "diasgarcia/tech-skills-br"),
+                "--pattern", MANIFEST_NAME, "--dir", directory,
+            ],
+            cwd=PROJECT_ROOT, check=True, timeout=60,
+        )
+        atual = json.loads((Path(directory) / MANIFEST_NAME).read_text(encoding="utf-8"))["snapshot_id"]
+    validate_sha256(atual)
     return snapshot_id == atual
 
 
