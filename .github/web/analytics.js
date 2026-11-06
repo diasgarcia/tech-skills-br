@@ -7,7 +7,7 @@
   const production = window.location.hostname === "diasgarcia.github.io" &&
     window.location.pathname.startsWith(sitePath);
   const tabs = ["resumo", "skills", "areas", "vagas", "api", "sobre"];
-  const resources = ["job_source", "github", "kaggle"];
+  const resources = ["job_source", "github", "kaggle", "huggingface"];
   const panel = document.getElementById("analytics-consent");
   let consent = readConsent();
   let started = false;

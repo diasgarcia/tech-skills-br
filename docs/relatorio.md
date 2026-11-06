@@ -483,3 +483,5 @@ Os 1.390 testes passaram. O lint de Python e o actionlint passaram. O teste com 
 Publiquei a tag v2026.10.27 e confirmei o SHA-256 do Parquet remoto. O primeiro envio da branch principal parou ao consultar o manifesto da release. Corrigi a consulta para usar o repositório explícito e baixar o manifesto em um diretório temporário, conforme o fluxo do Pages. O erro do comando de consulta agora fica visível no log.
 
 Confirmei que a branch principal do Hugging Face recebeu as 11.049 vagas e o mesmo Parquet da versão 216 do Kaggle. Integrei o envio automático na PR 33. Adicionei o link do dataset ao README, à página inicial da wiki e à página sobre o modelo de dados.
+
+Adicionei o ícone do Hugging Face ao rodapé do site. O link usa o mesmo estilo do Kaggle e tem um rótulo acessível. O site registra o clique quando a pessoa aceita a análise de uso. Conferi o rodapé no navegador em quatro larguras e os dez testes do site passaram.
