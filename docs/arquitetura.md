@@ -36,6 +36,12 @@ InfoJobs usa os últimos três dias. Abler e Recrutei usam a recência do sitema
 no modo diário. Essas janelas, os termos e os tetos de paginação limitam a
 cobertura; não garantem observar todos os anúncios.
 
+Cada fonte usa uma sessão HTTP própria. Dois HTTP 429 seguidos interrompem
+as chamadas dessa sessão. Um 429 com `Retry-After` acima de 30 segundos
+interrompe já na primeira resposta. Uma espera menor é respeitada antes
+da nova tentativa. A fonte preserva as vagas recebidas, registra o bloqueio
+e deixa os demais termos sem consulta. As outras fontes continuam.
+
 Jobbol usa uma listagem JSON e lê JSON-LD ou HTML nas páginas públicas de detalhe.
 A janela padrão é de três dias, com corte local antes de buscar a descrição.
 A listagem pede ordem decrescente de data. Anúncios promovidos podem ficar

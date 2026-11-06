@@ -1,6 +1,7 @@
 """Testes do PoliteSession: delay, retry-config, tratamento de erros."""
 
 import time
+from email.utils import formatdate
 from unittest.mock import MagicMock
 
 import pytest
@@ -74,7 +75,7 @@ def test_get_repassa_timeout_padrao(polite):
 
 def test_retry_nao_respeita_retry_after_sem_teto(polite):
     # Cloudflare ja respondeu 429 com Retry-After de 23h: dormir tudo isso
-    # travaria a coleta inteira. O backoff exponencial proprio ja espaca.
+    # travaria a coleta inteira. A politica da sessao encerra a fonte.
     adapter = polite.session.adapters["https://"]
 
     respects_retry_after = adapter.max_retries.respect_retry_after_header
@@ -246,7 +247,7 @@ def test_retry_transitorio_tem_a_mesma_politica_nos_transportes(impersonate, sta
     ) as session:
         response = MagicMock(status_code=200)
         session.session.get = MagicMock(side_effect=[
-            MagicMock(status_code=status, text="falha", headers={"Retry-After": "82800"}), response,
+            MagicMock(status_code=status, text="falha", headers={}), response,
         ])
 
         result = session.get("https://example.com/job")
@@ -324,7 +325,7 @@ def test_get_aplica_delay_a_cada_tentativa_e_backoff_limitado(polite, monkeypatc
     monkeypatch.setattr(polite, "_wait_turn", wait)
     monkeypatch.setattr(time, "sleep", sleep)
     polite.session.get = MagicMock(side_effect=[
-        MagicMock(status_code=429, text="erro", headers={"Retry-After": "82800"}),
+        MagicMock(status_code=429, text="erro", headers={}),
         MagicMock(status_code=200),
     ])
 
@@ -333,3 +334,60 @@ def test_get_aplica_delay_a_cada_tentativa_e_backoff_limitado(polite, monkeypatc
     assert wait.call_count == 2
     sleep.assert_called_once_with(0.5)
     assert polite.session.adapters["https://"].max_retries.total == 0
+
+
+@pytest.mark.parametrize("impersonate", [None, "chrome"])
+@pytest.mark.parametrize("max_retries", [0, 3])
+def test_dois_429_seguidos_encerram_chamadas_da_sessao(impersonate, max_retries):
+    with PoliteSession(
+        user_agent="t", delay_seconds=0, backoff_factor=0, max_retries=max_retries,
+        impersonate=impersonate,
+    ) as session:
+        session.session.get = MagicMock(return_value=MagicMock(status_code=429, headers={}, text="limite"))
+
+        assert session.get("https://example.com/primeira") is None
+        assert session.get("https://example.com/segunda") is None
+        assert session.get("https://example.com/terceira") is None
+
+        assert session.rate_limited
+        assert session.attempt_count == 2
+        assert session.last_status_code == 429
+        assert session.session.get.call_count == 2
+
+
+@pytest.mark.parametrize("impersonate", [None, "chrome"])
+@pytest.mark.parametrize("retry_after", ["82800", formatdate(time.time() + 3600, usegmt=True)])
+def test_retry_after_longo_interrompe_sem_espera(impersonate, retry_after, monkeypatch):
+    sleep = MagicMock()
+    monkeypatch.setattr(time, "sleep", sleep)
+    with PoliteSession(
+        user_agent="t", delay_seconds=0, backoff_factor=0, max_retries=3, impersonate=impersonate,
+    ) as session:
+        session.session.get = MagicMock(return_value=MagicMock(
+            status_code=429, headers={"Retry-After": retry_after}, text="limite",
+        ))
+
+        result = session.get("https://example.com/job")
+        session.get("https://example.com/outro")
+
+        assert result is None
+        assert session.rate_limited
+        assert session.attempt_count == 1
+        assert session.session.get.call_count == 1
+        sleep.assert_not_called()
+
+
+@pytest.mark.parametrize("retry_after,waits", [("2", [2]), ("invalido", [])])
+def test_429_isolado_pode_recuperar_sem_encerrar_sessao(polite, monkeypatch, retry_after, waits):
+    sleep = MagicMock()
+    monkeypatch.setattr(time, "sleep", sleep)
+    success = MagicMock(status_code=200)
+    limited = MagicMock(status_code=429, headers={"Retry-After": retry_after}, text="limite")
+    polite.session.get = MagicMock(side_effect=[limited, success, limited, success])
+
+    results = [polite.get("https://example.com/job"), polite.get("https://example.com/outro")]
+
+    assert results == [success, success]
+    assert not polite.rate_limited
+    assert polite.attempt_count == 4
+    assert [call.args[0] for call in sleep.call_args_list] == waits * 2

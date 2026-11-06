@@ -175,6 +175,8 @@ class JobbolSource(JobSource):
                 break
             novos = 0
             for raw in batch:
+                if getattr(self.session, "rate_limited", False):
+                    break
                 if not isinstance(raw, dict):
                     self._erro(f"{term}: registro fora do formato esperado")
                     continue
