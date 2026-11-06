@@ -476,4 +476,6 @@ Separei a exportação do Parquet das etapas de publicação. As três rodadas u
 
 Conferi as 10.099 vagas e as 16 colunas da versão 191 do Kaggle com o SQLite da release de 27/10. Preparei o envio do arquivo original como a tag v2026.10.27, com a origem e o hash no Dataset Card. A publicação no Hugging Face ainda depende da configuração do dataset e do token de escrita.
 
+Confirmei o cadastro do dataset público e do secret de escrita. Configurei o endereço da réplica no Actions. Separei a trava da tag histórica da trava da base atual, pois a tag usa um arquivo validado da versão 191 e pode ser publicada durante uma coleta.
+
 Os 1.390 testes passaram. O lint de Python e o actionlint passaram. O teste com Git LFS local verificou a atualização da branch principal, a preservação da tag, a repetição sem mudança e a recusa de um snapshot antigo. A simulação HTTP confirmou a verificação dos bytes e a rejeição de hash divergente e resposta 404. Atualizei a documentação e preparei a revisão das páginas de automação e fluxo da wiki.

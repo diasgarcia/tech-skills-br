@@ -14,7 +14,7 @@ on:
           - hugging-face-v2026.10.27
 
 concurrency:
-  group: vagas-snapshot-latest
+  group: ${{ inputs.destino == 'hugging-face-v2026.10.27' && 'vagas-hf-v2026.10.27' || 'vagas-snapshot-latest' }}
   cancel-in-progress: false
 
 jobs:

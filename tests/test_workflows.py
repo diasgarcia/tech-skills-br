@@ -149,7 +149,10 @@ def test_pages_confere_snapshot_antes_de_publicar(workflow, producer_id, deploy_
 def test_publicacao_kaggle_continua_coordenada_com_o_banco():
     payload = yaml.safe_load((WORKFLOW_DIR / "publish_kaggle.yml").read_text(encoding="utf-8"))
 
-    assert payload["concurrency"] == {"group": "vagas-snapshot-latest", "cancel-in-progress": False}
+    assert payload["concurrency"]["group"] == (
+        "${{ inputs.destino == 'hugging-face-v2026.10.27' && 'vagas-hf-v2026.10.27' || 'vagas-snapshot-latest' }}"
+    )
+    assert payload["concurrency"]["cancel-in-progress"] is False
 
 
 @pytest.mark.parametrize(
