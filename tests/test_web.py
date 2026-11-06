@@ -12,19 +12,23 @@ INDEX_PATH = Path(__file__).resolve().parents[1] / ".github" / "web" / "index.ht
 KAGGLE_DATASET_URL = (
     "https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br"
 )
+HUGGING_FACE_DATASET_URL = "https://huggingface.co/datasets/diasgarcia/tech-skills-br"
 
 
-def test_footer_exibe_links_do_github_e_kaggle():
+def test_footer_exibe_links_do_projeto_e_dos_datasets():
     content = INDEX_PATH.read_text(encoding="utf-8")
     page = BeautifulSoup(content, "html.parser")
     footer = page.find("footer")
     github = footer.find("a", href="https://github.com/diasgarcia/tech-skills-br")
     kaggle = footer.find("a", href=KAGGLE_DATASET_URL)
+    hugging_face = footer.find("a", href=HUGGING_FACE_DATASET_URL)
 
     assert github is not None and github.find("svg") is not None
     assert kaggle is not None and kaggle.find("svg") is not None
+    assert hugging_face is not None and hugging_face.find("svg") is not None
     assert github.get("aria-label") == "Abrir o projeto no GitHub"
     assert kaggle.get("aria-label") == "Abrir o dataset no Kaggle"
+    assert hugging_face.get("aria-label") == "Abrir o dataset no Hugging Face"
 
 
 def test_kpi_identifica_a_skill_com_maior_presenca():
@@ -40,7 +44,7 @@ def test_footer_mobile_oculta_rotulos_e_mantem_icones():
 
     assert ".footer-link-label { display: none; }" in content
     assert "padding: 3px;\n        color: var(--text-muted);" in content
-    assert content.count('class="footer-icon"') == 2
+    assert content.count('class="footer-icon"') == 3
 
 
 def test_links_do_footer_usam_o_mesmo_destaque_azul():

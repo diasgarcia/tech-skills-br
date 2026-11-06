@@ -188,10 +188,13 @@ test("eventos aceitam só nomes de abas e destinos previstos", () => {
   click("job_source");
   click("github");
   click("kaggle");
+  click("huggingface");
   click("email@example.test");
   const events = app.commands().filter(args => args[0] === "event");
 
-  assert.deepEqual(events.map(args => args[1]), ["select_tab", "select_tab", "click_resource", "click_resource", "click_resource"]);
+  assert.deepEqual(events.filter(args => args[1] === "select_tab").map(args => args[2].tab), ["resumo", "vagas"]);
+  assert.deepEqual(events.filter(args => args[1] === "click_resource").map(args => args[2].resource),
+    ["job_source", "github", "kaggle", "huggingface"]);
   assert.ok(events.every(args => args[2].send_to === id));
   assert.ok(!JSON.stringify(events).includes("email@example.test"));
 });
