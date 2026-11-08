@@ -493,3 +493,9 @@ Limitei as chamadas de uma sessão após dois HTTP 429 seguidos. Uma espera info
 Os 1.403 testes passaram e o lint não apontou problemas. A simulação HTTP local confirmou a preservação de resultados e a continuidade da outra fonte nos modos sequencial e paralelo. Também conferiu as esperas longas e a recuperação de um 429 isolado nos dois transportes HTTP.
 
 Troquei o nome do conjunto exibido no Hugging Face de train para vagas. A configuração versionada passa a usar esse nome nas publicações seguintes.
+
+---
+
+### 07/11/2026
+
+Corrigi trechos da arquitetura e da wiki que ainda apresentavam a validação manual como pendente. Vinculei esses textos ao resultado registrado de 370 anúncios revisados e 11 anúncios com erro, ou 2,97% da amostra. Preservei o método e as fichas da validação já publicada.
