@@ -22,7 +22,35 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from api.snapshots import MANIFEST_NAME, sha256, validate_sha256
 
-CARD = PROJECT_ROOT / "docs" / "huggingface-dataset.md"
+DATASET_CARD = """---
+language:
+- pt
+license: mit
+pretty_name: Tech Skills Brasil
+tags:
+- brazil
+- jobs
+- labor-market
+configs:
+- config_name: default
+  data_files:
+  - split: vagas
+    path: vagas.parquet
+---
+
+# Tech Skills Brasil
+
+Esta base reúne anúncios de vagas de entrada em tecnologia no Brasil. Inclui vagas de estágio, aprendiz, trainee e nível júnior. Cada linha representa um anúncio. A coluna `skills` lista as habilidades identificadas no texto do anúncio.
+
+A coleta consulta portais públicos de emprego. O projeto consolida os anúncios, classifica a área e extrai habilidades com um vocabulário de termos técnicos. A coleta roda três vezes por dia. A branch `main` mostra o snapshot mais recente. Tags com data preservam versões específicas.
+
+Os dados descrevem os anúncios coletados. A cobertura varia por fonte, e alguns anúncios têm descrição incompleta ou modalidade ausente. O projeto documenta o escopo e os critérios de coleta na wiki.
+
+- [Código e releases](https://github.com/diasgarcia/tech-skills-br)
+- [Metodologia e limitações](https://github.com/diasgarcia/tech-skills-br/wiki)
+- [Dataset no Kaggle](https://www.kaggle.com/datasets/rafaeldiasgarcia/tech-skills-br)
+- [Painel](https://diasgarcia.github.io/tech-skills-br/)
+"""
 PARQUET_NAME = "vagas.parquet"
 logger = logging.getLogger(__name__)
 
@@ -61,7 +89,7 @@ def publicar(
     *,
     snapshot_id: str | None = None,
     tag: str | None = None,
-    card: Path = CARD,
+    card: Path | None = None,
 ) -> None:
     if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*/[A-Za-z0-9][A-Za-z0-9._-]*", repo_id):
         raise ValueError("Use o identificador HF_REPO_ID no formato usuario/dataset.")
@@ -121,7 +149,10 @@ def publicar(
         git("lfs", "install", "--local")
         git("lfs", "track", PARQUET_NAME)
         shutil.copyfile(parquet, worktree / PARQUET_NAME)
-        shutil.copyfile(card, worktree / "README.md")
+        if card is None:
+            (worktree / "README.md").write_text(DATASET_CARD, encoding="utf-8", newline="\n")
+        else:
+            shutil.copyfile(card, worktree / "README.md")
         git("add", "--", ".gitattributes", "README.md", PARQUET_NAME)
         git("config", "user.name", "github-actions[bot]")
         git("config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com")
@@ -150,7 +181,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("parquet", type=Path)
     parser.add_argument("--repo", default=os.getenv("HF_REPO_ID", "diasgarcia/tech-skills-br"))
-    parser.add_argument("--card", type=Path, default=CARD)
+    parser.add_argument("--card", type=Path)
     revision = parser.add_mutually_exclusive_group(required=True)
     revision.add_argument("--snapshot-id")
     revision.add_argument("--tag")
