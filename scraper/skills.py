@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import re
 import unicodedata
+from bisect import bisect_left
 from collections import Counter
 from functools import lru_cache
 from pathlib import Path
@@ -27,13 +28,49 @@ _URL_RE = re.compile(
 _KEEP_RE = re.compile(r"[^a-z0-9#+ ]+")
 _BOUNDARY = r"[a-z0-9#+]"
 _CASE_BOUNDARY = r"[A-Za-z0-9#+]"
+_ROTULO_COLADO_RE = re.compile(
+    r"(?<=[^\W_])(?=(?:Forma[cç][aã]o|Requisitos|Qualifica[cç][oõ]es|Responsabilidades|"
+    r"Benef[ií]cios|Informa[cç][oõ]es adicionais|[Nn]o[cç][oõ]es (?:de|b[aá]sicas de)|"
+    r"Conhecimentos? (?:em|de)|Suporte de|Plataformas? |"
+    r"Ter (?:desenvolvido|experi[eê]ncia))(?=\b|[A-ZÀ-ÖØ-Þ]))"
+)
+_CURSOS_RE = (
+    r"engenharia|ci[eê]ncias?|sistemas|tecnologia|matem[aá]tica|estat[ií]stica|"
+    r"el[eé]trica|eletrot[eé]cnica|eletr[oô]nica|mecatr[oô]nica|automa[cç][aã]o|"
+    r"redes de computadores|an[aá]lise e desenvolvimento de sistemas|[aá]reas? correlatas?"
+)
+_FORMACAO_RE = re.compile(
+    r"\b(?:forma[cç][aã]o(?:\s+acad[eê]mica)?\s*:\s*"
+    r"|forma[cç][aã]o\s+(?=(?:" + _CURSOS_RE + r")\b)"
+    r"|(?:ensino )?superior\s+(?:tecn[oó]logo|bacharelado)(?:\s+ou\s+(?:tecn[oó]logo|bacharelado))?"
+    r"\s+(?=(?:" + _CURSOS_RE + r")\b)"
+    r"|ensino\s+m[eé]dio\s+t[eé]cnico\s+(?:completo\s+)?em\s+cursos?\s+de\s+"
+    r"|(?:forma[cç][aã]o|gradua[cç][aã]o|(?:ensino\s+)?superior|bacharelado)\s+"
+    r"(?:(?:acad[eê]mica|superior|t[eé]cnic[ao]|tecn[oó]log[ao]|complet[ao]|"
+    r"conclu[ií]d[ao]|em andamento|ou|cursando)[\s()]+)*(?:em|na [aá]rea de)"
+    r"(?!\s*:?\s*andamento\b)\s*:?\s*"
+    r"|(?<!ou )cursando(?:[ \t]+ou[ \t]+ser[ \t]+rec[eé]m-formad[oa](?:\([oa]\))?[ \t]+em\b|"
+    r"(?![ \t]+ou\b))[ \t]*:?[ \t]+"
+    r"|(?:currently )?pursuing (?:a )?(?:ba|bs|ma|ms)(?:/(?:ba|bs|ma|ms))?"
+    r"(?: or (?:ba|bs|ma|ms)(?:/(?:ba|bs|ma|ms))?)? in )"
+    r"[^.!?;\r\n•]+(?:;\s*(?:" + _CURSOS_RE + r")\b[^.!?;\r\n•]*)*",
+    re.IGNORECASE,
+)
+_FIM_FORMACAO_RE = re.compile(
+    r"\b(?:conhecimentos?|experi[eê]ncia|viv[eê]ncia|dom[ií]nio|familiaridade|"
+    r"habilidades?|no[cç][oõ]es|certifica[cç][oõ]es)"
+    r"(?:\s+(?:b[aá]sic[ao]s?|avan[cç]ad[ao]s?|intermedi[aá]ri[ao]s?|"
+    r"pr[eé]via|pr[aá]tica|t[eé]cnic[ao]s?|s[oó]lid[ao]s?))?"
+    r"\s+(?:em|de|com|no|na|nos|nas)\b",
+    re.IGNORECASE,
+)
 
 ARQUIVO_SECOES_DESCARTE = RULES_DIR / "secoes_descarte.yml"
 ARQUIVO_CONTEXTOS_DESCARTE = RULES_DIR / "contextos_descarte.yml"
 
 
 def _carregar_secoes_descarte() -> tuple[str, ...]:
-    """Secoes finais (beneficios/termos) que o extrator deve ignorar."""
+    """Secoes de beneficios e termos que o extrator deve ignorar."""
     try:
         with open(ARQUIVO_SECOES_DESCARTE, encoding="utf-8") as fh:
             dados = yaml.safe_load(fh) or {}
@@ -44,7 +81,7 @@ def _carregar_secoes_descarte() -> tuple[str, ...]:
 
 
 def _carregar_secoes_conteudo() -> tuple[str, ...]:
-    """Marcadores de conteudo (requisitos/atividades) que adiam o corte."""
+    """Titulos de secoes que retomam a leitura de requisitos e atividades."""
     try:
         with open(ARQUIVO_SECOES_DESCARTE, encoding="utf-8") as fh:
             dados = yaml.safe_load(fh) or {}
@@ -78,7 +115,7 @@ def _carregar_contextos_descarte() -> dict[str, list[re.Pattern]]:
     return compiladas
 
 
-def _carregar_exclusoes_sufixo_alias() -> dict[str, dict[str, tuple[str, ...]]]:
+def _carregar_exclusoes_alias(campo: str) -> dict[str, dict[str, tuple[str, ...]]]:
     """Carrega excecoes contextuais especificas de cada alias.
 
     Exemplo: o alias "node" de Node.js nao deve casar quando vier antes de
@@ -97,13 +134,13 @@ def _carregar_exclusoes_sufixo_alias() -> dict[str, dict[str, tuple[str, ...]]]:
             if not isinstance(configuracao, dict):
                 continue
             alias_normalizado = normalize_tech(alias)
-            sufixos = tuple(
+            termos = tuple(
                 token
-                for item in (configuracao.get("nao_seguido_por") or [])
+                for item in (configuracao.get(campo) or [])
                 if (token := normalize_tech(item))
             )
-            if alias_normalizado and sufixos:
-                por_alias[alias_normalizado] = sufixos
+            if alias_normalizado and termos:
+                por_alias[alias_normalizado] = termos
         if por_alias:
             resultado[tecnologia] = por_alias
     return resultado
@@ -141,7 +178,9 @@ def _normalized_offsets(raw: str) -> list[int]:
     return offsets
 
 
-def _compile_alias(alias: str, suffixes: tuple[str, ...] = ()) -> re.Pattern:
+def _compile_alias(
+    alias: str, suffixes: tuple[str, ...] = (), prefixes: tuple[str, ...] = (),
+) -> re.Pattern:
     token = normalize_tech(alias)
     if not token:
         return re.compile(r"(?!x)x")
@@ -149,8 +188,9 @@ def _compile_alias(alias: str, suffixes: tuple[str, ...] = ()) -> re.Pattern:
     if suffixes:
         alternatives = "|".join(re.escape(suffix) for suffix in suffixes)
         suffix_guard = rf"(?!\s+(?:{alternatives})(?!{_BOUNDARY}))"
+    prefix_guard = "".join(rf"(?<!\b{re.escape(prefix)} )" for prefix in prefixes)
     return re.compile(
-        rf"(?<!{_BOUNDARY}){re.escape(token)}{suffix_guard}(?!{_BOUNDARY})"
+        rf"(?<!{_BOUNDARY}){prefix_guard}{re.escape(token)}{suffix_guard}(?!{_BOUNDARY})"
     )
 
 
@@ -172,20 +212,25 @@ class SkillExtractor:
         secoes_conteudo: list[str] | None = None,
         contextos_descarte: dict[str, list[re.Pattern]] | None = None,
         exclusoes_sufixo_alias: dict[str, dict[str, tuple[str, ...]]] | None = None,
+        exclusoes_prefixo_alias: dict[str, dict[str, tuple[str, ...]]] | None = None,
     ) -> None:
         self.skills: dict[str, list[re.Pattern]] = {}
         self.case_sensitive: dict[str, list[re.Pattern]] = {}
         self.groups: dict[str, str] = {}
-        self.secoes_descarte = (
+        descarte = (
             tuple(s.strip() for s in secoes_descarte if s.strip())
             if secoes_descarte is not None
             else _carregar_secoes_descarte()
         )
-        self.secoes_conteudo = (
+        conteudo = (
             tuple(s.strip() for s in secoes_conteudo if s.strip())
             if secoes_conteudo is not None
             else _carregar_secoes_conteudo()
         )
+        self.secoes_descarte = {normalize_tech(secao) for secao in descarte}
+        titulos = self.secoes_descarte | {normalize_tech(secao) for secao in conteudo}
+        alternativas = sorted(filter(None, titulos), key=lambda titulo: (-len(titulo), titulo))
+        self._titulos_secao = re.compile("|".join(map(re.escape, alternativas))) if alternativas else None
         self.contextos_descarte = (
             contextos_descarte
             if contextos_descarte is not None
@@ -194,18 +239,37 @@ class SkillExtractor:
         self.exclusoes_sufixo_alias = (
             exclusoes_sufixo_alias
             if exclusoes_sufixo_alias is not None
-            else _carregar_exclusoes_sufixo_alias()
+            else _carregar_exclusoes_alias("nao_seguido_por")
+        )
+        self.exclusoes_prefixo_alias = (
+            exclusoes_prefixo_alias
+            if exclusoes_prefixo_alias is not None
+            else _carregar_exclusoes_alias("nao_precedido_por")
         )
         for group, entries in (rules or {}).items():
-            for canonical, aliases in (entries or {}).items():
-                patterns = []
+            for canonical, rule in (entries or {}).items():
                 case_patterns = []
+                if isinstance(rule, dict):
+                    aliases = rule.get("aliases")
+                    patterns = [
+                        re.compile(rf"(?<!{_BOUNDARY})(?:{pattern})(?!{_BOUNDARY})")
+                        for pattern in rule.get("padroes", ())
+                    ]
+                    case_patterns.extend(
+                        re.compile(rf"(?<!{_CASE_BOUNDARY})(?:{pattern})(?!{_CASE_BOUNDARY})")
+                        for pattern in rule.get("padroes_originais", ())
+                    )
+                else:
+                    aliases = rule
+                    patterns = []
                 exclusoes_canonicas = self.exclusoes_sufixo_alias.get(canonical, {})
+                prefixos_canonicos = self.exclusoes_prefixo_alias.get(canonical, {})
                 for a in (aliases or [canonical]):
                     case_only = a.startswith("~")
                     if case_only:
                         a = a[1:]
                     suffixes = exclusoes_canonicas.get(normalize_tech(a), ())
+                    prefixes = prefixos_canonicos.get(normalize_tech(a), ())
                     if any(c.isupper() for c in a):
                         # Alias com maiuscula casa no texto original preservando
                         # caixa ("Go" != "go" != "GO"). A nao ser que o alias
@@ -213,9 +277,9 @@ class SkillExtractor:
                         # casamento normal, insensivel a caixa (ex.: "pfSense").
                         case_patterns.append(_compile_case_alias(a))
                         if not case_only:
-                            patterns.append(_compile_alias(a, suffixes))
+                            patterns.append(_compile_alias(a, suffixes, prefixes))
                     else:
-                        patterns.append(_compile_alias(a, suffixes))
+                        patterns.append(_compile_alias(a, suffixes, prefixes))
                 self.skills[canonical] = patterns
                 self.case_sensitive[canonical] = case_patterns
                 self.groups[canonical] = group
@@ -234,57 +298,53 @@ class SkillExtractor:
         inicio_de_linha = not antes or antes.endswith(("\n", "\r"))
         rotulo = raw[inicio:fim]
         titulo = rotulo[:1].isupper()
-        delimitado = depois.startswith((":", "\n", "\r", "|", "-", "–"))
+        # Aceita cabecalhos colados pelo HTML, mas nao substrings de palavras.
+        if (inicio and raw[inicio - 1].isalnum() and not titulo) or (
+            fim < len(raw) and raw[fim].isalnum() and not raw[fim].isupper()
+        ):
+            return False
+        delimitado = depois.startswith((":", "?", "\n", "\r", "|", "-", "–"))
         # Os portais frequentemente achatam o HTML: "Benefícios Vale transporte".
         proxima_letra = re.search(r"[^\W\d_]", depois)
         proximo_titulo = bool(proxima_letra and proxima_letra[0].isupper())
         titulo_composto = titulo and len(rotulo.split()) > 1
         return inicio_de_linha or delimitado or (titulo and proximo_titulo) or titulo_composto
 
-    def _recortar_secoes_finais(
-        self, texto_normalizado: str, raw: str,
-    ) -> tuple[str, list[int] | None]:
-        """Corta na primeira secao de beneficios/termos que vier DEPOIS do
-        ultimo marcador de conteudo (requisitos/atividades).
-
-        O LinkedIn as vezes coloca "Beneficios" no meio do texto, antes de
-        "Requisitos": cortar ali descartaria os proprios requisitos. Entao o
-        corte so acontece quando a secao de descarte aparece apos todo o
-        conteudo.
-        """
-        limite = -1
-        for secao in self.secoes_conteudo:
-            posicao = texto_normalizado.rfind(secao)
-            if posicao > limite:
-                limite = posicao
-        fim = len(texto_normalizado)
-        offsets = None
-        for secao in self.secoes_descarte:
-            # O HTML pode colar "ITILInformações adicionaisBenefícios".
-            # A validacao no texto original distingue cabecalho de prosa.
-            pattern = re.compile(re.escape(normalize_tech(secao)))
-            for match in pattern.finditer(texto_normalizado, limite + 1):
-                if match.start() >= fim:
-                    break
-                if offsets is None:
-                    offsets = _normalized_offsets(raw)
-                if self._e_titulo_de_secao(
-                    raw, offsets[match.start()], offsets[match.end() - 1] + 1,
-                ):
-                    fim = match.start()
-                    break
-        return texto_normalizado[:fim].strip(), offsets
-
     def _textos_permitidos(self, raw: str) -> tuple[str, str]:
         """Aplica os mesmos trechos de descarte nas duas formas do texto."""
         normalized = normalize_tech(raw)
-        retained, offsets = self._recortar_secoes_finais(normalized, raw)
-        excluded = []
-        if len(retained) < len(normalized):
-            excluded.append((len(retained), len(normalized)))
+        excluded: list[tuple[int, int]] = []
+        sections = list(self._titulos_secao.finditer(normalized)) if self._titulos_secao else []
+        education = list(_FORMACAO_RE.finditer(raw))
+        offsets = _normalized_offsets(raw) if sections or education else None
+        if offsets is not None:
+            discard_start = None
+            section_starts = []
+            for section in sections:
+                position = offsets[section.start()]
+                if not self._e_titulo_de_secao(raw, position, offsets[section.end() - 1] + 1):
+                    continue
+                section_starts.append(section.start())
+                if discard_start is not None:
+                    excluded.append((discard_start, section.start()))
+                discard_start = section.start() if section[0] in self.secoes_descarte else None
+            if discard_start is not None:
+                excluded.append((discard_start, len(normalized)))
+
+            for mention in education:
+                start = bisect_left(offsets, mention.start())
+                end = bisect_left(offsets, mention.end())
+                next_section = bisect_left(section_starts, start + 1)
+                if next_section < len(section_starts):
+                    end = min(end, section_starts[next_section])
+                technical = _FIM_FORMACAO_RE.search(mention[0])
+                if technical:
+                    end = min(end, bisect_left(offsets, mention.start() + technical.start()))
+                excluded.append((start, end))
+
         for padroes in self.contextos_descarte.values():
             for padrao in padroes:
-                excluded.extend(match.span() for match in padrao.finditer(retained))
+                excluded.extend(match.span() for match in padrao.finditer(normalized))
         if not excluded:
             return raw, normalized
         if offsets is None:
@@ -301,7 +361,8 @@ class SkillExtractor:
 
     def extract(self, *texts: str) -> list[str]:
         """Tecnologias citadas nos textos, sem repetir, em ordem alfabetica."""
-        raw = _URL_RE.sub(" ", " ".join(t for t in texts if t))
+        raw = _URL_RE.sub(" ", "\n".join(t for t in texts if t))
+        raw = _ROTULO_COLADO_RE.sub(" ", raw)
         raw, haystack = self._textos_permitidos(raw)
         if not haystack.strip():
             return []

@@ -92,6 +92,7 @@ jobs:
           import os
           import kagglehub
           from api.snapshots import sha256
+          from scripts.publish_huggingface import DATASET_CARD
 
           archive = Path(os.environ["RUNNER_TEMP"]) / "release-2026-10-27"
           archive.mkdir()
@@ -101,8 +102,7 @@ jobs:
           digest = sha256(parquet)
           if digest != "0a1ab444d24649ccb73e7aae482174edee85f43727a7531fedb8095c1c830b6c":
               raise SystemExit("O Parquet da versão 191 difere do arquivo validado.")
-          card = Path("docs/huggingface-dataset.md").read_text(encoding="utf-8")
-          card += (
+          card = DATASET_CARD + (
               "\n## Snapshot v2026.10.27\n\n"
               "Este snapshot contém 10.099 vagas publicadas entre 01/01/2026 e 27/10/2026.\n\n"
               "- [Release no GitHub](https://github.com/diasgarcia/tech-skills-br/releases/tag/v2026.10.27)\n"

@@ -1,14 +1,7 @@
-# Secoes finais tipicas de beneficios/termos nas descricoes de vagas.
+# Secoes tipicas de beneficios/termos nas descricoes de vagas.
 #
-# O texto a partir do titulo de qualquer uma dessas secoes e ignorado NA
-# EXTRACAO DE SKILLS: o que vem ali nao e requisito e costuma gerar falso
-# positivo ("Open English" em parcerias, "hardware para trabalhar em casa"
-# em beneficios, clausulas de privacidade).
-#
-# O corte so acontece se a secao vier DEPOIS do ultimo marcador de
-# conteudo listado em `secoes_conteudo`: o LinkedIn costuma meter
-# "Beneficios" no meio do texto, antes de "Requisitos" -- nesse caso o
-# texto nao e cortado ali e os requisitos continuam valendo.
+# O extrator ignora o texto dessas secoes ate um novo titulo de conteudo.
+# Assim, um bloco de beneficios pode aparecer antes dos requisitos.
 #
 # O corte vale SO para o extrator: a descricao completa continua sendo
 # salva no banco/CSV. As strings sao comparadas no texto normalizado
@@ -31,14 +24,8 @@ secoes_descarte:
   - beneficios para voce
   - beneficios oferecidos
 
-# Secoes de conteudo (requisitos/atividades). Usadas so para decidir se
-# uma secao de descarte pode ou nao cortar o texto: se houver marcador de
-# conteudo DEPOIS da secao de descarte, o corte e adiado (nao acontece).
-# "parceria com"/"parcerias com" sairam do descarte: aparecem em boilerplate
-# de empresa ("atuar em parceria com o time") e cortavam texto ANTES dos
-# requisitos (ex.: vaga 18 do BTG perdia Java/C#/Python/AWS; 24 vagas no total).
-# Uma palavra em uma frase ("repleto de beneficios para colaboradores")
-# nao e um titulo. O extrator verifica delimitadores/caixa no texto original.
+# Titulos de conteudo que retomam a extracao depois de uma secao de descarte.
+# O extrator confere os delimitadores e a caixa no texto original.
 secoes_conteudo:
   - requisitos
   - qualificacoes
@@ -57,8 +44,13 @@ secoes_conteudo:
   - e legal que voce
   - sobre a vaga
   - para se destacar nessa posicao
+  - para se destacar nesta posicao
+  - voce ira se diferenciar se tiver
   - buscamos profissional
   - conhecimento em ferramentas
+  - conhecimentos desejaveis
+  - conhecimentos tecnicos
+  - desejavel conhecimento
   - competencias tecnicas essenciais
   - competencias tecnicas desejaveis
   - o que voce pode esperar do seu dia
@@ -68,11 +60,15 @@ secoes_conteudo:
   - conhecimentos necessarios
   - conhecimentos e habilidades
   - responsabilidades e atribuicoes
+  - diferencial
   - diferenciais
+  - idiomas
   - skills
   - what you will do
   - what you ll do
   - what we are looking for
   - responsibilities
+  - responsibilities and assignments
   - requirements
+  - requirements and qualifications
   - qualifications

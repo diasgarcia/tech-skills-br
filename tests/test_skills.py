@@ -276,12 +276,135 @@ def test_preserva_requisitos_dos_anuncios_revisados(ext, texto, esperadas):
         "Requisitos: SQL. benefícios: curso de Python.",
         "Requisitos: SQL. Informações adicionais ✔️ Convênio com Open English.",
         "Requisitos: SQL. Informações adicionaisVale refeição. Curso de Python.",
+        "Requisitos: SQL. Benefícios: desconto em cursos de inglês e atividades para a família.",
     ],
 )
 def test_corta_titulos_de_beneficios_sem_confundir_prosa(ext, texto):
     found = ext.extract(texto)
 
     assert found == ["SQL"]
+
+
+@pytest.mark.parametrize(
+    "titulo",
+    [
+        "Diferencial:", "Para se destacar nesta posição seria legal ter", "Desejável conhecimento em",
+        "Você irá se diferenciar se tiver:",
+    ],
+)
+def test_retoma_requisitos_apos_informacoes_adicionais(ext, titulo):
+    texto = (
+        f"Requisitos: SQL. Informações adicionais: curso de inglês. {titulo} PHP e Laravel. "
+        "Benefícios: curso de Python."
+    )
+
+    found = ext.extract(texto)
+
+    assert set(found) == {"SQL", "PHP", "Laravel"}
+
+
+def test_reconhece_secao_tecnica_de_gupy_apos_beneficios(ext):
+    texto = (
+        "Benefícios Vale-transporte e curso de Python. "
+        "Responsibilities and assignments Apoiar no atendimento técnico de 1º nível. "
+        "Requirements And Qualifications Desejável conhecimento básico de redes."
+    )
+
+    found = ext.extract(texto)
+
+    assert set(found) == {"Suporte N1/N2", "Redes de Computadores"}
+
+
+@pytest.mark.parametrize(
+    "texto,esperadas",
+    [
+        (
+            "Requisitos: Cursando Engenharia de Software ou Estatística. Atividades: consultar PostgreSQL.",
+            {"PostgreSQL"},
+        ),
+        (
+            "Formação: graduação em Eletrônica, com conhecimentos básicos em Python e Eletrônica.",
+            {"Eletrônica", "Python"},
+        ),
+        (
+            "Graduação em andamento em Estatística Conhecimentos técnicos React e SQL.",
+            {"React", "SQL"},
+        ),
+        (
+            "Ensino superior completo ou cursando Instalação e configuração de Linux e Windows Server.",
+            {"Linux", "Windows Server"},
+        ),
+        (
+            "Cursando Ciência da Computação Conhecimentos intermediários em SQL e Python.",
+            {"SQL", "Python"},
+        ),
+        (
+            "Formação: Engenharia de Software. Requisitos: experiência em engenharia de software e SQL.",
+            {"Engenharia de Software", "SQL"},
+        ),
+        (
+            "Formação Ciência da Computação; Engenharia de Software; Estatística; Áreas correlatas. "
+            "Conhecimentos técnicos Python.",
+            {"Python"},
+        ),
+        (
+            "Ensino superior completo em Estatística. Requisitos: Excel e SQL.",
+            {"Excel", "SQL"},
+        ),
+        (
+            "Formação completa em uma das seguintes áreas: Engenharia: elétrica, eletrônica, computação. "
+            "Diferencial: C++.",
+            {"C++"},
+        ),
+        (
+            "Formação técnica ou superior (completa ou cursando) em Eletrônica; Pacote Office.",
+            {"Pacote Office"},
+        ),
+        (
+            "Curso superior concluído ou em andamento (com mínimo de 50% já concluído) "
+            "HDI Desktop Support Technician Fundamentos de ITIL com mínimo de 10h aula "
+            "Hardware e Windows.",
+            {"Hardware", "Windows", "ITIL"},
+        ),
+    ],
+)
+def test_separa_formacao_de_competencias_tecnicas(ext, texto, esperadas):
+    found = ext.extract(texto)
+
+    assert set(found) == esperadas
+
+
+def test_formacao_na_descricao_preserva_habilidade_do_titulo(ext):
+    texto = "Cursando Engenharia de Software ou Estatística."
+
+    found = ext.extract("Estágio em Engenharia de Software", texto)
+
+    assert found == ["Engenharia de Software"]
+
+
+def test_formacao_de_modelos_nao_e_formacao_academica(ext):
+    texto = "Aplicar Python na formação de modelos de Machine Learning."
+
+    found = ext.extract(texto)
+
+    assert set(found) == {"Python", "Machine Learning"}
+
+
+@pytest.mark.parametrize(
+    "texto,esperadas",
+    [
+        ("Administrar ambientes virtualizados em Hyper-V e Proxmox.", {"Hyper-V"}),
+        ("Administrar hosts ESXi por meio do vCenter.", {"VMware"}),
+        ("Acompanhar solicitações via sistema de tickets.", {"Gestão de Chamados"}),
+        ("Atendimento de 1º e 2º nível.", {"Suporte N1/N2"}),
+        ("Realizar manutenção de notebooks.", {"Montagem e Manutenção de PCs"}),
+        ("Prestar suporte presencial e remoto via Remote Desktop.", {"Suporte Remoto"}),
+    ],
+)
+def test_distingue_ferramentas_e_atividades_de_suporte(ext, texto, esperadas):
+    found = ext.extract(texto)
+
+    assert set(found) == esperadas
 
 
 @pytest.mark.parametrize(
@@ -296,7 +419,6 @@ def test_corta_titulos_de_beneficios_sem_confundir_prosa(ext, texto):
         ("Certificação AZ-900 e plataformas APM.", {"AZ-900 (Azure Fundamentals)", "APM (Monitoramento de Aplicações)"}),
         ("Conhecer certificado digital e sistemas de chamado no Qcertifica.", {"Certificados Digitais", "Gestão de Chamados", "Qcertifica"}),
         ("Atuar na rede corporativa e infraestrutura de tecnologia da informação.", {"Redes de Computadores", "Infraestrutura de TI"}),
-        ("Instalação de computadores, equipamentos e periféricos.", {"Hardware"}),
         ("Teste / manutenção computadores e notebooks.", {"Montagem e Manutenção de PCs"}),
     ],
 )
@@ -393,7 +515,8 @@ def test_extrai_stack_ios_da_evoluservices(ext):
     )
     found = ext.extract("Desenvolvedora iOS", desc)
     assert {"Swift", "iOS", "Storyboard", "Alamofire", "ReactiveSwift",
-            "Firebase", "Testes Automatizados", "MVVM", "TDD", "BDD"} <= set(found)
+            "Firebase", "MVVM", "TDD", "BDD"} <= set(found)
+    assert "Testes Automatizados" not in found
 
 
 def test_storyboard_de_ux_nao_conta_como_ferramenta_ios(ext):
@@ -483,9 +606,10 @@ def test_extrai_atividades_de_suporte_da_vaga_embelleze(ext):
     )
     found = ext.extract("Estagio em TI", desc)
     assert {
-        "Hardware", "Redes de Computadores", "Gestão de Chamados",
+        "Redes de Computadores", "Gestão de Chamados",
         "Infraestrutura de TI", "Segurança da Informação", "Backup",
     } <= set(found)
+    assert "Hardware" not in found
 
 
 def test_extrai_api_e_planilhas_genericas_da_vaga_omie(ext):
@@ -494,6 +618,56 @@ def test_extrai_api_e_planilhas_genericas_da_vaga_omie(ext):
     found = ext.extract("Analista Júnior", desc)
 
     assert {"APIs", "Planilhas"} <= set(found)
+
+
+@pytest.mark.parametrize(
+    "texto,esperadas",
+    [
+        ("Conhecimento em API REST.", {"API REST"}),
+        ("Consumo de APIs REST.", {"API REST"}),
+        ("Integrações via API RESTful.", {"API REST"}),
+        ("Integrar REST APIs.", {"API REST"}),
+        ("Consumir RESTful APIs.", {"API REST"}),
+        ("Desenvolver REST Web APIs.", {"API REST"}),
+        ("Conhecimento em REST.", {"API REST"}),
+        ("Construir APIs.", {"APIs"}),
+        ("Consumir Web APIs.", {"APIs"}),
+        ("Conhecimento em APIs Web.", {"APIs"}),
+        ("Integrar APIs e desenvolver APIs REST.", {"APIs", "API REST"}),
+        ("Consumir REST APIs e documentar uma API.", {"APIs", "API REST"}),
+    ],
+)
+def test_api_rest_nao_implica_registro_de_api_generica(ext, texto, esperadas):
+    found = set(ext.extract(texto))
+
+    assert found == esperadas
+
+
+@pytest.mark.parametrize(
+    "texto,esperadas",
+    [
+        ("Stack: SQL Server e PL/SQL.", {"SQL Server", "PL/SQL"}),
+        ("Consultar SQL Server e escrever SQL.", {"SQL Server", "SQL"}),
+        ("Node.js, React.js e Next.js.", {"Node.js", "React", "Next.js"}),
+        ("Node, JS e React Native.", {"Node.js", "JavaScript", "React Native"}),
+        ("Desenvolver pipelines de dados com contêineres.", set()),
+        ("Criar usuário e fazer triagem de chamados.", {"IAM", "Gestão de Chamados"}),
+        ("Conhecer Microsoft 365, Outlook, Teams e OneDrive.", {"Office 365", "Microsoft Teams", "OneDrive"}),
+        ("Experiência com equipes e cross-functional teams.", set()),
+        ("Atendimento de segundo nível e manutenção preventiva em desktops.", {
+            "Suporte N1/N2", "Montagem e Manutenção de PCs", "Manutenção Preventiva",
+        }),
+        ("Realizar testes funcionais, exploratórios, de aceitação e de regressão.", {
+            "Testes Funcionais", "Testes de Regressão",
+        }),
+        ("Trabalhar com Python, R e C/C++.", {"Python", "R", "C", "C++"}),
+        ("Treinamento em Python. R$ a combinar.", {"Python"}),
+        ("Suporte remotoNoções de ITILFormação: Estatística.", {"Suporte Remoto", "ITIL"}),
+        ("Cursando ou ser recém-formado em Engenharia de Software. Experiência com AWS.", {"AWS"}),
+    ],
+)
+def test_extrai_mencoes_explicitas_e_preserva_distincao_entre_habilidades(ext, texto, esperadas):
+    assert set(ext.extract(texto)) == esperadas
 
 
 def test_extrai_atividades_especificas_de_suporte_gupy(ext):
