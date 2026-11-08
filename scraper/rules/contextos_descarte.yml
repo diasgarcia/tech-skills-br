@@ -16,6 +16,13 @@
 # Excecoes que valem somente para um alias de uma tecnologia. Elas evitam
 # ambiguidades sem remover o termo completo das outras tecnologias.
 aliases_contextuais:
+  APIs:
+    api:
+      nao_seguido_por: [rest, restful, gateway]
+      nao_precedido_por: [rest, restful, rest web, restful web]
+    apis:
+      nao_seguido_por: [rest, restful]
+      nao_precedido_por: [rest, restful, rest web, restful web]
   Azure:
     azure:
       nao_seguido_por:
@@ -27,28 +34,117 @@ aliases_contextuais:
     node:
       nao_seguido_por:
         - red
+  SQL:
+    sql:
+      nao_seguido_por: [server]
+      nao_precedido_por: [pl, t, transact, ms]
+  React:
+    react:
+      nao_seguido_por: [native]
+  Java:
+    java:
+      nao_seguido_por: [ee]
+  Windows:
+    windows:
+      nao_seguido_por: [server]
+      nao_precedido_por: [servidores]
+  Inteligência Artificial:
+    ia:
+      nao_seguido_por: [generativa, agentica]
+      nao_precedido_por: [agentes de, agente de, assistentes de, assistente de]
+    inteligencia artificial:
+      nao_seguido_por: [generativa]
+  Apex:
+    apex:
+      nao_precedido_por: [oracle]
+  Oracle:
+    oracle:
+      nao_seguido_por: [apex]
+  Automação:
+    ferramentas de automacao:
+      nao_seguido_por: [de testes]
+    scripts de automacao:
+      nao_seguido_por: [de testes]
+  Pacote Office:
+    microsoft office:
+      nao_seguido_por: ["365"]
+  Planilhas:
+    planilhas:
+      nao_seguido_por: [google, excel]
+      nao_precedido_por: [google]
+  Storage:
+    storage:
+      nao_precedido_por: [cloud, cloud object]
+  Criptografia:
+    tls:
+      nao_precedido_por: [divisao, divisao de]
+  SIEM/SOC:
+    soc:
+      nao_seguido_por: ["2", ii]
+  MongoDB:
+    mongo:
+      nao_seguido_por: [like]
+  Snowflake:
+    snowflake:
+      nao_precedido_por: [star schema]
+      nao_seguido_por: [schema]
+  UX/UI:
+    ui:
+      nao_precedido_por: [shadcn]
+  CSS:
+    css:
+      nao_precedido_por: [tailwind]
+  Eletrônica:
+    eletronica:
+      nao_precedido_por: [seguranca]
+  Engenharia de Software:
+    engenheiro de software:
+      nao_seguido_por: [embarcado]
+    engenheira de software:
+      nao_seguido_por: [embarcado]
+  Infraestrutura de TI:
+    analista de infraestrutura:
+      nao_seguido_por: [predial, civil, urbana, rodoviaria]
+    suporte a infraestrutura:
+      nao_seguido_por: [predial, civil, urbana, rodoviaria]
 
 descartar:
   Salesforce:
     - "parceiro oficial credenciado salesforce e mulesoft"
+    - "partners including adobe aws braze google microsoft salesforce and shopify"
   Inteligência Artificial:
     - "que incorporam a inteligencia artificial por completo"
+    - "combinando tecnologia de ponta inteligencia artificial e a criatividade humana"
+    - "nossas solucoes utilizam inteligencia artificial colaboracao e mobilidade"
+    - "ao delivery alavancada por tecnologia e inteligencia artificial"
+    - "empresa oferece servicos em nuvem cloud ciberseguranca inteligencia artificial e desenvolvimento de software"
+    - "dispositivos moveis e inteligencia artificial responsabilidades e atribuicoes"
+  Cibersegurança:
+    - "somos especialistas em tecnologia infraestrutura de rede e ciberseguranca"
+    - "every cybersecurity"
+    - "nossa atuacao abrange dados ciberseguranca cloud observabilidade"
+  Backup:
+    - "pecas suprimentos e itens de backup"
+  Hardware:
+    - "hardware and software setup for you to work from home"
+    - "gestao de hardware ou areas correlatas"
+    - "instituto hardware"
+    - "gigante brasileira de hardware"
+    - "mundo do hardware"
+    - "hardware e servicos"
+    - "segmentos de hardware"
   LGPD:
     - "exclusivamente para fins do processo seletivo respeitando a lgpd"
     - "voce concorda com nossa politica de protecao de dados da lgpd"
     - "voce concorda com nossa politica de protecao de dados lgpd"
+    - "seus dados ficarao armazenados em nosso banco de dados atendendo a privacidade de dados conforme a lei geral de protecao de dados"
+    - "manter suas informacoes pessoais em nosso banco de dados"
   SIP:
     - "a sip e a hyu"
   SBC (Session Border Controller):
     - "sbc solucoes em impressoes"
   VTEX:
     - "parceira global da vtex"
-  Hardware:
-    - "instituto hardware"
-    - "gigante brasileira de hardware"
-    - "mundo do hardware"
-    - "hardware e servicos"
-    - "segmentos de hardware"
   Eletrônica:
     # "eletronica" casa com adjetivos do dia a dia, nao com a area:
     # "e-mail eletronico", "ponto eletronico", "nota fiscal eletronica"...
