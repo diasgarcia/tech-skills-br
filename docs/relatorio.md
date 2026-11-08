@@ -442,7 +442,7 @@ Os 1.338 testes passaram e o lint não apontou problemas. O primeiro envio ao Ka
 
 ### 04/11/2026
 
-Registrei o resultado da revisão manual de 370 anúncios da release de 10 mil vagas. A revisão encontrou 11 anúncios com erro (2,97%) nos critérios de escopo de TI e registro de habilidades. O método e as fichas estão no [documento de validação](validacao/validacao.md).
+Registrei o resultado da revisão manual de 370 anúncios da release de 10 mil vagas. A revisão encontrou 11 anúncios com erro (2,97%) nos critérios de escopo de TI e registro de habilidades. O método e as fichas estão no [documento de revisão manual](validacao/revisao-manual.md).
 
 Separei os anúncios recentes em vagas-recentes.json, gerado junto com os demais arquivos do site. O recorte inclui o dia da geração em Brasília e os 29 dias anteriores, pela data de publicação. Preservei vagas.json com a base completa. O explorador carrega o arquivo recente apenas ao abrir a aba e monta a tabela em lotes de 50 linhas durante a rolagem. A busca consulta todos os anúncios do recorte. Adicionei nova tentativa em caso de falha no carregamento e um botão para mostrar mais linhas pelo teclado.
 
@@ -498,4 +498,8 @@ Troquei o nome do conjunto exibido no Hugging Face de train para vagas. A config
 
 ### 07/11/2026
 
-Corrigi trechos da arquitetura e da wiki que ainda apresentavam a validação manual como pendente. Vinculei esses textos ao resultado registrado de 370 anúncios revisados e 11 anúncios com erro, ou 2,97% da amostra. Preservei o método e as fichas da validação já publicada.
+Registrei o micro-F1 de **97,40%** na extração de habilidades das 370 vagas. A documentação inclui o catálogo, os dados por vaga e o SQLite de origem. A revisão manual de escopo e cobertura ficou em um documento separado.
+
+Refinei os cortes de benefícios e formação, a leitura de títulos de seção e o reconhecimento de atividades técnicas. Separei menções que geravam vínculos adicionais, como API REST e APIs e SQL Server e SQL. Os 1.453 testes e o lint passaram.
+
+Atualizei a documentação de classificação e do endpoint de vagas recentes na cópia local da wiki. Centralizei o cartão do Hugging Face no script de publicação.

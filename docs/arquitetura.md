@@ -271,7 +271,9 @@ por si só, o frescor.
 
 Testes de falha usam clientes simulados e SQLite temporário. Há cenários de rollback, retomada, confirmação de publicação, categorias e nulos no Parquet, além de execução das células do notebook com dados pequenos. As instruções estão no [guia local](execucao-rapida.md).
 
-Os testes automatizados verificam o comportamento das regras. A revisão manual avaliou 370 anúncios selecionados aleatoriamente entre os aceitos na release `v2026.10.27`. A conferência do escopo de TI e do registro de habilidades encontrou 11 anúncios com erro, ou 2,97% da amostra. O método e os resultados estão na [validação manual](validacao/validacao.md).
+Os testes automatizados verificam o comportamento das regras. A medição da extração usa 370 anúncios da release `v2026.10.27`. O micro-F1 e os dados por vaga estão na [validação da extração](validacao/validacao.md).
+
+A conferência manual do escopo de TI e da cobertura do catálogo encontrou 11 anúncios com erro, ou 2,97% da amostra. O método e as fichas estão na [revisão manual](validacao/revisao-manual.md).
 
 Termos fora do vocabulário e rótulos oficiais ausentes continuam sendo limites do processamento. A descrição obtida é salva sem truncamento; falhas de acesso podem impedir a recuperação do conteúdo completo da fonte. Os detalhes estão em [Escopo e Limitações](https://github.com/diasgarcia/tech-skills-br/wiki/Escopo-e-Limitacoes).
 
