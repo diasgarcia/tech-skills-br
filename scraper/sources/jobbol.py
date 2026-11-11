@@ -25,6 +25,7 @@ from .base import JobSource
 logger = logging.getLogger(__name__)
 SITE_URL = "https://candidatos.jobbol.com.br"
 API_URL = f"{SITE_URL}/assets/php/buscar-vagas-redis.php"
+DETAIL_HOSTS = frozenset({urlsplit(SITE_URL).netloc, "www.jobbol.com.br"})
 RESULTADOS_POR_PAGINA = 50
 FUSO_BRASIL = timezone(timedelta(hours=-3))
 
@@ -59,7 +60,7 @@ def _html_posting(html: str) -> dict | None:
         return None
     url = urlsplit(canonical.get("href", ""))
     match = re.fullmatch(r"/vaga/([0-9]+)-[^/]+/?", url.path)
-    if url.scheme != "https" or url.netloc != urlsplit(SITE_URL).netloc or match is None:
+    if url.scheme != "https" or url.netloc not in DETAIL_HOSTS or match is None:
         return None
 
     sections = []
@@ -124,7 +125,7 @@ def _mesma_vaga(
     # O ID antigo redireciona para /vaga/{novo_id}-{slug}, cujo JSON-LD usa v{novo_id}.
     final = urlsplit(getattr(response, "url", "") or "")
     match = re.fullmatch(r"/vaga/([0-9]+)-[^/]+/?", final.path)
-    if final.scheme != "https" or final.netloc != urlsplit(SITE_URL).netloc or match is None:
+    if final.scheme != "https" or final.netloc not in DETAIL_HOSTS or match is None:
         return False
     if str(identifier.get("value")) != f"v{match.group(1)}":
         return False
@@ -147,7 +148,7 @@ class JobbolSource(JobSource):
     def __init__(self, session: PoliteSession, settings: Settings) -> None:
         super().__init__(session, settings)
         self.searches = load_jobbol_searches()
-        self._details: dict[str, Job] = {}
+        self._details: dict[str, Job | None] = {}
         self.stats.collection_profile = f"last-{settings.jobbol_days_back}d-jsonld-v1"
 
     def fetch(self, terms: list[str]) -> list[Job]:
@@ -198,14 +199,12 @@ class JobbolSource(JobSource):
                     continue
                 if self.settings.only_junior and not default_filter().is_entry_level(title):
                     continue
-                job = self._details.get(job_id)
-                if job is None:
-                    job = self._detalhe(raw, published, term)
-                    if job is not None:
-                        self._details[job_id] = job
+                if job_id not in self._details:
+                    self._details[job_id] = self._detalhe(raw, published, term)
+                job = self._details[job_id]
                 if job is not None:
                     jobs.append(job)
-            if novos == 0:
+            if novos == 0 or getattr(self.session, "rate_limited", False):
                 break
             total = payload.get("total")
             if isinstance(total, int) and params["offset"] + len(batch) >= total:
@@ -234,7 +233,7 @@ class JobbolSource(JobSource):
             valid_path = parsed.path == f"/vaga/{job_id}" or (
                 migrated is not None and migrated.group(1) == str(raw.get("id_vaga"))
             )
-            if parsed.scheme != "https" or parsed.netloc != urlsplit(SITE_URL).netloc or not valid_path:
+            if parsed.scheme != "https" or parsed.netloc not in DETAIL_HOSTS or not valid_path:
                 self._erro(f"{job_id}: link da listagem divergente (link={link!r})")
                 return None
             if migrated is not None:

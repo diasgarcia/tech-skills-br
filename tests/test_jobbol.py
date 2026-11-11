@@ -3,7 +3,6 @@
 import json
 from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
-from unittest.mock import Mock
 
 import pytest
 
@@ -21,11 +20,14 @@ class FakeSession:
         self.responses = iter(responses)
         self.request_count = 0
         self.calls = []
+        self.last_status_code = None
 
     def get(self, url, params=None):
         self.calls.append((url, dict(params) if params else None))
         self.request_count += 1
-        return next(self.responses, None)
+        response = next(self.responses, None)
+        self.last_status_code = 404 if response is None else 200
+        return response
 
     get_json = get
 
@@ -457,19 +459,25 @@ def test_jsonld_tem_prioridade_sobre_html_do_mesmo_detalhe():
     assert collector.stats.errors == []
 
 
-@pytest.mark.parametrize("response", [redirected_detail(history=[]), html_detail(history=[])])
+@pytest.mark.parametrize("detail_factory", [redirected_detail, html_detail])
+@pytest.mark.parametrize("final_host", [jobbol.SITE_URL, "https://www.jobbol.com.br"])
 @pytest.mark.parametrize("link", [
     "/vaga/145231-desenvolvedor-junior",
     f"{jobbol.SITE_URL}/vaga/145231-desenvolvedor-junior",
+    "https://www.jobbol.com.br/vaga/145231-desenvolvedor-junior",
 ])
-def test_usa_link_migrado_da_listagem_com_id_estavel_e_cidade(response, link):
+def test_usa_link_migrado_da_listagem_com_id_estavel_e_cidade(detail_factory, final_host, link):
     listing = row(link=link, id_vaga="145231", id_cidade="4006")
+    path = "/vaga/145231-desenvolvedor-junior"
+    response = detail_factory(history=[], final_url=f"{final_host}{path}?cidade=4006")
+    response.text = response.text.replace(jobbol.SITE_URL, final_host)
     session = FakeSession({"vagas": [listing], "total": 1}, response)
     collector = source(session)
 
     jobs = collector.fetch(["junior"])
 
-    assert session.calls[1][0] == f"{jobbol.SITE_URL}/vaga/145231-desenvolvedor-junior?cidade=4006"
+    requested_link = f"{jobbol.SITE_URL}{link}" if link.startswith("/") else link
+    assert session.calls[1][0] == f"{requested_link}?cidade=4006"
     assert jobs[0].external_id == "123"
     assert jobs[0].url == session.calls[1][0]
     assert set(default_extractor().extract(jobs[0].description)) == {"SQL", "Python", "Docker"}
@@ -516,6 +524,7 @@ def test_link_invalido_da_listagem_e_reportado_antes_da_chamada(link, page_id):
     redirected_detail(page_id="999", history=[]),
     redirected_detail(title="Outra vaga", history=[]),
     redirected_detail(final_url="https://outro.example/vaga/145231-desenvolvedor-junior", history=[]),
+    redirected_detail(final_url="https://www.jobbol.com.br/vaga/999-outra-vaga", page_id="999", history=[]),
     redirected_detail(identifier={"value": "123"}, history=[]),
 ])
 def test_link_da_listagem_rejeita_detalhe_de_outra_identidade(response):
@@ -530,14 +539,13 @@ def test_link_da_listagem_rejeita_detalhe_de_outra_identidade(response):
 
 def test_404_no_link_da_listagem_continua_com_erro_sem_repeticao():
     listing = row(link="/vaga/145231-desenvolvedor-junior", id_vaga="145231")
-    session = FakeSession({"vagas": [listing], "total": 1}, None)
-    session.last_status_code = 404
-    session.get = Mock(wraps=session.get)
+    payload = {"vagas": [listing], "total": 1}
+    session = FakeSession(payload, None, payload)
     collector = source(session)
 
-    jobs = collector.fetch(["junior"])
+    jobs = collector.fetch(["junior", "desenvolvedor"])
 
     assert jobs == []
-    assert session.get.call_count == 1
+    assert session.request_count == 3
     assert len(collector.stats.errors) == 1
     assert "http=404" in collector.stats.errors[0]
