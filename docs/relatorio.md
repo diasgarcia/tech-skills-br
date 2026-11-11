@@ -503,3 +503,9 @@ Registrei o micro-F1 de **97,40%** na extração de habilidades das 370 vagas. A
 Refinei os cortes de benefícios e formação, a leitura de títulos de seção e o reconhecimento de atividades técnicas. Separei menções que geravam vínculos adicionais, como API REST e APIs e SQL Server e SQL. Os 1.453 testes e o lint passaram.
 
 Atualizei a documentação de classificação e do endpoint de vagas recentes na cópia local da wiki. Centralizei o cartão do Hugging Face no script de publicação.
+
+---
+
+### 11/11/2026
+
+Corrigi a leitura de vagas da Jobbol quando o portal redireciona o detalhe para `www.jobbol.com.br`. Mantive a verificação do ID e do título. As buscas da mesma rodada reutilizam o resultado da consulta de cada vaga, inclusive após uma falha. Confirmei a recuperação da descrição de uma vaga rejeitada no Actions. Atualizei a documentação de arquitetura e preparei a revisão da página correspondente na wiki.

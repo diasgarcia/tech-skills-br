@@ -51,10 +51,12 @@ Observações são preservados antes dos benefícios.
 
 O identificador persistido da Jobbol continua sendo o `jobkey` da listagem.
 O coletor usa o `link` informado pela API, conferindo HTTPS, domínio e
-compatibilidade com `id_vaga`. O parâmetro de cidade usa `id_cidade` quando
-o link atual ainda não tem query. O detalhe precisa confirmar o ID e o
-título da listagem. Assim, o endereço de consulta pode usar o novo ID sem
-mudar a identidade do registro salvo.
+compatibilidade com `id_vaga`. Os detalhes podem usar
+`candidatos.jobbol.com.br` ou `www.jobbol.com.br`. O parâmetro de cidade usa
+`id_cidade` quando o link atual ainda não tem query. O detalhe precisa
+confirmar o ID e o título da listagem. Assim, o endereço de consulta pode
+usar o novo ID sem mudar a identidade do registro salvo. Buscas da mesma
+rodada compartilham o resultado de cada detalhe, inclusive quando há falha.
 
 Quando o link está ausente no formato legado, a consulta usa `/vaga/{jobkey}`.
 Nesse caso, uma migração para `/vaga/{novo_id}-{slug}` exige também o histórico
