@@ -1,9 +1,9 @@
-# Relatório Consolidado da Base de Vagas (12563 vagas)
+# Relatório Consolidado da Base de Vagas (12566 vagas)
 
-- **Data de geração:** 21/11/2026 19:37 (Brasília)
-- **Período coberto:** 01/01/2026 até 21/11/2026
-- **Total de vagas consolidadas:** 12563
-- **Vagas novas no dia (21/11/2026, Brasília):** 29
+- **Data de geração:** 22/11/2026 19:30 (Brasília)
+- **Período coberto:** 01/01/2026 até 22/11/2026
+- **Total de vagas consolidadas:** 12566
+- **Vagas novas no dia (22/11/2026, Brasília):** 3
 
 Os resultados descrevem os anúncios coletados. As menções identificadas não representam toda a demanda do mercado nem o número de contratações.
 
@@ -12,10 +12,10 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 | Posição | Área | Vagas | % | Gráfico |
 |---|---|---|---|---|
 | 1 | Suporte Técnico | 3915 | 31.2% | ######.............. |
-| 2 | Engenharia de Software | 1765 | 14.0% | ###................. |
+| 2 | Engenharia de Software | 1767 | 14.1% | ###................. |
 | 3 | Infraestrutura / Redes | 1116 | 8.9% | ##.................. |
 | 4 | Service Desk / Help Desk | 868 | 6.9% | #................... |
-| 5 | Data | 788 | 6.3% | #................... |
+| 5 | Data | 789 | 6.3% | #................... |
 | 6 | Backend | 670 | 5.3% | #................... |
 | 7 | Outros/TI Geral | 631 | 5.0% | #................... |
 | 8 | Field Service / Hardware | 441 | 3.5% | #................... |
@@ -34,12 +34,12 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 
 | Região | Vagas | % | Gráfico |
 |---|---|---|---|
-| Sudeste | 6771 | 53.9% | ###########......... |
+| Sudeste | 6772 | 53.9% | ###########......... |
 | Sul | 2450 | 19.5% | ####................ |
 | Nordeste | 1037 | 8.3% | ##.................. |
 | Centro-Oeste | 755 | 6.0% | #................... |
 | Nacional | 674 | 5.4% | #................... |
-| Remoto Nacional | 507 | 4.0% | #................... |
+| Remoto Nacional | 509 | 4.1% | #................... |
 | Norte | 308 | 2.5% | .................... |
 | Não informado | 61 | 0.5% | .................... |
 
@@ -53,7 +53,7 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 | 4 | Nacional | 674 | 5.4% | #................... |
 | 5 | Porto Alegre | 535 | 4.3% | #................... |
 | 6 | Curitiba | 515 | 4.1% | #................... |
-| 7 | Remoto | 507 | 4.0% | #................... |
+| 7 | Remoto | 509 | 4.1% | #................... |
 | 8 | Campinas | 350 | 2.8% | #................... |
 | 9 | Florianópolis | 309 | 2.5% | .................... |
 | 10 | Brasília | 268 | 2.1% | .................... |
@@ -63,15 +63,15 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 | Modalidade | Vagas | % | Gráfico |
 |---|---|---|---|
 | Presencial | 5182 | 41.2% | ########............ |
-| Não informado | 4737 | 37.7% | ########............ |
+| Não informado | 4738 | 37.7% | ########............ |
 | Híbrido | 1420 | 11.3% | ##.................. |
-| Remoto | 1224 | 9.7% | ##.................. |
+| Remoto | 1226 | 9.8% | ##.................. |
 
 ## Distribuição por Nível de Entrada
 
 | Senioridade | Vagas | % |
 |---|---|---|
-| Júnior | 8941 | 71.2% |
+| Júnior | 8944 | 71.2% |
 | Estágio | 3292 | 26.2% |
 | Aprendiz | 182 | 1.4% |
 | Trainee | 148 | 1.2% |
@@ -80,7 +80,7 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 
 | Portal | Vagas | % |
 |---|---|---|
-| linkedin | 7827 | 62.3% |
+| linkedin | 7830 | 62.3% |
 | solides | 1272 | 10.1% |
 | infojobs | 1254 | 10.0% |
 | gupy | 935 | 7.4% |
@@ -97,11 +97,11 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 |---|---|---|
 | 1 | Hardware | 3050 |
 | 2 | Redes de Computadores | 2693 |
-| 3 | Inglês | 2437 |
+| 3 | Inglês | 2439 |
 | 4 | Banco de Dados | 2303 |
 | 5 | Windows | 2254 |
 | 6 | SQL | 2189 |
-| 7 | Pacote Office | 2140 |
+| 7 | Pacote Office | 2141 |
 | 8 | Gestão de Chamados | 2127 |
 | 9 | Sistemas Operacionais | 2081 |
 | 10 | Git | 1682 |
@@ -111,10 +111,10 @@ Os resultados descrevem os anúncios coletados. As menções identificadas não 
 | 14 | Segurança da Informação | 1417 |
 | 15 | JavaScript | 1231 |
 | 16 | Linux | 1172 |
-| 17 | Manutenção Preventiva | 1060 |
+| 17 | Manutenção Preventiva | 1061 |
 | 18 | Montagem e Manutenção de PCs | 1032 |
 | 19 | Análise de Dados | 1027 |
-| 20 | Infraestrutura de TI | 940 |
+| 20 | Infraestrutura de TI | 941 |
 
 ## Top 10 Empresas com Mais Vagas
 
