@@ -26,6 +26,8 @@ logger = logging.getLogger(__name__)
 SITE_URL = "https://candidatos.jobbol.com.br"
 API_URL = f"{SITE_URL}/assets/php/buscar-vagas-redis.php"
 DETAIL_HOSTS = frozenset({urlsplit(SITE_URL).netloc, "www.jobbol.com.br"})
+GONE_ERROR_MIN_COUNT = 5
+GONE_ERROR_RATIO = 0.20
 RESULTADOS_POR_PAGINA = 50
 FUSO_BRASIL = timezone(timedelta(hours=-3))
 
@@ -149,12 +151,38 @@ class JobbolSource(JobSource):
         super().__init__(session, settings)
         self.searches = load_jobbol_searches()
         self._details: dict[str, Job | None] = {}
+        self._detail_attempts = 0
+        self._detail_successes = 0
+        self._gone_count = 0
         self.stats.collection_profile = f"last-{settings.jobbol_days_back}d-jsonld-v1"
 
     def fetch(self, terms: list[str]) -> list[Job]:
         self._details.clear()
+        self._detail_attempts = 0
+        self._detail_successes = 0
+        self._gone_count = 0
         searches = list(self.searches) if terms == load_search_terms() else terms
-        return super().fetch(searches)
+        jobs = super().fetch(searches)
+        self._verificar_excesso_410()
+        return jobs
+
+    def _verificar_excesso_410(self) -> None:
+        if not self._gone_count or not self._detail_attempts:
+            return
+        if self._detail_successes == 0:
+            self._erro(
+                f"nenhum detalhe valido obtido; HTTP 410 em "
+                f"{self._gone_count}/{self._detail_attempts} detalhes"
+            )
+            return
+        if (
+            self._gone_count >= GONE_ERROR_MIN_COUNT
+            and self._gone_count / self._detail_attempts >= GONE_ERROR_RATIO
+        ):
+            self._erro(
+                f"excesso de detalhes indisponiveis com HTTP 410 "
+                f"({self._gone_count}/{self._detail_attempts} detalhes)"
+            )
 
     def fetch_term(self, term: str) -> list[Job]:
         page_size = min(self.settings.page_size, RESULTADOS_POR_PAGINA)
@@ -243,12 +271,16 @@ class JobbolSource(JobSource):
                     query = urlencode({"cidade": city_id})
                 url = urlunsplit((parsed.scheme, parsed.netloc, parsed.path, query, ""))
                 listed_url = url
+        self._detail_attempts += 1
         response = self.session.get(url)
         if response is None:
-            self._erro(
-                f"{job_id}: detalhe indisponivel "
-                f"(http={getattr(self.session, 'last_status_code', None)}; url={url})"
-            )
+            status = getattr(self.session, "last_status_code", None)
+            if status == 410:
+                self._gone_count += 1
+                self.session.last_status_code = None
+                logger.info("%s: %s: detalhe encerrado no portal (http=410; url=%s)", self.name, job_id, url)
+                return None
+            self._erro(f"{job_id}: detalhe indisponivel (http={status}; url={url})")
             return None
         posting = _jobposting(response.text) or _html_posting(response.text)
         if posting is None or not isinstance(posting.get("description"), str) or not posting["description"].strip():
@@ -273,6 +305,7 @@ class JobbolSource(JobSource):
         }.get(normalize(raw.get("TIPO") or ""), NAO_INFORMADO)
         if workplace == NAO_INFORMADO and posting.get("jobLocationType") == "TELECOMMUTE":
             workplace = REMOTO
+        self._detail_successes += 1
         return Job(
             source=self.name, external_id=job_id, title=raw["CARGO"],
             company=company or str(raw.get("EMPRESA") or ""), url=url,

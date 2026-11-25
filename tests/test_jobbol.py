@@ -26,6 +26,9 @@ class FakeSession:
         self.calls.append((url, dict(params) if params else None))
         self.request_count += 1
         response = next(self.responses, None)
+        if isinstance(response, tuple) and len(response) == 2 and response[0] is None:
+            self.last_status_code = response[1]
+            return None
         self.last_status_code = 404 if response is None else 200
         return response
 
@@ -549,3 +552,77 @@ def test_404_no_link_da_listagem_continua_com_erro_sem_repeticao():
     assert session.request_count == 3
     assert len(collector.stats.errors) == 1
     assert "http=404" in collector.stats.errors[0]
+
+
+def test_410_pontual_no_detalhe_e_ignorado_sem_erro_e_sem_repeticao():
+    valid = row("1", link="/vaga/145231-desenvolvedor-junior", id_vaga="145231")
+    gone = row("2", link="/vaga/173893-estagiario-marketing", id_vaga="173893")
+    payload = {"vagas": [valid, gone], "total": 2}
+    session = FakeSession(payload, redirected_detail("1", history=[]), (None, 410), payload)
+    collector = source(session)
+
+    jobs = collector.fetch(["junior", "desenvolvedor"])
+
+    assert [job.external_id for job in jobs] == ["1", "1"]
+    assert session.request_count == 4
+    assert collector.stats.errors == []
+
+
+def test_410_unico_de_um_termo_nao_falha_quando_outro_termo_obtem_detalhe():
+    gone = row("2", link="/vaga/173893-estagiario-marketing", id_vaga="173893")
+    valid = row("1", link="/vaga/145231-desenvolvedor-junior", id_vaga="145231")
+    session = FakeSession(
+        {"vagas": [gone], "total": 1},
+        (None, 410),
+        {"vagas": [valid], "total": 1},
+        redirected_detail("1", history=[]),
+    )
+    collector = source(session)
+
+    jobs = collector.fetch(["estagio", "junior"])
+
+    assert [job.external_id for job in jobs] == ["1"]
+    assert collector.stats.errors == []
+
+
+def test_410_sem_nenhum_detalhe_valido_registra_erro():
+    gone = row("2", link="/vaga/173893-estagiario-marketing", id_vaga="173893")
+    session = FakeSession({"vagas": [gone], "total": 1}, (None, 410))
+    collector = source(session)
+
+    jobs = collector.fetch(["junior"])
+
+    assert jobs == []
+    assert session.last_status_code is None
+    assert len(collector.stats.errors) == 1
+    assert "HTTP 410" in collector.stats.errors[0]
+    assert "1/1" in collector.stats.errors[0]
+
+
+def test_410_em_excesso_preserva_vagas_validas_e_registra_erro():
+    rows = [row(str(i)) for i in range(1, 26)]
+    responses = [{"vagas": rows, "total": 25}]
+    responses.extend(detail(str(i)) for i in range(1, 21))
+    responses.extend((None, 410) for _ in range(21, 26))
+    collector = source(FakeSession(*responses))
+
+    jobs = collector.fetch(["junior"])
+
+    assert len(jobs) == 20
+    assert len(collector.stats.errors) == 1
+    assert "5/25" in collector.stats.errors[0]
+
+
+@pytest.mark.parametrize("total, gone_total", [(5, 4), (26, 5)])
+def test_410_abaixo_do_limite_de_excesso_nao_gera_erro(total, gone_total):
+    valid_total = total - gone_total
+    rows = [row(str(i)) for i in range(1, total + 1)]
+    responses = [{"vagas": rows, "total": total}]
+    responses.extend(detail(str(i)) for i in range(1, valid_total + 1))
+    responses.extend((None, 410) for _ in range(gone_total))
+    collector = source(FakeSession(*responses))
+
+    jobs = collector.fetch(["junior"])
+
+    assert len(jobs) == valid_total
+    assert collector.stats.errors == []
