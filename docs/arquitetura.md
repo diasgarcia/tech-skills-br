@@ -58,6 +58,12 @@ confirmar o ID e o título da listagem. Assim, o endereço de consulta pode
 usar o novo ID sem mudar a identidade do registro salvo. Buscas da mesma
 rodada compartilham o resultado de cada detalhe, inclusive quando há falha.
 
+Respostas `HTTP 410` pontuais no detalhe indicam anúncio já encerrado antes de
+sair do cache da listagem e são ignoradas sem erro, mantendo o cache da rodada.
+Se nenhum detalhe válido for obtido com ocorrência de `410`, ou se a taxa
+atingir pelo menos 5 casos e 20% dos detalhes consultados, o coletor registra
+erro. Respostas `HTTP 404` continuam gerando erro.
+
 Quando o link está ausente no formato legado, a consulta usa `/vaga/{jobkey}`.
 Nesse caso, uma migração para `/vaga/{novo_id}-{slug}` exige também o histórico
 de redirecionamento iniciado no endereço solicitado. Divergências geram

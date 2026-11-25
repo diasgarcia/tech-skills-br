@@ -509,3 +509,9 @@ Atualizei a documentação de classificação e do endpoint de vagas recentes na
 ### 11/11/2026
 
 Corrigi a leitura de vagas da Jobbol quando o portal redireciona o detalhe para `www.jobbol.com.br`. Mantive a verificação do ID e do título. As buscas da mesma rodada reutilizam o resultado da consulta de cada vaga, inclusive após uma falha. Confirmei a recuperação da descrição de uma vaga rejeitada no Actions. Atualizei a documentação de arquitetura e preparei a revisão da página correspondente na wiki.
+
+---
+
+### 25/11/2026
+
+Tratei respostas HTTP 410 pontuais nos detalhes da Jobbol como anúncio encerrado antes de sair do cache da listagem. O coletor registra o aviso no log, reaproveita o resultado na rodada e evita marcar a coleta como parcial. Mantive o erro para respostas HTTP 404 e adicionei proteção para falhar quando nenhum detalhe válido é obtido com ocorrência de 410 ou quando a taxa atinge pelo menos 5 casos e 20% dos detalhes consultados. Os 1.468 testes e o lint passaram localmente. Atualizei a documentação de arquitetura e a wiki correspondente.
